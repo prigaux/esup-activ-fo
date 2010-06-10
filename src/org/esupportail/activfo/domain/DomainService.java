@@ -7,10 +7,12 @@ package org.esupportail.activfo.domain;
 import java.io.Serializable;
 import java.util.List;
 
+import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.application.Version;
+import org.esupportail.commons.services.ldap.LdapException;
 import org.esupportail.commons.web.beans.Paginator;
 
 /**
@@ -107,5 +109,8 @@ public interface DomainService extends Serializable {
 	 * @return 'true' if the user can revoke the privileges of an administrator.
 	 */
 	boolean userCanDeleteAdmin(User user, User admin);
+	
+	boolean validateAccount(Account account) throws LdapException;
+	public void recupChaine();
 
-}
+}	
