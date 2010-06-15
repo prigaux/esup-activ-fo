@@ -73,7 +73,45 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>accountDisplayName</display-name>
+		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoDisplayNameChange</from-outcome>
+			<to-view-id>/stylesheets/accountDisplayName.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>accountCharter</display-name>
+		<from-view-id>/stylesheets/accountDisplayName.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoCharterAgreement</from-outcome>
+			<to-view-id>/stylesheets/accountCharter.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 
+	<navigation-rule>
+		<display-name>accountPassword</display-name>
+		<from-view-id>/stylesheets/accountCharter.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPasswordChange</from-outcome>
+			<to-view-id>/stylesheets/accountPassword.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>accountEnabled</display-name>
+		<from-view-id>/stylesheets/accountPassword.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoAccountEnabled</from-outcome>
+			<to-view-id>/stylesheets/accountEnabled.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	
 	<navigation-rule>
 		<display-name>ldapSearch</display-name>
 		<from-view-id>/stylesheets/ldapSearch.jsp</from-view-id>
