@@ -6,6 +6,8 @@ package org.esupportail.activfo.domain;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -19,6 +21,7 @@ import org.esupportail.activfo.domain.tools.StringTools;
 import org.esupportail.activfo.services.ldap.InvalidLdapAccountException;
 import org.esupportail.activfo.services.ldap.LdapSchema;
 import org.esupportail.activfo.services.ldap.NotUniqueLdapAccountException;
+import org.esupportail.activfo.services.ldap.WriteableLdapUserService;
 import org.esupportail.activfo.services.remote.Information;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
@@ -55,6 +58,10 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 * {@link LdapUserService}.
 	 */
 	private LdapUserService ldapUserService;
+	
+	
+	private WriteableLdapUserService writeableLdapUserService;
+
 
 	/**
 	 * The LDAP attribute that contains the display name. 
@@ -291,15 +298,10 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	public boolean validateAccount(Account account) throws LdapException {
 
 		try {
-			System.out.println(account.getHarpegeNumber());
-			System.out.println("account1");
-			if (this.ldapUserService.getClass()==null){
-				System.out.println("kkkkkkkkkkk");
-			}
-			List<LdapUser> ldapUserList = this.ldapUserService
-					.getLdapUsersFromFilter("(supannEmpId="
+			List<LdapUser> ldapUserList = this.ldapUserService.
+					getLdapUsersFromFilter("(supannEmpId="
 							+ account.getHarpegeNumber() + ")");
-			System.out.println("account2");
+			
 			if (ldapUserList.size() > 1) {
 				throw new NotUniqueLdapAccountException(
 						"LDAP account with supannEmpId "
@@ -308,20 +310,19 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 				return false;
 			}
 
-			LdapUser ldapUser = ldapUserList.get(0);
-
+			LdapUser ldapUser = ldapUserList.get(0); //recuperation de l'element LDAP correspondant au id 1102
+			
 			if (logger.isDebugEnabled()) {
 				logger.debug("Validating account for : " + ldapUser);
 				logger.debug("Birthdate checking");
 			}
-
+			
 			/*
 			 * Birthdate checking
 			 */
-
 			String ldapUserBirthdateStr = ldapUser.getAttribute(LdapSchema
-					.getBirthdate());
-
+					.getBirthdate());         //recuperation de la valeur de l'attribut up1Birthday de l'element LDAP
+			
 			if (ldapUserBirthdateStr == null) {
 				String errmsg = "LDAP account with supannEmpId "
 						+ account.getHarpegeNumber() + " has no birthdate";
@@ -374,6 +375,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 			boolean isInLdap = false;
 			while (i.hasNext()) {
 				sn = i.next();
+				System.out.println(sn);
 				if (StringTools.compareInsensitive(account.getBirthName(), sn)) {
 					isInLdap = true;
 					break;
@@ -402,6 +404,9 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 				logger.debug("Setting account shadowLastChange : "
 						+ ldapUser.getAttribute(LdapSchema.getShadowLastChange()));
 			}
+			
+			System.out.println(ldapUser.getAttribute(LdapSchema
+					.getShadowLastChange()));
 			account.setShadowLastChange(ldapUser.getAttribute(LdapSchema
 					.getShadowLastChange()));
 
@@ -422,9 +427,77 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		}
 	}
 	
-	public void recupChaine(){
-		System.out.println("===============");
-		System.out.println(service.obtenirChaine());
+	
+	public boolean updateLdapAttributes(Account account,
+			final String currentPassword) {
+
+		try {
+			System.out.println("Rentree dans updateLdapAttributes");
+			//authentification avec numid et mdpinitial
+			this.writeableLdapUserService.defineAuthenticatedContext(account
+					.getId(), account.getInitialPassword());
+			
+			if (logger.isTraceEnabled()) {
+				logger.trace("Mot de passe initial : "
+						+ account.getInitialPassword());
+			}
+			
+			
+			/* Writing of password in LDAP */
+			LdapUser ldapUser = this.ldapUserService.getLdapUser(account
+					.getId());
+			
+			ldapUser.getAttributes().clear();
+			
+			List<String> listPasswordAttr = new ArrayList<String>();
+			listPasswordAttr.add(account.getPassword());
+			ldapUser.getAttributes().put(LdapSchema.getPassword(),listPasswordAttr);
+			
+			/* Writing of shadowLastChange in LDAP */
+			List<String> listShadowLastChangeAttr = new ArrayList<String>();
+			Calendar cal = Calendar.getInstance();
+			String shadowLastChange = Integer.toString((int) Math.floor(cal
+					.getTimeInMillis()
+					/ (1000 * 3600 * 24)));
+						
+			if (logger.isDebugEnabled()) {
+				logger.debug("Writing shadowLastChange in LDAP : "
+						+ shadowLastChange);
+			}
+
+			listShadowLastChangeAttr.add(shadowLastChange);
+			ldapUser.getAttributes().put(LdapSchema.getShadowLastChange(),listShadowLastChangeAttr);
+			
+			
+			/* Writing of displayName in LDAP */
+			List<String> listDisplayNameAttr = new ArrayList<String>();
+			listDisplayNameAttr.add(account.getDisplayName());
+			ldapUser.getAttributes().put(LdapSchema.getDisplayName(),
+					listDisplayNameAttr);
+			
+			
+			this.writeableLdapUserService.updateLdapUser(ldapUser);
+			
+			ldapUser.getAttributes().clear();
+
+			/* For security reasons, all passwords are erased */
+			account.setPassword(null);
+
+			logger.info("Activation du compte : " + account.getId());
+
+			this.writeableLdapUserService.defineAnonymousContext();
+		} catch (LdapException e) {
+			logger.error(e.getMessage());
+			throw e;
+		}
+
+		return true;
+	}
+	
+	
+	public String recupChaine(){
+		return service.obtenirChaine();
+
 	}
 
 	public Information getService() {
@@ -433,6 +506,16 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 
 	public void setService(Information service) {
 		this.service = service;
+	}
+	
+	public WriteableLdapUserService getWriteableLdapUserService() {
+		return writeableLdapUserService;
+	}
+
+	public void setWriteableLdapUserService(
+			
+			WriteableLdapUserService writeableLdapUserService) {
+			this.writeableLdapUserService = writeableLdapUserService;
 	}
 
 	
