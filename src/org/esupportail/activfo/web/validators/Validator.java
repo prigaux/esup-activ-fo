@@ -44,6 +44,7 @@ public class Validator extends AbstractI18nAwareBean {
 		}
 		
 		else {
+					
 			FacesMessage facesMessage = getFacesErrorMessage("VALIDATOR.NOTSTRING");
 			facesMessage.setSeverity(FacesMessage.SEVERITY_FATAL);
 			throw new ValidatorException(facesMessage);

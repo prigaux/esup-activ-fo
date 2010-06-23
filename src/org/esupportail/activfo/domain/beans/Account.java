@@ -5,23 +5,17 @@
 package org.esupportail.activfo.domain.beans;
 
 
-import java.text.Collator;
+import java.io.Serializable;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+
 import java.util.Random;
 
-//import org.acegisecurity.providers.ldap.authenticator.LdapShaPasswordEncoder;
-import org.esupportail.activfo.domain.DomainService;
+
+
 import org.esupportail.activfo.domain.tools.StringTools;
-//import org.esupportail.activfo.domain.tools.StringTools;
-//import org.esupportail.activfo.services.ldap.LdapSchema;
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
-import org.esupportail.commons.services.ldap.LdapEntity;
-import org.esupportail.commons.services.ldap.LdapUser;
-import org.esupportail.commons.services.ldap.LdapUserService;
-import org.esupportail.commons.services.logging.Logger;
-import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.strings.StringUtils;
 import org.acegisecurity.providers.ldap.authenticator.LdapShaPasswordEncoder;
 
@@ -29,21 +23,15 @@ import org.acegisecurity.providers.ldap.authenticator.LdapShaPasswordEncoder;
 /**
  * The class that represent net account.
  */
-public class Account extends AbstractI18nAwareBean {
+public class Account extends AbstractI18nAwareBean implements Serializable {
 	
-	/**
-	 * Id of the account.
-	 */
+
+	private static final long serialVersionUID = 3019553610200363364L;
+
+	
 	private String id;
 	
-    /**
-	 * Harpege number of this account
-	 */
     private String harpegeNumber;
-    
-    /**
-	 * Display Name of the user.
-	 */
     
     private String displayName;
     
@@ -61,9 +49,7 @@ public class Account extends AbstractI18nAwareBean {
 	
 	private boolean charterAgreement;
 
-	/**
-	 * Bean constructor.
-	 */
+	
 	public Account() {
 		super();
 		charterAgreement=false;
@@ -100,28 +86,26 @@ public class Account extends AbstractI18nAwareBean {
 		+ "], birthName=[" + birthName + "],displayName=[" + displayName + "],   birthDate=[" + birthDate + "], shadowLastChange=[" + shadowLastChange + "]";
 	}
 
-	/**
-	 * @return  the id of the user.
-	 */
 	public String getId() {
 		return id;
 	}
 
-	/**
-	 * @param id
-	 */
 	public void setId(final String id) {
 		this.id = StringUtils.nullIfEmpty(id);
 	}
 
+	
 	public String getHarpegeNumber() {
+		System.out.println(harpegeNumber);
 		return harpegeNumber;
 	}
 
 	public void setHarpegeNumber(String harpegeNumber) {
+	
 		this.harpegeNumber = harpegeNumber;
 	}
 
+	
 	public String getBirthName() {
 		return birthName;
 	}
@@ -130,6 +114,7 @@ public class Account extends AbstractI18nAwareBean {
 		this.birthName = birthName;
 	}
 
+	
 	public Date getBirthDate() {
 		return birthDate;
 	}
@@ -137,6 +122,7 @@ public class Account extends AbstractI18nAwareBean {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
+	
 	
 	public String getPassword() {
 		return password;
@@ -146,15 +132,12 @@ public class Account extends AbstractI18nAwareBean {
 		this.password = password;
 	}
 
-	public String getDisplayName() {
 	
+	public String getDisplayName() {
 		return displayName;
-		
 	}
 
 	public void setDisplayName(String displayName) {
-		
-		
 		this.displayName = displayName;
 	}
 	
@@ -178,8 +161,8 @@ public class Account extends AbstractI18nAwareBean {
 		this.setPassword(encryptedPassword);
 	}
 	
-	public void generateInitialPassword() {
-		/* TODO : input your password generation algorithm here */
+	/*public void generateInitialPassword() {
+		
 		initialPassword = "initialseed#";
 		SimpleDateFormat format =
             new SimpleDateFormat("ddMMyyyy");
@@ -188,7 +171,7 @@ public class Account extends AbstractI18nAwareBean {
 		
 		initialPassword += StringTools.cleanAllSpecialChar(this.birthName)+"#";
 		
-	}
+	}*/
 	
 	public String getInitialPassword() {
 		return initialPassword;
@@ -243,6 +226,8 @@ public class Account extends AbstractI18nAwareBean {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+
+	
 	
 
 }

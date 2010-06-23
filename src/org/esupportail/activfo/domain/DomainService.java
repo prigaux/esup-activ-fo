@@ -111,8 +111,14 @@ public interface DomainService extends Serializable {
 	boolean userCanDeleteAdmin(User user, User admin);
 	
 	boolean validateAccount(Account account) throws LdapException;
-	public boolean updateLdapAttributes(Account account,
-			final String currentPassword);
-	public String recupChaine();
+	
+	public boolean updateLdapAttributes(final String currentPassword)throws LdapException;
+	
+	public Account constrAccount(Account account);
+	
+	public void accountSetDisplayName(String displayName);
+	
+	
+	
 
 }	
