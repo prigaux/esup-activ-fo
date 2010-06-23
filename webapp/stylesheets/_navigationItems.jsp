@@ -2,6 +2,9 @@
 <e:menuItem id="welcome" value="#{msgs['NAVIGATION.TEXT.WELCOME']}"
 	action="#{welcomeController.enter}"
 	accesskey="#{msgs['NAVIGATION.ACCESSKEY.WELCOME']}" />
+<e:menuItem id="account" value="#{msgs['NAVIGATION.TEXT.ACTIVATION']}"
+	action="#{accountController.enter}"
+	accesskey="#{msgs['NAVIGATION.ACCESSKEY.ACTIVATION']}" />
 <e:menuItem id="administrators"
 	value="#{msgs['NAVIGATION.TEXT.ADMINISTRATION']}"
 	action="#{administratorsController.enter}"
@@ -15,7 +18,7 @@
 <e:menuItem id="about" value="#{msgs['NAVIGATION.TEXT.ABOUT']}"
 	accesskey="#{msgs['NAVIGATION.ACCESSKEY.ABOUT']}"
 	action="#{aboutController.enter}" />
-<e:menuItem id="login" action="casLogin"
+<e:menuItem id="login" action="navigationLogin"
 	value="#{msgs['NAVIGATION.TEXT.LOGIN']}"
 	accesskey="#{msgs['NAVIGATION.ACCESSKEY.LOGIN']}"
 	rendered="#{sessionController.printLogin}" />

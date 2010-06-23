@@ -244,7 +244,10 @@
 			<url-pattern>/stylesheets/administratorAdd.jsp</url-pattern>
 			<url-pattern>/stylesheets/administratorDelete.jsp</url-pattern>
 			<url-pattern>/stylesheets/accountActivation.jsp</url-pattern>
-			
+			<url-pattern>/stylesheets/accountEnabled.jsp</url-pattern>
+			<url-pattern>/stylesheets/accountDisplayName.jsp</url-pattern>
+			<url-pattern>/stylesheets/accountCharter.jsp</url-pattern>
+			<url-pattern>/stylesheets/accountPassword.jsp</url-pattern>			
 			<url-pattern>/stylesheets/departments.jsp</url-pattern>
 			<url-pattern>/stylesheets/departmentAdd.jsp</url-pattern>
 			<url-pattern>/stylesheets/departmentDelete.jsp</url-pattern>

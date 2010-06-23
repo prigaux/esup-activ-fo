@@ -15,6 +15,10 @@
 	
 	<e:messages />
 	
+	<e:text escape="false" value="#{msgs['ACTIVATION.TEXT.SUPPORTADRESS']}" rendered="#{accountController.currentAccount.activated}"/>
+
+
+
 	<h:form id="activationForm" rendered="#{accountController.currentAccount.activated == false}">
 	
 	
@@ -44,10 +48,11 @@
 		</e:panelGrid>
 		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushValid}" />
 	</h:form>
-
-
-
 	
+	<h:form>
+		<e:commandButton value="#{msgs['ACTIVATION.BUTTON.RESTART']}"
+			action="#{exceptionController.restart}" />
+	</h:form>
 	
 <% /* @include file="_debug.jsp" */ %>
 </e:page>
