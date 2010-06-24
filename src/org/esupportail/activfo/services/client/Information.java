@@ -1,4 +1,4 @@
-package org.esupportail.activfo.services.remote;
+package org.esupportail.activfo.services.client;
 
 import java.util.Date;
 

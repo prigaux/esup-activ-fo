@@ -2,7 +2,7 @@
  * ESUP-Portail LDAP Account Activation - Copyright (c) 2006 ESUP-Portail consortium
  * http://sourcesup.cru.fr/projects/esup-activ
  */
-package org.esupportail.activfo.services.remote;
+package org.esupportail.activfo.services.client;
 
 
 

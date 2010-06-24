@@ -18,12 +18,8 @@ import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.VersionManager;
 import org.esupportail.activfo.domain.tools.StringTools;
-import org.esupportail.activfo.services.remote.AccountInt;
-import org.esupportail.activfo.services.remote.Information;
-import org.esupportail.activfo.services.ldap.InvalidLdapAccountException;
-import org.esupportail.activfo.services.ldap.LdapSchema;
-import org.esupportail.activfo.services.ldap.NotUniqueLdapAccountException;
-import org.esupportail.activfo.services.ldap.WriteableLdapUserService;
+import org.esupportail.activfo.services.client.AccountInt;
+import org.esupportail.activfo.services.client.Information;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.application.Version;
@@ -65,7 +61,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	private LdapUserService ldapUserService;
 	
 	
-	private WriteableLdapUserService writeableLdapUserService;
+	
 
 
 	/**
@@ -345,14 +341,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		accountServ.setDisplayName(displayName);
 	}
 	
-	public WriteableLdapUserService getWriteableLdapUserService() {
-		return writeableLdapUserService;
-	}
-
-	public void setWriteableLdapUserService(
-			WriteableLdapUserService writeableLdapUserService) {
-			this.writeableLdapUserService = writeableLdapUserService;
-	}
+	
 
 	
 
