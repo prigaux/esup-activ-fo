@@ -25,6 +25,7 @@ import org.acegisecurity.providers.ldap.authenticator.LdapShaPasswordEncoder;
  */
 public class Account extends AbstractI18nAwareBean implements Serializable {
 	
+	
 
 	private static final long serialVersionUID = 3019553610200363364L;
 
@@ -141,38 +142,7 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 		this.displayName = displayName;
 	}
 	
-	public void encryptPassword() {
-		/*
-		 * If we look at phpldapadmin SSHA encryption algorithm in :
-		 * /usr/share/phpldapadmin/lib/functions.php function password_hash(
-		 * $password_clear, $enc_type ) salt length for SSHA is 4
-		 */
-		final int SALT_LENGTH = 4;
 		
-		LdapShaPasswordEncoder ldapShaPasswordEncoder = new LdapShaPasswordEncoder();
-		/* Salt generation */
-		byte[] salt = new byte[SALT_LENGTH];
-		Random generator = new Random();
-		generator.nextBytes(salt);
-		/* SSHA encoding */
-		String encryptedPassword = ldapShaPasswordEncoder.encodePassword(this.getPassword(), salt);
-		
-
-		this.setPassword(encryptedPassword);
-	}
-	
-	/*public void generateInitialPassword() {
-		
-		initialPassword = "initialseed#";
-		SimpleDateFormat format =
-            new SimpleDateFormat("ddMMyyyy");
-		initialPassword += format.format(this.birthDate)+"#";
-		initialPassword += this.harpegeNumber+"#";
-		
-		initialPassword += StringTools.cleanAllSpecialChar(this.birthName)+"#";
-		
-	}*/
-	
 	public String getInitialPassword() {
 		return initialPassword;
 	}
@@ -190,7 +160,6 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 	public boolean changeDisplayName(String newDisplayName) {
 
 		// Compare newDisplayName and displayName
-
 		if (StringTools.compareInsensitive(this.getDisplayName(), newDisplayName)) {
 			this.setDisplayName(newDisplayName);
 			return true;

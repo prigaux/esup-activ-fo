@@ -4,22 +4,18 @@
  */
 package org.esupportail.activfo.domain;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
+
 import java.util.Date;
-import java.util.Iterator;
+import java.util.HashMap;
+
 import java.util.List;
-import java.util.TimeZone;
+
 
 import org.esupportail.activfo.dao.DaoService;
 import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.VersionManager;
-import org.esupportail.activfo.domain.tools.StringTools;
-import org.esupportail.activfo.services.client.AccountInt;
-import org.esupportail.activfo.services.client.Information;
+import org.esupportail.activfo.services.client.AccountManagement;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.application.Version;
@@ -44,10 +40,8 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 */
 	private static final long serialVersionUID = -8200845058340254019L;
 
-	private Information service;
+	private AccountManagement service;
 	
-	
-	private AccountInt accountServ;
 	
 	/**
 	 * {@link DaoService}.
@@ -297,48 +291,28 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	}
 	
 	
-	public boolean validateAccount(Account account) throws LdapException {
+	public HashMap<String,String> validateAccount(String number,String birthName,Date birthDate) throws LdapException {
 		System.out.println("DomainImpFO");
-		return service.validAccount(account.getHarpegeNumber(),account.getBirthName(),account.getBirthDate());
+		return service.validAccount(number,birthName,birthDate);
 	}
 	
 	
-	public boolean updateLdapAttributes(final String currentPassword)throws LdapException {
+	public boolean updateLdapAttributes(final String currentPassword,String id,String code)throws LdapException {
 
-		return service.updateLdap(currentPassword);	
-	}
-		
-
-	public void setAccountServ(AccountInt accountServ) {
-		this.accountServ = accountServ;
+		return service.updateLdap(currentPassword,id,code);	
 	}
 	
-
-	public Account constrAccount(Account account){
-		
-		account.setShadowLastChange(accountServ.getShadowLastChange());
-		account.setDisplayName(accountServ.getDisplayName());
-		account.setId(accountServ.getId());
-		account.setMail(accountServ.getMail());
-		account.setId(accountServ.getId());
-		return account;
-		
-	}
-	
-	public Information getService() {
+	public AccountManagement getService() {
 		return service;
 	}
 	
-	public void setService(Information service) {
+	public void setService(AccountManagement service) {
 		this.service = service;
 	}
 
-	public AccountInt getAccountServ() {
-		return accountServ;
-	}
 	
-	public void accountSetDisplayName(String displayName){
-		accountServ.setDisplayName(displayName);
+	public void updateDisplayName(String displayName){
+		service.updateDisplayName(displayName);
 	}
 	
 	

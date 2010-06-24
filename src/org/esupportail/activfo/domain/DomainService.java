@@ -5,6 +5,8 @@
 package org.esupportail.activfo.domain;
 
 import java.io.Serializable;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.esupportail.activfo.domain.beans.Account;
@@ -110,13 +112,11 @@ public interface DomainService extends Serializable {
 	 */
 	boolean userCanDeleteAdmin(User user, User admin);
 	
-	boolean validateAccount(Account account) throws LdapException;
+	HashMap<String,String> validateAccount(String number,String birthName,Date birthDate) throws LdapException;
 	
-	public boolean updateLdapAttributes(final String currentPassword)throws LdapException;
+	public boolean updateLdapAttributes(final String currentPassword,String id,String code)throws LdapException;
 	
-	public Account constrAccount(Account account);
-	
-	public void accountSetDisplayName(String displayName);
+	public void updateDisplayName(String displayName);
 	
 	
 	

@@ -5,6 +5,7 @@
 package org.esupportail.activfo.web.controllers;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
 import org.esupportail.activfo.domain.beans.Account;
 
@@ -24,7 +25,14 @@ public class AccountController extends AbstractContextAwareController implements
 	 */
 	private  Account currentAccount;
 	
-
+	private String idKey;
+	private String mailKey;
+	private String shadowLastChangeKey;
+	private String displayNameKey;
+	
+	
+	
+	HashMap<String,String> accountDescr;
 	/**
 	 * If connected user want to update its password.
 	 */
@@ -87,10 +95,15 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	public String pushValid() {//pour tester si on doit activer ou non
 		try {
-		
-			if (this.getDomainService().validateAccount(currentAccount)) {
+			accountDescr=this.getDomainService().validateAccount(currentAccount.getHarpegeNumber(),currentAccount.getBirthName(),currentAccount.getBirthDate());
+			
+			if (accountDescr!=null) {
 				
-				currentAccount=this.getDomainService().constrAccount(currentAccount);
+				currentAccount.setShadowLastChange(accountDescr.get(shadowLastChangeKey));
+				currentAccount.setDisplayName(accountDescr.get(displayNameKey));
+				currentAccount.setId(accountDescr.get(idKey));
+				currentAccount.setMail(accountDescr.get(mailKey));
+				
 				
 				/* for security reasons */
 				currentAccount.setBirthName(null);
@@ -128,14 +141,16 @@ public class AccountController extends AbstractContextAwareController implements
 			logger.debug("currentAccount :" + currentAccount);
 			
 			if (currentAccount.changeDisplayName(newDisplayName)){
+				
 				/*modification du displayName au niveau du BO*/
-				this.getDomainService().accountSetDisplayName(currentAccount.getDisplayName());
+				this.getDomainService().updateDisplayName(currentAccount.getDisplayName());
 				
 				this.addInfoMessage(null, "DISPLAYNAME.MESSAGE.CHANGE.SUCCESSFULL");
 				return "gotoCharterAgreement";
 			}
 			
 			newDisplayName=currentAccount.getDisplayName();
+			
 			this.addErrorMessage(null, "DISPLAYNAME.MESSAGE.CHANGE.UNSUCCESSFULL");
 			return null;
 	}
@@ -145,7 +160,7 @@ public class AccountController extends AbstractContextAwareController implements
 	 * @return A String. gotoPasswordChange
 	 */
 	public String pushCharterAgreement() {
-
+	
 			if (currentAccount.isCharterAgreement()){
 				this.addInfoMessage(null, "CHARTER.MESSAGE.AGREE.SUCCESSFULL");
 				return "gotoPasswordChange";
@@ -162,9 +177,7 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushChangePassword() {
 		try {
 			
-			currentAccount.encryptPassword();
-						
-			if (this.getDomainService().updateLdapAttributes(currentAccount.getPassword())){	
+			if (this.getDomainService().updateLdapAttributes(currentAccount.getPassword(),accountDescr.get("id"),null)){	
 				this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
 			
 				/* For security reasons, all passwords are erased */
@@ -179,6 +192,38 @@ public class AccountController extends AbstractContextAwareController implements
 		}
 
 		return null;
+	}
+
+	public String getIdKey() {
+		return idKey;
+	}
+
+	public void setIdKey(String idKey) {
+		this.idKey = idKey;
+	}
+
+	public String getMailKey() {
+		return mailKey;
+	}
+
+	public void setMailKey(String mailKey) {
+		this.mailKey = mailKey;
+	}
+
+	public String getShadowLastChangeKey() {
+		return shadowLastChangeKey;
+	}
+
+	public void setShadowLastChangeKey(String shadowLastChangeKey) {
+		this.shadowLastChangeKey = shadowLastChangeKey;
+	}
+
+	public String getDisplayNameKey() {
+		return displayNameKey;
+	}
+
+	public void setDisplayNameKey(String displayNameKey) {
+		this.displayNameKey = displayNameKey;
 	}
 
 	public Account getCurrentAccount() {
@@ -204,7 +249,5 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setNewDisplayName(String newDisplayName) {
 		this.newDisplayName = newDisplayName;
 	}
-
-	
 
 }
