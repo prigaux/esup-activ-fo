@@ -3,6 +3,7 @@
 <beans 
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
 	>
 
@@ -78,7 +79,12 @@
 		parent="abstractContextAwareController"
 		scope="session"
     	>
-		<description>A bean to manage the account activation</description>
+    	<description>A bean to manage the account activation</description>
+    	<property name="idKey" value="${hashmap.key.id}"/>
+		<property name="mailKey" value="${hashmap.key.mail}"/>
+		<property name="shadowLastChangeKey" value="${hashmap.key.shadowlastchange}"/>
+		<property name="displayNameKey" value="${hashmap.key.displayname}"/>
+			
 	</bean>
 
 	<bean id="aboutController"
