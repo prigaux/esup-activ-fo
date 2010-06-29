@@ -75,8 +75,38 @@
 	</navigation-rule>
 	
 	<navigation-rule>
-		<display-name>accountDisplayName</display-name>
+		<display-name>accountReinitialisation</display-name>
+		<from-view-id>/stylesheets/welcome.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>navigationReinitialisation</from-outcome>
+			<to-view-id>/stylesheets/accountReinitialisation.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>accountEmailPerso</display-name>
 		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoEmailPersoChange</from-outcome>
+			<to-view-id>/stylesheets/accountEmailPerso.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<display-name>accountCode</display-name>
+		<from-view-id>/stylesheets/accountEmailPerso.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPutCode</from-outcome>
+			<to-view-id>/stylesheets/accountCode.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<display-name>accountDisplayName</display-name>
+		<from-view-id>/stylesheets/accountCode.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoDisplayNameChange</from-outcome>
 			<to-view-id>/stylesheets/accountDisplayName.jsp</to-view-id>
