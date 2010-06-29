@@ -17,7 +17,7 @@ import java.util.Random;
 import org.esupportail.activfo.domain.tools.StringTools;
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
 import org.esupportail.commons.utils.strings.StringUtils;
-import org.acegisecurity.providers.ldap.authenticator.LdapShaPasswordEncoder;
+
 
 
 /**
@@ -50,6 +50,8 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 	
 	private boolean charterAgreement;
 
+	private String emailPerso;
+	
 	
 	public Account() {
 		super();
@@ -196,7 +198,13 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 		this.mail = mail;
 	}
 
-	
+	public String getEmailPerso() {
+		return emailPerso;
+	}
+
+	public void setEmailPerso(String emailPerso) {
+		this.emailPerso = emailPerso;
+	}
 	
 
 }
