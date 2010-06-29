@@ -25,10 +25,11 @@ public class AccountController extends AbstractContextAwareController implements
 	 */
 	private  Account currentAccount;
 	
-	private String idKey;
-	private String mailKey;
-	private String shadowLastChangeKey;
-	private String displayNameKey;
+	private String accountIdKey;
+	private String accountMailKey;
+	private String accountSLCKey;
+	private String accountDNKey;
+
 	
 	
 	
@@ -42,6 +43,8 @@ public class AccountController extends AbstractContextAwareController implements
 	private final Logger logger = new LoggerImpl(getClass());
 	
 	private String newDisplayName;
+	
+	private String code;
 	
 
 	/**
@@ -66,8 +69,8 @@ public class AccountController extends AbstractContextAwareController implements
 	@Override
 	public void reset() {
 		super.reset();
-		//this.currentAccount=null;
-		enter();
+		this.currentAccount=null;
+		//enter();
 	}
 
 	/**
@@ -81,7 +84,7 @@ public class AccountController extends AbstractContextAwareController implements
 	 * JSF callback.
 	 * @return a String.
 	 */
-	public String enter() {
+	public String enterActivation() {
 		
 		if (!isPageAuthorized()) {
 			addUnauthorizedActionMessage();
@@ -93,16 +96,31 @@ public class AccountController extends AbstractContextAwareController implements
 		return "navigationActivation";
 	}
 	
+	
+	public String enterReinitialisation() {
+		
+		if (!isPageAuthorized()) {
+			addUnauthorizedActionMessage();
+			return null;
+		}
+		
+		currentAccount = new Account();
+
+		return "navigationReinitialisation";
+	}
+
+	
+	
 	public String pushValid() {//pour tester si on doit activer ou non
 		try {
 			accountDescr=this.getDomainService().validateAccount(currentAccount.getHarpegeNumber(),currentAccount.getBirthName(),currentAccount.getBirthDate());
 			
 			if (accountDescr!=null) {
 				
-				currentAccount.setShadowLastChange(accountDescr.get(shadowLastChangeKey));
-				currentAccount.setDisplayName(accountDescr.get(displayNameKey));
-				currentAccount.setId(accountDescr.get(idKey));
-				currentAccount.setMail(accountDescr.get(mailKey));
+				currentAccount.setShadowLastChange(accountDescr.get(accountSLCKey));
+				currentAccount.setDisplayName(accountDescr.get(accountDNKey));
+				currentAccount.setId(accountDescr.get(accountIdKey));
+				currentAccount.setMail(accountDescr.get(accountMailKey));
 				
 				
 				/* for security reasons */
@@ -112,8 +130,9 @@ public class AccountController extends AbstractContextAwareController implements
 
 				if (!currentAccount.isActivated()) {
 					this.addInfoMessage(null, "ACTIVATION.MESSAGE.VALIDACCOUNT");
+					//emailPerso=currentAccount.getEmailPerso();
 					newDisplayName = currentAccount.getDisplayName();
-					return "gotoDisplayNameChange";
+					return "gotoEmailPersoChange";
 				}
 				else {
 					addErrorMessage(null, "ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
@@ -132,6 +151,34 @@ public class AccountController extends AbstractContextAwareController implements
 		return null;
 	}
 	
+	
+	
+	public String pushEmailPerso() {
+		
+		this.getDomainService().setMailPerso(this.currentAccount.getId(),this.currentAccount.getEmailPerso());
+		this.addInfoMessage(null, "EMAILPERSO.MESSAGE.EMAILPERSOSUCCESSFUL");
+		return "gotoPutCode";
+	}
+	
+	
+	public String pushVerifyCode() {
+		
+		int state=this.getDomainService().validateCode(this.currentAccount.getId(), this.code);
+		if (state==2){
+			this.addInfoMessage(null, "CODE.MESSAGE.CODESUCCESSFULL");
+			return "gotoDisplayNameChange";
+		}
+		else if (state==1){
+			addErrorMessage(null, "CODE.MESSAGE.CODENOTVALIDE");
+		}
+		else
+			addErrorMessage(null, "CODE.MESSAGE.CODETIMEOUT");
+		
+		return null;
+	
+			
+	}
+	
 	/**
 	 * JSF callback.
 	 * @return A String. gotoPasswordChange
@@ -143,7 +190,7 @@ public class AccountController extends AbstractContextAwareController implements
 			if (currentAccount.changeDisplayName(newDisplayName)){
 				
 				/*modification du displayName au niveau du BO*/
-				this.getDomainService().updateDisplayName(currentAccount.getDisplayName());
+				this.getDomainService().updateDisplayName(currentAccount.getDisplayName(),currentAccount.getId(),code);
 				
 				this.addInfoMessage(null, "DISPLAYNAME.MESSAGE.CHANGE.SUCCESSFULL");
 				return "gotoCharterAgreement";
@@ -177,7 +224,7 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushChangePassword() {
 		try {
 			
-			if (this.getDomainService().updateLdapAttributes(currentAccount.getPassword(),accountDescr.get("id"),null)){	
+			if (this.getDomainService().updateLdapAttributes(currentAccount.getPassword(),currentAccount.getId(),code)){	
 				this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
 			
 				/* For security reasons, all passwords are erased */
@@ -194,37 +241,7 @@ public class AccountController extends AbstractContextAwareController implements
 		return null;
 	}
 
-	public String getIdKey() {
-		return idKey;
-	}
-
-	public void setIdKey(String idKey) {
-		this.idKey = idKey;
-	}
-
-	public String getMailKey() {
-		return mailKey;
-	}
-
-	public void setMailKey(String mailKey) {
-		this.mailKey = mailKey;
-	}
-
-	public String getShadowLastChangeKey() {
-		return shadowLastChangeKey;
-	}
-
-	public void setShadowLastChangeKey(String shadowLastChangeKey) {
-		this.shadowLastChangeKey = shadowLastChangeKey;
-	}
-
-	public String getDisplayNameKey() {
-		return displayNameKey;
-	}
-
-	public void setDisplayNameKey(String displayNameKey) {
-		this.displayNameKey = displayNameKey;
-	}
+	
 
 	public Account getCurrentAccount() {
 		return currentAccount;
@@ -249,5 +266,49 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setNewDisplayName(String newDisplayName) {
 		this.newDisplayName = newDisplayName;
 	}
+
+	
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getAccountIdKey() {
+		return accountIdKey;
+	}
+
+	public void setAccountIdKey(String accountIdKey) {
+		this.accountIdKey = accountIdKey;
+	}
+
+	public String getAccountMailKey() {
+		return accountMailKey;
+	}
+
+	public void setAccountMailKey(String accountMailKey) {
+		this.accountMailKey = accountMailKey;
+	}
+
+	public String getAccountSLCKey() {
+		return accountSLCKey;
+	}
+
+	public void setAccountSLCKey(String accountSLCKey) {
+		this.accountSLCKey = accountSLCKey;
+	}
+
+	public String getAccountDNKey() {
+		return accountDNKey;
+	}
+
+	public void setAccountDNKey(String accountDNKey) {
+		this.accountDNKey = accountDNKey;
+	}
+
+	
 
 }
