@@ -116,7 +116,11 @@ public interface DomainService extends Serializable {
 	
 	public boolean updateLdapAttributes(final String currentPassword,String id,String code)throws LdapException;
 	
-	public void updateDisplayName(String displayName);
+	public void updateDisplayName(String displayName,String id, String code);
+	
+	public void setMailPerso(String id,String mailPerso);
+	
+	public int validateCode(String id,String code);
 	
 	
 	
