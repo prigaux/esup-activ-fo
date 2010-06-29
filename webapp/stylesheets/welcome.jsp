@@ -15,17 +15,18 @@
 		
 		
 	
-	<e:commandButton id="etudiant" value="#{msgs['NAVIGATION.TEXT.ACTIVATION']}"
-	action="#{accountController.enter}"
+	<e:commandButton id="activation" value="#{msgs['NAVIGATION.TEXT.ACTIVATION']}"
+	action="#{accountController.enterActivation}"
 	accesskey="#{msgs['NAVIGATION.ACCESSKEY.ETUDIANT']}" />
 	
-	<e:commandButton  id="personnel" value="#{msgs['NAVIGATION.TEXT.MDP']}"
-	action="#{accountController.enter}"
-	accesskey="#{msgs['NAVIGATION.ACCESSKEY.PERSONNEL']}" />
+	<e:commandButton id="reinit" value="#{msgs['NAVIGATION.TEXT.REINIT']}"
+	action="#{accountController.enterReinitialisation}"
+	accesskey="#{msgs['NAVIGATION.ACCESSKEY.ANCIEN']}" />
 	
-	<e:commandButton id="ancien" value="#{msgs['NAVIGATION.TEXT.REINIT']}"
-	action="#{accountController.enter}"
-	accesskey="#{msgs['NAVIGATION.ACCESSKEY.ANCIEN']}" />		
+	<e:commandButton  id="password" value="#{msgs['NAVIGATION.TEXT.MDP']}"
+	action="#{accountController.enterReinitialisation}"
+	accesskey="#{msgs['NAVIGATION.ACCESSKEY.PERSONNEL']}" />
+			
 	</h:form>
 	
 <script type="text/javascript">	
