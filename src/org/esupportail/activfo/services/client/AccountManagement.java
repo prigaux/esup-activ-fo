@@ -14,5 +14,9 @@ public interface AccountManagement {
 
 	public boolean updateLdap(final String currentPassword,String id,String code)throws LdapException;
 
-	public void updateDisplayName(String diplayName);
+	public void updateDisplayName(String displayName,String id, String code);
+	
+	public void setMailPerso(String id,String mailPerso);
+	
+	public int validateCode(String id,String code);
 }
