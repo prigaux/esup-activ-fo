@@ -85,37 +85,17 @@
 	</navigation-rule>
 	
 	<navigation-rule>
-		<display-name>accountEmailPerso</display-name>
+		<display-name>accountPersonnelInfo</display-name>
 		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
 		<navigation-case>
-			<from-outcome>gotoEmailPersoChange</from-outcome>
-			<to-view-id>/stylesheets/accountEmailPerso.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	
-	
-	<navigation-rule>
-		<display-name>accountCode</display-name>
-		<from-view-id>/stylesheets/accountEmailPerso.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>gotoPutCode</from-outcome>
-			<to-view-id>/stylesheets/accountCode.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	
-	
-	<navigation-rule>
-		<display-name>accountDisplayName</display-name>
-		<from-view-id>/stylesheets/accountCode.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>gotoDisplayNameChange</from-outcome>
-			<to-view-id>/stylesheets/accountDisplayName.jsp</to-view-id>
+			<from-outcome>gotoPersonnelInfo</from-outcome>
+			<to-view-id>/stylesheets/accountPersonnelInfo.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
 		<display-name>accountCharter</display-name>
-		<from-view-id>/stylesheets/accountDisplayName.jsp</from-view-id>
+		<from-view-id>/stylesheets/accountPersonnelInfo.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoCharterAgreement</from-outcome>
 			<to-view-id>/stylesheets/accountCharter.jsp</to-view-id>
