@@ -291,15 +291,14 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	}
 	
 	
-	public HashMap<String,String> validateAccount(String number,String birthName,Date birthDate) throws LdapException {
-		System.out.println("DomainImpFO");
-		return service.validAccount(number,birthName,birthDate);
+	public HashMap<String,String> validateAccount(String number,String birthName,Date birthDate,List<String>attrPersoInfo) throws LdapException{
+		return service.validateAccount(number,birthName,birthDate,attrPersoInfo);
 	}
 	
 	
-	public boolean updateLdapAttributes(final String currentPassword,String id,String code)throws LdapException {
+	public boolean setPassword(final String currentPassword,String id,String code)throws LdapException {
 
-		return service.updateLdap(currentPassword,id,code);	
+		return service.setPassword(currentPassword,id,code);	
 	}
 	
 	public AccountManagement getService() {
