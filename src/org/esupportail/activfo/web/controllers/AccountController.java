@@ -5,7 +5,11 @@
 package org.esupportail.activfo.web.controllers;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.esupportail.activfo.domain.beans.Account;
 
@@ -29,6 +33,8 @@ public class AccountController extends AbstractContextAwareController implements
 	private String accountMailKey;
 	private String accountSLCKey;
 	private String accountDNKey;
+	
+	private String attributes;
 
 	
 	
@@ -113,15 +119,41 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	public String pushValid() {//pour tester si on doit activer ou non
 		try {
-			accountDescr=this.getDomainService().validateAccount(currentAccount.getHarpegeNumber(),currentAccount.getBirthName(),currentAccount.getBirthDate());
+			//List<String> attrPersoInfo créé et initialisé par spring
+			//On met dans la liste les attributs correspondant aux information personnelles qu'on souhaite afficher au niveau de l'interface
+			List<String> attrPersoInfo=Arrays.asList(attributes.split(","));
+			
+			String msg=this.getString("INFORMATION.LABEL.NOM");
+			
+			List<String>labPersoInfo=Arrays.asList(msg.split(","));
+			
+			
+			accountDescr=this.getDomainService().validateAccount(currentAccount.getHarpegeNumber(),currentAccount.getBirthName(),currentAccount.getBirthDate(),attrPersoInfo);
 			
 			if (accountDescr!=null) {
 				
 				currentAccount.setShadowLastChange(accountDescr.get(accountSLCKey));
-				currentAccount.setDisplayName(accountDescr.get(accountDNKey));
 				currentAccount.setId(accountDescr.get(accountIdKey));
 				currentAccount.setMail(accountDescr.get(accountMailKey));
+
 				
+				//currentAccount.setDisplayName(accountDescr.get(accountDNKey));
+				
+				//On met dans une liste les valeurs des informations personnelles
+				HashMap<String,String> listValue=new HashMap<String,String>();
+				for(int i=0;i<attrPersoInfo.size();i++){
+					listValue.put(labPersoInfo.get(i), accountDescr.get(attrPersoInfo.get(i)));
+				}
+				
+				// Filling the map
+				List<Map.Entry<String, String>> personnelInfo
+				        = new ArrayList<Map.Entry<String, String>>(listValue.entrySet());
+				System.out.println(personnelInfo.toString());
+				
+				
+				//System.out.println(listValue.toString());
+				
+				currentAccount.setPersonnelInfo(personnelInfo);
 				
 				/* for security reasons */
 				currentAccount.setBirthName(null);
@@ -132,7 +164,7 @@ public class AccountController extends AbstractContextAwareController implements
 					this.addInfoMessage(null, "ACTIVATION.MESSAGE.VALIDACCOUNT");
 					//emailPerso=currentAccount.getEmailPerso();
 					newDisplayName = currentAccount.getDisplayName();
-					return "gotoEmailPersoChange";
+					return "gotoPersonnelInfo";
 				}
 				else {
 					addErrorMessage(null, "ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
@@ -153,15 +185,15 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	
 	
-	public String pushEmailPerso() {
+	/*public String pushEmailPerso() {
 		
 		this.getDomainService().setMailPerso(this.currentAccount.getId(),this.currentAccount.getEmailPerso());
 		this.addInfoMessage(null, "EMAILPERSO.MESSAGE.EMAILPERSOSUCCESSFUL");
 		return "gotoPutCode";
-	}
+	}*/
 	
 	
-	public String pushVerifyCode() {
+	/*public String pushVerifyCode() {
 		
 		int state=this.getDomainService().validateCode(this.currentAccount.getId(), this.code);
 		if (state==2){
@@ -177,7 +209,7 @@ public class AccountController extends AbstractContextAwareController implements
 		return null;
 	
 			
-	}
+	}*/
 	
 	/**
 	 * JSF callback.
@@ -187,6 +219,8 @@ public class AccountController extends AbstractContextAwareController implements
 		
 			logger.debug("currentAccount :" + currentAccount);
 			
+			System.out.println("kkkkkkkkkkkkkkkkkk");
+			System.out.println(this.currentAccount.getPersonnelInfo().toString());
 			if (currentAccount.changeDisplayName(newDisplayName)){
 				
 				/*modification du displayName au niveau du BO*/
@@ -199,6 +233,7 @@ public class AccountController extends AbstractContextAwareController implements
 			newDisplayName=currentAccount.getDisplayName();
 			
 			this.addErrorMessage(null, "DISPLAYNAME.MESSAGE.CHANGE.UNSUCCESSFULL");
+			
 			return null;
 	}
 	
@@ -224,7 +259,7 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushChangePassword() {
 		try {
 			
-			if (this.getDomainService().updateLdapAttributes(currentAccount.getPassword(),currentAccount.getId(),code)){	
+			if (this.getDomainService().setPassword(currentAccount.getPassword(),currentAccount.getId(),code)){	
 				this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
 			
 				/* For security reasons, all passwords are erased */
@@ -307,6 +342,14 @@ public class AccountController extends AbstractContextAwareController implements
 
 	public void setAccountDNKey(String accountDNKey) {
 		this.accountDNKey = accountDNKey;
+	}
+
+	public String getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(String attributes) {
+		this.attributes = attributes;
 	}
 
 	
