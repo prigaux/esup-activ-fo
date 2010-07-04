@@ -9,6 +9,8 @@ import java.io.Serializable;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import java.util.Random;
 
@@ -50,7 +52,10 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 	
 	private boolean charterAgreement;
 
+	
 	private String emailPerso;
+	
+	private String mobile;
 	
 	
 	public Account() {
@@ -205,6 +210,17 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 	public void setEmailPerso(String emailPerso) {
 		this.emailPerso = emailPerso;
 	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	
+	
 	
 
 }
