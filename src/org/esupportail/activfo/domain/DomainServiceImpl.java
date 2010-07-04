@@ -310,17 +310,17 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	}
 
 	
-	public void updateDisplayName(String displayName,String id, String code){
+	/*public void updateDisplayName(String displayName,String id, String code){
 		service.updateDisplayName(displayName,id,code);
 	}
 	
 	public void setMailPerso(String id,String mailPerso){
 		service.setMailPerso(id,mailPerso);
-	}
+	}*/
 	
-	public int validateCode(String id,String code){
+	/*public int validateCode(String id,String code){
 		return service.validateCode(id, code);
-	}
+	}*/
 	
 	
 
