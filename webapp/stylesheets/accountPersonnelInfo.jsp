@@ -9,20 +9,19 @@
 	
 	<h:form id="activationForm" rendered="#{sessionController.currentUser == null}">
 	
-	<t:dataList value="#{accountController.currentAccount.personnelInfo}" var="entry" > 
-		<e:outputLabel for="newDisplayName" value="#{entry.key}" rendered="#{entry.value != null}" />
+	<t:dataList value="#{accountController.personnelInfo}" var="entry" > 
+		<h:panelGroup rendered="#{entry.value != null}">
+		<h:outputLabel for="newDisplayName" value="#{entry.key}" />
 	
-		<e:inputText  id="newDisplayName"  value="#{entry.value}" rendered="#{entry.value != null}" required="true"/>
-		
+		<h:inputText  value="#{entry.value}"  required="true"/>
+		</h:panelGroup>
 	</t:dataList>
 	
-	
-	
-	<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeDisplayName}" />
+	<h:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeDisplayName}" />
 	</h:form>
 	
 	<h:form>
-		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeDisplayName}" />
+		
 		<e:commandButton value="#{msgs['ACTIVATION.BUTTON.RESTART']}"
 			action="#{exceptionController.restart}" />
 	</h:form>
