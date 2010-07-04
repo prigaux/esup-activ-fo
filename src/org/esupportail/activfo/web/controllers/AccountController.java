@@ -37,7 +37,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String attributes;
 
 	
-	
+	private List<Map.Entry<String, String>> personnelInfo;
 	
 	HashMap<String,String> accountDescr;
 	/**
@@ -135,7 +135,9 @@ public class AccountController extends AbstractContextAwareController implements
 				currentAccount.setShadowLastChange(accountDescr.get(accountSLCKey));
 				currentAccount.setId(accountDescr.get(accountIdKey));
 				currentAccount.setMail(accountDescr.get(accountMailKey));
-
+				
+				code=accountDescr.get("code");
+				
 				
 				//currentAccount.setDisplayName(accountDescr.get(accountDNKey));
 				
@@ -153,7 +155,7 @@ public class AccountController extends AbstractContextAwareController implements
 				
 				//System.out.println(listValue.toString());
 				
-				currentAccount.setPersonnelInfo(personnelInfo);
+				this.setPersonnelInfo(personnelInfo);
 				
 				/* for security reasons */
 				currentAccount.setBirthName(null);
@@ -164,7 +166,7 @@ public class AccountController extends AbstractContextAwareController implements
 					this.addInfoMessage(null, "ACTIVATION.MESSAGE.VALIDACCOUNT");
 					//emailPerso=currentAccount.getEmailPerso();
 					newDisplayName = currentAccount.getDisplayName();
-					return "gotoPersonnelInfo";
+					return "gotoCharterAgreement";
 				}
 				else {
 					addErrorMessage(null, "ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
@@ -220,11 +222,11 @@ public class AccountController extends AbstractContextAwareController implements
 			logger.debug("currentAccount :" + currentAccount);
 			
 			System.out.println("kkkkkkkkkkkkkkkkkk");
-			System.out.println(this.currentAccount.getPersonnelInfo().toString());
+			System.out.println(this.getPersonnelInfo().toString());
 			if (currentAccount.changeDisplayName(newDisplayName)){
 				
 				/*modification du displayName au niveau du BO*/
-				this.getDomainService().updateDisplayName(currentAccount.getDisplayName(),currentAccount.getId(),code);
+//				this.getDomainService().updateDisplayName(currentAccount.getDisplayName(),currentAccount.getId(),code);
 				
 				this.addInfoMessage(null, "DISPLAYNAME.MESSAGE.CHANGE.SUCCESSFULL");
 				return "gotoCharterAgreement";
@@ -352,6 +354,14 @@ public class AccountController extends AbstractContextAwareController implements
 		this.attributes = attributes;
 	}
 
+	public List<Map.Entry<String, String>> getPersonnelInfo() {
+		return personnelInfo;
+	}
 	
+	
+
+	public void setPersonnelInfo(List<Map.Entry<String, String>> personnelInfo) {
+		this.personnelInfo = personnelInfo;
+	}
 
 }
