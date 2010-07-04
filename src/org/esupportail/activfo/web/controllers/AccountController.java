@@ -261,7 +261,7 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushChangePassword() {
 		try {
 			
-			if (this.getDomainService().setPassword(currentAccount.getPassword(),currentAccount.getId(),code)){	
+			if (this.getDomainService().setPassword(currentAccount.getId(),code,currentAccount.getPassword())){	
 				this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
 			
 				/* For security reasons, all passwords are erased */
