@@ -296,9 +296,9 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	}
 	
 	
-	public boolean setPassword(final String currentPassword,String id,String code)throws LdapException {
+	public boolean setPassword(String id,String code,final String currentPassword)throws LdapException {
 
-		return service.setPassword(currentPassword,id,code);	
+		return service.setPassword(id,code,currentPassword);	
 	}
 	
 	public AccountManagement getService() {
