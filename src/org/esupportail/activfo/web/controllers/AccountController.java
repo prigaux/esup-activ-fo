@@ -35,6 +35,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String accountDNKey;
 	
 	private String attributes;
+	private String labels;
 
 	
 	private List<Map.Entry<String, String>> personnelInfo;
@@ -122,11 +123,8 @@ public class AccountController extends AbstractContextAwareController implements
 			//List<String> attrPersoInfo créé et initialisé par spring
 			//On met dans la liste les attributs correspondant aux information personnelles qu'on souhaite afficher au niveau de l'interface
 			List<String> attrPersoInfo=Arrays.asList(attributes.split(","));
-			
-			String msg=this.getString("INFORMATION.LABEL.NOM");
-			
-			List<String>labPersoInfo=Arrays.asList(msg.split(","));
-			
+			List<String>labPersoInfo=Arrays.asList(labels.split(","));
+			//String msg=this.getString("INFORMATION.LABEL.NOM");
 			
 			accountDescr=this.getDomainService().validateAccount(currentAccount.getHarpegeNumber(),currentAccount.getBirthName(),currentAccount.getBirthDate(),attrPersoInfo);
 			
@@ -153,6 +151,7 @@ public class AccountController extends AbstractContextAwareController implements
 				System.out.println(personnelInfo.toString());
 				
 				
+				
 				//System.out.println(listValue.toString());
 				
 				this.setPersonnelInfo(personnelInfo);
@@ -163,10 +162,12 @@ public class AccountController extends AbstractContextAwareController implements
 				currentAccount.setHarpegeNumber(null);
 
 				if (!currentAccount.isActivated()) {
+					
 					this.addInfoMessage(null, "ACTIVATION.MESSAGE.VALIDACCOUNT");
 					//emailPerso=currentAccount.getEmailPerso();
 					newDisplayName = currentAccount.getDisplayName();
-					return "gotoCharterAgreement";
+					System.out.println("cdsdsd");
+					return "gotoPersonnelInfo";
 				}
 				else {
 					addErrorMessage(null, "ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
@@ -362,6 +363,14 @@ public class AccountController extends AbstractContextAwareController implements
 
 	public void setPersonnelInfo(List<Map.Entry<String, String>> personnelInfo) {
 		this.personnelInfo = personnelInfo;
+	}
+
+	public String getLabels() {
+		return labels;
+	}
+
+	public void setLabels(String labels) {
+		this.labels = labels;
 	}
 
 }
