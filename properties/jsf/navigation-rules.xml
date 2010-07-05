@@ -88,8 +88,8 @@
 		<display-name>accountPersonnelInfo</display-name>
 		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
 		<navigation-case>
-			<from-outcome>gotoCharterAgreement</from-outcome>
-			<to-view-id>/stylesheets/accountCharter.jsp</to-view-id>
+			<from-outcome>gotoPersonnelInfo</from-outcome>
+			<to-view-id>/stylesheets/accountPersonnelInfo.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
