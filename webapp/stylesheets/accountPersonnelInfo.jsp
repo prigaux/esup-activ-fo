@@ -9,12 +9,13 @@
 	
 	<h:form id="activationForm" rendered="#{sessionController.currentUser == null}">
 	
+		
 	<t:dataList value="#{accountController.personnelInfo}" var="entry" > 
-		<h:panelGroup rendered="#{entry.value != null}">
-		<h:outputLabel for="newDisplayName" value="#{entry.key}" />
+		<!--<h:panelGroup rendered="#{entry.value != null}">-->
+		<h:outputLabel value="#{msgs[entry.key]}" />
 	
 		<h:inputText  value="#{entry.value}"  required="true"/>
-		</h:panelGroup>
+		<!--</h:panelGroup>-->
 	</t:dataList>
 	
 	<h:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeDisplayName}" />
