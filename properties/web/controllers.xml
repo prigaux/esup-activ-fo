@@ -85,7 +85,7 @@
 		<property name="accountSLCKey" value="${account.key.shadowlastchange}"/>
 		<property name="accountDNKey" value="${account.key.displayname}"/>
 		<property name="attributes" value="${info.attributes}"/>
-		
+		<property name="labels" value="${info.labels}"/>
 				
 	</bean>
 
