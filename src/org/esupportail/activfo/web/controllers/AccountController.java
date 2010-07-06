@@ -120,41 +120,34 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	public String pushValid() {//pour tester si on doit activer ou non
 		try {
-			//List<String> attrPersoInfo créé et initialisé par spring
-			//On met dans la liste les attributs correspondant aux information personnelles qu'on souhaite afficher au niveau de l'interface
+			//On met dans deux listes les attributs et les labels(contenus dans le config.properties) correspondant aux informations personnelles qu'on souhaite afficher au niveau de l'interface
 			List<String> attrPersoInfo=Arrays.asList(attributes.split(","));
 			List<String>labPersoInfo=Arrays.asList(labels.split(","));
-			//String msg=this.getString("INFORMATION.LABEL.NOM");
-			
+						
 			accountDescr=this.getDomainService().validateAccount(currentAccount.getHarpegeNumber(),currentAccount.getBirthName(),currentAccount.getBirthDate(),attrPersoInfo);
 			
 			if (accountDescr!=null) {
+				logger.info("Identification réussie");
 				
 				currentAccount.setShadowLastChange(accountDescr.get(accountSLCKey));
 				currentAccount.setId(accountDescr.get(accountIdKey));
 				currentAccount.setMail(accountDescr.get(accountMailKey));
 				
 				code=accountDescr.get("code");
-				
-				
-				//currentAccount.setDisplayName(accountDescr.get(accountDNKey));
-				
-				//On met dans une liste les valeurs des informations personnelles
+							
+				//On met dans un hashMap les valeurs des informations personnelles provenant du BO 
 				HashMap<String,String> listValue=new HashMap<String,String>();
 				for(int i=0;i<attrPersoInfo.size();i++){
 					listValue.put(labPersoInfo.get(i), accountDescr.get(attrPersoInfo.get(i)));
 				}
 				
-				// Filling the map
-				List<Map.Entry<String, String>> personnelInfo
-				        = new ArrayList<Map.Entry<String, String>>(listValue.entrySet());
-				System.out.println(personnelInfo.toString());
-				
-				
-				
-				//System.out.println(listValue.toString());
-				
+				// Création d'une liste à partir de la Map pour effectuer son parcours dans la vue accoountPersoInfo.jsp
+				List<Map.Entry<String, String>> personnelInfo = new ArrayList<Map.Entry<String, String>>(listValue.entrySet());
 				this.setPersonnelInfo(personnelInfo);
+				
+				logger.info("Liste des infos personnelles construites");
+				
+				logger.info("Affichage de la liste des infos personnelles: "+personnelInfo.toString());
 				
 				/* for security reasons */
 				currentAccount.setBirthName(null);
@@ -162,18 +155,18 @@ public class AccountController extends AbstractContextAwareController implements
 				currentAccount.setHarpegeNumber(null);
 
 				if (!currentAccount.isActivated()) {
-					
+					logger.info("Compte non activé");
 					this.addInfoMessage(null, "ACTIVATION.MESSAGE.VALIDACCOUNT");
-					//emailPerso=currentAccount.getEmailPerso();
-					newDisplayName = currentAccount.getDisplayName();
-					System.out.println("cdsdsd");
+					//newDisplayName = currentAccount.getDisplayName();
 					return "gotoPersonnelInfo";
 				}
 				else {
+					logger.info("Compte déja activé");
 					addErrorMessage(null, "ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
 				}
 			}
 			else {
+				logger.info("Identifation utilisateur non valide");
 				addErrorMessage(null, "ACTIVATION.MESSAGE.INVALIDACCOUNT");
 			}
 			
@@ -218,22 +211,25 @@ public class AccountController extends AbstractContextAwareController implements
 	 * JSF callback.
 	 * @return A String. gotoPasswordChange
 	 */
-	public String pushChangeDisplayName() {
-		
+	public String pushChangeInfoPerso() {
+			logger.info("Mise à jour des informations personnelles");
+			
 			logger.debug("currentAccount :" + currentAccount);
 			
-			System.out.println("kkkkkkkkkkkkkkkkkk");
-			System.out.println(this.getPersonnelInfo().toString());
+			logger.info(this.getPersonnelInfo().toString());
+			
 			if (currentAccount.changeDisplayName(newDisplayName)){
+				/*modification des infos personnelles au niveau du BO*/
 				
-				/*modification du displayName au niveau du BO*/
-//				this.getDomainService().updateDisplayName(currentAccount.getDisplayName(),currentAccount.getId(),code);
+				//Liste "personnelInfo" à mettre en HashMap
+				
+				//this.getDomainService().updateInfoPerso(currentAccount.getId(),code,hashInfo);
 				
 				this.addInfoMessage(null, "DISPLAYNAME.MESSAGE.CHANGE.SUCCESSFULL");
 				return "gotoCharterAgreement";
 			}
 			
-			newDisplayName=currentAccount.getDisplayName();
+			//newDisplayName=currentAccount.getDisplayName();
 			
 			this.addErrorMessage(null, "DISPLAYNAME.MESSAGE.CHANGE.UNSUCCESSFULL");
 			
@@ -247,10 +243,11 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushCharterAgreement() {
 	
 			if (currentAccount.isCharterAgreement()){
+				logger.info("Charte acceptée");
 				this.addInfoMessage(null, "CHARTER.MESSAGE.AGREE.SUCCESSFULL");
 				return "gotoPasswordChange";
 			}
-			
+			logger.info("Charte non acceptée");
 			this.addErrorMessage(null, "CHARTER.MESSAGE.AGREE.UNSUCCESSFULL");
 			return null;
 	}
@@ -263,12 +260,17 @@ public class AccountController extends AbstractContextAwareController implements
 		try {
 			
 			if (this.getDomainService().setPassword(currentAccount.getId(),code,currentAccount.getPassword())){	
+				logger.info("Mot de passe enrgistré au niveau du BO");
 				this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
 			
 				/* For security reasons, all passwords are erased */
 				currentAccount.setPassword(null);
 		
 				return "gotoAccountEnabled";
+			}
+			
+			else{
+				logger.info("Mot de passe non enregistré au niveau du BO");
 			}
 		}
 
