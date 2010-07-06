@@ -301,6 +301,10 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		return service.setPassword(id,code,currentPassword);	
 	}
 	
+	public boolean updateInfoPerso(HashMap<String,String> infoPerso){
+		return service.updateInfoPerso(infoPerso);
+	}
+	
 	public AccountManagement getService() {
 		return service;
 	}
