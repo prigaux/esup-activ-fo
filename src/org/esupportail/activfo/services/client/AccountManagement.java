@@ -15,6 +15,8 @@ public interface AccountManagement {
 
 	public boolean setPassword(String id,String code,final String currentPassword)throws LdapException;
 
+	public boolean updateInfoPerso(HashMap<String,String> infoPerso);
+	
 	//public void updateDisplayName(String displayName,String id, String code);
 	
 	//public void setMailPerso(String id,String mailPerso);
