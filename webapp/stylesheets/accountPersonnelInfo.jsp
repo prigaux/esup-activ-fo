@@ -18,7 +18,7 @@
 		<!--</h:panelGroup>-->
 	</t:dataList>
 	
-	<h:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeDisplayName}" />
+	<h:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
 	</h:form>
 	
 	<h:form>
