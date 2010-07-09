@@ -86,8 +86,11 @@
 		<property name="accountDNKey" value="${account.key.displayname}"/>
 		<property name="attributes" value="${info.attributes}"/>
 		<property name="labels" value="${info.labels}"/>
+		
 				
 	</bean>
+	
+	
 
 	<bean id="aboutController"
 		class="org.esupportail.activfo.web.controllers.AboutController"
