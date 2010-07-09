@@ -10,12 +10,16 @@
 	<h:form id="activationForm" rendered="#{sessionController.currentUser == null}">
 	
 		
-	<t:dataList value="#{accountController.personnelInfo}" var="entry" > 
-		<!--<h:panelGroup rendered="#{entry.value != null}">-->
-		<h:outputLabel value="#{msgs[entry.key]}" />
-	
-		<h:inputText  value="#{entry.value}"  required="true"/>
-		<!--</h:panelGroup>-->
+	<t:dataList value="#{accountController.listPersoInfo}" var="entry"> 
+		<e:panelGrid columns="3" >
+		<t:div id="infoDiv" rendered="#{entry.value != null}">
+		
+		<h:outputLabel id="infoLab" value="#{msgs[entry.key]}" />
+		
+		<h:inputText id="infoInput" value="#{entry.value}"  required="true" size="35"/>
+		
+		</t:div>
+		</e:panelGrid>
 	</t:dataList>
 	
 	<h:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
