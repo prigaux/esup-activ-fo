@@ -364,3 +364,18 @@ with class uportal-background-selected"  */
 	font-size: 12px;
 	font-weight: bold;
 }  /*  uPortal equivalent style =3D  " no current equivalent"  */
+
+
+div{
+	margin-bottom:10px;	
+}
+
+input{
+	margin-left:10px;
+}
+
+label{
+	width:40px;
+}	
+
+
