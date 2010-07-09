@@ -15,6 +15,8 @@ import org.esupportail.activfo.dao.DaoService;
 import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.VersionManager;
+import org.esupportail.activfo.exceptions.LdapProblemException;
+import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.activfo.services.client.AccountManagement;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
@@ -291,18 +293,20 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	}
 	
 	
-	public HashMap<String,String> validateAccount(String number,String birthName,Date birthDate,List<String>attrPersoInfo) throws LdapException{
+	public HashMap<String,String> validateAccount(String number,String birthName,Date birthDate,List<String>attrPersoInfo) throws LdapProblemException{
 		return service.validateAccount(number,birthName,birthDate,attrPersoInfo);
+		
+				
 	}
 	
 	
-	public boolean setPassword(String id,String code,final String currentPassword)throws LdapException {
+	public boolean setPassword(String id,String code,final String currentPassword)throws LdapProblemException,UserPermissionException {
 
 		return service.setPassword(id,code,currentPassword);	
 	}
 	
-	public boolean updateInfoPerso(HashMap<String,String> infoPerso){
-		return service.updateInfoPerso(infoPerso);
+	public boolean updateInfoPerso(String id,String code, HashMap<String,String> infoPerso)throws LdapProblemException,UserPermissionException{
+		return service.updateInfoPerso(id,code,infoPerso);
 	}
 	
 	public AccountManagement getService() {
