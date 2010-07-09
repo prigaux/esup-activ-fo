@@ -8,10 +8,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import org.esupportail.activfo.domain.beans.Account;
+import org.esupportail.activfo.domain.beans.PersonalInformation;
+import org.esupportail.activfo.domain.beans.PersonalInformation;
+import org.esupportail.activfo.domain.tools.StringTools;
+import org.esupportail.activfo.exceptions.LdapProblemException;
+import org.esupportail.activfo.exceptions.UserPermissionException;
 
 import org.esupportail.commons.services.ldap.LdapException;
 
@@ -38,7 +44,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String labels;
 
 	
-	private List<Map.Entry<String, String>> personnelInfo;
+	private List<PersonalInformation> listPersoInfo;
 	
 	HashMap<String,String> accountDescr;
 	/**
@@ -52,6 +58,10 @@ public class AccountController extends AbstractContextAwareController implements
 	private String newDisplayName;
 	
 	private String code;
+	
+	
+	
+	private HashMap<String,String> hashInf=new HashMap<String,String>();
 	
 
 	/**
@@ -135,19 +145,20 @@ public class AccountController extends AbstractContextAwareController implements
 				
 				code=accountDescr.get("code");
 							
-				//On met dans un hashMap les valeurs des informations personnelles provenant du BO 
-				HashMap<String,String> listValue=new HashMap<String,String>();
+				
+				logger.info("Construction de la liste des informations personnelles du compte");
+				listPersoInfo = new ArrayList<PersonalInformation>();
 				for(int i=0;i<attrPersoInfo.size();i++){
-					listValue.put(labPersoInfo.get(i), accountDescr.get(attrPersoInfo.get(i)));
+					PersonalInformation personalInformation=new PersonalInformation();
+					personalInformation.setKey(labPersoInfo.get(i));
+					personalInformation.setValue(accountDescr.get(attrPersoInfo.get(i)));
+					listPersoInfo.add(personalInformation);
+					if (personalInformation.getKey().equals("INFORMATION.LABEL.NOM")){
+						currentAccount.setDisplayName(personalInformation.getValue());
+					}
 				}
-				
-				// Création d'une liste à partir de la Map pour effectuer son parcours dans la vue accoountPersoInfo.jsp
-				List<Map.Entry<String, String>> personnelInfo = new ArrayList<Map.Entry<String, String>>(listValue.entrySet());
-				this.setPersonnelInfo(personnelInfo);
-				
 				logger.info("Liste des infos personnelles construites");
-				
-				logger.info("Affichage de la liste des infos personnelles: "+personnelInfo.toString());
+				logger.info("Liste des infos personnelles: "+listPersoInfo.toString());
 				
 				/* for security reasons */
 				currentAccount.setBirthName(null);
@@ -157,7 +168,6 @@ public class AccountController extends AbstractContextAwareController implements
 				if (!currentAccount.isActivated()) {
 					logger.info("Compte non activé");
 					this.addInfoMessage(null, "ACTIVATION.MESSAGE.VALIDACCOUNT");
-					//newDisplayName = currentAccount.getDisplayName();
 					return "gotoPersonnelInfo";
 				}
 				else {
@@ -171,7 +181,7 @@ public class AccountController extends AbstractContextAwareController implements
 			}
 			
 		}
-		catch (LdapException e) {
+		catch (LdapProblemException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
 			
@@ -212,28 +222,52 @@ public class AccountController extends AbstractContextAwareController implements
 	 * @return A String. gotoPasswordChange
 	 */
 	public String pushChangeInfoPerso() {
-			logger.info("Mise à jour des informations personnelles");
 			
-			logger.debug("currentAccount :" + currentAccount);
+			try{
+				logger.info("Mise à jour des informations personnelles");
+				
+				Iterator it=listPersoInfo.iterator();
+				while(it.hasNext()){
+					PersonalInformation hash=(PersonalInformation)it.next();
+					if (hash.getKey().equals("INFORMATION.LABEL.NOM")){
+						if (!StringTools.compareInsensitive(currentAccount.getDisplayName(), hash.getValue())) {
+							hash.setValue(currentAccount.getDisplayName());
+						}
+					}
+					hashInf.put(this.getString(hash.getKey()), hash.getValue());
+				}
+				logger.info("Récupération des informations personnelles modifiées par l'utilisateur");
+				
+				if (this.getDomainService().updateInfoPerso(currentAccount.getId(),code,hashInf)){
+					logger.info("Informations personnelles envoyées au BO pour mise à jour: "+hashInf.toString());
+					
+					this.addInfoMessage(null, "DISPLAYNAME.MESSAGE.CHANGE.SUCCESSFULL");
+					return "gotoCharterAgreement";
+					
+				}
+				else{
+					//Pas sur que ca serve vraiment
+				}
 			
-			logger.info(this.getPersonnelInfo().toString());
-			
-			if (currentAccount.changeDisplayName(newDisplayName)){
-				/*modification des infos personnelles au niveau du BO*/
-				
-				//Liste "personnelInfo" à mettre en HashMap
-				
-				//this.getDomainService().updateInfoPerso(currentAccount.getId(),code,hashInfo);
-				
-				this.addInfoMessage(null, "DISPLAYNAME.MESSAGE.CHANGE.SUCCESSFULL");
-				return "gotoCharterAgreement";
 			}
+			catch (LdapProblemException e) {
+				logger.error(e.getMessage());
+				addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
+			
+			}catch (UserPermissionException e) {
+				logger.error(e.getMessage());
+				addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
+			}
+			
+			
+			return null;
+			//}
 			
 			//newDisplayName=currentAccount.getDisplayName();
 			
-			this.addErrorMessage(null, "DISPLAYNAME.MESSAGE.CHANGE.UNSUCCESSFULL");
+			//this.addErrorMessage(null, "DISPLAYNAME.MESSAGE.CHANGE.UNSUCCESSFULL");
 			
-			return null;
+			//return null;
 	}
 	
 	/**
@@ -260,7 +294,7 @@ public class AccountController extends AbstractContextAwareController implements
 		try {
 			
 			if (this.getDomainService().setPassword(currentAccount.getId(),code,currentAccount.getPassword())){	
-				logger.info("Mot de passe enrgistré au niveau du BO");
+				logger.info("Mot de passe enregistré au niveau du BO");
 				this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
 			
 				/* For security reasons, all passwords are erased */
@@ -274,8 +308,13 @@ public class AccountController extends AbstractContextAwareController implements
 			}
 		}
 
-		catch (LdapException e) {
+		catch (LdapProblemException e) {
+			logger.error(e.getMessage());
 			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
+		
+		}catch (UserPermissionException e) {
+			logger.error(e.getMessage());
+			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
 		}
 
 		return null;
@@ -357,16 +396,6 @@ public class AccountController extends AbstractContextAwareController implements
 		this.attributes = attributes;
 	}
 
-	public List<Map.Entry<String, String>> getPersonnelInfo() {
-		return personnelInfo;
-	}
-	
-	
-
-	public void setPersonnelInfo(List<Map.Entry<String, String>> personnelInfo) {
-		this.personnelInfo = personnelInfo;
-	}
-
 	public String getLabels() {
 		return labels;
 	}
@@ -375,4 +404,11 @@ public class AccountController extends AbstractContextAwareController implements
 		this.labels = labels;
 	}
 
+	public List<PersonalInformation> getListPersoInfo() {
+		return listPersoInfo;
+	}
+
+	public void setListPersoInfo(List<PersonalInformation> listPersoInfo) {
+		this.listPersoInfo = listPersoInfo;
+	}
 }
