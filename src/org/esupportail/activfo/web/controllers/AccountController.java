@@ -16,6 +16,7 @@ import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.domain.beans.PersonalInformation;
 import org.esupportail.activfo.domain.beans.PersonalInformation;
 import org.esupportail.activfo.domain.tools.StringTools;
+import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 
@@ -156,6 +157,13 @@ public class AccountController extends AbstractContextAwareController implements
 					if (personalInformation.getKey().equals("INFORMATION.LABEL.NOM")){
 						currentAccount.setDisplayName(personalInformation.getValue());
 					}
+					/*else if (personalInformation.getKey().equals("INFORMATION.LABEL.EMAIL")){
+						currentAccount.setDisplayName(personalInformation.getValue());
+					}
+					
+					else if (personalInformation.getKey().equals("INFORMATION.LABEL.MOBILE")){
+						currentAccount.setDisplayName(personalInformation.getValue());
+					}*/
 				}
 				logger.info("Liste des infos personnelles construites");
 				logger.info("Liste des infos personnelles: "+listPersoInfo.toString());
@@ -232,8 +240,33 @@ public class AccountController extends AbstractContextAwareController implements
 					if (hash.getKey().equals("INFORMATION.LABEL.NOM")){
 						if (!StringTools.compareInsensitive(currentAccount.getDisplayName(), hash.getValue())) {
 							hash.setValue(currentAccount.getDisplayName());
+							this.addErrorMessage(null, "PERSONALINFO.DISPLAYNAME.MESSAGE.CHANGE.UNSUCCESSFULL");
+							return null;
+						}
+						else{
+							
 						}
 					}
+					
+					/*else if (hash.getKey().equals("INFORMATION.LABEL.EMAIL")){
+						if (!hash.getValue().matches("^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$")) {
+							//hash.setValue(currentAccount.getEmail());
+						}
+						else{
+							
+						}
+					}
+					
+					else if (hash.getKey().equals("INFORMATION.LABEL.MOBILE")){
+						if (hash.getValue().matches("^06[0-9]{8}$")) {
+							//hash.setValue(currentAccount.getMobile());
+						}
+						else{
+							
+						}
+					}*/
+					
+					
 					hashInf.put(this.getString(hash.getKey()), hash.getValue());
 				}
 				logger.info("Récupération des informations personnelles modifiées par l'utilisateur");
@@ -241,7 +274,7 @@ public class AccountController extends AbstractContextAwareController implements
 				if (this.getDomainService().updateInfoPerso(currentAccount.getId(),code,hashInf)){
 					logger.info("Informations personnelles envoyées au BO pour mise à jour: "+hashInf.toString());
 					
-					this.addInfoMessage(null, "DISPLAYNAME.MESSAGE.CHANGE.SUCCESSFULL");
+					this.addInfoMessage(null, "PERSONALINFO.MESSAGE.CHANGE.SUCCESSFULL");
 					return "gotoCharterAgreement";
 					
 				}
@@ -314,7 +347,12 @@ public class AccountController extends AbstractContextAwareController implements
 		
 		}catch (UserPermissionException e) {
 			logger.error(e.getMessage());
+			this.enterReinitialisation();
 			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
+		
+		}catch (KerberosException e) {
+		logger.error(e.getMessage());
+		addErrorMessage(null, "KERBEROS.MESSAGE.PROBLEM");
 		}
 
 		return null;
