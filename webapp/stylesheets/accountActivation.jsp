@@ -1,6 +1,7 @@
 <%@include file="_include.jsp"%>
 
 
+
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 
 <%-- Data mustn't be recorded in this form, even by using back button --%> 
