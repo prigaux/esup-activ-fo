@@ -11,6 +11,7 @@ import java.util.List;
 
 import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.domain.beans.User;
+import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.commons.exceptions.ConfigException;
@@ -116,7 +117,7 @@ public interface DomainService extends Serializable {
 	
 	public HashMap<String,String> validateAccount(String number,String birthName,Date birthDate,List<String>attrPersoInfo) throws LdapProblemException;
 	
-	public boolean setPassword(String id,String code,final String currentPassword)throws LdapProblemException,UserPermissionException;
+	public boolean setPassword(String id,String code,final String currentPassword)throws LdapProblemException,UserPermissionException,KerberosException;
 	
 	public boolean updateInfoPerso(String id,String code,HashMap<String,String> infoPerso)throws LdapProblemException,UserPermissionException;
 	

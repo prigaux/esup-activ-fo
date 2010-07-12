@@ -15,6 +15,7 @@ import org.esupportail.activfo.dao.DaoService;
 import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.VersionManager;
+import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.activfo.services.client.AccountManagement;
@@ -300,7 +301,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	}
 	
 	
-	public boolean setPassword(String id,String code,final String currentPassword)throws LdapProblemException,UserPermissionException {
+	public boolean setPassword(String id,String code,final String currentPassword)throws LdapProblemException,UserPermissionException,KerberosException {
 
 		return service.setPassword(id,code,currentPassword);	
 	}
