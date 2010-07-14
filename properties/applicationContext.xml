@@ -41,5 +41,7 @@
 	<import resource="web/controllers.xml" />
 	<import resource="web/converters.xml" />
 	<import resource="web/validators.xml" />
-
+	<import resource="web/beanDisplayName.xml" />
+	<import resource="web/beanEmailPerso.xml" />
+	<import resource="web/beanMobilePhone.xml" />
 </beans>
