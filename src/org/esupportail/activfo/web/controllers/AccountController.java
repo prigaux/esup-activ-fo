@@ -19,6 +19,8 @@ import org.esupportail.activfo.domain.tools.StringTools;
 import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
+import org.esupportail.activfo.web.beans.BeanDisplayName;
+import org.esupportail.activfo.web.beans.BeanInfo;
 
 import org.esupportail.commons.services.ldap.LdapException;
 
@@ -60,7 +62,7 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	private String code;
 	
-	
+	private List<BeanInfo> listBeanPersoInfo;
 	
 	private HashMap<String,String> hashInf=new HashMap<String,String>();
 	
@@ -148,25 +150,16 @@ public class AccountController extends AbstractContextAwareController implements
 							
 				
 				logger.info("Construction de la liste des informations personnelles du compte");
-				listPersoInfo = new ArrayList<PersonalInformation>();
+				
+				//listPersoInfo = new ArrayList<PersonalInformation>();
 				for(int i=0;i<attrPersoInfo.size();i++){
-					PersonalInformation personalInformation=new PersonalInformation();
-					personalInformation.setKey(labPersoInfo.get(i));
-					personalInformation.setValue(accountDescr.get(attrPersoInfo.get(i)));
-					listPersoInfo.add(personalInformation);
-					if (personalInformation.getKey().equals("INFORMATION.LABEL.NOM")){
-						currentAccount.setDisplayName(personalInformation.getValue());
+					listBeanPersoInfo.get(i).setKey(labPersoInfo.get(i));
+					listBeanPersoInfo.get(i).setValue(accountDescr.get(attrPersoInfo.get(i)));
+					if (listBeanPersoInfo.get(i) instanceof BeanDisplayName){
+						currentAccount.setDisplayName(listBeanPersoInfo.get(i).getValue());
 					}
-					/*else if (personalInformation.getKey().equals("INFORMATION.LABEL.EMAIL")){
-						currentAccount.setDisplayName(personalInformation.getValue());
-					}
-					
-					else if (personalInformation.getKey().equals("INFORMATION.LABEL.MOBILE")){
-						currentAccount.setDisplayName(personalInformation.getValue());
-					}*/
 				}
-				logger.info("Liste des infos personnelles construites");
-				logger.info("Liste des infos personnelles: "+listPersoInfo.toString());
+				
 				
 				/* for security reasons */
 				currentAccount.setBirthName(null);
@@ -199,31 +192,7 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	
 	
-	/*public String pushEmailPerso() {
-		
-		this.getDomainService().setMailPerso(this.currentAccount.getId(),this.currentAccount.getEmailPerso());
-		this.addInfoMessage(null, "EMAILPERSO.MESSAGE.EMAILPERSOSUCCESSFUL");
-		return "gotoPutCode";
-	}*/
 	
-	
-	/*public String pushVerifyCode() {
-		
-		int state=this.getDomainService().validateCode(this.currentAccount.getId(), this.code);
-		if (state==2){
-			this.addInfoMessage(null, "CODE.MESSAGE.CODESUCCESSFULL");
-			return "gotoDisplayNameChange";
-		}
-		else if (state==1){
-			addErrorMessage(null, "CODE.MESSAGE.CODENOTVALIDE");
-		}
-		else
-			addErrorMessage(null, "CODE.MESSAGE.CODETIMEOUT");
-		
-		return null;
-	
-			
-	}*/
 	
 	/**
 	 * JSF callback.
@@ -234,40 +203,18 @@ public class AccountController extends AbstractContextAwareController implements
 			try{
 				logger.info("Mise à jour des informations personnelles");
 				
-				Iterator it=listPersoInfo.iterator();
+				Iterator it=listBeanPersoInfo.iterator();
 				while(it.hasNext()){
-					PersonalInformation hash=(PersonalInformation)it.next();
-					if (hash.getKey().equals("INFORMATION.LABEL.NOM")){
-						if (!StringTools.compareInsensitive(currentAccount.getDisplayName(), hash.getValue())) {
-							hash.setValue(currentAccount.getDisplayName());
+					BeanInfo beanPersoInfo=(BeanInfo)it.next();
+					if (beanPersoInfo instanceof BeanDisplayName){
+						if (!StringTools.compareInsensitive(currentAccount.getDisplayName(), beanPersoInfo.getValue())) {
+							beanPersoInfo.setValue(currentAccount.getDisplayName());
 							this.addErrorMessage(null, "PERSONALINFO.DISPLAYNAME.MESSAGE.CHANGE.UNSUCCESSFULL");
 							return null;
 						}
-						else{
-							
-						}
 					}
 					
-					/*else if (hash.getKey().equals("INFORMATION.LABEL.EMAIL")){
-						if (!hash.getValue().matches("^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$")) {
-							//hash.setValue(currentAccount.getEmail());
-						}
-						else{
-							
-						}
-					}
-					
-					else if (hash.getKey().equals("INFORMATION.LABEL.MOBILE")){
-						if (hash.getValue().matches("^06[0-9]{8}$")) {
-							//hash.setValue(currentAccount.getMobile());
-						}
-						else{
-							
-						}
-					}*/
-					
-					
-					hashInf.put(this.getString(hash.getKey()), hash.getValue());
+					hashInf.put(this.getString(beanPersoInfo.getKey()), beanPersoInfo.getValue());
 				}
 				logger.info("Récupération des informations personnelles modifiées par l'utilisateur");
 				
@@ -276,12 +223,8 @@ public class AccountController extends AbstractContextAwareController implements
 					
 					this.addInfoMessage(null, "PERSONALINFO.MESSAGE.CHANGE.SUCCESSFULL");
 					return "gotoCharterAgreement";
-					
-				}
-				else{
-					//Pas sur que ca serve vraiment
-				}
-			
+				}	
+						
 			}
 			catch (LdapProblemException e) {
 				logger.error(e.getMessage());
@@ -294,13 +237,7 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			
 			return null;
-			//}
 			
-			//newDisplayName=currentAccount.getDisplayName();
-			
-			//this.addErrorMessage(null, "DISPLAYNAME.MESSAGE.CHANGE.UNSUCCESSFULL");
-			
-			//return null;
 	}
 	
 	/**
@@ -336,9 +273,9 @@ public class AccountController extends AbstractContextAwareController implements
 				return "gotoAccountEnabled";
 			}
 			
-			else{
-				logger.info("Mot de passe non enregistré au niveau du BO");
-			}
+			logger.info("Mot de passe non enregistré au niveau du BO");
+			return null;
+			
 		}
 
 		catch (LdapProblemException e) {
@@ -351,8 +288,8 @@ public class AccountController extends AbstractContextAwareController implements
 			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
 		
 		}catch (KerberosException e) {
-		logger.error(e.getMessage());
-		addErrorMessage(null, "KERBEROS.MESSAGE.PROBLEM");
+			logger.error(e.getMessage());
+			addErrorMessage(null, "KERBEROS.MESSAGE.PROBLEM");
 		}
 
 		return null;
@@ -449,4 +386,41 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setListPersoInfo(List<PersonalInformation> listPersoInfo) {
 		this.listPersoInfo = listPersoInfo;
 	}
+
+	public List<BeanInfo> getListBeanPersoInfo() {
+		return listBeanPersoInfo;
+	}
+
+	public void setListBeanPersoInfo(List<BeanInfo> listBeanPersoInfo) {
+		this.listBeanPersoInfo = listBeanPersoInfo;
+	}
+
+		
+	/*public String pushEmailPerso() {
+	
+	this.getDomainService().setMailPerso(this.currentAccount.getId(),this.currentAccount.getEmailPerso());
+	this.addInfoMessage(null, "EMAILPERSO.MESSAGE.EMAILPERSOSUCCESSFUL");
+	return "gotoPutCode";
+}*/
+
+
+/*public String pushVerifyCode() {
+	
+	int state=this.getDomainService().validateCode(this.currentAccount.getId(), this.code);
+	if (state==2){
+		this.addInfoMessage(null, "CODE.MESSAGE.CODESUCCESSFULL");
+		return "gotoDisplayNameChange";
+	}
+	else if (state==1){
+		addErrorMessage(null, "CODE.MESSAGE.CODENOTVALIDE");
+	}
+	else
+		addErrorMessage(null, "CODE.MESSAGE.CODETIMEOUT");
+	
+	return null;
+
+		
+}*/
+	
+	
 }
