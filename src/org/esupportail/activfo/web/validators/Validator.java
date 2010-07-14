@@ -30,6 +30,8 @@ public class Validator extends AbstractI18nAwareBean {
 	private static final long serialVersionUID = -4048989162279656426L;
 	
 	private final Logger logger = new LoggerImpl(getClass());
+	
+	
 
 	public void validateZipCode(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		if (value instanceof String) {
@@ -285,5 +287,8 @@ public class Validator extends AbstractI18nAwareBean {
 		}
 		else throw new ValidatorException(getFacesErrorMessage("VALIDATOR.NOTSTRING"));
 	}
+	
+	
+	
 	
 }
