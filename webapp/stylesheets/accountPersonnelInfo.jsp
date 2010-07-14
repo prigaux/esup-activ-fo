@@ -10,13 +10,13 @@
 	<h:form id="activationForm" rendered="#{sessionController.currentUser == null}">
 	
 		
-	<t:dataList value="#{accountController.listPersoInfo}" var="entry"> 
+	<t:dataList value="#{accountController.listBeanPersoInfo}" var="entry"> 
 		<e:panelGrid columns="3" >
-		<t:div id="infoDiv" rendered="#{entry.value != null}">
+		<t:div id="infoDiv" rendered="#{entry.value != null}" >
 		
-		<h:outputLabel id="infoLab" value="#{msgs[entry.key]}" />
+		<e:outputLabel id="infoLab" value="#{msgs[entry.key]}" />
 		
-		<h:inputText id="infoInput" value="#{entry.value}"  required="true" size="35"/>
+		<e:inputText id="infoInput" value="#{entry.value}"  required="true" size="35" validator="#{entry.validator.validate}"/>
 		
 		</t:div>
 		</e:panelGrid>
