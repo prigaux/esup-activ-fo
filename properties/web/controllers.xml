@@ -86,7 +86,13 @@
 		<property name="accountDNKey" value="${account.key.displayname}"/>
 		<property name="attributes" value="${info.attributes}"/>
 		<property name="labels" value="${info.labels}"/>
-		
+		<property name="listBeanPersoInfo">
+			<list>
+				<ref bean="beanDisplayName"/>
+				<ref bean="beanEmailPerso"/>
+				<ref bean="beanMobilePhone"/>
+			</list>
+		</property>
 				
 	</bean>
 	

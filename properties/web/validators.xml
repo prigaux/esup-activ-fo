@@ -21,6 +21,48 @@
     	<description>
 			A validator for forms objects.
     	</description>
+    	
+    	
 	</bean>
+	
+	<bean 
+		id="validatorDisplayName"
+		class="org.esupportail.activfo.web.validators.ValidatorDisplayName"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for DisplayName.
+    	</description>
+    	
+    	
+	</bean>
+	
+	<bean 
+		id="validatorEmail"
+		class="org.esupportail.activfo.web.validators.ValidatorEmail"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Email
+    	</description>
+    	
+    	
+	</bean>
+	
+	<bean 
+		id="validatorMobilePhone"
+		class="org.esupportail.activfo.web.validators.ValidatorMobilePhone"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Mobile.
+    	</description>
+    	
+    	
+	</bean>
+	
+	
+	
+	
 
 </beans>
