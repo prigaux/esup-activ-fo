@@ -29,7 +29,7 @@
 	    		The name of the application.
 	    	</description>
     	</property>
-    	<property name="versionMajorNumber" value="0" >
+    	<property name="versionMajorNumber" value="2" >
 	    	<description>
 	    		The major number of the application (1 for version 1.2.3).
 	    	</description>
@@ -44,7 +44,7 @@
 	    		The update of the application (3 for version 1.2.3).
 	    	</description>
     	</property>
-    	<property name="copyright" value="Copyright (c) 2006 ESUP-Portail consortium" >
+    	<property name="copyright" value="Copyright (c) 2010 ESUP-Portail consortium" >
 	    	<description>
 	    		The copyright.
 	    	</description>
