@@ -52,6 +52,7 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 	
 	private boolean charterAgreement;
 
+	private String code;
 	
 	private String emailPerso;
 	
@@ -217,6 +218,14 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 
 	public void setMobile(String mobile) {
 		this.mobile = mobile;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	

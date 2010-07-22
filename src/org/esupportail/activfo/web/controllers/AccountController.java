@@ -5,8 +5,11 @@
 package org.esupportail.activfo.web.controllers;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -19,7 +22,7 @@ import org.esupportail.activfo.domain.tools.StringTools;
 import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
-import org.esupportail.activfo.web.beans.BeanDisplayName;
+
 import org.esupportail.activfo.web.beans.BeanInfo;
 
 import org.esupportail.commons.services.ldap.LdapException;
@@ -33,38 +36,35 @@ import org.esupportail.commons.services.logging.LoggerImpl;
  */
 public class AccountController extends AbstractContextAwareController implements Serializable {
 
-	/**
-	 * The class that represent net account.
-	 */
+	private final Logger logger = new LoggerImpl(getClass());
+	
+	
 	private  Account currentAccount;
+	private boolean reinit=false;
 	
 	private String accountIdKey;
 	private String accountMailKey;
 	private String accountSLCKey;
 	private String accountDNKey;
+	private String accountCodeKey;
 	
-	private String attributes;
-	private String labels;
-
+	private String attributesInfPerso;
+	private String attributesToValidate;
 	
-	private List<PersonalInformation> listPersoInfo;
+	private List<BeanInfo> listBeanInfoToValidate;
+	private List<BeanInfo> listBeanPersoInfo;
+	private BeanInfo beanPasswordPrincipal;
+	private BeanInfo beanCode;
+	
 	
 	HashMap<String,String> accountDescr;
-	/**
-	 * If connected user want to update its password.
-	 */
-	private String currentPassword;
 	
 	
-	private final Logger logger = new LoggerImpl(getClass());
+	private HashMap<String,String> hashBeanPersoInfo=new HashMap<String,String>();
 	
-	private String newDisplayName;
+	private HashMap<String,String> hashInfToValidate=new HashMap<String,String>();
 	
-	private String code;
 	
-	private List<BeanInfo> listBeanPersoInfo;
-	
-	private HashMap<String,String> hashInf=new HashMap<String,String>();
 	
 
 	/**
@@ -110,9 +110,10 @@ public class AccountController extends AbstractContextAwareController implements
 			addUnauthorizedActionMessage();
 			return null;
 		}
-		
+	
 		currentAccount = new Account();
-
+		reinit=false;
+				
 		return "navigationActivation";
 	}
 	
@@ -125,60 +126,86 @@ public class AccountController extends AbstractContextAwareController implements
 		}
 		
 		currentAccount = new Account();
-
-		return "navigationReinitialisation";
+		System.out.println("REINITIALISATION");
+		reinit=true;
+		return "navigationActivation";
 	}
 
 	
 	
-	public String pushValid() {//pour tester si on doit activer ou non
+	public String pushValid() {
 		try {
-			//On met dans deux listes les attributs et les labels(contenus dans le config.properties) correspondant aux informations personnelles qu'on souhaite afficher au niveau de l'interface
-			List<String> attrPersoInfo=Arrays.asList(attributes.split(","));
-			List<String>labPersoInfo=Arrays.asList(labels.split(","));
-						
-			accountDescr=this.getDomainService().validateAccount(currentAccount.getHarpegeNumber(),currentAccount.getBirthName(),currentAccount.getBirthDate(),attrPersoInfo);
+
+			//Attributs à valider
+			List<String> attrToValidate=Arrays.asList(attributesToValidate.split(","));
+
+			//Attributs concernant les informations personnelles que l'on souhaite afficher
+			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
+			
+			Iterator it=listBeanInfoToValidate.iterator();
+			int j=0;
+			while(it.hasNext()){
+				
+				BeanInfo beanInfoToValidate=(BeanInfo)it.next();
+				hashInfToValidate.put(attrToValidate.get(j), beanInfoToValidate.getValue());
+				beanInfoToValidate.setValue("");//security reason
+				j++;
+			}
+			
+			logger.info("La validation concerne les données suivantes: "+this.hashInfToValidate.toString());
+
+			
+			accountDescr=this.getDomainService().validateAccount(hashInfToValidate,attrPersoInfo);
 			
 			if (accountDescr!=null) {
-				logger.info("Identification réussie");
 				
-				currentAccount.setShadowLastChange(accountDescr.get(accountSLCKey));
+				logger.info("Validation des identificateurs réussie");
+				
 				currentAccount.setId(accountDescr.get(accountIdKey));
 				currentAccount.setMail(accountDescr.get(accountMailKey));
-				
-				code=accountDescr.get("code");
-							
-				
-				logger.info("Construction de la liste des informations personnelles du compte");
-				
-				//listPersoInfo = new ArrayList<PersonalInformation>();
-				for(int i=0;i<attrPersoInfo.size();i++){
-					listBeanPersoInfo.get(i).setKey(labPersoInfo.get(i));
-					listBeanPersoInfo.get(i).setValue(accountDescr.get(attrPersoInfo.get(i)));
-					if (listBeanPersoInfo.get(i) instanceof BeanDisplayName){
-						currentAccount.setDisplayName(listBeanPersoInfo.get(i).getValue());
-					}
-				}
-				
-				
-				/* for security reasons */
-				currentAccount.setBirthName(null);
-				currentAccount.setBirthDate(null);
-				currentAccount.setHarpegeNumber(null);
+				currentAccount.setCode(accountDescr.get(accountCodeKey));
+				currentAccount.setEmailPerso(accountDescr.get(accountMailKey));
 
-				if (!currentAccount.isActivated()) {
-					logger.info("Compte non activé");
-					this.addInfoMessage(null, "ACTIVATION.MESSAGE.VALIDACCOUNT");
-					return "gotoPersonnelInfo";
+				if (currentAccount.getCode()!=null) {
+					if (reinit){
+						logger.info("Compte non activé");
+						this.addErrorMessage(null, "IDENTIFICATION.REINITIALISATION.MESSAGE.ACCOUNT.NONACTIVATED");
+
+					}else{
+						logger.info("Compte non activé");
+						logger.info("Construction de la liste des informations personnelles du compte");
+						for(int i=0;i<attrPersoInfo.size();i++){
+							listBeanPersoInfo.get(i).setValue(accountDescr.get(attrPersoInfo.get(i)));
+						}
+						this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+						return "gotoPersonnelInfo";
+					}
+					
 				}
 				else {
-					logger.info("Compte déja activé");
-					addErrorMessage(null, "ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
+					if (reinit){
+						
+						this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+						
+						if (this.getDomainService().getCode(currentAccount.getId())!=null){
+							logger.info("Code envoyé par le FO sur l'adresse mail de l'utilisateur");
+							return "gotoPushCode";
+						}
+						else{
+							logger.info("Code non envoyé par le FO");
+							addErrorMessage(null, "CODE.ERROR.SENDING");
+						}
+						
+					}
+					else{
+						logger.info("Compte déja activé");
+						addErrorMessage(null, "IDENTIFICATION.ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
+					}
 				}
 			}
 			else {
 				logger.info("Identifation utilisateur non valide");
-				addErrorMessage(null, "ACTIVATION.MESSAGE.INVALIDACCOUNT");
+				addErrorMessage(null, "IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
 			}
 			
 		}
@@ -187,42 +214,35 @@ public class AccountController extends AbstractContextAwareController implements
 			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
 			
 		}
+		
 		return null;
 	}
 	
 	
-	
-	
-	
-	/**
-	 * JSF callback.
-	 * @return A String. gotoPasswordChange
-	 */
 	public String pushChangeInfoPerso() {
 			
 			try{
 				logger.info("Mise à jour des informations personnelles");
 				
 				Iterator it=listBeanPersoInfo.iterator();
+				
 				while(it.hasNext()){
 					BeanInfo beanPersoInfo=(BeanInfo)it.next();
-					if (beanPersoInfo instanceof BeanDisplayName){
-						if (!StringTools.compareInsensitive(currentAccount.getDisplayName(), beanPersoInfo.getValue())) {
-							beanPersoInfo.setValue(currentAccount.getDisplayName());
-							this.addErrorMessage(null, "PERSONALINFO.DISPLAYNAME.MESSAGE.CHANGE.UNSUCCESSFULL");
-							return null;
-						}
-					}
-					
-					hashInf.put(this.getString(beanPersoInfo.getKey()), beanPersoInfo.getValue());
+					hashBeanPersoInfo.put(this.getString(beanPersoInfo.getKey()), beanPersoInfo.getValue());
 				}
+				
 				logger.info("Récupération des informations personnelles modifiées par l'utilisateur");
 				
-				if (this.getDomainService().updateInfoPerso(currentAccount.getId(),code,hashInf)){
-					logger.info("Informations personnelles envoyées au BO pour mise à jour: "+hashInf.toString());
+				if (this.getDomainService().updatePersonalInformations(currentAccount.getId(),currentAccount.getCode(),hashBeanPersoInfo)){
+					logger.info("Informations personnelles envoyées au BO pour mise à jour: "+hashBeanPersoInfo.toString());
 					
-					this.addInfoMessage(null, "PERSONALINFO.MESSAGE.CHANGE.SUCCESSFULL");
-					return "gotoCharterAgreement";
+					this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
+					
+					if (!reinit){
+						return "gotoCharterAgreement";
+					}else{
+						return "gotoPushCode";
+					}
 				}	
 						
 			}
@@ -235,9 +255,22 @@ public class AccountController extends AbstractContextAwareController implements
 				addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
 			}
 			
-			
 			return null;
 			
+	}
+	
+	
+	public String pushVerifyCode() {
+		
+		currentAccount.setCode(beanCode.getValue());
+		if (this.getDomainService().validateCode(this.currentAccount.getId(), this.currentAccount.getCode())){
+			this.addInfoMessage(null, "CODE.MESSAGE.CODESUCCESSFULL");
+			return "gotoPasswordChange";
+		}
+		
+		addErrorMessage(null, "CODE.MESSAGE.CODENOTVALIDE");
+		return null;
+
 	}
 	
 	/**
@@ -251,6 +284,7 @@ public class AccountController extends AbstractContextAwareController implements
 				this.addInfoMessage(null, "CHARTER.MESSAGE.AGREE.SUCCESSFULL");
 				return "gotoPasswordChange";
 			}
+			
 			logger.info("Charte non acceptée");
 			this.addErrorMessage(null, "CHARTER.MESSAGE.AGREE.UNSUCCESSFULL");
 			return null;
@@ -262,8 +296,9 @@ public class AccountController extends AbstractContextAwareController implements
 	 */
 	public String pushChangePassword() {
 		try {
+			currentAccount.setPassword(beanPasswordPrincipal.getValue());
 			
-			if (this.getDomainService().setPassword(currentAccount.getId(),code,currentAccount.getPassword())){	
+			if (this.getDomainService().setPassword(currentAccount.getId(),currentAccount.getCode(),currentAccount.getPassword())){	
 				logger.info("Mot de passe enregistré au niveau du BO");
 				this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
 			
@@ -305,32 +340,8 @@ public class AccountController extends AbstractContextAwareController implements
 		this.currentAccount = currentAccount;
 	}
 
-	public String getCurrentPassword() {
-		return currentPassword;
-	}
-
-	public void setCurrentPassword(String currentPassword) {
-		this.currentPassword = currentPassword;
-	}
-
-	public String getNewDisplayName() {
-		return newDisplayName;
-	}
-
-	public void setNewDisplayName(String newDisplayName) {
-		this.newDisplayName = newDisplayName;
-	}
-
 	
-
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
+	
 	public String getAccountIdKey() {
 		return accountIdKey;
 	}
@@ -363,30 +374,6 @@ public class AccountController extends AbstractContextAwareController implements
 		this.accountDNKey = accountDNKey;
 	}
 
-	public String getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(String attributes) {
-		this.attributes = attributes;
-	}
-
-	public String getLabels() {
-		return labels;
-	}
-
-	public void setLabels(String labels) {
-		this.labels = labels;
-	}
-
-	public List<PersonalInformation> getListPersoInfo() {
-		return listPersoInfo;
-	}
-
-	public void setListPersoInfo(List<PersonalInformation> listPersoInfo) {
-		this.listPersoInfo = listPersoInfo;
-	}
-
 	public List<BeanInfo> getListBeanPersoInfo() {
 		return listBeanPersoInfo;
 	}
@@ -395,32 +382,71 @@ public class AccountController extends AbstractContextAwareController implements
 		this.listBeanPersoInfo = listBeanPersoInfo;
 	}
 
-		
-	/*public String pushEmailPerso() {
-	
-	this.getDomainService().setMailPerso(this.currentAccount.getId(),this.currentAccount.getEmailPerso());
-	this.addInfoMessage(null, "EMAILPERSO.MESSAGE.EMAILPERSOSUCCESSFUL");
-	return "gotoPutCode";
-}*/
-
-
-/*public String pushVerifyCode() {
-	
-	int state=this.getDomainService().validateCode(this.currentAccount.getId(), this.code);
-	if (state==2){
-		this.addInfoMessage(null, "CODE.MESSAGE.CODESUCCESSFULL");
-		return "gotoDisplayNameChange";
+	public String getAccountCodeKey() {
+		return accountCodeKey;
 	}
-	else if (state==1){
-		addErrorMessage(null, "CODE.MESSAGE.CODENOTVALIDE");
-	}
-	else
-		addErrorMessage(null, "CODE.MESSAGE.CODETIMEOUT");
-	
-	return null;
 
-		
-}*/
+	public void setAccountCodeKey(String accountCodeKey) {
+		this.accountCodeKey = accountCodeKey;
+	}
+
+	public boolean isReinit() {
+		return reinit;
+	}
+
+	public void setReinit(boolean reinit) {
+		this.reinit = reinit;
+	}
+	
+	public String getAttributesToValidate() {
+		return attributesToValidate;
+	}
+
+	public void setAttributesToValidate(String attributesToValidate) {
+		this.attributesToValidate = attributesToValidate;
+	}
+
+	public String getAttributesInfPerso() {
+		return attributesInfPerso;
+	}
+
+	public void setAttributesInfPerso(String attributesInfPerso) {
+		this.attributesInfPerso = attributesInfPerso;
+	}
+
+	public List<BeanInfo> getListBeanInfoToValidate() {
+		return listBeanInfoToValidate;
+	}
+
+	public void setListBeanInfoToValidate(List<BeanInfo> listBeanInfoToValidate) {
+		this.listBeanInfoToValidate = listBeanInfoToValidate;
+	}
+
+	public BeanInfo getBeanPasswordPrincipal() {
+		return beanPasswordPrincipal;
+	}
+
+	public void setBeanPasswordPrincipal(BeanInfo beanPasswordPrincipal) {
+		this.beanPasswordPrincipal = beanPasswordPrincipal;
+	}
+
+	public BeanInfo getBeanCode() {
+		return beanCode;
+	}
+
+	public void setBeanCode(BeanInfo beanCode) {
+		this.beanCode = beanCode;
+	}
+
+	public HashMap<String, String> getHashBeanPersoInfo() {
+		return hashBeanPersoInfo;
+	}
+
+	public void setHashBeanPersoInfo(HashMap<String, String> hashBeanPersoInfo) {
+		this.hashBeanPersoInfo = hashBeanPersoInfo;
+	}
+
+	
 	
 	
 }

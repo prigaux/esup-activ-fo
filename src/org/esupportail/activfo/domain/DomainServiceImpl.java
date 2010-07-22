@@ -294,10 +294,8 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	}
 	
 	
-	public HashMap<String,String> validateAccount(String number,String birthName,Date birthDate,List<String>attrPersoInfo) throws LdapProblemException{
-		return service.validateAccount(number,birthName,birthDate,attrPersoInfo);
-		
-				
+	public HashMap<String,String> validateAccount(HashMap<String,String> hashInfToValidate,List<String>attrPersoInfo) throws LdapProblemException{
+		return service.validateAccount(hashInfToValidate,attrPersoInfo);
 	}
 	
 	
@@ -306,8 +304,22 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		return service.setPassword(id,code,currentPassword);	
 	}
 	
-	public boolean updateInfoPerso(String id,String code, HashMap<String,String> infoPerso)throws LdapProblemException,UserPermissionException{
-		return service.updateInfoPerso(id,code,infoPerso);
+	public boolean setPassword(String id,String code,String oldPassword, final String currentPassword)throws LdapProblemException,UserPermissionException,KerberosException{
+		return service.setPassword(id,code,oldPassword,currentPassword);
+	}
+	
+	public boolean updatePersonalInformations(String id,String code, HashMap<String,String> hashBeanPersoInfo)throws LdapProblemException,UserPermissionException{
+		return service.updatePersonalInformations(id,code,hashBeanPersoInfo);
+	}
+	
+	
+	
+	public String getCode(String id){
+		return service.getCode(id);
+	}
+	
+	public String getCode(String id,String canal){
+		return service.getCode(id, canal);
 	}
 	
 	public AccountManagement getService() {
@@ -316,6 +328,9 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	
 	public void setService(AccountManagement service) {
 		this.service = service;
+	}
+	public boolean validateCode(String id,String code){
+		return service.validateCode(id, code);
 	}
 
 	
