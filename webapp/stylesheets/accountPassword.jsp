@@ -1,7 +1,8 @@
 <%@include file="_include.jsp"%>
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 	<%@include file="_navigation.jsp"%>
-	<e:section value="#{msgs['PASSWORD.TITLE']}" />
+	<e:section value="#{msgs['PASSWORD.ACTIVATION.TITLE']}" rendered="#{accountController.reinit == false}"/>
+	<e:section value="#{msgs['PASSWORD.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
 	<e:messages />
 	<e:paragraph escape="false" value="#{msgs['PASSWORD.TEXT.TOP']}" />
 
@@ -160,9 +161,10 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 		<e:panelGrid columns="3" >
 		
 			<e:outputLabel for="password"
-				value="#{msgs['PASSWORD.TEXT.PASSWORD']}" />
-  			<e:inputSecret id="password" value="#{accountController.currentAccount.password}"
-                required="true" onkeyup="updatestrength( this.value, '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYSTRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.STRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.MEDIUM']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.WEAK']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}');" validator="#{validator.validatePassword}" >
+				value="#{msgs[beanPasswordPrincipal.key]}"/>
+  			
+  			<e:inputSecret id="password" value="#{beanPasswordPrincipal.value}"
+                required="true" onkeyup="updatestrength( this.value, '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYSTRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.STRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.MEDIUM']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.WEAK']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}');" validator="#{beanPasswordPrincipal.validator.validate}" >
   			</e:inputSecret>
   			
   			<e:message for="password" /> 
@@ -175,7 +177,8 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
       		<e:message for="verdict" /> 
   			
   			<e:outputLabel for="password"
-				value="#{msgs['PASSWORD.TEXT.VERIFYPASSWORD']}" />
+				value="#{msgs['PASSWORD.TEXT.LABEL.VERIFYPASSWORD']}" />
+			
 			<e:inputSecret id="verifyPassword" required="true"  >
 				<t:validateEqual for="password" />
 			</e:inputSecret>
@@ -185,7 +188,7 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 	</h:form>
 	
 	<h:form>
-		<e:commandButton value="#{msgs['ACTIVATION.BUTTON.RESTART']}"
+		<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}"
 			action="#{exceptionController.restart}" />
 	</h:form>
 	

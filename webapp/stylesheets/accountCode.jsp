@@ -18,10 +18,10 @@
 		rendered="#{sessionController.currentUser == null}">
 
 	<e:outputLabel for="code"
-		value="#{msgs['CODE.TEXT.LABEL']}" />
+		value="#{msgs[beanCode.key]}" />
 	<e:inputText id="code"
-		value="#{accountController.code}"
-		required="true">
+		value="#{beanCode.value}"
+		required="true" validator="#{beanCode.validator.validate}">
 	</e:inputText>
 	
 		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}"
@@ -30,7 +30,7 @@
 	</h:form>
 	
 	<h:form>
-		<e:commandButton value="#{msgs['ACTIVATION.BUTTON.RESTART']}"
+		<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}"
 			action="#{exceptionController.restart}" />
 	</h:form>
 

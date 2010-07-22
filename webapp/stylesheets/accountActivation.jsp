@@ -12,46 +12,36 @@
 </t:documentHead>
 
 	<%@include file="_navigation.jsp"%>
-	<e:section value="#{msgs['ACTIVATION.TITLE']}" />
-	
+	<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}"rendered="#{accountController.reinit == false}" />
+	<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}"rendered="#{accountController.reinit == true}" />
 	<e:messages />
 	
-	<e:text escape="false" value="#{msgs['ACTIVATION.TEXT.SUPPORTADRESS']}" rendered="#{accountController.currentAccount.activated}"/>
+	<e:text escape="false" value="#{msgs['IDENTIFICATION.TEXT.SUPPORTADRESS']}" rendered="#{accountController.currentAccount.activated}"/>
 
 
 
 	<h:form id="activationForm" rendered="#{accountController.currentAccount.activated == false}">
 	
 	
-		<e:paragraph value="#{msgs['ACTIVATION.TEXT.TOP']}" />
-		<e:panelGrid columns="3" >
-			<e:outputLabel for="harpegeNumber"
-				value="#{msgs['ACTIVATION.TEXT.HARPEGENUMBER']}" />
-			<e:inputText id="harpegeNumber" value="#{accountController.currentAccount.harpegeNumber}" required="true" validator="#{validator.validateHarpegeNumber}"/>
-			<e:message for="harpegeNumber" /> 
+	<e:paragraph value="#{msgs['IDENTIFICATION.TEXT.TOP']}" />
+	
+	<t:dataList value="#{accountController.listBeanInfoToValidate}" var="entry"> 
+		<e:panelGrid>
+			<t:div rendered="#{entry.value!=null}" >
+			
+				<h:outputLabel value="#{msgs[entry.key]}" />
 				
-			<e:outputLabel for="birthName" 
-				value="#{msgs['ACTIVATION.TEXT.PATRONYMIC']}" />
-			<e:inputText id="birthName" value="#{accountController.currentAccount.birthName}" required="true" >
-			</e:inputText>
-			<e:message for="birthName" />	
-
-
-			<e:outputLabel for="birthDate" 
-				value="#{msgs['ACTIVATION.TEXT.BIRTHDATE']}" />
-			<t:inputCalendar  id="birthDate" monthYearRowClass="yearMonthHeader" weekRowClass="weekHeader" currentDayCellClass="currentDayCell" 
-			renderAsPopup="true" value="#{accountController.currentAccount.birthDate}" required="true" 
-			popupDateFormat="dd/MM/yyyy" renderPopupButtonAsImage="true" popupTodayString="#{msgs['_.DAY.TODAY']}" popupWeekString="#{msgs['_.DAY.WEEK']}">
-				<f:convertDateTime pattern="d/M/yyyy" />
-			</t:inputCalendar>
-			<e:message for="birthDate" />
-				
+				<h:inputText value="#{entry.value}"  required="true" size="25" validator="#{entry.validator.validate}" converter="#{ldapDateConverter}" rendered="#{entry.converter!=null}"/>
+				<h:inputText value="#{entry.value}"  required="true" size="25" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null}"/>
+			
+			</t:div>
 		</e:panelGrid>
+	</t:dataList>
 		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushValid}" />
 	</h:form>
 	
 	<h:form>
-		<e:commandButton value="#{msgs['ACTIVATION.BUTTON.RESTART']}"
+		<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}"
 			action="#{exceptionController.restart}" />
 	</h:form>
 	

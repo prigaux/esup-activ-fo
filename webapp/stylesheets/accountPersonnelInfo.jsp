@@ -3,20 +3,22 @@
 	locale="#{sessionController.locale}">
 	<%@include file="_navigation.jsp"%>
 	
-	<e:section value="#{msgs['DISPLAYNAME.TITLE']}" />
+	<e:section value="#{msgs['PERSOINFO.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
+	<e:section value="#{msgs['PERSOINFO.ACTIVATION.TITLE']}" rendered="#{accountController.reinit == false}" />
+	
 	<e:messages />
-	<e:paragraph value="#{msgs['DISPLAYNAME.TEXT.TOP']}" />
+	<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}" />
 	
 	<h:form id="activationForm" rendered="#{sessionController.currentUser == null}">
 	
 		
 	<t:dataList value="#{accountController.listBeanPersoInfo}" var="entry"> 
-		<e:panelGrid columns="3" >
-		<t:div id="infoDiv" rendered="#{entry.value != null}" >
+		<e:panelGrid>
+		<t:div rendered="#{entry.value!=null}" >
 		
-		<e:outputLabel id="infoLab" value="#{msgs[entry.key]}" />
+		<e:outputLabel value="#{msgs[entry.key]}" />
 		
-		<e:inputText id="infoInput" value="#{entry.value}"  required="true" size="35" validator="#{entry.validator.validate}"/>
+		<e:inputText value="#{entry.value}"  required="true" size="35" validator="#{entry.validator.validate}"/>
 		
 		</t:div>
 		</e:panelGrid>
@@ -27,7 +29,7 @@
 	
 	<h:form>
 		
-		<e:commandButton value="#{msgs['ACTIVATION.BUTTON.RESTART']}"
+		<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}"
 			action="#{exceptionController.restart}" />
 	</h:form>
 

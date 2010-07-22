@@ -21,7 +21,7 @@
 	</h:form>
 	
 	<h:form>
-		<e:commandButton value="#{msgs['ACTIVATION.BUTTON.RESTART']}"
+		<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}"
 			action="#{exceptionController.restart}" />
 	</h:form>
 
