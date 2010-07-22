@@ -58,6 +58,8 @@
 				<value>${ldap.attribute.birthname}</value>
 				<value>${ldap.attribute.mail}</value>
 				<value>${ldap.attribute.shadowLastChange}</value>
+				<value>${ldap.attribute.password}</value>
+				
 			</list>
 		</property>
 		<property name="searchAttribute" value="cn">
@@ -75,6 +77,7 @@
 				<value>${ldap.attribute.birthname}</value>
 				<value>${ldap.attribute.mail}</value>
 				<value>${ldap.attribute.shadowLastChange}</value>
+				<value>${ldap.attribute.password}</value>
 			</list>
 		</property>
 		<property name="cacheManager" ref="cacheManager">

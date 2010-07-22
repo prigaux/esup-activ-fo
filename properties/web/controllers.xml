@@ -79,13 +79,17 @@
 		parent="abstractContextAwareController"
 		scope="session"
     	>
-    	<description>A bean to manage the account activation</description>
+    	<description>A bean to manage the application</description>
+
     	<property name="accountIdKey" value="${account.key.id}"/>
 		<property name="accountMailKey" value="${account.key.mail}"/>
 		<property name="accountSLCKey" value="${account.key.shadowlastchange}"/>
 		<property name="accountDNKey" value="${account.key.displayname}"/>
-		<property name="attributes" value="${info.attributes}"/>
-		<property name="labels" value="${info.labels}"/>
+		<property name="accountCodeKey" value="${account.key.code}"/>
+		
+		<property name="attributesInfPerso" value="${ldap.attributes.information}"/>
+		<property name="attributesToValidate" value="${ldap.attributes.validation}"/>
+		
 		<property name="listBeanPersoInfo">
 			<list>
 				<ref bean="beanDisplayName"/>
@@ -93,6 +97,18 @@
 				<ref bean="beanMobilePhone"/>
 			</list>
 		</property>
+		
+		<property name="listBeanInfoToValidate">
+			<list>
+				<ref bean="beanHarpegeNumber"/>
+				<ref bean="beanBirthName"/>
+				<ref bean="beanBirthDate"/>
+			</list>
+		</property>
+		
+		<property name="beanPasswordPrincipal" ref="beanPasswordPrincipal"/>
+		
+		<property name="beanCode" ref="beanCode"/>
 				
 	</bean>
 	

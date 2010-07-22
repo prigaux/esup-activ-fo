@@ -21,5 +21,19 @@
 			A converter for Locale objects.
     	</description>
 	</bean>
-
+	
+	
+	<bean 
+		id="ldapDateConverter"
+		class="org.esupportail.activfo.web.converters.LdapDateConverter"
+		>
+    	<description>
+			A converter for....
+    	</description>
+    	
+    	<property name="formatStandardDate" value="${format.standard.date}"/>
+    	<property name="formatLdapDate" value="${ldap.attribute.birthdate.format}"/>
+	</bean>
+	
+	
 </beans>
