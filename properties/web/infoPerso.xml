@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	>
+
+	<bean
+		id="beanDisplayName"
+		class="org.esupportail.activfo.web.beans.BeanInfoImpl"
+		scope="session"
+		>
+
+		<property name="key" value="${view.label.displayname}"/>
+		<property name="value"> <null /></property>
+		<property name="id" value="displayName"/>
+		<property name="validator" ref="validatorDisplayName"/>
+		<property name="typeChamp" value=""/>
+		<property name="aide" value=""/>
+		<property name="converter"> <null /></property>
+		
+	</bean>
+	
+	<bean
+		id="beanEmailPerso"
+		class="org.esupportail.activfo.web.beans.BeanInfoImpl"
+		scope="session"
+		>
+
+		<property name="key" value="${view.label.mailperso}"/>
+		<property name="value"> <null /></property>
+		<property name="id" value="mailPerso"/>
+		<property name="validator" ref="validatorEmail"/>
+		<property name="typeChamp" value=""/>
+		<property name="aide" value=""/>
+		<property name="converter"> <null /></property>
+		
+	</bean>
+	
+	<bean
+		id="beanMobilePhone"
+		class="org.esupportail.activfo.web.beans.BeanInfoImpl"
+		scope="session"
+		>
+
+		<property name="key" value="${view.label.pager}"/>
+		<property name="value"> <null /></property>
+		<property name="id" value="mobile"/>
+		<property name="validator" ref="validatorMobilePhone"/>
+		<property name="typeChamp" value=""/>
+		<property name="aide" value=""/>
+		<property name="converter"> <null /></property>
+		
+	</bean>
+	
+	
+
+</beans>

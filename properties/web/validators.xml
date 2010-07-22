@@ -13,17 +13,6 @@
 		This file is referenced by /properties/applicationContext.xml.
 	-->
 
-	<bean 
-		id="validator"
-		class="org.esupportail.activfo.web.validators.Validator"
-		parent="abstractI18nAwareBean"
-		>
-    	<description>
-			A validator for forms objects.
-    	</description>
-    	
-    	
-	</bean>
 	
 	<bean 
 		id="validatorDisplayName"
@@ -33,8 +22,7 @@
     	<description>
 			A validator for DisplayName.
     	</description>
-    	
-    	
+    		
 	</bean>
 	
 	<bean 
@@ -61,8 +49,68 @@
     	
 	</bean>
 	
+	<bean 
+		id="validatorHarpegeNumber"
+		class="org.esupportail.activfo.web.validators.ValidatorHarpegeNumber"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Harpege Number.
+    	</description>
+    	
+    	
+	</bean>
 	
+	<bean 
+		id="validatorBirthName"
+		class="org.esupportail.activfo.web.validators.ValidatorBirthName"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for BirthName.
+    	</description>
+    	
+    	
+    	
+    	
+	</bean>
 	
+	<bean 
+		id="validatorBirthDate"
+		class="org.esupportail.activfo.web.validators.ValidatorBirthDate"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for BirthDate.
+    	</description>
+    	
+    	<property name="formatLdapDate" value="${ldap.attribute.birthdate.format}"/>
+    	
+	</bean>
+	
+	<bean 
+		id="validatorPassword"
+		class="org.esupportail.activfo.web.validators.ValidatorPassword"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Password.
+    	</description>
+    	
+    	
+	</bean>
+	
+	<bean 
+		id="validatorCode"
+		class="org.esupportail.activfo.web.validators.ValidatorCode"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Code.
+    	</description>
+    	
+    	
+	</bean>
 	
 
 </beans>
