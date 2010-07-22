@@ -40,8 +40,10 @@
 	<import resource="tags/tags.xml" />
 	<import resource="web/controllers.xml" />
 	<import resource="web/converters.xml" />
+	<import resource="web/infoPerso.xml" />
+	<import resource="web/infoToValidate.xml" />
 	<import resource="web/validators.xml" />
-	<import resource="web/beanDisplayName.xml" />
-	<import resource="web/beanEmailPerso.xml" />
-	<import resource="web/beanMobilePhone.xml" />
+	<import resource="web/fieldPassword.xml" />
+	<import resource="web/fieldCode.xml" />
+
 </beans>
