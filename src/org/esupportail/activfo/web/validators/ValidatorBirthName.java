@@ -8,8 +8,9 @@ import javax.faces.validator.ValidatorException;
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
 
 
-public class ValidatorEmail extends AbstractI18nAwareBean implements Validator  {
+public class ValidatorBirthName extends AbstractI18nAwareBean implements Validator{
 	
+		
 	/**
 	 * 
 	 */
@@ -21,17 +22,11 @@ public class ValidatorEmail extends AbstractI18nAwareBean implements Validator  
 	
 	
 	
+	
 
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		
-		if (value instanceof String) {
-			String strValue = (String) value;
-			if (!strValue.matches("^[a-zA-Z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,4}$")) {
-				throw new ValidatorException(getFacesErrorMessage("VALIDATOR.EMAIL.INVALID"));
-			}
-		
-		}
 	}
-	
+
 		
 }

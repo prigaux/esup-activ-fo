@@ -8,7 +8,7 @@ import javax.faces.validator.ValidatorException;
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
 
 
-public class ValidatorDisplayName extends AbstractI18nAwareBean {
+public class ValidatorDisplayName extends AbstractI18nAwareBean implements Validator{
 	
 	/**
 	 * 
