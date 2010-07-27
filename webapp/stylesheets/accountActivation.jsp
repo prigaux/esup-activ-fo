@@ -19,24 +19,27 @@
 	<e:text escape="false" value="#{msgs['IDENTIFICATION.TEXT.SUPPORTADRESS']}" rendered="#{accountController.currentAccount.activated}"/>
 
 
-
 	<h:form id="activationForm" rendered="#{accountController.currentAccount.activated == false}">
 	
 	
 	<e:paragraph value="#{msgs['IDENTIFICATION.TEXT.TOP']}" />
-	
-	<t:dataList value="#{accountController.listBeanInfoToValidate}" var="entry"> 
+		
+	<t:dataList value="#{accountController.listInfoToValidate}" var="entry"> 
 		<e:panelGrid>
 			<t:div rendered="#{entry.value!=null}" >
-			
 				<h:outputLabel value="#{msgs[entry.key]}" />
-				
 				<h:inputText value="#{entry.value}"  required="true" size="25" validator="#{entry.validator.validate}" converter="#{ldapDateConverter}" rendered="#{entry.converter!=null}"/>
 				<h:inputText value="#{entry.value}"  required="true" size="25" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null}"/>
-			
+				
+				<h:outputLink id="rolloverImage" value="#" onclick="drawAlert('#{entry.aide}')" rendered="#{entry.aide!=null}">
+					<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
+					<h:outputText id="aide" value="#{msgs[entry.aide]}"/>
+				</h:outputLink>
 			</t:div>
 		</e:panelGrid>
 	</t:dataList>
+		
+		
 		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushValid}" />
 	</h:form>
 	
@@ -47,3 +50,12 @@
 	
 <% /* @include file="_debug.jsp" */ %>
 </e:page>
+
+<script type="text/javascript" language="javascript">
+function drawAlert(msg)
+{
+    alert (msg);
+}
+</script>
+
+

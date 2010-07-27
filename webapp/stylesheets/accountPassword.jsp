@@ -158,33 +158,38 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 
 
 	<h:form id="activationForm" rendered="#{sessionController.currentUser == null}">
-		<e:panelGrid columns="3" >
 		
-			<e:outputLabel for="password"
-				value="#{msgs[beanPasswordPrincipal.key]}"/>
-  			
-  			<e:inputSecret id="password" value="#{beanPasswordPrincipal.value}"
-                required="true" onkeyup="updatestrength( this.value, '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYSTRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.STRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.MEDIUM']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.WEAK']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}');" validator="#{beanPasswordPrincipal.validator.validate}" >
-  			</e:inputSecret>
-  			
+		<e:panelGrid columns="4" >
+  			<e:outputLabel for="password" value="#{msgs[beanPasswordPrincipal.key]}"/>
+	  		<e:inputSecret id="password" value="#{beanPasswordPrincipal.value}"
+	     		required="true" onkeyup="updatestrength( this.value, '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYSTRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.STRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.MEDIUM']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.WEAK']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}');" validator="#{beanPasswordPrincipal.validator.validate}" >
+	  		</e:inputSecret>
+	  			
+	  		<h:outputLink id="rolloverImage" value="#" rendered="#{beanPasswordPrincipal.aide!=null}">
+				<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
+				<h:outputText id="aide" value="#{msgs[beanPasswordPrincipal.aide]}"/>
+			</h:outputLink>
+  		  			
   			<e:message for="password" /> 
   			
       		<e:outputLabel for="verdict" value="#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH']}" />
-      		<e:panelGrid columns="1" >
-      			<h:outputText  id="verdict" value="#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}" />
-      			<t:htmlTag value="div" id="strengthbar" style="font-size: 1px; height: 2px; width: 0px; border: 1px solid white;" ></t:htmlTag>
-      		</e:panelGrid> 
+	      	<h:outputText  id="verdict" value="#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}" />
+	      	<t:htmlTag value="div" id="strengthbar" style="font-size: 1px; height: 2px; width: 0px; border: 1px solid white;" ></t:htmlTag>
+      		      		      		
       		<e:message for="verdict" /> 
   			
-  			<e:outputLabel for="password"
-				value="#{msgs['PASSWORD.TEXT.LABEL.VERIFYPASSWORD']}" />
-			
+  			<e:outputLabel for="password" value="#{msgs['PASSWORD.TEXT.LABEL.VERIFYPASSWORD']}" />
 			<e:inputSecret id="verifyPassword" required="true"  >
 				<t:validateEqual for="password" />
 			</e:inputSecret>
+
   			<e:message for="verifyPassword" /> 
-		</e:panelGrid>
-		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangePassword}" />
+		
+			
+			
+			</e:panelGrid>
+			
+			<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangePassword}" />
 	</h:form>
 	
 	<h:form>

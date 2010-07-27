@@ -366,9 +366,7 @@ with class uportal-background-selected"  */
 }  /*  uPortal equivalent style =3D  " no current equivalent"  */
 
 
-div{
-	margin-bottom:10px;	
-}
+
 
 input{
 	margin-left:10px;
@@ -378,4 +376,50 @@ label{
 	width:40px;
 }	
 
+#activationForm a {
+
+position:absolute;
+
+
+margin-left:5px;
+
+
+}
+
+
+#activationForm img{
+width:22px;
+height:22px;
+margin-top:auto;
+}	
+
+
+#activationForm span {
+
+position: absolute;
+
+
+
+
+width:300px;
+
+height:auto;
+
+display:none;
+
+padding:10px;
+
+}
+
+
+
+#activationForm a:hover span {
+
+display:inline;
+border:1px solid;
+background-color:#D5DDE2;
+z-index: 1;
+color:black;
+margin-left:30px;
+}
 

@@ -58,7 +58,19 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 	
 	private String mobile;
 	
+	private String oneRadioValue;
 	
+	private String oneRadioProcedure;
+	
+	
+	public String getOneRadioValue() {
+		return oneRadioValue;
+	}
+
+	public void setOneRadioValue(String oneRadioValue) {
+		this.oneRadioValue = oneRadioValue;
+	}
+
 	public Account() {
 		super();
 		charterAgreement=false;
@@ -226,6 +238,14 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public String getOneRadioProcedure() {
+		return oneRadioProcedure;
+	}
+
+	public void setOneRadioProcedure(String oneRadioProcedure) {
+		this.oneRadioProcedure = oneRadioProcedure;
 	}
 
 	

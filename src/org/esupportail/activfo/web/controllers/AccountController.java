@@ -23,7 +23,8 @@ import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 
-import org.esupportail.activfo.web.beans.BeanInfo;
+import org.esupportail.activfo.web.beans.BeanField;
+
 
 import org.esupportail.commons.services.ldap.LdapException;
 
@@ -38,9 +39,11 @@ public class AccountController extends AbstractContextAwareController implements
 
 	private final Logger logger = new LoggerImpl(getClass());
 	
-	
 	private  Account currentAccount;
+	
 	private boolean reinit=false;
+	private boolean passwChange=false;
+	
 	
 	private String accountIdKey;
 	private String accountMailKey;
@@ -48,23 +51,54 @@ public class AccountController extends AbstractContextAwareController implements
 	private String accountDNKey;
 	private String accountCodeKey;
 	
+	//liste des champs pour l'affichage des informations personnelles
+	private List<BeanField> listBeanPersoInfo;
+	
+	//liste des attributs pour l'affichage des informations personnelles
 	private String attributesInfPerso;
-	private String attributesToValidate;
-	
-	private List<BeanInfo> listBeanInfoToValidate;
-	private List<BeanInfo> listBeanPersoInfo;
-	private BeanInfo beanPasswordPrincipal;
-	private BeanInfo beanCode;
 	
 	
+	//liste générique d'attributs à valider
+	private List<String> attrToValidate;
+	
+	private String attributesStudentToValidate;
+	private String attributesPersonnelToValidate;
+	private String attributesOldStudentToValidate;
+	
+	
+	
+	//liste générique des champs pour la validation
+	private List<BeanField> listInfoToValidate;
+	
+	private List<BeanField> listInfoStudentToValidate;
+	private List<BeanField> listInfoPersonnelToValidate;
+	private List<BeanField> listInfoOldStudentToValidate;
+	
+	
+	
+	//liste des champs correspondant aux procedures
+	private List<BeanField> listBeanProcedure;
+	
+	//liste des champs correspondant aux statuts de l'utilisateur
+	private List<BeanField> listBeanStatus;
+	
+	//champ passwordPrincipal
+	private BeanField beanPasswordPrincipal;
+	
+	//champ code
+	private BeanField beanCode;
+	
+	
+	//decriptif du compte suite à validation
 	HashMap<String,String> accountDescr;
 	
+	private String procedureReinitialisation;
+	private String procedureActivation;
+	private String procedurePasswordChange;
 	
-	private HashMap<String,String> hashBeanPersoInfo=new HashMap<String,String>();
-	
-	private HashMap<String,String> hashInfToValidate=new HashMap<String,String>();
-	
-	
+	private String statusStudent;
+	private String statusPersonnel;
+	private String statusOldStudent;
 	
 
 	/**
@@ -72,6 +106,7 @@ public class AccountController extends AbstractContextAwareController implements
 	 */
 	public AccountController() {
 		super();
+		currentAccount = new Account();
 	}
 
 	/**
@@ -89,7 +124,7 @@ public class AccountController extends AbstractContextAwareController implements
 	@Override
 	public void reset() {
 		super.reset();
-		this.currentAccount=null;
+		//this.currentAccount=null;
 		//enter();
 	}
 
@@ -99,61 +134,56 @@ public class AccountController extends AbstractContextAwareController implements
 	public boolean isPageAuthorized() {
 		return true;
 	}
-
-	/**
-	 * JSF callback.
-	 * @return a String.
-	 */
-	public String enterActivation() {
+	
+	public String enter() {
 		
 		if (!isPageAuthorized()) {
 			addUnauthorizedActionMessage();
 			return null;
 		}
-	
-		currentAccount = new Account();
-		reinit=false;
+		
+		if (currentAccount.getOneRadioProcedure().equals(procedureReinitialisation)){
+			reinit=true;
+			passwChange=false;
+		}
+		else if (currentAccount.getOneRadioProcedure().equals(procedurePasswordChange)){
+			passwChange=true;
+			reinit=false;
+		}
+		else{
+			reinit=false;
+			passwChange=false;
+		}
+		
+		
+		if(currentAccount.getOneRadioValue().equals(statusStudent)){
+
+			this.listInfoToValidate=listInfoStudentToValidate;
+			attrToValidate=Arrays.asList(attributesStudentToValidate.split(","));
+		}
+		else if (currentAccount.getOneRadioValue().equals(this.statusPersonnel)){
+			this.listInfoToValidate=listInfoPersonnelToValidate;
+			attrToValidate=Arrays.asList(attributesPersonnelToValidate.split(","));
+		}
+		else{
+			this.listInfoToValidate=listInfoOldStudentToValidate;
+			attrToValidate=Arrays.asList(attributesOldStudentToValidate.split(","));
+		}
 				
 		return "navigationActivation";
 	}
 	
-	
-	public String enterReinitialisation() {
 		
-		if (!isPageAuthorized()) {
-			addUnauthorizedActionMessage();
-			return null;
-		}
-		
-		currentAccount = new Account();
-		System.out.println("REINITIALISATION");
-		reinit=true;
-		return "navigationActivation";
-	}
-
-	
-	
 	public String pushValid() {
 		try {
+			
+			HashMap<String,String> hashInfToValidate;
+			hashInfToValidate=this.getMap(listInfoToValidate, attrToValidate);
 
-			//Attributs à valider
-			List<String> attrToValidate=Arrays.asList(attributesToValidate.split(","));
+			logger.info("La validation concerne les données suivantes: "+hashInfToValidate.toString());
 
 			//Attributs concernant les informations personnelles que l'on souhaite afficher
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
-			
-			Iterator it=listBeanInfoToValidate.iterator();
-			int j=0;
-			while(it.hasNext()){
-				
-				BeanInfo beanInfoToValidate=(BeanInfo)it.next();
-				hashInfToValidate.put(attrToValidate.get(j), beanInfoToValidate.getValue());
-				beanInfoToValidate.setValue("");//security reason
-				j++;
-			}
-			
-			logger.info("La validation concerne les données suivantes: "+this.hashInfToValidate.toString());
-
 			
 			accountDescr=this.getDomainService().validateAccount(hashInfToValidate,attrPersoInfo);
 			
@@ -224,10 +254,11 @@ public class AccountController extends AbstractContextAwareController implements
 			try{
 				logger.info("Mise à jour des informations personnelles");
 				
+				HashMap<String,String> hashBeanPersoInfo=new HashMap<String,String>();
 				Iterator it=listBeanPersoInfo.iterator();
 				
 				while(it.hasNext()){
-					BeanInfo beanPersoInfo=(BeanInfo)it.next();
+					BeanField beanPersoInfo=(BeanField)it.next();
 					hashBeanPersoInfo.put(this.getString(beanPersoInfo.getKey()), beanPersoInfo.getValue());
 				}
 				
@@ -238,11 +269,7 @@ public class AccountController extends AbstractContextAwareController implements
 					
 					this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
 					
-					if (!reinit){
-						return "gotoCharterAgreement";
-					}else{
-						return "gotoPushCode";
-					}
+					return "gotoCharterAgreement";
 				}	
 						
 			}
@@ -319,7 +346,7 @@ public class AccountController extends AbstractContextAwareController implements
 		
 		}catch (UserPermissionException e) {
 			logger.error(e.getMessage());
-			this.enterReinitialisation();
+			//this.enterReinitialisation();
 			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
 		
 		}catch (KerberosException e) {
@@ -374,11 +401,11 @@ public class AccountController extends AbstractContextAwareController implements
 		this.accountDNKey = accountDNKey;
 	}
 
-	public List<BeanInfo> getListBeanPersoInfo() {
+	public List<BeanField> getListBeanPersoInfo() {
 		return listBeanPersoInfo;
 	}
 
-	public void setListBeanPersoInfo(List<BeanInfo> listBeanPersoInfo) {
+	public void setListBeanPersoInfo(List<BeanField> listBeanPersoInfo) {
 		this.listBeanPersoInfo = listBeanPersoInfo;
 	}
 
@@ -398,13 +425,7 @@ public class AccountController extends AbstractContextAwareController implements
 		this.reinit = reinit;
 	}
 	
-	public String getAttributesToValidate() {
-		return attributesToValidate;
-	}
-
-	public void setAttributesToValidate(String attributesToValidate) {
-		this.attributesToValidate = attributesToValidate;
-	}
+	
 
 	public String getAttributesInfPerso() {
 		return attributesInfPerso;
@@ -414,39 +435,181 @@ public class AccountController extends AbstractContextAwareController implements
 		this.attributesInfPerso = attributesInfPerso;
 	}
 
-	public List<BeanInfo> getListBeanInfoToValidate() {
-		return listBeanInfoToValidate;
-	}
-
-	public void setListBeanInfoToValidate(List<BeanInfo> listBeanInfoToValidate) {
-		this.listBeanInfoToValidate = listBeanInfoToValidate;
-	}
-
-	public BeanInfo getBeanPasswordPrincipal() {
+	public BeanField getBeanPasswordPrincipal() {
 		return beanPasswordPrincipal;
 	}
 
-	public void setBeanPasswordPrincipal(BeanInfo beanPasswordPrincipal) {
+	public void setBeanPasswordPrincipal(BeanField beanPasswordPrincipal) {
 		this.beanPasswordPrincipal = beanPasswordPrincipal;
 	}
 
-	public BeanInfo getBeanCode() {
+	public BeanField getBeanCode() {
 		return beanCode;
 	}
 
-	public void setBeanCode(BeanInfo beanCode) {
+	public void setBeanCode(BeanField beanCode) {
 		this.beanCode = beanCode;
 	}
-
-	public HashMap<String, String> getHashBeanPersoInfo() {
-		return hashBeanPersoInfo;
+	
+	public boolean isPasswChange() {
+		return passwChange;
 	}
 
-	public void setHashBeanPersoInfo(HashMap<String, String> hashBeanPersoInfo) {
-		this.hashBeanPersoInfo = hashBeanPersoInfo;
+	public void setPasswChange(boolean passwChange) {
+		this.passwChange = passwChange;
+	}
+
+	public List<BeanField> getListBeanProcedure() {
+		return listBeanProcedure;
+	}
+
+	public void setListBeanProcedure(List<BeanField> listBeanProcedure) {
+		this.listBeanProcedure = listBeanProcedure;
 	}
 
 	
+	public List<BeanField> getListBeanStatus() {
+		return listBeanStatus;
+	}
+
+	public void setListBeanStatus(List<BeanField> listBeanStatus) {
+		this.listBeanStatus = listBeanStatus;
+	}
+
+	public String getAttributesOldStudentToValidate() {
+		return attributesOldStudentToValidate;
+	}
+
+	public void setAttributesOldStudentToValidate(
+			String attributesOldStudentToValidate) {
+		this.attributesOldStudentToValidate = attributesOldStudentToValidate;
+	}
+
+	public List<BeanField> getListInfoStudentToValidate() {
+		return listInfoStudentToValidate;
+	}
+
+	public void setListInfoStudentToValidate(
+			List<BeanField> listInfoStudentToValidate) {
+		this.listInfoStudentToValidate = listInfoStudentToValidate;
+	}
+
+	public List<BeanField> getListInfoPersonnelToValidate() {
+		return listInfoPersonnelToValidate;
+	}
+
+	public void setListInfoPersonnelToValidate(
+			List<BeanField> listInfoPersonnelToValidate) {
+		this.listInfoPersonnelToValidate = listInfoPersonnelToValidate;
+	}
+
+	public List<BeanField> getListInfoOldStudentToValidate() {
+		return listInfoOldStudentToValidate;
+	}
+
+	public void setListInfoOldStudentToValidate(
+			List<BeanField> listInfoOldStudentToValidate) {
+		this.listInfoOldStudentToValidate = listInfoOldStudentToValidate;
+	}
+
+	private HashMap<String,String> getMap(List<BeanField> listeInfoToValidate,List<String>attrToValidate){
+		
+		HashMap<String,String> hashInfToValidate=new HashMap<String,String>();
+		Iterator it=listeInfoToValidate.iterator();
+		int j=0;
+		while(it.hasNext()){
+			BeanField beanInfoToValidate=(BeanField)it.next();
+			hashInfToValidate.put(attrToValidate.get(j), beanInfoToValidate.getValue());
+			beanInfoToValidate.setValue("");//security reason
+			j++;
+		}
+		return hashInfToValidate;
+		
+	}
+
+	public String getAttributesStudentToValidate() {
+		return attributesStudentToValidate;
+	}
+
+	public void setAttributesStudentToValidate(String attributesStudentToValidate) {
+		this.attributesStudentToValidate = attributesStudentToValidate;
+	}
+
+	public String getAttributesPersonnelToValidate() {
+		return attributesPersonnelToValidate;
+	}
+
+	public void setAttributesPersonnelToValidate(
+			String attributesPersonnelToValidate) {
+		this.attributesPersonnelToValidate = attributesPersonnelToValidate;
+	}
+
+	public List<BeanField> getListInfoToValidate() {
+		return listInfoToValidate;
+	}
+
+	public void setListInfoToValidate(List<BeanField> listInfoToValidate) {
+		this.listInfoToValidate = listInfoToValidate;
+	}
+
+	
+
+	public List<String> getAttrToValidate() {
+		return attrToValidate;
+	}
+
+	public void setAttrToValidate(List<String> attrToValidate) {
+		this.attrToValidate = attrToValidate;
+	}
+
+	public String getProcedureReinitialisation() {
+		return procedureReinitialisation;
+	}
+
+	public void setProcedureReinitialisation(String procedureReinitialisation) {
+		this.procedureReinitialisation = procedureReinitialisation;
+	}
+
+	public String getProcedureActivation() {
+		return procedureActivation;
+	}
+
+	public void setProcedureActivation(String procedureActivation) {
+		this.procedureActivation = procedureActivation;
+	}
+
+	public String getProcedurePasswordChange() {
+		return procedurePasswordChange;
+	}
+
+	public void setProcedurePasswordChange(String procedurePasswordChange) {
+		this.procedurePasswordChange = procedurePasswordChange;
+	}
+
+	public String getStatusStudent() {
+		return statusStudent;
+	}
+
+	public void setStatusStudent(String statusStudent) {
+		this.statusStudent = statusStudent;
+	}
+
+	public String getStatusPersonnel() {
+		return statusPersonnel;
+	}
+
+	public void setStatusPersonnel(String statusPersonnel) {
+		this.statusPersonnel = statusPersonnel;
+	}
+
+	public String getStatusOldStudent() {
+		return statusOldStudent;
+	}
+
+	public void setStatusOldStudent(String statusOldStudent) {
+		this.statusOldStudent = statusOldStudent;
+	}
 	
 	
+
 }
