@@ -8,7 +8,7 @@
 
 	<bean
 		id="beanCode"
-		class="org.esupportail.activfo.web.beans.BeanInfoImpl"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
 
@@ -17,7 +17,7 @@
 		<property name="id" value="code"/>
 		<property name="validator" ref="validatorCode"/>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value=""/>
+		<property name="aide" value="${view.aide.code}"/>
 		<property name="converter"> <null /></property>
 		
 	</bean>

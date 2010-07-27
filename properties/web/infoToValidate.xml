@@ -8,7 +8,7 @@
 
 	<bean
 		id="beanHarpegeNumber"
-		class="org.esupportail.activfo.web.beans.BeanInfoImpl"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
 
@@ -17,14 +17,31 @@
 		<property name="id" value="harpegeNumber"/>
 		<property name="validator" ref="validatorHarpegeNumber"/>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value=""/>
+		<property name="aide" value="${view.aide.harpegenumber}"/>
 		<property name="converter"> <null /></property>
 		
 	</bean>
 	
 	<bean
+		id="beanStudentLogin"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="${view.label.studentlogin}"/>
+		<property name="value" value=""/>
+		<property name="id" value="studentlogin"/>
+		<property name="validator" ref="validatorHarpegeNumber"/>
+		<property name="typeChamp" value=""/>
+		<property name="aide" value="${view.aide.studentlogin}"/>
+		<property name="converter"> <null /></property>
+		
+	</bean>
+	
+	
+	<bean
 		id="beanBirthName"
-		class="org.esupportail.activfo.web.beans.BeanInfoImpl"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
 
@@ -33,14 +50,34 @@
 		<property name="id" value="birthName"/>
 		<property name="validator" ref="validatorBirthName"/>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value=""/>
+		<property name="aide"> <null /> </property>
 		<property name="converter"> <null /></property>
 		
 	</bean>
 	
+	
+	<bean
+		id="beanStudentNumber"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="${view.label.studentnumber}"/>
+		<property name="value" value=""/>
+		<property name="id" value="studentnumber"/>
+		<property name="validator" ref="validatorHarpegeNumber"/>
+		<property name="typeChamp" value=""/>
+		<property name="aide" value="${view.aide.studentnumber}"/>
+		<property name="converter"> <null /></property>
+		
+	</bean>
+	
+	
+	
+	
 	<bean
 		id="beanBirthDate"
-		class="org.esupportail.activfo.web.beans.BeanInfoImpl"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
 
@@ -49,10 +86,12 @@
 		<property name="id" value="birthDate"/>
 		<property name="validator" ref="validatorBirthDate"/>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value=""/>
+		<property name="aide"> <null/></property>
 		<property name="converter" value="ldapDateConverter"/>
 		
 	</bean>
+	
+	
 	
 	
 

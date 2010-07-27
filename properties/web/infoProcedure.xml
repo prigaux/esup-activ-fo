@@ -7,52 +7,56 @@
 	>
 
 	<bean
-		id="beanDisplayName"
+		id="beanActivation"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.displayname}"/>
-		<property name="value"> <null /></property>
-		<property name="id" value="displayName"/>
-		<property name="validator" ref="validatorDisplayName"/>
+		<property name="key" value="${view.label.procedure.activation}"/>
+		<property name="value" value="${view.value.procedure.activation}"/>
+		<property name="id" value="activation"/>
+		<property name="validator"> <null /></property>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value="${view.aide.displayname}"/>
+		<property name="aide"> <null /></property>
 		<property name="converter"> <null /></property>
 		
 	</bean>
 	
 	<bean
-		id="beanEmailPerso"
+		id="beanReinitialisation"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.mailperso}"/>
-		<property name="value"> <null /></property>
-		<property name="id" value="mailPerso"/>
-		<property name="validator" ref="validatorEmail"/>
+		<property name="key" value="${view.label.procedure.reinitialisation}"/>
+		<property name="value" value="${view.value.procedure.reinitialisation}"/>
+		<property name="id" value="reinitialisation"/>
+		<property name="validator"> <null /></property>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value=""/>
+		<property name="aide"> <null /></property>
 		<property name="converter"> <null /></property>
 		
 	</bean>
 	
+	
 	<bean
-		id="beanMobilePhone"
+		id="beanPasswordChange"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.pager}"/>
-		<property name="value"> <null /></property>
-		<property name="id" value="mobile"/>
-		<property name="validator" ref="validatorMobilePhone"/>
+		<property name="key" value="${view.label.procedure.passwordchange}"/>
+		<property name="value" value="${view.value.procedure.passwordchange}"/>
+		<property name="id" value="passwordchange"/>
+		<property name="validator"> <null /></property>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value=""/>
+		<property name="aide"> <null /></property>
 		<property name="converter"> <null /></property>
 		
 	</bean>
+	
+	
+	
 	
 	
 

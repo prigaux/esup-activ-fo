@@ -7,52 +7,56 @@
 	>
 
 	<bean
-		id="beanDisplayName"
+		id="beanStudent"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.displayname}"/>
-		<property name="value"> <null /></property>
-		<property name="id" value="displayName"/>
-		<property name="validator" ref="validatorDisplayName"/>
+		<property name="key" value="${view.label.status.student}"/>
+		<property name="value" value="${view.value.status.student}"/>
+		<property name="id" value="student"/>
+		<property name="validator"> <null /></property>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value="${view.aide.displayname}"/>
+		<property name="aide"> <null /></property>
 		<property name="converter"> <null /></property>
 		
 	</bean>
 	
 	<bean
-		id="beanEmailPerso"
+		id="beanPersonnel"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.mailperso}"/>
-		<property name="value"> <null /></property>
-		<property name="id" value="mailPerso"/>
-		<property name="validator" ref="validatorEmail"/>
+		<property name="key" value="${view.label.status.personnel}"/>
+		<property name="value" value="${view.value.status.personnel}"/>
+		<property name="id" value="personnel"/>
+		<property name="validator"> <null /></property>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value=""/>
+		<property name="aide"> <null /></property>
 		<property name="converter"> <null /></property>
 		
 	</bean>
 	
+	
 	<bean
-		id="beanMobilePhone"
+		id="beanOldStudent"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.pager}"/>
-		<property name="value"> <null /></property>
-		<property name="id" value="mobile"/>
-		<property name="validator" ref="validatorMobilePhone"/>
+		<property name="key" value="${view.label.status.oldstudent}"/>
+		<property name="value" value="${view.value.status.oldstudent}"/>
+		<property name="id" value="oldstudent"/>
+		<property name="validator"> <null /></property>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value=""/>
+		<property name="aide"> <null /></property>
 		<property name="converter"> <null /></property>
 		
 	</bean>
+	
+	
+	
 	
 	
 

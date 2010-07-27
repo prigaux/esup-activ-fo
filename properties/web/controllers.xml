@@ -87,8 +87,19 @@
 		<property name="accountDNKey" value="${account.key.displayname}"/>
 		<property name="accountCodeKey" value="${account.key.code}"/>
 		
+		<property name="procedureActivation" value="${view.value.procedure.activation}"/>
+		<property name="procedureReinitialisation" value="${view.value.procedure.reinitialisation}"/>
+		<property name="procedurePasswordChange" value="${view.value.procedure.passwordchange}"/>
+		
+		<property name="statusStudent" value="${view.value.status.student}"/>
+		<property name="statusPersonnel" value="${view.value.status.personnel}"/>
+		<property name="statusOldStudent" value="${view.value.status.oldstudent}"/>
+		
 		<property name="attributesInfPerso" value="${ldap.attributes.information}"/>
-		<property name="attributesToValidate" value="${ldap.attributes.validation}"/>
+		
+		<property name="attributesStudentToValidate" value="${ldap.attributes.validation.student}"/>
+		<property name="attributesPersonnelToValidate" value="${ldap.attributes.validation.personnel}"/>
+		<property name="attributesOldStudentToValidate" value="${ldap.attributes.validation.oldstudent}"/>
 		
 		<property name="listBeanPersoInfo">
 			<list>
@@ -98,13 +109,47 @@
 			</list>
 		</property>
 		
-		<property name="listBeanInfoToValidate">
+		<property name="listInfoPersonnelToValidate">
 			<list>
 				<ref bean="beanHarpegeNumber"/>
 				<ref bean="beanBirthName"/>
 				<ref bean="beanBirthDate"/>
 			</list>
 		</property>
+		
+		<property name="listInfoStudentToValidate">
+			<list>
+				<ref bean="beanStudentLogin"/>
+				<ref bean="beanStudentNumber"/>
+				<ref bean="beanBirthDate"/>
+			</list>
+		</property>
+		
+		<property name="listInfoOldStudentToValidate">
+			<list>
+				<ref bean="beanStudentLogin"/>
+				<ref bean="beanStudentNumber"/>
+				<ref bean="beanBirthDate"/>
+			</list>
+		</property>
+		
+		<property name="listBeanProcedure">
+			<list>
+				<ref bean="beanActivation"/>
+				<ref bean="beanReinitialisation"/>
+				<ref bean="beanPasswordChange"/>
+			</list>
+		</property>
+		
+		<property name="listBeanStatus">
+			<list>
+				<ref bean="beanStudent"/>
+				<ref bean="beanPersonnel"/>
+				<ref bean="beanOldStudent"/>
+			</list>
+		</property>
+		
+		
 		
 		<property name="beanPasswordPrincipal" ref="beanPasswordPrincipal"/>
 		
@@ -159,5 +204,7 @@
 		</property>
 	</bean>
 	-->
+	
+	
 
 </beans>

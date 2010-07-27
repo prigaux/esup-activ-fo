@@ -85,13 +85,13 @@
 		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoPersonnelInfo</from-outcome>
-			<to-view-id>/stylesheets/accountPersonnelInfo.jsp</to-view-id>
+			<to-view-id>/stylesheets/accountPersonalInfo.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
 		<display-name>accountCharter</display-name>
-		<from-view-id>/stylesheets/accountPersonnelInfo.jsp</from-view-id>
+		<from-view-id>/stylesheets/accountPersonalInfo.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoCharterAgreement</from-outcome>
 			<to-view-id>/stylesheets/accountCharter.jsp</to-view-id>
