@@ -25,10 +25,13 @@
 				<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
 				<h:outputText id="aide" value="#{msgs[beanCode.aide]}"/>
 			</h:outputLink>
-			
 		</e:panelGrid>
-		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushVerifyCode}" />
+		
+		<t:div style="margin-top:30;">
+			<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushVerifyCode}" />
+		</t:div>
 		<e:message for="code" />	
+	
 	</h:form>
 	
 	<h:form>

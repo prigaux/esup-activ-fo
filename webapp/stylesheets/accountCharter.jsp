@@ -10,19 +10,15 @@
 	<h:form id="charterForm"
 		rendered="#{sessionController.currentUser == null}">
 
-		<e:outputLabel for="charterAgreement"
-			value="#{msgs['CHARTER.TEXT.AGREE']}" />
-		<e:selectBooleanCheckbox id="charterAgreement"
-			value="#{accountController.currentAccount.charterAgreement}"
-			required="true" />
-
-		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}"
-			action="#{accountController.pushCharterAgreement}" />
+		<e:outputLabel for="charterAgreement" value="#{msgs['CHARTER.TEXT.AGREE']}" />
+		<e:selectBooleanCheckbox id="charterAgreement" value="#{accountController.currentAccount.charterAgreement}" required="true" />
+		<t:div style="margin-top:30;">
+			<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushCharterAgreement}" />
+		</t:div>
 	</h:form>
 	
 	<h:form>
-		<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}"
-			action="#{exceptionController.restart}" />
+		<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
 	</h:form>
 
 	<%
