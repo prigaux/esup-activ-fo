@@ -84,7 +84,7 @@
 			A validator for BirthDate.
     	</description>
     	
-    	<property name="formatLdapDate" value="${ldap.attribute.birthdate.format}"/>
+    	<property name="formatLdapDate" value="${format.ldap.date}"/>
     	
 	</bean>
 	

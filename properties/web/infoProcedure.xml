@@ -12,7 +12,7 @@
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.procedure.activation}"/>
+		<property name="key" value="WELCOME.PROCEDURE.ACTIVATION.RADIOBUTTON.LABEL"/>
 		<property name="value" value="${view.value.procedure.activation}"/>
 		<property name="id" value="activation"/>
 		<property name="validator"> <null /></property>
@@ -28,7 +28,7 @@
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.procedure.reinitialisation}"/>
+		<property name="key" value="WELCOME.PROCEDURE.REINITIALISATION.RADIOBUTTON.LABEL"/>
 		<property name="value" value="${view.value.procedure.reinitialisation}"/>
 		<property name="id" value="reinitialisation"/>
 		<property name="validator"> <null /></property>
@@ -45,7 +45,7 @@
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.procedure.passwordchange}"/>
+		<property name="key" value="WELCOME.PROCEDURE.PASSWORDCHANGE.RADIOBUTTON.LABEL"/>
 		<property name="value" value="${view.value.procedure.passwordchange}"/>
 		<property name="id" value="passwordchange"/>
 		<property name="validator"> <null /></property>

@@ -12,12 +12,12 @@
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.harpegenumber}"/>
+		<property name="key" value="IDENTIFICATION.HARPEGENUMBER.TEXT.LABEL"/>
 		<property name="value" value=""/>
 		<property name="id" value="harpegeNumber"/>
 		<property name="validator" ref="validatorHarpegeNumber"/>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value="${view.aide.harpegenumber}"/>
+		<property name="aide" value="IDENTIFICATION.HARPEGENUMBER.TEXT.AIDE"/>
 		<property name="converter"> <null /></property>
 		
 	</bean>
@@ -28,12 +28,12 @@
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.studentlogin}"/>
+		<property name="key" value="IDENTIFICATION.STUDENTLOGIN.TEXT.LABEL"/>
 		<property name="value" value=""/>
 		<property name="id" value="studentlogin"/>
 		<property name="validator" ref="validatorHarpegeNumber"/>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value="${view.aide.studentlogin}"/>
+		<property name="aide" value="IDENTIFICATION.STUDENTLOGIN.TEXT.AIDE"/>
 		<property name="converter"> <null /></property>
 		
 	</bean>
@@ -45,7 +45,7 @@
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.birthname}"/>
+		<property name="key" value="IDENTIFICATION.BIRTHNAME.TEXT.LABEL"/>
 		<property name="value" value=""/>
 		<property name="id" value="birthName"/>
 		<property name="validator" ref="validatorBirthName"/>
@@ -62,12 +62,12 @@
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.studentnumber}"/>
+		<property name="key" value="IDENTIFICATION.STUDENTNUMBER.TEXT.LABEL"/>
 		<property name="value" value=""/>
 		<property name="id" value="studentnumber"/>
 		<property name="validator" ref="validatorHarpegeNumber"/>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value="${view.aide.studentnumber}"/>
+		<property name="aide" value="IDENTIFICATION.STUDENTNUMBER.TEXT.AIDE"/>
 		<property name="converter"> <null /></property>
 		
 	</bean>
@@ -81,7 +81,7 @@
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.birthdate}"/>
+		<property name="key" value="IDENTIFICATION.BIRTHDATE.TEXT.LABEL"/>
 		<property name="value" value=""/>
 		<property name="id" value="birthDate"/>
 		<property name="validator" ref="validatorBirthDate"/>

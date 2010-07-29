@@ -83,9 +83,10 @@
 
     	<property name="accountIdKey" value="${account.key.id}"/>
 		<property name="accountMailKey" value="${account.key.mail}"/>
-		<property name="accountSLCKey" value="${account.key.shadowlastchange}"/>
+		<property name="accountMailPersoKey" value="${account.key.mailperso}"/>
 		<property name="accountDNKey" value="${account.key.displayname}"/>
 		<property name="accountCodeKey" value="${account.key.code}"/>
+		
 		
 		<property name="procedureActivation" value="${view.value.procedure.activation}"/>
 		<property name="procedureReinitialisation" value="${view.value.procedure.reinitialisation}"/>
@@ -95,11 +96,11 @@
 		<property name="statusPersonnel" value="${view.value.status.personnel}"/>
 		<property name="statusOldStudent" value="${view.value.status.oldstudent}"/>
 		
-		<property name="attributesInfPerso" value="${ldap.attributes.information}"/>
+		<property name="attributesInfPerso" value="${attributes.information}"/>
 		
-		<property name="attributesStudentToValidate" value="${ldap.attributes.validation.student}"/>
-		<property name="attributesPersonnelToValidate" value="${ldap.attributes.validation.personnel}"/>
-		<property name="attributesOldStudentToValidate" value="${ldap.attributes.validation.oldstudent}"/>
+		<property name="attributesStudentToValidate" value="${attributes.validation.student}"/>
+		<property name="attributesPersonnelToValidate" value="${attributes.validation.personnel}"/>
+		<property name="attributesOldStudentToValidate" value="${attributes.validation.oldstudent}"/>
 		
 		<property name="listBeanPersoInfo">
 			<list>

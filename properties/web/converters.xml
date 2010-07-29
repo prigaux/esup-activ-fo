@@ -32,7 +32,7 @@
     	</description>
     	
     	<property name="formatStandardDate" value="${format.standard.date}"/>
-    	<property name="formatLdapDate" value="${ldap.attribute.birthdate.format}"/>
+    	<property name="formatLdapDate" value="${format.ldap.date}"/>
 	</bean>
 	
 	

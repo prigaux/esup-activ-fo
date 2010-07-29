@@ -12,12 +12,12 @@
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.code}"/>
+		<property name="key" value="CODE.TEXT.LABEL.CODE"/>
 		<property name="value" value=""/>
 		<property name="id" value="code"/>
 		<property name="validator" ref="validatorCode"/>
 		<property name="typeChamp" value=""/>
-		<property name="aide" value="${view.aide.code}"/>
+		<property name="aide" value="CODE.TEXT.AIDE.CODE"/>
 		<property name="converter"> <null /></property>
 		
 	</bean>

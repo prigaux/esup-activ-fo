@@ -12,7 +12,7 @@
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.status.student}"/>
+		<property name="key" value="WELCOME.STATUS.STUDENT.RADIOBUTTON.LABEL"/>
 		<property name="value" value="${view.value.status.student}"/>
 		<property name="id" value="student"/>
 		<property name="validator"> <null /></property>
@@ -28,7 +28,7 @@
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.status.personnel}"/>
+		<property name="key" value="WELCOME.STATUS.PERSONNEL.RADIOBUTTON.LABEL"/>
 		<property name="value" value="${view.value.status.personnel}"/>
 		<property name="id" value="personnel"/>
 		<property name="validator"> <null /></property>
@@ -45,7 +45,7 @@
 		scope="session"
 		>
 
-		<property name="key" value="${view.label.status.oldstudent}"/>
+		<property name="key" value="WELCOME.STATUS.OLDSTUDENT.RADIOBUTTON.LABEL"/>
 		<property name="value" value="${view.value.status.oldstudent}"/>
 		<property name="id" value="oldstudent"/>
 		<property name="validator"> <null /></property>
