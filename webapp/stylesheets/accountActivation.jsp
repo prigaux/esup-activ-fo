@@ -12,8 +12,9 @@
 </t:documentHead>
 
 	<%@include file="_navigation.jsp"%>
-	<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}"rendered="#{accountController.reinit == false}" />
+	<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}"rendered="#{accountController.activ == true}" />
 	<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}"rendered="#{accountController.reinit == true}" />
+	<e:section value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.TITLE']}"rendered="#{accountController.passwChange == true}" />
 	<e:messages />
 	
 	<e:text escape="false" value="#{msgs['IDENTIFICATION.TEXT.SUPPORTADRESS']}" rendered="#{accountController.currentAccount.activated}"/>
@@ -22,25 +23,29 @@
 	<h:form id="activationForm" rendered="#{accountController.currentAccount.activated == false}">
 	
 	
-	<e:paragraph value="#{msgs['IDENTIFICATION.TEXT.TOP']}" />
+		<e:paragraph value="#{msgs['IDENTIFICATION.TEXT.TOP']}" />
 		
-	<t:dataList value="#{accountController.listInfoToValidate}" var="entry"> 
-		<e:panelGrid>
-			<t:div rendered="#{entry.value!=null}" >
-				<h:outputLabel value="#{msgs[entry.key]}" />
-				<h:inputText value="#{entry.value}"  required="true" size="25" validator="#{entry.validator.validate}" converter="#{ldapDateConverter}" rendered="#{entry.converter!=null}"/>
-				<h:inputText value="#{entry.value}"  required="true" size="25" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null}"/>
+		<t:dataList value="#{accountController.listInfoToValidate}" var="entry"> 
+		
+			<e:panelGrid columns="4" columnClasses="col1,col2,col3" rendered="#{entry.value!=null}">
+			
+				<e:outputLabel value="#{msgs[entry.key]}" />
+				<e:inputText value="#{entry.value}"  required="true" size="25" validator="#{entry.validator.validate}" converter="#{ldapDateConverter}" rendered="#{entry.converter!=null}"/>
+				<e:inputText value="#{entry.value}"  required="true" size="25" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null}"/>
 				
 				<h:outputLink id="rolloverImage" value="#" onclick="drawAlert('#{entry.aide}')" rendered="#{entry.aide!=null}">
 					<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
 					<h:outputText id="aide" value="#{msgs[entry.aide]}"/>
 				</h:outputLink>
-			</t:div>
-		</e:panelGrid>
-	</t:dataList>
+						
+			</e:panelGrid>
+		</t:dataList>
 		
-		
-		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushValid}" />
+		<t:div style="margin-top:30;">
+			<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushValid}" />
+		</t:div>
+	
+	
 	</h:form>
 	
 	<h:form>
