@@ -55,7 +55,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 * {@link LdapUserService}.
 
 	 */
-	private LdapUserService ldapUserService;
+	private LdapUserService ldapUserService=null;
 	
 	
 	
@@ -85,8 +85,6 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	public void afterPropertiesSet() throws Exception {
 		Assert.notNull(this.daoService, 
 				"property daoService of class " + this.getClass().getName() + " can not be null");
-		Assert.notNull(this.ldapUserService, 
-				"property ldapUserService of class " + this.getClass().getName() + " can not be null");
 		Assert.hasText(this.displayNameLdapAttribute, 
 				"property displayNameLdapAttribute of class " + this.getClass().getName() 
 				+ " can not be null");
@@ -304,8 +302,8 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		return service.setPassword(id,code,currentPassword);	
 	}
 	
-	public boolean setPassword(String id,String code,String oldPassword, final String currentPassword)throws LdapProblemException,UserPermissionException,KerberosException{
-		return service.setPassword(id,code,oldPassword,currentPassword);
+	public HashMap<String,String> setPassword(String id,String oldPassword,final String currentPassword,List<String>attrPersoInfo)throws LdapProblemException,UserPermissionException,KerberosException{
+		return service.setPassword(id,oldPassword,currentPassword,attrPersoInfo);
 	}
 	
 	public boolean updatePersonalInformations(String id,String code, HashMap<String,String> hashBeanPersoInfo)throws LdapProblemException,UserPermissionException{

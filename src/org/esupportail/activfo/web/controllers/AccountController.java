@@ -40,14 +40,14 @@ public class AccountController extends AbstractContextAwareController implements
 	private final Logger logger = new LoggerImpl(getClass());
 	
 	private  Account currentAccount;
-	
+	private boolean activ=false;
 	private boolean reinit=false;
 	private boolean passwChange=false;
 	
 	
 	private String accountIdKey;
 	private String accountMailKey;
-	private String accountSLCKey;
+	private String accountMailPersoKey;
 	private String accountDNKey;
 	private String accountCodeKey;
 	
@@ -145,12 +145,15 @@ public class AccountController extends AbstractContextAwareController implements
 		if (currentAccount.getOneRadioProcedure().equals(procedureReinitialisation)){
 			reinit=true;
 			passwChange=false;
+			activ=false;
 		}
 		else if (currentAccount.getOneRadioProcedure().equals(procedurePasswordChange)){
 			passwChange=true;
 			reinit=false;
+			activ=false;
 		}
 		else{
+			activ=true;
 			reinit=false;
 			passwChange=false;
 		}
@@ -194,17 +197,19 @@ public class AccountController extends AbstractContextAwareController implements
 				currentAccount.setId(accountDescr.get(accountIdKey));
 				currentAccount.setMail(accountDescr.get(accountMailKey));
 				currentAccount.setCode(accountDescr.get(accountCodeKey));
-				currentAccount.setEmailPerso(accountDescr.get(accountMailKey));
+				
+				currentAccount.setEmailPerso(accountDescr.get(accountMailPersoKey));
 
 				if (currentAccount.getCode()!=null) {
-					if (reinit){
+					if (reinit|passwChange){
 						logger.info("Compte non activé");
 						this.addErrorMessage(null, "IDENTIFICATION.REINITIALISATION.MESSAGE.ACCOUNT.NONACTIVATED");
 
-					}else{
+					}else if(activ){
 						logger.info("Compte non activé");
 						logger.info("Construction de la liste des informations personnelles du compte");
 						for(int i=0;i<attrPersoInfo.size();i++){
+							System.out.println("kkkk"+accountDescr.get(attrPersoInfo.get(i)));
 							listBeanPersoInfo.get(i).setValue(accountDescr.get(attrPersoInfo.get(i)));
 						}
 						this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
@@ -227,9 +232,14 @@ public class AccountController extends AbstractContextAwareController implements
 						}
 						
 					}
-					else{
+					else if(activ){
 						logger.info("Compte déja activé");
 						addErrorMessage(null, "IDENTIFICATION.ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
+					}
+					
+					else if(passwChange){
+						this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+						return "gotoPasswordChange";
 					}
 				}
 			}
@@ -385,13 +395,7 @@ public class AccountController extends AbstractContextAwareController implements
 		this.accountMailKey = accountMailKey;
 	}
 
-	public String getAccountSLCKey() {
-		return accountSLCKey;
-	}
-
-	public void setAccountSLCKey(String accountSLCKey) {
-		this.accountSLCKey = accountSLCKey;
-	}
+	
 
 	public String getAccountDNKey() {
 		return accountDNKey;
@@ -608,6 +612,22 @@ public class AccountController extends AbstractContextAwareController implements
 
 	public void setStatusOldStudent(String statusOldStudent) {
 		this.statusOldStudent = statusOldStudent;
+	}
+
+	public boolean isActiv() {
+		return activ;
+	}
+
+	public void setActiv(boolean activ) {
+		this.activ = activ;
+	}
+
+	public String getAccountMailPersoKey() {
+		return accountMailPersoKey;
+	}
+
+	public void setAccountMailPersoKey(String accountMailPersoKey) {
+		this.accountMailPersoKey = accountMailPersoKey;
 	}
 	
 	

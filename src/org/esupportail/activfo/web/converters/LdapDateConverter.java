@@ -39,6 +39,8 @@ public class LdapDateConverter implements Converter, Serializable {
 	 * @see javax.faces.convert.Converter#getAsObject(
 	 * javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.String)
 	 */
+	
+	//affichage ldap
 	public Object getAsObject(
 			@SuppressWarnings("unused") final FacesContext context, 
 			@SuppressWarnings("unused") final UIComponent component, 
@@ -48,16 +50,18 @@ public class LdapDateConverter implements Converter, Serializable {
 			return null;
 		}
 		
-		String val=(String)value;
+		//String val=(String)value;
 		Date date=null;
 		try {
-			date = stringToDate(val,formatStandardDate);
+			date = stringToDate(value,formatStandardDate);
 		} catch (ParseException e) {
 			return value;
 		}
 		return  dateToString(date,formatLdapDate);
 	}
 
+	
+	//Affichage standard
 	/**
 	 * @see javax.faces.convert.Converter#getAsString(
 	 * javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.Object)
