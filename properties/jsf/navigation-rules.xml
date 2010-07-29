@@ -128,6 +128,16 @@
 	</navigation-rule>
 	
 	<navigation-rule>
+		<display-name>accountPasswordChange</display-name>
+		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPasswordChange</from-outcome>
+			<to-view-id>/stylesheets/accountPassword.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
 		<display-name>accountEnabled</display-name>
 		<from-view-id>/stylesheets/accountPassword.jsp</from-view-id>
 		<navigation-case>
