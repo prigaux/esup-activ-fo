@@ -3,7 +3,7 @@
 	<%@include file="_navigation.jsp"%>
 	<e:section value="#{msgs['PASSWORD.ACTIVATION.TITLE']}" rendered="#{accountController.reinit == false}"/>
 	<e:section value="#{msgs['PASSWORD.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
-	<e:messages />
+	<e:messages escape="false"/>
 	<e:paragraph escape="false" value="#{msgs['PASSWORD.TEXT.TOP']}" />
 
 <script language="javascript" type="text/javascript">
