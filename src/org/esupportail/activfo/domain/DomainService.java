@@ -13,6 +13,7 @@ import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
+import org.esupportail.activfo.exceptions.OldPasswordException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
@@ -119,7 +120,7 @@ public interface DomainService extends Serializable {
 	
 	public boolean setPassword(String id,String code,final String currentPassword)throws LdapProblemException,UserPermissionException,KerberosException;
 	
-	public HashMap<String,String> setPassword(String id,String oldPassword,final String currentPassword,List<String>attrPersoInfo)throws LdapProblemException,UserPermissionException,KerberosException;
+	public HashMap<String,String> setPassword(String id,String oldPassword,final String currentPassword,List<String>attrPersoInfo)throws LdapProblemException,UserPermissionException,KerberosException,OldPasswordException;
 	
 	public boolean updatePersonalInformations(String id,String code,HashMap<String,String> hashBeanPersoInfo)throws LdapProblemException,UserPermissionException;
 	

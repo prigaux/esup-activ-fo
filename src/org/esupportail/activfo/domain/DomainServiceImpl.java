@@ -17,6 +17,7 @@ import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.VersionManager;
 import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
+import org.esupportail.activfo.exceptions.OldPasswordException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.activfo.services.client.AccountManagement;
 import org.esupportail.commons.exceptions.ConfigException;
@@ -24,7 +25,6 @@ import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.application.Version;
 import org.esupportail.commons.services.ldap.LdapException;
 import org.esupportail.commons.services.ldap.LdapUser;
-import org.esupportail.commons.services.ldap.LdapUserService;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
@@ -55,7 +55,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 * {@link LdapUserService}.
 
 	 */
-	private LdapUserService ldapUserService=null;
+	
 	
 	
 	
@@ -129,9 +129,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 * @see org.esupportail.activfo.domain.DomainService#updateUserInfo(org.esupportail.activfo.domain.beans.User)
 	 */
 	public void updateUserInfo(final User user) {
-		if (setUserInfo(user, ldapUserService.getLdapUser(user.getId()))) {
-			updateUser(user);
-		}
+		
 	}
 
 	/**
@@ -140,14 +138,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 */
 	public User getUser(final String id) throws UserNotFoundException {
 		User user = daoService.getUser(id);
-		if (user == null) {
-			LdapUser ldapUser = this.ldapUserService.getLdapUser(id);
-			user = new User();
-			user.setId(ldapUser.getId());
-			setUserInfo(user, ldapUser);
-			daoService.addUser(user);
-			logger.info("user '" + user.getId() + "' has been added to the database");
-		}
+		
 		return user;
 	}
 
@@ -284,12 +275,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		this.daoService = daoService;
 	}
 
-	/**
-	 * @param ldapUserService the ldapUserService to set
-	 */
-	public void setLdapUserService(final LdapUserService ldapUserService) {
-		this.ldapUserService = ldapUserService;
-	}
+	
 	
 	
 	public HashMap<String,String> validateAccount(HashMap<String,String> hashInfToValidate,List<String>attrPersoInfo) throws LdapProblemException{
@@ -302,7 +288,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		return service.setPassword(id,code,currentPassword);	
 	}
 	
-	public HashMap<String,String> setPassword(String id,String oldPassword,final String currentPassword,List<String>attrPersoInfo)throws LdapProblemException,UserPermissionException,KerberosException{
+	public HashMap<String,String> setPassword(String id,String oldPassword,final String currentPassword,List<String>attrPersoInfo)throws LdapProblemException,UserPermissionException,KerberosException,OldPasswordException{
 		return service.setPassword(id,oldPassword,currentPassword,attrPersoInfo);
 	}
 	
