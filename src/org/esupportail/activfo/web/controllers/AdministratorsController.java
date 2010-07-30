@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.commons.exceptions.UserNotFoundException;
-import org.esupportail.commons.services.ldap.LdapUserService;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.web.beans.Paginator;
 import org.esupportail.commons.web.controllers.LdapSearchCaller;
@@ -34,10 +33,7 @@ public class AdministratorsController extends AbstractContextAwareController imp
 	 */
 	private User userToDelete;
 	
-	/**
-	 * The LDAP service.
-	 */
-	private LdapUserService ldapUserService;
+	
 
     /**
      * The paginator.
@@ -57,9 +53,7 @@ public class AdministratorsController extends AbstractContextAwareController imp
 	@Override
 	public void afterPropertiesSetInternal() {
 		super.afterPropertiesSetInternal();
-		Assert.notNull(ldapUserService, 
-				"property ldapUserService of class " + getClass().getName() 
-				+ " can not be null");
+		
 	}
 
 	/**
@@ -131,10 +125,7 @@ public class AdministratorsController extends AbstractContextAwareController imp
 	 * @return the LDAP statistics.
 	 */
 	public List <String> getLdapStatistics() {
-		if (!ldapUserService.supportStatistics()) {
-			return new ArrayList<String>();
-		}
-		return ldapUserService.getStatistics(getSessionController().getLocale());
+		return null;
 	}
 
 	/**
@@ -204,11 +195,6 @@ public class AdministratorsController extends AbstractContextAwareController imp
 		this.ldapUid = ldapUid;
 	}
 
-	/**
-	 * @param ldapUserService the ldapUserService to set
-	 */
-	public void setLdapUserService(final LdapUserService ldapUserService) {
-		this.ldapUserService = ldapUserService;
-	}
+	
 
 }

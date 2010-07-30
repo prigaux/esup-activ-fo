@@ -16,8 +16,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.esupportail.activfo.domain.beans.Account;
-import org.esupportail.activfo.domain.beans.PersonalInformation;
-import org.esupportail.activfo.domain.beans.PersonalInformation;
 import org.esupportail.activfo.domain.tools.StringTools;
 import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
