@@ -10,7 +10,7 @@
 	<%@include file="_navigation.jsp"%>
 	
 	<e:section value="#{msgs['PERSOINFO.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
-	<e:section value="#{msgs['PERSOINFO.ACTIVATION.TITLE']}" rendered="#{accountController.reinit == false}" />
+	<e:section value="#{msgs['PERSOINFO.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}" />
 
 	<e:messages/>
 	
@@ -24,9 +24,12 @@
 		
 		
 			
-					<e:panelGrid columns="3" columnClasses="col1,col2,col3" rendered="#{entry.value!=null}">
+					<e:panelGrid columns="3" columnClasses="col1,col2,col3" >
+						
 						<e:outputLabel value="#{msgs[entry.key]}" />
-						<e:inputText value="#{entry.value}"  required="true" size="35" validator="#{entry.validator.validate}"/>
+						<e:inputText value="#{entry.value}"  required="true" size="35" validator="#{entry.validator.validate}" rendered="#{entry.typeChamp==null}"/>
+						
+						<h:selectBooleanCheckbox  value="#{entry.value2}"  rendered="#{entry.typeChamp=='selectBooleanCheckbox'}" converter="#{smsAgreementConverter}"/>
 						<h:outputLink id="rolloverImage" value="#" onclick="drawAlert('#{entry.aide}')" rendered="#{entry.aide!=null}">
 							<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
 							<h:outputText id="aide" value="#{msgs[entry.aide]}"/>

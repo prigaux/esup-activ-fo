@@ -6,12 +6,14 @@
 	<e:messages />
 		
 		
-	<e:paragraph escape="false" value="#{msgs['CODE.TEXT.TOP']}">
+	<e:paragraph escape="false" value="#{msgs['CODE.TEXT.MAILPERSO.TOP']}" rendered="#{accountController.currentAccount.oneChoiceCanal==accountController.accountMailPersoKey}">
 		  <f:param value="#{accountController.currentAccount.emailPerso}" />
 	</e:paragraph>
 	
-	<e:paragraph value="#{msgs['CODE.TEXT.TOP2']}" />
-	<e:paragraph value="#{msgs['CODE.TEXT.TOP3']}" />
+	<e:paragraph escape="false" value="#{msgs['CODE.TEXT.PAGER.TOP']}" rendered="#{accountController.currentAccount.oneChoiceCanal==accountController.accountPagerKey}">
+		  <f:param value="#{accountController.currentAccount.pager}" />
+	</e:paragraph>
+	
 	
 	
 	<h:form id="activationForm" rendered="#{sessionController.currentUser == null}">

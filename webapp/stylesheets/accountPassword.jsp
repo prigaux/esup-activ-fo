@@ -1,10 +1,12 @@
 <%@include file="_include.jsp"%>
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 	<%@include file="_navigation.jsp"%>
-	<e:section value="#{msgs['PASSWORD.ACTIVATION.TITLE']}" rendered="#{accountController.reinit == false}"/>
+	<e:section value="#{msgs['PASSWORD.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}"/>
 	<e:section value="#{msgs['PASSWORD.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
-	<e:messages escape="false"/>
-	<e:paragraph escape="false" value="#{msgs['PASSWORD.TEXT.TOP']}" />
+	<e:section value="#{msgs['PASSWORD.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}"/>
+	<e:messages />
+	<e:paragraph escape="false" value="#{msgs['PASSWORD.TEXT.TOP']}" rendered="#{accountController.passwChange == false}"/>
+	<e:paragraph escape="false" value="#{msgs['PASSWORD.CHANGEMENT.TEXT.TOP']}" rendered="#{accountController.passwChange == true}"/>
 
 <script language="javascript" type="text/javascript">
     
@@ -160,7 +162,30 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 	<h:form id="activationForm" rendered="#{sessionController.currentUser == null}">
 		
 		
+		<e:panelGrid columns="3" columnClasses="col1,col2,col3" rendered="#{accountController.passwChange == true}">
+			<e:outputLabel for="login" value="#{msgs[beanLogin.key]}" />
+			<e:inputText id="login"
+				value="#{beanLogin.value}"
+				required="true" validator="#{beanLogin.validator.validate}">
+			</e:inputText>
+			<h:outputLink id="rolloverImage" value="#" rendered="#{beanLogin.aide!=null}">
+				<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
+				<h:outputText id="aide" value="#{msgs[beanLogin.aide]}"/>
+			</h:outputLink>
+			<e:message for="login" />
+		</e:panelGrid>
 		
+		<e:panelGrid columns="3" columnClasses="col1,col2,col3" rendered="#{accountController.passwChange == true}">
+			<e:outputLabel for="oldPassword" value="#{msgs[beanOldPassword.key]}" />
+			<e:inputSecret id="oldPassword" value="#{beanOldPassword.value}"
+	     		required="true"  >
+	  		</e:inputSecret>
+			<h:outputLink id="rolloverImage" value="#" rendered="#{beanOldPassword.aide!=null}">
+				<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
+				<h:outputText id="aide" value="#{msgs[beanOldPassword.aide]}"/>
+			</h:outputLink>
+			<e:message for="oldPassword" />
+		</e:panelGrid>
 		
 		<e:panelGrid columns="4" columnClasses="col1,col2,col3" >
   			<e:outputLabel for="password" value="#{msgs[beanPasswordPrincipal.key]}"/>
