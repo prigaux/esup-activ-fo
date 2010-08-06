@@ -12,9 +12,24 @@ public class BeanFieldImpl implements BeanField {
 	private String converter;
 	private Validator validator;
 	private String id;
+	private String valueAcceptation;
+	private boolean value2;
 	
 	
 	
+	
+	public boolean isValue2() {
+		return value2;
+	}
+	public void setValue2(boolean value2) {
+		this.value2 = value2;
+	}
+	public String getValueAcceptation() {
+		return valueAcceptation;
+	}
+	public void setValueAcceptation(String valueAcceptation) {
+		this.valueAcceptation = valueAcceptation;
+	}
 	public String getId() {
 		return id;
 	}

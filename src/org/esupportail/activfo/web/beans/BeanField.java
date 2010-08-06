@@ -34,4 +34,12 @@ public interface BeanField {
 	
 	public void setId(String id);
 	
+	public String getValueAcceptation();
+	
+	public void setValueAcceptation(String valueAcceptation);
+	
+	public boolean isValue2();
+	
+	public void setValue2(boolean value2);
+	
 }

@@ -19,6 +19,7 @@ import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.domain.tools.StringTools;
 import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
+import org.esupportail.activfo.exceptions.OldPasswordException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 
 import org.esupportail.activfo.web.beans.BeanField;
@@ -35,6 +36,7 @@ import org.esupportail.commons.services.logging.LoggerImpl;
  */
 public class AccountController extends AbstractContextAwareController implements Serializable {
 
+
 	private final Logger logger = new LoggerImpl(getClass());
 	
 	private  Account currentAccount;
@@ -43,11 +45,18 @@ public class AccountController extends AbstractContextAwareController implements
 	private boolean passwChange=false;
 	
 	
+	private String smsAccepted;
+	private String smsNonAccepted;
+	
 	private String accountIdKey;
 	private String accountMailKey;
 	private String accountMailPersoKey;
+	private String accountPagerKey;
 	private String accountDNKey;
 	private String accountCodeKey;
+	
+	
+	private String fieldSmsAgreementId;
 	
 	//liste des champs pour l'affichage des informations personnelles
 	private List<BeanField> listBeanPersoInfo;
@@ -74,6 +83,9 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	
 	
+	private List<BeanField> listBeanCanal;
+	
+	
 	//liste des champs correspondant aux procedures
 	private List<BeanField> listBeanProcedure;
 	
@@ -86,9 +98,18 @@ public class AccountController extends AbstractContextAwareController implements
 	//champ code
 	private BeanField beanCode;
 	
+	//champ login
+	private BeanField beanLogin;
+	
+	//champ oldPassword
+	private BeanField beanOldPassword;
+	
+	
+	private BeanField beanSMSAgreement;
+	
 	
 	//decriptif du compte suite à validation
-	HashMap<String,String> accountDescr;
+	HashMap<String,String> accountDescr=new HashMap<String,String>();
 	
 	private String procedureReinitialisation;
 	private String procedureActivation;
@@ -104,7 +125,7 @@ public class AccountController extends AbstractContextAwareController implements
 	 */
 	public AccountController() {
 		super();
-		currentAccount = new Account();
+		
 	}
 
 	/**
@@ -122,8 +143,6 @@ public class AccountController extends AbstractContextAwareController implements
 	@Override
 	public void reset() {
 		super.reset();
-		//this.currentAccount=null;
-		//enter();
 	}
 
 	/**
@@ -149,6 +168,7 @@ public class AccountController extends AbstractContextAwareController implements
 			passwChange=true;
 			reinit=false;
 			activ=false;
+			return "gotoPasswordChange";
 		}
 		else{
 			activ=true;
@@ -187,7 +207,7 @@ public class AccountController extends AbstractContextAwareController implements
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			
 			accountDescr=this.getDomainService().validateAccount(hashInfToValidate,attrPersoInfo);
-			
+
 			if (accountDescr!=null) {
 				
 				logger.info("Validation des identificateurs réussie");
@@ -195,21 +215,38 @@ public class AccountController extends AbstractContextAwareController implements
 				currentAccount.setId(accountDescr.get(accountIdKey));
 				currentAccount.setMail(accountDescr.get(accountMailKey));
 				currentAccount.setCode(accountDescr.get(accountCodeKey));
-				
 				currentAccount.setEmailPerso(accountDescr.get(accountMailPersoKey));
-
+				currentAccount.setPager(accountDescr.get(accountPagerKey));
+				currentAccount.setSmsAgreement(accountDescr.get(fieldSmsAgreementId));
+				/*if (accountDescr.get(accountPagerKey).equals("{lol}")){
+					currentAccount.setSmsAgreement(true);
+				}
+				else{
+					currentAccount.setSmsAgreement(false);
+				}*/
 				if (currentAccount.getCode()!=null) {
-					if (reinit|passwChange){
-						logger.info("Compte non activé");
+					if (reinit){
+						logger.info("Reinitialisation impossible, compte non activé");
 						this.addErrorMessage(null, "IDENTIFICATION.REINITIALISATION.MESSAGE.ACCOUNT.NONACTIVATED");
 
 					}else if(activ){
-						logger.info("Compte non activé");
 						logger.info("Construction de la liste des informations personnelles du compte");
 						for(int i=0;i<attrPersoInfo.size();i++){
-							System.out.println("kkkk"+accountDescr.get(attrPersoInfo.get(i)));
+							if (attrPersoInfo.get(i).equals(accountDNKey)){
+								currentAccount.setDisplayName(accountDescr.get(attrPersoInfo.get(i)));
+							}
 							listBeanPersoInfo.get(i).setValue(accountDescr.get(attrPersoInfo.get(i)));
+							if (attrPersoInfo.get(i).equals(fieldSmsAgreementId)){
+								if (accountDescr.get(attrPersoInfo.get(i)).equals(smsAccepted)){
+									listBeanPersoInfo.get(i).setValue2(true);
+								}
+								else{
+									listBeanPersoInfo.get(i).setValue2(false);
+								}
+							}
+							
 						}
+			
 						this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 						return "gotoPersonnelInfo";
 					}
@@ -218,26 +255,49 @@ public class AccountController extends AbstractContextAwareController implements
 				else {
 					if (reinit){
 						
-						this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
-						
-						if (this.getDomainService().getCode(currentAccount.getId())!=null){
-							logger.info("Code envoyé par le FO sur l'adresse mail de l'utilisateur");
-							return "gotoPushCode";
-						}
-						else{
-							logger.info("Code non envoyé par le FO");
-							addErrorMessage(null, "CODE.ERROR.SENDING");
+						if (currentAccount.getPager()!=null &&  currentAccount.getEmailPerso()!=null){
+							this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+							return "gotoChoice"; 	
 						}
 						
+						else if (currentAccount.getPager()==null &&  currentAccount.getEmailPerso()!=null){
+							
+							currentAccount.setOneChoiceCanal(accountMailPersoKey);
+							if (this.getDomainService().getCode(currentAccount.getId(),accountMailPersoKey)!=null){
+								addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+								logger.info("Code envoyé");
+								return "gotoPushCode";
+							}
+							else{
+								logger.info("Erreur lors de l'envoi du code");
+								addErrorMessage(null, "CODE.ERROR.SENDING");
+							}
+						}
+						
+						else if (currentAccount.getPager()!=null &&  currentAccount.getEmailPerso()==null){
+							
+							currentAccount.setOneChoiceCanal(accountPagerKey);
+							
+							if (this.getDomainService().getCode(currentAccount.getId(), accountPagerKey)!=null){
+								this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+								logger.info("Erreur lors de l'envoi du code");
+								return "gotoPushCode";
+							}
+							else{
+								logger.info("Erreur lors de l'envoi du code");
+								addErrorMessage(null, "CODE.ERROR.SENDING");
+							}
+						}
+						
+						else{//si les deux sont null
+							//Vous n'avez encore jamais renseigné un email perso ou votre numero de portable. Il est impossbile donc de vous envoyer un code de reinitialisation de mot de passe
+							addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+							addErrorMessage(null, "IDENTIFICATION.MESSAGE.NONECANAL");
+						}
 					}
 					else if(activ){
 						logger.info("Compte déja activé");
 						addErrorMessage(null, "IDENTIFICATION.ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
-					}
-					
-					else if(passwChange){
-						this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
-						return "gotoPasswordChange";
 					}
 				}
 			}
@@ -258,16 +318,28 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	
 	public String pushChangeInfoPerso() {
+			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			
 			try{
 				logger.info("Mise à jour des informations personnelles");
 				
 				HashMap<String,String> hashBeanPersoInfo=new HashMap<String,String>();
 				Iterator it=listBeanPersoInfo.iterator();
-				
+				int i=0;
 				while(it.hasNext()){
 					BeanField beanPersoInfo=(BeanField)it.next();
-					hashBeanPersoInfo.put(this.getString(beanPersoInfo.getKey()), beanPersoInfo.getValue());
+					if (beanPersoInfo.getId().equals(fieldSmsAgreementId)){
+						if (beanPersoInfo.isValue2()){
+							hashBeanPersoInfo.put(attrPersoInfo.get(i), smsAccepted);
+						}
+						else
+							hashBeanPersoInfo.put(attrPersoInfo.get(i), smsNonAccepted);
+					}
+					else{
+						hashBeanPersoInfo.put(attrPersoInfo.get(i), beanPersoInfo.getValue());
+					}
+						
+					i++;
 				}
 				
 				logger.info("Récupération des informations personnelles modifiées par l'utilisateur");
@@ -277,7 +349,13 @@ public class AccountController extends AbstractContextAwareController implements
 					
 					this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
 					
-					return "gotoCharterAgreement";
+					if (activ){
+						return "gotoCharterAgreement";
+					}
+					else{
+						return "gotoAccountEnabled";
+					}
+					
 				}	
 						
 			}
@@ -295,10 +373,31 @@ public class AccountController extends AbstractContextAwareController implements
 	}
 	
 	
+	public String pushChoice(){
+		try{
+			
+			if (this.getDomainService().getCode(currentAccount.getId(),currentAccount.getOneChoiceCanal())!=null){
+				logger.info("Code envoyé par le FO sur le canal choisi de l'utilisateur");
+				return "gotoPushCode";
+			}
+			else{
+				logger.info("Code non envoyé par le FO");
+				addErrorMessage(null, "CODE.ERROR.SENDING");
+			}
+		
+		}catch (LdapProblemException e) {
+			logger.error(e.getMessage());
+			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
+		}
+		
+		return null;
+	}
+	
+	
 	public String pushVerifyCode() {
 		
 		currentAccount.setCode(beanCode.getValue());
-		if (this.getDomainService().validateCode(this.currentAccount.getId(), this.currentAccount.getCode())){
+		if (this.getDomainService().validateCode(currentAccount.getId(), currentAccount.getCode())){
 			this.addInfoMessage(null, "CODE.MESSAGE.CODESUCCESSFULL");
 			return "gotoPasswordChange";
 		}
@@ -331,19 +430,47 @@ public class AccountController extends AbstractContextAwareController implements
 	 */
 	public String pushChangePassword() {
 		try {
+			
+			
 			currentAccount.setPassword(beanPasswordPrincipal.getValue());
 			
-			if (this.getDomainService().setPassword(currentAccount.getId(),currentAccount.getCode(),currentAccount.getPassword())){	
-				logger.info("Mot de passe enregistré au niveau du BO");
-				this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
+			if (passwChange){
+				currentAccount.setId(beanLogin.getValue());
+				currentAccount.setOldPassword(beanOldPassword.getValue());
+				List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
+				accountDescr=this.getDomainService().setPassword(currentAccount.getId(),currentAccount.getOldPassword(),currentAccount.getPassword() , attrPersoInfo);
+				
+				if (accountDescr!=null){
+					logger.info("Changement de mot de passe réussi");
+					this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
+					for(int i=0;i<attrPersoInfo.size();i++){
+						listBeanPersoInfo.get(i).setValue(accountDescr.get(attrPersoInfo.get(i)));
+					}
+					
+					/* For security reasons, all passwords are erased */
+					currentAccount.setPassword(null);
+					
+					return "gotoPersonnelInfo";
 			
-				/* For security reasons, all passwords are erased */
-				currentAccount.setPassword(null);
-		
-				return "gotoAccountEnabled";
+				}
+				else {
+					logger.info("Changement mot de passe non effectuée");
+					addErrorMessage(null, "PASSWORD.MESSAGE.INVALIDLOGIN");
+				}
 			}
 			
-			logger.info("Mot de passe non enregistré au niveau du BO");
+			else{
+				if (this.getDomainService().setPassword(currentAccount.getId(),currentAccount.getCode(),currentAccount.getPassword())){	
+					logger.info("Mot de passe enregistré au niveau du BO");
+					this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
+				
+					/* For security reasons, all passwords are erased */
+					currentAccount.setPassword(null);
+			
+					return "gotoAccountEnabled";
+				}
+			}
+				
 			return null;
 			
 		}
@@ -351,6 +478,11 @@ public class AccountController extends AbstractContextAwareController implements
 		catch (LdapProblemException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
+		
+		}catch (OldPasswordException e) {
+			logger.error(e.getMessage());
+			//this.enterReinitialisation();
+			addErrorMessage(null, "PASSWORD.MESSAGE.CHANGE.OLDPASSWORD.PROBLEM");
 		
 		}catch (UserPermissionException e) {
 			logger.error(e.getMessage());
@@ -627,7 +759,70 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setAccountMailPersoKey(String accountMailPersoKey) {
 		this.accountMailPersoKey = accountMailPersoKey;
 	}
-	
-	
 
+	public BeanField getBeanLogin() {
+		return beanLogin;
+	}
+
+	public void setBeanLogin(BeanField beanLogin) {
+		this.beanLogin = beanLogin;
+	}
+
+	public BeanField getBeanOldPassword() {
+		return beanOldPassword;
+	}
+
+	public void setBeanOldPassword(BeanField beanOldPassword) {
+		this.beanOldPassword = beanOldPassword;
+	}
+
+	public String getAccountPagerKey() {
+		return accountPagerKey;
+	}
+
+	public void setAccountPagerKey(String accountPagerKey) {
+		this.accountPagerKey = accountPagerKey;
+	}
+
+	public List<BeanField> getListBeanCanal() {
+		return listBeanCanal;
+	}
+
+	public void setListBeanCanal(List<BeanField> listBeanCanal) {
+		this.listBeanCanal = listBeanCanal;
+	}
+
+	public BeanField getBeanSMSAgreement() {
+		return beanSMSAgreement;
+	}
+
+	public void setBeanSMSAgreement(BeanField beanSMSAgreement) {
+		this.beanSMSAgreement = beanSMSAgreement;
+	}
+
+	public String getFieldSmsAgreementId() {
+		return fieldSmsAgreementId;
+	}
+
+	public void setFieldSmsAgreementId(String fieldSmsAgreementId) {
+		this.fieldSmsAgreementId = fieldSmsAgreementId;
+	}
+
+	public String getSmsAccepted() {
+		return smsAccepted;
+	}
+
+	public void setSmsAccepted(String smsAccepted) {
+		this.smsAccepted = smsAccepted;
+	}
+
+	public String getSmsNonAccepted() {
+		return smsNonAccepted;
+	}
+
+	public void setSmsNonAccepted(String smsNonAccepted) {
+		this.smsNonAccepted = smsNonAccepted;
+	}
+
+	
 }

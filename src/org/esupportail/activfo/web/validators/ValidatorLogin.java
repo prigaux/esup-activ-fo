@@ -1,6 +1,12 @@
 package org.esupportail.activfo.web.validators;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
@@ -8,30 +14,19 @@ import javax.faces.validator.ValidatorException;
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
 
 
-public class ValidatorMobilePhone extends AbstractI18nAwareBean implements Validator {
+public class ValidatorLogin extends AbstractI18nAwareBean implements Validator{
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1L;
-
-	/**
-	 * 
-	 */
+	private static final long serialVersionUID = 8849185735359561457L;
 	
 	
 
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		
-		if (value instanceof String) {
-			String strValue = (String) value;
-			if (!strValue.matches("^06[0-9]{8}$|^00[0-9]{11,13}$")) {
-				throw new ValidatorException(getFacesErrorMessage("VALIDATOR.MOBILE.INVALID"));
-			}
-		
-		}
-		
 	}
 	
+
 	
 }
