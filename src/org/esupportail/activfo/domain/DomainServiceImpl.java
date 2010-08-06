@@ -302,7 +302,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		return service.getCode(id);
 	}
 	
-	public String getCode(String id,String canal){
+	public String getCode(String id,String canal)throws LdapProblemException{
 		return service.getCode(id, canal);
 	}
 	

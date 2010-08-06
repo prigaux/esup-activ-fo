@@ -17,20 +17,26 @@ import java.util.Random;
 
 
 import org.esupportail.activfo.domain.tools.StringTools;
-import org.esupportail.commons.beans.AbstractI18nAwareBean;
 import org.esupportail.commons.utils.strings.StringUtils;
+import org.springframework.beans.factory.InitializingBean;
 
 
 
 /**
  * The class that represent net account.
  */
-public class Account extends AbstractI18nAwareBean implements Serializable {
+public class Account implements InitializingBean {
 	
 	
 
-	private static final long serialVersionUID = 3019553610200363364L;
+	
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5854730800181753413L;
+
+	private String oldPassword; 
 	
 	private String id;
 	
@@ -50,19 +56,32 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 	
 	private String initialPassword;
 	
-	private boolean charterAgreement;
+	private boolean charterAgreement=false;
+	
+	private String smsAgreement;
 
 	private String code;
 	
 	private String emailPerso;
 	
-	private String mobile;
+	private String pager;
 	
+		
 	private String oneRadioValue;
 	
 	private String oneRadioProcedure;
 	
+	private String oneChoiceCanal;
 	
+	
+	public String getOneChoiceCanal() {
+		return oneChoiceCanal;
+	}
+
+	public void setOneChoiceCanal(String oneChoiceCanal) {
+		this.oneChoiceCanal = oneChoiceCanal;
+	}
+
 	public String getOneRadioValue() {
 		return oneRadioValue;
 	}
@@ -73,7 +92,7 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 
 	public Account() {
 		super();
-		charterAgreement=false;
+		
 	}
 
 	/**
@@ -224,14 +243,7 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 		this.emailPerso = emailPerso;
 	}
 
-	public String getMobile() {
-		return mobile;
-	}
-
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
-	}
-
+	
 	public String getCode() {
 		return code;
 	}
@@ -246,6 +258,38 @@ public class Account extends AbstractI18nAwareBean implements Serializable {
 
 	public void setOneRadioProcedure(String oneRadioProcedure) {
 		this.oneRadioProcedure = oneRadioProcedure;
+	}
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public String getPager() {
+		return pager;
+	}
+
+	public void setPager(String pager) {
+		this.pager = pager;
+	}
+
+	@Override
+	public void afterPropertiesSet() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+
+	public String getSmsAgreement() {
+		return smsAgreement;
+	}
+
+	public void setSmsAgreement(String smsAgreement) {
+		this.smsAgreement = smsAgreement;
 	}
 
 	
