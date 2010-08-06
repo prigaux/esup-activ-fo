@@ -35,5 +35,14 @@
     	<property name="formatLdapDate" value="${format.ldap.date}"/>
 	</bean>
 	
+	<bean 
+		id="smsAgreementConverter"
+		class="org.esupportail.activfo.web.converters.SmsAgreementConverter"
+		>
+    	<description>
+			A converter for....
+    	</description>
+    	
+    </bean>
 	
 </beans>

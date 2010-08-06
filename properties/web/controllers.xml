@@ -82,9 +82,16 @@
     	<property name="accountIdKey" value="${account.key.id}"/>
 		<property name="accountMailKey" value="${account.key.mail}"/>
 		<property name="accountMailPersoKey" value="${account.key.mailperso}"/>
+		<property name="accountPagerKey" value="${account.key.pager}"/>
 		<property name="accountDNKey" value="${account.key.displayname}"/>
 		<property name="accountCodeKey" value="${account.key.code}"/>
 		
+		<property name="fieldSmsAgreementId" value="${account.id.field.smsagreement}"/>
+		
+		<property name="smsAccepted" value="${value.sms.accepted}"/>
+		<property name="smsNonAccepted" value="${value.sms.nonaccepted}"/>
+		
+		<property name="currentAccount" ref="account"/>
 		
 		<property name="procedureActivation" value="${view.value.procedure.activation}"/>
 		<property name="procedureReinitialisation" value="${view.value.procedure.reinitialisation}"/>
@@ -105,6 +112,7 @@
 				<ref bean="beanDisplayName"/>
 				<ref bean="beanEmailPerso"/>
 				<ref bean="beanMobilePhone"/>
+				<ref bean="beanSMSAgreement"/>
 			</list>
 		</property>
 		
@@ -149,10 +157,22 @@
 		</property>
 		
 		
+		<property name="listBeanCanal">
+			<list>
+				<ref bean="beanMailPerso"/>
+				<ref bean="beanPager"/>
+			</list>
+		</property>
+		
+		
 		
 		<property name="beanPasswordPrincipal" ref="beanPasswordPrincipal"/>
 		
 		<property name="beanCode" ref="beanCode"/>
+		
+		<property name="beanLogin" ref="beanLogin"/>
+		
+		<property name="beanOldPassword" ref="beanOldPassword"/>
 				
 	</bean>
 	
@@ -173,6 +193,13 @@
 		scope="session"
     	>
 		<description>A bean to manage exception reports.</description>
+	</bean>
+	
+	<bean id="account"
+		class="org.esupportail.activfo.domain.beans.Account"
+		scope="session"
+    	>
+		
 	</bean>
 	
 	

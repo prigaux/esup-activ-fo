@@ -16,7 +16,7 @@
 		<property name="value"> <null /></property>
 		<property name="id" value="displayName"/>
 		<property name="validator" ref="validatorDisplayName"/>
-		<property name="typeChamp" value=""/>
+		<property name="typeChamp" ><null /></property>
 		<property name="aide" value="PERSOINFO.DISPLAYNAME.TEXT.AIDE"/>
 		<property name="converter"> <null /></property>
 		
@@ -32,7 +32,7 @@
 		<property name="value"> <null /></property>
 		<property name="id" value="mailPerso"/>
 		<property name="validator" ref="validatorEmail"/>
-		<property name="typeChamp" value=""/>
+		<property name="typeChamp"><null /></property>
 		<property name="aide"> <null /></property>
 		<property name="converter"> <null /></property>
 		
@@ -48,12 +48,28 @@
 		<property name="value"> <null /></property>
 		<property name="id" value="mobile"/>
 		<property name="validator" ref="validatorMobilePhone"/>
-		<property name="typeChamp" value=""/>
+		<property name="typeChamp"><null /></property>
 		<property name="aide"><null /></property>
 		<property name="converter"> <null /></property>
 		
 	</bean>
 	
+	<bean
+		id="beanSMSAgreement"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="PERSOINFO.SMSAGREEMENT.TEXT.LABEL"/>
+		<property name="value"> <null /></property>
+		<property name="value2" value="false"/> 
+		<property name="id" value="${account.id.field.smsagreement}"/>
+		<property name="validator"><null /></property>
+		<property name="typeChamp" value="selectBooleanCheckbox"/>
+		<property name="aide"><null /></property>
+		<property name="converter" value="smsAgreementConverter"/>
+		
+	</bean>
 	
 
 </beans>

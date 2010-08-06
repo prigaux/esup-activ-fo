@@ -76,13 +76,49 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+		<display-name>accountNoneCanal</display-name>
+		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPersonnelInfo</from-outcome>
+			<to-view-id>/stylesheets/accountPersonalInfo.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 	
+	<navigation-rule>
+		<display-name>accountChoice</display-name>
+		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoChoice</from-outcome>
+			<to-view-id>/stylesheets/accountChoice.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 	
+	<navigation-rule>
+		<display-name>accountCode2</display-name>
+		<from-view-id>/stylesheets/accountChoice.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPushCode</from-outcome>
+			<to-view-id>/stylesheets/accountCode.jsp</to-view-id>
+			<redirect />
+		</navigation-case>
+	</navigation-rule>
 	
 	
 	<navigation-rule>
 		<display-name>accountPersonnelInfo</display-name>
 		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPersonnelInfo</from-outcome>
+			<to-view-id>/stylesheets/accountPersonalInfo.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>accountPersonnelInfoChangePassword</display-name>
+		<from-view-id>/stylesheets/accountPassword.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoPersonnelInfo</from-outcome>
 			<to-view-id>/stylesheets/accountPersonalInfo.jsp</to-view-id>
@@ -129,13 +165,22 @@
 	
 	<navigation-rule>
 		<display-name>accountPasswordChange</display-name>
-		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
+		<from-view-id>/stylesheets/welcome.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoPasswordChange</from-outcome>
 			<to-view-id>/stylesheets/accountPassword.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
+	
+	<navigation-rule>
+		<display-name>passwordChanged</display-name>
+		<from-view-id>/stylesheets/accountPersonalInfo.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoAccountEnabled</from-outcome>
+			<to-view-id>/stylesheets/accountEnabled.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	
 	<navigation-rule>
 		<display-name>accountEnabled</display-name>

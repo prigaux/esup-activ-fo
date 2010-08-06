@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	>
+
+	
+	<bean
+		id="beanMailPerso"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="CHOICE.CANAL.MAILPERSO.RADIOBUTTON.LABEL"/>
+		<property name="value" value="${account.key.mailperso}"/>
+		<property name="id" value="mailperso"/>
+		<property name="validator"> <null /></property>
+		<property name="typeChamp" value=""/>
+		<property name="aide"> <null /></property>
+		<property name="converter"> <null /></property>
+		
+	</bean>
+	
+	
+	<bean
+		id="beanPager"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="CHOICE.CANAL.PAGER.RADIOBUTTON.LABEL"/>
+		<property name="value" value="${account.key.pager}"/>
+		<property name="id" value="pager"/>
+		<property name="validator"> <null /></property>
+		<property name="typeChamp" value=""/>
+		<property name="aide"> <null /></property>
+		<property name="converter"> <null /></property>
+		
+	</bean>
+
+</beans>

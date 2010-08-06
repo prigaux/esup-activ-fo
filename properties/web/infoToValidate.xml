@@ -31,7 +31,7 @@
 		<property name="key" value="IDENTIFICATION.STUDENTLOGIN.TEXT.LABEL"/>
 		<property name="value" value=""/>
 		<property name="id" value="studentlogin"/>
-		<property name="validator" ref="validatorHarpegeNumber"/>
+		<property name="validator"> <null /></property>
 		<property name="typeChamp" value=""/>
 		<property name="aide" value="IDENTIFICATION.STUDENTLOGIN.TEXT.AIDE"/>
 		<property name="converter"> <null /></property>
@@ -65,7 +65,7 @@
 		<property name="key" value="IDENTIFICATION.STUDENTNUMBER.TEXT.LABEL"/>
 		<property name="value" value=""/>
 		<property name="id" value="studentnumber"/>
-		<property name="validator" ref="validatorHarpegeNumber"/>
+		<property name="validator" ><null /></property>
 		<property name="typeChamp" value=""/>
 		<property name="aide" value="IDENTIFICATION.STUDENTNUMBER.TEXT.AIDE"/>
 		<property name="converter"> <null /></property>

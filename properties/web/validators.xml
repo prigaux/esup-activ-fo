@@ -18,10 +18,14 @@
 		id="validatorDisplayName"
 		class="org.esupportail.activfo.web.validators.ValidatorDisplayName"
 		parent="abstractI18nAwareBean"
+		scope="session"
 		>
     	<description>
 			A validator for DisplayName.
     	</description>
+    	
+    	
+    	<property name="account" ref="account"/>
     		
 	</bean>
 	
@@ -107,6 +111,18 @@
 		>
     	<description>
 			A validator for Code.
+    	</description>
+    	
+    	
+	</bean>
+	
+	<bean 
+		id="validatorLogin"
+		class="org.esupportail.activfo.web.validators.ValidatorLogin"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Login.
     	</description>
     	
     	
