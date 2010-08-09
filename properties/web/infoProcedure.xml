@@ -55,6 +55,21 @@
 		
 	</bean>
 	
+	<bean
+		id="beanLoginChange"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="WELCOME.PROCEDURE.LOGINCHANGE.RADIOBUTTON.LABEL"/>
+		<property name="value" value="${view.value.procedure.loginchange}"/>
+		<property name="id" value="loginchange"/>
+		<property name="validator"> <null /></property>
+		<property name="typeChamp" value=""/>
+		<property name="aide"> <null /></property>
+		<property name="converter"> <null /></property>
+		
+	</bean>
 	
 	
 	

@@ -96,6 +96,7 @@
 		<property name="procedureActivation" value="${view.value.procedure.activation}"/>
 		<property name="procedureReinitialisation" value="${view.value.procedure.reinitialisation}"/>
 		<property name="procedurePasswordChange" value="${view.value.procedure.passwordchange}"/>
+		<property name="procedureLoginChange" value="${view.value.procedure.loginchange}"/>	
 		
 		<property name="statusStudent" value="${view.value.status.student}"/>
 		<property name="statusPersonnel" value="${view.value.status.personnel}"/>
@@ -145,6 +146,7 @@
 				<ref bean="beanActivation"/>
 				<ref bean="beanReinitialisation"/>
 				<ref bean="beanPasswordChange"/>
+				<ref bean="beanLoginChange"/>
 			</list>
 		</property>
 		
@@ -166,13 +168,17 @@
 		
 		
 		
-		<property name="beanPasswordPrincipal" ref="beanPasswordPrincipal"/>
+		<property name="beanNewPassword" ref="beanNewPassword"/>
 		
 		<property name="beanCode" ref="beanCode"/>
 		
 		<property name="beanLogin" ref="beanLogin"/>
 		
-		<property name="beanOldPassword" ref="beanOldPassword"/>
+		<property name="beanNewLogin" ref="beanNewLogin"/>
+		
+		<property name="beanPassword" ref="beanPassword"/>
+		
+		<property name="interfLogin" value="true"/>
 				
 	</bean>
 	

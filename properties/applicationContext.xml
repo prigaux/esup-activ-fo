@@ -46,9 +46,10 @@
 	<import resource="web/infoStatus.xml" />
 	<import resource="web/infoCanal.xml" />
 	<import resource="web/validators.xml" />
-	<import resource="web/fieldPassword.xml" />
+	<import resource="web/fieldNewPassword.xml" />
 	<import resource="web/fieldCode.xml" />
-	<import resource="web/fieldOldPassword.xml" />
+	<import resource="web/fieldPassword.xml" />
 	<import resource="web/fieldLogin.xml" />
+	<import resource="web/fieldNewLogin.xml" />
 
 </beans>

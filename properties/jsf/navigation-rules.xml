@@ -67,28 +67,28 @@
 	
 	
 	<navigation-rule>
-		<display-name>accountActivation</display-name>
+		<display-name>accountWelcomeToIdentification</display-name>
 		<from-view-id>/stylesheets/welcome.jsp</from-view-id>
 		<navigation-case>
-			<from-outcome>navigationActivation</from-outcome>
-			<to-view-id>/stylesheets/accountActivation.jsp</to-view-id>
+			<from-outcome>goToInfoToValidate</from-outcome>
+			<to-view-id>/stylesheets/accountIdentification.jsp</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
-		<display-name>accountNoneCanal</display-name>
-		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
+		<display-name>accountIdentificationToPersonalInfo</display-name>
+		<from-view-id>/stylesheets/accountIdentification.jsp</from-view-id>
 		<navigation-case>
-			<from-outcome>gotoPersonnelInfo</from-outcome>
+			<from-outcome>gotoPersonalInfo</from-outcome>
 			<to-view-id>/stylesheets/accountPersonalInfo.jsp</to-view-id>
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
-		<display-name>accountChoice</display-name>
-		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
+		<display-name>accountIdentificationToChoice</display-name>
+		<from-view-id>/stylesheets/accountIdentification.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoChoice</from-outcome>
 			<to-view-id>/stylesheets/accountChoice.jsp</to-view-id>
@@ -97,7 +97,7 @@
 	</navigation-rule>
 	
 	<navigation-rule>
-		<display-name>accountCode2</display-name>
+		<display-name>accountChoiceToCode</display-name>
 		<from-view-id>/stylesheets/accountChoice.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoPushCode</from-outcome>
@@ -108,25 +108,25 @@
 	
 	
 	<navigation-rule>
-		<display-name>accountPersonnelInfo</display-name>
-		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
+		<display-name>accountIdentificationToPersonalInfo</display-name>
+		<from-view-id>/stylesheets/accountIdentification.jsp</from-view-id>
 		<navigation-case>
-			<from-outcome>gotoPersonnelInfo</from-outcome>
+			<from-outcome>gotoPersonalInfo</from-outcome>
 			<to-view-id>/stylesheets/accountPersonalInfo.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
-		<display-name>accountPersonnelInfoChangePassword</display-name>
+		<display-name>accountPasswordToPersonalInfo</display-name>
 		<from-view-id>/stylesheets/accountPassword.jsp</from-view-id>
 		<navigation-case>
-			<from-outcome>gotoPersonnelInfo</from-outcome>
+			<from-outcome>gotoPersonalInfo</from-outcome>
 			<to-view-id>/stylesheets/accountPersonalInfo.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
 	<navigation-rule>
-		<display-name>accountCharter</display-name>
+		<display-name>accountPersonalInfoToCharter</display-name>
 		<from-view-id>/stylesheets/accountPersonalInfo.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoCharterAgreement</from-outcome>
@@ -134,10 +134,18 @@
 		</navigation-case>
 	</navigation-rule>
 
-	
 	<navigation-rule>
-		<display-name>accountCode</display-name>
-		<from-view-id>/stylesheets/accountActivation.jsp</from-view-id>
+		<display-name>accountPersonnalInfoToLogin</display-name>
+		<from-view-id>/stylesheets/accountPersonalInfo.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoLogin</from-outcome>
+			<to-view-id>/stylesheets/accountLogin.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+		
+	<navigation-rule>
+		<display-name>accountIdentificationToCode</display-name>
+		<from-view-id>/stylesheets/accountIdentification.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoPushCode</from-outcome>
 			<to-view-id>/stylesheets/accountCode.jsp</to-view-id>
@@ -146,7 +154,17 @@
 	
 	
 	<navigation-rule>
-		<display-name>accountPassword</display-name>
+		<display-name>accountLoginToCharter</display-name>
+		<from-view-id>/stylesheets/accountLogin.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoCharter</from-outcome>
+			<to-view-id>/stylesheets/accountCharter.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<display-name>accountCharterToPassword</display-name>
 		<from-view-id>/stylesheets/accountCharter.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoPasswordChange</from-outcome>
@@ -155,7 +173,7 @@
 	</navigation-rule>
 	
 	<navigation-rule>
-		<display-name>accountPasswordReinit</display-name>
+		<display-name>accountCodeToPassword</display-name>
 		<from-view-id>/stylesheets/accountCode.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoPasswordChange</from-outcome>
@@ -164,17 +182,53 @@
 	</navigation-rule>
 	
 	<navigation-rule>
-		<display-name>accountPasswordChange</display-name>
+		<display-name>accountWelcomeToAuthentification</display-name>
 		<from-view-id>/stylesheets/welcome.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoAuthentification</from-outcome>
+			<to-view-id>/stylesheets/accountAuthentification.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>accountAuthentificationToPassword</display-name>
+		<from-view-id>/stylesheets/accountAuthentification.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoPasswordChange</from-outcome>
 			<to-view-id>/stylesheets/accountPassword.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
+	<navigation-rule>
+		<display-name>accountPasswordToPersonalInfo</display-name>
+		<from-view-id>/stylesheets/accountPassword.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPersonalInfo</from-outcome>
+			<to-view-id>/stylesheets/accountPersonalInfo.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	
 	<navigation-rule>
-		<display-name>passwordChanged</display-name>
+		<display-name>accountAuthentificationToLogin</display-name>
+		<from-view-id>/stylesheets/accountAuthentification.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoLoginChange</from-outcome>
+			<to-view-id>/stylesheets/accountLogin.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>accountLoginToPersonalInfo</display-name>
+		<from-view-id>/stylesheets/accountLogin.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPersonalInfo</from-outcome>
+			<to-view-id>/stylesheets/accountPersonalInfo.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
+		<display-name>accountPersonalInfoToEnabled</display-name>
 		<from-view-id>/stylesheets/accountPersonalInfo.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoAccountEnabled</from-outcome>
@@ -183,7 +237,7 @@
 	</navigation-rule>
 	
 	<navigation-rule>
-		<display-name>accountEnabled</display-name>
+		<display-name>accountPasswordToEnabled</display-name>
 		<from-view-id>/stylesheets/accountPassword.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoAccountEnabled</from-outcome>
@@ -191,7 +245,14 @@
 		</navigation-case>
 	</navigation-rule>
 	
-	
+	<navigation-rule>
+		<display-name>accountLoginToEnabled</display-name>
+		<from-view-id>/stylesheets/accountLogin.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoAccountEnabled</from-outcome>
+			<to-view-id>/stylesheets/accountEnabled.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
 	
 	<navigation-rule>
 		<display-name>ldapSearch</display-name>

@@ -7,15 +7,15 @@
 	>
 
 	<bean
-		id="beanOldPassword"
+		id="beanNewLogin"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
 
-		<property name="key" value="PASSWORD.TEXT.LABEL.OLDPASSWORD"/>
+		<property name="key" value="LOGIN.TEXT.LABEL.NEWLOGIN"/>
 		<property name="value" value=""/>
-		<property name="id" value="code"/>
-		<property name="validator" ><null /></property>
+		<property name="id" value="newlogin"/>
+		<property name="validator" ref="validatorLogin"/>
 		<property name="typeChamp" value=""/>
 		<property name="aide" ><null /></property>
 		<property name="converter"> <null /></property>
