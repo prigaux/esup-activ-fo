@@ -17,10 +17,10 @@
 	<e:section value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.TITLE']}"rendered="#{accountController.passwChange == true}" />
 	<e:messages />
 	
-	<e:text escape="false" value="#{msgs['IDENTIFICATION.TEXT.SUPPORTADRESS']}" rendered="#{accountController.currentAccount.activated}"/>
+	<e:text escape="false" value="#{msgs['IDENTIFICATION.TEXT.TOP']}"/>
 
 
-	<h:form id="activationForm" rendered="#{accountController.currentAccount.activated == false}">
+	<h:form id="accountForm" rendered="#{accountController.currentAccount.activated == false}">
 	
 	
 		<e:paragraph value="#{msgs['IDENTIFICATION.TEXT.TOP']}" />
@@ -33,8 +33,8 @@
 				<e:inputText value="#{entry.value}"  required="true" size="25" validator="#{entry.validator.validate}" converter="#{ldapDateConverter}" rendered="#{entry.converter!=null}"/>
 				<e:inputText value="#{entry.value}"  required="true" size="25" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null}"/>
 				
-				<h:outputLink id="rolloverImage" value="#" onclick="drawAlert('#{entry.aide}')" rendered="#{entry.aide!=null}">
-					<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
+				<h:outputLink  value="#" onclick="drawAlert('#{entry.aide}')" rendered="#{entry.aide!=null}">
+					<h:graphicImage url="../media/aide.jpg"  style="border: 0;"/>
 					<h:outputText id="aide" value="#{msgs[entry.aide]}"/>
 				</h:outputLink>
 						

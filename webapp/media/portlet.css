@@ -376,7 +376,7 @@ label{
 	width:40px;
 }	
 
-#activationForm a {
+#accountForm a {
 
 position:absolute;
 
@@ -387,14 +387,14 @@ margin-left:5px;
 }
 
 
-#activationForm img{
+#accountForm img{
 width:22px;
 height:22px;
 margin-top:auto;
 }	
 
 
-#activationForm span {
+#accountForm span {
 
 position: absolute;
 
@@ -413,7 +413,7 @@ padding:10px;
 
 
 
-#activationForm a:hover span {
+#accountForm a:hover span {
 
 display:inline;
 border:1px solid;

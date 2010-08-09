@@ -5,7 +5,7 @@
 <e:section value="#{msgs['CHOICE.TITLE']}" />
 <e:messages />
 
-	<h:form id="choiceForm" rendered="#{sessionController.currentUser == null}">
+	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
 
 		<e:paragraph escape="false" value="#{msgs['CHOICE.TEXT.TOP']}">
 		  <f:param value="#{accountController.currentAccount.emailPerso}" />

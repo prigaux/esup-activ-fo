@@ -11,12 +11,14 @@
 	
 	<e:section value="#{msgs['PERSOINFO.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
 	<e:section value="#{msgs['PERSOINFO.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}" />
+	<e:section value="#{msgs['PERSOINFO.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}" />
+	<e:section value="#{msgs['PERSOINFO.LOGINCHANGE.TITLE']}" rendered="#{accountController.loginChange == true}" />
 
 	<e:messages/>
 	
 	<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}" />
 	
-	<h:form id="activationForm" rendered="#{sessionController.currentUser == null}">
+	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
 	
 	
 		

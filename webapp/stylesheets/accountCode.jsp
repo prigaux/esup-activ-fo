@@ -16,7 +16,7 @@
 	
 	
 	
-	<h:form id="activationForm" rendered="#{sessionController.currentUser == null}">
+	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
 		<e:panelGrid columns="3">
 			<e:outputLabel for="code" value="#{msgs[beanCode.key]}" />
 			<e:inputText id="code"

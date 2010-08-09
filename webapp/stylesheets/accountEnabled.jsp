@@ -36,6 +36,16 @@
 		 </e:paragraph>
 	 </t:div>
 	
+	<t:div rendered="#{accountController.loginChange == true}">
+		<e:section value="#{msgs['LOGINCHANGED.TITLE']}" />
+		<e:messages />
+		<e:paragraph value="#{msgs['LOGINCHANGED.TEXT.TOP']}" />
+
+		<e:paragraph escape="false" value="#{msgs['ENABLED.TEXT.UNAUTHENTICATED']}">
+		  <f:param value="#{accountController.currentAccount.id}" />
+		  <f:param value="#{accountController.currentAccount.mail}" />
+		 </e:paragraph>
+	 </t:div>
 		 	 
 	 <e:subSection value="#{msgs['ENABLED.SUBTITLE.ESUPACCESS']}" />
 	 <e:paragraph escape="false" value="#{msgs['ENABLED.TEXT.ESUPURL']}" />

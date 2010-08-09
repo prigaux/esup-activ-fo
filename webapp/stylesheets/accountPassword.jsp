@@ -143,15 +143,15 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 		   strengthlevel = STRENGTH_STRONGER
 		}
 
-		document.getElementById( 'activationForm:verdict' ).style.color = strengthcolors[ strengthlevel ];
-		document.getElementById( 'activationForm:verdict' ).innerHTML = (strVerdict);
+		document.getElementById( 'accountForm:verdict' ).style.color = strengthcolors[ strengthlevel ];
+		document.getElementById( 'accountForm:verdict' ).innerHTML = (strVerdict);
 		
 		strengthbarwidth=intScore*5;
-		document.getElementById('activationForm:strengthbar').style.width = strengthbarwidth + "px";
-		document.getElementById('activationForm:strengthbar').style.backgroundColor = strengthcolors[ strengthlevel ];
+		document.getElementById('accountForm:strengthbar').style.width = strengthbarwidth + "px";
+		document.getElementById('accountForm:strengthbar').style.backgroundColor = strengthcolors[ strengthlevel ];
 		
-<!--		document.getElementById( 'activationForm:score' ).value = (intScore)-->
-<!--		document.getElementById( 'activationForm:matchlog' ).value = (strLog)-->
+<!--		document.getElementById( 'accountForm:score' ).value = (intScore)-->
+<!--		document.getElementById( 'accountForm:matchlog' ).value = (strLog)-->
 	
 }
 
@@ -159,42 +159,18 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 
 
 
-	<h:form id="activationForm" rendered="#{sessionController.currentUser == null}">
+	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
 		
 		
-		<e:panelGrid columns="3" columnClasses="col1,col2,col3" rendered="#{accountController.passwChange == true}">
-			<e:outputLabel for="login" value="#{msgs[beanLogin.key]}" />
-			<e:inputText id="login"
-				value="#{beanLogin.value}"
-				required="true" validator="#{beanLogin.validator.validate}">
-			</e:inputText>
-			<h:outputLink id="rolloverImage" value="#" rendered="#{beanLogin.aide!=null}">
-				<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
-				<h:outputText id="aide" value="#{msgs[beanLogin.aide]}"/>
-			</h:outputLink>
-			<e:message for="login" />
-		</e:panelGrid>
-		
-		<e:panelGrid columns="3" columnClasses="col1,col2,col3" rendered="#{accountController.passwChange == true}">
-			<e:outputLabel for="oldPassword" value="#{msgs[beanOldPassword.key]}" />
-			<e:inputSecret id="oldPassword" value="#{beanOldPassword.value}"
-	     		required="true"  >
-	  		</e:inputSecret>
-			<h:outputLink id="rolloverImage" value="#" rendered="#{beanOldPassword.aide!=null}">
-				<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
-				<h:outputText id="aide" value="#{msgs[beanOldPassword.aide]}"/>
-			</h:outputLink>
-			<e:message for="oldPassword" />
-		</e:panelGrid>
 		
 		<e:panelGrid columns="4" columnClasses="col1,col2,col3" >
-  			<e:outputLabel for="password" value="#{msgs[beanPasswordPrincipal.key]}"/>
-	  		<e:inputSecret id="password" value="#{beanPasswordPrincipal.value}"
-	     		required="true" onkeyup="updatestrength( this.value, '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYSTRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.STRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.MEDIUM']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.WEAK']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}');" validator="#{beanPasswordPrincipal.validator.validate}" >
+  			<e:outputLabel for="password" value="#{msgs[beanNewPassword.key]}"/>
+	  		<e:inputSecret id="password" value="#{beanNewPassword.value}"
+	     		required="true" onkeyup="updatestrength( this.value, '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYSTRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.STRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.MEDIUM']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.WEAK']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}');" validator="#{beanNewPassword.validator.validate}" >
 	  		</e:inputSecret>
-	  		<h:outputLink id="rolloverImage" value="#" rendered="#{beanPasswordPrincipal.aide!=null}">
+	  		<h:outputLink id="rolloverImage" value="#" rendered="#{beanNewPassword.aide!=null}">
 				<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
-				<h:outputText id="aide" value="#{msgs[beanPasswordPrincipal.aide]}"/>
+				<h:outputText id="aide" value="#{msgs[beanNewPassword.aide]}"/>
 			</h:outputLink>
 			<e:message for="password" />
 	  	</e:panelGrid>
