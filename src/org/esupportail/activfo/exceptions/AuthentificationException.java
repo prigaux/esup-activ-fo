@@ -1,6 +1,6 @@
 package org.esupportail.activfo.exceptions;
 
-public class OldPasswordException extends Exception{
+public class AuthentificationException extends Exception{
 	
 	/**
 	 * The id for serialization.
@@ -10,14 +10,14 @@ public class OldPasswordException extends Exception{
 	/**
 	 * @param message
 	 */
-	public OldPasswordException(final String message) {
+	public AuthentificationException(final String message) {
 		super(message);
 	}
 
 	/**
 	 * @param cause
 	 */
-	public OldPasswordException(final Throwable cause) {
+	public AuthentificationException(final Throwable cause) {
 		super(cause);
 	}
 
@@ -25,7 +25,7 @@ public class OldPasswordException extends Exception{
 	 * @param message
 	 * @param cause
 	 */
-	public OldPasswordException(final String message, final Throwable cause) {
+	public AuthentificationException(final String message, final Throwable cause) {
 		super(message, cause);
 	}
 

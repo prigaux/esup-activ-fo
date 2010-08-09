@@ -11,13 +11,14 @@ import java.util.HashMap;
 import java.util.List;
 
 
+import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
 import org.esupportail.activfo.dao.DaoService;
 import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.VersionManager;
+import org.esupportail.activfo.exceptions.AuthentificationException;
 import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
-import org.esupportail.activfo.exceptions.OldPasswordException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.activfo.services.client.AccountManagement;
 import org.esupportail.commons.exceptions.ConfigException;
@@ -288,21 +289,20 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		return service.setPassword(id,code,currentPassword);	
 	}
 	
-	public HashMap<String,String> setPassword(String id,String oldPassword,final String currentPassword,List<String>attrPersoInfo)throws LdapProblemException,UserPermissionException,KerberosException,OldPasswordException{
+/*	public HashMap<String,String> setPassword(String id,String oldPassword,final String currentPassword,List<String>attrPersoInfo)throws LdapProblemException,UserPermissionException,KerberosException,OldPasswordException{
 		return service.setPassword(id,oldPassword,currentPassword,attrPersoInfo);
-	}
+	}*/
 	
 	public boolean updatePersonalInformations(String id,String code, HashMap<String,String> hashBeanPersoInfo)throws LdapProblemException,UserPermissionException{
 		return service.updatePersonalInformations(id,code,hashBeanPersoInfo);
 	}
 	
-	
-	
-	public String getCode(String id){
-		return service.getCode(id);
+	public boolean changeLogin(String id, String code,String newLogin)throws LdapProblemException,UserPermissionException,KerberosException,LoginAlreadyExistsException{
+		return service.changeLogin(id, code, newLogin);
 	}
 	
-	public String getCode(String id,String canal)throws LdapProblemException{
+	
+	public boolean getCode(String id,String canal)throws LdapProblemException{
 		return service.getCode(id, canal);
 	}
 	
@@ -316,22 +316,9 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	public boolean validateCode(String id,String code){
 		return service.validateCode(id, code);
 	}
-
 	
-	/*public void updateDisplayName(String displayName,String id, String code){
-		service.updateDisplayName(displayName,id,code);
+	public HashMap<String,String> authentificateUser(String id,String password,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException{
+		return service.authentificateUser(id, password,attrPersoInfo);
 	}
-	
-	public void setMailPerso(String id,String mailPerso){
-		service.setMailPerso(id,mailPerso);
-	}*/
-	
-	/*public int validateCode(String id,String code){
-		return service.validateCode(id, code);
-	}*/
-	
-	
-
-	
 
 }
