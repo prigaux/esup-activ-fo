@@ -206,7 +206,6 @@ public class AccountController extends AbstractContextAwareController implements
 			this.listInfoToValidate=listInfoOldStudentToValidate;
 			attrToValidate=Arrays.asList(attributesOldStudentToValidate.split(","));
 		}
-				
 		return "goToInfoToValidate";
 	}
 	
@@ -226,7 +225,7 @@ public class AccountController extends AbstractContextAwareController implements
 
 			if (accountDescr!=null) {
 				
-				logger.info("Validation des identificateurs réussie");
+				logger.info("Identification valide");
 				
 				currentAccount.setId(accountDescr.get(accountIdKey));
 				currentAccount.setMail(accountDescr.get(accountMailKey));
@@ -243,11 +242,9 @@ public class AccountController extends AbstractContextAwareController implements
 					}else if(activ){
 						logger.info("Construction de la liste des informations personnelles du compte");
 						this.buildListPersoInfo(attrPersoInfo);
-			
 						this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 						return "gotoPersonalInfo";
 					}
-					
 				}
 				else {
 					if (reinit){
@@ -304,7 +301,6 @@ public class AccountController extends AbstractContextAwareController implements
 				logger.info("Identifation utilisateur non valide");
 				addErrorMessage(null, "IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
 			}
-			
 		}
 		catch (LdapProblemException e) {
 			logger.error(e.getMessage());
@@ -317,6 +313,7 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	
 	public String pushChangeInfoPerso() {
+			
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			
 			try{
@@ -358,11 +355,8 @@ public class AccountController extends AbstractContextAwareController implements
 							return "gotoLogin";
 						else
 							return "gotoAccountEnabled";
-						//return "gotoAccountEnabled";
 					}
-					
 				}	
-						
 			}
 			catch (LdapProblemException e) {
 				logger.error(e.getMessage());
@@ -413,6 +407,9 @@ public class AccountController extends AbstractContextAwareController implements
 				}
 			
 			}
+			else {
+				addErrorMessage(null, "AUTHENTIFICATION.MESSAGE.INVALID");
+			}
 			
 		}catch(AuthentificationException e){
 			logger.error(e.getMessage());
@@ -421,7 +418,6 @@ public class AccountController extends AbstractContextAwareController implements
 		}catch (LdapProblemException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
-			
 		}
 		
 		
@@ -541,7 +537,6 @@ public class AccountController extends AbstractContextAwareController implements
 				else{
 					return "gotoAccountEnabled";
 				}
-			
 			}
 			else {
 				logger.info("Changement mot de passe non effectué");
@@ -555,7 +550,6 @@ public class AccountController extends AbstractContextAwareController implements
 		
 		}catch (UserPermissionException e) {
 			logger.error(e.getMessage());
-			//this.enterReinitialisation();
 			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
 		
 		}catch (KerberosException e) {
@@ -565,8 +559,23 @@ public class AccountController extends AbstractContextAwareController implements
 
 		return null;
 	}
-
 	
+	private void buildListPersoInfo(List<String>attrPersoInfo){
+		for(int i=0;i<attrPersoInfo.size();i++){
+			if (attrPersoInfo.get(i).equals(accountDNKey)){
+				currentAccount.setDisplayName(accountDescr.get(attrPersoInfo.get(i)));
+			}
+			listBeanPersoInfo.get(i).setValue(accountDescr.get(attrPersoInfo.get(i)));
+			if (attrPersoInfo.get(i).equals(fieldSmsAgreementId)){
+				if (accountDescr.get(attrPersoInfo.get(i)).equals(smsAccepted)){
+					listBeanPersoInfo.get(i).setValue2(true);
+				}
+				else{
+					listBeanPersoInfo.get(i).setValue2(false);
+				}
+			}
+		}
+	}
 
 	public Account getCurrentAccount() {
 		return currentAccount;
@@ -575,8 +584,6 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setCurrentAccount(Account currentAccount) {
 		this.currentAccount = currentAccount;
 	}
-
-	
 	
 	public String getAccountIdKey() {
 		return accountIdKey;
@@ -593,8 +600,6 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setAccountMailKey(String accountMailKey) {
 		this.accountMailKey = accountMailKey;
 	}
-
-	
 
 	public String getAccountDNKey() {
 		return accountDNKey;
@@ -746,8 +751,6 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setListInfoToValidate(List<BeanField> listInfoToValidate) {
 		this.listInfoToValidate = listInfoToValidate;
 	}
-
-	
 
 	public List<String> getAttrToValidate() {
 		return attrToValidate;
@@ -901,25 +904,6 @@ public class AccountController extends AbstractContextAwareController implements
 		this.beanNewLogin = beanNewLogin;
 	}
 	
-	private void buildListPersoInfo(List<String>attrPersoInfo){
-		for(int i=0;i<attrPersoInfo.size();i++){
-			if (attrPersoInfo.get(i).equals(accountDNKey)){
-				currentAccount.setDisplayName(accountDescr.get(attrPersoInfo.get(i)));
-			}
-			listBeanPersoInfo.get(i).setValue(accountDescr.get(attrPersoInfo.get(i)));
-			if (attrPersoInfo.get(i).equals(fieldSmsAgreementId)){
-				if (accountDescr.get(attrPersoInfo.get(i)).equals(smsAccepted)){
-					listBeanPersoInfo.get(i).setValue2(true);
-					//mettr boolean à true
-				}
-				else{
-					listBeanPersoInfo.get(i).setValue2(false);
-				}
-			}
-			
-		}
-	}
-
 	public BeanField getBeanNewPassword() {
 		return beanNewPassword;
 	}
