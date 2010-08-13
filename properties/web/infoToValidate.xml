@@ -16,8 +16,8 @@
 		<property name="value" value=""/>
 		<property name="id" value="harpegeNumber"/>
 		<property name="validator" ref="validatorHarpegeNumber"/>
-		<property name="typeChamp" value=""/>
-		<property name="aide" value="IDENTIFICATION.HARPEGENUMBER.TEXT.AIDE"/>
+		<property name="fieldType" value=""/>
+		<property name="help" value="IDENTIFICATION.HARPEGENUMBER.TEXT.HELP"/>
 		<property name="converter"> <null /></property>
 		
 	</bean>
@@ -31,9 +31,9 @@
 		<property name="key" value="IDENTIFICATION.STUDENTLOGIN.TEXT.LABEL"/>
 		<property name="value" value=""/>
 		<property name="id" value="studentlogin"/>
-		<property name="validator"> <null /></property>
-		<property name="typeChamp" value=""/>
-		<property name="aide" value="IDENTIFICATION.STUDENTLOGIN.TEXT.AIDE"/>
+		<property name="validator" ref="validatorStudentLogin"/>
+		<property name="fieldType" value=""/>
+		<property name="help" value="IDENTIFICATION.STUDENTLOGIN.TEXT.HELP"/>
 		<property name="converter"> <null /></property>
 		
 	</bean>
@@ -49,8 +49,8 @@
 		<property name="value" value=""/>
 		<property name="id" value="birthName"/>
 		<property name="validator" ref="validatorBirthName"/>
-		<property name="typeChamp" value=""/>
-		<property name="aide"> <null /> </property>
+		<property name="fieldType" value=""/>
+		<property name="help"> <null /> </property>
 		<property name="converter"> <null /></property>
 		
 	</bean>
@@ -66,8 +66,8 @@
 		<property name="value" value=""/>
 		<property name="id" value="studentnumber"/>
 		<property name="validator" ><null /></property>
-		<property name="typeChamp" value=""/>
-		<property name="aide" value="IDENTIFICATION.STUDENTNUMBER.TEXT.AIDE"/>
+		<property name="fieldType" value=""/>
+		<property name="help" value="IDENTIFICATION.STUDENTNUMBER.TEXT.HELP"/>
 		<property name="converter"> <null /></property>
 		
 	</bean>
@@ -85,9 +85,9 @@
 		<property name="value" value=""/>
 		<property name="id" value="birthDate"/>
 		<property name="validator" ref="validatorBirthDate"/>
-		<property name="typeChamp" value=""/>
-		<property name="aide"> <null/></property>
-		<property name="converter" value="ldapDateConverter"/>
+		<property name="fieldType" value=""/>
+		<property name="help"> <null/></property>
+		<property name="converter" ref="ldapDateConverter"/>
 		
 	</bean>
 	

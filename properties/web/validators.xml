@@ -66,6 +66,18 @@
 	</bean>
 	
 	<bean 
+		id="validatorStudentLogin"
+		class="org.esupportail.activfo.web.validators.ValidatorStudentLogin"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Student login.
+    	</description>
+    	
+    	
+	</bean>
+	
+	<bean 
 		id="validatorBirthName"
 		class="org.esupportail.activfo.web.validators.ValidatorBirthName"
 		parent="abstractI18nAwareBean"
@@ -88,7 +100,7 @@
 			A validator for BirthDate.
     	</description>
     	
-    	<property name="formatLdapDate" value="${format.ldap.date}"/>
+    	<property name="formatLdapDate" value="${format.date.ldap}"/>
     	
 	</bean>
 	
