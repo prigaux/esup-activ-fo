@@ -86,27 +86,26 @@
 		<property name="accountDNKey" value="${account.key.displayname}"/>
 		<property name="accountCodeKey" value="${account.key.code}"/>
 		
-		<property name="fieldSmsAgreementId" value="${account.id.field.smsagreement}"/>
+		<property name="fieldSmsAgreementId" value="${account.key.termsOfUse}"/>
 		
-		<property name="smsAccepted" value="${value.sms.accepted}"/>
-		<property name="smsNonAccepted" value="${value.sms.nonaccepted}"/>
-		
+		<property name="smsAccepted" value="${sms.CG}"/>
+				
 		<property name="currentAccount" ref="account"/>
 		
-		<property name="procedureActivation" value="${view.value.procedure.activation}"/>
-		<property name="procedureReinitialisation" value="${view.value.procedure.reinitialisation}"/>
-		<property name="procedurePasswordChange" value="${view.value.procedure.passwordchange}"/>
-		<property name="procedureLoginChange" value="${view.value.procedure.loginchange}"/>	
+		<property name="procedureActivation" value="${view.procedure.activation}"/>
+		<property name="procedureReinitialisation" value="${view.procedure.reinitialisation}"/>
+		<property name="procedurePasswordChange" value="${view.procedure.passwordchange}"/>
+		<property name="procedureLoginChange" value="${view.procedure.loginchange}"/>	
 		
-		<property name="statusStudent" value="${view.value.status.student}"/>
-		<property name="statusPersonnel" value="${view.value.status.personnel}"/>
-		<property name="statusOldStudent" value="${view.value.status.oldstudent}"/>
+		<property name="statusStudent" value="${view.status.student}"/>
+		<property name="statusPersonnel" value="${view.status.personnel}"/>
+		<property name="statusOldStudent" value="${view.status.alumni.student}"/>
 		
 		<property name="attributesInfPerso" value="${attributes.information}"/>
 		
 		<property name="attributesStudentToValidate" value="${attributes.validation.student}"/>
 		<property name="attributesPersonnelToValidate" value="${attributes.validation.personnel}"/>
-		<property name="attributesOldStudentToValidate" value="${attributes.validation.oldstudent}"/>
+		<property name="attributesOldStudentToValidate" value="${attributes.validation.alumni.student}"/>
 		
 		<property name="listBeanPersoInfo">
 			<list>
