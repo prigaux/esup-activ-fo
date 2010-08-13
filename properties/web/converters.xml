@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
+
+
 <beans 
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -12,6 +14,9 @@
 		It should not be modified but by the developers.
 		This file is referenced by /properties/applicationContext.xml.
 	-->
+	
+	
+	
 
 	<bean 
 		id="localeConverter"
@@ -31,8 +36,8 @@
 			A converter for....
     	</description>
     	
-    	<property name="formatStandardDate" value="${format.standard.date}"/>
-    	<property name="formatLdapDate" value="${format.ldap.date}"/>
+    	<property name="formatStandardDate" value="${format.date.standard}"/>
+    	<property name="formatLdapDate" value="${format.date.ldap}"/>
 	</bean>
 	
 	<bean 

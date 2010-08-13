@@ -17,8 +17,8 @@
 		<property name="value" value="${account.key.mailperso}"/>
 		<property name="id" value="mailperso"/>
 		<property name="validator"> <null /></property>
-		<property name="typeChamp" value=""/>
-		<property name="aide"> <null /></property>
+		<property name="fieldType" value=""/>
+		<property name="help"> <null /></property>
 		<property name="converter"> <null /></property>
 		
 	</bean>
@@ -34,8 +34,8 @@
 		<property name="value" value="${account.key.pager}"/>
 		<property name="id" value="pager"/>
 		<property name="validator"> <null /></property>
-		<property name="typeChamp" value=""/>
-		<property name="aide"> <null /></property>
+		<property name="fieldType" value=""/>
+		<property name="help"> <null /></property>
 		<property name="converter"> <null /></property>
 		
 	</bean>
