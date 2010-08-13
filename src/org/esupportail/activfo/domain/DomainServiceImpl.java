@@ -5,7 +5,7 @@
 package org.esupportail.activfo.domain;
 
 
-import java.util.Date;
+
 import java.util.HashMap;
 
 import java.util.List;
@@ -13,7 +13,6 @@ import java.util.List;
 
 import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
 import org.esupportail.activfo.dao.DaoService;
-import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.VersionManager;
 import org.esupportail.activfo.exceptions.AuthentificationException;
@@ -24,7 +23,6 @@ import org.esupportail.activfo.services.client.AccountManagement;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.application.Version;
-import org.esupportail.commons.services.ldap.LdapException;
 import org.esupportail.commons.services.ldap.LdapUser;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
@@ -56,11 +54,6 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 * {@link LdapUserService}.
 
 	 */
-	
-	
-	
-	
-
 
 	/**
 	 * The LDAP attribute that contains the display name. 
@@ -90,12 +83,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 				"property displayNameLdapAttribute of class " + this.getClass().getName() 
 				+ " can not be null");
 	}
-	
-	
-	
-	
-	
-	
+
 	
 
 	//////////////////////////////////////////////////////////////
@@ -108,9 +96,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 * @param ldapUser 
 	 * @return true if the user was updated.
 	 */
-	private boolean setUserInfo(
-			final User user, 
-			final LdapUser ldapUser) {
+	private boolean setUserInfo(final User user, final LdapUser ldapUser) {
 		String displayName = null;
 		List<String> displayNameLdapAttributes = ldapUser.getAttributes().get(displayNameLdapAttribute);
 		if (displayNameLdapAttributes != null) {
@@ -284,21 +270,18 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	}
 	
 	
-	public boolean setPassword(String id,String code,final String currentPassword)throws LdapProblemException,UserPermissionException,KerberosException {
+	public void setPassword(String id,String code,final String currentPassword)throws LdapProblemException,UserPermissionException,KerberosException {
 
-		return service.setPassword(id,code,currentPassword);	
+		service.setPassword(id,code,currentPassword);	
 	}
 	
-/*	public HashMap<String,String> setPassword(String id,String oldPassword,final String currentPassword,List<String>attrPersoInfo)throws LdapProblemException,UserPermissionException,KerberosException,OldPasswordException{
-		return service.setPassword(id,oldPassword,currentPassword,attrPersoInfo);
-	}*/
-	
-	public boolean updatePersonalInformations(String id,String code, HashMap<String,String> hashBeanPersoInfo)throws LdapProblemException,UserPermissionException{
-		return service.updatePersonalInformations(id,code,hashBeanPersoInfo);
+
+	public void updatePersonalInformations(String id,String code, HashMap<String,String> hashBeanPersoInfo)throws LdapProblemException,UserPermissionException{
+		service.updatePersonalInformations(id,code,hashBeanPersoInfo);
 	}
 	
-	public boolean changeLogin(String id, String code,String newLogin)throws LdapProblemException,UserPermissionException,KerberosException,LoginAlreadyExistsException{
-		return service.changeLogin(id, code, newLogin);
+	public void changeLogin(String id, String code,String newLogin)throws LdapProblemException,UserPermissionException,KerberosException,LoginAlreadyExistsException{
+		service.changeLogin(id, code, newLogin);
 	}
 	
 	

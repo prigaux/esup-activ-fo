@@ -1,15 +1,15 @@
 package org.esupportail.activfo.web.validators;
 
 
-import java.util.List;
+import java.text.Collator;
+
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
 import org.esupportail.activfo.domain.beans.Account;
-import org.esupportail.activfo.domain.tools.StringTools;
-import org.esupportail.activfo.web.beans.BeanField;
+
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
 
 
@@ -18,7 +18,6 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	
 	private Account account;
 	
-	private List<BeanField> liste;
 	
 	/**
 	 * 
@@ -35,7 +34,7 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		String val=(String)value;
 		
-		if (StringTools.compareInsensitive(account.getDisplayName(), val)) {
+		if (this.compareInsensitive(account.getDisplayName(), val)) {
 			
 			
 		}
@@ -45,6 +44,37 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 			
 		
 	}
+	
+	public boolean compareInsensitive(String str1, String str2) {
+
+//		Logger.debug("Comparing : " + str1 + " and " + str2);
+
+		String strTmp1 = str1.replaceAll("[-|']+", " ");
+		String strTmp2 = str2.replaceAll("[-|']+", " ");
+		Collator collator = Collator.getInstance();
+		collator.setStrength(Collator.PRIMARY);
+
+		if (collator.compare(strTmp1, strTmp2) == 0) {
+//			logger.debug("Strings are equivalent");
+			return true;
+		}
+
+//		logger.debug("Strings  are different");
+		return false;
+	}
+	
+	public static String cleanAllSpecialChar(String str) {
+
+//		Logger.debug("Comparing : " + str1 + " and " + str2);
+
+		String strTmp1 = str.toLowerCase();
+		strTmp1 = strTmp1.replaceAll("[^a-z]+", "");
+
+		//strTmp1 = Normalizer.normalize(strTmp1, Normalizer.DECOMP, 0);
+	    return strTmp1.replaceAll("[^\\p{ASCII}]","");
+
+	}
+
 
 	public Account getAccount() {
 		return account;

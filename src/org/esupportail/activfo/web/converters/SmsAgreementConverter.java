@@ -4,9 +4,6 @@
 package org.esupportail.activfo.web.converters;
 
 import java.io.Serializable;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -25,8 +22,6 @@ public class SmsAgreementConverter implements Converter, Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	
-	private String formatStandardDate;
-	private String formatLdapDate;
 
 	/**
 	 * Bean constructor.

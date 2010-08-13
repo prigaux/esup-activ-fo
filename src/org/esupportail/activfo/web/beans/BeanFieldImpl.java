@@ -1,29 +1,26 @@
 package org.esupportail.activfo.web.beans;
 
-import org.esupportail.activfo.web.validators.Validator;
-import org.esupportail.activfo.web.validators.ValidatorDisplayName;
+import javax.faces.convert.Converter;
 
-public class BeanFieldImpl implements BeanField {
+import org.esupportail.activfo.web.validators.Validator;
+
+
+public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private String key;
-	private String value;
-	private String typeChamp;
-	private String aide;
-	private String converter;
+	private T value;
+	private String fieldType;
+	private String help;
+	private Converter converter;
 	private Validator validator;
 	private String id;
 	private String valueAcceptation;
-	private boolean value2;
 	
 	
 	
 	
-	public boolean isValue2() {
-		return value2;
-	}
-	public void setValue2(boolean value2) {
-		this.value2 = value2;
-	}
+	
+	
 	public String getValueAcceptation() {
 		return valueAcceptation;
 	}
@@ -42,35 +39,37 @@ public class BeanFieldImpl implements BeanField {
 	public void setKey(String key) {
 		this.key = key;
 	}
-	public String getValue() {
+	public T getValue() {
 		return value;
 	}
-	public void setValue(String value) {
+	public void setValue(T value) {
 		this.value = value;
 	}
-	public String getTypeChamp() {
-		return typeChamp;
-	}
-	public void setTypeChamp(String typeChamp) {
-		this.typeChamp = typeChamp;
-	}
-	public String getAide() {
-		return aide;
-	}
-	public void setAide(String aide) {
-		this.aide = aide;
-	}
+	
 	public Validator getValidator() {
 		return validator;
 	}
 	public void setValidator(Validator validator) {
 		this.validator = validator;
 	}
-	public String getConverter() {
+	
+	public Converter getConverter() {
 		return converter;
 	}
-	public void setConverter(String converter) {
+	public void setConverter(Converter converter) {
 		this.converter = converter;
+	}
+	public String getFieldType() {
+		return fieldType;
+	}
+	public void setFieldType(String fieldType) {
+		this.fieldType = fieldType;
+	}
+	public String getHelp() {
+		return help;
+	}
+	public void setHelp(String help) {
+		this.help = help;
 	}
 	
 }

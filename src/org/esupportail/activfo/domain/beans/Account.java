@@ -5,18 +5,12 @@
 package org.esupportail.activfo.domain.beans;
 
 
-import java.io.Serializable;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import java.util.Random;
 
 
 
-import org.esupportail.activfo.domain.tools.StringTools;
+
 import org.esupportail.commons.utils.strings.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -133,19 +127,7 @@ public class Account implements InitializingBean {
 	public void setId(final String id) {
 		this.id = StringUtils.nullIfEmpty(id);
 	}
-
-	
-	public String getHarpegeNumber() {
-		System.out.println(harpegeNumber);
-		return harpegeNumber;
-	}
-
-	public void setHarpegeNumber(String harpegeNumber) {
-	
-		this.harpegeNumber = harpegeNumber;
-	}
-
-	
+		
 	public String getBirthName() {
 		return birthName;
 	}
@@ -196,16 +178,7 @@ public class Account implements InitializingBean {
 	 * @see org.esupportail.activ.domain.DomainService#changeDisplayName(org.esupportail.activ.domain.beans.Account,
 	 *      java.lang.String)
 	 */
-	public boolean changeDisplayName(String newDisplayName) {
-
-		// Compare newDisplayName and displayName
-		if (StringTools.compareInsensitive(this.getDisplayName(), newDisplayName)) {
-			this.setDisplayName(newDisplayName);
-			return true;
-		}
-
-		return false;
-	}
+	
 
 	public String getShadowLastChange() {
 		return shadowLastChange;

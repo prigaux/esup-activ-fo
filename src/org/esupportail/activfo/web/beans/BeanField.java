@@ -1,34 +1,35 @@
 package org.esupportail.activfo.web.beans;
 
-import org.esupportail.activfo.web.validators.Validator;
-import org.esupportail.activfo.web.validators.ValidatorDisplayName;
+import javax.faces.convert.Converter;
 
-public interface BeanField {
+import org.esupportail.activfo.web.validators.Validator;
+
+
+public interface BeanField<T> {
 	
 	
 	public String getKey();
 	
 	public void setKey(String key);
 	
-	public String getValue();
+	public T getValue();
 	
-	public void setValue(String value);
+	public void setValue(T value);
 	
-	public String getTypeChamp();
+	public String getFieldType();
 	
-	public void setTypeChamp(String typeChamp);
+	public void setFieldType(String fieldType);
 	
-	public String getAide();
+	public String getHelp();
 	
-	public void setAide(String aide);
+	public void setHelp(String help);
 	
 	public Validator getValidator();
 	
 	public void setValidator(Validator validator);
 	
-	public String getConverter();
-	
-	public void setConverter(String converter);
+	public Converter getConverter();
+	public void setConverter(Converter converter);
 	
 	public String getId();
 	
@@ -38,8 +39,6 @@ public interface BeanField {
 	
 	public void setValueAcceptation(String valueAcceptation);
 	
-	public boolean isValue2();
 	
-	public void setValue2(boolean value2);
 	
 }
