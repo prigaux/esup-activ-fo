@@ -23,9 +23,9 @@
 				value="#{beanCode.value}"
 				required="true" validator="#{beanCode.validator.validate}">
 			</e:inputText>
-			<h:outputLink id="rolloverImage" value="#" rendered="#{beanCode.aide!=null}">
-				<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
-				<h:outputText id="aide" value="#{msgs[beanCode.aide]}"/>
+			<h:outputLink id="rolloverImage" value="#" rendered="#{beanCode.help!=null}">
+				<h:graphicImage id="w3c" url="../media/help.jpg"  style="border: 0;"/>
+				<h:outputText id="help" value="#{msgs[beanCode.help]}"/>
 			</h:outputLink>
 		</e:panelGrid>
 		

@@ -14,9 +14,9 @@
 		<e:panelGrid columns="3" columnClasses="col1,col2,col3" >
 			<e:outputLabel for="login" value="#{msgs[beanLogin.key]}" />
 			<e:inputText id="login" value="#{beanLogin.value}" required="true" validator="#{beanLogin.validator.validate}"> </e:inputText>
-			<h:outputLink id="rolloverImage" value="#" rendered="#{beanLogin.aide!=null}">
+			<h:outputLink id="rolloverImage" value="#" rendered="#{beanLogin.help!=null}">
 				<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
-				<h:outputText id="aide" value="#{msgs[beanLogin.aide]}"/>
+				<h:outputText id="help" value="#{msgs[beanLogin.help]}"/>
 			</h:outputLink>
 			<e:message for="login" />
 		</e:panelGrid>
@@ -24,9 +24,9 @@
 		<e:panelGrid columns="3" columnClasses="col1,col2,col3" >
 			<e:outputLabel for="password" value="#{msgs[beanPassword.key]}" />
 			<e:inputSecret id="password" value="#{beanPassword.value}" required="true" validator="#{beanPassword.validator.validate}" > </e:inputSecret>
-			<h:outputLink value="#" rendered="#{beanPassword.aide!=null}">
-				<h:graphicImage url="../media/aide.jpg"  style="border: 0;"/>
-				<h:outputText value="#{msgs[beanPassword.aide]}"/>
+			<h:outputLink value="#" rendered="#{beanPassword.help!=null}">
+				<h:graphicImage url="../media/help.jpg"  style="border: 0;"/>
+				<h:outputText value="#{msgs[beanPassword.help]}"/>
 			</h:outputLink>
 			<e:message for="password" />
 		</e:panelGrid>

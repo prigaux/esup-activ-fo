@@ -30,12 +30,12 @@
 			<e:panelGrid columns="4" columnClasses="col1,col2,col3" rendered="#{entry.value!=null}">
 			
 				<e:outputLabel value="#{msgs[entry.key]}" />
-				<e:inputText value="#{entry.value}"  required="true" size="25" validator="#{entry.validator.validate}" converter="#{ldapDateConverter}" rendered="#{entry.converter!=null}"/>
+				<e:inputText value="#{entry.value}"  required="true" size="25" validator="#{entry.validator.validate}" converter="#{entry.converter}" rendered="#{entry.converter!=null}"/>
 				<e:inputText value="#{entry.value}"  required="true" size="25" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null}"/>
 				
-				<h:outputLink  value="#" onclick="drawAlert('#{entry.aide}')" rendered="#{entry.aide!=null}">
-					<h:graphicImage url="../media/aide.jpg"  style="border: 0;"/>
-					<h:outputText id="aide" value="#{msgs[entry.aide]}"/>
+				<h:outputLink  value="#" onclick="drawAlert('#{entry.help}')" rendered="#{entry.help!=null}">
+					<h:graphicImage url="../media/help.jpg"  style="border: 0;"/>
+					<h:outputText id="help" value="#{msgs[entry.help]}"/>
 				</h:outputLink>
 						
 			</e:panelGrid>
