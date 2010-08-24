@@ -19,6 +19,21 @@
 			<default-locale>en</default-locale>
 			<supported-locale>fr</supported-locale>
 		</locale-config>
+		
+		
+		
 	</application>
+	
+	<converter>
+  <description>
+    Converter for credit card 
+    numbers that normalizes 
+    the input to a standard format
+  </description>
+  <converter-id>booleanConverter</converter-id>
+  <converter-class>
+    javax.faces.convert.BooleanConverter
+  </converter-class>
+</converter> 
 
 </faces-config>

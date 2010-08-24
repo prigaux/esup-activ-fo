@@ -86,7 +86,7 @@
 		<property name="id" value="birthDate"/>
 		<property name="validator" ref="validatorBirthDate"/>
 		<property name="fieldType" value=""/>
-		<property name="help"> <null/></property>
+		
 		<property name="converter" ref="ldapDateConverter"/>
 		
 	</bean>
