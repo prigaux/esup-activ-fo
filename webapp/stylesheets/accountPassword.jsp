@@ -150,8 +150,8 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 		document.getElementById('accountForm:strengthbar').style.width = strengthbarwidth + "px";
 		document.getElementById('accountForm:strengthbar').style.backgroundColor = strengthcolors[ strengthlevel ];
 		
-<!--		document.getElementById( 'accountForm:score' ).value = (intScore)-->
-<!--		document.getElementById( 'accountForm:matchlog' ).value = (strLog)-->
+		document.getElementById( 'accountForm:score' ).value = (intScore)
+		document.getElementById( 'accountForm:matchlog' ).value = (strLog)
 	
 }
 
