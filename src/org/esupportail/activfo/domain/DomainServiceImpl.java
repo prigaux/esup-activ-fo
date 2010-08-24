@@ -296,11 +296,11 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	public void setService(AccountManagement service) {
 		this.service = service;
 	}
-	public boolean validateCode(String id,String code){
+	public boolean validateCode(String id,String code)throws UserPermissionException{
 		return service.validateCode(id, code);
 	}
 	
-	public HashMap<String,String> authentificateUser(String id,String password,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException{
+	public HashMap<String,String> authentificateUser(String id,String password,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException{
 		return service.authentificateUser(id, password,attrPersoInfo);
 	}
 

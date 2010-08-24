@@ -220,14 +220,14 @@ public class AccountController extends AbstractContextAwareController implements
 			if (accountDescr!=null) {
 				
 				logger.info("Identification valide");
-				
+				System.out.println("1");
 				currentAccount.setId(accountDescr.get(accountIdKey));
 				currentAccount.setMail(accountDescr.get(accountMailKey));
 				currentAccount.setCode(accountDescr.get(accountCodeKey));
 				currentAccount.setEmailPerso(accountDescr.get(accountMailPersoKey));
 				currentAccount.setPager(accountDescr.get(accountPagerKey));
 				currentAccount.setSmsAgreement(accountDescr.get(fieldSmsAgreementId));
-		
+				System.out.println("2");
 				if (currentAccount.getCode()!=null) {
 					if (reinit){
 						logger.info("Reinitialisation impossible, compte non activé");
@@ -318,12 +318,12 @@ public class AccountController extends AbstractContextAwareController implements
 				int i=0;
 				while(it.hasNext()){
 					BeanField beanPersoInfo=(BeanField)it.next();
-					if (beanPersoInfo.getId().equals(fieldSmsAgreementId)){
+					if (beanPersoInfo.getId().equals(fieldSmsAgreementId)){//TODO A mettre dans un convertisseur
 						if (beanPersoInfo.getValue().equals(true)){
 							hashBeanPersoInfo.put(attrPersoInfo.get(i), smsAccepted);
 						}
 						else
-							hashBeanPersoInfo.put(attrPersoInfo.get(i), "");
+							hashBeanPersoInfo.put(attrPersoInfo.get(i), null);
 					}
 					else{
 						hashBeanPersoInfo.put(attrPersoInfo.get(i), beanPersoInfo.getValue().toString());
@@ -395,7 +395,7 @@ public class AccountController extends AbstractContextAwareController implements
 					}
 				}
 				else{
-					logger.info("Reinitialisation impossible, compte non activé");
+					logger.info("Changement de mot de passe impossible, compte non activé");
 					this.addErrorMessage(null, "AUTHENTIFICATION.MESSAGE.ACCOUNT.NONACTIVATED");
 				}
 			
@@ -411,6 +411,10 @@ public class AccountController extends AbstractContextAwareController implements
 		}catch (LdapProblemException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
+		
+		}catch (UserPermissionException e) {
+		logger.error(e.getMessage());
+		addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
 		}
 		
 		
@@ -478,16 +482,19 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	
 	public String pushVerifyCode() {
-		
-		currentAccount.setCode(beanCode.getValue().toString());
-		if (this.getDomainService().validateCode(currentAccount.getId(), currentAccount.getCode())){
-			this.addInfoMessage(null, "CODE.MESSAGE.CODESUCCESSFULL");
-			beanCode.setValue("");
-			return "gotoPasswordChange";
-			//verification id dans le hash et suppression si present
+		try{
+			currentAccount.setCode(beanCode.getValue().toString());
+			if (this.getDomainService().validateCode(currentAccount.getId(), currentAccount.getCode())){
+				this.addInfoMessage(null, "CODE.MESSAGE.CODESUCCESSFULL");
+				beanCode.setValue("");
+				return "gotoPasswordChange";
+			}
+			
+		}catch (UserPermissionException e){
+			logger.error(e.getMessage());
+			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
 		}
 		
-		//ajout de l'id dans le hash en incrementant le nombre de tentatives
 		addErrorMessage(null, "CODE.MESSAGE.CODENOTVALIDE");
 		return null;
 

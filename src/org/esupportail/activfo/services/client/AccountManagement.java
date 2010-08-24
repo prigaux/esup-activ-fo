@@ -20,11 +20,11 @@ public interface AccountManagement {
 
 	public void updatePersonalInformations(String id,String code,HashMap<String,String> hashBeanPersoInfo)throws LdapProblemException,UserPermissionException;
 	
-	public boolean validateCode(String id,String code);
+	public boolean validateCode(String id,String code)throws UserPermissionException;
 	
 	public boolean getCode(String id,String canal)throws LdapProblemException;
 		
-	public HashMap<String,String> authentificateUser(String id,String password,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException;
+	public HashMap<String,String> authentificateUser(String id,String password,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException;
 
 	public void changeLogin(String id,String code,String newLogin)throws LdapProblemException,UserPermissionException,KerberosException,LoginAlreadyExistsException;
 	

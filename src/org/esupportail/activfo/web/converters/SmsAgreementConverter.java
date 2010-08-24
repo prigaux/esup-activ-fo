@@ -47,7 +47,7 @@ public class SmsAgreementConverter implements Converter, Serializable {
 			return null;
 		}
 		if (value.equals("true")){
-			return "{lol}";
+			return "{}";
 		}
 		else
 			return "";
