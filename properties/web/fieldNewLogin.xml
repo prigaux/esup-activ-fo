@@ -14,11 +14,8 @@
 
 		<property name="key" value="LOGIN.TEXT.LABEL.NEWLOGIN"/>
 		<property name="value" value=""/>
-		<property name="id" value="newlogin"/>
 		<property name="validator" ref="validatorLogin"/>
-		<property name="fieldType" value=""/>
-		<property name="help" ><null /></property>
-		<property name="converter"> <null /></property>
+		<property name="required" value="true" />
 		
 	</bean>
 

@@ -14,13 +14,9 @@
 		>
 
 		<property name="key" value="CHOICE.CANAL.MAILPERSO.RADIOBUTTON.LABEL"/>
-		<property name="value" value="${account.key.mailperso}"/>
-		<property name="id" value="mailperso"/>
-		<property name="validator"> <null /></property>
-		<property name="fieldType" value=""/>
-		<property name="help"> <null /></property>
-		<property name="converter"> <null /></property>
-		
+		<property name="typeBean" value="${account.key.mailperso}"/>
+		<property name="disabled" value="false"/>
+				
 	</bean>
 	
 	
@@ -31,12 +27,20 @@
 		>
 
 		<property name="key" value="CHOICE.CANAL.PAGER.RADIOBUTTON.LABEL"/>
-		<property name="value" value="${account.key.pager}"/>
-		<property name="id" value="pager"/>
-		<property name="validator"> <null /></property>
-		<property name="fieldType" value=""/>
-		<property name="help"> <null /></property>
-		<property name="converter"> <null /></property>
+		<property name="typeBean" value="${account.key.pager}"/>
+		<property name="disabled" value="false"/>
+		
+	</bean>
+	
+	<bean
+		id="beanGest"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="CHOICE.CANAL.GEST.RADIOBUTTON.LABEL"/>
+		<property name="typeBean" value="${account.key.gest}"/>
+		<property name="disabled" value="false"/>
 		
 	</bean>
 

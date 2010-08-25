@@ -14,11 +14,6 @@
 
 		<property name="key" value="WELCOME.PROCEDURE.ACTIVATION.RADIOBUTTON.LABEL"/>
 		<property name="value" value="${view.procedure.activation}"/>
-		<property name="id" value="activation"/>
-		<property name="validator"> <null /></property>
-		<property name="fieldType" value=""/>
-		<property name="help"> <null /></property>
-		<property name="converter"> <null /></property>
 		
 	</bean>
 	
@@ -30,11 +25,6 @@
 
 		<property name="key" value="WELCOME.PROCEDURE.REINITIALISATION.RADIOBUTTON.LABEL"/>
 		<property name="value" value="${view.procedure.reinitialisation}"/>
-		<property name="id" value="reinitialisation"/>
-		<property name="validator"> <null /></property>
-		<property name="fieldType" value=""/>
-		<property name="help"> <null /></property>
-		<property name="converter"> <null /></property>
 		
 	</bean>
 	
@@ -47,11 +37,6 @@
 
 		<property name="key" value="WELCOME.PROCEDURE.PASSWORDCHANGE.RADIOBUTTON.LABEL"/>
 		<property name="value" value="${view.procedure.passwordchange}"/>
-		<property name="id" value="passwordchange"/>
-		<property name="validator"> <null /></property>
-		<property name="fieldType" value=""/>
-		<property name="help"> <null /></property>
-		<property name="converter"> <null /></property>
 		
 	</bean>
 	
@@ -63,11 +48,6 @@
 
 		<property name="key" value="WELCOME.PROCEDURE.LOGINCHANGE.RADIOBUTTON.LABEL"/>
 		<property name="value" value="${view.procedure.loginchange}"/>
-		<property name="id" value="loginchange"/>
-		<property name="validator"> <null /></property>
-		<property name="fieldType" value=""/>
-		<property name="help"> <null /></property>
-		<property name="converter"> <null /></property>
 		
 	</bean>
 	

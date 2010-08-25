@@ -13,12 +13,9 @@
 		>
 
 		<property name="key" value="PERSOINFO.DISPLAYNAME.TEXT.LABEL"/>
-		<property name="value"> <null /></property>
-		<property name="id" value="displayName"/>
 		<property name="validator" ref="validatorDisplayName"/>
-		<property name="fieldType" ><null /></property>
 		<property name="help" value="PERSOINFO.DISPLAYNAME.TEXT.HELP"/>
-		<property name="converter"> <null /></property>
+		
 		
 	</bean>
 	
@@ -29,12 +26,8 @@
 		>
 
 		<property name="key" value="PERSOINFO.MAILPERSO.TEXT.LABEL"/>
-		<property name="value"> <null /></property>
-		<property name="id" value="mailPerso"/>
 		<property name="validator" ref="validatorEmail"/>
-		<property name="fieldType"><null /></property>
-		<property name="help"> <null /></property>
-		<property name="converter"> <null /></property>
+		<property name="required" value="false" />
 		
 	</bean>
 	
@@ -45,12 +38,8 @@
 		>
 
 		<property name="key" value="PERSOINFO.MOBILE.TEXT.LABEL"/>
-		<property name="value"> <null /></property>
-		<property name="id" value="mobile"/>
 		<property name="validator" ref="validatorMobilePhone"/>
-		<property name="fieldType"><null /></property>
-		<property name="help"><null /></property>
-		<property name="converter"> <null /></property>
+		<property name="required" value="false" />
 		
 	</bean>
 	
@@ -61,11 +50,8 @@
 		>
 
 		<property name="key" value="PERSOINFO.SMSAGREEMENT.TEXT.LABEL"/>
-		<property name="value"> <null /></property>
 		<property name="id" value="${account.key.termsOfUse}"/>
-		<property name="validator"><null /></property>
 		<property name="fieldType" value="selectBooleanCheckbox"/>
-		<property name="help"><null /></property>
 		<property name="converter" ref="smsAgreementConverter"/>
 		
 	</bean>

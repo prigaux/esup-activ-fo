@@ -14,11 +14,10 @@
 
 		<property name="key" value="CODE.TEXT.LABEL.CODE"/>
 		<property name="value" value=""/>
-		<property name="id" value="code"/>
 		<property name="validator" ref="validatorCode"/>
-		<property name="fieldType" value=""/>
 		<property name="help" value="CODE.TEXT.HELP.CODE"/>
-		<property name="converter"> <null /></property>
+		<property name="required" value="true" />
+
 		
 	</bean>
 

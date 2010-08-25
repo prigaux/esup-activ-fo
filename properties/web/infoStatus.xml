@@ -14,11 +14,7 @@
 
 		<property name="key" value="WELCOME.STATUS.STUDENT.RADIOBUTTON.LABEL"/>
 		<property name="value" value="${view.status.student}"/>
-		<property name="id" value="student"/>
-		<property name="validator"> <null /></property>
-		<property name="fieldType" value=""/>
-		<property name="help"> <null /></property>
-		<property name="converter"> <null /></property>
+		
 		
 	</bean>
 	
@@ -30,11 +26,6 @@
 
 		<property name="key" value="WELCOME.STATUS.PERSONNEL.RADIOBUTTON.LABEL"/>
 		<property name="value" value="${view.status.personnel}"/>
-		<property name="id" value="personnel"/>
-		<property name="validator"> <null /></property>
-		<property name="fieldType" value=""/>
-		<property name="help"> <null /></property>
-		<property name="converter"> <null /></property>
 		
 	</bean>
 	
@@ -47,11 +38,6 @@
 
 		<property name="key" value="WELCOME.STATUS.ALUMNI.STUDENT.RADIOBUTTON.LABEL"/>
 		<property name="value" value="${view.status.alumni.student}"/>
-		<property name="id" value="alumnistudent"/>
-		<property name="validator"> <null /></property>
-		<property name="fieldType" value=""/>
-		<property name="help"> <null /></property>
-		<property name="converter"> <null /></property>
 		
 	</bean>
 	

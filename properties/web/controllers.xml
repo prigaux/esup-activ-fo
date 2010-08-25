@@ -85,6 +85,9 @@
 		<property name="accountPagerKey" value="${account.key.pager}"/>
 		<property name="accountDNKey" value="${account.key.displayname}"/>
 		<property name="accountCodeKey" value="${account.key.code}"/>
+		<property name="accountGestKey" value="${account.key.gest}"/>
+		<property name="accountDescrPossibleChannelsKey" value="${account.key.possibleChannels}"/>
+		
 		
 		<property name="fieldSmsAgreementId" value="${account.key.termsOfUse}"/>
 		
@@ -106,6 +109,10 @@
 		<property name="attributesStudentToValidate" value="${attributes.validation.student}"/>
 		<property name="attributesPersonnelToValidate" value="${attributes.validation.personnel}"/>
 		<property name="attributesOldStudentToValidate" value="${attributes.validation.alumni.student}"/>
+		
+		<property name="labelCanalMailPerso" value="CHOICE.CANAL.MAILPERSO.RADIOBUTTON.LABEL"/>
+		<property name="labelCanalGest" value="CHOICE.CANAL.GEST.RADIOBUTTON.LABEL"/>
+		<property name="labelCanalPager" value="CHOICE.CANAL.PAGER.RADIOBUTTON.LABEL"/>
 		
 		<property name="listBeanPersoInfo">
 			<list>
@@ -156,16 +163,6 @@
 				<ref bean="beanOldStudent"/>
 			</list>
 		</property>
-		
-		
-		<property name="listBeanCanal">
-			<list>
-				<ref bean="beanMailPerso"/>
-				<ref bean="beanPager"/>
-			</list>
-		</property>
-		
-		
 		
 		<property name="beanNewPassword" ref="beanNewPassword"/>
 		

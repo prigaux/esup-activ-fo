@@ -14,11 +14,9 @@
 
 		<property name="key" value="IDENTIFICATION.HARPEGENUMBER.TEXT.LABEL"/>
 		<property name="value" value=""/>
-		<property name="id" value="harpegeNumber"/>
 		<property name="validator" ref="validatorHarpegeNumber"/>
-		<property name="fieldType" value=""/>
 		<property name="help" value="IDENTIFICATION.HARPEGENUMBER.TEXT.HELP"/>
-		<property name="converter"> <null /></property>
+		<property name="required" value="true" />
 		
 	</bean>
 	
@@ -30,12 +28,10 @@
 
 		<property name="key" value="IDENTIFICATION.STUDENTLOGIN.TEXT.LABEL"/>
 		<property name="value" value=""/>
-		<property name="id" value="studentlogin"/>
 		<property name="validator" ref="validatorStudentLogin"/>
-		<property name="fieldType" value=""/>
 		<property name="help" value="IDENTIFICATION.STUDENTLOGIN.TEXT.HELP"/>
-		<property name="converter"> <null /></property>
-		
+		<property name="required" value="true" />
+				
 	</bean>
 	
 	
@@ -47,12 +43,9 @@
 
 		<property name="key" value="IDENTIFICATION.BIRTHNAME.TEXT.LABEL"/>
 		<property name="value" value=""/>
-		<property name="id" value="birthName"/>
 		<property name="validator" ref="validatorBirthName"/>
-		<property name="fieldType" value=""/>
-		<property name="help"> <null /> </property>
-		<property name="converter"> <null /></property>
-		
+		<property name="required" value="true" />
+				
 	</bean>
 	
 	
@@ -65,11 +58,9 @@
 		<property name="key" value="IDENTIFICATION.STUDENTNUMBER.TEXT.LABEL"/>
 		<property name="value" value=""/>
 		<property name="id" value="studentnumber"/>
-		<property name="validator" ><null /></property>
-		<property name="fieldType" value=""/>
 		<property name="help" value="IDENTIFICATION.STUDENTNUMBER.TEXT.HELP"/>
-		<property name="converter"> <null /></property>
-		
+		<property name="required" value="true" />
+				
 	</bean>
 	
 	
@@ -83,11 +74,9 @@
 
 		<property name="key" value="IDENTIFICATION.BIRTHDATE.TEXT.LABEL"/>
 		<property name="value" value=""/>
-		<property name="id" value="birthDate"/>
 		<property name="validator" ref="validatorBirthDate"/>
-		<property name="fieldType" value=""/>
-		
 		<property name="converter" ref="ldapDateConverter"/>
+		<property name="required" value="true" />
 		
 	</bean>
 	
