@@ -29,6 +29,7 @@ public interface BeanField<T> {
 	public void setValidator(Validator validator);
 	
 	public Converter getConverter();
+	
 	public void setConverter(Converter converter);
 	
 	public String getId();
@@ -39,6 +40,14 @@ public interface BeanField<T> {
 	
 	public void setValueAcceptation(String valueAcceptation);
 	
+	public boolean isRequired();
 	
+	public void setRequired(boolean required);
+	
+	public String getTypeBean();
+	public void setTypeBean(String typeBean);
+	
+	public boolean isDisabled();
+	public void setDisabled(boolean disabled);
 	
 }

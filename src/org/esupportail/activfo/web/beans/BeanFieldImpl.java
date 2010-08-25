@@ -15,12 +15,31 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	private Validator validator;
 	private String id;
 	private String valueAcceptation;
+	private boolean required;
+	private String typeBean;
+	private boolean disabled;
 	
 	
 	
 	
-	
-	
+	public boolean isDisabled() {
+		return disabled;
+	}
+	public void setDisabled(boolean disabled) {
+		this.disabled = disabled;
+	}
+	public String getTypeBean() {
+		return typeBean;
+	}
+	public void setTypeBean(String typeBean) {
+		this.typeBean = typeBean;
+	}
+	public boolean isRequired() {
+		return required;
+	}
+	public void setRequired(boolean required) {
+		this.required = required;
+	}
 	public String getValueAcceptation() {
 		return valueAcceptation;
 	}

@@ -5,6 +5,7 @@
 package org.esupportail.activfo.web.controllers;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -18,6 +19,7 @@ import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.activfo.exceptions.AuthentificationException;
 import org.esupportail.activfo.web.beans.BeanField;
+import org.esupportail.activfo.web.beans.BeanFieldImpl;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 
@@ -47,7 +49,13 @@ public class AccountController extends AbstractContextAwareController implements
 	private String accountPagerKey;
 	private String accountDNKey;
 	private String accountCodeKey;
+	private String accountGestKey;
+	private String accountDescrPossibleChannelsKey;
 	
+	
+	private String labelCanalMailPerso;
+	private String labelCanalPager;
+	private String labelCanalGest;
 	
 	private String fieldSmsAgreementId;
 	
@@ -216,18 +224,17 @@ public class AccountController extends AbstractContextAwareController implements
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			
 			accountDescr=this.getDomainService().validateAccount(hashInfToValidate,attrPersoInfo);
-
+			
 			if (accountDescr!=null) {
 				
 				logger.info("Identification valide");
-				System.out.println("1");
 				currentAccount.setId(accountDescr.get(accountIdKey));
 				currentAccount.setMail(accountDescr.get(accountMailKey));
 				currentAccount.setCode(accountDescr.get(accountCodeKey));
 				currentAccount.setEmailPerso(accountDescr.get(accountMailPersoKey));
 				currentAccount.setPager(accountDescr.get(accountPagerKey));
 				currentAccount.setSmsAgreement(accountDescr.get(fieldSmsAgreementId));
-				System.out.println("2");
+				
 				if (currentAccount.getCode()!=null) {
 					if (reinit){
 						logger.info("Reinitialisation impossible, compte non activé");
@@ -241,19 +248,26 @@ public class AccountController extends AbstractContextAwareController implements
 					}
 				}
 				else {
+					
 					if (reinit){
 						logger.info("Construction de la liste des informations personnelles du compte");
 						this.buildListPersoInfo(attrPersoInfo);
-									
-						if (currentAccount.getPager()!=null &&  currentAccount.getEmailPerso()!=null && currentAccount.getSmsAgreement().equals(smsAccepted)){
+
+						List<String> listPossibleChannels = Arrays.asList(accountDescr.get(accountDescrPossibleChannelsKey).split( "," ));
+						 
+						
+						System.out.println(listPossibleChannels);
+						
+						if (listPossibleChannels.size()>1){
+							buildListBeanCanal(listPossibleChannels);
 							this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 							return "gotoChoice"; 	
 						}
 						
-						else if (currentAccount.getPager()==null &&  currentAccount.getEmailPerso()!=null){
+						else if (listPossibleChannels.size()==1){
 							
-							currentAccount.setOneChoiceCanal(accountMailPersoKey);
-							if (this.getDomainService().getCode(currentAccount.getId(),accountMailPersoKey)){
+							currentAccount.setOneChoiceCanal(listPossibleChannels.get(0));
+							if (this.getDomainService().getCode(currentAccount.getId(),listPossibleChannels.get(0))){
 								addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 								logger.info("Code envoyé");
 								return "gotoPushCode";
@@ -264,26 +278,13 @@ public class AccountController extends AbstractContextAwareController implements
 							}
 						}
 						
-						else if (currentAccount.getPager()!=null && currentAccount.getSmsAgreement().equals(smsAccepted)&&  currentAccount.getEmailPerso()==null){
-							
-							currentAccount.setOneChoiceCanal(accountPagerKey);
-							
-							if (this.getDomainService().getCode(currentAccount.getId(), accountPagerKey)){
-								this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
-								logger.info("Erreur lors de l'envoi du code");
-								return "gotoPushCode";
-							}
-							else{
-								logger.info("Erreur lors de l'envoi du code");
-								addErrorMessage(null, "CODE.ERROR.SENDING");
-							}
-						}
-						
+												
 						else{//si les deux sont null
 							//Vous n'avez encore jamais renseigné un email perso ou votre numero de portable. Il est impossbile donc de vous envoyer un code de reinitialisation de mot de passe
 							addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 							addErrorMessage(null, "IDENTIFICATION.MESSAGE.NONECANAL");
 						}
+				
 					}
 					else if(activ){
 						logger.info("Compte déja activé");
@@ -312,13 +313,12 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			try{
 				logger.info("Mise à jour des informations personnelles");
-				
 				HashMap<String,String> hashBeanPersoInfo=new HashMap<String,String>();
 				Iterator it=listBeanPersoInfo.iterator();
 				int i=0;
 				while(it.hasNext()){
 					BeanField beanPersoInfo=(BeanField)it.next();
-					if (beanPersoInfo.getId().equals(fieldSmsAgreementId)){//TODO A mettre dans un convertisseur
+					if (beanPersoInfo.getId()!=null){//TODO A mettre dans un convertisseur
 						if (beanPersoInfo.getValue().equals(true)){
 							hashBeanPersoInfo.put(attrPersoInfo.get(i), smsAccepted);
 						}
@@ -326,30 +326,35 @@ public class AccountController extends AbstractContextAwareController implements
 							hashBeanPersoInfo.put(attrPersoInfo.get(i), null);
 					}
 					else{
-						hashBeanPersoInfo.put(attrPersoInfo.get(i), beanPersoInfo.getValue().toString());
+						if (beanPersoInfo.getValue()!=null){
+							hashBeanPersoInfo.put(attrPersoInfo.get(i), beanPersoInfo.getValue().toString());
+						}
+						else{
+							hashBeanPersoInfo.put(attrPersoInfo.get(i), null);
+						}
+						
 					}
 						
 					i++;
 				}
 				
-								
 				this.getDomainService().updatePersonalInformations(currentAccount.getId(),currentAccount.getCode(),hashBeanPersoInfo);
+				
 				logger.info("Informations personnelles envoyées au BO pour mise à jour: "+hashBeanPersoInfo.toString());
 					
 				this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
 					
 				if (activ){
-					if (isInterfLogin())
-						return "gotoLogin";
-					else
-						return "gotoCharterAgreement";
+					return "gotoCharterAgreement";
 				}
-				else{
-					if (isInterfLogin())
-						return "gotoLogin";
-					else
-						return "gotoAccountEnabled";
+				else if(loginChange){
+					return "gotoLoginChange";
 				}
+				else 
+					return "gotoPasswordChange";
+
+			
+				
 			}
 			catch (LdapProblemException e) {
 				logger.error(e.getMessage());
@@ -371,6 +376,7 @@ public class AccountController extends AbstractContextAwareController implements
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			
 			accountDescr=this.getDomainService().authentificateUser(currentAccount.getId(), currentAccount.getOldPassword(),attrPersoInfo);
+			
 			if (accountDescr!=null){
 				logger.info("Authentification réusssie");
 				
@@ -387,12 +393,8 @@ public class AccountController extends AbstractContextAwareController implements
 					
 					this.addInfoMessage(null, "AUTHENTIFICATION.MESSAGE.VALID");
 					
-					if (passwChange){
-						return "gotoPasswordChange";
-					}
-					else if (loginChange){
-						return "gotoLoginChange";
-					}
+					return "gotoPersonalInfo";
+					
 				}
 				else{
 					logger.info("Changement de mot de passe impossible, compte non activé");
@@ -428,13 +430,7 @@ public class AccountController extends AbstractContextAwareController implements
 			beanNewLogin.setValue("");
 			logger.info("Changement de login réussi");
 			this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
-				
-			if (loginChange)
-				return "gotoPersonalInfo";
-			else if (activ) 
-				return "gotoCharter";
-			else
-				return "gotoAccountEnabled";
+			return "gotoAccountEnabled";
 			
 		}
 
@@ -527,10 +523,7 @@ public class AccountController extends AbstractContextAwareController implements
 			logger.info("Changement de mot de passe réussi");
 			this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
 			beanNewPassword.setValue("");
-			if (!activ)
-				return "gotoPersonalInfo";
-			else
-				return "gotoAccountEnabled";
+			return "gotoAccountEnabled";
 
 		}
 
@@ -912,5 +905,73 @@ public class AccountController extends AbstractContextAwareController implements
 		this.interfLogin = interfLogin;
 	}
 
+	public String getAccountDescrPossibleChannelsKey() {
+		return accountDescrPossibleChannelsKey;
+	}
+
+	public void setAccountDescrPossibleChannelsKey(
+			String accountDescrPossibleChannelsKey) {
+		this.accountDescrPossibleChannelsKey = accountDescrPossibleChannelsKey;
+	}
+
+	public String getAccountGestKey() {
+		return accountGestKey;
+	}
+
+	public void setAccountGestKey(String accountGestKey) {
+		this.accountGestKey = accountGestKey;
+	}
+	
+	private void buildListBeanCanal(List<String>listPossibleChannels){
+		listBeanCanal=new ArrayList<BeanField>();
+		for(int i=0;i<=listPossibleChannels.size()-1;i++){
+			if (listPossibleChannels.get(i).equalsIgnoreCase(accountMailPersoKey)){
+				BeanFieldImpl bean=new BeanFieldImpl();
+				bean.setValue(accountMailPersoKey);
+				bean.setKey(labelCanalMailPerso);
+				listBeanCanal.add(bean);
+			}
+			
+			if (listPossibleChannels.get(i).equalsIgnoreCase(accountGestKey)){
+				BeanFieldImpl bean=new BeanFieldImpl();
+				bean.setValue(accountGestKey);
+				bean.setKey(labelCanalGest);
+				listBeanCanal.add(bean);
+			}
+		
+			if (listPossibleChannels.get(i).equalsIgnoreCase(accountPagerKey)){
+				BeanFieldImpl bean=new BeanFieldImpl();
+				bean.setValue(accountPagerKey);
+				bean.setKey(labelCanalPager);
+				listBeanCanal.add(bean);
+			}
+			
+		}
+
+	}
+
+	public String getLabelCanalMailPerso() {
+		return labelCanalMailPerso;
+	}
+
+	public void setLabelCanalMailPerso(String labelCanalMailPerso) {
+		this.labelCanalMailPerso = labelCanalMailPerso;
+	}
+
+	public String getLabelCanalPager() {
+		return labelCanalPager;
+	}
+
+	public void setLabelCanalPager(String labelCanalPager) {
+		this.labelCanalPager = labelCanalPager;
+	}
+
+	public String getLabelCanalGest() {
+		return labelCanalGest;
+	}
+
+	public void setLabelCanalGest(String labelCanalGest) {
+		this.labelCanalGest = labelCanalGest;
+	}
 	
 }
