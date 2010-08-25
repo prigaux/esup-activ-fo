@@ -166,7 +166,7 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 		<e:panelGrid columns="4" columnClasses="col1,col2,col3" >
   			<e:outputLabel for="password" value="#{msgs[beanNewPassword.key]}"/>
 	  		<e:inputSecret id="password" value="#{beanNewPassword.value}"
-	     		required="true" onkeyup="updatestrength( this.value, '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYSTRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.STRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.MEDIUM']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.WEAK']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}');" validator="#{beanNewPassword.validator.validate}" >
+	     		required="#{beanNewPassword.required}" onkeyup="updatestrength( this.value, '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYSTRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.STRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.MEDIUM']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.WEAK']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}');" validator="#{beanNewPassword.validator.validate}" >
 	  		</e:inputSecret>
 	  		<h:outputLink id="rolloverImage" value="#" rendered="#{beanNewPassword.help!=null}">
 				<h:graphicImage id="w3c" url="../media/help.jpg"  style="border: 0;"/>
@@ -202,6 +202,7 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 		<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}"
 			action="#{exceptionController.restart}" />
 	</h:form>
+	
 	
 <% /* @include file="_debug.jsp" */ %>
 </e:page>

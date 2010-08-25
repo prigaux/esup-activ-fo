@@ -16,7 +16,7 @@
 		
 		<e:panelGrid columns="3" columnClasses="col1,col2,col3" >
 			<e:outputLabel for="newlogin" value="#{msgs[beanNewLogin.key]}" />
-			<e:inputText id="login" value="#{beanNewLogin.value}" required="true" validator="#{beanNewLogin.validator.validate}"> </e:inputText>
+			<e:inputText id="login" value="#{beanNewLogin.value}" required="#{beanNewLogin.required}" validator="#{beanNewLogin.validator.validate}"> </e:inputText>
 			<h:outputLink id="rolloverImage" value="#" rendered="#{beanNewLogin.help!=null}">
 				<h:graphicImage id="w3c" url="../media/help.jpg"  style="border: 0;"/>
 				<h:outputText id="help" value="#{msgs[beanNewLogin.help]}"/>

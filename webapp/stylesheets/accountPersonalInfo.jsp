@@ -29,9 +29,9 @@
 					<e:panelGrid columns="3" columnClasses="col1,col2,col3" >
 						
 						<e:outputLabel value="#{msgs[entry.key]}" />
-						<e:inputText value="#{entry.value}"  required="true" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null}"/>
+						<e:inputText value="#{entry.value}"  required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null}"/>
 						
-						<h:selectBooleanCheckbox  value="#{entry.value}"  rendered="#{entry.fieldType=='selectBooleanCheckbox'}" converter="#{entry.converter}"/>
+						<e:selectBooleanCheckbox2  value="#{entry.value}"  rendered="#{entry.fieldType=='selectBooleanCheckbox'}" converter="#{entry.converter}"/>
 						<h:outputLink id="rolloverImage" value="#" onclick="drawAlert('#{entry.help}')" rendered="#{entry.help!=null}">
 							<h:graphicImage id="w3c" url="../media/help.jpg"  style="border: 0;"/>
 							<h:outputText id="help" value="#{msgs[entry.help]}"/>

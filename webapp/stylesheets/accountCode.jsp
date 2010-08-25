@@ -14,14 +14,14 @@
 		  <f:param value="#{accountController.currentAccount.pager}" />
 	</e:paragraph>
 	
-	
+	<e:paragraph escape="false" value="#{msgs['CODE.TEXT.GEST.TOP']}" rendered="#{accountController.currentAccount.oneChoiceCanal==accountController.accountGestKey}">
+		  
+	</e:paragraph>
 	
 	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
 		<e:panelGrid columns="3">
 			<e:outputLabel for="code" value="#{msgs[beanCode.key]}" />
-			<e:inputText id="code"
-				value="#{beanCode.value}"
-				required="true" validator="#{beanCode.validator.validate}">
+			<e:inputText id="code" value="#{beanCode.value}" required="#{beanCode.required}" validator="#{beanCode.validator.validate}">
 			</e:inputText>
 			<h:outputLink id="rolloverImage" value="#" rendered="#{beanCode.help!=null}">
 				<h:graphicImage id="w3c" url="../media/help.jpg"  style="border: 0;"/>
