@@ -23,15 +23,12 @@
 	
 		
 	<t:dataList value="#{accountController.listBeanPersoInfo}" var="entry" style="myStyle"> 
-		
-		
-			
-					<e:panelGrid columns="3" columnClasses="col1,col2,col3" >
+							<e:panelGrid columns="3" columnClasses="col1,col2,col3" >
 						
 						<e:outputLabel value="#{msgs[entry.key]}" />
 						<e:inputText value="#{entry.value}"  required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null}"/>
 						
-						<e:selectBooleanCheckbox2  value="#{entry.value}"  rendered="#{entry.fieldType=='selectBooleanCheckbox'}" converter="#{entry.converter}"/>
+						<d:selectBooleanCheckbox  value="#{entry.value}"  rendered="#{entry.fieldType=='selectBooleanCheckbox'}" converter="#{entry.converter}"/>
 						<h:outputLink id="rolloverImage" value="#" onclick="drawAlert('#{entry.help}')" rendered="#{entry.help!=null}">
 							<h:graphicImage id="w3c" url="../media/help.jpg"  style="border: 0;"/>
 							<h:outputText id="help" value="#{msgs[entry.help]}"/>
