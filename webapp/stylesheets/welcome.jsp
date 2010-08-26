@@ -4,13 +4,18 @@
 <script type="text/javascript">
  $(document).ready(function(){
    $("#[id='welcomeForm:statusDiv']").hide();
+   $(":radio").removeAttr("checked");
    $(":radio").click(function(){
      if(this.value=="activation" || this.value=="reinitialisation"){
-      $("#[id='welcomeForm:statusDiv']").slideDown();
+       if(this.name!="welcomeForm:statusRadio")
+         $("#[name='welcomeForm:statusRadio']").removeAttr("checked");
+       $("#[id='welcomeForm:statusDiv']").slideDown();
     }
      else 
-     if(this.value=="passwordchange" || this.value=="loginchange"){
-          $("#[id='welcomeForm:statusDiv']").slideUp();      
+     if(this.value=="passwordchange" || this.value=="loginchange"){           
+           $("#[id='welcomeForm:statusDiv']").slideUp();
+           $("#[name='welcomeForm:statusRadio']").first().attr("checked","checked");
+                         
           }
    });
  });
@@ -36,7 +41,7 @@
 	
 	<t:div id="statusDiv">
 		<e:paragraph escape="false" value="#{msgs['WELCOME.STATUS.TEXT.TOP']}" />		
-			<t:selectOneRadio required="true" value="#{accountController.currentAccount.oneRadioValue}">
+			<t:selectOneRadio id="statusRadio" required="true" value="#{accountController.currentAccount.oneRadioValue}">
 				<t:selectItems value="#{accountController.listBeanStatus}" var="entry" itemLabel="#{msgs[entry.key]}" itemValue="#{entry.value}"></t:selectItems>
 			</t:selectOneRadio>	
 		</t:div>
