@@ -6,9 +6,14 @@ package org.esupportail.activfo.web.converters;
 import java.io.Serializable;
 
 import javax.faces.component.UIComponent;
+import javax.faces.component.ValueHolder;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 
+
+import org.esupportail.activfo.domain.beans.Account;
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.springframework.util.StringUtils;
 
 /**
@@ -20,14 +25,15 @@ public class SmsAgreementConverter implements Converter, Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	
+	private Account currentAccount;
+	private final Logger logger = new LoggerImpl(getClass());
 
 	/**
 	 * Bean constructor.
 	 */
 	public SmsAgreementConverter() {
 		super();
+		
 	}
 
 	/**
@@ -40,19 +46,21 @@ public class SmsAgreementConverter implements Converter, Serializable {
 			@SuppressWarnings("unused") final FacesContext context, 
 			@SuppressWarnings("unused") final UIComponent component, 
 			final String value) {
-		
-		System.out.println("koukkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk888888888888");
-		
-		if (!StringUtils.hasText(value)) {
-			return null;
-		}
+		logger.debug("Convertisseur méthode getAsObject, valeur initiale"+value);
+		//return Boolean.valueOf("true");
 		if (value.equals("true")){
-			return "{}";
+			currentAccount.setSmsAgreement("true");
+			System.out.println("valeur true");
+			
+			return "true";
 		}
-		else
-			return "";
-		
+		else{
+			currentAccount.setSmsAgreement("false");
+			return "false";
+		}
 	}
+	
+	
 
 	
 	//Affichage standard
@@ -64,26 +72,37 @@ public class SmsAgreementConverter implements Converter, Serializable {
 			@SuppressWarnings("unused") final FacesContext context, 
 			@SuppressWarnings("unused") final UIComponent component, 
 			final Object value) {
-		
-		
-		
+		logger.debug("Convertisseur méthode getAsString, valeur initiale"+value);
+				
 		String val=(String)value;
-		System.out.println("koukkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk"+val);		
-		if (value == null || !StringUtils.hasText(value.toString())) {
+		
+		/*if (value == null || !StringUtils.hasText(value.toString())) {
 			return "false";
-		}
+		}*/
 		
+		return "true";
 		
-		
-		if (val.equals("{lol}")){
-			System.out.println("koukkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk");
-			return "true";
-		}
-		else
-			System.out.println("koukkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk222");
-			return "false";
-		
+//		if ("{SMSU}CG".equals(currentAccount.getSmsAgreement())){
+//				return "true";
+//		
+//		}else{
+//			return "false";
+//			
+//		}
+	
 	}
+
+	public Account getCurrentAccount() {
+		return currentAccount;
+	}
+
+	public void setCurrentAccount(Account currentAccount) {
+		this.currentAccount = currentAccount;
+	}
+	
+	
+	
+	
 	
 	
 	
