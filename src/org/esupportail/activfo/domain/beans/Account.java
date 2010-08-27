@@ -8,9 +8,6 @@ package org.esupportail.activfo.domain.beans;
 
 import java.util.Date;
 
-
-
-
 import org.esupportail.commons.utils.strings.StringUtils;
 import org.springframework.beans.factory.InitializingBean;
 
