@@ -3,13 +3,11 @@ package org.esupportail.activfo.web.validators;
 
 import java.text.Collator;
 
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
 import org.esupportail.activfo.domain.beans.Account;
-
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
 
 
@@ -47,8 +45,7 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	
 	public boolean compareInsensitive(String str1, String str2) {
 
-//		Logger.debug("Comparing : " + str1 + " and " + str2);
-
+		if (str2==null) return false;
 		String strTmp1 = str1.replaceAll("[-|']+", " ");
 		String strTmp2 = str2.replaceAll("[-|']+", " ");
 		Collator collator = Collator.getInstance();
