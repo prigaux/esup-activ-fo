@@ -4,9 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.esupportail.activfo.exceptions.AuthentificationException;
-import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
 import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
+import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 
 
