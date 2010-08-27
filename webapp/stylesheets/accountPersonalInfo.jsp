@@ -1,12 +1,12 @@
 <%@include file="_include.jsp"%>
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
-	
+<!--	
 	<t:documentHead>
 		<meta http-equiv="Expires" content="0">
 		<meta http-equiv="cache-control" content="no-cache,no-store">
 		<meta http-equiv="pragma" content="no-cache">
 	</t:documentHead>
-	
+-->	
 	<%@include file="_navigation.jsp"%>
 	
 	<e:section value="#{msgs['PERSOINFO.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
@@ -27,7 +27,7 @@
 						
 						<e:outputLabel value="#{msgs[entry.key]}" />
 						<e:inputText value="#{entry.value}"  required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null}"/>
-						
+
 						<d:selectBooleanCheckbox  value="#{entry.value}"  rendered="#{entry.fieldType=='selectBooleanCheckbox'}" converter="#{entry.converter}"/>
 						<h:outputLink id="rolloverImage" value="#" onclick="drawAlert('#{entry.help}')" rendered="#{entry.help!=null}">
 							<h:graphicImage id="w3c" url="../media/help.jpg"  style="border: 0;"/>
