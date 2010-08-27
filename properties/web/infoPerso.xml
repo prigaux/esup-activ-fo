@@ -15,6 +15,7 @@
 		<property name="key" value="PERSOINFO.DISPLAYNAME.TEXT.LABEL"/>
 		<property name="validator" ref="validatorDisplayName"/>
 		<property name="help" value="PERSOINFO.DISPLAYNAME.TEXT.HELP"/>
+		<property name="required" value="true" />
 		
 		
 	</bean>
@@ -50,7 +51,6 @@
 		>
 
 		<property name="key" value="PERSOINFO.SMSAGREEMENT.TEXT.LABEL"/>
-		<property name="id" value="${account.key.termsOfUse}"/>
 		<property name="fieldType" value="selectBooleanCheckbox"/>
 		<property name="converter" ref="smsAgreementConverter"/>
 		

@@ -43,10 +43,13 @@
 	<bean 
 		id="smsAgreementConverter"
 		class="org.esupportail.activfo.web.converters.SmsAgreementConverter"
+		scope="session"
 		>
     	<description>
 			A converter for....
     	</description>
+   	<property name="currentAccount" ref="account"/>
+    	
     	
     </bean>
 	
