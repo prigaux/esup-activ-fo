@@ -48,8 +48,9 @@
     	<description>
 			A converter for....
     	</description>
-   	<property name="currentAccount" ref="account"/>
-    	
+   	
+   		<property name="currentAccount" ref="account"/>
+    	<property name="smsAccepted" value="${sms.CG}"/>
     	
     </bean>
 	
