@@ -27,6 +27,9 @@ public class SmsAgreementConverter implements Converter, Serializable {
 	private static final long serialVersionUID = 1L;
 	private Account currentAccount;
 	private final Logger logger = new LoggerImpl(getClass());
+	private String smsAccepted;
+
+	
 
 	/**
 	 * Bean constructor.
@@ -46,21 +49,17 @@ public class SmsAgreementConverter implements Converter, Serializable {
 			@SuppressWarnings("unused") final FacesContext context, 
 			@SuppressWarnings("unused") final UIComponent component, 
 			final String value) {
-		logger.debug("Convertisseur méthode getAsObject, valeur initiale"+value);
-		//return Boolean.valueOf("true");
+		
+		
 		if (value.equals("true")){
-			currentAccount.setSmsAgreement("true");
-			System.out.println("valeur true");
-			
-			return "true";
+			currentAccount.setSmsAgreement(smsAccepted);
+			return smsAccepted;
 		}
 		else{
-			currentAccount.setSmsAgreement("false");
-			return "false";
+			currentAccount.setSmsAgreement(null);
+			return null;
 		}
 	}
-	
-	
 
 	
 	//Affichage standard
@@ -72,23 +71,14 @@ public class SmsAgreementConverter implements Converter, Serializable {
 			@SuppressWarnings("unused") final FacesContext context, 
 			@SuppressWarnings("unused") final UIComponent component, 
 			final Object value) {
-		logger.debug("Convertisseur méthode getAsString, valeur initiale"+value);
-				
+						
 		String val=(String)value;
 		
-		/*if (value == null || !StringUtils.hasText(value.toString())) {
+		if (smsAccepted.equals(currentAccount.getSmsAgreement()))
+				return "true";
+		
+		else
 			return "false";
-		}*/
-		
-		return "true";
-		
-//		if ("{SMSU}CG".equals(currentAccount.getSmsAgreement())){
-//				return "true";
-//		
-//		}else{
-//			return "false";
-//			
-//		}
 	
 	}
 
@@ -98,6 +88,14 @@ public class SmsAgreementConverter implements Converter, Serializable {
 
 	public void setCurrentAccount(Account currentAccount) {
 		this.currentAccount = currentAccount;
+	}
+
+	public String getSmsAccepted() {
+		return smsAccepted;
+	}
+
+	public void setSmsAccepted(String smsAccepted) {
+		this.smsAccepted = smsAccepted;
 	}
 	
 	
