@@ -2,13 +2,14 @@
 
 <script type="text/javascript" src="../media/jquery.js"></script>
 <script type="text/javascript">
- $(document).ready(function(){
-   $("#[id='welcomeForm:statusDiv']").hide();
-   $(":radio").removeAttr("checked");
+ $(document).ready(function(){  
+   if($("#[value='activation']").attr("checked") ||
+      $("#[value='reinitialisation']").attr("checked"))
+   		$("#[id='welcomeForm:statusDiv']").show();
+   else $("#[id='welcomeForm:statusDiv']").hide();		
+   
    $(":radio").click(function(){
-     if(this.value=="activation" || this.value=="reinitialisation"){
-       if(this.name!="welcomeForm:statusRadio")
-         $("#[name='welcomeForm:statusRadio']").removeAttr("checked");
+     if(this.value=="activation" || this.value=="reinitialisation"){       
        $("#[id='welcomeForm:statusDiv']").slideDown();
     }
      else 
