@@ -4,12 +4,10 @@
  */
 package org.esupportail.activfo.web.controllers; 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.commons.exceptions.UserNotFoundException;
-import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.web.beans.Paginator;
 import org.esupportail.commons.web.controllers.LdapSearchCaller;
 
