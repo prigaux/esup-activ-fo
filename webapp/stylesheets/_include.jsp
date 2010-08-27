@@ -4,7 +4,7 @@
 <%@ taglib uri="http://myfaces.apache.org/tomahawk" prefix="t" %>
 <%@ taglib uri="http://commons.esup-portail.org" prefix="e"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ taglib uri="http://activfo.esup-portail.org" prefix="d"%>
 
 
 
