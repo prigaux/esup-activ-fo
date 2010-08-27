@@ -11,13 +11,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-
 import org.esupportail.activfo.domain.beans.Account;
+import org.esupportail.activfo.exceptions.AuthentificationException;
 import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
-import org.esupportail.activfo.exceptions.AuthentificationException;
 import org.esupportail.activfo.web.beans.BeanField;
 import org.esupportail.activfo.web.beans.BeanFieldImpl;
 import org.esupportail.commons.services.logging.Logger;
@@ -234,6 +233,7 @@ public class AccountController extends AbstractContextAwareController implements
 				currentAccount.setEmailPerso(accountDescr.get(accountMailPersoKey));
 				currentAccount.setPager(accountDescr.get(accountPagerKey));
 				currentAccount.setSmsAgreement(accountDescr.get(fieldSmsAgreementId));
+				currentAccount.setDisplayName(accountDescr.get(accountDNKey));
 				
 				if (currentAccount.getCode()!=null) {
 					if (reinit){
@@ -318,25 +318,16 @@ public class AccountController extends AbstractContextAwareController implements
 				int i=0;
 				while(it.hasNext()){
 					BeanField beanPersoInfo=(BeanField)it.next();
-					if (beanPersoInfo.getId()!=null){//TODO A mettre dans un convertisseur
-						if (beanPersoInfo.getValue().equals(true)){
-							hashBeanPersoInfo.put(attrPersoInfo.get(i), smsAccepted);
-						}
-						else
-							hashBeanPersoInfo.put(attrPersoInfo.get(i), null);
+					if (beanPersoInfo.getValue()!=null){
+						hashBeanPersoInfo.put(attrPersoInfo.get(i), beanPersoInfo.getValue().toString());
 					}
 					else{
-						if (beanPersoInfo.getValue()!=null){
-							hashBeanPersoInfo.put(attrPersoInfo.get(i), beanPersoInfo.getValue().toString());
-						}
-						else{
-							hashBeanPersoInfo.put(attrPersoInfo.get(i), null);
-						}
-						
+						hashBeanPersoInfo.put(attrPersoInfo.get(i), null);
 					}
-						
 					i++;
 				}
+				
+				System.out.println("HASH:"+hashBeanPersoInfo);
 				
 				this.getDomainService().updatePersonalInformations(currentAccount.getId(),currentAccount.getCode(),hashBeanPersoInfo);
 				
@@ -386,6 +377,8 @@ public class AccountController extends AbstractContextAwareController implements
 				currentAccount.setEmailPerso(accountDescr.get(accountMailPersoKey));
 				currentAccount.setPager(accountDescr.get(accountPagerKey));
 				currentAccount.setSmsAgreement(accountDescr.get(fieldSmsAgreementId));
+				currentAccount.setDisplayName(accountDescr.get(accountDNKey));
+				
 				
 				if (currentAccount.getCode()!=null) {
 					logger.info("Construction de la liste des informations personnelles du compte");
@@ -483,7 +476,7 @@ public class AccountController extends AbstractContextAwareController implements
 			if (this.getDomainService().validateCode(currentAccount.getId(), currentAccount.getCode())){
 				this.addInfoMessage(null, "CODE.MESSAGE.CODESUCCESSFULL");
 				beanCode.setValue("");
-				return "gotoPasswordChange";
+				return "gotoPersonalInfo";
 			}
 			
 		}catch (UserPermissionException e){
@@ -544,20 +537,16 @@ public class AccountController extends AbstractContextAwareController implements
 	}
 	
 	private void buildListPersoInfo(List<String>attrPersoInfo){
-		for(int i=0;i<attrPersoInfo.size();i++){
-			if (attrPersoInfo.get(i).equals(accountDNKey)){
-				currentAccount.setDisplayName(accountDescr.get(attrPersoInfo.get(i)));
-			}
-			listBeanPersoInfo.get(i).setValue(accountDescr.get(attrPersoInfo.get(i)));
-			if (attrPersoInfo.get(i).equals(fieldSmsAgreementId)){
-				if (accountDescr.get(attrPersoInfo.get(i)).equals(smsAccepted)){
-					listBeanPersoInfo.get(i).setValue(true);
-				}
-				else{
+			for(int i=0;i<attrPersoInfo.size();i++)
+				
+				if ("selectBooleanCheckbox".equals(listBeanPersoInfo.get(i).getFieldType())){
 					listBeanPersoInfo.get(i).setValue(false);
-				}
-			}
-		}
+					logger.info("checkbox"+listBeanPersoInfo.get(i).getFieldType());
+				}	
+				
+				else listBeanPersoInfo.get(i).setValue(accountDescr.get(attrPersoInfo.get(i)));
+				
+			
 	}
 
 	public Account getCurrentAccount() {
