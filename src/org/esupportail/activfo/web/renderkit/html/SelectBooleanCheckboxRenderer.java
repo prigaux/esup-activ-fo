@@ -19,14 +19,10 @@ public class SelectBooleanCheckboxRenderer extends HtmlCheckboxRenderer {
 	
 	public Object getConvertedValue(FacesContext context, UIComponent component, Object submittedValue) throws ConverterException { 
 		
-		
 		Converter converter= ((ValueHolder) component).getConverter(); 
-		
-		logger.debug("AAAAAAAAAAAAAAAAaa"+submittedValue.toString());
-		
 		return converter.getAsObject(context, component, (String)submittedValue.toString()); 
 		
-		//return o;
+
 		
 	}
 	
@@ -34,17 +30,13 @@ public class SelectBooleanCheckboxRenderer extends HtmlCheckboxRenderer {
 	protected void renderCheckbox(FacesContext context, UIComponent component,String value, String label,boolean disabled,boolean checked,boolean renderId){
 		
 		Converter converter= ((ValueHolder) component).getConverter(); 
+		
 		if (converter!=null){
-		value=converter.getAsString(context, component, value);
-		logger.debug("valeur initiale"+value);
-		logger.debug("valeur recupérée par getAsString"+value);
-		if (value.equals("false")){
-			checked=false;
+			value=converter.getAsString(context, component, value);
+			
+			if (value.equals("false")) checked=false;
+			else checked=true;
 		}
-		else checked=true;
-		}
-		
-		
 		
 		
 		try {
@@ -53,9 +45,9 @@ public class SelectBooleanCheckboxRenderer extends HtmlCheckboxRenderer {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
 	}
+	
+	
 	
 	
 	
