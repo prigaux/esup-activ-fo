@@ -30,9 +30,9 @@
     numbers that normalizes 
     the input to a standard format
   </description>
-  <converter-id>booleanConverter</converter-id>
+  <converter-id>smsAgreementConverter</converter-id>
   <converter-class>
-    javax.faces.convert.BooleanConverter
+    org.esupportail.activfo.web.converters.SmsAgreementConverter
   </converter-class>
 </converter> 
 
