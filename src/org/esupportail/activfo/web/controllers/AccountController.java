@@ -15,6 +15,7 @@ import java.util.Map;
 
 import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.exceptions.AuthentificationException;
+import org.esupportail.activfo.exceptions.ChannelException;
 import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
@@ -243,15 +244,11 @@ public class AccountController extends AbstractContextAwareController implements
 					else if (listPossibleChannels.size()==1){
 							
 						currentAccount.setOneChoiceCanal(listPossibleChannels.get(0));
-						if (this.getDomainService().getCode(currentAccount.getAttribute(this.accountIdKey),listPossibleChannels.get(0))){
-							addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
-							logger.info("Code envoyé");
-							return "gotoPushCode";
-						}
-						else{
-							logger.info("Erreur lors de l'envoi du code");
-							addErrorMessage(null, "CODE.ERROR.SENDING");
-						}
+						this.getDomainService().sendCode(currentAccount.getAttribute(this.accountIdKey),listPossibleChannels.get(0));
+						addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+						logger.info("Code envoyé");
+						return "gotoPushCode";
+						
 					}
 						
 												
@@ -281,6 +278,9 @@ public class AccountController extends AbstractContextAwareController implements
 			logger.error(e.getMessage());
 			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
 			
+		}catch (ChannelException e) {
+			logger.error(e.getMessage());
+			addErrorMessage(null, "CODE.ERROR.SENDING");
 		}
 		
 		
@@ -433,18 +433,14 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushChoice(){
 		try{
 			
-			if (this.getDomainService().getCode(currentAccount.getAttribute(accountIdKey),currentAccount.getOneChoiceCanal())){
-				logger.info("Code envoyé par le FO sur le canal choisi par l'utilisateur");
-				return "gotoPushCode";
-			}
-			else{
-				logger.info("Code non envoyé par le FO");
-				addErrorMessage(null, "CODE.ERROR.SENDING");
-			}
-		
-		}catch (LdapProblemException e) {
+			this.getDomainService().sendCode(currentAccount.getAttribute(accountIdKey),currentAccount.getOneChoiceCanal());
+			logger.info("Code envoyé par le FO sur le canal choisi par l'utilisateur");
+			return "gotoPushCode";
+			
+					
+		}catch (ChannelException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
+			addErrorMessage(null, "CODE.ERROR.SENDING");
 		}
 		
 		return null;
