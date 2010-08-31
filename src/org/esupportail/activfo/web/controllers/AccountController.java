@@ -18,6 +18,7 @@ import org.esupportail.activfo.exceptions.AuthentificationException;
 import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
+import org.esupportail.activfo.exceptions.LoginException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.activfo.web.beans.BeanField;
 import org.esupportail.activfo.web.beans.BeanFieldImpl;
@@ -276,6 +277,10 @@ public class AccountController extends AbstractContextAwareController implements
 			logger.error(e.getMessage());
 			addErrorMessage(null, "IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
 			
+		}catch (LoginException e) {
+			logger.error(e.getMessage());
+			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
+			
 		}
 		
 		
@@ -328,6 +333,10 @@ public class AccountController extends AbstractContextAwareController implements
 			}catch (UserPermissionException e) {
 				logger.error(e.getMessage());
 				addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
+			}catch (LoginException e) {
+				logger.error(e.getMessage());
+				addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
+				
 			}
 			
 			return null;
@@ -372,6 +381,11 @@ public class AccountController extends AbstractContextAwareController implements
 		}catch (UserPermissionException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
+		
+		}catch (LoginException e) {
+			logger.error(e.getMessage());
+			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
+			
 		}
 		
 		
@@ -405,6 +419,11 @@ public class AccountController extends AbstractContextAwareController implements
 		}catch (KerberosException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "KERBEROS.MESSAGE.PROBLEM");
+		
+		}catch (LoginException e) {
+			logger.error(e.getMessage());
+			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
+			
 		}
 
 		return null;
@@ -494,6 +513,11 @@ public class AccountController extends AbstractContextAwareController implements
 		}catch (KerberosException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "KERBEROS.MESSAGE.PROBLEM");
+		
+		}catch (LoginException e) {
+			logger.error(e.getMessage());
+			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
+			
 		}
 
 		return null;
