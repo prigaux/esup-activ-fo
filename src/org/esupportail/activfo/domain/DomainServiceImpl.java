@@ -263,7 +263,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	
 	
 	
-	public HashMap<String,String> validateAccount(HashMap<String,String> hashInfToValidate,List<String>attrPersoInfo) throws LdapProblemException{
+	public HashMap<String,String> validateAccount(HashMap<String,String> hashInfToValidate,List<String>attrPersoInfo) throws LdapProblemException,AuthentificationException{
 		return service.validateAccount(hashInfToValidate,attrPersoInfo);
 	}
 	
