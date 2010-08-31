@@ -28,6 +28,7 @@ public class SmsAgreementConverter implements Converter, Serializable {
 	private Account currentAccount;
 	private final Logger logger = new LoggerImpl(getClass());
 	private String smsAccepted;
+	private String accountTermOfUseKey;
 
 	
 
@@ -52,11 +53,13 @@ public class SmsAgreementConverter implements Converter, Serializable {
 		
 		
 		if (value.equals("true")){
-			currentAccount.setSmsAgreement(smsAccepted);
+			System.out.println("getAsobject1");
+			currentAccount.setAttribute(accountTermOfUseKey, smsAccepted);
+			System.out.println("getAsobject2");
 			return smsAccepted;
 		}
 		else{
-			currentAccount.setSmsAgreement(null);
+			currentAccount.setAttribute(accountTermOfUseKey, null);
 			return null;
 		}
 	}
@@ -74,7 +77,7 @@ public class SmsAgreementConverter implements Converter, Serializable {
 						
 		String val=(String)value;
 		
-		if (smsAccepted.equals(currentAccount.getSmsAgreement()))
+		if (smsAccepted.equals(currentAccount.getAttribute(accountTermOfUseKey)))
 				return "true";
 		
 		else
@@ -98,10 +101,12 @@ public class SmsAgreementConverter implements Converter, Serializable {
 		this.smsAccepted = smsAccepted;
 	}
 	
-	
-	
-	
-	
-	
+	public String getAccountTermOfUseKey() {
+		return accountTermOfUseKey;
+	}
+
+	public void setAccountTermOfUseKey(String accountTermOfUseKey) {
+		this.accountTermOfUseKey = accountTermOfUseKey;
+	}
 	
 }

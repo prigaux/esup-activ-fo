@@ -7,9 +7,11 @@ package org.esupportail.activfo.web.controllers;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.exceptions.AuthentificationException;
@@ -39,9 +41,6 @@ public class AccountController extends AbstractContextAwareController implements
 	private boolean loginChange=false;
 	
 	
-	private String smsAccepted;
-	
-	
 	private String accountIdKey;
 	private String accountMailKey;
 	private String accountMailPersoKey;
@@ -49,14 +48,14 @@ public class AccountController extends AbstractContextAwareController implements
 	private String accountDNKey;
 	private String accountCodeKey;
 	private String accountGestKey;
-	private String accountDescrPossibleChannelsKey;
-	
+	private String accountPossibleChannelsKey;
+	private String accountTermOfUseKey;
 	
 	private String labelCanalMailPerso;
 	private String labelCanalPager;
 	private String labelCanalGest;
 	
-	private String fieldSmsAgreementId;
+	private String fieldTypeSelectBooleanCheckBox;
 	
 	//liste des champs pour l'affichage des informations personnelles
 	private List<BeanField> listBeanPersoInfo;
@@ -104,9 +103,6 @@ public class AccountController extends AbstractContextAwareController implements
 	//champ Password
 	private BeanField beanPassword;
 	
-	//bean smsAgreement
-	private BeanField<?> beanSMSAgreement;
-	
 	//champ newLogin
 	private BeanField beanNewLogin;
 	
@@ -123,10 +119,6 @@ public class AccountController extends AbstractContextAwareController implements
 	private String statusPersonnel;
 	private String statusOldStudent;
 	
-	//attribut mis à true si on veut qu'il y ait une interface de login
-	private boolean interfLogin;
-	
-
 	
 	/**
 	 * Bean constructor.
@@ -136,15 +128,7 @@ public class AccountController extends AbstractContextAwareController implements
 		
 	}
 
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return getClass().getSimpleName() + "#" + hashCode();
-	}
-	
-	
+		
 	/**
 	 * @see org.esupportail.activ.web.controllers.AbstractDomainAwareBean#reset()
 	 */
@@ -225,17 +209,13 @@ public class AccountController extends AbstractContextAwareController implements
 			accountDescr=this.getDomainService().validateAccount(hashInfToValidate,attrPersoInfo);
 			
 			if (accountDescr!=null) {
+				//recuperation liste pour attributs perso info
 				
 				logger.info("Identification valide");
-				currentAccount.setId(accountDescr.get(accountIdKey));
-				currentAccount.setMail(accountDescr.get(accountMailKey));
-				currentAccount.setCode(accountDescr.get(accountCodeKey));
-				currentAccount.setEmailPerso(accountDescr.get(accountMailPersoKey));
-				currentAccount.setPager(accountDescr.get(accountPagerKey));
-				currentAccount.setSmsAgreement(accountDescr.get(fieldSmsAgreementId));
-				currentAccount.setDisplayName(accountDescr.get(accountDNKey));
+				logger.info("accoutDescr: "+accountDescr.toString());
+				this.updateCurrentAccount();
 				
-				if (currentAccount.getCode()!=null) {
+				if (currentAccount.getAttribute(accountCodeKey)!=null) {
 					if (reinit){
 						logger.info("Reinitialisation impossible, compte non activé");
 						this.addErrorMessage(null, "IDENTIFICATION.REINITIALISATION.MESSAGE.ACCOUNT.NONACTIVATED");
@@ -252,11 +232,7 @@ public class AccountController extends AbstractContextAwareController implements
 					if (reinit){
 						logger.info("Construction de la liste des informations personnelles du compte");
 						this.buildListPersoInfo(attrPersoInfo);
-
-						List<String> listPossibleChannels = Arrays.asList(accountDescr.get(accountDescrPossibleChannelsKey).split( "," ));
-						 
-						
-						System.out.println(listPossibleChannels);
+						List<String> listPossibleChannels = currentAccount.getAttributes(accountPossibleChannelsKey);
 						
 						if (listPossibleChannels.size()>1){
 							buildListBeanCanal(listPossibleChannels);
@@ -267,7 +243,7 @@ public class AccountController extends AbstractContextAwareController implements
 						else if (listPossibleChannels.size()==1){
 							
 							currentAccount.setOneChoiceCanal(listPossibleChannels.get(0));
-							if (this.getDomainService().getCode(currentAccount.getId(),listPossibleChannels.get(0))){
+							if (this.getDomainService().getCode(currentAccount.getAttribute(this.accountIdKey),listPossibleChannels.get(0))){
 								addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 								logger.info("Code envoyé");
 								return "gotoPushCode";
@@ -327,9 +303,7 @@ public class AccountController extends AbstractContextAwareController implements
 					i++;
 				}
 				
-				System.out.println("HASH:"+hashBeanPersoInfo);
-				
-				this.getDomainService().updatePersonalInformations(currentAccount.getId(),currentAccount.getCode(),hashBeanPersoInfo);
+				this.getDomainService().updatePersonalInformations(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),hashBeanPersoInfo);
 				
 				logger.info("Informations personnelles envoyées au BO pour mise à jour: "+hashBeanPersoInfo.toString());
 					
@@ -361,33 +335,21 @@ public class AccountController extends AbstractContextAwareController implements
 	}
 	public String pushAuthentificate(){
 		try{
-			currentAccount.setId(beanLogin.getValue().toString());
-			currentAccount.setOldPassword(beanPassword.getValue().toString());
 			//Attributs concernant les informations personnelles que l'on souhaite afficher
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			
-			accountDescr=this.getDomainService().authentificateUser(currentAccount.getId(), currentAccount.getOldPassword(),attrPersoInfo);
-			
+			accountDescr=this.getDomainService().authentificateUser(beanLogin.getValue().toString(), beanPassword.getValue().toString(),attrPersoInfo);
+						
 			if (accountDescr!=null){
+				
 				logger.info("Authentification réusssie");
-				
-				currentAccount.setId(accountDescr.get(accountIdKey));
-				currentAccount.setMail(accountDescr.get(accountMailKey));
-				currentAccount.setCode(accountDescr.get(accountCodeKey));
-				currentAccount.setEmailPerso(accountDescr.get(accountMailPersoKey));
-				currentAccount.setPager(accountDescr.get(accountPagerKey));
-				currentAccount.setSmsAgreement(accountDescr.get(fieldSmsAgreementId));
-				currentAccount.setDisplayName(accountDescr.get(accountDNKey));
-				
-				
-				if (currentAccount.getCode()!=null) {
+				this.updateCurrentAccount();
+								
+				if (currentAccount.getAttribute(accountCodeKey)!=null) {
 					logger.info("Construction de la liste des informations personnelles du compte");
 					this.buildListPersoInfo(attrPersoInfo);
-					
 					this.addInfoMessage(null, "AUTHENTIFICATION.MESSAGE.VALID");
-					
 					return "gotoPersonalInfo";
-					
 				}
 				else{
 					logger.info("Changement de mot de passe impossible, compte non activé");
@@ -408,8 +370,8 @@ public class AccountController extends AbstractContextAwareController implements
 			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
 		
 		}catch (UserPermissionException e) {
-		logger.error(e.getMessage());
-		addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
+			logger.error(e.getMessage());
+			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
 		}
 		
 		
@@ -419,7 +381,7 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushLogin(){
 		try {
 			
-			this.getDomainService().changeLogin(currentAccount.getId(), currentAccount.getCode(), beanNewLogin.getValue().toString());
+			this.getDomainService().changeLogin(currentAccount.getAttribute(accountIdKey), currentAccount.getAttribute(accountCodeKey), beanNewLogin.getValue().toString());
 			beanNewLogin.setValue("");
 			logger.info("Changement de login réussi");
 			this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
@@ -452,8 +414,8 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushChoice(){
 		try{
 			
-			if (this.getDomainService().getCode(currentAccount.getId(),currentAccount.getOneChoiceCanal())){
-				logger.info("Code envoyé par le FO sur le canal choisi de l'utilisateur");
+			if (this.getDomainService().getCode(currentAccount.getAttribute(accountIdKey),currentAccount.getOneChoiceCanal())){
+				logger.info("Code envoyé par le FO sur le canal choisi par l'utilisateur");
 				return "gotoPushCode";
 			}
 			else{
@@ -472,8 +434,9 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	public String pushVerifyCode() {
 		try{
-			currentAccount.setCode(beanCode.getValue().toString());
-			if (this.getDomainService().validateCode(currentAccount.getId(), currentAccount.getCode())){
+			currentAccount.setAttribute(this.accountCodeKey, beanCode.getValue().toString());//.setCode(beanCode.getValue().toString());
+			if (this.getDomainService().validateCode(currentAccount.getAttribute(accountIdKey), currentAccount.getAttribute(accountCodeKey))){
+				logger.info("Code renseigné valide");
 				this.addInfoMessage(null, "CODE.MESSAGE.CODESUCCESSFULL");
 				beanCode.setValue("");
 				return "gotoPersonalInfo";
@@ -512,7 +475,7 @@ public class AccountController extends AbstractContextAwareController implements
 	 */
 	public String pushChangePassword() {
 		try {
-			this.getDomainService().setPassword(currentAccount.getId(),currentAccount.getCode(),beanNewPassword.getValue().toString());
+			this.getDomainService().setPassword(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(this.accountCodeKey),beanNewPassword.getValue().toString());
 			logger.info("Changement de mot de passe réussi");
 			this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
 			beanNewPassword.setValue("");
@@ -539,151 +502,16 @@ public class AccountController extends AbstractContextAwareController implements
 	private void buildListPersoInfo(List<String>attrPersoInfo){
 			for(int i=0;i<attrPersoInfo.size();i++)
 				
-				if ("selectBooleanCheckbox".equals(listBeanPersoInfo.get(i).getFieldType())){
+				if (this.fieldTypeSelectBooleanCheckBox.equals(listBeanPersoInfo.get(i).getFieldType())){
 					listBeanPersoInfo.get(i).setValue(false);
-					logger.info("checkbox"+listBeanPersoInfo.get(i).getFieldType());
 				}	
 				
-				else listBeanPersoInfo.get(i).setValue(accountDescr.get(attrPersoInfo.get(i)));
+				else listBeanPersoInfo.get(i).setValue(currentAccount.getAttribute(attrPersoInfo.get(i)));
 				
 			
 	}
 
-	public Account getCurrentAccount() {
-		return currentAccount;
-	}
-
-	public void setCurrentAccount(Account currentAccount) {
-		this.currentAccount = currentAccount;
-	}
 	
-	public String getAccountIdKey() {
-		return accountIdKey;
-	}
-
-	public void setAccountIdKey(String accountIdKey) {
-		this.accountIdKey = accountIdKey;
-	}
-
-	public String getAccountMailKey() {
-		return accountMailKey;
-	}
-
-	public void setAccountMailKey(String accountMailKey) {
-		this.accountMailKey = accountMailKey;
-	}
-
-	public String getAccountDNKey() {
-		return accountDNKey;
-	}
-
-	public void setAccountDNKey(String accountDNKey) {
-		this.accountDNKey = accountDNKey;
-	}
-
-	public List<BeanField> getListBeanPersoInfo() {
-		return listBeanPersoInfo;
-	}
-
-	public void setListBeanPersoInfo(List<BeanField> listBeanPersoInfo) {
-		this.listBeanPersoInfo = listBeanPersoInfo;
-	}
-
-	public String getAccountCodeKey() {
-		return accountCodeKey;
-	}
-
-	public void setAccountCodeKey(String accountCodeKey) {
-		this.accountCodeKey = accountCodeKey;
-	}
-
-	public boolean isReinit() {
-		return reinit;
-	}
-
-	public void setReinit(boolean reinit) {
-		this.reinit = reinit;
-	}
-	
-	
-
-	public String getAttributesInfPerso() {
-		return attributesInfPerso;
-	}
-
-	public void setAttributesInfPerso(String attributesInfPerso) {
-		this.attributesInfPerso = attributesInfPerso;
-	}
-	
-	public BeanField getBeanCode() {
-		return beanCode;
-	}
-
-	public void setBeanCode(BeanField beanCode) {
-		this.beanCode = beanCode;
-	}
-	
-	public boolean isPasswChange() {
-		return passwChange;
-	}
-
-	public void setPasswChange(boolean passwChange) {
-		this.passwChange = passwChange;
-	}
-
-	public List<BeanField> getListBeanProcedure() {
-		return listBeanProcedure;
-	}
-
-	public void setListBeanProcedure(List<BeanField> listBeanProcedure) {
-		this.listBeanProcedure = listBeanProcedure;
-	}
-
-	
-	public List<BeanField> getListBeanStatus() {
-		return listBeanStatus;
-	}
-
-	public void setListBeanStatus(List<BeanField> listBeanStatus) {
-		this.listBeanStatus = listBeanStatus;
-	}
-
-	public String getAttributesOldStudentToValidate() {
-		return attributesOldStudentToValidate;
-	}
-
-	public void setAttributesOldStudentToValidate(
-			String attributesOldStudentToValidate) {
-		this.attributesOldStudentToValidate = attributesOldStudentToValidate;
-	}
-
-	public List<BeanField> getListInfoStudentToValidate() {
-		return listInfoStudentToValidate;
-	}
-
-	public void setListInfoStudentToValidate(
-			List<BeanField> listInfoStudentToValidate) {
-		this.listInfoStudentToValidate = listInfoStudentToValidate;
-	}
-
-	public List<BeanField> getListInfoPersonnelToValidate() {
-		return listInfoPersonnelToValidate;
-	}
-
-	public void setListInfoPersonnelToValidate(
-			List<BeanField> listInfoPersonnelToValidate) {
-		this.listInfoPersonnelToValidate = listInfoPersonnelToValidate;
-	}
-
-	public List<BeanField> getListInfoOldStudentToValidate() {
-		return listInfoOldStudentToValidate;
-	}
-
-	public void setListInfoOldStudentToValidate(
-			List<BeanField> listInfoOldStudentToValidate) {
-		this.listInfoOldStudentToValidate = listInfoOldStudentToValidate;
-	}
-
 	private HashMap<String,String> getMap(List<BeanField> listeInfoToValidate,List<String>attrToValidate){
 		
 		HashMap<String,String> hashInfToValidate=new HashMap<String,String>();
@@ -698,6 +526,52 @@ public class AccountController extends AbstractContextAwareController implements
 		return hashInfToValidate;
 		
 	}
+	
+	public HashMap<String,List<String>> convertHash(HashMap<String,String> hash){
+		
+		HashMap<String,List<String>> newHash=new HashMap<String,List<String>>();
+		Iterator<Map.Entry<String, String>> it=hash.entrySet().iterator();
+		while(it.hasNext()){
+			Map.Entry<String, String> e=it.next();
+			newHash.put(e.getKey(), Arrays.asList(e.getValue().split(",")));
+		}
+		return newHash;
+	}
+	
+	public void updateCurrentAccount(){
+		currentAccount.setAttributes(this.convertHash(accountDescr));
+		currentAccount.setId(currentAccount.getAttribute(accountIdKey));
+		currentAccount.setMail(currentAccount.getAttribute(accountMailKey));
+		currentAccount.setEmailPerso(currentAccount.getAttribute(accountMailPersoKey));
+		currentAccount.setPager(currentAccount.getAttribute(accountPagerKey));
+	}
+	
+	private void buildListBeanCanal(List<String>listPossibleChannels){
+		listBeanCanal=new ArrayList<BeanField>();
+		for(int i=0;i<=listPossibleChannels.size()-1;i++){
+			if (listPossibleChannels.get(i).equalsIgnoreCase(accountMailPersoKey)){
+				BeanFieldImpl bean=new BeanFieldImpl();
+				bean.setValue(accountMailPersoKey);
+				bean.setKey(labelCanalMailPerso);
+				listBeanCanal.add(bean);
+			}
+			
+			if (listPossibleChannels.get(i).equalsIgnoreCase(accountGestKey)){
+				BeanFieldImpl bean=new BeanFieldImpl();
+				bean.setValue(accountGestKey);
+				bean.setKey(labelCanalGest);
+				listBeanCanal.add(bean);
+			}
+		
+			if (listPossibleChannels.get(i).equalsIgnoreCase(accountPagerKey)){
+				BeanFieldImpl bean=new BeanFieldImpl();
+				bean.setValue(accountPagerKey);
+				bean.setKey(labelCanalPager);
+				listBeanCanal.add(bean);
+			}
+		}
+	}
+
 
 	public String getAttributesStudentToValidate() {
 		return attributesStudentToValidate;
@@ -820,32 +694,7 @@ public class AccountController extends AbstractContextAwareController implements
 		this.listBeanCanal = listBeanCanal;
 	}
 
-	public BeanField getBeanSMSAgreement() {
-		return beanSMSAgreement;
-	}
-
-	public void setBeanSMSAgreement(BeanField beanSMSAgreement) {
-		this.beanSMSAgreement = beanSMSAgreement;
-	}
-
-	public String getFieldSmsAgreementId() {
-		return fieldSmsAgreementId;
-	}
-
-	public void setFieldSmsAgreementId(String fieldSmsAgreementId) {
-		this.fieldSmsAgreementId = fieldSmsAgreementId;
-	}
-
-	public String getSmsAccepted() {
-		return smsAccepted;
-	}
-
-	public void setSmsAccepted(String smsAccepted) {
-		this.smsAccepted = smsAccepted;
-	}
-
 	
-
 	public boolean isLoginChange() {
 		return loginChange;
 	}
@@ -886,23 +735,6 @@ public class AccountController extends AbstractContextAwareController implements
 		this.beanPassword = beanPassword;
 	}
 
-	public boolean isInterfLogin() {
-		return interfLogin;
-	}
-
-	public void setInterfLogin(boolean interfLogin) {
-		this.interfLogin = interfLogin;
-	}
-
-	public String getAccountDescrPossibleChannelsKey() {
-		return accountDescrPossibleChannelsKey;
-	}
-
-	public void setAccountDescrPossibleChannelsKey(
-			String accountDescrPossibleChannelsKey) {
-		this.accountDescrPossibleChannelsKey = accountDescrPossibleChannelsKey;
-	}
-
 	public String getAccountGestKey() {
 		return accountGestKey;
 	}
@@ -911,34 +743,7 @@ public class AccountController extends AbstractContextAwareController implements
 		this.accountGestKey = accountGestKey;
 	}
 	
-	private void buildListBeanCanal(List<String>listPossibleChannels){
-		listBeanCanal=new ArrayList<BeanField>();
-		for(int i=0;i<=listPossibleChannels.size()-1;i++){
-			if (listPossibleChannels.get(i).equalsIgnoreCase(accountMailPersoKey)){
-				BeanFieldImpl bean=new BeanFieldImpl();
-				bean.setValue(accountMailPersoKey);
-				bean.setKey(labelCanalMailPerso);
-				listBeanCanal.add(bean);
-			}
-			
-			if (listPossibleChannels.get(i).equalsIgnoreCase(accountGestKey)){
-				BeanFieldImpl bean=new BeanFieldImpl();
-				bean.setValue(accountGestKey);
-				bean.setKey(labelCanalGest);
-				listBeanCanal.add(bean);
-			}
-		
-			if (listPossibleChannels.get(i).equalsIgnoreCase(accountPagerKey)){
-				BeanFieldImpl bean=new BeanFieldImpl();
-				bean.setValue(accountPagerKey);
-				bean.setKey(labelCanalPager);
-				listBeanCanal.add(bean);
-			}
-			
-		}
-
-	}
-
+	
 	public String getLabelCanalMailPerso() {
 		return labelCanalMailPerso;
 	}
@@ -963,4 +768,163 @@ public class AccountController extends AbstractContextAwareController implements
 		this.labelCanalGest = labelCanalGest;
 	}
 	
+	public String getAccountTermOfUseKey() {
+		return accountTermOfUseKey;
+	}
+
+	public void setAccountTermOfUseKey(String accountTermOfUseKey) {
+		this.accountTermOfUseKey = accountTermOfUseKey;
+	}
+
+	public String getAccountPossibleChannelsKey() {
+		return accountPossibleChannelsKey;
+	}
+
+	public void setAccountPossibleChannelsKey(String accountPossibleChannelsKey) {
+		this.accountPossibleChannelsKey = accountPossibleChannelsKey;
+	}
+	
+	public Account getCurrentAccount() {
+		return currentAccount;
+	}
+
+	public void setCurrentAccount(Account currentAccount) {
+		this.currentAccount = currentAccount;
+	}
+	
+	public String getAccountIdKey() {
+		return accountIdKey;
+	}
+
+	public void setAccountIdKey(String accountIdKey) {
+		this.accountIdKey = accountIdKey;
+	}
+
+	public String getAccountMailKey() {
+		return accountMailKey;
+	}
+
+	public void setAccountMailKey(String accountMailKey) {
+		this.accountMailKey = accountMailKey;
+	}
+
+	public String getAccountDNKey() {
+		return accountDNKey;
+	}
+
+	public void setAccountDNKey(String accountDNKey) {
+		this.accountDNKey = accountDNKey;
+	}
+
+	public List<BeanField> getListBeanPersoInfo() {
+		return listBeanPersoInfo;
+	}
+
+	public void setListBeanPersoInfo(List<BeanField> listBeanPersoInfo) {
+		this.listBeanPersoInfo = listBeanPersoInfo;
+	}
+
+	public String getAccountCodeKey() {
+		return accountCodeKey;
+	}
+
+	public void setAccountCodeKey(String accountCodeKey) {
+		this.accountCodeKey = accountCodeKey;
+	}
+
+	public boolean isReinit() {
+		return reinit;
+	}
+
+	public void setReinit(boolean reinit) {
+		this.reinit = reinit;
+	}
+
+	public String getAttributesInfPerso() {
+		return attributesInfPerso;
+	}
+
+	public void setAttributesInfPerso(String attributesInfPerso) {
+		this.attributesInfPerso = attributesInfPerso;
+	}
+	
+	public BeanField getBeanCode() {
+		return beanCode;
+	}
+
+	public void setBeanCode(BeanField beanCode) {
+		this.beanCode = beanCode;
+	}
+	
+	public boolean isPasswChange() {
+		return passwChange;
+	}
+
+	public void setPasswChange(boolean passwChange) {
+		this.passwChange = passwChange;
+	}
+
+	public List<BeanField> getListBeanProcedure() {
+		return listBeanProcedure;
+	}
+
+	public void setListBeanProcedure(List<BeanField> listBeanProcedure) {
+		this.listBeanProcedure = listBeanProcedure;
+	}
+
+	
+	public List<BeanField> getListBeanStatus() {
+		return listBeanStatus;
+	}
+
+	public void setListBeanStatus(List<BeanField> listBeanStatus) {
+		this.listBeanStatus = listBeanStatus;
+	}
+
+	public String getAttributesOldStudentToValidate() {
+		return attributesOldStudentToValidate;
+	}
+
+	public void setAttributesOldStudentToValidate(
+			String attributesOldStudentToValidate) {
+		this.attributesOldStudentToValidate = attributesOldStudentToValidate;
+	}
+
+	public List<BeanField> getListInfoStudentToValidate() {
+		return listInfoStudentToValidate;
+	}
+
+	public void setListInfoStudentToValidate(
+			List<BeanField> listInfoStudentToValidate) {
+		this.listInfoStudentToValidate = listInfoStudentToValidate;
+	}
+
+	public List<BeanField> getListInfoPersonnelToValidate() {
+		return listInfoPersonnelToValidate;
+	}
+
+	public void setListInfoPersonnelToValidate(
+			List<BeanField> listInfoPersonnelToValidate) {
+		this.listInfoPersonnelToValidate = listInfoPersonnelToValidate;
+	}
+
+	public List<BeanField> getListInfoOldStudentToValidate() {
+		return listInfoOldStudentToValidate;
+	}
+
+	public void setListInfoOldStudentToValidate(
+			List<BeanField> listInfoOldStudentToValidate) {
+		this.listInfoOldStudentToValidate = listInfoOldStudentToValidate;
+	}
+
+	public String getFieldTypeSelectBooleanCheckBox() {
+		return fieldTypeSelectBooleanCheckBox;
+	}
+
+
+	public void setFieldTypeSelectBooleanCheckBox(
+			String fieldTypeSelectBooleanCheckBox) {
+		this.fieldTypeSelectBooleanCheckBox = fieldTypeSelectBooleanCheckBox;
+	}
+
 }
