@@ -4,12 +4,12 @@
 
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 
-<%-- Data mustn't be recorded in this form, even by using back button --%> 
-<t:documentHead>
-<meta http-equiv="Expires" content="0">
-<meta http-equiv="cache-control" content="no-cache,no-store">
-<meta http-equiv="pragma" content="no-cache">
-</t:documentHead>
+	<%-- Data mustn't be recorded in this form, even by using back button --%> 
+	<t:documentHead>
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="cache-control" content="no-cache,no-store">
+		<meta http-equiv="pragma" content="no-cache">
+	</t:documentHead>
 
 	<%@include file="_navigation.jsp"%>
 	<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}"rendered="#{accountController.activ == true}" />

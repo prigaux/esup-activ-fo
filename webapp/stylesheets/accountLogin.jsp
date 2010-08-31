@@ -1,5 +1,7 @@
 <%@include file="_include.jsp"%>
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
+	
+		
 	<%@include file="_navigation.jsp"%>
 	
 	<e:section value="#{msgs['LOGIN.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}" />
