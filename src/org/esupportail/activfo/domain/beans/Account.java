@@ -6,9 +6,9 @@ package org.esupportail.activfo.domain.beans;
 
 
 
-import java.util.Date;
-
-import org.esupportail.commons.utils.strings.StringUtils;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import org.springframework.beans.factory.InitializingBean;
 
 
@@ -18,46 +18,27 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public class Account implements InitializingBean {
 	
-	
 
-	
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 5854730800181753413L;
-
-	private String oldPassword; 
 	
 	private String id;
-	
-    private String harpegeNumber;
     
     private String displayName;
     
-	private String birthName;
-	
-	private String shadowLastChange;
-	
-	private Date birthDate;
-	
-	private String password;
+	private boolean activated;
 	
 	private String mail;
-	
-	private String initialPassword;
 	
 	private boolean charterAgreement=false;
 	
 	private String smsAgreement;
-
-	private String code;
-	
+		
 	private String emailPerso;
 	
 	private String pager;
 	
-		
+	private HashMap<String, List<String>> attributes = new HashMap<String, List<String>>();
+	
 	private String oneRadioValue;
 	
 	private String oneRadioProcedure;
@@ -86,107 +67,12 @@ public class Account implements InitializingBean {
 		
 	}
 
-	/**
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(final Object obj) {
-		if (obj == null) {
-			return false;
-		}
-		if (!(obj instanceof Account)) {
-			return false;
-		}
-		return id.equals(((Account) obj).getId());
-	}
-
-	/**
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		return super.hashCode();
-	}
-
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "User#" + hashCode() + "[id=[" + id + "], harpegeNumber=[" + harpegeNumber 
-		+ "], birthName=[" + birthName + "],displayName=[" + displayName + "],   birthDate=[" + birthDate + "], shadowLastChange=[" + shadowLastChange + "]";
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(final String id) {
-		this.id = StringUtils.nullIfEmpty(id);
-	}
-		
-	public String getBirthName() {
-		return birthName;
-	}
-
-	public void setBirthName(String birthName) {
-		this.birthName = birthName;
-	}
-
-	
-	public Date getBirthDate() {
-		return birthDate;
-	}
-
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
-	
-	
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	
 	public String getDisplayName() {
 		return displayName;
 	}
 
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
-	}
-	
-		
-	public String getInitialPassword() {
-		return initialPassword;
-	}
-
-	public void setInitialPassword(String initialPassword) {
-		this.initialPassword = initialPassword;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.esupportail.activ.domain.DomainService#changeDisplayName(org.esupportail.activ.domain.beans.Account,
-	 *      java.lang.String)
-	 */
-	
-
-	public String getShadowLastChange() {
-		return shadowLastChange;
-	}
-
-	public void setShadowLastChange(String shadowLastChange) {
-		this.shadowLastChange = shadowLastChange;
-	}
-	
-	public boolean isActivated() {
-		return (this.shadowLastChange!=null && this.shadowLastChange.length()!=0);
 	}
 
 	public boolean isCharterAgreement() {
@@ -213,15 +99,6 @@ public class Account implements InitializingBean {
 		this.emailPerso = emailPerso;
 	}
 
-	
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
 	public String getOneRadioProcedure() {
 		return oneRadioProcedure;
 	}
@@ -230,14 +107,7 @@ public class Account implements InitializingBean {
 		this.oneRadioProcedure = oneRadioProcedure;
 	}
 
-	public String getOldPassword() {
-		return oldPassword;
-	}
-
-	public void setOldPassword(String oldPassword) {
-		this.oldPassword = oldPassword;
-	}
-
+	
 	public String getPager() {
 		return pager;
 	}
@@ -261,6 +131,57 @@ public class Account implements InitializingBean {
 	public void setSmsAgreement(String smsAgreement) {
 		this.smsAgreement = smsAgreement;
 	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public boolean isActivated() {
+		return activated;
+	}
+
+	public void setActivated(boolean activated) {
+		this.activated = activated;
+	}
+	
+	public String getAttribute(final String name) {
+		List<String> values = getAttributes(name);
+		if (values.size() < 1) {
+			return null;
+		}
+		return values.get(0);
+	}
+	
+	public List<String> getAttributes(final String name) {
+		List<String> result = attributes.get(name);
+		if (result == null) {
+			result = new ArrayList<String>();
+		}
+		return result;
+	}
+	
+	public void setAttributes(
+			final HashMap<String, List<String>> attributes) {
+		this.attributes = attributes;
+	}
+	
+	public void setAttribute(String name,String value) {
+		
+		List<String>liste;
+		liste=new ArrayList<String>();
+		
+		liste.add(value);
+		
+		attributes.put(name, liste);
+		
+	}
+
+	
+
 
 	
 	
