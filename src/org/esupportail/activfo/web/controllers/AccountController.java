@@ -246,14 +246,13 @@ public class AccountController extends AbstractContextAwareController implements
 						currentAccount.setOneChoiceCanal(listPossibleChannels.get(0));
 						this.getDomainService().sendCode(currentAccount.getAttribute(this.accountIdKey),listPossibleChannels.get(0));
 						addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
-						logger.info("Code envoyé");
+						logger.debug("Code envoyé");
 						return "gotoPushCode";
 						
 					}
-						
 												
-					else{//si les deux sont null
-						//Vous n'avez encore jamais renseigné un email perso ou votre numero de portable. Il est impossbile donc de vous envoyer un code de reinitialisation de mot de passe
+					else{
+						logger.debug("aucun canal d'envoi n'est disponible");
 						addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 						addErrorMessage(null, "IDENTIFICATION.MESSAGE.NONECANAL");
 					}
