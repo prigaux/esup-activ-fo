@@ -376,7 +376,7 @@ label{
 	width:40px;
 }	
 
-#accountForm a {
+.help a {
 
 position:absolute;
 
@@ -387,14 +387,14 @@ margin-left:5px;
 }
 
 
-#accountForm img{
+.help img{
 width:22px;
 height:22px;
 margin-top:auto;
 }	
 
 
-#accountForm span {
+.help span {
 
 position: absolute;
 
