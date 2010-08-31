@@ -13,6 +13,7 @@ import org.esupportail.activfo.dao.DaoService;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.VersionManager;
 import org.esupportail.activfo.exceptions.AuthentificationException;
+import org.esupportail.activfo.exceptions.ChannelException;
 import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
@@ -284,8 +285,8 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	}
 	
 	
-	public boolean getCode(String id,String canal)throws LdapProblemException{
-		return service.getCode(id, canal);
+	public void sendCode(String id,String canal)throws ChannelException{
+		service.sendCode(id, canal);
 	}
 	
 	public AccountManagement getService() {
