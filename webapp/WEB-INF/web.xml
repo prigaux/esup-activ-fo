@@ -24,7 +24,8 @@
 			classpath:/properties/applicationContext.xml
 		</param-value>
 	</context-param>
-
+	
+	
 	<context-param>
 		<description>
 			The location of the main configuration file of the JSF framework.
@@ -243,11 +244,14 @@
 			<url-pattern>/stylesheets/administrators.jsp</url-pattern>
 			<url-pattern>/stylesheets/administratorAdd.jsp</url-pattern>
 			<url-pattern>/stylesheets/administratorDelete.jsp</url-pattern>
-			<url-pattern>/stylesheets/accountActivation.jsp</url-pattern>
+			<url-pattern>/stylesheets/accountIdentification.jsp</url-pattern>
+			<url-pattern>/stylesheets/accountAuthentification.jsp</url-pattern>
 			<url-pattern>/stylesheets/accountEnabled.jsp</url-pattern>
-			<url-pattern>/stylesheets/accountDisplayName.jsp</url-pattern>
+			<url-pattern>/stylesheets/accountPersonalInfo.jsp</url-pattern>
 			<url-pattern>/stylesheets/accountCharter.jsp</url-pattern>
 			<url-pattern>/stylesheets/accountPassword.jsp</url-pattern>			
+			<url-pattern>/stylesheets/accountChoice.jsp</url-pattern>
+			<url-pattern>/stylesheets/accountLogin.jsp</url-pattern>
 			<url-pattern>/stylesheets/departments.jsp</url-pattern>
 			<url-pattern>/stylesheets/departmentAdd.jsp</url-pattern>
 			<url-pattern>/stylesheets/departmentDelete.jsp</url-pattern>
