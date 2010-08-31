@@ -132,16 +132,16 @@
 		
 		<property name="listInfoStudentToValidate">
 			<list>
-				<ref bean="beanStudentLogin"/>
 				<ref bean="beanStudentNumber"/>
+				<ref bean="beanBirthName"/>
 				<ref bean="beanBirthDate"/>
 			</list>
 		</property>
 		
 		<property name="listInfoOldStudentToValidate">
 			<list>
-				<ref bean="beanStudentLogin"/>
 				<ref bean="beanStudentNumber"/>
+				<ref bean="beanBirthName"/>
 				<ref bean="beanBirthDate"/>
 			</list>
 		</property>

@@ -20,21 +20,7 @@
 		
 	</bean>
 	
-	<bean
-		id="beanStudentLogin"
-		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
-		scope="session"
-		>
-
-		<property name="key" value="IDENTIFICATION.STUDENTLOGIN.TEXT.LABEL"/>
-		<property name="value" value=""/>
-		<property name="validator" ref="validatorStudentLogin"/>
-		<property name="help" value="IDENTIFICATION.STUDENTLOGIN.TEXT.HELP"/>
-		<property name="required" value="true" />
-				
-	</bean>
-	
-	
+		
 	<bean
 		id="beanBirthName"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
