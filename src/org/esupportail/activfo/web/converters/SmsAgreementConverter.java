@@ -53,9 +53,7 @@ public class SmsAgreementConverter implements Converter, Serializable {
 		
 		
 		if (value.equals("true")){
-			System.out.println("getAsobject1");
 			currentAccount.setAttribute(accountTermOfUseKey, smsAccepted);
-			System.out.println("getAsobject2");
 			return smsAccepted;
 		}
 		else{
