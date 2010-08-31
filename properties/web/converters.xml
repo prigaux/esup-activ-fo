@@ -51,6 +51,7 @@
    	
    		<property name="currentAccount" ref="account"/>
     	<property name="smsAccepted" value="${sms.CG}"/>
+    	<property name="accountTermOfUseKey" value="${account.key.termsOfUse}"/>
     	
     </bean>
 	

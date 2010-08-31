@@ -26,6 +26,7 @@
     	
     	
     	<property name="account" ref="account"/>
+    	<property name="accountDNKey" value="${account.key.displayname}"/>
     		
 	</bean>
 	

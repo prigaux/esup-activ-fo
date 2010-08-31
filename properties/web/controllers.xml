@@ -86,13 +86,12 @@
 		<property name="accountDNKey" value="${account.key.displayname}"/>
 		<property name="accountCodeKey" value="${account.key.code}"/>
 		<property name="accountGestKey" value="${account.key.gest}"/>
-		<property name="accountDescrPossibleChannelsKey" value="${account.key.possibleChannels}"/>
+		<property name="accountPossibleChannelsKey" value="${account.key.possibleChannels}"/>
 		
+		<property name="fieldTypeSelectBooleanCheckBox" value="${view.field.type.selectbooleancheckbox}"/>
 		
-		<property name="fieldSmsAgreementId" value="${account.key.termsOfUse}"/>
+		<property name="accountTermOfUseKey" value="${account.key.termsOfUse}"/>
 		
-		<property name="smsAccepted" value="${sms.CG}"/>
-				
 		<property name="currentAccount" ref="account"/>
 		
 		<property name="procedureActivation" value="${view.procedure.activation}"/>
@@ -174,8 +173,7 @@
 		
 		<property name="beanPassword" ref="beanPassword"/>
 		
-		<property name="interfLogin" value="true"/>
-				
+					
 	</bean>
 	
 	
@@ -201,6 +199,7 @@
 		class="org.esupportail.activfo.domain.beans.Account"
 		scope="session"
     	>
+    	
 		
 	</bean>
 	
