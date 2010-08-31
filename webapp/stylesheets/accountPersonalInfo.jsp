@@ -29,9 +29,9 @@
 						<e:inputText value="#{entry.value}"  required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null}"/>
 
 						<d:selectBooleanCheckbox  value="#{entry.value}"  rendered="#{entry.fieldType=='selectBooleanCheckbox'}" converter="#{entry.converter}"/>
-						<h:outputLink id="rolloverImage" value="#" onclick="drawAlert('#{entry.help}')" rendered="#{entry.help!=null}">
-							<h:graphicImage id="w3c" url="../media/help.jpg"  style="border: 0;"/>
-							<h:outputText id="help" value="#{msgs[entry.help]}"/>
+						<h:outputLink  styleClass="help" id="rolloverImage" value="#" onclick="drawAlert('#{entry.help}')" rendered="#{entry.help!=null}">
+							<h:graphicImage  url="../media/help.jpg"  style="border: 0;"/>
+							<h:outputText value="#{msgs[entry.help]}"/>
 						</h:outputLink>
 					</e:panelGrid>
 			

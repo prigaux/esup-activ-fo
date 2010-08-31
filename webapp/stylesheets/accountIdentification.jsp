@@ -15,7 +15,8 @@
 	<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}"rendered="#{accountController.activ == true}" />
 	<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}"rendered="#{accountController.reinit == true}" />
 	<e:section value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.TITLE']}"rendered="#{accountController.passwChange == true}" />
-	<e:messages />
+	
+	<e:messages/>
 	
 	<e:text escape="false" value="#{msgs['IDENTIFICATION.TEXT.TOP']}"/>
 
@@ -33,9 +34,9 @@
 				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25" validator="#{entry.validator.validate}" converter="#{entry.converter}" rendered="#{entry.converter!=null}"/>
 				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null}"/>
 				
-				<h:outputLink  value="#"  rendered="#{entry.help!=null}">
+				<h:outputLink  styleClass="help" value="#"  rendered="#{entry.help!=null}">
 					<h:graphicImage url="../media/help.jpg"  style="border: 0;"/>
-					<h:outputText id="help" value="#{msgs[entry.help]}"/>
+					<h:outputText value="#{msgs[entry.help]}"/>
 				</h:outputLink>
 						
 			</e:panelGrid>
