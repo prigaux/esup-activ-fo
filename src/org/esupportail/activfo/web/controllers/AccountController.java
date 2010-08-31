@@ -208,76 +208,76 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			accountDescr=this.getDomainService().validateAccount(hashInfToValidate,attrPersoInfo);
 			
-			if (accountDescr!=null) {
-				//recuperation liste pour attributs perso info
+			//recuperation liste pour attributs perso info
 				
-				logger.info("Identification valide");
-				logger.info("accoutDescr: "+accountDescr.toString());
-				this.updateCurrentAccount();
+			logger.info("Identification valide");
+			logger.info("accoutDescr: "+accountDescr.toString());
+			this.updateCurrentAccount();
 				
-				if (currentAccount.getAttribute(accountCodeKey)!=null) {
-					if (reinit){
-						logger.info("Reinitialisation impossible, compte non activé");
-						this.addErrorMessage(null, "IDENTIFICATION.REINITIALISATION.MESSAGE.ACCOUNT.NONACTIVATED");
+			if (currentAccount.getAttribute(accountCodeKey)!=null) {
+				if (reinit){
+					logger.info("Reinitialisation impossible, compte non activé");
+					this.addErrorMessage(null, "IDENTIFICATION.REINITIALISATION.MESSAGE.ACCOUNT.NONACTIVATED");
 
-					}else if(activ){
-						logger.info("Construction de la liste des informations personnelles du compte");
-						this.buildListPersoInfo(attrPersoInfo);
-						this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
-						return "gotoPersonalInfo";
-					}
-				}
-				else {
-					
-					if (reinit){
-						logger.info("Construction de la liste des informations personnelles du compte");
-						this.buildListPersoInfo(attrPersoInfo);
-						List<String> listPossibleChannels = currentAccount.getAttributes(accountPossibleChannelsKey);
-						
-						if (listPossibleChannels.size()>1){
-							buildListBeanCanal(listPossibleChannels);
-							this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
-							return "gotoChoice"; 	
-						}
-						
-						else if (listPossibleChannels.size()==1){
-							
-							currentAccount.setOneChoiceCanal(listPossibleChannels.get(0));
-							if (this.getDomainService().getCode(currentAccount.getAttribute(this.accountIdKey),listPossibleChannels.get(0))){
-								addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
-								logger.info("Code envoyé");
-								return "gotoPushCode";
-							}
-							else{
-								logger.info("Erreur lors de l'envoi du code");
-								addErrorMessage(null, "CODE.ERROR.SENDING");
-							}
-						}
-						
-												
-						else{//si les deux sont null
-							//Vous n'avez encore jamais renseigné un email perso ou votre numero de portable. Il est impossbile donc de vous envoyer un code de reinitialisation de mot de passe
-							addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
-							addErrorMessage(null, "IDENTIFICATION.MESSAGE.NONECANAL");
-						}
-				
-					}
-					else if(activ){
-						logger.info("Compte déja activé");
-						addErrorMessage(null, "IDENTIFICATION.ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
-					}
+				}else if(activ){
+					logger.info("Construction de la liste des informations personnelles du compte");
+					this.buildListPersoInfo(attrPersoInfo);
+					this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+					return "gotoPersonalInfo";
 				}
 			}
 			else {
-				logger.info("Identifation utilisateur non valide");
-				addErrorMessage(null, "IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
+					
+				if (reinit){
+					logger.info("Construction de la liste des informations personnelles du compte");
+					this.buildListPersoInfo(attrPersoInfo);
+					List<String> listPossibleChannels = currentAccount.getAttributes(accountPossibleChannelsKey);
+						
+					if (listPossibleChannels.size()>1){
+						buildListBeanCanal(listPossibleChannels);
+						this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+						return "gotoChoice"; 	
+					}
+						
+					else if (listPossibleChannels.size()==1){
+							
+						currentAccount.setOneChoiceCanal(listPossibleChannels.get(0));
+						if (this.getDomainService().getCode(currentAccount.getAttribute(this.accountIdKey),listPossibleChannels.get(0))){
+							addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+							logger.info("Code envoyé");
+							return "gotoPushCode";
+						}
+						else{
+							logger.info("Erreur lors de l'envoi du code");
+							addErrorMessage(null, "CODE.ERROR.SENDING");
+						}
+					}
+						
+												
+					else{//si les deux sont null
+						//Vous n'avez encore jamais renseigné un email perso ou votre numero de portable. Il est impossbile donc de vous envoyer un code de reinitialisation de mot de passe
+						addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+						addErrorMessage(null, "IDENTIFICATION.MESSAGE.NONECANAL");
+					}
+				
+				}
+				else if(activ){
+					logger.info("Compte déja activé");
+					addErrorMessage(null, "IDENTIFICATION.ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
+				}
 			}
+			
 		}
 		catch (LdapProblemException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
 			
+		}catch (AuthentificationException e) {
+			logger.error(e.getMessage());
+			addErrorMessage(null, "IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
+			
 		}
+		
 		
 		return null;
 	}
