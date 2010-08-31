@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import org.esupportail.activfo.exceptions.AuthentificationException;
+import org.esupportail.activfo.exceptions.ChannelException;
 import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
@@ -24,7 +25,7 @@ public interface AccountManagement {
 	
 	public boolean validateCode(String id,String code)throws UserPermissionException;
 	
-	public boolean getCode(String id,String canal)throws LdapProblemException;
+	public void sendCode(String id,String canal)throws ChannelException;
 		
 	public HashMap<String,String> authentificateUser(String id,String password,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException;
 
