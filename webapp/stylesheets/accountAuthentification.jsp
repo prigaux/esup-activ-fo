@@ -26,7 +26,7 @@
 			<e:inputSecret id="password" value="#{beanPassword.value}" required="#{beanPassword.required}" validator="#{beanPassword.validator.validate}" > </e:inputSecret>
 			<h:outputLink  styleClass="help" value="#" rendered="#{beanPassword.help!=null}">
 				<h:graphicImage url="../media/help.jpg"  style="border: 0;"/>
-				<h:outputText value="#{msgs[beanPassword.help]}"/>
+				<h:outputText id="help" value="#{msgs[beanPassword.help]}"/>
 			</h:outputLink>
 			<e:message for="password" />
 		</e:panelGrid>

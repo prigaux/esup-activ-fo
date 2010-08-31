@@ -25,7 +25,7 @@
 			</e:inputText>
 			<h:outputLink  styleClass="help" id="rolloverImage" value="#" rendered="#{beanCode.help!=null}">
 				<h:graphicImage url="../media/help.jpg"  style="border: 0;"/>
-				<h:outputText  value="#{msgs[beanCode.help]}"/>
+				<h:outputText  id="help" value="#{msgs[beanCode.help]}"/>
 			</h:outputLink>
 		</e:panelGrid>
 		

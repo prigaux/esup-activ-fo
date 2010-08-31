@@ -168,9 +168,9 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 	  		<e:inputSecret id="password" value="#{beanNewPassword.value}"
 	     		required="#{beanNewPassword.required}" onkeyup="updatestrength( this.value, '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYSTRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.STRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.MEDIUM']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.WEAK']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}');" validator="#{beanNewPassword.validator.validate}" >
 	  		</e:inputSecret>
-	  		<h:outputLink styleClass="help" id="rolloverImage" value="#" rendered="#{beanNewPassword.help!=null}" styleClass="help">
-				<h:graphicImage  url="../media/help.jpg"  style="border: 0;"/>
-				<h:outputText  value="#{msgs[beanNewPassword.help]}"/>
+	  		<h:outputLink styleClass="help" id="rolloverImage" value="#" rendered="#{beanNewPassword.help!=null}" >
+				<h:graphicImage id="w3c" url="../media/help.jpg"  style="border: 0;"/>
+				<h:outputText id="help" value="#{msgs[beanNewPassword.help]}"/>
 			</h:outputLink>
 			<e:message for="password" />
 	  	</e:panelGrid>

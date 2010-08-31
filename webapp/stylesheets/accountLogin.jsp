@@ -19,7 +19,7 @@
 			<e:inputText id="login" value="#{beanNewLogin.value}" required="#{beanNewLogin.required}" validator="#{beanNewLogin.validator.validate}"> </e:inputText>
 			<h:outputLink  styleClass="help" id="rolloverImage" value="#" rendered="#{beanNewLogin.help!=null}">
 				<h:graphicImage  url="../media/help.jpg"  style="border: 0;"/>
-				<h:outputText  value="#{msgs[beanNewLogin.help]}"/>
+				<h:outputText id="help" value="#{msgs[beanNewLogin.help]}"/>
 			</h:outputLink>
 			<e:message for="newlogin" />
 		</e:panelGrid>

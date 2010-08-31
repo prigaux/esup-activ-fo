@@ -18,13 +18,13 @@
 	
 	<e:messages/>
 	
-	<e:paragraph escape="false" value="#{msgs['IDENTIFICATION.TEXT.TOP']}" />
+	
 
 
 	<h:form id="accountForm" rendered="#{accountController.currentAccount.activated == false}">
 	
 	
-		
+		<e:paragraph  escape="false" value="#{msgs['IDENTIFICATION.TEXT.TOP']}" />
 		
 		<t:dataList value="#{accountController.listInfoToValidate}" var="entry"> 
 		
@@ -36,7 +36,7 @@
 				
 				<h:outputLink  styleClass="help" value="#"  rendered="#{entry.help!=null}">
 					<h:graphicImage url="../media/help.jpg"  style="border: 0;"/>
-					<h:outputText value="#{msgs[entry.help]}"/>
+					<h:outputText id="help" value="#{msgs[entry.help]}"/>
 				</h:outputLink>
 						
 			</e:panelGrid>
