@@ -18,13 +18,13 @@
 	
 	<e:messages/>
 	
-	<e:text escape="false" value="#{msgs['IDENTIFICATION.TEXT.TOP']}"/>
+	<e:paragraph escape="false" value="#{msgs['IDENTIFICATION.TEXT.TOP']}" />
 
 
 	<h:form id="accountForm" rendered="#{accountController.currentAccount.activated == false}">
 	
 	
-		<e:paragraph value="#{msgs['IDENTIFICATION.TEXT.TOP']}" />
+		
 		
 		<t:dataList value="#{accountController.listInfoToValidate}" var="entry"> 
 		
