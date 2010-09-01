@@ -298,10 +298,10 @@ public class AccountController extends AbstractContextAwareController implements
 				int i=0;
 				while(it.hasNext()){
 					BeanField beanPersoInfo=(BeanField)it.next();
-					if (beanPersoInfo.getValue()!=null){
+					if ("".equals(beanPersoInfo.getValue()) || beanPersoInfo.getValue()==null ){
 						hashBeanPersoInfo.put(attrPersoInfo.get(i), beanPersoInfo.getValue().toString());
 					}
-					else{
+					else {
 						hashBeanPersoInfo.put(attrPersoInfo.get(i), null);
 					}
 					i++;
