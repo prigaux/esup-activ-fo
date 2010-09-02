@@ -306,10 +306,11 @@ public class AccountController extends AbstractContextAwareController implements
 					}
 					i++;
 				}
+				logger.info("Informations personnelles envoyées au BO pour mise à jour: "+hashBeanPersoInfo.toString());
 				
 				this.getDomainService().updatePersonalInformations(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),hashBeanPersoInfo);
 				
-				logger.info("Informations personnelles envoyées au BO pour mise à jour: "+hashBeanPersoInfo.toString());
+				
 					
 				this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
 					
