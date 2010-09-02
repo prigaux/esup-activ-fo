@@ -20,6 +20,7 @@ import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
 import org.esupportail.activfo.exceptions.LoginException;
+import org.esupportail.activfo.exceptions.PrincipalNotExistsException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.activfo.web.beans.BeanField;
 import org.esupportail.activfo.web.beans.BeanFieldImpl;
@@ -396,7 +397,7 @@ public class AccountController extends AbstractContextAwareController implements
 		try {
 			
 			this.getDomainService().changeLogin(currentAccount.getAttribute(accountIdKey), currentAccount.getAttribute(accountCodeKey), beanNewLogin.getValue().toString());
-			beanNewLogin.setValue("");
+			//beanNewLogin.setValue("");
 			logger.info("Changement de login réussi");
 			this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
 			return "gotoAccountEnabled";
@@ -410,9 +411,8 @@ public class AccountController extends AbstractContextAwareController implements
 		catch (LoginAlreadyExistsException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "LOGIN.MESSAGE.PROBLEM");
-		}
-	
-		catch (UserPermissionException e) {
+		
+		}catch (UserPermissionException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
 		
@@ -423,7 +423,31 @@ public class AccountController extends AbstractContextAwareController implements
 		}catch (LoginException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
+		
+		}catch (PrincipalNotExistsException e) {
 			
+			try{
+				this.getDomainService().setPassword(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(this.accountCodeKey),beanNewPassword.getValue().toString());
+				logger.info("Changement de login réussi");
+				this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
+				return "gotoAccountEnabled";
+			
+			}catch (LdapProblemException ex) {
+					logger.error(e.getMessage());
+					addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
+				
+				}catch (UserPermissionException ex) {
+					logger.error(e.getMessage());
+					addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
+				
+				}catch (KerberosException ex) {
+					logger.error(e.getMessage());
+					addErrorMessage(null, "KERBEROS.MESSAGE.PROBLEM");
+				
+				}catch (LoginException ex) {
+					logger.error(e.getMessage());
+					addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
+				}
 		}
 
 		return null;
@@ -493,7 +517,7 @@ public class AccountController extends AbstractContextAwareController implements
 			this.getDomainService().setPassword(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(this.accountCodeKey),beanNewPassword.getValue().toString());
 			logger.info("Changement de mot de passe réussi");
 			this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
-			beanNewPassword.setValue("");
+			//beanNewPassword.setValue("");
 			return "gotoAccountEnabled";
 
 		}
