@@ -33,7 +33,7 @@
 				<e:outputLabel value="#{msgs[entry.key]}" />
 				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25" validator="#{entry.validator.validate}" converter="#{entry.converter}" rendered="#{entry.converter!=null&&entry.validator!=null}"/>
 				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null&&entry.validator!=null}"/>
-				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25"  rendered="#{entry.converter==null&&entry.validator!=null}"/>
+				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25"  rendered="#{entry.converter==null&&entry.validator==null}"/>
 				
 				<h:outputLink  styleClass="help" value="#"  rendered="#{entry.help!=null}">
 					<h:graphicImage url="../media/help.jpg"  style="border: 0;"/>
