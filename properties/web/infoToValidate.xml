@@ -43,7 +43,6 @@
 
 		<property name="key" value="IDENTIFICATION.STUDENTNUMBER.TEXT.LABEL"/>
 		<property name="value" value=""/>
-		<property name="id" value="studentnumber"/>
 		<property name="help" value="IDENTIFICATION.STUDENTNUMBER.TEXT.HELP"/>
 		<property name="required" value="true" />
 				
