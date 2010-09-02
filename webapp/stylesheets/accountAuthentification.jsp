@@ -31,7 +31,7 @@
 		
 		<e:panelGrid columns="3" columnClasses="col1,col2,col3" >
 			<e:outputLabel for="password" value="#{msgs[beanPassword.key]}" />
-			<e:inputSecret id="password" value="#{beanPassword.value}" required="#{beanPassword.required}" validator="#{beanPassword.validator.validate}" > </e:inputSecret>
+			<e:inputSecret id="password" value="#{beanPassword.value}" required="#{beanPassword.required}"> </e:inputSecret>
 			<h:outputLink  styleClass="help" value="#" rendered="#{beanPassword.help!=null}">
 				<h:graphicImage url="../media/help.jpg"  style="border: 0;"/>
 				<h:outputText id="help" value="#{msgs[beanPassword.help]}"/>
