@@ -397,6 +397,7 @@ public class AccountController extends AbstractContextAwareController implements
 		try {
 			
 			this.getDomainService().changeLogin(currentAccount.getAttribute(accountIdKey), currentAccount.getAttribute(accountCodeKey), beanNewLogin.getValue().toString());
+			currentAccount.setAttribute(this.accountIdKey, beanNewLogin.getValue().toString());
 			//beanNewLogin.setValue("");
 			logger.info("Changement de login réussi");
 			this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
