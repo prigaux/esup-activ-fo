@@ -15,6 +15,7 @@ import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
 import org.esupportail.activfo.exceptions.LoginException;
+import org.esupportail.activfo.exceptions.PrincipalNotExistsException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
@@ -128,6 +129,6 @@ public interface DomainService extends Serializable {
 		
 	public boolean validateCode(String id,String code)throws UserPermissionException;
 	
-	public void changeLogin(String id, String code,String newLogin)throws LdapProblemException,UserPermissionException,KerberosException,LoginAlreadyExistsException,LoginException;
+	public void changeLogin(String id, String code,String newLogin)throws LdapProblemException,UserPermissionException,KerberosException,LoginAlreadyExistsException,LoginException,PrincipalNotExistsException;
 
 }	

@@ -18,6 +18,7 @@ import org.esupportail.activfo.exceptions.KerberosException;
 import org.esupportail.activfo.exceptions.LdapProblemException;
 import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
 import org.esupportail.activfo.exceptions.LoginException;
+import org.esupportail.activfo.exceptions.PrincipalNotExistsException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.activfo.services.client.AccountManagement;
 import org.esupportail.commons.exceptions.ConfigException;
@@ -280,7 +281,7 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		service.updatePersonalInformations(id,code,hashBeanPersoInfo);
 	}
 	
-	public void changeLogin(String id, String code,String newLogin)throws LdapProblemException,UserPermissionException,KerberosException,LoginAlreadyExistsException,LoginException{
+	public void changeLogin(String id, String code,String newLogin)throws LdapProblemException,UserPermissionException,KerberosException,LoginAlreadyExistsException,LoginException,PrincipalNotExistsException{
 		service.changeLogin(id, code, newLogin);
 	}
 	
