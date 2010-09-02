@@ -428,7 +428,7 @@ public class AccountController extends AbstractContextAwareController implements
 		}catch (PrincipalNotExistsException e) {
 			
 			try{
-				this.getDomainService().setPassword(beanNewLogin.getValue().toString(),currentAccount.getAttribute(this.accountCodeKey),beanNewPassword.getValue().toString());
+				this.getDomainService().setPassword(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(this.accountCodeKey),beanNewLogin.getValue().toString(),beanNewPassword.getValue().toString());
 				logger.info("Changement de login réussi");
 				this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
 				return "gotoAccountEnabled";

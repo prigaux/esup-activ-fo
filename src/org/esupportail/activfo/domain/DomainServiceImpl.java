@@ -272,11 +272,13 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	
 	
 	public void setPassword(String id,String code,final String currentPassword)throws LdapProblemException,UserPermissionException,KerberosException,LoginException {
-
 		service.setPassword(id,code,currentPassword);	
 	}
 	
-
+	public void setPassword(String id,String code,String newLogin,final String currentPassword)throws LdapProblemException,UserPermissionException,KerberosException,LoginException{
+		service.setPassword(id,code,newLogin,currentPassword);
+	}
+	
 	public void updatePersonalInformations(String id,String code, HashMap<String,String> hashBeanPersoInfo)throws LdapProblemException,UserPermissionException,LoginException{
 		service.updatePersonalInformations(id,code,hashBeanPersoInfo);
 	}

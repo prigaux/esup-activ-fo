@@ -13,8 +13,6 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	private String help;
 	private Converter converter;
 	private Validator validator;
-	private String id;
-	private String valueAcceptation;
 	private boolean required;
 	private String typeBean;
 	private boolean disabled;
@@ -40,18 +38,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	public void setRequired(boolean required) {
 		this.required = required;
 	}
-	public String getValueAcceptation() {
-		return valueAcceptation;
-	}
-	public void setValueAcceptation(String valueAcceptation) {
-		this.valueAcceptation = valueAcceptation;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 	public String getKey() {
 		return key;
 	}

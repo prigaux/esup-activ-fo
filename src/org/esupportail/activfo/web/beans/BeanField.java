@@ -32,14 +32,6 @@ public interface BeanField<T> {
 	
 	public void setConverter(Converter converter);
 	
-	public String getId();
-	
-	public void setId(String id);
-	
-	public String getValueAcceptation();
-	
-	public void setValueAcceptation(String valueAcceptation);
-	
 	public boolean isRequired();
 	
 	public void setRequired(boolean required);
