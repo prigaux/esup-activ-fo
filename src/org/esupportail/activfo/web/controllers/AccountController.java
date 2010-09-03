@@ -397,8 +397,7 @@ public class AccountController extends AbstractContextAwareController implements
 		try {
 			
 			this.getDomainService().changeLogin(currentAccount.getAttribute(accountIdKey), currentAccount.getAttribute(accountCodeKey), beanNewLogin.getValue().toString());
-			currentAccount.setAttribute(this.accountIdKey, beanNewLogin.getValue().toString());
-			//beanNewLogin.setValue("");
+			currentAccount.setId(beanNewLogin.getValue().toString());
 			logger.info("Changement de login réussi");
 			this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
 			return "gotoAccountEnabled";
@@ -429,7 +428,7 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			try{
 				this.getDomainService().setPassword(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(this.accountCodeKey),beanNewLogin.getValue().toString(),beanNewPassword.getValue().toString());
-				currentAccount.setAttribute(this.accountIdKey, beanNewLogin.getValue().toString());
+				currentAccount.setId(beanNewLogin.getValue().toString());
 				logger.info("Changement de login réussi");
 				this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
 				return "gotoAccountEnabled";
