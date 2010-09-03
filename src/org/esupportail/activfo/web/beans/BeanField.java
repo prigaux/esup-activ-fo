@@ -42,4 +42,7 @@ public interface BeanField<T> {
 	public boolean isDisabled();
 	public void setDisabled(boolean disabled);
 	
+	public String getId();
+	public void setId(String id);
+	
 }
