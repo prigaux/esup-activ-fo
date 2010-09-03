@@ -545,7 +545,7 @@ public class AccountController extends AbstractContextAwareController implements
 	}
 	
 	private void buildListPersoInfo(List<String>attrPersoInfo){
-			for(int i=0;i<attrPersoInfo.size();i++)
+			for(int i=0;i<attrPersoInfo.size()-1;i++)
 				
 				if (this.fieldTypeSelectBooleanCheckBox.equals(listBeanPersoInfo.get(i).getFieldType())){
 					listBeanPersoInfo.get(i).setValue(false);
@@ -594,13 +594,19 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	public String updateMailPersoForPresentation(String mailPerso){
 		String newMailPerso=null;
-		List<String>list=Arrays.asList(mailPerso.split("@"));
-		newMailPerso="xxxx@"+list.get(1);
+		if (mailPerso!=null){
+			List<String>list=Arrays.asList(mailPerso.split("@"));
+			newMailPerso="xxxx@"+list.get(1);
+		}
 		return newMailPerso;
 	}
 	
 	public String updatePagerForPresentation(String pager){
-		String newPager="xxxx"+pager.substring(4, 10);
+		
+		String newPager=null;
+		if (pager!=null){
+		newPager="xxxx"+pager.substring(4, 10);
+		}
 		return newPager;	
 	}
 	
