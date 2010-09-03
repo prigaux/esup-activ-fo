@@ -429,6 +429,7 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			try{
 				this.getDomainService().setPassword(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(this.accountCodeKey),beanNewLogin.getValue().toString(),beanNewPassword.getValue().toString());
+				currentAccount.setAttribute(this.accountIdKey, beanNewLogin.getValue().toString());
 				logger.info("Changement de login réussi");
 				this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
 				return "gotoAccountEnabled";
@@ -587,8 +588,21 @@ public class AccountController extends AbstractContextAwareController implements
 		currentAccount.setAttributes(this.convertHash(accountDescr));
 		currentAccount.setId(currentAccount.getAttribute(accountIdKey));
 		currentAccount.setMail(currentAccount.getAttribute(accountMailKey));
-		currentAccount.setEmailPerso(currentAccount.getAttribute(accountMailPersoKey));
-		currentAccount.setPager(currentAccount.getAttribute(accountPagerKey));
+		currentAccount.setEmailPerso(this.updateMailPersoForPresentation(currentAccount.getAttribute(accountMailPersoKey)));
+		currentAccount.setPager(this.updatePagerForPresentation(currentAccount.getAttribute(accountPagerKey)));
+	}
+	
+	
+	public String updateMailPersoForPresentation(String mailPerso){
+		String newMailPerso=null;
+		List<String>list=Arrays.asList(mailPerso.split("@"));
+		newMailPerso="xxxx@"+list.get(1);
+		return newMailPerso;
+	}
+	
+	public String updatePagerForPresentation(String pager){
+		String newPager="xxxx"+pager.substring(4, 10);
+		return newPager;	
 	}
 	
 	private void buildListBeanCanal(List<String>listPossibleChannels){
