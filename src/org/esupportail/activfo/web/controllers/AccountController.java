@@ -593,8 +593,9 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	
 	public String updateMailPersoForPresentation(String mailPerso){
-		String newMailPerso=null;
-		if (mailPerso!=null | !"".equals(mailPerso)){
+		
+		String newMailPerso="";
+		if (!"".equals(mailPerso)){
 			List<String>list=Arrays.asList(mailPerso.split("@"));
 			newMailPerso="xxxx@"+list.get(1);
 		}
@@ -603,8 +604,8 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	public String updatePagerForPresentation(String pager){
 		
-		String newPager=null;
-		if (pager!=null | !"".equals(pager)){
+		String newPager="";
+		if (!"".equals(pager)){
 		newPager="xxxx"+pager.substring(4, 10);
 		}
 		return newPager;	
