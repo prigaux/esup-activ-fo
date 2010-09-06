@@ -7,11 +7,11 @@
 		
 		
 	<e:paragraph escape="false" value="#{msgs['CODE.TEXT.MAILPERSO.TOP']}" rendered="#{accountController.currentAccount.oneChoiceCanal==accountController.accountMailPersoKey}">
-		  <f:param value="#{accountController.currentAccount.emailPerso}" />
+		  <f:param value="#{accountController.partialMailPerso}" />
 	</e:paragraph>
 	
 	<e:paragraph escape="false" value="#{msgs['CODE.TEXT.PAGER.TOP']}" rendered="#{accountController.currentAccount.oneChoiceCanal==accountController.accountPagerKey}">
-		  <f:param value="#{accountController.currentAccount.pager}" />
+		  <f:param value="#{accountController.partialPager}" />
 	</e:paragraph>
 	
 	<e:paragraph escape="false" value="#{msgs['CODE.TEXT.GEST.TOP']}" rendered="#{accountController.currentAccount.oneChoiceCanal==accountController.accountGestKey}">

@@ -16,8 +16,8 @@
 	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
 		
 		<e:paragraph escape="false" value="#{msgs['CHOICE.TEXT.TOP']}">
-		  <f:param value="#{accountController.currentAccount.emailPerso}" />
-		  <f:param value="#{accountController.currentAccount.pager}" />
+		  <f:param value="#{accountController.partialMailPerso}" />
+		  <f:param value="#{accountController.partialPager}" />
 		</e:paragraph>
 		
 		<t:div>
