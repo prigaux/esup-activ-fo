@@ -7,7 +7,6 @@ package org.esupportail.activfo.web.controllers;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -67,7 +66,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String attributesInfPerso;
 	
 	
-	//liste générique d'attributs à valider
+	//liste gï¿½nï¿½rique d'attributs ï¿½ valider
 	private List<String> attrToValidate;
 	
 	private String attributesStudentToValidate;
@@ -76,7 +75,7 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	
 	
-	//liste générique des champs pour la validation
+	//liste gï¿½nï¿½rique des champs pour la validation
 	private List<BeanField> listInfoToValidate;
 	
 	private List<BeanField> listInfoStudentToValidate;
@@ -110,7 +109,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private BeanField beanNewLogin;
 	
 	
-	//decriptif du compte suite à validation
+	//decriptif du compte suite ï¿½ validation
 	HashMap<String,String> accountDescr=new HashMap<String,String>();
 	
 	private String procedureReinitialisation;
@@ -204,7 +203,7 @@ public class AccountController extends AbstractContextAwareController implements
 			HashMap<String,String> hashInfToValidate;
 			hashInfToValidate=this.getMap(listInfoToValidate, attrToValidate);
 
-			logger.info("La validation concerne les données suivantes: "+hashInfToValidate.toString());
+			logger.info("La validation concerne les donnï¿½es suivantes: "+hashInfToValidate.toString());
 
 			//Attributs concernant les informations personnelles que l'on souhaite afficher
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
@@ -219,7 +218,7 @@ public class AccountController extends AbstractContextAwareController implements
 				
 			if (currentAccount.getAttribute(accountCodeKey)!=null) {
 				if (reinit){
-					logger.info("Reinitialisation impossible, compte non activé");
+					logger.info("Reinitialisation impossible, compte non activï¿½");
 					this.addErrorMessage(null, "IDENTIFICATION.REINITIALISATION.MESSAGE.ACCOUNT.NONACTIVATED");
 
 				}else if(activ){
@@ -247,7 +246,7 @@ public class AccountController extends AbstractContextAwareController implements
 						currentAccount.setOneChoiceCanal(listPossibleChannels.get(0));
 						this.getDomainService().sendCode(currentAccount.getAttribute(this.accountIdKey),listPossibleChannels.get(0));
 						addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
-						logger.debug("Code envoyé");
+						logger.debug("Code envoyï¿½");
 						return "gotoPushCode";
 						
 					}
@@ -260,7 +259,7 @@ public class AccountController extends AbstractContextAwareController implements
 				
 				}
 				else if(activ){
-					logger.info("Compte déja activé");
+					logger.info("Compte dï¿½ja activï¿½");
 					addErrorMessage(null, "IDENTIFICATION.ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
 				}
 			}
@@ -293,7 +292,7 @@ public class AccountController extends AbstractContextAwareController implements
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			
 			try{
-				logger.info("Mise à jour des informations personnelles");
+				logger.info("Mise ï¿½ jour des informations personnelles");
 				HashMap<String,String> hashBeanPersoInfo=new HashMap<String,String>();
 				Iterator it=listBeanPersoInfo.iterator();
 				int i=0;
@@ -307,7 +306,7 @@ public class AccountController extends AbstractContextAwareController implements
 					}
 					i++;
 				}
-				logger.info("Informations personnelles envoyées au BO pour mise à jour: "+hashBeanPersoInfo.toString());
+				logger.info("Informations personnelles envoyï¿½es au BO pour mise ï¿½ jour: "+hashBeanPersoInfo.toString());
 				
 				this.getDomainService().updatePersonalInformations(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),hashBeanPersoInfo);
 				
@@ -352,7 +351,7 @@ public class AccountController extends AbstractContextAwareController implements
 						
 			if (accountDescr!=null){
 				
-				logger.info("Authentification réusssie");
+				logger.info("Authentification rï¿½usssie");
 				this.updateCurrentAccount();
 								
 				if (currentAccount.getAttribute(accountCodeKey)!=null) {
@@ -362,7 +361,7 @@ public class AccountController extends AbstractContextAwareController implements
 					return "gotoPersonalInfo";
 				}
 				else{
-					logger.info("Changement de mot de passe impossible, compte non activé");
+					logger.info("Changement de mot de passe impossible, compte non activï¿½");
 					this.addErrorMessage(null, "AUTHENTIFICATION.MESSAGE.ACCOUNT.NONACTIVATED");
 				}
 			
@@ -398,7 +397,7 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			this.getDomainService().changeLogin(currentAccount.getAttribute(accountIdKey), currentAccount.getAttribute(accountCodeKey), beanNewLogin.getValue().toString());
 			currentAccount.setId(beanNewLogin.getValue().toString());
-			logger.info("Changement de login réussi");
+			logger.info("Changement de login rï¿½ussi");
 			this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
 			return "gotoAccountEnabled";
 			
@@ -429,7 +428,7 @@ public class AccountController extends AbstractContextAwareController implements
 			try{
 				this.getDomainService().setPassword(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(this.accountCodeKey),beanNewLogin.getValue().toString(),beanNewPassword.getValue().toString());
 				currentAccount.setId(beanNewLogin.getValue().toString());
-				logger.info("Changement de login réussi");
+				logger.info("Changement de login rï¿½ussi");
 				this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
 				return "gotoAccountEnabled";
 			
@@ -459,7 +458,7 @@ public class AccountController extends AbstractContextAwareController implements
 		try{
 			
 			this.getDomainService().sendCode(currentAccount.getAttribute(accountIdKey),currentAccount.getOneChoiceCanal());
-			logger.info("Code envoyé par le FO sur le canal choisi par l'utilisateur");
+			logger.info("Code envoyï¿½ par le FO sur le canal choisi par l'utilisateur");
 			return "gotoPushCode";
 			
 					
@@ -476,7 +475,7 @@ public class AccountController extends AbstractContextAwareController implements
 		try{
 			currentAccount.setAttribute(this.accountCodeKey, beanCode.getValue().toString());//.setCode(beanCode.getValue().toString());
 			if (this.getDomainService().validateCode(currentAccount.getAttribute(accountIdKey), currentAccount.getAttribute(accountCodeKey))){
-				logger.info("Code renseigné valide");
+				logger.info("Code renseignï¿½ valide");
 				this.addInfoMessage(null, "CODE.MESSAGE.CODESUCCESSFULL");
 				beanCode.setValue("");
 				return "gotoPersonalInfo";
@@ -499,12 +498,12 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushCharterAgreement() {
 	
 			if (currentAccount.isCharterAgreement()){
-				logger.info("Charte acceptée");
+				logger.info("Charte acceptï¿½e");
 				this.addInfoMessage(null, "CHARTER.MESSAGE.AGREE.SUCCESSFULL");
 				return "gotoPasswordChange";
 			}
 			
-			logger.info("Charte non acceptée");
+			logger.info("Charte non acceptï¿½e");
 			this.addErrorMessage(null, "CHARTER.MESSAGE.AGREE.UNSUCCESSFULL");
 			return null;
 	}
@@ -516,7 +515,7 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushChangePassword() {
 		try {
 			this.getDomainService().setPassword(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(this.accountCodeKey),beanNewPassword.getValue().toString());
-			logger.info("Changement de mot de passe réussi");
+			logger.info("Changement de mot de passe rï¿½ussi");
 			this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
 			//beanNewPassword.setValue("");
 			return "gotoAccountEnabled";
@@ -545,7 +544,7 @@ public class AccountController extends AbstractContextAwareController implements
 	}
 	
 	private void buildListPersoInfo(List<String>attrPersoInfo){
-			for(int i=0;i<attrPersoInfo.size()-1;i++)
+			for(int i=0;i<attrPersoInfo.size();i++)
 				
 				if (this.fieldTypeSelectBooleanCheckBox.equals(listBeanPersoInfo.get(i).getFieldType())){
 					listBeanPersoInfo.get(i).setValue(false);
@@ -587,23 +586,22 @@ public class AccountController extends AbstractContextAwareController implements
 		currentAccount.setAttributes(this.convertHash(accountDescr));
 		currentAccount.setId(currentAccount.getAttribute(accountIdKey));
 		currentAccount.setMail(currentAccount.getAttribute(accountMailKey));
-		currentAccount.setEmailPerso(this.updateMailPersoForPresentation(currentAccount.getAttribute(accountMailPersoKey)));
-		currentAccount.setPager(this.updatePagerForPresentation(currentAccount.getAttribute(accountPagerKey)));
+		currentAccount.setEmailPerso(currentAccount.getAttribute(accountMailPersoKey));
+		currentAccount.setPager(currentAccount.getAttribute(accountPagerKey));
 	}
 	
 	
-	public String updateMailPersoForPresentation(String mailPerso){
-		
+	public String getPartialMailPerso(){
+		String mailPerso=currentAccount.getEmailPerso();
 		String newMailPerso="";
-		if (!"".equals(mailPerso)){
-			List<String>list=Arrays.asList(mailPerso.split("@"));
-			newMailPerso="xxxx@"+list.get(1);
+		if (!"".equals(mailPerso)){	
+			newMailPerso="xxxx"+mailPerso.substring(4);
 		}
 		return newMailPerso;
 	}
 	
-	public String updatePagerForPresentation(String pager){
-		
+	public String getPartialPager(){
+		String pager=currentAccount.getPager();
 		String newPager="";
 		if (!"".equals(pager)){
 		newPager="xxxx"+pager.substring(4, 10);

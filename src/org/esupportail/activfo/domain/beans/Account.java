@@ -116,7 +116,6 @@ public class Account implements InitializingBean {
 		this.pager = pager;
 	}
 
-	@Override
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
 		
