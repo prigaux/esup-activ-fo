@@ -16,6 +16,9 @@
 			value="org.esupportail.activfo.services.client.AccountManagement" />
 		<property name="wsdlDocumentUrl" 
 			value="${webservice.backoffice.access}" />
+		<property name="lookupServiceOnStartup">
+			<value type="boolean">false</value>
+		</property>
 </bean>
 
 
