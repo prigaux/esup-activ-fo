@@ -233,7 +233,7 @@ public class VersionningServiceImpl extends AbstractDomainAwareBean implements V
 			return false;
 		}
 		DatabaseUtils.update();
-		upgradeDatabaseIfNeeded("2.1.0");
+		upgradeDatabaseIfNeeded("0.1.0");
 		if (!getDatabaseVersion().equals(getApplicationService().getVersion())) {
 			setDatabaseVersion(getApplicationService().getVersion().toString(), false);
 		}
