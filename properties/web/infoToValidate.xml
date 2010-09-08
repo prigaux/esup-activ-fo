@@ -19,8 +19,7 @@
 		<property name="required" value="true" />
 		
 	</bean>
-	
-		
+			
 	<bean
 		id="beanBirthName"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
@@ -33,8 +32,7 @@
 		<property name="required" value="true" />
 				
 	</bean>
-	
-	
+		
 	<bean
 		id="beanStudentNumber"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
@@ -48,9 +46,6 @@
 		<property name="required" value="true" />
 				
 	</bean>
-	
-	
-	
 	
 	<bean
 		id="beanBirthDate"
@@ -66,8 +61,4 @@
 		
 	</bean>
 	
-	
-	
-	
-
 </beans>
