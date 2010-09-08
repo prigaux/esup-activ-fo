@@ -6,6 +6,7 @@
 		properties/auth/auth.xml
 		properties/cache/cache.xml
 		properties/cache/ehcache.xml
+		properties/client/client.xml
 		properties/dao/hibernate/mapping/*
 		properties/dao/hibernate/hibernate-*.cfg.xml
 		properties/dao/dao.xml
@@ -25,10 +26,11 @@
 		properties/misc/application.xml
 		properties/smtp/smtp.xml
 		properties/tags/tags.xml
-		properties/web/controllers.xml
-		properties/web/converters.xml
+		properties/web/*.xml
 		properties/applicationContext.xml
 		properties/defaults.properties
+		properties/defaults-portlet.properties
+		properties/defaults-servlet.properties
 		src/**/*.java 
 		src/**/*.html 
     	webapp/media/**/*
