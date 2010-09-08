@@ -595,7 +595,7 @@ public class AccountController extends AbstractContextAwareController implements
 		String mailPerso=currentAccount.getEmailPerso();
 		String newMailPerso="";
 		if (!"".equals(mailPerso)){	
-			newMailPerso="xxxx"+mailPerso.substring(4);
+			newMailPerso="xxxxxx"+mailPerso.substring(6);
 		}
 		return newMailPerso;
 	}
@@ -604,7 +604,7 @@ public class AccountController extends AbstractContextAwareController implements
 		String pager=currentAccount.getPager();
 		String newPager="";
 		if (!"".equals(pager)){
-		newPager="xxxx"+pager.substring(4, 10);
+		newPager="XXXXXX"+pager.substring(6);
 		}
 		return newPager;	
 	}
