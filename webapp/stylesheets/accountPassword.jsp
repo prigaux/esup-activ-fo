@@ -175,14 +175,16 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
       		<h:panelGroup>      		
 	      		<h:outputText  id="verdict" value="#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}" />
 	      		<t:htmlTag value="div" id="strengthbar" style="font-size: 1px; height: 3px; width: 0px; border: 1px solid white;" ></t:htmlTag>
-	      	</h:panelGroup>	      	      		      		      		
+	      	</h:panelGroup>	   
+	      	<t:htmlTag value="span"/>   	      		      		      		
       		<e:message for="verdict" /> 
-			<t:htmlTag value="span"/>
+			
 			 
   			<e:outputLabel for="password" value="#{msgs['PASSWORD.TEXT.LABEL.VERIFYPASSWORD']}" />
 			<e:inputSecret id="verifyPassword" required="true"  >
 				<t:validateEqual for="password" />
 			</e:inputSecret>
+			<t:htmlTag value="span"/>
   			<e:message for="verifyPassword" /> 
 		</e:panelGrid>
 									
