@@ -1,4 +1,6 @@
 <%@include file="_include.jsp"%>
+<%@include file="_includeScript.jsp"%>
+
 <e:page stringsVar="msgs" menuItem="account"
 	locale="#{sessionController.locale}">
 	<%@include file="_navigation.jsp"%>
@@ -23,10 +25,7 @@
 			<e:outputLabel for="code" value="#{msgs[beanCode.key]}" />
 			<e:inputText id="code" value="#{beanCode.value}" required="#{beanCode.required}" validator="#{beanCode.validator.validate}">
 			</e:inputText>
-			<h:outputLink  styleClass="help" id="rolloverImage" value="#" rendered="#{beanCode.help!=null}">
-				<h:graphicImage url="../media/help.jpg"  style="border: 0;"/>
-				<h:outputText  id="help" value="#{msgs[beanCode.help]}"/>
-			</h:outputLink>
+		    <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanCode.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{beanCode.help!=null}"/>
 		</e:panelGrid>
 		
 		<t:div style="margin-top:30;">

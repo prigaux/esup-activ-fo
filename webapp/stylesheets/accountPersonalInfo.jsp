@@ -1,4 +1,6 @@
 <%@include file="_include.jsp"%>
+<%@include file="_includeScript.jsp"%>
+
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 	
 	<t:documentHead>
@@ -22,22 +24,17 @@
 	
 	
 		
-	<t:dataList value="#{accountController.listBeanPersoInfo}" var="entry" style="myStyle"> 
-							<e:panelGrid columns="3" columnClasses="col1,col2,col3" >
-						
+	<h:dataTable value="#{accountController.listBeanPersoInfo}" var="entry"> 
+					<h:column>						
 						<e:outputLabel value="#{msgs[entry.key]}" />
+					</h:column>
+					<h:column>		
 						<e:inputText value="#{entry.value}"  required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null}"/>
-
-						<d:selectBooleanCheckbox  value="#{entry.value}"  rendered="#{entry.fieldType=='selectBooleanCheckbox'}" converter="#{entry.converter}"/>
-						<h:outputLink  styleClass="help" id="rolloverImage" value="#" onclick="drawAlert('#{entry.help}')" rendered="#{entry.help!=null}">
-							<h:graphicImage  url="../media/help.jpg"  style="border: 0;"/>
-							<h:outputText id="help" value="#{msgs[entry.help]}"/>
-						</h:outputLink>
-					</e:panelGrid>
-			
-				
-		
-	</t:dataList>
+					</h:column>
+					<h:column>			
+						<h:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
+					</h:column>										
+	</h:dataTable>
 	
 	
 	<t:div style="margin-top:30;">

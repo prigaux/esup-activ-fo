@@ -1,4 +1,6 @@
 <%@include file="_include.jsp"%>
+<%@include file="_includeScript.jsp"%>
+
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 	
 		
@@ -16,20 +18,16 @@
 	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
 		
 		
-		<e:panelGrid columns="3" columnClasses="col1,col2,col3" >
+		<e:panelGrid columns="4">
 			<e:outputLabel for="newlogin" value="#{msgs[beanNewLogin.key]}" />
 			<e:inputText id="login" value="#{beanNewLogin.value}" required="#{beanNewLogin.required}" validator="#{beanNewLogin.validator.validate}"> </e:inputText>
-			<h:outputLink  styleClass="help" id="rolloverImage" value="#" rendered="#{beanNewLogin.help!=null}">
-				<h:graphicImage  url="../media/help.jpg"  style="border: 0;"/>
-				<h:outputText id="help" value="#{msgs[beanNewLogin.help]}"/>
-			</h:outputLink>
+			<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanNewLogin.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{beanNewLogin.help!=null}"/>
 			<e:message for="newlogin" />
 		</e:panelGrid>
-		
-				
-			<t:div style="margin-top:30;">
-			<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushLogin}" />
-			</t:div>
+						
+		<t:div style="margin-top:30;">
+		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushLogin}" />
+		</t:div>
 	</h:form>
 	
 	<h:form>

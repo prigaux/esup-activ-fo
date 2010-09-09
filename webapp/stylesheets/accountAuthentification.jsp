@@ -1,4 +1,5 @@
 <%@include file="_include.jsp"%>
+
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 	
 	<%-- Data mustn't be recorded in this form, even by using back button --%> 
@@ -6,6 +7,9 @@
 		<meta http-equiv="Expires" content="0">
 		<meta http-equiv="cache-control" content="no-cache,no-store">
 		<meta http-equiv="pragma" content="no-cache">
+		
+		<%@include file="_includeScript.jsp"%>
+		
 	</t:documentHead>
 	
 	<%@include file="_navigation.jsp"%>
@@ -19,33 +23,22 @@
 	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
 		
 		
-		<e:panelGrid columns="3" columnClasses="col1,col2,col3" >
+		<e:panelGrid columns="4">
 			<e:outputLabel for="login" value="#{msgs[beanLogin.key]}" />
 			<e:inputText id="login" value="#{beanLogin.value}" required="#{beanLogin.required}" validator="#{beanLogin.validator.validate}"> </e:inputText>
-			<h:outputLink id="rolloverImage" value="#" rendered="#{beanLogin.help!=null}">
-				<h:graphicImage id="w3c" url="../media/aide.jpg"  style="border: 0;"/>
-				<h:outputText id="help" value="#{msgs[beanLogin.help]}"/>
-			</h:outputLink>
+			<t:graphicImage styleClass="helpTip" longdesc="#{msgs[beanLogin.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{beanLogin.help!=null}"/>
+			<t:htmlTag value="span" rendered="#{beanLogin.help==null}"/>
 			<e:message for="login" />
-		</e:panelGrid>
-		
-		<e:panelGrid columns="3" columnClasses="col1,col2,col3" >
+
 			<e:outputLabel for="password" value="#{msgs[beanPassword.key]}" />
 			<e:inputSecret id="password" value="#{beanPassword.value}" required="#{beanPassword.required}"> </e:inputSecret>
-			<h:outputLink  styleClass="help" value="#" rendered="#{beanPassword.help!=null}">
-				<h:graphicImage url="../media/help.jpg"  style="border: 0;"/>
-				<h:outputText id="help" value="#{msgs[beanPassword.help]}"/>
-			</h:outputLink>
+			<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanPassword.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{beanPassword.help!=null}"/>
 			<e:message for="password" />
 		</e:panelGrid>
-		
-		
-			
-			
-			
-			<t:div style="margin-top:30;">
-			<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushAuthentificate}" />
-			</t:div>
+												
+		<t:div style="margin-top:30;">
+		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushAuthentificate}" />
+		</t:div>
 	</h:form>
 	
 	<h:form>

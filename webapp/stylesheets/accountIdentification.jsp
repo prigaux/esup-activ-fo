@@ -1,7 +1,5 @@
 <%@include file="_include.jsp"%>
 
-
-
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 
 	<%-- Data mustn't be recorded in this form, even by using back button --%> 
@@ -9,6 +7,8 @@
 		<meta http-equiv="Expires" content="0">
 		<meta http-equiv="cache-control" content="no-cache,no-store">
 		<meta http-equiv="pragma" content="no-cache">
+		
+		<%@include file="_includeScript.jsp"%>
 	</t:documentHead>
 
 	<%@include file="_navigation.jsp"%>
@@ -25,24 +25,21 @@
 	
 	
 		<e:paragraph  escape="false" value="#{msgs['IDENTIFICATION.TEXT.TOP']}" />
-		
-		<t:dataList value="#{accountController.listInfoToValidate}" var="entry"> 
-		
-			<e:panelGrid columns="4" columnClasses="col1,col2,col3" rendered="#{entry.value!=null}">
-			
+	
+		<h:dataTable value="#{accountController.listInfoToValidate}" var="entry"> 
+		 	<h:column>						  					
 				<e:outputLabel value="#{msgs[entry.key]}" />
+			</h:column>
+			<h:column>						
 				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25" validator="#{entry.validator.validate}" converter="#{entry.converter}" rendered="#{entry.converter!=null&&entry.validator!=null}"/>
 				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null&&entry.validator!=null}"/>
 				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25"  rendered="#{entry.converter==null&&entry.validator==null}"/>
+			</h:column>
+			<h:column>									
+				<t:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
+			</h:column>													
+		</h:dataTable>
 				
-				<h:outputLink  styleClass="help" value="#"  rendered="#{entry.help!=null}">
-					<h:graphicImage url="../media/help.jpg"  style="border: 0;"/>
-					<h:outputText id="help" value="#{msgs[entry.help]}"/>
-				</h:outputLink>
-						
-			</e:panelGrid>
-		</t:dataList>
-		
 		<t:div style="margin-top:30;">
 			<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushValid}" />
 		</t:div>
