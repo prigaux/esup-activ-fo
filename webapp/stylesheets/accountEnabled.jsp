@@ -49,6 +49,10 @@
 		 	 
 	 <e:subSection value="#{msgs['ENABLED.SUBTITLE.ESUPACCESS']}" />
 	 <e:paragraph escape="false" value="#{msgs['ENABLED.TEXT.ESUPURL']}" />
+	 <h:form>
+		<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}"
+			action="#{exceptionController.restart}" />
+	</h:form>
 	 
 <% /* @include file="_debug.jsp" */ %>
 </e:page>
