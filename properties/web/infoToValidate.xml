@@ -47,6 +47,20 @@
 				
 	</bean>
 	
+		<bean
+		id="beanAlumStudentNumber"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="IDENTIFICATION.STUDENTNUMBER.TEXT.LABEL"/>
+		<property name="value" value=""/>
+		<property name="id" value="studentnumber"/>
+		<property name="help" value="IDENTIFICATION.ALUMSTUDENTNUMBER.TEXT.HELP"/>
+		<property name="required" value="true" />
+				
+	</bean>
+	
 	<bean
 		id="beanBirthDate"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"

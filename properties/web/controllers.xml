@@ -140,7 +140,7 @@
 		
 		<property name="listInfoOldStudentToValidate">
 			<list>
-				<ref bean="beanStudentNumber"/>
+				<ref bean="beanAlumStudentNumber"/>
 				<ref bean="beanBirthName"/>
 				<ref bean="beanBirthDate"/>
 			</list>
