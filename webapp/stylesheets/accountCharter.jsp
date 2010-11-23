@@ -3,8 +3,20 @@
 	locale="#{sessionController.locale}">
 	<%@include file="_navigation.jsp"%>
 	<e:section value="#{msgs['CHARTER.TITLE']}" />
+	
+	<t:div>
+	<table  border="0"  cellpadding="0" cellspacing="0" >
+	<tr>
+		<td><img src="/media/bouton-4etape-roll_01.jpg"></td>
+		<td><img src="/media/bouton-4etape-roll_02.jpg"></td>
+		<td><img src="/media/bouton-4etape_03.jpg"></td>
+		<td><img src="/media/bouton-4etape-roll_04.jpg"></td>
+	</tr>
+    </table>
+    </t:div>
+	
 	<e:messages />
-
+	
 	<e:paragraph escape="false" value="#{msgs['CHARTER.TEXT.TOP']}" />
 
 	<h:form id="accountForm"

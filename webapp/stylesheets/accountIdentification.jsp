@@ -16,13 +16,20 @@
 	<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}"rendered="#{accountController.reinit == true}" />
 	<e:section value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.TITLE']}"rendered="#{accountController.passwChange == true}" />
 	
+	<t:div>
+	<table  border="0"  cellpadding="0" cellspacing="0" >
+	<tr>
+		<td><img src="/media/bouton-4etape_01.jpg"></td>
+		<td><img src="/media/bouton-4etape-roll_02.jpg"></td>
+		<td><img src="/media/bouton-4etape-roll_03.jpg"></td>
+		<td><img src="/media/bouton-4etape-roll_04.jpg"></td>
+	</tr>
+    </table>
+    </t:div>
+	
 	<e:messages/>
-	
-	
-
 
 	<h:form id="accountForm" rendered="#{accountController.currentAccount.activated == false}">
-	
 	
 		<e:paragraph  escape="false" value="#{msgs['IDENTIFICATION.TEXT.TOP']}" />
 	
@@ -32,7 +39,7 @@
 			</h:column>
 			<h:column>						
 				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25" validator="#{entry.validator.validate}" converter="#{entry.converter}" rendered="#{entry.converter!=null&&entry.validator!=null}"/>
-				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null&&entry.validator!=null}"/>
+				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null&&entry.validator!=null}"/>	
 				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25"  rendered="#{entry.converter==null&&entry.validator==null}"/>
 			</h:column>
 			<h:column>									

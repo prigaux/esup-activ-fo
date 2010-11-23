@@ -15,6 +15,18 @@
 	<%@include file="_navigation.jsp"%>
 	<e:section value="#{msgs['AUTHENTIFICATION.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}"/>
 	<e:section value="#{msgs['AUTHENTIFICATION.LOGINCHANGE.TITLE']}" rendered="#{accountController.loginChange == true}"/>
+	
+	<t:div>
+	<table  border="0"  cellpadding="0" cellspacing="0" >
+	<tr>
+		<td><img src="/media/bouton-4etape_01.jpg"></td>
+		<td><img src="/media/bouton-4etape-roll_02.jpg"></td>
+		<td><img src="/media/bouton-4etape-roll_03.jpg"></td>
+		<td><img src="/media/bouton-4etape-roll_04.jpg"></td>
+	</tr>
+    </table>
+    </t:div>
+	
 	<e:messages />
 	
 	<e:paragraph escape="false" value="#{msgs['AUTHENTIFICATION.TEXT.TOP']}" />

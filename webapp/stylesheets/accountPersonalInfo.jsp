@@ -16,7 +16,20 @@
 	<e:section value="#{msgs['PERSOINFO.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}" />
 	<e:section value="#{msgs['PERSOINFO.LOGINCHANGE.TITLE']}" rendered="#{accountController.loginChange == true}" />
 
+    <t:div>
+	<table  border="0"  cellpadding="0" cellspacing="0" >
+	<tr>
+		<td><img src="/media/bouton-4etape-roll_01.jpg"></td>
+		<td><img src="/media/bouton-4etape_02.jpg"></td>
+		<td><img src="/media/bouton-4etape-roll_03.jpg"></td>
+		<td><img src="/media/bouton-4etape-roll_04.jpg"></td>
+	</tr>
+    </table>
+    </t:div>
+
 	<e:messages/>
+	
+	
 	
 	<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}" />
 	
@@ -29,17 +42,22 @@
 						<e:outputLabel value="#{msgs[entry.key]}" />
 					</h:column>
 					<h:column>		
-						<e:inputText value="#{entry.value}"  required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null}"/>
+					  <h:dataTable value="#{entry.values}" var="sub">              
+                          <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null}" />
+                          <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator==null}" />
+                     
+                      </h:dataTable>
 					</h:column>
 					<h:column>			
 						<h:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
 					</h:column>										
 	</h:dataTable>
-	
+										
 	
 	<t:div style="margin-top:30;">
 		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
 	</t:div>
+	
 	</h:form>
 	
 	<h:form>

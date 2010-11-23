@@ -6,7 +6,20 @@
 	<e:section value="#{msgs['PASSWORD.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}"/>
 	<e:section value="#{msgs['PASSWORD.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
 	<e:section value="#{msgs['PASSWORD.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}"/>
+	
+	<t:div>
+	<table  border="0"  cellpadding="0" cellspacing="0" >
+	<tr>
+		<td><img src="/media/bouton-4etape-roll_01.jpg"></td>
+		<td><img src="/media/bouton-4etape-roll_02.jpg"></td>
+		<td><img src="/media/bouton-4etape-roll_03.jpg"></td>
+		<td><img src="/media/bouton-4etape_04.jpg"></td>
+	</tr>
+    </table>
+    </t:div>
+	
 	<e:messages />
+	
 	<e:paragraph escape="false" value="#{msgs['PASSWORD.TEXT.TOP']}" rendered="#{accountController.passwChange == false}"/>
 	<e:paragraph escape="false" value="#{msgs['PASSWORD.CHANGEMENT.TEXT.TOP']}" rendered="#{accountController.passwChange == true}"/>
 
