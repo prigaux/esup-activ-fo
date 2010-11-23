@@ -56,5 +56,23 @@
 		
 	</bean>
 	
+	<bean  
+		id="beanEduPersonPrimaryAffiliation"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+		<property name="key" value="PERSOINFO.EDUPERSONPRIMARYAFFILIATION.TEXT.LABEL"/>
+		<property name="required" value="false" />
+	</bean>
+	
+	<bean  
+		id="beanEduPersonAffiliation"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+		<property name="key" value="PERSOINFO.EDUPERSONAFFILIATION.TEXT.LABEL"/>
+		<property name="required" value="false" />
+	</bean>
+	
 
 </beans>
