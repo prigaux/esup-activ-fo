@@ -133,4 +133,5 @@ public interface DomainService extends Serializable {
 	
 	public void changeLogin(String id, String code,String newLogin)throws LdapProblemException,UserPermissionException,KerberosException,LoginAlreadyExistsException,LoginException,PrincipalNotExistsException;
 
+
 }	

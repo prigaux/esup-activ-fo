@@ -4,8 +4,6 @@
  */
 package org.esupportail.activfo.domain;
 
-
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -262,8 +260,6 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	public void setDaoService(final DaoService daoService) {
 		this.daoService = daoService;
 	}
-
-	
 	
 	
 	public HashMap<String,String> validateAccount(HashMap<String,String> hashInfToValidate,List<String>attrPersoInfo) throws LdapProblemException,AuthentificationException,LoginException{
