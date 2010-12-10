@@ -23,6 +23,8 @@ import org.esupportail.activfo.exceptions.PrincipalNotExistsException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.activfo.web.beans.BeanField;
 import org.esupportail.activfo.web.beans.BeanFieldImpl;
+import org.esupportail.activfo.web.beans.BeanMultiValue;
+import org.esupportail.activfo.web.beans.BeanMultiValueImpl;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 
@@ -112,6 +114,7 @@ public class AccountController extends AbstractContextAwareController implements
 	//decriptif du compte suite � validation
 	HashMap<String,String> accountDescr=new HashMap<String,String>();
 	
+	
 	private String procedureReinitialisation;
 	private String procedureActivation;
 	private String procedurePasswordChange;
@@ -120,6 +123,8 @@ public class AccountController extends AbstractContextAwareController implements
 	private String statusStudent;
 	private String statusPersonnel;
 	private String statusOldStudent;
+	
+	private String separator;
 	
 	
 	/**
@@ -202,17 +207,21 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			HashMap<String,String> hashInfToValidate;
 			hashInfToValidate=this.getMap(listInfoToValidate, attrToValidate);
-
+			
 			logger.info("La validation concerne les donn�es suivantes: "+hashInfToValidate.toString());
-
+			
 			//Attributs concernant les informations personnelles que l'on souhaite afficher
+			
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			
 			accountDescr=this.getDomainService().validateAccount(hashInfToValidate,attrPersoInfo);
 			
+			logger.info("accoutDescr : "+accountDescr.toString());
+			
 			//recuperation liste pour attributs perso info
 				
 			logger.info("Identification valide");
+			
 			logger.info("accoutDescr: "+accountDescr.toString());
 			this.updateCurrentAccount();
 				
@@ -295,11 +304,26 @@ public class AccountController extends AbstractContextAwareController implements
 				logger.info("Mise � jour des informations personnelles");
 				HashMap<String,String> hashBeanPersoInfo=new HashMap<String,String>();
 				Iterator it=listBeanPersoInfo.iterator();
+				
 				int i=0;
 				while(it.hasNext()){
 					BeanField beanPersoInfo=(BeanField)it.next();
-					if (!"".equals(beanPersoInfo.getValue()) || beanPersoInfo.getValue()!=null ){
-						hashBeanPersoInfo.put(attrPersoInfo.get(i), beanPersoInfo.getValue().toString());
+					
+					List<BeanMultiValue> lbm = new ArrayList<BeanMultiValue>();
+					
+					Iterator itBeanPersoInfo=beanPersoInfo.getValues().iterator();
+					
+					String valueBeanMulti=null;
+					int j=0;
+					while(itBeanPersoInfo.hasNext()) {
+						BeanMultiValue bmv=(BeanMultiValue)itBeanPersoInfo.next();
+						if (j>0)valueBeanMulti+=getSeparator()+bmv.getValue();
+						else valueBeanMulti=bmv.getValue();
+						j++;
+					}
+					
+					if (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null ){
+						hashBeanPersoInfo.put(attrPersoInfo.get(i), valueBeanMulti);
 					}
 					else {
 						hashBeanPersoInfo.put(attrPersoInfo.get(i), null);
@@ -309,8 +333,6 @@ public class AccountController extends AbstractContextAwareController implements
 				logger.info("Informations personnelles envoy�es au BO pour mise � jour: "+hashBeanPersoInfo.toString());
 				
 				this.getDomainService().updatePersonalInformations(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),hashBeanPersoInfo);
-				
-				
 					
 				this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
 					
@@ -348,7 +370,7 @@ public class AccountController extends AbstractContextAwareController implements
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			
 			accountDescr=this.getDomainService().authentificateUser(beanLogin.getValue().toString(), beanPassword.getValue().toString(),attrPersoInfo);
-						
+				
 			if (accountDescr!=null){
 				
 				logger.info("Authentification r�usssie");
@@ -544,45 +566,72 @@ public class AccountController extends AbstractContextAwareController implements
 	}
 	
 	private void buildListPersoInfo(List<String>attrPersoInfo){
+		
 			for(int i=0;i<attrPersoInfo.size();i++)
+			{	
+				
+				/*
 				
 				if (this.fieldTypeSelectBooleanCheckBox.equals(listBeanPersoInfo.get(i).getFieldType())){
 					listBeanPersoInfo.get(i).setValue(false);
 				}	
 				
-				else listBeanPersoInfo.get(i).setValue(currentAccount.getAttribute(attrPersoInfo.get(i)));
+				else { 
+		
+					listBeanPersoInfo.get(i).setValues(currentAccount.getAttributes(attrPersoInfo.get(i)));
+				}
+				*/
 				
+				logger.debug("currentAccount attribute : "+currentAccount.getAttributes(attrPersoInfo.get(i)));
+				
+				List<BeanMultiValue> lbm = new ArrayList<BeanMultiValue>();
+	
+				for (String str : currentAccount.getAttributes(attrPersoInfo.get(i))) {
+					BeanMultiValue bmv = new BeanMultiValueImpl();
+					bmv.setValue(str);
+					lbm.add(bmv);
+				}
+				
+				listBeanPersoInfo.get(i).setValues(lbm);
+				
+
+				
+			}
 			
 	}
 
 	
 	private HashMap<String,String> getMap(List<BeanField> listeInfoToValidate,List<String>attrToValidate){
-		
+
 		HashMap<String,String> hashInfToValidate=new HashMap<String,String>();
-		Iterator it=listeInfoToValidate.iterator();
-		int j=0;
-		while(it.hasNext()){
-			BeanField beanInfoToValidate=(BeanField)it.next();
-			hashInfToValidate.put(attrToValidate.get(j), beanInfoToValidate.getValue().toString());
-			beanInfoToValidate.setValue("");//security reason
-			j++;
-		}
+	
+		for(int j=0;j<listeInfoToValidate.size();j++)
+			hashInfToValidate.put(attrToValidate.get(j), listeInfoToValidate.get(j).getValue().toString());
+		
 		return hashInfToValidate;
 		
 	}
+	
 	
 	public HashMap<String,List<String>> convertHash(HashMap<String,String> hash){
 		
 		HashMap<String,List<String>> newHash=new HashMap<String,List<String>>();
 		Iterator<Map.Entry<String, String>> it=hash.entrySet().iterator();
+		
+		
+		
 		while(it.hasNext()){
 			Map.Entry<String, String> e=it.next();
 			newHash.put(e.getKey(), Arrays.asList(e.getValue().split(",")));
+			//newHash.put(e.getKey(), Arrays.asList(e.getValue()));
 		}
 		return newHash;
 	}
 	
+	
 	public void updateCurrentAccount(){
+		//currentAccount.setAttributes(this.convertHash(accountDescr));
+		
 		currentAccount.setAttributes(this.convertHash(accountDescr));
 		currentAccount.setId(currentAccount.getAttribute(accountIdKey));
 		currentAccount.setMail(currentAccount.getAttribute(accountMailKey));
@@ -794,7 +843,7 @@ public class AccountController extends AbstractContextAwareController implements
 		return beanPassword;
 	}
 
-	public void setBeanPassword(BeanField beanPassword) {
+	public void setBeanPassword(BeanField convertListToStringbeanPassword) {
 		this.beanPassword = beanPassword;
 	}
 
@@ -989,5 +1038,17 @@ public class AccountController extends AbstractContextAwareController implements
 			String fieldTypeSelectBooleanCheckBox) {
 		this.fieldTypeSelectBooleanCheckBox = fieldTypeSelectBooleanCheckBox;
 	}
+
+
+	public String getSeparator() {
+		return separator;
+	}
+
+
+	public void setSeparator(String separator) {
+		this.separator = separator;
+	}
+	
+	
 
 }
