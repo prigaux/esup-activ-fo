@@ -29,29 +29,24 @@
 
 	<e:messages/>
 	
-	
-	
 	<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}" />
 	
 	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
-	
-	
-		
-	<h:dataTable value="#{accountController.listBeanPersoInfo}" var="entry"> 
-					<h:column>						
-						<e:outputLabel value="#{msgs[entry.key]}" />
-					</h:column>
-					<h:column>		
-					  <h:dataTable value="#{entry.values}" var="sub">              
-                          <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null}" />
-                          <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator==null}" />
-                     
-                      </h:dataTable>
-					</h:column>
-					<h:column>			
-						<h:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
-					</h:column>										
-	</h:dataTable>
+	  <h:dataTable value="#{accountController.listBeanPersoInfo}" var="entry" columnClasses="firstColumn,secondColumn,thirdColumn"> 
+		<h:column>						
+		  <e:outputLabel value="#{msgs[entry.key]}" />
+		</h:column>
+		<h:column>
+		  <t:dataList value="#{entry.values}" var="sub" style="Vertical-Align: Top;" >
+		    <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null}" />
+            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null}" />
+            <t:htmlTag value="br" />  
+          </t:dataList>
+        </h:column>  
+        <h:column>			
+		  <h:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
+		</h:column>										
+	  </h:dataTable>
 										
 	
 	<t:div style="margin-top:30;">
