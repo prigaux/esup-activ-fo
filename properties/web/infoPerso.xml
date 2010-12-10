@@ -17,7 +17,6 @@
 		<property name="help" value="PERSOINFO.DISPLAYNAME.TEXT.HELP"/>
 		<property name="required" value="true" />
 		
-		
 	</bean>
 	
 	<bean
