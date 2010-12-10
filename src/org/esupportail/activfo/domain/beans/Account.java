@@ -37,7 +37,7 @@ public class Account implements InitializingBean {
 	
 	private String pager;
 	
-	private HashMap<String, List<String>> attributes = new HashMap<String, List<String>>();
+	private HashMap<String, List<String>> attributes = new HashMap<String,List<String>>();
 	
 	private String oneRadioValue;
 	
@@ -118,10 +118,7 @@ public class Account implements InitializingBean {
 
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
-		
 	}
-
-	
 
 	public String getSmsAgreement() {
 		return smsAgreement;
@@ -169,21 +166,10 @@ public class Account implements InitializingBean {
 	}
 	
 	public void setAttribute(String name,String value) {
-		
-		List<String>liste;
+		ArrayList<String>liste;
 		liste=new ArrayList<String>();
-		
 		liste.add(value);
-		
 		attributes.put(name, liste);
 		
 	}
-
-	
-
-
-	
-	
-	
-
 }
