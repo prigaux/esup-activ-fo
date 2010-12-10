@@ -119,8 +119,8 @@
 				<ref bean="beanEmailPerso"/>
 				<ref bean="beanMobilePhone"/>
 			<!--  <ref bean="beanSMSAgreement"/> -->
-			    <ref bean="beanEduPersonPrimaryAffiliation"/> 
-			    <ref bean="beanEduPersonAffiliation"/>
+			     <ref bean="beanEduPersonPrimaryAffiliation"/> 
+			    <ref bean="beanEduPersonAffiliation"/>   
 			</list>
 		</property>
 		
@@ -175,10 +175,9 @@
 		
 		<property name="beanPassword" ref="beanPassword"/>
 		
+		<property name="separator" value="${sep.multiValue}"/>
 					
 	</bean>
-	
-	
 
 	<bean id="aboutController"
 		class="org.esupportail.activfo.web.controllers.AboutController"
@@ -187,8 +186,6 @@
     	>
 		<description>A bean to manage the about page.</description>
 	</bean>
-
-	
 
 	<bean id="exceptionController"
 		class="org.esupportail.commons.web.controllers.ExceptionController"
@@ -201,11 +198,7 @@
 		class="org.esupportail.activfo.domain.beans.Account"
 		scope="session"
     	>
-    	
-		
 	</bean>
-	
-	
 
 	<!-- uncomment this bean and include _debug.jsp to get debug info
 	<bean id="debugController"
