@@ -1,5 +1,8 @@
 package org.esupportail.activfo.web.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.faces.convert.Converter;
 
 import org.esupportail.activfo.web.validators.Validator;
@@ -17,6 +20,8 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	private String typeBean;
 	private boolean disabled;
 	private String id;
+	
+	private List<BeanMultiValue> values;
 	
 	
 	
@@ -82,6 +87,15 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	}
 	public void setHelp(String help) {
 		this.help = help;
+	}
+	
+	public List<BeanMultiValue> getValues()
+	{
+		return values;
+	}
+	public void setValues(List<BeanMultiValue> values){
+		this.values=values;
+		
 	}
 	
 }

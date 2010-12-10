@@ -1,5 +1,7 @@
 package org.esupportail.activfo.web.beans;
 
+import java.util.List;
+
 import javax.faces.convert.Converter;
 
 import org.esupportail.activfo.web.validators.Validator;
@@ -44,5 +46,9 @@ public interface BeanField<T> {
 	
 	public String getId();
 	public void setId(String id);
+	
+	public List<BeanMultiValue> getValues();
+	public void setValues(List<BeanMultiValue> values);
+	
 	
 }
