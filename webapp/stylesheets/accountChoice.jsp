@@ -1,4 +1,5 @@
 <%@include file="_include.jsp"%>
+<%@include file="_includeScript.jsp"%>
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 
 <%-- Data mustn't be recorded in this form, even by using back button --%> 
@@ -11,6 +12,17 @@
 <%@include file="_navigation.jsp"%>
 
 <e:section value="#{msgs['CHOICE.TITLE']}" />
+
+<t:div styleClass="secondStepImage" rendered="#{accountController.reinit == true}">
+	<ul id="processSteps">
+		<li id="firstStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE1.TEXT']}"></h:outputText></li>
+		<li id="currentTab"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE2.TEXT']}" ></h:outputText></li>
+		<li id="thirdStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE3.TEXT']}"></h:outputText></li>
+		<li id="fourthStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE4.TEXT']}"></h:outputText></li>
+		<li id="fifthStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE5.TEXT']}"></h:outputText></li>
+	</ul>
+</t:div>
+
 <e:messages />
 
 	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">

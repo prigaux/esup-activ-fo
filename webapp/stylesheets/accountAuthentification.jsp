@@ -16,16 +16,21 @@
 	<e:section value="#{msgs['AUTHENTIFICATION.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}"/>
 	<e:section value="#{msgs['AUTHENTIFICATION.LOGINCHANGE.TITLE']}" rendered="#{accountController.loginChange == true}"/>
 	
-	<t:div>
-	<table  border="0"  cellpadding="0" cellspacing="0" >
-	<tr>
-		<td><img src="/media/bouton-4etape_01.jpg"></td>
-		<td><img src="/media/bouton-4etape-roll_02.jpg"></td>
-		<td><img src="/media/bouton-4etape-roll_03.jpg"></td>
-		<td><img src="/media/bouton-4etape-roll_04.jpg"></td>
-	</tr>
-    </table>
-    </t:div>
+	<t:div styleClass="firstStepImage3fleches" rendered="#{accountController.passwChange == true}" >
+	<ul id="processSteps">
+		<li id="currentTab"><h:outputText value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE1.TEXT']}"></h:outputText></li>
+		<li id="secondStep"><h:outputText style="Vertical-Align:Top;" value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE2.TEXT']}"></h:outputText></li>
+		<li id="thirdStep"><h:outputText value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE3.TEXT']}"></h:outputText></li>
+	</ul>
+	</t:div>
+	
+	<t:div styleClass="firstStepImage3fleches" rendered="#{accountController.loginChange == true}" >
+	<ul id="processSteps">
+		<li id="currentTab"><h:outputText value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE1.TEXT']}"></h:outputText></li>
+		<li id="secondStep"><h:outputText style="Vertical-Align:Top;" value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE2.TEXT']}"></h:outputText></li>
+		<li id="thirdStep"><h:outputText value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE3.TEXT']}"></h:outputText></li>
+	</ul>
+	</t:div>
 	
 	<e:messages />
 	

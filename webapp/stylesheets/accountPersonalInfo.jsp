@@ -1,5 +1,6 @@
 <%@include file="_include.jsp"%>
 <%@include file="_includeScript.jsp"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 	
@@ -16,16 +17,40 @@
 	<e:section value="#{msgs['PERSOINFO.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}" />
 	<e:section value="#{msgs['PERSOINFO.LOGINCHANGE.TITLE']}" rendered="#{accountController.loginChange == true}" />
 
-    <t:div>
-	<table  border="0"  cellpadding="0" cellspacing="0" >
-	<tr>
-		<td><img src="/media/bouton-4etape-roll_01.jpg"></td>
-		<td><img src="/media/bouton-4etape_02.jpg"></td>
-		<td><img src="/media/bouton-4etape-roll_03.jpg"></td>
-		<td><img src="/media/bouton-4etape-roll_04.jpg"></td>
-	</tr>
-    </table>
-    </t:div>
+   
+    <t:div styleClass="secondStepImage" rendered="#{accountController.activ == true}">
+	<ul id="processSteps">
+		<li id="firstStep"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE1.TEXT']}"></h:outputText></li>
+		<li id="currentTab"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE2.TEXT']}"></h:outputText></li>
+		<li id="thirdStep"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE3.TEXT']}"></h:outputText></li>
+		<li id="fourthStep"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE4.TEXT']}"></h:outputText></li>
+	</ul>
+	</t:div>
+	
+	<t:div styleClass="fourthStepImage" rendered="#{accountController.reinit == true}">
+	<ul id="processSteps">
+		<li id="firstStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE1.TEXT']}"></h:outputText></li>
+		<li id="secondStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE2.TEXT']}" ></h:outputText></li>
+		<li id="thirdStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE3.TEXT']}"></h:outputText></li>
+		<li id="currentTab"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE4.TEXT']}"></h:outputText></li>
+		<li id="fifthStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE5.TEXT']}"></h:outputText></li>
+	</ul>
+	</t:div>
+	<t:div styleClass="secondStepImage3fleches" rendered="#{accountController.passwChange == true}" >
+	<ul id="processSteps">
+		<li id="firstStep"><h:outputText value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE1.TEXT']}"></h:outputText></li>
+		<li id="currentTab"><h:outputText value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE2.TEXT']}"></h:outputText></li>
+		<li id="thirdStep"><h:outputText value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE3.TEXT']}"></h:outputText></li>
+	</ul>
+	</t:div>
+	
+	<t:div styleClass="secondStepImage3fleches" rendered="#{accountController.loginChange == true}" >
+	<ul id="processSteps">
+		<li id="firstStep"><h:outputText value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE1.TEXT']}"></h:outputText></li>
+		<li id="currentTab"><h:outputText value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE2.TEXT']}"></h:outputText></li>
+		<li id="thirdStep"><h:outputText value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE3.TEXT']}"></h:outputText></li>
+	</ul>
+	</t:div>
 
 	<e:messages/>
 	
@@ -37,14 +62,27 @@
 		  <e:outputLabel value="#{msgs[entry.key]}" />
 		</h:column>
 		<h:column>
-		  <t:dataList value="#{entry.values}" var="sub" style="Vertical-Align: Top;" >
-		    <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null}" />
-            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null}" />
-            <t:htmlTag value="br" />  
+		<t:dataList value="#{entry.values}" var="sub" style="Vertical-Align: Top;" >
+		    <t:div rendered="#{sub.value!=''}" styleClass="#{entry.divName}show">
+			    <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value!=''}" />
+	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value!=''}" />
+	            <t:htmlTag value="br"  />
+	        </t:div>
+	        <t:div rendered="#{sub.value==''}" style="display:none;" styleClass="#{entry.divName}hide" >    
+	            <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value==''}" />
+	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value==''}" />
+	            <t:htmlTag value="br"  />
+            </t:div>
           </t:dataList>
+
+
         </h:column>  
         <h:column>			
 		  <h:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
+		  <t:div >
+			  <h:graphicImage alt="#{entry.divName}" styleClass="show" value="/media/add.png"  style="border: 0;" rendered="#{entry.isMultiValue!=null&&entry.isMultiValue==true}"/>
+			  <h:graphicImage alt="#{entry.divName}" styleClass="hide" value="/media/remove.png"  style="border: 0;" rendered="#{entry.isMultiValue!=null&&entry.isMultiValue==true}"/>
+		  </t:div>
 		</h:column>										
 	  </h:dataTable>
 										
@@ -56,7 +94,6 @@
 	</h:form>
 	
 	<h:form>
-		
 		<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}"
 			action="#{exceptionController.restart}" />
 	</h:form>

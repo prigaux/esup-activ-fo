@@ -16,16 +16,24 @@
 	<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}"rendered="#{accountController.reinit == true}" />
 	<e:section value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.TITLE']}"rendered="#{accountController.passwChange == true}" />
 	
-	<t:div>
-	<table  border="0"  cellpadding="0" cellspacing="0" >
-	<tr>
-		<td><img src="/media/bouton-4etape_01.jpg"></td>
-		<td><img src="/media/bouton-4etape-roll_02.jpg"></td>
-		<td><img src="/media/bouton-4etape-roll_03.jpg"></td>
-		<td><img src="/media/bouton-4etape-roll_04.jpg"></td>
-	</tr>
-    </table>
-    </t:div>
+	<t:div styleClass="firstStepImage" rendered="#{accountController.activ == true}">
+	<ul id="processSteps">
+	<li id="currentTab"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE1.TEXT']}"></h:outputText></li>
+	<li id="secondStep"><h:outputText style="Vertical-Align:Top;" value="#{msgs['ACTIVATION.COMPTE.ETAPE2.TEXT']}"></h:outputText></li>
+	<li id="thirdStep"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE3.TEXT']}"></h:outputText></li>
+	<li id="fourthStep"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE4.TEXT']}"></h:outputText></li>
+	</ul>
+	</t:div>
+	
+	<t:div styleClass="firstStepImage" rendered="#{accountController.reinit == true}">
+	<ul id="processSteps">
+		<li id="currentTab"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE1.TEXT']}"></h:outputText></li>
+		<li id="secondStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE2.TEXT']}" ></h:outputText></li>
+		<li id="thirdStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE3.TEXT']}"></h:outputText></li>
+		<li id="fourthStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE4.TEXT']}"></h:outputText></li>
+		<li id="fifthStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE5.TEXT']}"></h:outputText></li>
+	</ul>
+	</t:div>
 	
 	<e:messages/>
 

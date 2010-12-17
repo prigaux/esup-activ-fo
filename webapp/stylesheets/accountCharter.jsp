@@ -2,18 +2,17 @@
 <e:page stringsVar="msgs" menuItem="account"
 	locale="#{sessionController.locale}">
 	<%@include file="_navigation.jsp"%>
+	<%@include file="_includeScript.jsp"%>
 	<e:section value="#{msgs['CHARTER.TITLE']}" />
 	
-	<t:div>
-	<table  border="0"  cellpadding="0" cellspacing="0" >
-	<tr>
-		<td><img src="/media/bouton-4etape-roll_01.jpg"></td>
-		<td><img src="/media/bouton-4etape-roll_02.jpg"></td>
-		<td><img src="/media/bouton-4etape_03.jpg"></td>
-		<td><img src="/media/bouton-4etape-roll_04.jpg"></td>
-	</tr>
-    </table>
-    </t:div>
+	<t:div styleClass="thirdStepImage" rendered="#{accountController.activ == true}">
+	<ul id="processSteps">
+		<li id="firstStep"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE1.TEXT']}"></h:outputText></li>
+		<li id="secondStep"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE2.TEXT']}"></h:outputText></li>
+		<li id="currentTab"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE3.TEXT']}"></h:outputText></li>
+		<li id="fourthStep"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE4.TEXT']}"></h:outputText></li>
+	</ul>
+	</t:div>
 	
 	<e:messages />
 	

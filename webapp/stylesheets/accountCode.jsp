@@ -5,6 +5,33 @@
 	locale="#{sessionController.locale}">
 	<%@include file="_navigation.jsp"%>
 	<e:section value="#{msgs['CODE.TITLE']}" />
+	
+	<t:div styleClass="thirdStepImage">
+	<ul id="processSteps">
+		<li id="firstStep">
+			<h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE1.TEXT']}" rendered="#{accountController.activ == true}"></h:outputText>
+			<h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE1.TEXT']}"rendered="#{accountController.reinit == true}" ></h:outputText>
+			<h:outputText value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE1.TEXT']}" rendered="#{accountController.passwChange == true}"></h:outputText>
+		</li>
+		<li id="secondStep">
+			<h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE2.TEXT']}" rendered="#{accountController.activ == true}"></h:outputText>
+			<h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE2.TEXT']}"rendered="#{accountController.reinit == true}" ></h:outputText>
+			<h:outputText value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE2.TEXT']}" rendered="#{accountController.passwChange == true}"></h:outputText>
+	    </li>
+		<li id="currentTab">
+			<h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE3.TEXT']}" rendered="#{accountController.activ == true}"></h:outputText>
+			<h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE3.TEXT']}"rendered="#{accountController.reinit == true}" ></h:outputText>
+			<h:outputText value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE3.TEXT']}" rendered="#{accountController.passwChange == true}"></h:outputText>
+		</li>
+		<li id="fourthStep">
+			<h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE4.TEXT']}" rendered="#{accountController.activ == true}"></h:outputText>
+			<h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE4.TEXT']}"rendered="#{accountController.reinit == true}" ></h:outputText>
+			<h:outputText value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE4.TEXT']}" rendered="#{accountController.passwChange == true}"></h:outputText>
+			
+		</li>
+	</ul>
+	</t:div>
+	
 	<e:messages />
 		
 		

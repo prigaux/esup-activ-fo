@@ -7,16 +7,33 @@
 	<e:section value="#{msgs['PASSWORD.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
 	<e:section value="#{msgs['PASSWORD.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}"/>
 	
-	<t:div>
-	<table  border="0"  cellpadding="0" cellspacing="0" >
-	<tr>
-		<td><img src="/media/bouton-4etape-roll_01.jpg"></td>
-		<td><img src="/media/bouton-4etape-roll_02.jpg"></td>
-		<td><img src="/media/bouton-4etape-roll_03.jpg"></td>
-		<td><img src="/media/bouton-4etape_04.jpg"></td>
-	</tr>
-    </table>
-    </t:div>
+	<t:div styleClass="fourthStepImage" rendered="#{accountController.activ == true}">
+	<ul id="processSteps">
+		<li id="firstStep"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE1.TEXT']}"></h:outputText></li>
+		<li id="secondStep"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE2.TEXT']}"></h:outputText></li>
+		<li id="thirdStep"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE3.TEXT']}"></h:outputText></li>
+		<li id="currentTab"><h:outputText value="#{msgs['ACTIVATION.COMPTE.ETAPE4.TEXT']}"></h:outputText></li>
+	</ul>
+	</t:div>
+	
+	<t:div styleClass="fourthStepImage" rendered="#{accountController.reinit == true}">
+	<ul id="processSteps">
+		<li id="firstStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE1.TEXT']}"></h:outputText></li>
+		<li id="secondStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE2.TEXT']}" ></h:outputText></li>
+		<li id="thirdStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE3.TEXT']}"></h:outputText></li>
+		<li id="fourthStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE4.TEXT']}"></h:outputText></li>
+		<li id="currentTab"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE5.TEXT']}"></h:outputText></li>
+	</ul>
+	</t:div>
+	
+	<t:div styleClass="thirdStepImage3fleches" rendered="#{accountController.passwChange == true}" >
+	<ul id="processSteps">
+		<li id="firstStep"><h:outputText value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE1.TEXT']}"></h:outputText></li>
+		<li id="secondStep"><h:outputText style="Vertical-Align:Top;" value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE2.TEXT']}"></h:outputText></li>
+		<li id="currentTab"><h:outputText value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE3.TEXT']}"></h:outputText></li>
+	</ul>
+	</t:div>
+	
 	
 	<e:messages />
 	

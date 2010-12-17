@@ -10,6 +10,16 @@
 	<e:section value="#{msgs['LOGIN.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}" />
 	<e:section value="#{msgs['LOGIN.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}" />
 	<e:section value="#{msgs['LOGIN.TITLE']}" rendered="#{accountController.loginChange == true}" />
+	
+	<t:div styleClass="thirdStepImage3fleches" rendered="#{accountController.loginChange == true}" >
+	<ul id="processSteps">
+		<li id="firstStep"><h:outputText value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE1.TEXT']}"></h:outputText></li>
+		<li id="secondStep"><h:outputText style="Vertical-Align:Top;" value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE2.TEXT']}"></h:outputText></li>
+		<li id="currentTab"><h:outputText value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE3.TEXT']}"></h:outputText></li>
+	</ul>
+	</t:div>
+	
+	
 	<e:messages />
 	
 	<e:paragraph escape="false" value="#{msgs['LOGIN.TEXT.TOP']}" rendered="#{accountController.activ == true}"/>
