@@ -2,5 +2,68 @@
     .firstColumn, .secondColumn, .thirdColumn{
     Vertical-Align: Top;
     }
-
-
+    
+    .firstStepImage {
+    height: 53px;
+    background: #e8f0f7 url('../bandeau-activation-4fleches01-ent.png') no-repeat left top;
+    }
+    .secondStepImage {
+    height: 53px;
+    background: #e8f0f7 url('../bandeau-activation-4fleches02-ent.png') no-repeat left top;
+    }
+    .thirdStepImage {
+    height: 53px;
+    background: #e8f0f7 url('../bandeau-activation-4fleches03-ent.png') no-repeat left top;
+    }
+    .fourthStepImage {
+    height: 53px;
+    background: #e8f0f7 url('../bandeau-activation-4fleches04-ent.png') no-repeat left top;
+    }
+    .firstStepImage3fleches {
+    height: 53px;
+    background: #e8f0f7 url('../bandeau-activation-3fleches01-ent.png') no-repeat left top;
+    }
+    .secondStepImage3fleches {
+    height: 53px;
+    background: #e8f0f7 url('../bandeau-activation-3fleches02-ent.png') no-repeat left top;
+    }
+    .thirdStepImage3fleches {
+    height: 53px;
+    background: #e8f0f7 url('../bandeau-activation-3fleches03-ent.png') no-repeat left top;
+    }
+    
+    ul#processSteps {
+	list-style-type: none;
+	padding: 12px 0px 0px 0px;
+	margin: 0px 0px 0px 0px;
+	width: 100%;
+	font-size:11px;
+	}
+	ul#processSteps li {
+	display: inline;
+	width: 135px;
+	float: left;
+	color: #fff;
+	padding-top: 5px;
+	padding-left: 20px;
+	}
+	ul#processSteps li#firstStep {
+	width: 135px;
+	}
+	ul#processSteps li#secondStep {
+	width: 145px !important;
+	}
+    ul#processSteps li#thirdStep {
+	width: 140px !important;
+    }
+    ul#processSteps li#fourthStep {
+	width: 152px !important;
+    }
+    ul#processSteps li#fifthStep {
+	width: 152px !important;
+    }
+    ul#processSteps li#currentTab {
+	color: #000;
+	font-weight: bold;
+	}
+	
