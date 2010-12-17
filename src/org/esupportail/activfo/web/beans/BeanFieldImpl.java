@@ -23,6 +23,10 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private List<BeanMultiValue> values;
 	
+	private String isMultiValue;
+	
+	private String divName;
+	
 	
 	
 	public String getId() {
@@ -93,9 +97,25 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	{
 		return values;
 	}
+	
 	public void setValues(List<BeanMultiValue> values){
 		this.values=values;
-		
 	}
+	
+	public String getIsMultiValue() {
+		return isMultiValue;
+	}
+	public void setIsMultiValue(String isMultiValue) {
+		this.isMultiValue = isMultiValue;
+	}
+	
+	public String getDivName() {
+		return divName;
+	}
+	public void setDivName(String divName) {
+		this.divName = divName;
+	}
+	
+	
 	
 }

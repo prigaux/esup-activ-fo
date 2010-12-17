@@ -50,5 +50,12 @@ public interface BeanField<T> {
 	public List<BeanMultiValue> getValues();
 	public void setValues(List<BeanMultiValue> values);
 	
+    public String getIsMultiValue();
+	public void setIsMultiValue(String isMultiValue);
+	
+	public String getDivName();
+	public void setDivName(String divName);
+	
+	
 	
 }

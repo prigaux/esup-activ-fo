@@ -369,8 +369,12 @@ public class AccountController extends AbstractContextAwareController implements
 			//Attributs concernant les informations personnelles que l'on souhaite afficher
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			
+			
+			
 			accountDescr=this.getDomainService().authentificateUser(beanLogin.getValue().toString(), beanPassword.getValue().toString(),attrPersoInfo);
-				
+			
+			logger.debug("beanlogin :"+beanLogin.getValue().toString());
+			
 			if (accountDescr!=null){
 				
 				logger.info("Authentification r�usssie");
@@ -590,6 +594,13 @@ public class AccountController extends AbstractContextAwareController implements
 					BeanMultiValue bmv = new BeanMultiValueImpl();
 					bmv.setValue(str);
 					lbm.add(bmv);
+				}
+				if(listBeanPersoInfo.get(i).getIsMultiValue().equals("true")) {
+					for (int j=0;j<3;j++) {
+						BeanMultiValue bmv = new BeanMultiValueImpl();
+						bmv.setValue("");
+						lbm.add(bmv);
+					}
 				}
 				
 				listBeanPersoInfo.get(i).setValues(lbm);
@@ -843,7 +854,7 @@ public class AccountController extends AbstractContextAwareController implements
 		return beanPassword;
 	}
 
-	public void setBeanPassword(BeanField convertListToStringbeanPassword) {
+	public void setBeanPassword(BeanField beanPassword) {
 		this.beanPassword = beanPassword;
 	}
 
