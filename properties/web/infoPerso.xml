@@ -29,7 +29,7 @@
 		<property name="key" value="PERSOINFO.MAILPERSO.TEXT.LABEL"/>
 		<property name="validator" ref="validatorEmail"/>
 		<property name="required" value="false" />
-		<property name="isMultiValue" value="true"/>
+		<property name="isMultiValue" value="false"/>
 		<property name="divName" value="emailPerso"/>
 	</bean>
 	
@@ -41,7 +41,7 @@
 		<property name="key" value="PERSOINFO.MOBILE.TEXT.LABEL"/>
 		<property name="validator" ref="validatorMobilePhone"/>
 		<property name="required" value="false" />
-		<property name="isMultiValue" value="true"/>
+		<property name="isMultiValue" value="false"/>
 		<property name="divName" value="mobilePhone"/>
 	</bean>
 	
@@ -77,6 +77,7 @@
 		<property name="required" value="false" />
 		<property name="isMultiValue" value="true"/>
 		<property name="divName" value="eduPersonAffiliation"/>
+		<property name="numberOfValue" value="5"></property>
 	</bean>
 	
 
