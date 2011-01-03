@@ -27,7 +27,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private String divName;
 	
-	
+	private int numberOfValue;
 	
 	public String getId() {
 		return id;
@@ -114,6 +114,12 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	}
 	public void setDivName(String divName) {
 		this.divName = divName;
+	}
+	public int getNumberOfValue() {
+		return numberOfValue;
+	}
+	public void setNumberOfValue(int numberOfValue) {
+		this.numberOfValue = numberOfValue;
 	}
 	
 	
