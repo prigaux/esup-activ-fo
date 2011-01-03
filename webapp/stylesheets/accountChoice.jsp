@@ -13,7 +13,7 @@
 
 <e:section value="#{msgs['CHOICE.TITLE']}" />
 
-<t:div styleClass="secondStepImage" rendered="#{accountController.reinit == true}">
+<t:div styleClass="secondStepImage5fleches" rendered="#{accountController.reinit == true}">
 	<ul id="processSteps">
 		<li id="firstStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE1.TEXT']}"></h:outputText></li>
 		<li id="currentTab"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE2.TEXT']}" ></h:outputText></li>
@@ -22,6 +22,8 @@
 		<li id="fifthStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE5.TEXT']}"></h:outputText></li>
 	</ul>
 </t:div>
+
+
 
 <e:messages />
 
