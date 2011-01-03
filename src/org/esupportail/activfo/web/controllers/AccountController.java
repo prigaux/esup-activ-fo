@@ -595,8 +595,14 @@ public class AccountController extends AbstractContextAwareController implements
 					bmv.setValue(str);
 					lbm.add(bmv);
 				}
+				
+				
+				
 				if(listBeanPersoInfo.get(i).getIsMultiValue().equals("true")) {
-					for (int j=0;j<3;j++) {
+					
+					logger.debug("num :"+listBeanPersoInfo.get(i).getNumberOfValue()+","+currentAccount.getAttributes(attrPersoInfo.get(i)).size());
+					
+					for (int j=0;j<listBeanPersoInfo.get(i).getNumberOfValue()-currentAccount.getAttributes(attrPersoInfo.get(i)).size();j++) {
 						BeanMultiValue bmv = new BeanMultiValueImpl();
 						bmv.setValue("");
 						lbm.add(bmv);
