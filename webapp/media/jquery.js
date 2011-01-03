@@ -4084,7 +4084,7 @@ jQuery.fn.extend({
 			}
 		});
 	},
-
+va
 	before: function() {
 		if ( this[0] && this[0].parentNode ) {
 			return this.domManip(arguments, false, function( elem ) {
