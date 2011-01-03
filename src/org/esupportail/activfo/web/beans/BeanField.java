@@ -56,6 +56,10 @@ public interface BeanField<T> {
 	public String getDivName();
 	public void setDivName(String divName);
 	
+	public int getNumberOfValue();
+	public void setNumberOfValue(int numberOfValue);
+	
+	
 	
 	
 }
