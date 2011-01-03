@@ -25,7 +25,7 @@
 	</ul>
 	</t:div>
 	
-	<t:div styleClass="firstStepImage" rendered="#{accountController.reinit == true}">
+	<t:div styleClass="firstStepImage5fleches" rendered="#{accountController.reinit == true}">
 	<ul id="processSteps">
 		<li id="currentTab"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE1.TEXT']}"></h:outputText></li>
 		<li id="secondStep"><h:outputText value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE2.TEXT']}" ></h:outputText></li>
