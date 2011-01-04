@@ -15,7 +15,7 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	
 	
 	private Account account;
-	private String accountDNKey;
+	private String displayNameAttr;
 	
 	
 	/**
@@ -33,7 +33,7 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		String val=(String)value;
 		
-		if (this.compareInsensitive(account.getAttribute(this.accountDNKey), val)) {
+		if (this.compareInsensitive(account.getAttribute(this.displayNameAttr), val)) {
 			
 			
 		}
@@ -82,12 +82,9 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 		this.account = account;
 	}
 
-	public String getAccountDNKey() {
-		return accountDNKey;
-	}
 
-	public void setAccountDNKey(String accountDNKey) {
-		this.accountDNKey = accountDNKey;
+	public void setDisplayNameAttr(String displayNameAttr) {
+		this.displayNameAttr = displayNameAttr;
 	}
 	
 }
