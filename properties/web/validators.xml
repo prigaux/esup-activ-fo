@@ -26,7 +26,7 @@
     	
     	
     	<property name="account" ref="account"/>
-    	<property name="accountDNKey" value="${account.key.displayname}"/>
+    	<property name="displayNameAttr" value="${account.key.displayname}"/>
     		
 	</bean>
 	
@@ -137,7 +137,8 @@
     	<description>
 			A validator for Login.
     	</description>
-    	
+    	<property name="account" ref="account"/>
+    	<property name="displayNameAttr" value="${account.key.displayname}"/>
     	
 	</bean>
 	
