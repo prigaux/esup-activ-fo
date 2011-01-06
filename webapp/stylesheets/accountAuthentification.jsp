@@ -42,7 +42,7 @@
 		
 		<e:panelGrid columns="4">
 			<e:outputLabel for="login" value="#{msgs[beanLogin.key]}" />
-			<e:inputText id="login" value="#{beanLogin.value}" required="#{beanLogin.required}" validator="#{beanLogin.validator.validate}"> </e:inputText>
+			<e:inputText id="login" value="#{beanLogin.value}" required="#{beanLogin.required}" > </e:inputText>
 			<t:graphicImage styleClass="helpTip" longdesc="#{msgs[beanLogin.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{beanLogin.help!=null}"/>
 			<t:htmlTag value="span" rendered="#{beanLogin.help==null}"/>
 			<e:message for="login" />
