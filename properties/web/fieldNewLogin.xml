@@ -15,6 +15,7 @@
 		<property name="key" value="LOGIN.TEXT.LABEL.NEWLOGIN"/>
 		<property name="value" value=""/>
 		<property name="validator" ref="validatorLogin"/>
+		<property name="converter" ref="newLoginConverter"/>
 		<property name="required" value="true" />
 		
 	</bean>
