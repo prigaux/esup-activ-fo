@@ -6,12 +6,12 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
-import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
+import org.esupportail.activfo.domain.beans.Account;
+
 
 
 public class ValidatorLogin extends AbstractI18nAwareBean implements Validator{
-	
 	/**
 	 * 
 	 */
@@ -30,15 +30,23 @@ public class ValidatorLogin extends AbstractI18nAwareBean implements Validator{
 	private boolean isPermitLogin(String val)
 	{
 		boolean permit=false;
-		String displayName=account.getAttribute(this.displayNameAttr);
-		if(displayName!=null && val.length()>2)
-			if(displayName.contains(val.substring(1)) || 
-			   displayName.contains(val.substring(2)) ||
-			   displayName.contains(val.substring(0, val.length()-2)) ||
-			   displayName.contains(val.substring(1, val.length()-2))
-					) 
-				permit=true; //le nouveau login doit être de long min de 3 et contenir une ss chaîne de nom ou du prenom
+		int permitCount=0;
+		String compVal=null;
+		String displayName=account.getAttribute(this.displayNameAttr).toLowerCase();
 		
+		if(displayName!=null && val.length()>2) {
+			compVal=val.toLowerCase();
+			String stringTrim[] = null;
+	    	stringTrim=displayName.split(" ");
+	    	for(int i=0;i<stringTrim.length;i++) {
+	    	 if (compVal.contains(stringTrim[i]))
+	    		 permit=true;
+	    	 if (compVal.contains(stringTrim[i].substring(0,1)))
+	    		 permitCount++;
+	    	}
+	    	if (!permit && permitCount >= 2)
+	    		permit=true;
+		}
 		return permit;
 	}
 
