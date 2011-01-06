@@ -64,8 +64,8 @@
 		<h:column>
 		<t:dataList value="#{entry.values}" var="sub" style="Vertical-Align: Top;" >
 		    <t:div rendered="#{sub.value!=''}" styleClass="#{entry.divName}show">
-			    <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value!=''}" />
-	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value!=''}" />
+			    <h:inputText value="#{sub.value}" disabled="#{entry.isMultiValue!=true}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value!=''}" />
+	            <h:inputText value="#{sub.value}" disabled="#{entry.isMultiValue!=true}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value!=''}" />
 	            <t:htmlTag value="br"  />
 	        </t:div>
 	        <t:div rendered="#{sub.value==''}" style="display:none;" styleClass="#{entry.divName}hide" >    
