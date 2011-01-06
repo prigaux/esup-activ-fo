@@ -82,9 +82,20 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 		this.account = account;
 	}
 
+	/**
+	 * @return the displayNameAttr
+	 */
+	public String getDisplayNameAttr() {
+		return displayNameAttr;
+	}
 
+	/**
+	 * @param displayNameAttr the displayNameAttr to set
+	 */
 	public void setDisplayNameAttr(String displayNameAttr) {
 		this.displayNameAttr = displayNameAttr;
 	}
+
+
 	
 }
