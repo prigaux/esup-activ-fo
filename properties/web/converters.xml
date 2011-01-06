@@ -25,6 +25,7 @@
     	<description>
 			A converter for Locale objects.
     	</description>
+    	
 	</bean>
 	
 	
@@ -54,5 +55,22 @@
     	<property name="accountTermOfUseKey" value="${account.key.termsOfUse}"/>
     	
     </bean>
+    
+    <bean 
+		id="newLoginConverter"
+		class="org.esupportail.activfo.web.converters.NewLoginConverter"
+		scope="session"
+		>
+    	<description>
+			A converter for....
+    	</description>
+    	
+    	<property name="account" ref="account"/>
+    	<property name="displayName" value="${account.key.displayname}"/>
+    	
+    </bean>
+    
+
+    
 	
 </beans>
