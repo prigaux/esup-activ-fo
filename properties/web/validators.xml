@@ -133,6 +133,7 @@
 		id="validatorLogin"
 		class="org.esupportail.activfo.web.validators.ValidatorLogin"
 		parent="abstractI18nAwareBean"
+		scope="session"
 		>
     	<description>
 			A validator for Login.
