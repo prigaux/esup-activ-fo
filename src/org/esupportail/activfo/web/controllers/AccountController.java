@@ -670,7 +670,7 @@ public class AccountController extends AbstractContextAwareController implements
 		String pager=currentAccount.getPager();
 		String newPager="";
 		if (!"".equals(pager)){
-		newPager="XXXXXX"+pager.substring(6);
+		newPager=pager.substring(0,6)+"XXXX";
 		}
 		return newPager;	
 	}
