@@ -118,9 +118,11 @@
 				<ref bean="beanDisplayName"/>
 				<ref bean="beanEmailPerso"/>
 				<ref bean="beanMobilePhone"/>
+			    <!-- 
 			    <ref bean="beanEduPersonPrimaryAffiliation"/> 
 			    <ref bean="beanEduPersonAffiliation"/>
-			    <ref bean="beanSMSAgreement"/>   
+			    <ref bean="beanSMSAgreement"/>
+			     -->   
 			</list>
 		</property>
 		
