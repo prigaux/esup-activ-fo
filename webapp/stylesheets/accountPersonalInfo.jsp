@@ -66,6 +66,8 @@
 		    <t:div rendered="#{sub.value!=''}" styleClass="#{entry.divName}show">
 			    <h:inputText value="#{sub.value}" disabled="#{entry.isMultiValue!=true}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value!=''}" />
 	            <h:inputText value="#{sub.value}" disabled="#{entry.isMultiValue!=true}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value!=''}" />
+	            <h:selectBooleanCheckbox id="remember" rendered="#{entry.fieldType!=null}" converter="#{beanSMSAgreement.converter}" value="true"/>
+	            <h:outputText value="#{sub.value}" rendered="#{entry.fieldType!=null}" ></h:outputText>
 	            <t:htmlTag value="br"  />
 	        </t:div>
 	        <t:div rendered="#{sub.value==''}" style="display:none;" styleClass="#{entry.divName}hide" >    
@@ -74,8 +76,7 @@
 	            <t:htmlTag value="br"  />
             </t:div>
           </t:dataList>
-
-
+          
         </h:column>  
         <h:column>			
 		  <h:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
