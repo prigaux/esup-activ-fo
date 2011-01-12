@@ -3,6 +3,8 @@
  */
 package org.esupportail.activfo.web.converters;
 
+import java.text.Normalizer;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -37,8 +39,11 @@ public class NewLoginConverter implements Converter {
     	
     	String stringTrim[] = null;
     	String newLogin="";
-    	String var = account.getAttribute(this.displayName);
-    	stringTrim=var.split(" ");
+    	String displayNameOrigin = account.getAttribute(this.displayName);
+    	String displayNameNormalize = Normalizer.normalize(displayNameOrigin, Normalizer.Form.NFD);
+		String displayNameChange=displayNameNormalize.replaceAll("[^\\p{ASCII}]","");
+    	stringTrim=displayNameChange.split(" ");
+    	
     	for(int i=0;i<stringTrim.length;i++) {
     		if (i!=stringTrim.length-1)
     			newLogin+=stringTrim[i].substring(0,1);
