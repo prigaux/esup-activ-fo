@@ -2,6 +2,8 @@ package org.esupportail.activfo.web.validators;
 
 
 
+import java.text.Normalizer;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
@@ -19,11 +21,14 @@ public class ValidatorLogin extends AbstractI18nAwareBean implements Validator{
 	
 	private Account account;
 	private String displayNameAttr;
-
+	private String invalidMessage;
+	private int minSize=3;
+	private int maxSize=14;
+	
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		String val=(String)value;
-		
-		if(!isPermitLogin(val)) throw new ValidatorException(getFacesErrorMessage("VALIDATOR.LOGIN.INVALID"));
+		setInvalidMessage("VALIDATOR.LOGIN.INVALID.WITHOUTDISPLAYNAME");
+		if(!isPermitLogin(val)) throw new ValidatorException(getFacesErrorMessage(this.invalidMessage));
 		
 	}
 	
@@ -32,21 +37,35 @@ public class ValidatorLogin extends AbstractI18nAwareBean implements Validator{
 		boolean permit=false;
 		int permitCount=0;
 		String compVal=null;
-		String displayName=account.getAttribute(this.displayNameAttr).toLowerCase();
+		String displayNameOrigin=account.getAttribute(this.displayNameAttr).toLowerCase();
+		String displayNameNormalize = Normalizer.normalize(displayNameOrigin, Normalizer.Form.NFD);
+		String displayName=displayNameNormalize.replaceAll("[^\\p{ASCII}]","");
 		
-		if(displayName!=null && val.length()>2) {
-			compVal=val.toLowerCase();
-			String stringTrim[] = null;
-	    	stringTrim=displayName.split(" ");
-	    	for(int i=0;i<stringTrim.length;i++) {
-	    	 if (compVal.contains(stringTrim[i]))
-	    		 permit=true;
-	    	 if (compVal.contains(stringTrim[i].substring(0,1)))
-	    		 permitCount++;
-	    	}
-	    	if (!permit && permitCount >= 2)
-	    		permit=true;
+		if (val.length()>this.minSize && val.length()<this.maxSize ) {
+	    	if (val.matches("^[a-zA-Z]+[a-zA-Z0-9_\\-\\.]*$")) {
+	    		if(displayName!=null) {
+	    			compVal=val.toLowerCase();
+	    			String stringTrim[] = null;
+	    	    	stringTrim=displayName.split(" ");
+	    	    	for(int i=0;i<stringTrim.length;i++) {
+	    	    		if (compVal.contains(stringTrim[i]))
+	    	    			permit=true;
+	    	    		if (compVal.contains(stringTrim[i].substring(0,1)))
+	    	    			permitCount++;
+	    	    	}
+	    	    	
+	    	    	if (!permit && permitCount >= 2)
+	    	    		permit=true;
+	    		} 
+			} else {
+				if (val.matches("^[0-9]+[a-zA-Z0-9_\\-\\.]*$"))
+					this.invalidMessage="VALIDATOR.LOGIN.INVALID.FIRSTNUMBER";
+				else this.invalidMessage="VALIDATOR.LOGIN.INVALID.SPECIALCHAR";
+			}
+		} else {
+			this.invalidMessage="VALIDATOR.LOGIN.LENGTH";
 		}
+		
 		return permit;
 	}
 
@@ -63,7 +82,51 @@ public class ValidatorLogin extends AbstractI18nAwareBean implements Validator{
 	public void setDisplayNameAttr(String displayNameAttr) {
 		this.displayNameAttr = displayNameAttr;
 	}
+
+	/**
+	 * @return the invalidMessage
+	 */
+	public String getInvalidMessage() {
+		return invalidMessage;
+	}
+
+	/**
+	 * @param invalidMessage the invalidMessage to set
+	 */
+	public void setInvalidMessage(String invalidMessage) {
+		this.invalidMessage = invalidMessage;
+	}
+
+	/**
+	 * @return the minSize
+	 */
+	public int getMinSize() {
+		return minSize;
+	}
+
+	/**
+	 * @param minSize the minSize to set
+	 */
+	public void setMinSize(int minSize) {
+		this.minSize = minSize;
+	}
+
+	/**
+	 * @return the maxSize
+	 */
+	public int getMaxSize() {
+		return maxSize;
+	}
+
+	/**
+	 * @param maxSize the maxSize to set
+	 */
+	public void setMaxSize(int maxSize) {
+		this.maxSize = maxSize;
+	}
+	
+	
+	
 	
 
-	
 }
