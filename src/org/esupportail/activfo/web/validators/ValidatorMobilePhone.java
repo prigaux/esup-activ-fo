@@ -25,7 +25,7 @@ public class ValidatorMobilePhone extends AbstractI18nAwareBean implements Valid
 		
 		if (value instanceof String) {
 			String strValue = (String) value;
-			if (!strValue.matches("^06[0-9]{8}$|^00[0-9]{11,13}$")) {
+			if (!strValue.matches("^0[6|7][0-9]{8}$|^00[0-9]{11,13}$")) {
 				throw new ValidatorException(getFacesErrorMessage("VALIDATOR.MOBILE.INVALID"));
 			}
 		
