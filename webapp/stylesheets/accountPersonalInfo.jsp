@@ -68,7 +68,12 @@
 	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value!=''}" />
 	            <t:htmlTag value="br"  />
 	        </t:div>
-	        <t:div rendered="#{sub.value==''}" style="display:none;" styleClass="#{entry.divName}hide" >    
+	        <t:div rendered="#{sub.value==''&&entry.isMultiValue!=null&&entry.isMultiValue!=true}" styleClass="#{entry.divName}show">
+			    <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value==''}" />
+	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value==''}" />
+	            <t:htmlTag value="br"  />
+	        </t:div>
+	        <t:div rendered="#{sub.value==''&&entry.isMultiValue!=null&&entry.isMultiValue==true}" style="display:none;" styleClass="#{entry.divName}hide" >    
 	            <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value==''}" />
 	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value==''}" />
 	            <t:htmlTag value="br"  />
