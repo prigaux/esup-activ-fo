@@ -199,8 +199,8 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 	     		required="#{beanNewPassword.required}" onkeyup="updatestrength( this.value, '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYSTRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.STRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.MEDIUM']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.WEAK']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}');" validator="#{beanNewPassword.validator.validate}" >
 	  		</e:inputSecret>
 	  		<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanNewPassword.help]}" value="/media/help.jpg"  style="border: 0;"/>
-			<e:message for="password" />
-
+			<t:htmlTag value="span"/>
+			
       		<e:outputLabel for="verdict" value="#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH']}" />
       		<h:panelGroup>      		
 	      		<h:outputText  id="verdict" value="#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}" />
@@ -215,7 +215,7 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 				<t:validateEqual for="password" />
 			</e:inputSecret>
 			<t:htmlTag value="span"/>
-  			<e:message for="verifyPassword" /> 
+  			 
 		</e:panelGrid>
 									
 		<t:div style="margin-top:30;">
