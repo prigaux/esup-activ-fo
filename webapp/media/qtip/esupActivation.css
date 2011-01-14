@@ -5,85 +5,102 @@
     
     .firstStepImage {
     height: 53px;
-    background: #e8f0f7 url('../bandeau-activation-4fleches01-ent.png') no-repeat left top;
+    background: url('../bandeau-activation-4fleches01-ent.png') no-repeat left top;
     }
     .secondStepImage {
     height: 53px;
-    background: #e8f0f7 url('../bandeau-activation-4fleches02-ent.png') no-repeat left top;
+    background: url('../bandeau-activation-4fleches02-ent.png') no-repeat left top;
     }
     .thirdStepImage {
     height: 53px;
-    background: #e8f0f7 url('../bandeau-activation-4fleches03-ent.png') no-repeat left top;
+    background: url('../bandeau-activation-4fleches03-ent.png') no-repeat left top;
     }
     .fourthStepImage {
     height: 53px;
-    background: #e8f0f7 url('../bandeau-activation-4fleches04-ent.png') no-repeat left top;
+    background: url('../bandeau-activation-4fleches04-ent.png') no-repeat left top;
     }
     .firstStepImage5fleches {
     height: 53px;
-    background: #e8f0f7 url('../bandeau-activation-5fleches01-ent.png') no-repeat left top;
+    background: url('../bandeau-activation-5fleches01-ent.png') no-repeat left top;
     }
     .secondStepImage5fleches {
     height: 53px;
-    background: #e8f0f7 url('../bandeau-activation-5fleches02-ent.png') no-repeat left top;
+    background: url('../bandeau-activation-5fleches02-ent.png') no-repeat left top;
     }
     .thirdStepImage5fleches {
     height: 53px;
-    background: #e8f0f7 url('../bandeau-activation-5fleches03-ent.png') no-repeat left top;
+    background: url('../bandeau-activation-5fleches03-ent.png') no-repeat left top;
     }
     .fourthStepImage5fleches {
     height: 53px;
-    background: #e8f0f7 url('../bandeau-activation-5fleches04-ent.png') no-repeat left top;
+    background: url('../bandeau-activation-5fleches04-ent.png') no-repeat left top;
     }
     .fifthStepImage5fleches {
     height: 53px;
-    background: #e8f0f7 url('../bandeau-activation-5fleches05-ent.png') no-repeat left top;
+    background: url('../bandeau-activation-5fleches05-ent.png') no-repeat left top;
     }
     .firstStepImage3fleches {
     height: 53px;
-    background: #e8f0f7 url('../bandeau-activation-3fleches01-ent.png') no-repeat left top;
+    background: url('../bandeau-activation-3fleches01-ent.png') no-repeat left top;
     }
     .secondStepImage3fleches {
     height: 53px;
-    background: #e8f0f7 url('../bandeau-activation-3fleches02-ent.png') no-repeat left top;
+    background: url('../bandeau-activation-3fleches02-ent.png') no-repeat left top;
     }
     .thirdStepImage3fleches {
     height: 53px;
-    background: #e8f0f7 url('../bandeau-activation-3fleches03-ent.png') no-repeat left top;
+    background: url('../bandeau-activation-3fleches03-ent.png') no-repeat left top;
     }
     
-    ul#processSteps {
+    ul.processSteps {
 	list-style-type: none;
-	padding: 12px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
 	margin: 0px 0px 0px 0px;
 	width: 100%;
 	font-size:11px;
 	}
-	ul#processSteps li {
+	ul.processSteps h6 {
+	color:#fff;
+	font-size:20px;
+	font-style:bold;
+	font-family:arial;
+	margin:0px !important;
+	padding:0px !important;
+	line-height:20px;
+	}
+	ul.processSteps li {
 	display: inline;
 	width: 135px;
 	float: left;
-	color: #fff;
-	padding-top: 5px;
-	padding-left: 20px;
+	color: #b6ecff;
 	}
-	ul#processSteps li#firstStep {
+	ul.processSteps li.homeStep {
+	width: 35px;
+	}
+	ul.processSteps li.firstStep {
 	width: 135px;
+	padding-left: 92px;
 	}
-	ul#processSteps li#secondStep {
+	ul.processSteps li.secondStep {
 	width: 145px !important;
+	padding-left: 88px;
 	}
-    ul#processSteps li#thirdStep {
+    ul.processSteps li.thirdStep {
 	width: 140px !important;
+	padding-left: 88px
     }
-    ul#processSteps li#fourthStep {
+    ul.processSteps li.fourthStep {
 	width: 152px !important;
+	padding-left: 86px
     }
-    ul#processSteps li#fifthStep {
+    ul.processSteps li.fifthStep {
 	width: 152px !important;
+	padding-left: 86px
     }
-    ul#processSteps li#currentTab {
-	color: #000;
+    ul.processSteps li.currentTab {
+	color: #c9f1a5;
 	font-weight: bold;
+	padding-left:92px;
 	}
+	
 	
