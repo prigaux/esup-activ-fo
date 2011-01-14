@@ -12,11 +12,12 @@
 	<e:section value="#{msgs['LOGIN.TITLE']}" rendered="#{accountController.loginChange == true}" />
 	
 	<t:div styleClass="thirdStepImage3fleches" rendered="#{accountController.loginChange == true}" >
-	<ul id="processSteps">
-		<li id="firstStep"><h:outputText value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE1.TEXT']}"></h:outputText></li>
-		<li id="secondStep"><h:outputText style="Vertical-Align:Top;" value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE2.TEXT']}"></h:outputText></li>
-		<li id="currentTab"><h:outputText value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE3.TEXT']}"></h:outputText></li>
-	</ul>
+	<t:htmlTag styleClass="processSteps" value="ul">
+	    <t:htmlTag styleClass="homeStep" value="li"><t:graphicImage title="Acceuil" value="/media/home.jpg"  style="border: 0;cursor:pointer;" onclick="simulateLinkClick('restart:restartButton');"/></t:htmlTag>
+		<t:htmlTag styleClass="firstStep" value="li"><e:paragraph escape="false" value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE1.TEXT']}"/></t:htmlTag>
+		<t:htmlTag styleClass="secondStep" value="li"><e:paragraph escape="false" value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE2.TEXT']}"/></t:htmlTag>
+		<t:htmlTag styleClass="currentTab" value="li"><e:paragraph escape="false" value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE3.TEXT']}"/></t:htmlTag>
+	</t:htmlTag>
 	</t:div>
 	
 	
@@ -41,8 +42,8 @@
 		</t:div>
 	</h:form>
 	
-	<h:form>
-		<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}"
+	<h:form id="restart" style="display:none;">
+		<e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}"
 			action="#{exceptionController.restart}" />
 	</h:form>
 	
