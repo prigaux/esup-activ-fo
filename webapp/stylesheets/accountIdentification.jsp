@@ -19,18 +19,18 @@
 	<t:div styleClass="firstStepImage" rendered="#{accountController.activ == true}">
 	<t:htmlTag styleClass="processSteps" value="ul">
 	<t:htmlTag styleClass="homeStep" value="li"><t:graphicImage title="Acceuil" value="/media/home.jpg"  style="border: 0;cursor:pointer;" onclick="simulateLinkClick('restart:restartButton');"/></t:htmlTag>
-	<t:htmlTag styleClass="currentTab" value="li"><e:paragraph escape="false" value="#{msgs['ACTIVATION.COMPTE.ETAPE1.TEXT']}" /></t:htmlTag>
+	<t:htmlTag styleClass="currentTab" value="li"><t:outputText escape="false" value="#{msgs['ACTIVATION.COMPTE.ETAPE1.TEXT']}" /></t:htmlTag>
 	
 	<t:htmlTag styleClass="secondStep" value="li">
-	<e:paragraph escape="false" value="#{msgs['ACTIVATION.COMPTE.ETAPE2.TEXT']}"/>
+	<t:outputText escape="false" value="#{msgs['ACTIVATION.COMPTE.ETAPE2.TEXT']}"/>
 	</t:htmlTag>
 	
 	<t:htmlTag styleClass="thirdStep" value="li">
-	<e:paragraph escape="false" value="#{msgs['ACTIVATION.COMPTE.ETAPE3.TEXT']}"/>
+	<t:outputText escape="false" value="#{msgs['ACTIVATION.COMPTE.ETAPE3.TEXT']}"/>
 	</t:htmlTag>
 	
 	<t:htmlTag styleClass="fourthStep" value="li">
-	<e:paragraph escape="false" value="#{msgs['ACTIVATION.COMPTE.ETAPE4.TEXT']}"/>
+	<t:outputText escape="false" value="#{msgs['ACTIVATION.COMPTE.ETAPE4.TEXT']}"/>
 	</t:htmlTag>
 	
 	</t:htmlTag>
@@ -38,12 +38,12 @@
 	
 	<t:div styleClass="firstStepImage5fleches" rendered="#{accountController.reinit == true}">
 	<t:htmlTag styleClass="processSteps" value="ul">
-	    <t:htmlTag styleClass="homeStep" value="li"><t:graphicImage title="Acceuil" value="/media/home.jpg"  style="border: 0;cursor:pointer;" onclick="simulateLinkClick('restart:restartButton');"/></t:htmlTag>
-		<t:htmlTag styleClass="currentTab" value="li"><e:paragraph escape="false" value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE1.TEXT']}"/></t:htmlTag>
-		<t:htmlTag styleClass="secondStep" value="li"><e:paragraph escape="false" value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE2.TEXT']}" /></t:htmlTag>
-		<t:htmlTag styleClass="thirdStep" value="li"><e:paragraph escape="false" value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE3.TEXT']}"/></t:htmlTag>
-		<t:htmlTag styleClass="fourthStep" value="li"><e:paragraph escape="false" value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE4.TEXT']}"/></t:htmlTag>
-		<t:htmlTag styleClass="fifthStep" value="li"><e:paragraph escape="false" value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE5.TEXT']}"/></t:htmlTag>
+	    <t:htmlTag styleClass="homeStep" value="li"><t:graphicImage title="Accueil" value="/media/home.jpg"  style="border: 0;cursor:pointer;" onclick="simulateLinkClick('restart:restartButton');"/></t:htmlTag>
+		<t:htmlTag styleClass="currentTab" value="li"><t:outputText escape="false" value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE1.TEXT']}"/></t:htmlTag>
+		<t:htmlTag styleClass="secondStep" value="li"><t:outputText escape="false" value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE2.TEXT']}" /></t:htmlTag>
+		<t:htmlTag styleClass="thirdStep" value="li"><t:outputText escape="false" value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE3.TEXT']}"/></t:htmlTag>
+		<t:htmlTag styleClass="fourthStep" value="li"><t:outputText escape="false" value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE4.TEXT']}"/></t:htmlTag>
+		<t:htmlTag styleClass="fifthStep" value="li"><t:outputText escape="false" value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE5.TEXT']}"/></t:htmlTag>
 	</t:htmlTag>
 	</t:div>
 
