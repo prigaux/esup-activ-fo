@@ -10,12 +10,12 @@
    
    $(":radio").click(function(){
      if(this.value=="activation" || this.value=="reinitialisation"){       
-       $("#[id='welcomeForm:statusDiv']").slideDown();
+       $("#[id='welcomeForm:statusDiv']").slideDown();     
     }
      else 
-     if(this.value=="passwordchange" || this.value=="loginchange"){           
-           $("#[id='welcomeForm:statusDiv']").slideUp();
-           $("#[name='welcomeForm:statusRadio']").first().attr("checked","checked");
+     if(this.value=="passwordchange" || this.value=="loginchange"){        
+           $("#[id='welcomeForm:statusDiv']").slideUp();                           
+           $("#[name='welcomeForm:statusRadio']:first").attr("checked","checked");                   
                          
           }
    });
