@@ -28,6 +28,7 @@
 		>
 		<property name="key" value="PERSOINFO.MAILPERSO.TEXT.LABEL"/>
 		<property name="validator" ref="validatorEmail"/>
+		<property name="help" value="PERSOINFO.EMAILPERSO.TEXT.HELP"/>
 		<property name="required" value="false" />
 		<property name="isMultiValue" value="false"/>
 		<property name="divName" value="emailPerso"/>
@@ -40,6 +41,7 @@
 		>
 		<property name="key" value="PERSOINFO.MOBILE.TEXT.LABEL"/>
 		<property name="validator" ref="validatorMobilePhone"/>
+		<property name="help" value="PERSOINFO.MOBILE.TEXT.HELP"/>
 		<property name="required" value="false" />
 		<property name="isMultiValue" value="false"/>
 		<property name="divName" value="mobilePhone"/>
