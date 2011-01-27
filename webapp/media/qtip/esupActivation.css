@@ -1,4 +1,4 @@
-    /* common to all columns*/
+ /* common to all columns*/
     .firstColumn, .secondColumn, .thirdColumn{
     Vertical-Align: Top;
     }
@@ -66,55 +66,47 @@
 	font-family:arial;
 	margin:0px !important;
 	padding:0px !important;
-	line-height:20px;
+	line-height:10px;
 	
 	}
-	ul.processSteps li {
+	ul.processSteps li  {
 	display: inline;
-	width: 135px;
 	float: left;
 	color: #b6ecff;
+	padding-left:43px !important;
 	}
 	ul.processSteps li.homeStep {
-	width: 35px;
+	padding-left:0px !important;
 	}
 	ul.processSteps li.firstStep {
-	width: 135px;
-	padding-left: 92px !important;
 	padding-top:10px !important;
+	width:135px !important;
 	}
 	ul.processSteps li.secondStep {
-	width: 145px !important;
-	padding-left: 88px !important;
 	padding-top:10px !important;
+	width:130px !important;
 	}
     ul.processSteps li.thirdStep {
-	width: 140px !important;
-	padding-left: 88px !important;
 	padding-top:10px !important;
-    }
+	width:128px !important;
+	}
     ul.processSteps li.fourthStep {
-	width: 152px !important;
-	padding-left: 86px !important;
 	padding-top:10px !important;
-    }
+	width:128px !important;
+	}
     ul.processSteps li.fifthStep {
-	width: 152px !important;
-	padding-left: 86px !important;
 	padding-top:10px !important;
+	width:128px !important;
     }
     ul.processSteps li.currentTab {
 	color: #c9f1a5;
 	font-weight: bold;
-	padding-left:92px !important;
 	padding-top:10px !important;
+	width:128px !important;
 	}
 	ul.processSteps li.currentTabLogin {
 	color: #c9f1a5;
 	font-weight: bold;
-	padding-left:92px !important;
-	width:140px;
 	padding-top:10px !important;
+	width:135px !important;
 	}
-	
-	
