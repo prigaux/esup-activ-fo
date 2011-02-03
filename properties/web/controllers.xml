@@ -105,6 +105,10 @@
 		
 		<property name="attributesInfPerso" value="${attributes.information}"/>
 		
+		<property name="listCheckBox" value="${checkbox.list}"/>
+		<property name="checkBoxRow" value="${checkbox.row}"/>
+		<property name="checkBoxCol" value="${checkbox.col}"/>
+		
 		<property name="attributesStudentToValidate" value="${attributes.validation.student}"/>
 		<property name="attributesPersonnelToValidate" value="${attributes.validation.personnel}"/>
 		<property name="attributesOldStudentToValidate" value="${attributes.validation.alumni.student}"/>
@@ -118,11 +122,11 @@
 				<ref bean="beanDisplayName"/>
 				<ref bean="beanEmailPerso"/>
 				<ref bean="beanMobilePhone"/>
-			    <!-- 
+			     
 			    <ref bean="beanEduPersonPrimaryAffiliation"/> 
 			    <ref bean="beanEduPersonAffiliation"/>
 			    <ref bean="beanSMSAgreement"/>
-			     -->   
+			       
 			</list>
 		</property>
 		
