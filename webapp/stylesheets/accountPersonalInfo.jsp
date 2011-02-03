@@ -66,23 +66,32 @@
 		  <e:outputLabel value="#{msgs[entry.key]}" />
 		</h:column>
 		<h:column>
-		<t:dataList value="#{entry.values}" var="sub" style="Vertical-Align: Top;" >
-		    <t:div rendered="#{sub.value!=''}" styleClass="#{entry.divName}show">
-			    <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value!=''}" />
-	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value!=''}" />
-	            <t:htmlTag value="br"  />
-	        </t:div>
-	        <t:div rendered="#{sub.value==''&&entry.isMultiValue!=null&&entry.isMultiValue!=true}" styleClass="#{entry.divName}show">
-			    <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value==''}" />
-	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value==''}" />
-	            <t:htmlTag value="br"  />
-	        </t:div>
-	        <t:div rendered="#{sub.value==''&&entry.isMultiValue!=null&&entry.isMultiValue==true}" style="display:none;" styleClass="#{entry.divName}hide" >    
-	            <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value==''}" />
-	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value==''}" />
-	            <t:htmlTag value="br"  />
-            </t:div>
-          </t:dataList>
+		<t:dataList value="#{entry.values}" var="sub" style="Vertical-Align: Top;" rendered="#{entry.fieldType!='selectBooleanCheckbox'}" >
+          <t:div rendered="#{sub.value!=''}" styleClass="#{entry.divName}show">
+              <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value!=''}" />
+              <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value!=''}" />
+              <t:htmlTag value="br"  />
+          </t:div>
+          <t:div rendered="#{sub.value==''&&entry.isMultiValue!=null&&entry.isMultiValue!=true}" styleClass="#{entry.divName}show">
+              <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value==''}" />
+              <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value==''}" />
+              <t:htmlTag value="br"  />
+          </t:div>
+          <t:div rendered="#{sub.value==''&&entry.isMultiValue!=null&&entry.isMultiValue==true}" style="display:none;" styleClass="#{entry.divName}hide" >
+              <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value==''}" />
+              <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value==''}" />
+              <t:htmlTag value="br"  />
+          </t:div>
+        </t:dataList>
+
+        <t:dataList value="#{accountController.checkList}" var="entry2" rendered="#{entry.fieldType=='selectBooleanCheckbox'}">
+           <t:div styleClass="#{entry.divName}show" rendered="#{entry.fieldType=='selectBooleanCheckbox'}">
+              <h:selectBooleanCheckbox value="true" styleClass="#{entry2[0]}" valueChangeListener="#{accountController.checkboxChanged}" rendered="#{entry.fieldType=='selectBooleanCheckbox'&&entry2[1]=='true'}" />
+              <h:selectBooleanCheckbox value="false" styleClass="#{entry2[0]}" valueChangeListener="#{accountController.checkboxChanged}" rendered="#{entry.fieldType=='selectBooleanCheckbox'&&entry2[1]!='true'}" />
+              <h:outputLabel value="#{entry2[0]}" rendered="#{entry.fieldType=='selectBooleanCheckbox'}"/>
+              <t:htmlTag value="br"/>
+           </t:div>
+        </t:dataList> 
           
         </h:column>  
         <h:column>			
