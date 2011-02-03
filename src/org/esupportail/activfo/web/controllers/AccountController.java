@@ -28,6 +28,9 @@ import org.esupportail.activfo.web.beans.BeanMultiValueImpl;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 
+import javax.faces.component.UISelectBoolean;
+import javax.faces.component.html.HtmlSelectBooleanCheckbox;
+import javax.faces.event.ValueChangeEvent;
 
 /**
  * A visual bean for the welcome page.
@@ -126,6 +129,12 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	private String separator;
 	
+	private String listCheckBox;
+	
+	private int checkBoxRow;
+	private int checkBoxCol;
+	
+	private String[][] checkList;
 	
 	/**
 	 * Bean constructor.
@@ -296,11 +305,22 @@ public class AccountController extends AbstractContextAwareController implements
 	}
 	
 	
+	public void checkboxChanged(ValueChangeEvent e) {
+		HtmlSelectBooleanCheckbox cb = (HtmlSelectBooleanCheckbox) e.getComponent();
+		
+		for (int i=0;i<checkList.length;i++) {
+			if(cb.getStyleClass().equals(checkList[i][0])) {
+				checkList[i][1]=cb.getValue().toString();
+			}
+		}
+	}
+
+	
 	public String pushChangeInfoPerso() {
 			
-			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
-			
-			try{
+		    List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
+		    
+		    try{
 				logger.info("Mise � jour des informations personnelles");
 				HashMap<String,String> hashBeanPersoInfo=new HashMap<String,String>();
 				Iterator it=listBeanPersoInfo.iterator();
@@ -308,18 +328,31 @@ public class AccountController extends AbstractContextAwareController implements
 				int i=0;
 				while(it.hasNext()){
 					BeanField beanPersoInfo=(BeanField)it.next();
-					
 					List<BeanMultiValue> lbm = new ArrayList<BeanMultiValue>();
 					
 					Iterator itBeanPersoInfo=beanPersoInfo.getValues().iterator();
 					
 					String valueBeanMulti=null;
 					int j=0;
+					int m=0;
+
+					if (beanPersoInfo.getFieldType()!=null && beanPersoInfo.getFieldType().equals("selectBooleanCheckbox")) {
+						for(int k=0;k<getCheckList().length;k++) {
+					    	if (checkList[k][1].equals("true"))
+					    	{
+					    		if(m>0)valueBeanMulti+=getSeparator()+checkList[k][0];
+					    		else valueBeanMulti=checkList[k][0];
+					    		m++;
+					    	}
+					    }
+					} else {
 					while(itBeanPersoInfo.hasNext()) {
 						BeanMultiValue bmv=(BeanMultiValue)itBeanPersoInfo.next();
+						logger.debug("*value bmv : "+bmv.getValue());
 						if (j>0)valueBeanMulti+=getSeparator()+bmv.getValue();
-						else valueBeanMulti=bmv.getValue();
+					    else valueBeanMulti=bmv.getValue();
 						j++;
+					}
 					}
 					
 					if (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null ){
@@ -368,7 +401,6 @@ public class AccountController extends AbstractContextAwareController implements
 		try{
 			//Attributs concernant les informations personnelles que l'on souhaite afficher
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
-			
 			
 			
 			accountDescr=this.getDomainService().authentificateUser(beanLogin.getValue().toString(), beanPassword.getValue().toString(),attrPersoInfo);
@@ -569,22 +601,30 @@ public class AccountController extends AbstractContextAwareController implements
 		return null;
 	}
 	
+	private void buildCheckBoxList() {
+		
+		checkList = new String[checkBoxRow][checkBoxCol];
+		List<String> tmp1=currentAccount.getAttributes(accountTermOfUseKey);
+		List<String> tmp2=Arrays.asList(listCheckBox.split(","));
+		
+		for(int i=0;i<tmp2.size();i++) {
+			checkList[i][0]=tmp2.get(i);
+			checkList[i][1]="false";
+			for (int j=0;j<tmp1.size();j++) {
+				if(tmp1.get(j).equals(checkList[i][0]))
+					checkList[i][1]="true";
+				}
+			}
+	}
+	
 	private void buildListPersoInfo(List<String>attrPersoInfo){
+		
+		
+		    buildCheckBoxList();
 		
 			for(int i=0;i<attrPersoInfo.size();i++)
 			{	
 				
-				/*
-				
-				if (this.fieldTypeSelectBooleanCheckBox.equals(listBeanPersoInfo.get(i).getFieldType())){
-					listBeanPersoInfo.get(i).setValue(false);
-				}	
-				
-				else { 
-		
-					listBeanPersoInfo.get(i).setValues(currentAccount.getAttributes(attrPersoInfo.get(i)));
-				}
-				*/
 				
 				logger.debug("currentAccount attribute : "+currentAccount.getAttributes(attrPersoInfo.get(i)));
 				
@@ -595,13 +635,10 @@ public class AccountController extends AbstractContextAwareController implements
 					bmv.setValue(str);
 					lbm.add(bmv);
 				}
-				
-				
-				
+
 				if(listBeanPersoInfo.get(i).getIsMultiValue().equals("true")) {
 					
 					logger.debug("num :"+listBeanPersoInfo.get(i).getNumberOfValue()+","+currentAccount.getAttributes(attrPersoInfo.get(i)).size());
-					
 					for (int j=0;j<listBeanPersoInfo.get(i).getNumberOfValue()-currentAccount.getAttributes(attrPersoInfo.get(i)).size();j++) {
 						BeanMultiValue bmv = new BeanMultiValueImpl();
 						bmv.setValue("");
@@ -610,14 +647,10 @@ public class AccountController extends AbstractContextAwareController implements
 				}
 				
 				listBeanPersoInfo.get(i).setValues(lbm);
-				
-
-				
 			}
 			
 	}
-
-	
+    
 	private HashMap<String,String> getMap(List<BeanField> listeInfoToValidate,List<String>attrToValidate){
 
 		HashMap<String,String> hashInfToValidate=new HashMap<String,String>();
@@ -970,7 +1003,7 @@ public class AccountController extends AbstractContextAwareController implements
 	}
 
 	public String getAttributesInfPerso() {
-		return attributesInfPerso;
+	return attributesInfPerso;
 	}
 
 	public void setAttributesInfPerso(String attributesInfPerso) {
@@ -1056,16 +1089,49 @@ public class AccountController extends AbstractContextAwareController implements
 		this.fieldTypeSelectBooleanCheckBox = fieldTypeSelectBooleanCheckBox;
 	}
 
-
 	public String getSeparator() {
 		return separator;
 	}
 
-
 	public void setSeparator(String separator) {
 		this.separator = separator;
 	}
+
+	public String getListCheckBox() {
+		return listCheckBox;
+	}
 	
+	public void setListCheckBox(String listCheckBox) {
+		this.listCheckBox = listCheckBox;
+	}
+
+	public String[][] getCheckList() {
+		return checkList;
+	}
 	
+	public void setCheckList(String[][] checkList) {
+		this.checkList = checkList;
+	}
+
+
+	public int getCheckBoxRow() {
+		return checkBoxRow;
+	}
+
+
+	public void setCheckBoxRow(int checkBoxRow) {
+		this.checkBoxRow = checkBoxRow;
+	}
+
+
+	public int getCheckBoxCol() {
+		return checkBoxCol;
+	}
+
+
+	public void setCheckBoxCol(int checkBoxCol) {
+		this.checkBoxCol = checkBoxCol;
+	}
+
 
 }
