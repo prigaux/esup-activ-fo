@@ -87,11 +87,7 @@
 		<property name="accountCodeKey" value="${account.key.code}"/>
 		<property name="accountGestKey" value="${account.key.gest}"/>
 		<property name="accountPossibleChannelsKey" value="${account.key.possibleChannels}"/>
-		
-		<property name="fieldTypeSelectBooleanCheckBox" value="${view.field.type.selectbooleancheckbox}"/>
-		
-		<property name="accountTermOfUseKey" value="${account.key.termsOfUse}"/>
-		
+						
 		<property name="currentAccount" ref="account"/>
 		
 		<property name="procedureActivation" value="${view.procedure.activation}"/>
@@ -104,10 +100,6 @@
 		<property name="statusOldStudent" value="${view.status.alumni.student}"/>
 		
 		<property name="attributesInfPerso" value="${attributes.information}"/>
-		
-		<property name="listCheckBox" value="${checkbox.list}"/>
-		<property name="checkBoxRow" value="${checkbox.row}"/>
-		<property name="checkBoxCol" value="${checkbox.col}"/>
 		
 		<property name="attributesStudentToValidate" value="${attributes.validation.student}"/>
 		<property name="attributesPersonnelToValidate" value="${attributes.validation.personnel}"/>
@@ -122,10 +114,12 @@
 				<ref bean="beanDisplayName"/>
 				<ref bean="beanEmailPerso"/>
 				<ref bean="beanMobilePhone"/>
-			     
+				<ref bean="beanSMSAgreement"/>
+				
+			    <!-- 
 			    <ref bean="beanEduPersonPrimaryAffiliation"/> 
 			    <ref bean="beanEduPersonAffiliation"/>
-			    <ref bean="beanSMSAgreement"/>
+			    -->			    
 			       
 			</list>
 		</property>

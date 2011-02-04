@@ -3,12 +3,15 @@ package org.esupportail.activfo.web.beans;
 import java.util.List;
 
 import javax.faces.convert.Converter;
+import javax.faces.model.SelectItem;
 
 import org.esupportail.activfo.web.validators.Validator;
 
 
 public interface BeanField<T> {
 	
+	public static final String MANYCHECKBOX="selectManyCheckbox";
+	public static final String INPUTTEXT="inputText";
 	
 	public String getKey();
 	
@@ -37,10 +40,7 @@ public interface BeanField<T> {
 	public boolean isRequired();
 	
 	public void setRequired(boolean required);
-	
-	public String getTypeBean();
-	public void setTypeBean(String typeBean);
-	
+		
 	public boolean isDisabled();
 	public void setDisabled(boolean disabled);
 	
@@ -53,13 +53,16 @@ public interface BeanField<T> {
     public String getIsMultiValue();
 	public void setIsMultiValue(String isMultiValue);
 	
-	public String getDivName();
-	public void setDivName(String divName);
+	public String getName();
+	public void setName(String name);
 	
 	public int getNumberOfValue();
 	public void setNumberOfValue(int numberOfValue);
 	
+	public List<String> getSelectedItems();
+	public void setSelectedItems(List<String> selectedItems);
 	
-	
-	
+	public List<SelectItem> getDisplayItems();
+	public void setDisplayItems(List<SelectItem> displayItems);
+		
 }

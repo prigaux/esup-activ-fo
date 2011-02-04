@@ -16,8 +16,7 @@
 		<property name="validator" ref="validatorDisplayName"/>
 		<property name="help" value="PERSOINFO.DISPLAYNAME.TEXT.HELP"/>
 		<property name="required" value="true" />
-		<property name="isMultiValue" value="false"/>
-		<property name="divName" value="displayname"/>
+		<property name="name" value="displayname"/>
 		
 	</bean>
 	
@@ -30,8 +29,7 @@
 		<property name="validator" ref="validatorEmail"/>
 		<property name="help" value="PERSOINFO.EMAILPERSO.TEXT.HELP"/>
 		<property name="required" value="false" />
-		<property name="isMultiValue" value="false"/>
-		<property name="divName" value="emailPerso"/>
+		<property name="name" value="emailPerso"/>
 	</bean>
 	
 	<bean
@@ -43,8 +41,7 @@
 		<property name="validator" ref="validatorMobilePhone"/>
 		<property name="help" value="PERSOINFO.MOBILE.TEXT.HELP"/>
 		<property name="required" value="false" />
-		<property name="isMultiValue" value="false"/>
-		<property name="divName" value="mobilePhone"/>
+		<property name="name" value="mobilePhone"/>
 	</bean>
 	
 	<bean
@@ -53,10 +50,15 @@
 		scope="session"
 		>
 		<property name="key" value="PERSOINFO.SMSAGREEMENT.TEXT.LABEL"/>
-		<property name="fieldType" value="selectBooleanCheckbox"/>
-		<property name="converter" ref="smsAgreementConverter"/>
-		<property name="isMultiValue" value="false"/>
-		<property name="divName" value="smsAgreement"/>
+		<property name="fieldType" value="selectManyCheckbox"/>
+		<property name="displayItems">
+		   <list>
+		     <ref bean="beanSelectSMSUCG"/>
+		     <ref bean="beanSelectSMSUCROUS"/>
+		   </list>
+		</property>
+		<property name="isMultiValue" value="true"/>	
+		<property name="name" value="smsAgreement"/>
 	</bean>
 	
 	<bean  
@@ -66,8 +68,7 @@
 		>
 		<property name="key" value="PERSOINFO.EDUPERSONPRIMARYAFFILIATION.TEXT.LABEL"/>
 		<property name="required" value="false" />
-		<property name="isMultiValue" value="false"/>
-		<property name="divName" value="eduPersonPrimaryAffiliation"/>
+		<property name="name" value="eduPersonPrimaryAffiliation"/>
 	</bean>
 	
 	<bean  
@@ -78,9 +79,24 @@
 		<property name="key" value="PERSOINFO.EDUPERSONAFFILIATION.TEXT.LABEL"/>
 		<property name="required" value="false" />
 		<property name="isMultiValue" value="true"/>
-		<property name="divName" value="eduPersonAffiliation"/>
+		<property name="name" value="eduPersonAffiliation"/>
 		<property name="numberOfValue" value="5"></property>
 	</bean>
 	
-
+	<bean  
+		id="beanSelectSMSUCG"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="Université Paris 1"/>
+		<property name="value" value="{SMSU}CG" />
+	</bean>
+	
+	<bean  
+		id="beanSelectSMSUCROUS"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="CROUS"/>
+		<property name="value" value="{SMSU}CROUS" />
+	</bean>
+	
 </beans>

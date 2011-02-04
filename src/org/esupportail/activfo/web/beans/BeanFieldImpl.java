@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.convert.Converter;
+import javax.faces.model.SelectItem;
 
 import org.esupportail.activfo.web.validators.Validator;
 
@@ -12,20 +13,25 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private String key;
 	private T value;
-	private String fieldType;
+	private String fieldType=INPUTTEXT;
 	private String help;
 	private Converter converter;
 	private Validator validator;
 	private boolean required;
-	private String typeBean;
 	private boolean disabled;
 	private String id;
 	
-	private List<BeanMultiValue> values;
+	private List<BeanMultiValue> values=new ArrayList<BeanMultiValue>();
 	
-	private String isMultiValue;
+	private List<String> selectedItems=new ArrayList<String>(); // les champs sélectionnés par l'utilisateur
+	private List<SelectItem> displayItems=new ArrayList<SelectItem>(); // les champs à afficher à l'utilisateur
+	private List<String> stringDisplayItems=new ArrayList<String>();
 	
-	private String divName;
+	private List<BeanMultiValue> hideItems=new ArrayList<BeanMultiValue>(); // valeurs recupérées du BO mais non exploitées par le FO. Lors de l'enregistrement, à renvoyer au BO
+	
+	private String isMultiValue="false";
+	
+	private String name;
 	
 	private int numberOfValue;
 	
@@ -41,12 +47,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
 	}
-	public String getTypeBean() {
-		return typeBean;
-	}
-	public void setTypeBean(String typeBean) {
-		this.typeBean = typeBean;
-	}
+	
 	public boolean isRequired() {
 		return required;
 	}
@@ -93,13 +94,33 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		this.help = help;
 	}
 	
-	public List<BeanMultiValue> getValues()
+	public List<BeanMultiValue> getValues()	
 	{
-		return values;
+       if(MANYCHECKBOX.equals(fieldType))
+		{
+
+    	   values.clear();			
+			for(String s : selectedItems){
+				BeanMultiValue bmv = new BeanMultiValueImpl();
+				bmv.setValue(s);
+				values.add(bmv);				
+			}
+			for(BeanMultiValue bmv: hideItems)
+				this.values.add(bmv);								
+		}
+		 
+		return this.values;
 	}
-	
+
 	public void setValues(List<BeanMultiValue> values){
-		this.values=values;
+		if(MANYCHECKBOX.equals(fieldType)){
+			for(BeanMultiValue bmv : values)
+				if(stringDisplayItems.contains(bmv.getValue()))
+					selectedItems.add(bmv.getValue());
+				else
+					hideItems.add(bmv);					
+		} else
+			this.values=values;
 	}
 	
 	public String getIsMultiValue() {
@@ -109,11 +130,11 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		this.isMultiValue = isMultiValue;
 	}
 	
-	public String getDivName() {
-		return divName;
+	public String getName() {
+		return name;
 	}
-	public void setDivName(String divName) {
-		this.divName = divName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public int getNumberOfValue() {
 		return numberOfValue;
@@ -121,7 +142,34 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	public void setNumberOfValue(int numberOfValue) {
 		this.numberOfValue = numberOfValue;
 	}
-	
-	
+	/**
+	 * @return the selectedItems
+	 */
+	public List<String> getSelectedItems() {		 
+		return selectedItems;
+	}
+	/**
+	 * @param selectedItems the selectedItems to set
+	 */
+	public void setSelectedItems(List<String> selectedItems) {		
+		this.selectedItems = selectedItems;
+	}
+	/**
+	 * @return the displayItems
+	 */
+	public List<SelectItem> getDisplayItems() {
+		return displayItems;
+	}
+	/**
+	 * @param displayItems the displayItems to set
+	 */
+	public void setDisplayItems(List<SelectItem> displayItems) {
+				
+		for(SelectItem si:displayItems){
+			 stringDisplayItems.add(String.valueOf(si.getValue()));
+			 //i18n
+		}
+		this.displayItems = displayItems;
+	}	
 	
 }

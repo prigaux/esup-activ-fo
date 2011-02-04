@@ -66,44 +66,44 @@
 		  <e:outputLabel value="#{msgs[entry.key]}" />
 		</h:column>
 		<h:column>
-		<t:dataList value="#{entry.values}" var="sub" style="Vertical-Align: Top;" rendered="#{entry.fieldType!='selectBooleanCheckbox'}" >
-          <t:div rendered="#{sub.value!=''}" styleClass="#{entry.divName}show">
-              <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value!=''}" />
-              <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value!=''}" />
-              <t:htmlTag value="br"  />
-          </t:div>
-          <t:div rendered="#{sub.value==''&&entry.isMultiValue!=null&&entry.isMultiValue!=true}" styleClass="#{entry.divName}show">
-              <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value==''}" />
-              <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value==''}" />
-              <t:htmlTag value="br"  />
-          </t:div>
-          <t:div rendered="#{sub.value==''&&entry.isMultiValue!=null&&entry.isMultiValue==true}" style="display:none;" styleClass="#{entry.divName}hide" >
-              <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType==null&&entry.validator!=null&&sub.value==''}" />
-              <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value==''}" />
-              <t:htmlTag value="br"  />
-          </t:div>
-        </t:dataList>
+		<t:dataList value="#{entry.values}" var="sub" style="Vertical-Align: Top;"  rendered="#{entry.fieldType!='selectManyCheckbox'}" >
+		
+		    <t:div rendered="#{sub.value!=''}" styleClass="#{entry.name}show">
+			    <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value!=''}" />
+	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value!=''}" />
+	            <t:htmlTag value="br"  />
+	        </t:div>
+	         
+	        <t:div rendered="#{sub.value==''&&entry.isMultiValue!=null&&entry.isMultiValue!=true}" styleClass="#{entry.name}show">
+			    <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value==''}" />
+	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value==''}" />
+	            <t:htmlTag value="br"  />
+	        </t:div>
+	        <t:div rendered="#{sub.value==''&&entry.isMultiValue!=null&&entry.isMultiValue==true}" style="display:none;" styleClass="#{entry.name}hide" >    
+	            <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value==''}" />
+	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value==''}" />
+	            <t:htmlTag value="br"  />
+            </t:div>
+                                                               
+            </t:dataList>
+                       
+             <t:div rendered="#{entry.fieldType=='selectManyCheckbox'}">             
+             		<h:selectManyCheckbox value="#{entry.selectedItems}" rendered="#{entry.fieldType=='selectManyCheckbox'}" layout="pageDirection">
+                		<f:selectItems value="#{entry.displayItems}" />
+             		</h:selectManyCheckbox>              
+            </t:div> 
 
-        <t:dataList value="#{accountController.checkList}" var="entry2" rendered="#{entry.fieldType=='selectBooleanCheckbox'}">
-           <t:div styleClass="#{entry.divName}show" rendered="#{entry.fieldType=='selectBooleanCheckbox'}">
-              <h:selectBooleanCheckbox value="true" styleClass="#{entry2[0]}" valueChangeListener="#{accountController.checkboxChanged}" rendered="#{entry.fieldType=='selectBooleanCheckbox'&&entry2[1]=='true'}" />
-              <h:selectBooleanCheckbox value="false" styleClass="#{entry2[0]}" valueChangeListener="#{accountController.checkboxChanged}" rendered="#{entry.fieldType=='selectBooleanCheckbox'&&entry2[1]!='true'}" />
-              <h:outputLabel value="#{entry2[0]}" rendered="#{entry.fieldType=='selectBooleanCheckbox'}"/>
-              <t:htmlTag value="br"/>
-           </t:div>
-        </t:dataList> 
-          
-        </h:column>  
-        <h:column>			
-		  <h:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
-		  <t:div >
-			  <h:graphicImage alt="#{entry.divName}" styleClass="show" value="/media/add.png"  style="border: 0;" rendered="#{entry.isMultiValue!=null&&entry.isMultiValue==true}"/>
-			  <h:graphicImage alt="#{entry.divName}" styleClass="hide" value="/media/remove.png"  style="border: 0;" rendered="#{entry.isMultiValue!=null&&entry.isMultiValue==true}"/>
-		  </t:div>
-		</h:column>										
-	  </h:dataTable>
-										
-	
+                               
+       		</h:column>  
+        	<h:column>			
+		  	<h:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
+		  	<t:div >
+			  <h:graphicImage alt="#{entry.name}" styleClass="show" value="/media/add.png"  style="border: 0;" rendered="#{entry.isMultiValue!=null&&entry.isMultiValue==true&&entry.fieldType=='inputText'}"/>
+			  <h:graphicImage alt="#{entry.name}" styleClass="hide" value="/media/remove.png"  style="border: 0;" rendered="#{entry.isMultiValue!=null&&entry.isMultiValue==true&&entry.fieldType=='inputText'}"/>
+		  	</t:div>
+			</h:column>										
+	  	</h:dataTable>
+											
 	<t:div style="margin-top:30;">
 		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
 	</t:div>

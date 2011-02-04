@@ -41,20 +41,6 @@
     	<property name="formatLdapDate" value="${format.date.ldap}"/>
 	</bean>
 	
-	<bean 
-		id="smsAgreementConverter"
-		class="org.esupportail.activfo.web.converters.SmsAgreementConverter"
-		scope="session"
-		>
-    	<description>
-			A converter for....
-    	</description>
-   	
-   		<property name="currentAccount" ref="account"/>
-    	<property name="smsAccepted" value="${sms.CG}"/>
-    	<property name="accountTermOfUseKey" value="${account.key.termsOfUse}"/>
-    	
-    </bean>
     
     <bean 
 		id="newLoginConverter"
