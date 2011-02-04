@@ -54,17 +54,6 @@
     	
 	</bean>
 	
-	<bean 
-		id="validatorCheckBoxSMS"
-		class="org.esupportail.activfo.web.validators.ValidatorCheckBoxSMS"
-		parent="abstractI18nAwareBean"
-		>
-    	<description>
-			A validator for checkbox.
-    	</description>
-    	
-    	
-	</bean>
 	
 	<bean 
 		id="validatorHarpegeNumber"
