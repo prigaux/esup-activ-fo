@@ -297,6 +297,7 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			
+			
 			try{
 				logger.info("Mise � jour des informations personnelles");
 				HashMap<String,String> hashBeanPersoInfo=new HashMap<String,String>();
@@ -320,10 +321,10 @@ public class AccountController extends AbstractContextAwareController implements
 					}
 					
 					if (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null ){
-						hashBeanPersoInfo.put(attrPersoInfo.get(i), valueBeanMulti);
+						hashBeanPersoInfo.put(beanPersoInfo.getName(), valueBeanMulti);
 					}
 					else {
-						hashBeanPersoInfo.put(attrPersoInfo.get(i), null);
+						hashBeanPersoInfo.put(beanPersoInfo.getName(), null);
 					}
 					i++;
 				}
@@ -568,32 +569,39 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	private void buildListPersoInfo(List<String>attrPersoInfo){
 		
-			for(int i=0;i<attrPersoInfo.size();i++)
+		    for(int i=0;i<listBeanPersoInfo.size();i++)
 			{													
 					
-				logger.debug("currentAccount attribute : "+currentAccount.getAttributes(attrPersoInfo.get(i)));
+				logger.debug("currentAccount attribute : "+currentAccount.getAttributes(listBeanPersoInfo.get(i).getName()));
 				
-				List<BeanMultiValue> lbm = new ArrayList<BeanMultiValue>();
-	
-				for (String str : currentAccount.getAttributes(attrPersoInfo.get(i))) {
-					BeanMultiValue bmv = new BeanMultiValueImpl();
-					bmv.setValue(str);
-					lbm.add(bmv);
-				}
-												
-				if(listBeanPersoInfo.get(i).getIsMultiValue().equals("true")) {
+				if(attrPersoInfo.contains(listBeanPersoInfo.get(i).getName())) {
 					
-					logger.debug("num :"+listBeanPersoInfo.get(i).getNumberOfValue()+","+currentAccount.getAttributes(attrPersoInfo.get(i)).size());
-					
-					for (int j=0;j<listBeanPersoInfo.get(i).getNumberOfValue()-currentAccount.getAttributes(attrPersoInfo.get(i)).size();j++) {
+				    List<BeanMultiValue> lbm = new ArrayList<BeanMultiValue>();
+				
+					for (String str : currentAccount.getAttributes(listBeanPersoInfo.get(i).getName())) {
 						BeanMultiValue bmv = new BeanMultiValueImpl();
-						bmv.setValue("");
+						bmv.setValue(str);
 						lbm.add(bmv);
+						logger.debug("bang : "+str);
 					}
-				}				
-				listBeanPersoInfo.get(i).setValues(lbm);				
-				
-			}			
+					
+												
+					if(listBeanPersoInfo.get(i).getIsMultiValue().equals("true")) {
+						for (int j=0;j<listBeanPersoInfo.get(i).getNumberOfValue()-currentAccount.getAttributes(listBeanPersoInfo.get(i).getName()).size();j++) {
+							BeanMultiValue bmv = new BeanMultiValueImpl();
+							bmv.setValue("");
+							lbm.add(bmv);
+						}
+					}
+				    listBeanPersoInfo.get(i).setValues(lbm);
+				}
+			}
+
+			for(int i=0;i<listBeanPersoInfo.size();i++) {
+		    	if (currentAccount.getAttributes(listBeanPersoInfo.get(i).getName()).size()==0) {
+		    		listBeanPersoInfo.remove(i);
+		    	}
+		    }
 	}
 	
 	private HashMap<String,String> getMap(List<BeanField> listeInfoToValidate,List<String>attrToValidate){
@@ -1020,11 +1028,8 @@ public class AccountController extends AbstractContextAwareController implements
 		return separator;
 	}
 
-
 	public void setSeparator(String separator) {
 		this.separator = separator;
 	}
-	
-	
 
 }
