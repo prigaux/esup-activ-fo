@@ -68,9 +68,9 @@
 		<h:column>
 		<t:dataList value="#{entry.values}" var="sub" style="Vertical-Align: Top;"  rendered="#{entry.fieldType!='selectManyCheckbox'}" >
 		
-		    <t:div rendered="#{sub.value!=''}" styleClass="#{entry.name}show">
+		    <t:div rendered="#{sub.value!=''&&entry.fieldType!='selectOneRadio'}" styleClass="#{entry.name}show">
 			    <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value!=''}" />
-	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType==null&&entry.validator==null&&sub.value!=''}" />
+	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value!=''}" />
 	            <t:htmlTag value="br"  />
 	        </t:div>
 	         
@@ -84,15 +84,19 @@
 	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value==''}" />
 	            <t:htmlTag value="br"  />
             </t:div>
-                                                               
-            </t:dataList>
-                       
-             <t:div rendered="#{entry.fieldType=='selectManyCheckbox'}">             
-             		<h:selectManyCheckbox value="#{entry.selectedItems}" rendered="#{entry.fieldType=='selectManyCheckbox'}" layout="pageDirection">
-                		<f:selectItems value="#{entry.displayItems}" />
-             		</h:selectManyCheckbox>              
+            <t:div rendered="#{entry.fieldType=='selectOneRadio'}">             
+            	<h:selectOneRadio value="#{sub.value}"  >
+                  <f:selectItem itemValue="TRUE" itemLabel="Oui" />
+                  <f:selectItem itemValue="FALSE" itemLabel="Non"/>
+             	</h:selectOneRadio>              
             </t:div> 
-
+        </t:dataList>
+                       
+            <t:div rendered="#{entry.fieldType=='selectManyCheckbox'}">             
+             	<h:selectManyCheckbox value="#{entry.selectedItems}" rendered="#{entry.fieldType=='selectManyCheckbox'}" layout="pageDirection">
+                  <f:selectItems value="#{entry.displayItems}" />
+             	</h:selectManyCheckbox>        
+            </t:div> 
                                
        		</h:column>  
         	<h:column>			
