@@ -113,6 +113,8 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	}
 
 	public void setValues(List<BeanMultiValue> values){
+		selectedItems.clear();
+		hideItems.clear();
 		if(MANYCHECKBOX.equals(fieldType)){
 			for(BeanMultiValue bmv : values)
 				if(stringDisplayItems.contains(bmv.getValue()))
