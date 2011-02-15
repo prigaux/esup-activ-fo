@@ -35,6 +35,8 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private int numberOfValue;
 	
+	private boolean disable;
+	
 	public String getId() {
 		return id;
 	}
@@ -113,8 +115,6 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	}
 
 	public void setValues(List<BeanMultiValue> values){
-		selectedItems.clear();
-		hideItems.clear();
 		if(MANYCHECKBOX.equals(fieldType)){
 			for(BeanMultiValue bmv : values)
 				if(stringDisplayItems.contains(bmv.getValue()))
@@ -172,6 +172,21 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 			 //i18n
 		}
 		this.displayItems = displayItems;
-	}	
+	}
+	/**
+	 * @return the disable
+	 */
+	public boolean isDisable() {
+		return disable;
+	}
+	/**
+	 * @param disable the disable to set
+	 */
+	public void setDisable(boolean disable) {
+		this.disable = disable;
+	}
+		
+	
+	
 	
 }
