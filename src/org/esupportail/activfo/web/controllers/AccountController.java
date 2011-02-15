@@ -569,6 +569,7 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	private void buildListPersoInfo(List<String>attrPersoInfo){
 		
+		
 		    for(int i=0;i<listBeanPersoInfo.size();i++)
 			{													
 					
@@ -576,13 +577,14 @@ public class AccountController extends AbstractContextAwareController implements
 				
 				if(attrPersoInfo.contains(listBeanPersoInfo.get(i).getName())) {
 					
+					
+					
 				    List<BeanMultiValue> lbm = new ArrayList<BeanMultiValue>();
 				
 					for (String str : currentAccount.getAttributes(listBeanPersoInfo.get(i).getName())) {
 						BeanMultiValue bmv = new BeanMultiValueImpl();
 						bmv.setValue(str);
 						lbm.add(bmv);
-						logger.debug("bang : "+str);
 					}
 					
 												
@@ -594,14 +596,17 @@ public class AccountController extends AbstractContextAwareController implements
 						}
 					}
 				    listBeanPersoInfo.get(i).setValues(lbm);
+					
 				}
 			}
-
-			for(int i=0;i<listBeanPersoInfo.size();i++) {
-		    	if (currentAccount.getAttributes(listBeanPersoInfo.get(i).getName()).size()==0) {
-		    		listBeanPersoInfo.remove(i);
-		    	}
-		    }
+		    
+		    int k=0;
+		    while (k < listBeanPersoInfo.size()) { 
+		        if (currentAccount.getAttributes(listBeanPersoInfo.get(k).getName()).size()==0)
+		        	listBeanPersoInfo.remove(k);
+		        else
+		        	k++;
+		      }
 	}
 	
 	private HashMap<String,String> getMap(List<BeanField> listeInfoToValidate,List<String>attrToValidate){
