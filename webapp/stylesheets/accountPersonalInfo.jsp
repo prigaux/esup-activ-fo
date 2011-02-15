@@ -69,8 +69,8 @@
 		<t:dataList value="#{entry.values}" var="sub" style="Vertical-Align: Top;"  rendered="#{entry.fieldType!='selectManyCheckbox'}" >
 		
 		    <t:div rendered="#{sub.value!=''&&entry.fieldType!='selectOneRadio'}" styleClass="#{entry.name}show">
-			    <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value!=''}" />
-	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value!=''}" />
+			    <h:inputText value="#{sub.value}" disabled="#{entry.disable}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value!=''}" />
+	            <h:inputText value="#{sub.value}" disabled="#{entry.disable}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value!=''}" />
 	            <t:htmlTag value="br"  />
 	        </t:div>
 	         
