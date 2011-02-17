@@ -98,12 +98,14 @@
 		<property name="statusStudent" value="${view.status.student}"/>
 		<property name="statusPersonnel" value="${view.status.personnel}"/>
 		<property name="statusOldStudent" value="${view.status.alumni.student}"/>
+		<property name="statusAnotherStudent" value="${view.status.another.student}"/>
 		
 		<property name="attributesInfPerso" value="${attributes.information}"/>
 		
 		<property name="attributesStudentToValidate" value="${attributes.validation.student}"/>
 		<property name="attributesPersonnelToValidate" value="${attributes.validation.personnel}"/>
 		<property name="attributesOldStudentToValidate" value="${attributes.validation.alumni.student}"/>
+		<property name="attributesAnotherStudentToValidate" value="${attributes.validation.another.student}"/>
 		
 		<property name="labelCanalMailPerso" value="CHOICE.CANAL.MAILPERSO.RADIOBUTTON.LABEL"/>
 		<property name="labelCanalGest" value="CHOICE.CANAL.GEST.RADIOBUTTON.LABEL"/>
@@ -145,6 +147,14 @@
 			</list>
 		</property>
 		
+		<property name="listInfoAnotherStudentToValidate">
+			<list>
+				<ref bean="beanEtablissement"/>
+				<ref bean="beanAnotherStudentNumber"/>
+				<ref bean="beanBirthDate"/>
+			</list>
+		</property>
+		
 		<property name="listBeanProcedure">
 			<list>
 				<ref bean="beanActivation"/>
@@ -159,6 +169,7 @@
 				<ref bean="beanStudent"/>
 				<ref bean="beanPersonnel"/>
 				<ref bean="beanOldStudent"/>
+				<ref bean="beanAnotherStudent"/>
 			</list>
 		</property>
 		
