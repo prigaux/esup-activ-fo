@@ -71,7 +71,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String attributesStudentToValidate;
 	private String attributesPersonnelToValidate;
 	private String attributesOldStudentToValidate;
-	
+	private String attributesAnotherStudentToValidate;
 	
 	
 	//liste g�n�rique des champs pour la validation
@@ -80,7 +80,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private List<BeanField> listInfoStudentToValidate;
 	private List<BeanField> listInfoPersonnelToValidate;
 	private List<BeanField> listInfoOldStudentToValidate;
-	
+	private List<BeanField> listInfoAnotherStudentToValidate;
 	
 	
 	private List<BeanField> listBeanCanal;
@@ -120,6 +120,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String statusStudent;
 	private String statusPersonnel;
 	private String statusOldStudent;
+	private String statusAnotherStudent;
 	
 	private String separator;
 	
@@ -190,6 +191,10 @@ public class AccountController extends AbstractContextAwareController implements
 		else if (currentAccount.getOneRadioValue().equals(this.statusPersonnel)){
 			this.listInfoToValidate=listInfoPersonnelToValidate;
 			attrToValidate=Arrays.asList(attributesPersonnelToValidate.split(","));
+		}
+		else if (currentAccount.getOneRadioValue().equals(this.statusAnotherStudent)) {
+			this.listInfoToValidate=listInfoAnotherStudentToValidate;
+			attrToValidate=Arrays.asList(attributesAnotherStudentToValidate.split(","));
 		}
 		else{
 			this.listInfoToValidate=listInfoOldStudentToValidate;
@@ -773,6 +778,14 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setStatusOldStudent(String statusOldStudent) {
 		this.statusOldStudent = statusOldStudent;
 	}
+	
+	public String getStatusAnotherStudent() {
+		return statusAnotherStudent;
+	}
+
+    public void setStatusAnotherStudent(String statusAnotherStudent) {
+		this.statusAnotherStudent = statusAnotherStudent;
+	}
 
 	public boolean isActiv() {
 		return activ;
@@ -1001,6 +1014,16 @@ public class AccountController extends AbstractContextAwareController implements
 			String attributesOldStudentToValidate) {
 		this.attributesOldStudentToValidate = attributesOldStudentToValidate;
 	}
+	
+	public String getAttributesAnotherStudentToValidate() {
+		return attributesAnotherStudentToValidate;
+	}
+
+    public void setAttributesAnotherStudentToValidate(
+			String attributesAnotherStudentToValidate) {
+		this.attributesAnotherStudentToValidate = attributesAnotherStudentToValidate;
+	}
+
 
 	public List<BeanField> getListInfoStudentToValidate() {
 		return listInfoStudentToValidate;
@@ -1028,6 +1051,16 @@ public class AccountController extends AbstractContextAwareController implements
 			List<BeanField> listInfoOldStudentToValidate) {
 		this.listInfoOldStudentToValidate = listInfoOldStudentToValidate;
 	}
+	
+	public List<BeanField> getListInfoAnotherStudentToValidate() {
+		return listInfoAnotherStudentToValidate;
+	}
+
+	public void setListInfoAnotherStudentToValidate(
+			List<BeanField> listInfoAnotherStudentToValidate) {
+		this.listInfoAnotherStudentToValidate = listInfoAnotherStudentToValidate;
+	}
+
 
 	public String getSeparator() {
 		return separator;
