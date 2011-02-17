@@ -41,9 +41,15 @@
 		
 	</bean>
 	
-	
-	
-	
-	
+	<bean
+		id="beanAnotherStudent"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="WELCOME.STATUS.ANOTHER.STUDENT.RADIOBUTTON.LABEL"/>
+		<property name="value" value="${view.status.another.student}"/>
+		
+	</bean>
 
 </beans>
