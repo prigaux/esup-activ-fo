@@ -27,6 +27,8 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	private List<SelectItem> displayItems=new ArrayList<SelectItem>(); // les champs à afficher à l'utilisateur
 	private List<String> stringDisplayItems=new ArrayList<String>();
 	
+	private List<SelectItem> oneMenuItems = new ArrayList<SelectItem>();
+	
 	private List<BeanMultiValue> hideItems=new ArrayList<BeanMultiValue>(); // valeurs recupérées du BO mais non exploitées par le FO. Lors de l'enregistrement, à renvoyer au BO
 	
 	private String isMultiValue="false";
@@ -185,6 +187,17 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	public void setDisable(boolean disable) {
 		this.disable = disable;
 	}
+	
+	public List<SelectItem> getOneMenuItems() {
+		return oneMenuItems;
+	}
+	
+	public void setOneMenuItems(List<SelectItem> oneMenuItems) {
+		
+		this.oneMenuItems = oneMenuItems;
+	}
+	
+	
 		
 	
 	
