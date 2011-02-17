@@ -102,8 +102,8 @@
         	<h:column>			
 		  	<h:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
 		  	<t:div >
-			  <h:graphicImage alt="#{entry.name}" styleClass="show" value="/media/add.png"  style="border: 0;" rendered="#{entry.isMultiValue!=null&&entry.isMultiValue==true&&entry.fieldType=='inputText'}"/>
-			  <h:graphicImage alt="#{entry.name}" styleClass="hide" value="/media/remove.png"  style="border: 0;" rendered="#{entry.isMultiValue!=null&&entry.isMultiValue==true&&entry.fieldType=='inputText'}"/>
+			  <h:graphicImage alt="#{entry.name}" styleClass="show" value="/media/add.png"  style="border: 0;" rendered="#{entry.isMultiValue!=null&&entry.isMultiValue==true&&entry.fieldType=='inputText'&&(!entry.disable)}"/>
+			  <h:graphicImage alt="#{entry.name}" styleClass="hide" value="/media/remove.png"  style="border: 0;" rendered="#{entry.isMultiValue!=null&&entry.isMultiValue==true&&entry.fieldType=='inputText'&&(!entry.disable)}"/>
 		  	</t:div>
 			</h:column>										
 	  	</h:dataTable>
