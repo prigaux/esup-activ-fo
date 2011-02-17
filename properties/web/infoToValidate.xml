@@ -75,4 +75,100 @@
 		
 	</bean>
 	
+	<bean
+		id="beanIdentificationNumber"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="IDENTIFICATION.STUDENTINEBEA.TEXT.LABEL"/>
+		<property name="value" value=""/>
+		<property name="required" value="true" />
+		
+	</bean>
+	
+	<bean
+		id="beanAnotherStudentNumber"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="IDENTIFICATION.ANOTHERSTUDENTNUMBER.TEXT.LABEL"/>
+		<property name="value" value=""/>
+		<property name="id" value="studentnumber"/>
+		<property name="help" value="IDENTIFICATION.ANOTHERSTUDENTNUMBER.TEXT.HELP"/>
+		<property name="required" value="true" />
+				
+	</bean>
+	
+	<bean
+		id="beanEtablissement"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="IDENTIFICATION.ETABLISSEMENT.TEXT.LABEL"/>
+		<property name="value" value=""/>
+		<property name="fieldType" value="selectOneMenu"/>
+		<property name="required" value="true" />
+		<property name="oneMenuItems">
+		  <list>
+		    <ref bean="beanSelectNull"/>
+		    <ref bean="beanSelectParis2"/>
+		    <ref bean="beanSelectParis5"/>
+		    <ref bean="beanSelectParis11"/>
+		    <ref bean="beanSelectParis13"/>
+		    <ref bean="beanSelectUVSQ"/>
+		  </list>
+		</property>
+	</bean>
+	
+	<bean  
+		id="beanSelectNull"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="Choisissez votre établissement"/>
+		<property name="value" value="" />
+	</bean>
+	
+	<bean  
+		id="beanSelectParis2"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="Université Panthéon-Assas"/>
+		<property name="value" value="{UAI}0751718K" />
+	</bean>
+	
+	<bean  
+		id="beanSelectParis5"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="Université Paris Descartes"/>
+		<property name="value" value="{UAI}0751721N" />
+	</bean>
+	
+	<bean  
+		id="beanSelectParis11"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="Université Paris-Sud"/>
+		<property name="value" value="{UAI}0911101C" />
+	</bean>
+	
+	<bean  
+		id="beanSelectParis13"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="Université Paris-Nord"/>
+		<property name="value" value="{UAI}0931238R" />
+	</bean>
+	
+	<bean  
+		id="beanSelectUVSQ"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="Université Versailles Saint-Quentin"/>
+		<property name="value" value="{UAI}0751718K" />
+	</bean>
+
 </beans>
