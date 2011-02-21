@@ -224,14 +224,12 @@ public class AccountController extends AbstractContextAwareController implements
 				
 			logger.info("Identification valide");
 			
-			logger.info("accoutDescr: "+accountDescr.toString());
 			this.updateCurrentAccount();
 				
 			if (currentAccount.getAttribute(accountCodeKey)!=null) {
 				if (reinit){
 					logger.info("Reinitialisation impossible, compte non activ�");
 					this.addErrorMessage(null, "IDENTIFICATION.REINITIALISATION.MESSAGE.ACCOUNT.NONACTIVATED");
-
 				}else if(activ){
 					logger.info("Construction de la liste des informations personnelles du compte");
 					this.buildListPersoInfo(attrPersoInfo);
@@ -582,8 +580,6 @@ public class AccountController extends AbstractContextAwareController implements
 				
 				if(attrPersoInfo.contains(listBeanPersoInfo.get(i).getName())) {
 					
-					
-					
 				    List<BeanMultiValue> lbm = new ArrayList<BeanMultiValue>();
 				
 					for (String str : currentAccount.getAttributes(listBeanPersoInfo.get(i).getName())) {
@@ -591,7 +587,6 @@ public class AccountController extends AbstractContextAwareController implements
 						bmv.setValue(str);
 						lbm.add(bmv);
 					}
-					
 												
 					if(listBeanPersoInfo.get(i).getIsMultiValue().equals("true")) {
 						for (int j=0;j<listBeanPersoInfo.get(i).getNumberOfValue()-currentAccount.getAttributes(listBeanPersoInfo.get(i).getName()).size();j++) {
@@ -601,17 +596,13 @@ public class AccountController extends AbstractContextAwareController implements
 						}
 					}
 				    listBeanPersoInfo.get(i).setValues(lbm);
-					
 				}
 			}
 		    
 		    int k=0;
-		    while (k < listBeanPersoInfo.size()) { 
-		        if (currentAccount.getAttributes(listBeanPersoInfo.get(k).getName()).size()==0)
-		        	listBeanPersoInfo.remove(k);
-		        else
-		        	k++;
-		      }
+		    while (k < listBeanPersoInfo.size())
+		    	if (currentAccount.getAttributes(listBeanPersoInfo.get(k).getName()).size()==0) listBeanPersoInfo.remove(k);
+		        else k++;
 	}
 	
 	private HashMap<String,String> getMap(List<BeanField> listeInfoToValidate,List<String>attrToValidate){
@@ -631,20 +622,15 @@ public class AccountController extends AbstractContextAwareController implements
 		HashMap<String,List<String>> newHash=new HashMap<String,List<String>>();
 		Iterator<Map.Entry<String, String>> it=hash.entrySet().iterator();
 		
-		
-		
 		while(it.hasNext()){
 			Map.Entry<String, String> e=it.next();
 			newHash.put(e.getKey(), Arrays.asList(e.getValue().split(",")));
-			//newHash.put(e.getKey(), Arrays.asList(e.getValue()));
 		}
 		return newHash;
 	}
 	
 	
 	public void updateCurrentAccount(){
-		//currentAccount.setAttributes(this.convertHash(accountDescr));
-		
 		currentAccount.setAttributes(this.convertHash(accountDescr));
 		currentAccount.setId(currentAccount.getAttribute(accountIdKey));
 		currentAccount.setMail(currentAccount.getAttribute(accountMailKey));
@@ -1060,7 +1046,6 @@ public class AccountController extends AbstractContextAwareController implements
 			List<BeanField> listInfoAnotherStudentToValidate) {
 		this.listInfoAnotherStudentToValidate = listInfoAnotherStudentToValidate;
 	}
-
 
 	public String getSeparator() {
 		return separator;
