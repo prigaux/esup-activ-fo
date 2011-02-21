@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.VersionManager;
-import org.esupportail.commons.services.application.VersionningUtils;
 import org.esupportail.commons.web.beans.Paginator;
 
 public class EmptyDaoService implements DaoService {
