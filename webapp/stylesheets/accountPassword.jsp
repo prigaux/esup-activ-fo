@@ -3,7 +3,8 @@
 
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 	<%@include file="_navigation.jsp"%>
-	<e:section value="#{msgs['PASSWORD.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}"/>
+	
+	<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}"/>
 	<e:section value="#{msgs['PASSWORD.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
 	<e:section value="#{msgs['PASSWORD.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}"/>
 	
