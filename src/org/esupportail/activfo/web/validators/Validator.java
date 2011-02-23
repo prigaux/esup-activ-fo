@@ -9,7 +9,6 @@ import javax.faces.validator.ValidatorException;
 
 public interface Validator  {
 	
-
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException;
 		
 }
