@@ -50,9 +50,5 @@
 		<property name="value" value="${view.procedure.loginchange}"/>
 		
 	</bean>
-	
-	
-	
-	
 
 </beans>
