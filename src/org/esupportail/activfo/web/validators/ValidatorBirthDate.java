@@ -3,9 +3,11 @@ package org.esupportail.activfo.web.validators;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
 
 public class ValidatorBirthDate extends AbstractI18nAwareBean implements Validator{

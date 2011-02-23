@@ -3,6 +3,7 @@ package org.esupportail.activfo.web.validators;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
 
 public class ValidatorBirthName extends AbstractI18nAwareBean implements Validator{

@@ -1,9 +1,11 @@
 package org.esupportail.activfo.web.validators;
 
 import java.text.Normalizer;
+
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
+
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
 import org.esupportail.activfo.domain.beans.Account;
 
