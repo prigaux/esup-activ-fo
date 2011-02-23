@@ -8,11 +8,9 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 
-
 import org.apache.myfaces.renderkit.html.HtmlCheckboxRenderer;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-
 
 public class SelectBooleanCheckboxRenderer extends HtmlCheckboxRenderer {
 	private final Logger logger = new LoggerImpl(getClass());
@@ -22,7 +20,6 @@ public class SelectBooleanCheckboxRenderer extends HtmlCheckboxRenderer {
 		Converter converter= ((ValueHolder) component).getConverter(); 
 		return converter.getAsObject(context, component, (String)submittedValue.toString()); 
 	}
-	
 	
 	protected void renderCheckbox(FacesContext context, UIComponent component,String value, String label,boolean disabled,boolean checked,boolean renderId){
 		
@@ -35,7 +32,6 @@ public class SelectBooleanCheckboxRenderer extends HtmlCheckboxRenderer {
 			else checked=true;
 		}
 		
-		
 		try {
 			super.renderCheckbox(context, component,value,label,disabled,checked,renderId);
 		} catch (IOException e) {
@@ -43,5 +39,4 @@ public class SelectBooleanCheckboxRenderer extends HtmlCheckboxRenderer {
 			e.printStackTrace();
 		}
 	}
-	
 }

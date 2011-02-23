@@ -30,6 +30,4 @@ public class SelectBooleanCheckboxTag extends HtmlSelectBooleanCheckboxTag {
 		
 		return RENDERER_TYPE;
 	}
-	
-	
 }
