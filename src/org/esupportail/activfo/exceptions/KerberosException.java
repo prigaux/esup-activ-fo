@@ -29,5 +29,4 @@ public class KerberosException extends Exception{
 		super(message, cause);
 	}
 
-
 }

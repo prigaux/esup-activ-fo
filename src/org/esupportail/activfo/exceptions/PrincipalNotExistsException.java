@@ -29,5 +29,4 @@ public class PrincipalNotExistsException extends Exception{
 		super(message, cause);
 	}
 
-
 }

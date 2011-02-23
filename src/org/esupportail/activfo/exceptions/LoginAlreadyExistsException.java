@@ -29,5 +29,4 @@ public class LoginAlreadyExistsException extends Exception{
 		super(message, cause);
 	}
 
-
 }

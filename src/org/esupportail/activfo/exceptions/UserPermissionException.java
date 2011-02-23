@@ -26,5 +26,4 @@ public class UserPermissionException extends Exception{
 		super(message, cause);
 	}
 
-
 }

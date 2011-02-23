@@ -29,5 +29,4 @@ public class AuthentificationException extends Exception{
 		super(message, cause);
 	}
 
-
 }

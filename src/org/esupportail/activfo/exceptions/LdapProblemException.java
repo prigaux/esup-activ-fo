@@ -29,5 +29,4 @@ public class LdapProblemException extends Exception{
 		super(message, cause);
 	}
 
-
 }
