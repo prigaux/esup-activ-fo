@@ -19,8 +19,6 @@ public class NewLoginConverter implements Converter {
 	
 	private Account account;
 	private String displayName;
-	
-    
 
 	public NewLoginConverter() {
     }
@@ -79,7 +77,5 @@ public class NewLoginConverter implements Converter {
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
 	}
-    
-   
 	
 }
