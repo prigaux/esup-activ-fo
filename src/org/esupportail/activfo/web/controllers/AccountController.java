@@ -28,12 +28,10 @@ import org.esupportail.activfo.web.beans.BeanMultiValueImpl;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 
-
 /**
  * A visual bean for the welcome page.
  */
 public class AccountController extends AbstractContextAwareController implements Serializable {
-
 
 	private final Logger logger = new LoggerImpl(getClass());
 	
@@ -43,7 +41,6 @@ public class AccountController extends AbstractContextAwareController implements
 	private boolean reinit=false;
 	private boolean passwChange=false;
 	private boolean loginChange=false;
-	
 	
 	private String accountIdKey;
 	private String accountMailKey;

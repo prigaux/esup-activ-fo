@@ -193,6 +193,4 @@ public class AdministratorsController extends AbstractContextAwareController imp
 		this.ldapUid = ldapUid;
 	}
 
-	
-
 }
