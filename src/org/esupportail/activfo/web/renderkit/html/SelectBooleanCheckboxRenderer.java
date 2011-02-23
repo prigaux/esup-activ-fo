@@ -21,9 +21,6 @@ public class SelectBooleanCheckboxRenderer extends HtmlCheckboxRenderer {
 		
 		Converter converter= ((ValueHolder) component).getConverter(); 
 		return converter.getAsObject(context, component, (String)submittedValue.toString()); 
-		
-
-		
 	}
 	
 	
@@ -46,11 +43,5 @@ public class SelectBooleanCheckboxRenderer extends HtmlCheckboxRenderer {
 			e.printStackTrace();
 		}
 	}
-	
-	
-	
-	
-	
-	
 	
 }
