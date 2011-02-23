@@ -4,7 +4,6 @@
  */
 package org.esupportail.activfo.web.controllers;
 
-
 /**
  * A visual bean for the welcome page.
  */
