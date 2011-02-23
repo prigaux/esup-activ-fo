@@ -24,9 +24,6 @@ public class ValidatorBirthDate extends AbstractI18nAwareBean implements Validat
 	/**
 	 * 
 	 */
-	
-	
-	
 
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		if (value instanceof String) {
