@@ -1,12 +1,9 @@
 package org.esupportail.activfo.web.validators;
 
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
-
 
 public class ValidatorEmail extends AbstractI18nAwareBean implements Validator  {
 	
@@ -18,9 +15,6 @@ public class ValidatorEmail extends AbstractI18nAwareBean implements Validator  
 	/**
 	 * 
 	 */
-	
-	
-	
 
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		
@@ -32,6 +26,5 @@ public class ValidatorEmail extends AbstractI18nAwareBean implements Validator  
 		
 		}
 	}
-	
 		
 }

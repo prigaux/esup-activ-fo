@@ -1,12 +1,9 @@
 package org.esupportail.activfo.web.validators;
 
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
-
 
 public class ValidatorStudentLogin extends AbstractI18nAwareBean implements Validator{
 	
@@ -18,9 +15,6 @@ public class ValidatorStudentLogin extends AbstractI18nAwareBean implements Vali
 	/**
 	 * 
 	 */
-	
-	
-	
 
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		if (value instanceof String) {
@@ -32,5 +26,4 @@ public class ValidatorStudentLogin extends AbstractI18nAwareBean implements Vali
 		}
 		else throw new ValidatorException(getFacesErrorMessage("VALIDATOR.NOTSTRING"));
 	}
-	
 }

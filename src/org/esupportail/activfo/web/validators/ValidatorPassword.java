@@ -1,15 +1,11 @@
 package org.esupportail.activfo.web.validators;
 
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
-
 
 public class ValidatorPassword extends AbstractI18nAwareBean implements Validator{
 	
@@ -17,8 +13,6 @@ public class ValidatorPassword extends AbstractI18nAwareBean implements Validato
 	 * 
 	 */
 	private static final long serialVersionUID = 8849185735359561457L;
-	
-	
 
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		
@@ -199,7 +193,4 @@ public class ValidatorPassword extends AbstractI18nAwareBean implements Validato
 			}
 			else throw new ValidatorException(getFacesErrorMessage("VALIDATOR.NOTSTRING"));
 		}
-	
-
-	
 }

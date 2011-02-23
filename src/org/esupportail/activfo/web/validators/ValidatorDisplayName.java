@@ -1,47 +1,38 @@
 package org.esupportail.activfo.web.validators;
 
-
 import java.text.Collator;
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-
 import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
-
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 
 public class ValidatorDisplayName extends AbstractI18nAwareBean implements Validator{
-	
-	
-	private Account account;
-	private String displayNameAttr;
-	
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 8849185735359561457L;
+	private final Logger logger = new LoggerImpl(getClass());
 
+	private Account account;
+	private String displayNameAttr;
+	
 	/**
 	 * 
 	 */
-	
-	
-	
 
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		String val=(String)value;
 		
 		if (this.compareInsensitive(account.getAttribute(this.displayNameAttr), val)) {
 			
-			
 		}
 		else{
 			throw new ValidatorException(getFacesErrorMessage("VALIDATOR.DISPLAYNAME.INVALID"));
 		}
-			
-		
 	}
 	
 	public boolean compareInsensitive(String str1, String str2) {
@@ -53,26 +44,24 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 		collator.setStrength(Collator.PRIMARY);
 
 		if (collator.compare(strTmp1, strTmp2) == 0) {
-//			logger.debug("Strings are equivalent");
+			logger.debug("Strings are equivalent");
 			return true;
 		}
 
-//		logger.debug("Strings  are different");
+		logger.debug("Strings  are different");
 		return false;
 	}
 	
 	public static String cleanAllSpecialChar(String str) {
 
-//		Logger.debug("Comparing : " + str1 + " and " + str2);
+		//Logger.debug("Comparing : " + str1 + " and " + str2);
 
 		String strTmp1 = str.toLowerCase();
 		strTmp1 = strTmp1.replaceAll("[^a-z]+", "");
 
 		//strTmp1 = Normalizer.normalize(strTmp1, Normalizer.DECOMP, 0);
 	    return strTmp1.replaceAll("[^\\p{ASCII}]","");
-
 	}
-
 
 	public Account getAccount() {
 		return account;
@@ -95,7 +84,5 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	public void setDisplayNameAttr(String displayNameAttr) {
 		this.displayNameAttr = displayNameAttr;
 	}
-
-
 	
 }

@@ -1,17 +1,11 @@
 package org.esupportail.activfo.web.validators;
 
-
-
 import java.text.Normalizer;
-
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
 import org.esupportail.activfo.domain.beans.Account;
-
-
 
 public class ValidatorLogin extends AbstractI18nAwareBean implements Validator{
 	/**
@@ -29,7 +23,6 @@ public class ValidatorLogin extends AbstractI18nAwareBean implements Validator{
 		String val=(String)value;
 		setInvalidMessage("VALIDATOR.LOGIN.INVALID.WITHOUTDISPLAYNAME");
 		if(!isPermitLogin(val)) throw new ValidatorException(getFacesErrorMessage(this.invalidMessage));
-		
 	}
 	
 	private boolean isPermitLogin(String val)
@@ -124,9 +117,4 @@ public class ValidatorLogin extends AbstractI18nAwareBean implements Validator{
 	public void setMaxSize(int maxSize) {
 		this.maxSize = maxSize;
 	}
-	
-	
-	
-	
-
 }
