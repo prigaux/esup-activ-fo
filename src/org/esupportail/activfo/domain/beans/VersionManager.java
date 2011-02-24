@@ -4,7 +4,6 @@
  */
 package org.esupportail.activfo.domain.beans;
  
-
 import org.esupportail.commons.domain.beans.AbstractVersionManager;
 
 /**

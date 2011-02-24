@@ -4,7 +4,6 @@
  */
 package org.esupportail.activfo.domain.beans;
 
-
 import java.io.Serializable;
 
 import org.esupportail.commons.utils.strings.StringUtils;
@@ -131,6 +130,5 @@ public class User implements Serializable {
 	public void setLanguage(final String language) {
 		this.language = StringUtils.nullIfEmpty(language);
 	}
-    
 
 }
