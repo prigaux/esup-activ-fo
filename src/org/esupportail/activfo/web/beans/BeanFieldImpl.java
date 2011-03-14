@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.convert.Converter;
+import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
 import org.esupportail.activfo.web.validators.Validator;
@@ -26,8 +27,6 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	private List<String> selectedItems=new ArrayList<String>(); // les champs sélectionnés par l'utilisateur
 	private List<SelectItem> displayItems=new ArrayList<SelectItem>(); // les champs à afficher à l'utilisateur
 	private List<String> stringDisplayItems=new ArrayList<String>();
-	
-	private List<SelectItem> oneMenuItems = new ArrayList<SelectItem>();
 	
 	private List<BeanMultiValue> hideItems=new ArrayList<BeanMultiValue>(); // valeurs recupérées du BO mais non exploitées par le FO. Lors de l'enregistrement, à renvoyer au BO
 	
@@ -188,18 +187,9 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		this.disable = disable;
 	}
 	
-	public List<SelectItem> getOneMenuItems() {
-		return oneMenuItems;
-	}
-	
-	public void setOneMenuItems(List<SelectItem> oneMenuItems) {
-		
-		this.oneMenuItems = oneMenuItems;
-	}
-	
-	
-		
-	
-	
+
+	 public void changeValue(ValueChangeEvent evt) {
+       this.value= (T) evt.getNewValue();
+	 }
 	
 }
