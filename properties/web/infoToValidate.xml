@@ -94,7 +94,7 @@
 		>
 
 		<property name="key" value="IDENTIFICATION.ANOTHERSTUDENTNUMBER.TEXT.LABEL"/>
-		<property name="value" value=""/>
+		<property name="converter" ref="anotherStudentConverter"/>
 		<property name="id" value="studentnumber"/>
 		<property name="help" value="IDENTIFICATION.ANOTHERSTUDENTNUMBER.TEXT.HELP"/>
 		<property name="required" value="true" />
@@ -111,7 +111,7 @@
 		<property name="value" value=""/>
 		<property name="fieldType" value="selectOneMenu"/>
 		<property name="required" value="true" />
-		<property name="oneMenuItems">
+		<property name="displayItems">
 		  <list>
 		    <ref bean="beanSelectNull"/>
 		    <ref bean="beanSelectParis2"/>
@@ -136,7 +136,7 @@
 		class="javax.faces.model.SelectItem"
 		>
 		<property name="label" value="Université Panthéon-Assas"/>
-		<property name="value" value="{UAI}0751718K" />
+		<property name="value" value="0751718K" />
 	</bean>
 	
 	<bean  
@@ -144,7 +144,7 @@
 		class="javax.faces.model.SelectItem"
 		>
 		<property name="label" value="Université Paris Descartes"/>
-		<property name="value" value="{UAI}0751721N" />
+		<property name="value" value="0751721N" />
 	</bean>
 	
 	<bean  
@@ -152,7 +152,7 @@
 		class="javax.faces.model.SelectItem"
 		>
 		<property name="label" value="Université Paris-Sud"/>
-		<property name="value" value="{UAI}0911101C" />
+		<property name="value" value="0911101C" />
 	</bean>
 	
 	<bean  
@@ -160,7 +160,7 @@
 		class="javax.faces.model.SelectItem"
 		>
 		<property name="label" value="Université Paris-Nord"/>
-		<property name="value" value="{UAI}0931238R" />
+		<property name="value" value="0931238R" />
 	</bean>
 	
 	<bean  
@@ -168,7 +168,7 @@
 		class="javax.faces.model.SelectItem"
 		>
 		<property name="label" value="Université Versailles Saint-Quentin"/>
-		<property name="value" value="{UAI}0751718K" />
+		<property name="value" value="0781944P" />
 	</bean>
 
 </beans>
