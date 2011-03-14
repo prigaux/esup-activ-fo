@@ -57,14 +57,14 @@
 				<e:outputLabel value="#{msgs[entry.key]}" />
 			</h:column>
 			<h:column>						
-				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25" validator="#{entry.validator.validate}" converter="#{entry.converter}" rendered="#{entry.converter!=null&&entry.validator!=null&&entry.fieldType=='inputText'}"/>
-				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25" converter="#{entry.converter}" rendered="#{entry.converter!=null&&entry.validator==null&&entry.fieldType=='inputText'}"/>
-				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null&&entry.validator!=null&&entry.fieldType=='inputText'}"/>	
-				<e:inputText value="#{entry.value}"  required="#{entry.required}" size="25"  rendered="#{entry.converter==null&&entry.validator==null&&entry.fieldType=='inputText'}"/>
+				<e:inputText value="#{entry.value}"  required="#{entry.required}" style="width:100%"  validator="#{entry.validator.validate}" converter="#{entry.converter}" rendered="#{entry.converter!=null&&entry.validator!=null&&entry.fieldType=='inputText'}"/>
+				<e:inputText value="#{entry.value}"  required="#{entry.required}" style="width:100%"  converter="#{entry.converter}" rendered="#{entry.converter!=null&&entry.validator==null&&entry.fieldType=='inputText'}"/>
+				<e:inputText value="#{entry.value}"  required="#{entry.required}" style="width:100%"  validator="#{entry.validator.validate}"  rendered="#{entry.converter==null&&entry.validator!=null&&entry.fieldType=='inputText'}"/>	
+				<e:inputText value="#{entry.value}"  required="#{entry.required}" style="width:100%"   rendered="#{entry.converter==null&&entry.validator==null&&entry.fieldType=='inputText'}"/>
 				<h:selectOneMenu value="#{entry.value}" rendered="#{entry.fieldType=='selectOneMenu'}" valueChangeListener="#{entry.changeValue}" immediate="true">
                   <f:selectItems value="#{entry.displayItems}" />
              	</h:selectOneMenu>
-			</h:column>
+			</h:column><input style="width:100px" />
 			<h:column>									
 				<t:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
 			</h:column>													
