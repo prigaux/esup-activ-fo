@@ -56,7 +56,17 @@
     	
     </bean>
     
-
-    
-	
+    <bean 
+		id="anotherStudentConverter"
+		class="org.esupportail.activfo.web.converters.AnotherStudentConverter"
+		scope="session"
+		>
+    	<description>
+			A converter for....
+    	</description>
+    	
+    	<property name="etablissement" ref="beanEtablissement"/>
+    	
+	</bean>
+ 	
 </beans>
