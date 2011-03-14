@@ -28,7 +28,15 @@
 
 	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
 		
-		<e:paragraph escape="false" value="#{msgs['CHOICE.TEXT.TOP']}">
+		<e:paragraph escape="false" value="#{msgs['CHOICE.TEXT.WITHOUTEMAIL.TOP']}" rendered="#{accountController.partialMailPerso==''&&accountController.partialPager!=''}">
+		  <f:param value="#{accountController.partialPager}" />
+		</e:paragraph>
+		
+		<e:paragraph escape="false" value="#{msgs['CHOICE.TEXT.WITHOUTPHONE.TOP']}" rendered="#{accountController.partialMailPerso!=''&&accountController.partialPager==''}">
+		  <f:param value="#{accountController.partialMailPerso}" />
+		</e:paragraph>
+		
+		<e:paragraph escape="false" value="#{msgs['CHOICE.TEXT.TOP']}" rendered="#{accountController.partialMailPerso!=''&&accountController.partialPager!=''}">
 		  <f:param value="#{accountController.partialMailPerso}" />
 		  <f:param value="#{accountController.partialPager}" />
 		</e:paragraph>
