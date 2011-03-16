@@ -12,6 +12,7 @@ import org.esupportail.activfo.web.validators.Validator;
 
 public class BeanFieldImpl<T> implements BeanField<T> {
 	
+	//private String label;
 	private String key;
 	private T value;
 	private String fieldType=INPUTTEXT;
@@ -41,12 +42,15 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	public String getId() {
 		return id;
 	}
+	
 	public void setId(String id) {
 		this.id = id;
 	}
+	
 	public boolean isDisabled() {
 		return disabled;
 	}
+	
 	public void setDisabled(boolean disabled) {
 		this.disabled = disabled;
 	}
@@ -58,15 +62,10 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		this.required = required;
 	}
 	
-	public String getKey() {
-		return key;
-	}
-	public void setKey(String key) {
-		this.key = key;
-	}
 	public T getValue() {
 		return value;
 	}
+	
 	public void setValue(T value) {
 		this.value = value;
 	}
@@ -191,5 +190,17 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	 public void changeValue(ValueChangeEvent evt) {
        this.value= (T) evt.getNewValue();
 	 }
+	/**
+	 * @return the key
+	 */
+	public String getKey() {
+		return key;
+	}
+	/**
+	 * @param key the key to set
+	 */
+	public void setKey(String key) {
+		this.key = key;
+	}
 	
 }
