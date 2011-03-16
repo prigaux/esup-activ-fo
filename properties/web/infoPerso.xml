@@ -30,7 +30,7 @@
 		<property name="help" value="PERSOINFO.EMAILPERSO.TEXT.HELP"/>
 		<property name="required" value="false" />
 		<property name="name" value="supannMailPerso"/>
-		<property name="disable" value="true"/>
+		<property name="disable" value="false"/>
 	</bean>
 	
 	<bean
@@ -43,7 +43,7 @@
 		<property name="help" value="PERSOINFO.MOBILE.TEXT.HELP"/>
 		<property name="required" value="false" />
 		<property name="name" value="pager"/>
-		<property name="disable" value="true"/>
+		<property name="disable" value="false"/>
 	</bean>
 	
 	<bean
