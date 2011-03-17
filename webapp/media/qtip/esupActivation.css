@@ -1,6 +1,6 @@
  /* common to all columns*/
     .firstColumn, .secondColumn, .thirdColumn{
-    Vertical-Align: Top;
+    Vertical-Align: center;
     }
     
     .firstStepImage {
