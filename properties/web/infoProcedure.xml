@@ -35,7 +35,7 @@
 		scope="session"
 		>
 
-		<property name="key" value="WELCOME.PROCEDURE.PASSWORDCHANGE.RADIOBUTTON.LABEL"/>
+		<property name="key" value="PASSWORD.PASSWORDCHANGE.TITLE"/>
 		<property name="value" value="${view.procedure.passwordchange}"/>
 		
 	</bean>
