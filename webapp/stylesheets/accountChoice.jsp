@@ -11,7 +11,7 @@
 
 <%@include file="_navigation.jsp"%>
 
-<e:section value="#{msgs['CHOICE.TITLE']}" />
+<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}" />
 
 <t:div styleClass="secondStepImage5fleches" rendered="#{accountController.reinit == true}">
 	<t:htmlTag styleClass="processSteps" value="ul">
