@@ -13,7 +13,7 @@
 	</t:documentHead>
 	
 	<%@include file="_navigation.jsp"%>
-	<e:section value="#{msgs['AUTHENTIFICATION.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}"/>
+	<e:section value="#{msgs['PASSWORD.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}"/>
 	<e:section value="#{msgs['AUTHENTIFICATION.LOGINCHANGE.TITLE']}" rendered="#{accountController.loginChange == true}"/>
 	
 	<t:div styleClass="firstStepImage3fleches" rendered="#{accountController.passwChange == true}" >
