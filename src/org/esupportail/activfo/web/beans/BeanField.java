@@ -64,5 +64,9 @@ public interface BeanField<T> {
 	
 	public List<SelectItem> getDisplayItems();
 	public void setDisplayItems(List<SelectItem> displayItems);
+	
+	public List<SelectItem> getOneRadioItems();
+	public void setOneRadioItems(List<SelectItem> oneRadioItems);
+	
 		
 }
