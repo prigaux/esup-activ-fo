@@ -22,7 +22,7 @@ public class ValidatorStudentLogin extends AbstractI18nAwareBean implements Vali
 			String strValue = (String) value;
 			
 			if (!strValue.matches("^[0-9]{11}$")) {
-				throw new ValidatorException(getFacesErrorMessage("VALIDATOR.STUDENTLOGIN.INVALID"));
+				throw new ValidatorException(getFacesErrorMessage("LOGIN.MESSAGE.INVALIDLOGIN"));
 			}
 		}
 		else throw new ValidatorException(getFacesErrorMessage("VALIDATOR.NOTSTRING"));
