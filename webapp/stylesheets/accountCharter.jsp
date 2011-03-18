@@ -3,7 +3,7 @@
 	locale="#{sessionController.locale}">
 	<%@include file="_navigation.jsp"%>
 	<%@include file="_includeScript.jsp"%>
-	<e:section value="#{msgs['CHARTER.TITLE']}" />
+	<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}" />
 	
 	<t:div styleClass="thirdStepImage" rendered="#{accountController.activ == true}">
 	<t:htmlTag styleClass="processSteps" value="ul">
