@@ -96,7 +96,7 @@
 		<property name="key" value="IDENTIFICATION.ANOTHERSTUDENTNUMBER.TEXT.LABEL"/>
 		<property name="converter" ref="anotherStudentConverter"/>
 		<property name="id" value="studentnumber"/>
-		<property name="help" value="IDENTIFICATION.ANOTHERSTUDENTNUMBER.TEXT.HELP"/>
+		<property name="help" value="IDENTIFICATION.STUDENTNUMBER.TEXT.HELP"/>
 		<property name="required" value="true" />
 				
 	</bean>
