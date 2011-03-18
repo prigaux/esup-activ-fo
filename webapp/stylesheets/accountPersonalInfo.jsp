@@ -12,9 +12,9 @@
 
 	<%@include file="_navigation.jsp"%>
 	
-	<e:section value="#{msgs['PERSOINFO.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
-	<e:section value="#{msgs['PERSOINFO.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}" />
-	<e:section value="#{msgs['PERSOINFO.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}" />
+	<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
+	<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}" />
+	<e:section value="#{msgs['PASSWORD.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}" />
 	<e:section value="#{msgs['PERSOINFO.LOGINCHANGE.TITLE']}" rendered="#{accountController.loginChange == true}" />
 
    
@@ -62,11 +62,11 @@
 	
 	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
 	  <h:dataTable value="#{accountController.listBeanPersoInfo}" var="entry" columnClasses="firstColumn,secondColumn,thirdColumn"> 
-		<h:column>						
+		<h:column >						
 		  <e:outputLabel value="#{msgs[entry.key]}" />
 		</h:column>
 		<h:column>
-		<t:dataList value="#{entry.values}" var="sub" style="Vertical-Align: Top;"  rendered="#{entry.fieldType!='selectManyCheckbox'}" >
+		<t:dataList value="#{entry.values}" var="sub"  rendered="#{entry.fieldType!='selectManyCheckbox'}" >
 		
 		    <t:div rendered="#{sub.value!=''&&entry.fieldType!='selectOneRadio'}" styleClass="#{entry.name}show">
 			    <h:inputText value="#{sub.value}" disabled="#{entry.disable}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value!=''}" />
