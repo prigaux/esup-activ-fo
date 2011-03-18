@@ -9,7 +9,7 @@
 	<e:section value="#{msgs['LOGIN.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}" />
 	<e:section value="#{msgs['LOGIN.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}" />
 	<e:section value="#{msgs['LOGIN.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}" />
-	<e:section value="#{msgs['LOGIN.TITLE']}" rendered="#{accountController.loginChange == true}" />
+	<e:section value="#{msgs['PERSOINFO.LOGINCHANGE.TITLE']}" rendered="#{accountController.loginChange == true}" />
 	
 	<t:div styleClass="thirdStepImage3fleches" rendered="#{accountController.loginChange == true}" >
 	<t:htmlTag styleClass="processSteps" value="ul">
