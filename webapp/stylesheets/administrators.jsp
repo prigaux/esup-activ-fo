@@ -9,7 +9,7 @@
 			cellspacing="0" cellpadding="0">
 			<e:section value="#{msgs['ADMINISTRATORS.TITLE']}" />
 			<e:commandButton action="addAdmin"
-				value="#{msgs['ADMINISTRATORS.BUTTON.ADD_ADMIN']}"
+				value="#{msgs['ADMINISTRATOR_ADD.TITLE']}"
 				rendered="#{administratorsController.currentUserCanAddAdmin}" />
 		</e:panelGrid>
 
