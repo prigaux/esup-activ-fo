@@ -86,8 +86,7 @@
             </t:div>
             <t:div rendered="#{entry.fieldType=='selectOneRadio'}">             
             	<h:selectOneRadio value="#{sub.value}"  >
-                  <f:selectItem itemValue="TRUE" itemLabel="Oui" />
-                  <f:selectItem itemValue="FALSE" itemLabel="Non"/>
+                  <f:selectItems value="#{entry.oneRadioItems}" />
              	</h:selectOneRadio>              
             </t:div> 
         </t:dataList>
