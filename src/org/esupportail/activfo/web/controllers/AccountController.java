@@ -510,7 +510,7 @@ public class AccountController extends AbstractContextAwareController implements
 			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
 		}
 		
-		addErrorMessage(null, "CODE.MESSAGE.CODENOTVALIDE");
+		addErrorMessage(null, "VALIDATOR.CODE.INVALID");
 		return null;
 
 	}
