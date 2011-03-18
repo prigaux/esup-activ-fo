@@ -4,7 +4,7 @@
 <e:page stringsVar="msgs" menuItem="account"
 	locale="#{sessionController.locale}">
 	<%@include file="_navigation.jsp"%>
-	<e:section value="#{msgs['CODE.TITLE']}" />
+	<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}" />
 	
 	<t:div styleClass="thirdStepImage5fleches" rendered="#{accountController.reinit == true}">
 	<t:htmlTag styleClass="processSteps" value="ul">
