@@ -112,8 +112,31 @@
 		<property name="key" value="PERSOINFO.LISTEROUGE.TEXT.LABEL"/>
 		<property name="fieldType" value="selectOneRadio"/>
 		<property name="isMultiValue" value="false"/>	
+		<property name="oneRadioItems">
+		   <list>
+		    
+		     <ref bean="beanRadioFALSE"/>
+		      <ref bean="beanRadioTRUE"/>
+		   </list>
+		</property>
 		<property name="name" value="supannListeRouge"/>
 		<property name="disable" value="false"/>
+	</bean>
+	
+	<bean  
+		id="beanRadioTRUE"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="Ouiii"/>
+		<property name="value" value="TRUE" />
+	</bean>
+	
+	<bean  
+		id="beanRadioFALSE"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="Nonnn"/>
+		<property name="value" value="FALSE" />
 	</bean>
 	
 	<bean
