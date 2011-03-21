@@ -127,7 +127,7 @@
 		id="beanRadioTRUE"
 		class="javax.faces.model.SelectItem"
 		>
-		<property name="label" value="Ouiii"/>
+		<property name="label" value="Oui"/>
 		<property name="value" value="TRUE" />
 	</bean>
 	
@@ -135,7 +135,7 @@
 		id="beanRadioFALSE"
 		class="javax.faces.model.SelectItem"
 		>
-		<property name="label" value="Nonnn"/>
+		<property name="label" value="Non"/>
 		<property name="value" value="FALSE" />
 	</bean>
 	
