@@ -1,5 +1,7 @@
 package org.esupportail.activfo.web.validators;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,6 +17,39 @@ public class ValidatorPassword extends AbstractI18nAwareBean implements Validato
 	 * 
 	 */
 	private static final long serialVersionUID = 8849185735359561457L;
+	
+	private List<String> forbidden;
+	
+	private String caracterForbidden;
+
+	/**
+	 * @return the forbidden
+	 */
+	public List<String> getForbidden() {
+		return forbidden;
+	}
+
+	/**
+	 * @param forbidden the forbidden to set
+	 */
+	public void setForbidden(List<String> forbidden) {
+		this.forbidden = forbidden;
+	}
+
+
+	/**
+	 * @return the caracterForbidden
+	 */
+	public String getCaracterForbidden() {
+		return caracterForbidden;
+	}
+
+	/**
+	 * @param caracterForbidden the caracterForbidden to set
+	 */
+	public void setCaracterForbidden(String caracterForbidden) {
+		this.caracterForbidden = caracterForbidden;
+	}
 
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		
@@ -24,32 +59,9 @@ public class ValidatorPassword extends AbstractI18nAwareBean implements Validato
 			String PASSWORD_NUMERIC = "1";
 			String PASSWORD_SPECIAL = "1";
 			String PASSWORD_STRENGTH = "20";
-			String[][] interdit={
-					{"¡","\u00A1"},{"¢","\u00A2"},{"£","\u00A3"},{"¤","\u00A4"},
-					{"¥","\u00A5"},{"¦","\u00A6"},{"§","\u00A7"},{"¨","\u00A8"},
-					{"©","\u00A9"},{"ª","\u00AA"},{"«","\u00AB"},{"¬","\u00AC"},
-					{" ","espace"},{"®","\u00AE"},{"¯","\u00AF"},{"°","\u00B0"},
-					{"±","\u00B1"},{"²","\u00B2"},{"³","\u00B3"},{"´","\u00B4"},
-					{"µ","\u00B5"},{"¶","\u00B6"},{"·","\u00B7"},{"¸","\u00B8"},
-					{"¹","\u00B9"},{"º","\u00BA"},{"»","\u00BB"},{"¼","\u00BC"},
-					{"½","\u00BD"},{"¾","\u00BE"},{"¿","\u00BF"},{"À","\u00C0"},
-					{"Á","\u00C1"},{"Â","\u00C2"},{"Ã","\u00C3"},{"Ä","\u00C4"},
-					{"Å","\u00C5"},{"Æ","\u00C6"},{"Ç","\u00C7"},{"È","\u00C8"},
-					{"É","\u00C9"},{"Ê","\u00CA"},{"Ë","\u00CB"},{"Ì","\u00CC"},
-					{"Í","\u00CD"},{"Î","\u00CE"},{"Ï","\u00CF"},{"Ð","\u00D0"},
-					{"Ñ","\u00D1"},{"Ò","\u00D2"},{"Ó","\u00D3"},{"Ô","\u00D4"},
-					{"Õ","\u00D5"},{"Ö","\u00D6"},{"×","\u00D7"},{"Ø","\u00D8"},
-					{"Ù","\u00D9"},{"Ú","\u00DA"},{"Û","\u00DB"},{"Ü","\u00DC"},
-					{"Ý","\u00DD"},{"Þ","\u00DE"},{"ß","\u00DF"},{"à","\u00E0"},
-					{"á","\u00E1"},{"â","\u00E2"},{"ã","\u00E3"},{"ä","\u00E4"},
-					{"å","\u00E5"},{"æ","\u00E6"},{"ç","\u00E7"},{"è","\u00E8"},
-					{"é","\u00E9"},{"ê","\u00EA"},{"ë","\u00EB"},{"ì","\u00EC"},
-					{"í","\u00ED"},{"î","\u00EE"},{"ï","\u00EF"},{"ð","\u00F0"},
-					{"ñ","\u00F1"},{"ò","\u00F2"},{"ó","\u00F3"},{"ô","\u00F4"},
-					{"õ","\u00F5"},{"ö","\u00F6"},{"÷","\u00F7"},{"ø","\u00F8"},
-					{"ù","\u00F9"},{"ú","\u00FA"},{"û","\u00FB"},{"ü","\u00FC"},
-					{"ý","\u00FD"},{"þ","\u00FE"},{"ÿ","\u00FF"}
-			};
+			String specialmessage = null;
+			
+			List<String> forbidden=Arrays.asList(caracterForbidden.split(","));
 			
 			if (value instanceof String) {
 				String passwd = (String) value;
@@ -122,11 +134,14 @@ public class ValidatorPassword extends AbstractI18nAwareBean implements Validato
 					}
 				}
 				
-				for (int i=0;i<interdit.length;i++) {
-					p=Pattern.compile(interdit[i][0]);
+				for (int i=0;i<forbidden.size();i++) {
+					p=Pattern.compile(forbidden.get(i));
 					m=p.matcher(passwd);
 					if(m.find()) {
-						throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.INTERDITCARACTERS",interdit[i][1]));
+						if (forbidden.get(i).equals(" "))
+							specialmessage="espace";
+						else specialmessage=forbidden.get(i);
+						throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",specialmessage));
 					}
 				}
 				
