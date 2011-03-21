@@ -114,6 +114,7 @@
     	<description>
 			A validator for Password.
     	</description>
+    	<property name="caracterForbidden" value="${caracter.forbidden}"/>
     	
     	
 	</bean>
