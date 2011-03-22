@@ -114,13 +114,14 @@
 		<property name="listBeanPersoInfo">
 			<list>
 				<ref bean="beanDisplayName"/>
-				<ref bean="beanEmailPerso"/>
-				<ref bean="beanMobilePhone"/>
+				<ref bean="beanEmailPerso"/>		
 				<ref bean="beanEduPersonPrimaryAffiliation"/> 
 			    <ref bean="beanEduPersonAffiliation"/>
-			    <ref bean="beanListeRouge"/>
 			    <ref bean="beanMailRedirect"/> 
+			    <ref bean="beanKeepMail"/> 
+			    <ref bean="beanMobilePhone"/>
 			    <ref bean="beanSMSAgreement"/>
+			    <ref bean="beanListeRouge"/>
 			</list>
 		</property>
 		
