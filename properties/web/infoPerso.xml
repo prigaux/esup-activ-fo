@@ -114,9 +114,8 @@
 		<property name="isMultiValue" value="false"/>	
 		<property name="oneRadioItems">
 		   <list>
-		    
+        	 <ref bean="beanRadioTRUE"/>
 		     <ref bean="beanRadioFALSE"/>
-		      <ref bean="beanRadioTRUE"/>
 		   </list>
 		</property>
 		<property name="name" value="supannListeRouge"/>
@@ -147,6 +146,12 @@
 		<property name="key" value="PERSOINFO.MAILFORWARD.LABEL"/>
 		<property name="fieldType" value="selectOneRadio"/>
 		<property name="isMultiValue" value="false"/>	
+		<property name="oneRadioItems">
+		   <list>
+        	 <ref bean="beanRadioTRUE"/><!-- oui email perso -->
+		     <ref bean="beanRadioFALSE"/><!-- non vide -->
+		   </list>
+		</property>
 		<property name="name" value="mailForwardingAddress"/>
 		<property name="disable" value="false"/>
 	</bean>
@@ -158,6 +163,12 @@
 		<property name="key" value="PERSOINFO.MAILFORWARD.KEEPMAIL.LABEL"/>
 		<property name="fieldType" value="selectOneRadio"/>
 		<property name="isMultiValue" value="false"/>	
+		<property name="oneRadioItems">
+		   <list>
+        	 <ref bean="beanRadioTRUE"/> <!-- / -->
+		     <ref bean="beanRadioFALSE"/><!-- supprimer / -->
+		   </list>
+		</property>
 		<property name="name" value="mailForwardingAddress"/>
 		<property name="disable" value="false"/>
 	</bean>
