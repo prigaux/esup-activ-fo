@@ -41,6 +41,17 @@
 	</bean>
 	
 	<bean
+		id="beanDataChange"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="WELCOME.PROCEDURE.DATACHANGE.RADIOBUTTON.LABEL"/>
+		<property name="value" value="${view.procedure.loginchange}"/>
+		
+	</bean>
+	
+	<bean
 		id="beanLoginChange"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"

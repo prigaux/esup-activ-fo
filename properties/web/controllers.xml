@@ -162,6 +162,7 @@
 				<ref bean="beanActivation"/>
 				<ref bean="beanReinitialisation"/>
 				<ref bean="beanPasswordChange"/>
+				<ref bean="beanDataChange"/>
 				<ref bean="beanLoginChange"/>
 			</list>
 		</property>
