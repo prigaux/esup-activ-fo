@@ -18,24 +18,7 @@ public class ValidatorPassword extends AbstractI18nAwareBean implements Validato
 	 */
 	private static final long serialVersionUID = 8849185735359561457L;
 	
-	private List<String> forbidden;
-	
 	private String caracterForbidden;
-
-	/**
-	 * @return the forbidden
-	 */
-	public List<String> getForbidden() {
-		return forbidden;
-	}
-
-	/**
-	 * @param forbidden the forbidden to set
-	 */
-	public void setForbidden(List<String> forbidden) {
-		this.forbidden = forbidden;
-	}
-
 
 	/**
 	 * @return the caracterForbidden
@@ -60,8 +43,6 @@ public class ValidatorPassword extends AbstractI18nAwareBean implements Validato
 			String PASSWORD_SPECIAL = "1";
 			String PASSWORD_STRENGTH = "20";
 			String specialmessage = null;
-			
-			List<String> forbidden=Arrays.asList(caracterForbidden.split(","));
 			
 			if (value instanceof String) {
 				String passwd = (String) value;
@@ -134,17 +115,15 @@ public class ValidatorPassword extends AbstractI18nAwareBean implements Validato
 					}
 				}
 				
-				for (int i=0;i<forbidden.size();i++) {
-					p=Pattern.compile(forbidden.get(i));
-					m=p.matcher(passwd);
-					if(m.find()) {
-						if (forbidden.get(i).equals(" "))
-							specialmessage="espace";
-						else specialmessage=forbidden.get(i);
-						throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",specialmessage));
-					}
+				p=Pattern.compile(caracterForbidden);
+				m=p.matcher(passwd);
+					
+				if(m.find()) {
+					if (m.group(0).equals(" "))
+						specialmessage="espace";
+					else specialmessage=m.group(0);
+					throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",specialmessage));
 				}
-				
 				
 				// SPECIAL CHAR
 				p = Pattern.compile(".??[:,!,@,#,$,%,^,&,*,?,_,~]");
