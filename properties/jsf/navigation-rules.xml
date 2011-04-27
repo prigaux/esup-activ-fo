@@ -183,6 +183,24 @@
 	</navigation-rule>
 	
 	<navigation-rule>
+		<display-name>accountAuthentificationToDataChange</display-name>
+		<from-view-id>/stylesheets/accountAuthentification.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoDataChange</from-outcome>
+			<to-view-id>/stylesheets/accountDataChange.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>accountDataChangeToShowDataChange</display-name>
+		<from-view-id>/stylesheets/accountDataChange.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoViewDataChange</from-outcome>
+			<to-view-id>/stylesheets/accountViewDataChange.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
 		<display-name>accountLoginToEnabled</display-name>
 		<from-view-id>/stylesheets/accountLogin.jsp</from-view-id>
 		<navigation-case>
