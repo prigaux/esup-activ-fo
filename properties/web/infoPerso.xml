@@ -18,6 +18,8 @@
 		<property name="required" value="true" />
 		<property name="name" value="displayName"/>
 		<property name="disable" value="false"/>
+		<property name="category" value="principalInfo"/>
+		<property name="canUpdate" value="false"/>
 	</bean>
 	
 	<bean
@@ -44,6 +46,8 @@
 		<property name="required" value="false" />
 		<property name="name" value="pager"/>
 		<property name="disable" value="false"/>
+		<property name="category" value="personalInfo"/>
+		<property name="canUpdate" value="true"/>
 	</bean>
 	
 	<bean
@@ -72,7 +76,9 @@
 		<property name="key" value="PERSOINFO.EDUPERSONPRIMARYAFFILIATION.TEXT.LABEL"/>
 		<property name="required" value="false" />
 		<property name="name" value="eduPersonPrimaryAffiliation"/>
-		<property name="disable" value="false"/>
+		<property name="disable" value="true"/>
+		<property name="category" value="functionInfo"/>
+		<property name="canUpdate" value="false"/>
 	</bean>
 	
 	<bean  
@@ -173,6 +179,271 @@
 		<property name="disable" value="false"/>
 	</bean>
 	
+	 
+	<bean
+		id="beanUid"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="DATACHANGE.UID.TEXT.LABEL"/>
+		<property name="required" value="true" />
+		<property name="name" value="uid"/>
+		<property name="disable" value="true"/>
+		<property name="category" value="principalInfo"/>
+		<property name="canUpdate" value="false"/>
+	</bean>
+	
+	<bean
+		id="beanSupannCivilite"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="DATACHANGE.SUPANNCIVILITE.TEXT.LABEL"/>
+		<property name="required" value="true" />
+		<property name="name" value="supannCivilite"/>
+		<property name="disable" value="true"/>
+		<property name="category" value="principalInfo"/>
+		<property name="canUpdate" value="false"/>
+	</bean>
+	
+	<bean
+		id="beanSn"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="DATACHANGE.SN.TEXT.LABEL"/>
+		<property name="required" value="true" />
+		<property name="name" value="sn"/>
+		<property name="disable" value="true"/>
+		<property name="category" value="principalInfo"/>
+		<property name="canUpdate" value="false"/>
+	</bean>
+	
+	<bean
+		id="beanGivenName"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="DATACHANGE.GIVENNAME.TEXT.LABEL"/>
+		<property name="required" value="true" />
+		<property name="name" value="givenName"/>
+		<property name="disable" value="true"/>
+		<property name="category" value="principalInfo"/>
+		<property name="canUpdate" value="false"/>
+	</bean>
+	
+	<bean
+		id="beanEmployeeType"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="DATACHANGE.EMPLOYEETYPE.TEXT.LABEL"/>
+		<property name="required" value="true" />
+		<property name="name" value="employeeType"/>
+		<property name="disable" value="true"/>
+		<property name="category" value="functionInfo"/>
+		<property name="canUpdate" value="false"/>
+	</bean>
+	
+	<bean
+		id="beanMail"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="DATACHANGE.MAIL.TEXT.LABEL"/>
+		<property name="required" value="true" />
+		<property name="name" value="mail"/>
+		<property name="disable" value="true"/>
+		<property name="category" value="professionalInfo"/>
+		<property name="canUpdate" value="false"/>
+	</bean>
+	
+	<bean
+		id="beanPostalAddress"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="DATACHANGE.POSTALADDRESS.TEXT.LABEL"/>
+		<property name="required" value="true" />
+		<property name="name" value="postalAddress"/>
+		<property name="disable" value="true"/>
+		<property name="category" value="professionalInfo"/>
+		<property name="canUpdate" value="false"/>
+	</bean>
+	
+	<bean
+		id="beanPhone"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="DATACHANGE.PHONE.TEXT.LABEL"/>
+		<property name="required" value="true" />
+		<property name="name" value="telephoneNumber"/>
+		<property name="disable" value="true"/>
+		<property name="category" value="professionalInfo"/>
+		<property name="canUpdate" value="true"/>
+	</bean>
+	
+	<bean
+		id="beanFax"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="DATACHANGE.FAX.TEXT.LABEL"/>
+		<property name="required" value="true" />
+		<property name="name" value="facsimileTelephoneNumber"/>
+		<property name="disable" value="true"/>
+		<property name="category" value="professionalInfo"/>
+		<property name="canUpdate" value="true"/>
+	</bean>
+	
+	<bean
+		id="beanHomePostalAddress"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="DATACHANGE.HOMEPOSTALADDRESS.TEXT.LABEL"/>
+		<property name="required" value="true" />
+		<property name="name" value="homePostalAddress"/>
+		<property name="disable" value="false"/>
+		<property name="category" value="personalInfo"/>
+		<property name="canUpdate" value="true"/>
+	</bean>
+	
+	<bean
+		id="beanHarpegeeNumber"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="DATACHANGE.HARPEGEENUMBER.TEXT.LABEL"/>
+		<property name="required" value="true" />
+		<property name="name" value="harpegeeNumber"/>
+		<property name="disable" value="true"/>
+		<property name="category" value="harpegeeApogeeInfo"/>
+		<property name="canUpdate" value="false"/>
+	</bean>
+	
+	<bean
+		id="beanEduPersonOrgUnitDN"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="DATACHANGE.EDUPERSONORGUNITDN.TEXT.LABEL"/>
+		<property name="required" value="true" />
+		<property name="name" value="eduPersonOrgUnitDN"/>
+		<property name="disable" value="true"/>
+		<property name="category" value="harpegeeApogeeInfo"/>
+		<property name="canUpdate" value="false"/>
+	</bean>
+	
+	<bean
+		id="beanPrincipalInfo"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="INFO.PRINCIPAL.TEXT.LABEL"/>
+		<property name="name" value="principalInfo"/>
+		<!-- 
+		<property name="listCategory">
+		  <list>
+		    <ref bean="beanUid"/>
+		    <ref bean="beanSupannCivilite"/>
+		    <ref bean="beanSn"/>
+		    <ref bean="beanGivenName"/>
+		    <ref bean="beanDisplayName"/>
+		  </list>
+		 
+		</property>
+		--> 
+	</bean>
+	
+	<bean
+		id="beanFunctionInfo"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="INFO.FUNCTION.TEXT.LABEL"/>
+		<property name="name" value="functionInfo"/>
+		<!-- 
+		<property name="listCategory">
+		  <list>
+		    <ref bean="beanEduPersonPrimaryAffiliation"/>
+		    <ref bean="beanEmployeeType"/>
+		  </list>
+		</property>
+		 --> 
+	</bean>
+	
+	<bean
+		id="beanProfessionalInfo"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="INFO.PROFESSIONAL.TEXT.LABEL"/>
+		<property name="name" value="professionalInfo"/>
+		<!-- 
+		<property name="listCategory">
+		  <list>
+		    <ref bean="beanMail"/>
+		    <ref bean="beanPostalAddress"/>
+		    <ref bean="beanPhone"/>
+		    <ref bean="beanFax"/>
+		  </list>
+		</property>
+		 --> 
+	</bean>
 	
 	
+	
+	<bean
+		id="beanPersonalInfo"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="INFO.PERSONAL.TEXT.LABEL"/>
+		<property name="name" value="personalInfo"/>
+		<!-- 
+		<property name="listCategory">
+		  <list>
+		    <ref bean="beanHomePostalAddress"/>
+		    <ref bean="beanMobilePhone"/>
+		  </list>
+		</property>
+		 --> 
+	</bean>
+	
+	<bean
+		id="beanHarpegeeApogeeInfo"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="INFO.HARPEGEEAPOGEE.TEXT.LABEL"/>
+		<property name="name" value="harpegeeApogeeInfo"/>
+		<!-- 
+		<property name="listCategory">
+		  <list>
+		    <ref bean="beanHarpegeeNumber"/>
+		    <ref bean="beanEduPersonOrgUnitDN"/>
+		  </list>
+		</property>
+		 --> 
+	</bean>
+		
 </beans>
