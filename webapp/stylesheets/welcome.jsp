@@ -13,7 +13,7 @@
        $("#[id='welcomeForm:statusDiv']").slideDown();     
     }
      else 
-     if(this.value=="passwordchange" || this.value=="loginchange"){        
+     if(this.value=="passwordchange" || this.value=="loginchange" || this.value=="datachange"){        
            $("#[id='welcomeForm:statusDiv']").slideUp();                           
            $("#[name='welcomeForm:statusRadio']:first").attr("checked","checked");                   
                          
