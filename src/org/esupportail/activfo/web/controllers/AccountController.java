@@ -22,6 +22,7 @@ import org.esupportail.activfo.exceptions.LoginException;
 import org.esupportail.activfo.exceptions.PrincipalNotExistsException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.activfo.web.beans.BeanField;
+import org.esupportail.activfo.web.beans.CategoryBeanField;
 import org.esupportail.activfo.web.beans.BeanFieldImpl;
 import org.esupportail.activfo.web.beans.BeanMultiValue;
 import org.esupportail.activfo.web.beans.BeanMultiValueImpl;
@@ -41,6 +42,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private boolean reinit=false;
 	private boolean passwChange=false;
 	private boolean loginChange=false;
+	private boolean dataChange=false;
 	
 	private String accountIdKey;
 	private String accountMailKey;
@@ -61,6 +63,11 @@ public class AccountController extends AbstractContextAwareController implements
 	//liste des attributs pour l'affichage des informations personnelles
 	private String attributesInfPerso;
 	
+	//liste des champs pour l'affichage des informations que vous voulez modifier
+	private List<BeanField> listDataChangeInfos;
+	private String attributesDataChange;
+	
+	private List<BeanField> listDataChangeCategory;
 	
 	//liste g�n�rique d'attributs � valider
 	private List<String> attrToValidate;
@@ -78,7 +85,6 @@ public class AccountController extends AbstractContextAwareController implements
 	private List<BeanField> listInfoPersonnelToValidate;
 	private List<BeanField> listInfoOldStudentToValidate;
 	private List<BeanField> listInfoAnotherStudentToValidate;
-	
 	
 	private List<BeanField> listBeanCanal;
 	
@@ -104,6 +110,7 @@ public class AccountController extends AbstractContextAwareController implements
 	//champ newLogin
 	private BeanField beanNewLogin;
 	
+	private CategoryBeanField beanTestInfo;  
 	
 	//decriptif du compte suite � validation
 	HashMap<String,String> accountDescr=new HashMap<String,String>();
@@ -113,6 +120,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String procedureActivation;
 	private String procedurePasswordChange;
 	private String procedureLoginChange;
+	private String procedureDataChange;
 	
 	private String statusStudent;
 	private String statusPersonnel;
@@ -158,18 +166,29 @@ public class AccountController extends AbstractContextAwareController implements
 			passwChange=false;
 			activ=false;
 			loginChange=false;
+			dataChange=false;
 		}
 		else if (currentAccount.getOneRadioProcedure().equals(procedurePasswordChange)){
 			passwChange=true;
 			reinit=false;
 			activ=false;
 			loginChange=false;
+			dataChange=false;
+			return "gotoAuthentification";
+		}
+		else if (currentAccount.getOneRadioProcedure().equals(procedureDataChange)) {
+			passwChange=false;
+			activ=false;
+			reinit=false;
+			loginChange=false;
+			dataChange=true;
 			return "gotoAuthentification";
 		}
 		else if (currentAccount.getOneRadioProcedure().equals(procedureLoginChange)){
 			passwChange=false;
 			reinit=false;
 			activ=false;
+			dataChange=false;
 			loginChange=true;
 			return "gotoAuthentification";
 		}
@@ -229,7 +248,7 @@ public class AccountController extends AbstractContextAwareController implements
 					this.addErrorMessage(null, "IDENTIFICATION.REINITIALISATION.MESSAGE.ACCOUNT.NONACTIVATED");
 				}else if(activ){
 					logger.info("Construction de la liste des informations personnelles du compte");
-					this.buildListPersoInfo(attrPersoInfo);
+					this.buildListPersoInfo(listBeanPersoInfo,attrPersoInfo);
 					this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 					return "gotoPersonalInfo";
 				}
@@ -238,7 +257,7 @@ public class AccountController extends AbstractContextAwareController implements
 					
 				if (reinit){
 					logger.info("Construction de la liste des informations personnelles du compte");
-					this.buildListPersoInfo(attrPersoInfo);
+					this.buildListPersoInfo(listBeanPersoInfo,attrPersoInfo);
 					List<String> listPossibleChannels = currentAccount.getAttributes(accountPossibleChannelsKey);
 						
 					if (listPossibleChannels.size()>1){
@@ -295,13 +314,21 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	public String pushChangeInfoPerso() {
 			
-			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
+			Iterator it;
 			
+			if(dataChange) {
+				List<String> attrPersoInfo=Arrays.asList(attributesDataChange.split(","));
+			}
+			else {
+				List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
+			}
+			//logger.info("List attrPersoInfo : "+attrPersoInfo.toString());
 			
 			try{
 				logger.info("Mise � jour des informations personnelles");
 				HashMap<String,String> hashBeanPersoInfo=new HashMap<String,String>();
-				Iterator it=listBeanPersoInfo.iterator();
+				if(dataChange)it=listDataChangeInfos.iterator();
+				else it=listBeanPersoInfo.iterator();
 				
 				int i=0;
 				while(it.hasNext()){
@@ -320,11 +347,21 @@ public class AccountController extends AbstractContextAwareController implements
 						j++;
 					}
 					
-					if (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null ){
-						hashBeanPersoInfo.put(beanPersoInfo.getName(), valueBeanMulti);
+					if(dataChange) {
+						if (beanPersoInfo.isCanUpdate() && (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null) ){
+							hashBeanPersoInfo.put(beanPersoInfo.getName(), valueBeanMulti);
+						}
+						else {
+							hashBeanPersoInfo.put(beanPersoInfo.getName(), null);
+						}
 					}
 					else {
-						hashBeanPersoInfo.put(beanPersoInfo.getName(), null);
+						if (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null ){
+							hashBeanPersoInfo.put(beanPersoInfo.getName(), valueBeanMulti);
+						}
+						else {
+							hashBeanPersoInfo.put(beanPersoInfo.getName(), null);
+						}
 					}
 					i++;
 				}
@@ -340,10 +377,11 @@ public class AccountController extends AbstractContextAwareController implements
 				else if(loginChange){
 					return "gotoLoginChange";
 				}
+				else if (dataChange) {
+					return "gotoViewDataChange";
+				}
 				else 
 					return "gotoPasswordChange";
-
-			
 				
 			}
 			catch (LdapProblemException e) {
@@ -365,13 +403,19 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushAuthentificate(){
 		try{
 			//Attributs concernant les informations personnelles que l'on souhaite afficher
+			
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
+			List<String> attrDataChange=Arrays.asList(attributesDataChange.split(","));
+			//attrDataChangeCategory=Arrays.asList(attributesListDataChange.split(","));
 			
-			
-			
-			accountDescr=this.getDomainService().authentificateUser(beanLogin.getValue().toString(), beanPassword.getValue().toString(),attrPersoInfo);
+			if (dataChange)
+				accountDescr=this.getDomainService().authentificateUser(beanLogin.getValue().toString(), beanPassword.getValue().toString(),attrDataChange);
+			else
+				accountDescr=this.getDomainService().authentificateUser(beanLogin.getValue().toString(), beanPassword.getValue().toString(),attrPersoInfo);
 			
 			logger.debug("beanlogin :"+beanLogin.getValue().toString());
+			
+			logger.debug("accountDescr :"+accountDescr.toString());
 			
 			if (accountDescr!=null){
 				
@@ -380,9 +424,18 @@ public class AccountController extends AbstractContextAwareController implements
 								
 				if (currentAccount.getAttribute(accountCodeKey)!=null) {
 					logger.info("Construction de la liste des informations personnelles du compte");
-					this.buildListPersoInfo(attrPersoInfo);
+					if (dataChange)
+						this.buildListPersoInfo(listDataChangeInfos,attrDataChange);
+					else this.buildListPersoInfo(listBeanPersoInfo,attrPersoInfo);
+					
 					this.addInfoMessage(null, "AUTHENTIFICATION.MESSAGE.VALID");
-					return "gotoPersonalInfo";
+					if (dataChange) {
+						logger.debug("Check isDataChangeProcedure : "+dataChange);
+						return "gotoDataChange";
+					} else {
+						logger.debug("Check isDataChangeProcedure : "+dataChange);
+						return "gotoPersonalInfo";
+					}
 				}
 				else{
 					logger.info("Changement de mot de passe impossible, compte non activ�");
@@ -411,8 +464,6 @@ public class AccountController extends AbstractContextAwareController implements
 			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
 			
 		}
-		
-		
 		return null;
 	}
 	
@@ -567,38 +618,42 @@ public class AccountController extends AbstractContextAwareController implements
 		return null;
 	}
 	
-	private void buildListPersoInfo(List<String>attrPersoInfo){
+	private void buildListPersoInfo(List<BeanField> buildlist,List<String>attributesInfos){
 		
 		
-		    for(int i=0;i<listBeanPersoInfo.size();i++)
+		    for(int i=0;i<buildlist.size();i++)
 			{													
 					
-				logger.debug("currentAccount attribute : "+currentAccount.getAttributes(listBeanPersoInfo.get(i).getName()));
+				logger.debug("currentAccount attribute : "+currentAccount.getAttributes(buildlist.get(i).getName()));
 				
-				if(attrPersoInfo.contains(listBeanPersoInfo.get(i).getName())) {
+				//listBeanPersoInfo.get(i).getName().contains(attributesInfos)
+				
+				
+				if(attributesInfos.contains(buildlist.get(i).getName())) {
 					
 				    List<BeanMultiValue> lbm = new ArrayList<BeanMultiValue>();
 				
-					for (String str : currentAccount.getAttributes(listBeanPersoInfo.get(i).getName())) {
+					for (String str : currentAccount.getAttributes(buildlist.get(i).getName())) {
+						str=str.replace(getSeparator(), ",");
 						BeanMultiValue bmv = new BeanMultiValueImpl();
 						bmv.setValue(str);
 						lbm.add(bmv);
 					}
 												
-					if(listBeanPersoInfo.get(i).getIsMultiValue().equals("true")) {
-						for (int j=0;j<listBeanPersoInfo.get(i).getNumberOfValue()-currentAccount.getAttributes(listBeanPersoInfo.get(i).getName()).size();j++) {
+					if(buildlist.get(i).getIsMultiValue().equals("true")) {
+						for (int j=0;j<buildlist.get(i).getNumberOfValue()-currentAccount.getAttributes(buildlist.get(i).getName()).size();j++) {
 							BeanMultiValue bmv = new BeanMultiValueImpl();
 							bmv.setValue("");
 							lbm.add(bmv);
 						}
 					}
-				    listBeanPersoInfo.get(i).setValues(lbm);
+				    buildlist.get(i).setValues(lbm);
 				}
 			}
 		    
 		    int k=0;
-		    while (k < listBeanPersoInfo.size())
-		    	if (currentAccount.getAttributes(listBeanPersoInfo.get(k).getName()).size()==0) listBeanPersoInfo.remove(k);
+		    while (k < buildlist.size())
+		    	if (currentAccount.getAttributes(buildlist.get(k).getName()).size()==0) buildlist.remove(k);
 		        else k++;
 	}
 	
@@ -826,6 +881,14 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setProcedureLoginChange(String procedureLoginChange) {
 		this.procedureLoginChange = procedureLoginChange;
 	}
+	
+	public String getProcedureDataChange() {
+		return procedureDataChange;
+	}
+
+	public void setProcedureDataChange(String procedureDataChange) {
+		this.procedureDataChange = procedureDataChange;
+	}
 
 	public BeanField getBeanNewLogin() {
 		return beanNewLogin;
@@ -971,6 +1034,15 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setPasswChange(boolean passwChange) {
 		this.passwChange = passwChange;
 	}
+	
+	public boolean isDataChange() {
+		return dataChange;
+	}
+
+	public void setDataChange(boolean dataChange) {
+		this.dataChange = dataChange;
+	}
+
 
 	public List<BeanField> getListBeanProcedure() {
 		return listBeanProcedure;
@@ -1051,5 +1123,62 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setSeparator(String separator) {
 		this.separator = separator;
 	}
+
+
+	/**
+	 * @return the listDataChangeInfos
+	 */
+	public List<BeanField> getListDataChangeInfos() {
+		return listDataChangeInfos;
+	}
+
+	/**
+	 * @param listDataChangeInfos the listDataChangeInfos to set
+	 */
+	public void setListDataChangeInfos(List<BeanField> listDataChangeInfos) {
+		this.listDataChangeInfos = listDataChangeInfos;
+	}
+
+	public String getAttributesDataChange() {
+		return attributesDataChange;
+	}
+
+	public void setAttributesDataChange(String attributesDataChange) {
+		this.attributesDataChange = attributesDataChange;
+	}
+
+
+	/**
+	 * @return the listDataChangeCategory
+	 */
+	public List<BeanField> getListDataChangeCategory() {
+		return listDataChangeCategory;
+	}
+
+
+	/**
+	 * @param listDataChangeCategory the listDataChangeCategory to set
+	 */
+	public void setListDataChangeCategory(List<BeanField> listDataChangeCategory) {
+		this.listDataChangeCategory = listDataChangeCategory;
+	}
+
+
+	/**
+	 * @return the beanTestInfo
+	 */
+	public CategoryBeanField getBeanTestInfo() {
+		return beanTestInfo;
+	}
+
+
+	/**
+	 * @param beanTestInfo the beanTestInfo to set
+	 */
+	public void setBeanTestInfo(CategoryBeanField beanTestInfo) {
+		this.beanTestInfo = beanTestInfo;
+	}
+
+    
 
 }
