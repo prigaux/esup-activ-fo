@@ -41,6 +41,12 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private boolean disable;
 	
+	private boolean canUpdate;
+	
+	private String category;
+	
+	//private List<SelectItem> ListCategory=new ArrayList<SelectItem>(); 
+	
 	public String getId() {
 		return id;
 	}
@@ -218,7 +224,45 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	public void setOneRadioItems(List<SelectItem> oneRadioItems) {
 		this.oneRadioItems = oneRadioItems;
 	}
-	
+
+	/**
+	 * @return the whichcategory
+	 */
+	public String getCategory() {
+		return category;
+	}
+
+	/**
+	 * @param whichcategory the whichcategory to set
+	 */
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	/**
+	 * @return the canUpdate
+	 */
+	public boolean isCanUpdate() {
+		return canUpdate;
+	}
+
+	/**
+	 * @param canUpdate the canUpdate to set
+	 */
+	public void setCanUpdate(boolean canUpdate) {
+		this.canUpdate = canUpdate;
+	}
+
+	/*
+	public List<SelectItem> getListCategory() {
+		return ListCategory;
+	}
+
+	public void setListCategory(List<SelectItem> listCategory) {
+		ListCategory = listCategory;
+	}
+    */
+    
 	
 	
 }
