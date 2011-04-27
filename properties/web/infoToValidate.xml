@@ -30,7 +30,6 @@
 		<property name="value" value=""/>
 		<property name="validator" ref="validatorBirthName"/>
 		<property name="required" value="true" />
-				
 	</bean>
 		
 	<bean
