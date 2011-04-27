@@ -47,10 +47,10 @@
 		>
 
 		<property name="key" value="WELCOME.PROCEDURE.DATACHANGE.RADIOBUTTON.LABEL"/>
-		<property name="value" value="${view.procedure.loginchange}"/>
+		<property name="value" value="${view.procedure.datachange}"/>
 		
 	</bean>
-	
+		
 	<bean
 		id="beanLoginChange"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
