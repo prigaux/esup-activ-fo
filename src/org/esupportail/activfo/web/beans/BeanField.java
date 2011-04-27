@@ -68,5 +68,10 @@ public interface BeanField<T> {
 	public List<SelectItem> getOneRadioItems();
 	public void setOneRadioItems(List<SelectItem> oneRadioItems);
 	
-		
+	public String getCategory();
+	public void setCategory(String category);
+	
+	public boolean isCanUpdate();
+	public void setCanUpdate(boolean canUpdate);
+	
 }
