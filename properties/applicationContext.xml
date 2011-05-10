@@ -51,5 +51,5 @@
 	<import resource="web/fieldPassword.xml" />
 	<import resource="web/fieldLogin.xml" />
 	<import resource="web/fieldNewLogin.xml" />
-    <!-- <import resource="web/dataChangePerso.xml" /> -->
+    <import resource="web/infoDataChange.xml" />
 </beans>
