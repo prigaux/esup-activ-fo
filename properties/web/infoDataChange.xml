@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	>
+	
+	
+	 <bean
+		id="beanPrincipalInfo"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="title" value="INFO.PRINCIPAL.TEXT.LABEL"/>
+		<property name="name" value="principalInfo"/>
+		
+		<property name="listBeanField"> 
+		  <list>
+		    <ref bean="beanUid"/>
+		    <ref bean="beanSupannCivilite"/>
+		    <ref bean="beanSn"/>
+		    <ref bean="beanGivenName"/>
+		    <ref bean="beanDisplayName"/>
+		  </list>
+		 
+		</property>
+		 
+	</bean>
+	
+	<bean
+		id="beanFunctionInfo"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="title" value="INFO.FUNCTION.TEXT.LABEL"/>
+		<property name="name" value="functionInfo"/>
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanEduPersonPrimaryAffiliation"/>
+		    <ref bean="beanEmployeeType"/>
+		  </list>
+		</property> 
+	</bean>
+	
+	<bean
+		id="beanProfessionalInfo"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="title" value="INFO.PROFESSIONAL.TEXT.LABEL"/>
+		<property name="name" value="professionalInfo"/>
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanMail"/>
+		    <ref bean="beanPostalAddress"/>
+		    <ref bean="beanPhone"/>
+		    <ref bean="beanFax"/>
+		    <ref bean="beanMobilePro"/>
+		  </list>
+		</property> 
+	</bean>
+	
+	
+	
+	<bean
+		id="beanPersonalInfo"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="title" value="INFO.PERSONAL.TEXT.LABEL"/>
+		<property name="name" value="personalInfo"/>
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanHomePostalAddress"/>
+		  </list>
+		</property> 
+	</bean>
+	
+	<bean
+		id="beanHarpegeeApogeeInfo"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="title" value="INFO.HARPEGEEAPOGEE.TEXT.LABEL"/>
+		<property name="name" value="harpegeeApogeeInfo"/>
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanHarpegeeNumber"/>
+		    <ref bean="beanEduPersonOrgUnitDN"/>
+		  </list>
+		</property> 
+	</bean>
+	 
+</beans>
