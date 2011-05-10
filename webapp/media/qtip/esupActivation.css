@@ -2,6 +2,9 @@
     .firstColumn, .secondColumn, .thirdColumn{
     Vertical-Align: center;
     }
+    .firstColumn#sizeEx {
+    vertical-align: top;
+    }
     
     .firstStepImage {
     height: 53px;
