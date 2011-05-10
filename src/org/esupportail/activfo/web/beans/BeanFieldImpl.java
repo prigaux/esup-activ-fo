@@ -41,9 +41,11 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private boolean disable;
 	
-	private boolean canUpdate;
+	private boolean updateable;
 	
-	private String category;
+	//private String category;
+	
+	private String datachangeHelp;
 	
 	//private List<SelectItem> ListCategory=new ArrayList<SelectItem>(); 
 	
@@ -225,44 +227,39 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		this.oneRadioItems = oneRadioItems;
 	}
 
-	/**
-	 * @return the whichcategory
+		/**
+	 * @return the updateable
 	 */
-	public String getCategory() {
-		return category;
-	}
-
-	/**
-	 * @param whichcategory the whichcategory to set
-	 */
-	public void setCategory(String category) {
-		this.category = category;
+	public boolean isUpdateable() {
+		return updateable;
 	}
 
 	/**
-	 * @return the canUpdate
+	 * @param updateable the updateable to set
 	 */
-	public boolean isCanUpdate() {
-		return canUpdate;
+	public void setUpdateable(boolean updateable) {
+		this.updateable = updateable;
 	}
 
 	/**
-	 * @param canUpdate the canUpdate to set
+	 * @return the datachangeHelp
 	 */
-	public void setCanUpdate(boolean canUpdate) {
-		this.canUpdate = canUpdate;
+	public String getDatachangeHelp() {
+		return datachangeHelp;
 	}
 
-	/*
-	public List<SelectItem> getListCategory() {
-		return ListCategory;
+	/**
+	 * @param datachangeHelp the datachangeHelp to set
+	 */
+	public void setDatachangeHelp(String datachangeHelp) {
+		this.datachangeHelp = datachangeHelp;
 	}
 
-	public void setListCategory(List<SelectItem> listCategory) {
-		ListCategory = listCategory;
+	public int getSize() {
+		if (values!=null)
+			return values.size();
+		else
+			return 0;
 	}
-    */
-    
-	
 	
 }
