@@ -68,5 +68,23 @@
     	<property name="etablissement" ref="beanEtablissement"/>
     	
 	</bean>
+	
+	<bean 
+		id="stringConverter"
+		class="org.esupportail.activfo.web.converters.StringConverter"
+		scope="session"
+		>
+    	<description>
+			A converter for.... 
+    	</description>
+    	<property name="mapping" >
+    	  <map>
+    	    <entry key="employee" value="Personnel administratif / technique / de bibliothèque" />
+    	    <entry key="faculty" value="Enseignant" />
+    	    <entry key="researcher" value="Chercheur" />
+    	    <entry key="student" value="Etudiant" />
+    	  </map>
+    	</property>
+    </bean>
  	
 </beans>
