@@ -87,7 +87,7 @@
 		<property name="accountCodeKey" value="${account.key.code}"/>
 		<property name="accountGestKey" value="${account.key.gest}"/>
 		<property name="accountPossibleChannelsKey" value="${account.key.possibleChannels}"/>
-						
+		<property name="accountEmpIdKey" value="${account.key.supannEmpId}"/>				
 		<property name="currentAccount" ref="account"/>
 		
 		<property name="procedureActivation" value="${view.procedure.activation}"/>
@@ -112,6 +112,11 @@
 		<property name="labelCanalMailPerso" value="CHOICE.CANAL.MAILPERSO.RADIOBUTTON.LABEL"/>
 		<property name="labelCanalGest" value="CHOICE.CANAL.GEST.RADIOBUTTON.LABEL"/>
 		<property name="labelCanalPager" value="CHOICE.CANAL.PAGER.RADIOBUTTON.LABEL"/>
+		
+		<property name="smtpService" ref="smtpService"/>
+		<property name="subjectDataChange" value="${datachange.subject}"/>
+		<property name="body1DataChange" value="${datachange.body1.fr}"/>
+		<property name="body2DataChange" value="${datachange.body2.fr}"/>
 		
 		<property name="listBeanPersoInfo">
 			<list>
@@ -178,7 +183,7 @@
 			</list>
 		</property>
 		
-		<property name="listDataChangeCategory">
+		<property name="listBeanDataChange">
 			<list>
 			    <ref bean="beanPrincipalInfo" />
 				<ref bean="beanFunctionInfo"/>
@@ -188,28 +193,15 @@
 			</list>
 		</property>
 		
-		<!-- <property name="beanTestInfo" ref="beanTestInfo"/> -->
-		
-		<property name="listDataChangeInfos">
+		<!-- 
+		<property name="listBeanViewDataChange">
 			<list>
-			    <ref bean="beanUid"  />
-				<ref bean="beanSupannCivilite"/>
-				<ref bean="beanSn"/> <!-- surname -->
-				<ref bean="beanGivenName"/>
-				<ref bean="beanDisplayName" />
-				<ref bean="beanEduPersonPrimaryAffiliation"/>
-				<ref bean="beanEmployeeType"/>
-				<ref bean="beanMail"/>
-				<ref bean="beanPostalAddress"/>
-				<ref bean="beanPhone"/>
-				<ref bean="beanFax"/>
-				<ref bean="beanHomePostalAddress"/>
-				<ref bean="beanMobilePhone"/>
-				<ref bean="beanHarpegeeNumber"/>
-				<ref bean="beanEduPersonOrgUnitDN" />
+			    <ref bean="beanPublicDirectory" /> // annuaire public
+				<ref bean="beanPrivateDirectory"/> // annuaire privé
+				<ref bean="beanProfessionalInfo"/> // page personnelle
 			</list>
 		</property>
-		
+		 -->
 		<property name="beanNewPassword" ref="beanNewPassword"/>
 		
 		<property name="beanCode" ref="beanCode"/>
@@ -259,7 +251,5 @@
 		</property>
 	</bean>
 	-->
-	
-	
 
 </beans>
