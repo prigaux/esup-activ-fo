@@ -34,14 +34,19 @@ a:active, a:focus {
 }
 .expand a:link, .expand a:visited {
   border-width:1px;
-  background-image:url(/media/arrow-down.gif);
-  background-repeat:no-repeat;
+  background-image:url("/media/arrow-down.gif"),url("/media/idcback2.jpg");
+  background-repeat:no-repeat,repeat;
   background-position:98% 50%;
+  color : #B6ECFF;
 }
 .expand a:hover, .expand a:active, .expand a:focus {
   text-decoration:underline
 }
 .expand a.open:link, .expand a.open:visited {
   border-style:solid;
-  background:#c9f1a5 url(/media/arrow-up.gif) no-repeat 98% 50%
+  /*background:#c9f1a5 url(/media/arrow-up.gif) no-repeat 98% 50%*/
+  background-image:url(/media/arrow-up.gif),url(/media/idcback1.jpg);
+  background-repeat:no-repeat,repeat;
+  background-position:98% 50%;
+  color : #C9F1A5;
 }
