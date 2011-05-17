@@ -41,6 +41,9 @@ public class LdapConverter implements Converter {
 			final Object value) {
 
     	String base = value.toString();
+    	
+    	logger.debug("base value : "+base);
+    	
     	String filter = "(supannCodeEntite="+base+")";
     	String returnValue=null;
     	

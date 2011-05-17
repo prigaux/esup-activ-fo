@@ -76,7 +76,7 @@
 		<property name="converter" ref="stringConverter"/>
 		
 		<property name="name" value="eduPersonPrimaryAffiliation"/>
-		<property name="disable" value="false"/>
+		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
 		<property name="datachangeHelp" value="DATACHANGE.EDUPERSONPRIMARYAFFILIATION.TEXT.HELP"/>
 	</bean>
@@ -334,7 +334,7 @@
 		<property name="required" value="true" />
 		<property name="name" value="supannEntiteAffectation"/>
 		<property name="converter" ref="ldapConverter"/>
-		<property name="disable" value="false"/>
+		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
 		<property name="datachangeHelp" value="DATACHANGE.SUPANNENTITEAFFECTATION.TEXT.HELP"/> <!-- note -->
 	</bean>
