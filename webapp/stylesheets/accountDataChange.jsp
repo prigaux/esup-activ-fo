@@ -9,6 +9,7 @@
   $(function() {
     $("h2.expand").toggler({initShow: "div.collapse:first"});
     $("#content").expandAll({trigger: "h2.expand", ref: "div.demo",  speed: 100, oneSwitch: false});
+    
   });
   //--><!]]>
   </script>	
@@ -62,8 +63,8 @@
 	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
 	
 	<div class="demo">
-            
-	 <t:dataList value="#{accountController.listBeanDataChange}" var="category">
+	
+	 <t:dataList value="#{accountController.beanData}"  var="category">
 	   
       <t:htmlTag value="h2" styleClass="expand"><h:outputText value="#{msgs[category.title]}"/></t:htmlTag>
 	 
@@ -75,13 +76,11 @@
 		</h:column>
 		<h:column >    
 		<t:dataList value="#{beanfield.values}" var="sub"  rendered="#{beanfield.fieldType!='selectManyCheckbox'&&!accountController.viewDataChange}" >
-		
 		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'}" styleClass="#{beanfield.name}show">
 			    <h:inputText value="#{sub.value}" disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value!=''}" />
 	            <h:inputText value="#{sub.value}" disabled="#{beanfield.disable}" converter="#{beanfield.converter}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null}" />
 	            <t:htmlTag value="br"  />
 	        </t:div>
-	        
 	        <t:div rendered="#{sub.value==''&&beanfield.isMultiValue!=null&&beanfield.isMultiValue!=true&&beanfield.fieldType!='selectOneRadio'}" styleClass="#{beanfield.name}show">
 			    <h:inputText value="#{sub.value}" required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''}" />
 	            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''}" />
@@ -92,19 +91,16 @@
 	            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''}" />
 	            <t:htmlTag value="br"  />
             </t:div>
-           
         </t:dataList>
         
         <t:dataList value="#{beanfield.values}" var="sub"  rendered="#{beanfield.fieldType!='selectManyCheckbox'&&accountController.viewDataChange}" >
-		
 		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'}" styleClass="portlet-section-text">
 			    <h:outputText value="#{sub.value}" converter="#{beanfield.converter}"/>
 	            <t:htmlTag value="br"  />
 	        </t:div>
-	   
-           
         </t:dataList>
   		</h:column>  
+ 
        	<h:column >			
           <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.datachangeHelp]}" value="/media/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable}"/>
           <t:div >
@@ -116,6 +112,8 @@
 	 </t:div>
     </t:dataList>
   </div>
+
+
 
 	<t:div style="margin-top:30;" rendered="#{accountController.viewDataChange == false}">
 	  <e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />

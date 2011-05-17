@@ -96,5 +96,67 @@
 		  </list>
 		</property> 
 	</bean>
-	 
+	
+	<bean
+		id="beanPublicDirectory"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="title" value="INFO.PUBLICDIRECTORY.TEXT.LABEL"/>
+		<property name="name" value="publicDirectoryInfo"/>
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanDisplayName"/>
+		    <ref bean="beanEduPersonPrimaryAffiliation"/>
+		    <ref bean="beanMail"/>
+		    <ref bean="beanPostalAddress"/>
+		    <ref bean="beanSupannEntiteAffectation"/>
+		  </list>
+		</property> 
+	</bean>
+	
+	<bean
+		id="beanPrivateDirectory"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="title" value="INFO.PRIVATEDIRECTORY.TEXT.LABEL"/>
+		<property name="name" value="privateDirectoryInfo"/>
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanDisplayName"/>
+		    <ref bean="beanEduPersonPrimaryAffiliation"/>
+		    <ref bean="beanMail"/>
+		    <ref bean="beanPostalAddress"/>
+		    <ref bean="beanPhone"/>
+		    <ref bean="beanFax"/>
+		    <ref bean="beanMobilePro"/>
+		    <ref bean="beanSupannEntiteAffectation"/>
+		  </list>
+		</property> 
+	</bean>
+	
+	<bean
+		id="beanPersonalPageDirectory"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="title" value="INFO.PERSONALPAGE.TEXT.LABEL"/>
+		<property name="name" value="personalPageInfo"/>
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanDisplayName"/>
+		    <ref bean="beanEmployeeType"/>
+		    <ref bean="beanMail"/>
+		    <ref bean="beanPhone"/>
+		    <ref bean="beanFax"/>
+		    <ref bean="beanMobilePro"/>
+		    <ref bean="beanSupannEntiteAffectation"/>
+		  </list>
+		</property> 
+	</bean>
+		 
 </beans>

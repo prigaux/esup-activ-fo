@@ -193,15 +193,16 @@
 			</list>
 		</property>
 		
-		<!-- 
-		<property name="listBeanViewDataChange">
+		
+	    <property name="listBeanViewDataChange">
 			<list>
-			    <ref bean="beanPublicDirectory" /> // annuaire public
-				<ref bean="beanPrivateDirectory"/> // annuaire privé
-				<ref bean="beanProfessionalInfo"/> // page personnelle
+			    <ref bean="beanPublicDirectory" />
+				<ref bean="beanPrivateDirectory"/>
+				<ref bean="beanPersonalPageDirectory"/>
 			</list>
 		</property>
-		 -->
+		
+		
 		<property name="beanNewPassword" ref="beanNewPassword"/>
 		
 		<property name="beanCode" ref="beanCode"/>

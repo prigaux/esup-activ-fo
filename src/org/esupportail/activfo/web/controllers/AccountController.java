@@ -99,6 +99,8 @@ public class AccountController extends AbstractContextAwareController implements
 	private List<CategoryBeanField> listBeanDataChange;
 	private List<BeanField> listDataChangeInfos=new ArrayList<BeanField>();
 	
+	private List<CategoryBeanField> listBeanViewDataChange;
+	
 	private String attributesDataChange;
 	
 	
@@ -655,7 +657,6 @@ public class AccountController extends AbstractContextAwareController implements
 				//listBeanPersoInfo.get(i).getName().contains(attributesInfos)
 				
 				if(attributesInfos.contains(buildlist.get(i).getName())) {
-					logger.debug("**getname ** "+buildlist.get(i).getName());
 					List<BeanMultiValue> lbm = new ArrayList<BeanMultiValue>();
 				
 					for (String str : currentAccount.getAttributes(buildlist.get(i).getName())) {
@@ -1225,11 +1226,27 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setListBeanDataChange(List<CategoryBeanField> listBeanDataChange) {
 		
 		this.listBeanDataChange = listBeanDataChange;
-		
-		
-
 						
 	}
+	
+	
+
+	/**
+	 * @return the listBeanViewDataChange
+	 */
+	public List<CategoryBeanField> getListBeanViewDataChange() {
+		return listBeanViewDataChange;
+	}
+
+
+	/**
+	 * @param listBeanViewDataChange the listBeanViewDataChange to set
+	 */
+	public void setListBeanViewDataChange(
+			List<CategoryBeanField> listBeanViewDataChange) {
+		this.listBeanViewDataChange = listBeanViewDataChange;
+	}
+
 
 	/**
 	 * @return the viewDataChange
@@ -1336,6 +1353,11 @@ public class AccountController extends AbstractContextAwareController implements
 				listDataChangeInfos.add(bf);
 			}
 		}
+	}
+	
+	public List<CategoryBeanField> getBeanData() {
+		if (viewDataChange) return listBeanViewDataChange;
+		else return listBeanDataChange;
 	}
 
 }
