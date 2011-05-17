@@ -76,14 +76,9 @@
 		<h:column >    
 		<t:dataList value="#{beanfield.values}" var="sub"  rendered="#{beanfield.fieldType!='selectManyCheckbox'&&!accountController.viewDataChange}" >
 		
-		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'&&beanfield.name!='eduPersonPrimaryAffiliation'}" styleClass="#{beanfield.name}show">
-			    <h:inputText value="#{sub.value}" disabled="#{beanfield.disable}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value!=''}" />
-	            <h:inputText value="#{sub.value}" disabled="#{beanfield.disable}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null}" />
-	            <t:htmlTag value="br"  />
-	        </t:div>
-	        
-	        <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'&&beanfield.name=='eduPersonPrimaryAffiliation'}" styleClass="#{beanfield.name}show">
-	            <h:inputText value="#{sub.value}" disabled="#{beanfield.disable}" size="35" converter="#{beanEduPersonPrimaryAffiliation.converter}" required="#{beanfield.required}" />
+		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'}" styleClass="#{beanfield.name}show">
+			    <h:inputText value="#{sub.value}" disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value!=''}" />
+	            <h:inputText value="#{sub.value}" disabled="#{beanfield.disable}" converter="#{beanfield.converter}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null}" />
 	            <t:htmlTag value="br"  />
 	        </t:div>
 	        
@@ -97,18 +92,15 @@
 	            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''}" />
 	            <t:htmlTag value="br"  />
             </t:div>
-            
-            
            
         </t:dataList>
         
         <t:dataList value="#{beanfield.values}" var="sub"  rendered="#{beanfield.fieldType!='selectManyCheckbox'&&accountController.viewDataChange}" >
 		
 		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'}" styleClass="portlet-section-text">
-			    <h:outputText value="#{sub.value}"  />
+			    <h:outputText value="#{sub.value}" converter="#{beanfield.converter}"/>
 	            <t:htmlTag value="br"  />
 	        </t:div>
-	         
 	   
            
         </t:dataList>
