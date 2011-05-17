@@ -12,15 +12,17 @@ import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 
 import org.esupportail.activfo.domain.beans.Account;
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 
 /**
  * A JSF converter to pass Integer instances.
  */
 public class StringConverter implements Converter {
 	
-	//private Account account;
-	//private String eduPersonPrimaryAffiliation;
 	private HashMap<String,String> mapping = new HashMap<String,String>();
+	
+	private final Logger logger = new LoggerImpl(getClass());
 
 	public StringConverter() {
     }
@@ -36,9 +38,11 @@ public class StringConverter implements Converter {
     		@SuppressWarnings("unused") final FacesContext context, 
 			@SuppressWarnings("unused") final UIComponent component, 
 			final Object value) {
+     	
+    	logger.debug("value.toString : "+value.toString());
     	
-    	if (mapping.get(value)==null) return (String) value;
-    	else return mapping.get(value);
+    	if (mapping.get(value)==null) return value.toString();
+    	else return mapping.get(value).toString();
     }
 
 	/**

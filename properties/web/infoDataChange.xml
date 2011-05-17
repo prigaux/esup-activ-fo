@@ -92,7 +92,7 @@
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanHarpegeeNumber"/>
-		    <ref bean="beanEduPersonOrgUnitDN"/>
+		    <ref bean="beanSupannEntiteAffectation"/>
 		  </list>
 		</property> 
 	</bean>

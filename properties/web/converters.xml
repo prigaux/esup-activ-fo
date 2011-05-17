@@ -15,8 +15,6 @@
 		This file is referenced by /properties/applicationContext.xml.
 	-->
 	
-	
-	
 
 	<bean 
 		id="localeConverter"
@@ -83,8 +81,12 @@
     	    <entry key="faculty" value="Enseignant" />
     	    <entry key="researcher" value="Chercheur" />
     	    <entry key="student" value="Etudiant" />
+    	    <!-- <entry key="Personnel administratif / technique / de bibliothèque" value="employee" />
+    	     -->
     	  </map>
     	</property>
     </bean>
+    
+   
  	
 </beans>
