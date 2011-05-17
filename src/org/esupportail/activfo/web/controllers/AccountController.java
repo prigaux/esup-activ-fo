@@ -26,7 +26,6 @@ import org.esupportail.activfo.web.beans.CategoryBeanField;
 import org.esupportail.activfo.web.beans.BeanFieldImpl;
 import org.esupportail.activfo.web.beans.BeanMultiValue;
 import org.esupportail.activfo.web.beans.BeanMultiValueImpl;
-import org.esupportail.commons.services.ldap.LdapUser;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 
@@ -432,7 +431,7 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			List<String> attrDataChange=Arrays.asList(attributesDataChange.split(","));
-			//attrDataChangeCategory=Arrays.asList(attributesListDataChange.split(","));
+			
 			
 			if (dataChange)
 				accountDescr=this.getDomainService().authentificateUser(beanLogin.getValue().toString(), beanPassword.getValue().toString(),attrDataChange);
