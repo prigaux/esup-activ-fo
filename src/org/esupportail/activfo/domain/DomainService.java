@@ -20,6 +20,9 @@ import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.application.Version;
+import org.esupportail.commons.services.ldap.LdapEntityService;
+import org.esupportail.commons.services.ldap.LdapGroupService;
+import org.esupportail.commons.services.ldap.LdapUserService;
 import org.esupportail.commons.web.beans.Paginator;
 
 /**
@@ -132,5 +135,9 @@ public interface DomainService extends Serializable {
 	public boolean validateCode(String id,String code)throws UserPermissionException;
 	
 	public void changeLogin(String id, String code,String newLogin)throws LdapProblemException,UserPermissionException,KerberosException,LoginAlreadyExistsException,LoginException,PrincipalNotExistsException;
+	
+	public LdapEntityService getLdapEntityService();
+	
+	public void setLdapEntityService(LdapEntityService ldapEntityService);
 
 }

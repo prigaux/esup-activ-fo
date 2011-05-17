@@ -87,6 +87,17 @@
     	</property>
     </bean>
     
-   
+    <bean 
+		id="ldapConverter"
+		class="org.esupportail.activfo.web.converters.LdapConverter"
+		scope="session"
+		>
+    	<description>
+			A converter for....
+    	</description>
+    	
+    	<property name="ldapEntityService" ref="ldapEntityService"/>
+    	
+	</bean>
  	
 </beans>

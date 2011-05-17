@@ -7,6 +7,7 @@ package org.esupportail.activfo.domain;
 import java.util.HashMap;
 import java.util.List;
 
+import org.esupportail.activfo.services.ldap.LdapSchema;
 import org.esupportail.activfo.dao.DaoService;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.VersionManager;
@@ -22,6 +23,7 @@ import org.esupportail.activfo.services.client.AccountManagement;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.application.Version;
+import org.esupportail.commons.services.ldap.LdapEntityService;
 import org.esupportail.commons.services.ldap.LdapUser;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
@@ -32,9 +34,10 @@ import org.springframework.beans.factory.InitializingBean;
 /**
  * The basic implementation of DomainService.
  * 
- * See /properties/domain/domain-example.xml
+ * See /properties/domain/domain-example.xml 
+ * @param <LdapSchema>
  */
-public class DomainServiceImpl implements DomainService, InitializingBean {
+public class DomainServiceImpl<LdapSchema> implements DomainService, InitializingBean {
 
 	/**
 	 * The serialization id.
@@ -64,6 +67,8 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 	 * A logger.
 	 */
 	private final Logger logger = new LoggerImpl(getClass());
+	
+	private LdapEntityService ldapEntityService;
 
 	/**
 	 * Bean constructor.
@@ -303,4 +308,19 @@ public class DomainServiceImpl implements DomainService, InitializingBean {
 		return service.authentificateUser(id, password,attrPersoInfo);
 	}
 
+	/**
+	 * @return the ldapEntityService
+	 */
+	public LdapEntityService getLdapEntityService() {
+		return ldapEntityService;
+	}
+
+	/**
+	 * @param ldapEntityService the ldapEntityService to set
+	 */
+	public void setLdapEntityService(LdapEntityService ldapEntityService) {
+		this.ldapEntityService = ldapEntityService;
+	}
+	
+	
 }

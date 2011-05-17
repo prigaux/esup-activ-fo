@@ -333,6 +333,7 @@
 		<property name="key" value="DATACHANGE.SUPANNENTITEAFFECTATION.TEXT.LABEL"/>
 		<property name="required" value="true" />
 		<property name="name" value="supannEntiteAffectation"/>
+		<property name="converter" ref="ldapConverter"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
 		<property name="datachangeHelp" value="DATACHANGE.SUPANNENTITEAFFECTATION.TEXT.HELP"/> <!-- note -->
