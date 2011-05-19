@@ -31,8 +31,9 @@
 		<property name="validator" ref="validatorEmail"/>
 		<property name="help" value="PERSOINFO.EMAILPERSO.TEXT.HELP"/>
 		<property name="required" value="false" />
+		<property name="updateable" value="true"/>
 		<property name="name" value="supannMailPerso"/>
-		<property name="disable" value="true"/>
+		<property name="disable" value="false"/>
 	</bean>
 	
 	<bean
@@ -44,6 +45,7 @@
 		<property name="validator" ref="validatorMobilePhone"/>
 		<property name="help" value="PERSOINFO.MOBILE.TEXT.HELP"/>
 		<property name="required" value="false" />
+		<property name="updateable" value="true"/>
 		<property name="name" value="pager"/>
 		<property name="disable" value="false"/>
 	</bean>
@@ -79,6 +81,19 @@
 		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
 		<property name="datachangeHelp" value="DATACHANGE.EDUPERSONPRIMARYAFFILIATION.TEXT.HELP"/>
+	</bean>
+	
+	<bean
+		id="beanSupannCodeINE"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+		<property name="key" value="PERSOINFO.SUPANNCODEINE.TEXT.LABEL"/>
+		<property name="required" value="false" />
+		<property name="name" value="supannCodeINE"/>
+		<property name="disable" value="false"/>
+		<property name="updateable" value="false"/>
+		<property name="datachangeHelp" value="DATACHANGE.SUPANNCODEINE.TEXT.HELP"/>
 	</bean>
 	
 	
@@ -353,5 +368,20 @@
 		<property name="updateable" value="false"/>
 		<property name="datachangeHelp" value="DATACHANGE.MOBILE.TEXT.HELP"/>
 	</bean>
+	
+	<bean 
+		id="beanSupannEtuId"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="key" value="DATACHANGE.SUPANNETDID.TEXT.LABEL"/>
+		<property name="required" value="true" />
+		<property name="name" value="supannEtuId"/>
+		<property name="disable" value="true"/>
+		<property name="updateable" value="false"/>
+	</bean>
+	
+
 	
 </beans>

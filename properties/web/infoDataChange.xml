@@ -6,7 +6,6 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
 	>
 	
-	
 	 <bean
 		id="beanPrincipalInfo"
 		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
@@ -15,7 +14,6 @@
 
 		<property name="title" value="INFO.PRINCIPAL.TEXT.LABEL"/>
 		<property name="name" value="principalInfo"/>
-		
 		<property name="listBeanField"> 
 		  <list>
 		    <ref bean="beanUid"/>
@@ -24,9 +22,7 @@
 		    <ref bean="beanGivenName"/>
 		    <ref bean="beanDisplayName"/>
 		  </list>
-		 
 		</property>
-		 
 	</bean>
 	
 	<bean
@@ -37,10 +33,49 @@
 
 		<property name="title" value="INFO.FUNCTION.TEXT.LABEL"/>
 		<property name="name" value="functionInfo"/>
+		<property name="account" ref="account"/>
+		<property name="profile">
+		  <map>
+		    <entry key="eduPersonPrimaryAffiliation">
+  		      <list>
+		        <value>employee</value>
+		        <value>researcher</value>
+		        <value>faculty</value>
+		      </list>
+		    </entry>
+		  </map>
+		</property>
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanEduPersonPrimaryAffiliation"/>
 		    <ref bean="beanEmployeeType"/>
+		  </list>
+		</property> 
+	</bean>
+	
+	<bean
+		id="beanStudentCaracterInfo"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="title" value="INFO.STUDENTCARACTER.TEXT.LABEL"/>
+		<property name="name" value="studentCaracterInfo"/>
+		<property name="account" ref="account"/>
+		<property name="profile">
+		  <map>
+		    <entry key="eduPersonPrimaryAffiliation">
+  		      <list>
+		        <value>student</value>
+		      </list>
+		    </entry>
+		  </map>
+		</property>
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanEduPersonPrimaryAffiliation"/>
+		    <ref bean="beanSupannCodeINE"/>
+		    <ref bean="beanMail"/>
 		  </list>
 		</property> 
 	</bean>
@@ -53,6 +88,18 @@
 
 		<property name="title" value="INFO.PROFESSIONAL.TEXT.LABEL"/>
 		<property name="name" value="professionalInfo"/>
+		<property name="account" ref="account"/>
+		<property name="profile">
+		  <map>
+		    <entry key="eduPersonPrimaryAffiliation">
+  		      <list>
+		        <value>employee</value>
+		        <value>researcher</value>
+		        <value>faculty</value>
+		      </list>
+		    </entry>
+		  </map>
+		</property>
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanMail"/>
@@ -63,8 +110,6 @@
 		  </list>
 		</property> 
 	</bean>
-	
-	
 	
 	<bean
 		id="beanPersonalInfo"
@@ -77,6 +122,8 @@
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanHomePostalAddress"/>
+		    <ref bean="beanEmailPerso"/>		
+		    <ref bean="beanMobilePhone"/>
 		  </list>
 		</property> 
 	</bean>
@@ -89,13 +136,57 @@
 
 		<property name="title" value="INFO.HARPEGEEAPOGEE.TEXT.LABEL"/>
 		<property name="name" value="harpegeeApogeeInfo"/>
+		<property name="account" ref="account"/>
+		<property name="profile">
+		  <map>
+		    <entry key="eduPersonPrimaryAffiliation">
+  		      <list>
+		        <value>employee</value>
+		        <value>researcher</value>
+		        <value>faculty</value>
+		      </list>
+		    </entry>
+		  </map>
+		</property>
+
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanHarpegeeNumber"/>
 		    <ref bean="beanSupannEntiteAffectation"/>
 		  </list>
-		</property> 
+		</property>
+		
 	</bean>
+	
+
+	<bean
+		id="beanApogeeInfo"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="title" value="INFO.APOGEE.TEXT.LABEL"/>
+		<property name="name" value="apogeeInfo"/>
+		<property name="account" ref="account"/>
+		<property name="profile">
+		  <map>
+		    <entry key="eduPersonPrimaryAffiliation">
+		      <list>
+		        <value>student</value>
+		      </list>
+		    </entry>
+		  </map>
+		</property>
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanSupannEtuId"/>
+		    <ref bean="beanSupannEntiteAffectation"/>
+		  </list>
+		</property>
+		
+	</bean>
+
+
 	
 	<bean
 		id="beanPublicDirectory"
@@ -105,6 +196,18 @@
 
 		<property name="title" value="INFO.PUBLICDIRECTORY.TEXT.LABEL"/>
 		<property name="name" value="publicDirectoryInfo"/>
+		<property name="account" ref="account"/>
+		<property name="profile">
+		  <map>
+		    <entry key="eduPersonPrimaryAffiliation">
+		      <list>
+		        <value>employee</value>
+		        <value>researcher</value>
+		        <value>faculty</value>
+		      </list>
+		    </entry>
+		  </map>
+		</property>
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanDisplayName"/>
@@ -115,6 +218,35 @@
 		  </list>
 		</property> 
 	</bean>
+
+	<bean
+		id="beanStudentPublicDirectory"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="title" value="INFO.PUBLICDIRECTORY.TEXT.LABEL"/>
+		<property name="name" value="studentPublicDirectoryInfo"/>
+		<property name="account" ref="account"/>
+		<property name="profile">
+		  <map>
+		    <entry key="eduPersonPrimaryAffiliation">
+		      <list>
+		        <value>student</value>
+		      </list>
+		    </entry>
+		  </map>
+		</property>
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanDisplayName"/>
+		    <ref bean="beanEduPersonPrimaryAffiliation"/>
+		    <ref bean="beanMail"/>
+		    <ref bean="beanSupannEntiteAffectation"/>
+		  </list>
+		</property> 
+	</bean>
+
 	
 	<bean
 		id="beanPrivateDirectory"
@@ -124,15 +256,58 @@
 
 		<property name="title" value="INFO.PRIVATEDIRECTORY.TEXT.LABEL"/>
 		<property name="name" value="privateDirectoryInfo"/>
+		<property name="account" ref="account"/>
+		<property name="profile">
+		  <map>
+		    <entry key="eduPersonPrimaryAffiliation">
+		      <list>
+		        <value>employee</value>
+		        <value>researcher</value>
+		        <value>faculty</value>
+		      </list>
+		    </entry>
+		  </map>
+		</property>
+
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanDisplayName"/>
 		    <ref bean="beanEduPersonPrimaryAffiliation"/>
-		    <ref bean="beanMail"/>
-		    <ref bean="beanPostalAddress"/>
-		    <ref bean="beanPhone"/>
-		    <ref bean="beanFax"/>
-		    <ref bean="beanMobilePro"/>
+		    <ref bean="beanHomePostalAddress"/>
+		    <ref bean="beanEmailPerso"/>		
+		    <ref bean="beanMobilePhone"/>
+		    <ref bean="beanSupannEntiteAffectation"/>
+		    
+		  </list>
+		</property> 
+	</bean>
+
+	<bean
+		id="beanStudentPrivateDirectory"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="title" value="INFO.PRIVATEDIRECTORY.TEXT.LABEL"/>
+		<property name="name" value="studentPrivateDirectoryInfo"/>
+		<property name="account" ref="account"/>
+		<property name="profile">
+		  <map>
+		    <entry key="eduPersonPrimaryAffiliation">
+		      <list>
+		        <value>student</value>
+		      </list>
+		    </entry>
+		  </map>
+		</property>
+
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanDisplayName"/>
+		    <ref bean="beanEduPersonPrimaryAffiliation"/>
+		    <ref bean="beanEmailPerso"/>		
+		    <ref bean="beanMobilePhone"/>
+		    <ref bean="beanHomePostalAddress"/>
 		    <ref bean="beanSupannEntiteAffectation"/>
 		  </list>
 		</property> 
@@ -146,6 +321,19 @@
 
 		<property name="title" value="INFO.PERSONALPAGE.TEXT.LABEL"/>
 		<property name="name" value="personalPageInfo"/>
+		<property name="account" ref="account"/>
+		<property name="profile">
+		  <map>
+		    <entry key="eduPersonPrimaryAffiliation">
+		      <list>
+		        <value>researcher</value>
+		        <value>faculty</value>
+		        <value>employee</value>
+		      </list>
+		    </entry>
+		  </map>
+		</property>
+
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanDisplayName"/>
@@ -154,6 +342,35 @@
 		    <ref bean="beanPhone"/>
 		    <ref bean="beanFax"/>
 		    <ref bean="beanMobilePro"/>
+		    <ref bean="beanSupannEntiteAffectation"/>
+		  </list>
+		</property> 
+	</bean>
+
+	<bean
+		id="beanPhDPersonalPageDirectory"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+
+		<property name="title" value="INFO.PERSONALPAGE.TEXT.LABEL"/>
+		<property name="name" value="phDPersonalPageInfo"/>
+		<property name="account" ref="account"/>
+		<property name="profile">
+		  <map>
+		    <entry key="eduPersonPrimaryAffiliation">
+		      <list>
+		        <value>student</value>
+		      </list>
+		    </entry>
+		  </map>
+		</property>
+
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanDisplayName"/>
+		    <ref bean="beanEmployeeType"/>
+		    <ref bean="beanMail"/>
 		    <ref bean="beanSupannEntiteAffectation"/>
 		  </list>
 		</property> 

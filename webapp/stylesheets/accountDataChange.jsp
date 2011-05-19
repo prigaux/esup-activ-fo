@@ -64,13 +64,15 @@
 	
 	<div class="demo">
 	
-	 <t:dataList value="#{accountController.beanData}"  var="category">
-	   
-      <t:htmlTag value="h2" styleClass="expand"><h:outputText value="#{msgs[category.title]}"/></t:htmlTag>
+	 <t:dataList value="#{accountController.beanData}" var="category">
+	  
+	 
+      <t:htmlTag value="h2" styleClass="expand" rendered="#{category.access}" ><h:outputText value="#{msgs[category.title]}"/></t:htmlTag>
 	 
 	  <t:div styleClass="collapse" >
-	   <h:dataTable value="#{category.listBeanField}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn"> 
-		<h:column  >						
+	   <h:dataTable value="#{category.listBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn">
+	  
+	   <h:column  >						
 		  <e:outputLabel style="vertical-align:top;" value="#{msgs[beanfield.key]}" rendered="#{beanfield.size>1}"/>
 		  <e:outputLabel value="#{msgs[beanfield.key]}" rendered="#{beanfield.size<=1}"/>
 		</h:column>
@@ -110,6 +112,9 @@
 		</h:column>										
 	  </h:dataTable>
 	 </t:div>
+	 
+	 
+	 
     </t:dataList>
   </div>
 
