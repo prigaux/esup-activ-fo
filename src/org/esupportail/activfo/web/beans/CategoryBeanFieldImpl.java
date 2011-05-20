@@ -104,12 +104,12 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 			Set keySet = profile.keySet();
 			for(Object ks : keySet) {
 				List<String> ls=profile.get(ks);
-				//logger.debug("key:"+ks.toString());
+				//logger.debug("  key:"+ks.toString());
 				for (String vs : ls) { 
-					//logger.debug("vs:"+vs);
+					//logger.debug("    vs:"+vs);
 					if (account.getAttribute(ks.toString()).contains(vs)) {
 						returnValue=true;
-						//logger.debug("vs:"+vs+"** : "+account.getAttribute(ks.toString())+"T/F:"+account.getAttribute(ks.toString()).contains(vs));
+						//logger.debug("    vs:"+vs+"** : "+account.getAttribute(ks.toString())+"T/F:"+account.getAttribute(ks.toString()).contains(vs));
 					}
 				}
 			}

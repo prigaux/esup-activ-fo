@@ -358,9 +358,16 @@
 		<property name="account" ref="account"/>
 		<property name="profile">
 		  <map>
+		    <!-- 
 		    <entry key="eduPersonPrimaryAffiliation">
 		      <list>
 		        <value>student</value>
+		      </list>
+		    </entry>
+		     -->
+		    <entry key="supannEtuCursusAnnee">
+		      <list>
+		        <value>{SUPANN}D</value>
 		      </list>
 		    </entry>
 		  </map>
