@@ -64,5 +64,11 @@ public class MapOrDefaultConverter implements Converter {
 		return defaultValue;
 	}
 
+	/**
+	 * @param defaultValue the defaultValue to set
+	 */
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
+	}
 		
 }
