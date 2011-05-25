@@ -71,8 +71,9 @@ public interface BeanField<T> {
 	public boolean isUpdateable();
 	public void setUpdateable(boolean updateable);
 	
-	public String getDatachangeHelp();
-	public void setDatachangeHelp(String datachangeHelp);
+	public String getNotice();
+	public void setNotice(String notice);
+	
 	
 	public int getSize();
 	

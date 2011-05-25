@@ -19,7 +19,7 @@
 		<property name="name" value="displayName"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.DISPLAYNAME.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.DISPLAYNAME.TEXT.HELP"/>
 	</bean>
 	
 	<bean
@@ -75,12 +75,12 @@
 		>
 		<property name="key" value="PERSOINFO.EDUPERSONPRIMARYAFFILIATION.TEXT.LABEL"/>
 		<property name="required" value="false" />
-		<property name="converter" ref="stringConverter"/>
+		<property name="converter" ref="mapOrEqualConverter"/>
 		
 		<property name="name" value="eduPersonPrimaryAffiliation"/>
 		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.EDUPERSONPRIMARYAFFILIATION.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.EDUPERSONPRIMARYAFFILIATION.TEXT.HELP"/>
 	</bean>
 	
 	<bean
@@ -93,7 +93,7 @@
 		<property name="name" value="supannCodeINE"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.SUPANNCODEINE.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.SUPANNCODEINE.TEXT.HELP"/>
 	</bean>
 	
 	
@@ -104,10 +104,13 @@
 		>
 		<property name="key" value="PERSOINFO.EDUPERSONAFFILIATION.TEXT.LABEL"/>
 		<property name="required" value="false" />
+		<property name="converter" ref="mapOrDefaultConverter"/>
 		<property name="isMultiValue" value="true"/>
 		<property name="name" value="eduPersonAffiliation"/>
 		<property name="numberOfValue" value="5"/>
 		<property name="disable" value="true"/>
+		<property name="updateable" value="false"/>
+		
 	</bean>
 	
 	<bean  
@@ -206,7 +209,7 @@
 		<property name="name" value="uid"/>
 		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.UID.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.UID.TEXT.HELP"/>
 	</bean>
 	
 	<bean
@@ -219,7 +222,7 @@
 		<property name="name" value="supannCivilite"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.SUPANNCIVILITE.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.SUPANNCIVILITE.TEXT.HELP"/>
 	</bean>
 	
 	<bean
@@ -232,7 +235,7 @@
 		<property name="name" value="sn"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.SN.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.SN.TEXT.HELP"/>
 	</bean>
 	
 	<bean
@@ -245,7 +248,7 @@
 		<property name="name" value="givenName"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.GIVENNAME.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.GIVENNAME.TEXT.HELP"/>
 	</bean>
 	
 	<bean
@@ -258,7 +261,7 @@
 		<property name="name" value="employeeType"/>
 		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.EMPLOYEETYPE.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.EMPLOYEETYPE.TEXT.HELP"/>
 	</bean>
 	
 	<bean
@@ -271,7 +274,7 @@
 		<property name="name" value="mail"/>
 		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.MAIL.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.MAIL.TEXT.HELP"/>
 	</bean>
 	
 	<bean
@@ -284,7 +287,7 @@
 		<property name="name" value="postalAddress"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.POSTALADDRESS.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.POSTALADDRESS.TEXT.HELP"/>
 	</bean>
 	
 	<bean
@@ -297,7 +300,7 @@
 		<property name="name" value="telephoneNumber"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.PHONE.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.PHONE.TEXT.HELP"/>
 	</bean>
 	
 	<bean
@@ -310,7 +313,7 @@
 		<property name="name" value="facsimileTelephoneNumber"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.FAX.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.FAX.TEXT.HELP"/>
 	</bean>
 	
 	<bean
@@ -323,7 +326,7 @@
 		<property name="name" value="homePostalAddress"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="true"/>
-		<property name="datachangeHelp" value="DATACHANGE.HOMEPOSTALADDRESS.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.HOMEPOSTALADDRESS.TEXT.HELP"/>
 	</bean>
 	
 	<bean
@@ -336,7 +339,7 @@
 		<property name="name" value="supannEmpId"/>
 		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.HARPEGEENUMBER.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.HARPEGEENUMBER.TEXT.HELP"/>
 	</bean>
 	
 	<bean 
@@ -351,7 +354,7 @@
 		<property name="converter" ref="ldapConverter"/>
 		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.SUPANNENTITEAFFECTATION.TEXT.HELP"/> <!-- note -->
+		<property name="notice" value="DATACHANGE.SUPANNENTITEAFFECTATION.TEXT.HELP"/> <!-- note -->
 	</bean>
 	
 	<bean
@@ -366,7 +369,7 @@
 		<property name="name" value="mobile"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
-		<property name="datachangeHelp" value="DATACHANGE.MOBILE.TEXT.HELP"/>
+		<property name="notice" value="DATACHANGE.MOBILE.TEXT.HELP"/>
 	</bean>
 	
 	<bean 

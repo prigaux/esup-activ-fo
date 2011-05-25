@@ -45,7 +45,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	//private String category;
 	
-	private String datachangeHelp;
+	private String notice;
 	
 	//private List<SelectItem> ListCategory=new ArrayList<SelectItem>(); 
 	
@@ -126,13 +126,18 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 
 	public void setValues(List<BeanMultiValue> values){
 		if(MANYCHECKBOX.equals(fieldType)){
+			
 			for(BeanMultiValue bmv : values)
 				if(stringDisplayItems.contains(bmv.getValue()))
 					selectedItems.add(bmv.getValue());
 				else
-					hideItems.add(bmv);					
+					hideItems.add(bmv);
 		} else
 			this.values=values;
+
+		for(BeanMultiValue bmv : values) 
+			bmv.setConverter(converter);
+
 	}
 	
 	public String getIsMultiValue() {
@@ -241,18 +246,20 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		this.updateable = updateable;
 	}
 
+	
+
 	/**
-	 * @return the datachangeHelp
+	 * @return the notice
 	 */
-	public String getDatachangeHelp() {
-		return datachangeHelp;
+	public String getNotice() {
+		return notice;
 	}
 
 	/**
-	 * @param datachangeHelp the datachangeHelp to set
+	 * @param notice the notice to set
 	 */
-	public void setDatachangeHelp(String datachangeHelp) {
-		this.datachangeHelp = datachangeHelp;
+	public void setNotice(String notice) {
+		this.notice = notice;
 	}
 
 	public int getSize() {

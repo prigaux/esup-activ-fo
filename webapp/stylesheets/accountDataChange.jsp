@@ -78,33 +78,38 @@
 		</h:column>
 		<h:column >    
 		<t:dataList value="#{beanfield.values}" var="sub"  rendered="#{beanfield.fieldType!='selectManyCheckbox'&&!accountController.viewDataChange}" >
-		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'}" styleClass="#{beanfield.name}show">
-			    <h:inputText value="#{sub.value}" disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value!=''}" />
-	            <h:inputText value="#{sub.value}" disabled="#{beanfield.disable}" converter="#{beanfield.converter}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null}" />
+		    
+		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'&&!sub.empty2}" styleClass="#{beanfield.name}show">
+			    <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value!=''&&!sub.empty2}" />
+	            <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value!=''&&!sub.empty2}" />
 	            <t:htmlTag value="br"  />
 	        </t:div>
+	        
+	        
 	        <t:div rendered="#{sub.value==''&&beanfield.isMultiValue!=null&&beanfield.isMultiValue!=true&&beanfield.fieldType!='selectOneRadio'}" styleClass="#{beanfield.name}show">
 			    <h:inputText value="#{sub.value}" required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''}" />
 	            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''}" />
 	            <t:htmlTag value="br"  />
 	        </t:div>
+	        
 	        <t:div rendered="#{sub.value==''&&beanfield.isMultiValue!=null&&beanfield.isMultiValue==true&&beanfield.fieldType!='selectOneRadio'}" style="display:none;" styleClass="#{beanfield.name}hide" >    
 	            <h:inputText value="#{sub.value}" required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''}" />
 	            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''}" />
-	            <t:htmlTag value="br"  />
+	            <t:htmlTag value="br" />
             </t:div>
         </t:dataList>
         
         <t:dataList value="#{beanfield.values}" var="sub"  rendered="#{beanfield.fieldType!='selectManyCheckbox'&&accountController.viewDataChange}" >
 		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'}" styleClass="portlet-section-text">
 			    <h:outputText value="#{sub.value}" converter="#{beanfield.converter}"/>
-	            <t:htmlTag value="br"  />
+	            <t:htmlTag value="br" />
 	        </t:div>
         </t:dataList>
   		</h:column>  
  
-       	<h:column >			
-          <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.datachangeHelp]}" value="/media/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable}"/>
+       	<h:column >
+       	  <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable}"/>			
+          <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.notice]}" value="/media/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable}"/>
           <t:div >
 			<h:graphicImage alt="#{beanfield.name}" styleClass="show" value="/media/add.png"  style="border: 0;" rendered="#{beanfield.isMultiValue!=null&&beanfield.isMultiValue==true&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>
 			<h:graphicImage alt="#{beanfield.name}" styleClass="hide" value="/media/remove.png"  style="border: 0;" rendered="#{beanfield.isMultiValue!=null&&beanfield.isMultiValue==true&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>

@@ -43,11 +43,19 @@
 		        <value>faculty</value>
 		      </list>
 		    </entry>
+		    <entry key="eduPersonAffiliation">
+  		      <list>
+		        <value>employee</value>
+		        <value>member</value>
+		        <value>faculty</value>
+		      </list>
+		    </entry>
 		  </map>
 		</property>
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanEduPersonPrimaryAffiliation"/>
+		    <ref bean="beanEduPersonAffiliation"/>
 		    <ref bean="beanEmployeeType"/>
 		  </list>
 		</property> 
@@ -212,6 +220,7 @@
 		  <list>
 		    <ref bean="beanDisplayName"/>
 		    <ref bean="beanEduPersonPrimaryAffiliation"/>
+		    <ref bean="beanEduPersonAffiliation"/>
 		    <ref bean="beanMail"/>
 		    <ref bean="beanPostalAddress"/>
 		    <ref bean="beanSupannEntiteAffectation"/>
@@ -327,8 +336,6 @@
 		    <entry key="eduPersonPrimaryAffiliation">
 		      <list>
 		        <value>researcher</value>
-		        <value>faculty</value>
-		        <value>employee</value>
 		      </list>
 		    </entry>
 		  </map>
