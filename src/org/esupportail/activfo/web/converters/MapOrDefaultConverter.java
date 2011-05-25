@@ -19,7 +19,7 @@ public class MapOrDefaultConverter implements Converter {
 	
 	private HashMap<String,String> mapping = new HashMap<String,String>();
 	
-	private String returnValue="";
+	private String defaultValue="";
 	
 	private final Logger logger = new LoggerImpl(getClass());
 
@@ -38,13 +38,11 @@ public class MapOrDefaultConverter implements Converter {
 			@SuppressWarnings("unused") final UIComponent component, 
 			final Object value) {
      	
-    	logger.debug("value.toString : "+value.toString());
     	
     	if (mapping.get(value)==null) {
-    		//logger.debug("Isn't blank ? "+value);
-    		return getReturnValue();
+    		return getDefaultValue();
     	}
-    	else return mapping.get(value).toString();
+    	else return mapping.get(value);
     	
     }
 
@@ -62,8 +60,8 @@ public class MapOrDefaultConverter implements Converter {
 		this.mapping = mapping;
 	}
 	
-	public String getReturnValue() {
-		return returnValue;
+	public String getDefaultValue() {
+		return defaultValue;
 	}
 
 		
