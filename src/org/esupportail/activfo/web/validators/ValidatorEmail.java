@@ -17,7 +17,7 @@ public class ValidatorEmail extends AbstractI18nAwareBean implements Validator  
 	
 	private final Logger logger = new LoggerImpl(getClass());
 	
-	private String forbiddenEmail=".*univ-paris1.*";
+	private String forbiddenEmail=".*@univ-paris1\\.fr";
 
 	/**
 	 * 
