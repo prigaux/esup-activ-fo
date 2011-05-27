@@ -1,9 +1,17 @@
  /* common to all columns*/
-    .firstColumn, .secondColumn, .thirdColumn{
-    Vertical-Align: center;
+    .firstColumn {
+    vertical-Align: top;
+    padding-top: 6px;
     }
     .firstColumn#sizeEx {
     vertical-align: top;
+    }
+    .secondColumn {
+    vertical-align: center;
+    }
+    .thirdColumn {
+    vertical-align: top;
+    padding-top: 6px;
     }
     
     .firstStepImage {
