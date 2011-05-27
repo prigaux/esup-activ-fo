@@ -32,7 +32,7 @@ public class ValidatorEmail extends AbstractI18nAwareBean implements Validator  
 			}
 			
 			if (strValue.matches(getForbiddenEmail())) {
-				throw new ValidatorException(getFacesErrorMessage("VALIDATOR.EMAIL.INVALID")); 
+				throw new ValidatorException(getFacesErrorMessage("VALIDATOR.EMAIL.FORBIDDEN")); 
 			}
 		
 		}
