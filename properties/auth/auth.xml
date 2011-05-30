@@ -6,6 +6,7 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
 	>
 
+
     <bean id="authenticator" lazy-init="true"
         class="org.esupportail.activfo.services.authentication.AuthenticatorImpl">
         <property name="authenticationService" ref="${auth.bean}" />
@@ -14,6 +15,7 @@
 
     <bean id="servletAuthenticationService" lazy-init="true"
         class="org.esupportail.commons.services.authentication.CasFilterAuthenticationService">
+        
     </bean>
 
     <bean id="portletAuthenticationService" lazy-init="true"

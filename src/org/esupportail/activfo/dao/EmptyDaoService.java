@@ -35,8 +35,10 @@ public class EmptyDaoService implements DaoService {
 	}
 
 	public User getUser(String id) {
+		User user = new User();
+		user.setId(id);
 		// TODO Auto-generated method stub
-		return null;
+		return user;
 	}
 
 	public List<User> getUsers() {

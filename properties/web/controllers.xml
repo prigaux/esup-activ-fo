@@ -164,13 +164,27 @@
 			</list>
 		</property>
 		
-		<property name="listBeanProcedure">
+		<property name="listBeanProcedureWithCas">
+			<list>
+			    <!-- 
+				<ref bean="beanActivation"/>
+				<ref bean="beanReinitialisation"/>
+				 -->
+				<ref bean="beanDataChange"/>
+				<ref bean="beanPasswordChange"/>
+				<ref bean="beanLoginChange"/>
+			</list>
+		</property>
+		
+		<property name="listBeanProcedureWithoutCas">
 			<list>
 				<ref bean="beanActivation"/>
 				<ref bean="beanReinitialisation"/>
 				<ref bean="beanPasswordChange"/>
+				<!--
 				<ref bean="beanDataChange"/>
 				<ref bean="beanLoginChange"/>
+				-->
 			</list>
 		</property>
 		

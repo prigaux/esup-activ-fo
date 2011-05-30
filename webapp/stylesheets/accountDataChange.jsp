@@ -60,7 +60,7 @@
 	
 	<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}" />
 	
-	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
+	<h:form id="accountForm" >
 	
 	<div class="demo">
 	

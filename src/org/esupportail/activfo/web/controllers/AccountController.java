@@ -91,7 +91,8 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	
 	//liste des champs correspondant aux procedures
-	private List<BeanField> listBeanProcedure;
+	private List<BeanField> listBeanProcedureWithCas;
+	private List<BeanField> listBeanProcedureWithoutCas;
 	
 	//liste des champs correspondant aux statuts de l'utilisateur
 	private List<BeanField> listBeanStatus;
@@ -1103,15 +1104,37 @@ public class AccountController extends AbstractContextAwareController implements
 		this.dataChange = dataChange;
 	}
 
-
-	public List<BeanField> getListBeanProcedure() {
-		return listBeanProcedure;
+    /**
+	 * @return the listBeanProcedureWithCas
+	 */
+	public List<BeanField> getListBeanProcedureWithCas() {
+		return listBeanProcedureWithCas;
 	}
 
-	public void setListBeanProcedure(List<BeanField> listBeanProcedure) {
-		this.listBeanProcedure = listBeanProcedure;
+
+	/**
+	 * @param listBeanProcedureWithCas the listBeanProcedureWithCas to set
+	 */
+	public void setListBeanProcedureWithCas(List<BeanField> listBeanProcedureWithCas) {
+		this.listBeanProcedureWithCas = listBeanProcedureWithCas;
 	}
 
+
+	/**
+	 * @return the listBeanProcedureWithoutCas
+	 */
+	public List<BeanField> getListBeanProcedureWithoutCas() {
+		return listBeanProcedureWithoutCas;
+	}
+
+
+	/**
+	 * @param listBeanProcedureWithoutCas the listBeanProcedureWithoutCas to set
+	 */
+	public void setListBeanProcedureWithoutCas(
+			List<BeanField> listBeanProcedureWithoutCas) {
+		this.listBeanProcedureWithoutCas = listBeanProcedureWithoutCas;
+	}
 	
 	public List<BeanField> getListBeanStatus() {
 		return listBeanStatus;

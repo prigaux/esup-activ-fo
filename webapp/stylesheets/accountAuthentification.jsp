@@ -49,7 +49,7 @@
 	<e:paragraph escape="false" value="#{msgs['AUTHENTIFICATION.TEXT.TOP']}" />
 	
 
-	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
+	<h:form id="accountForm" >
 		
 		
 		<e:panelGrid columns="4">

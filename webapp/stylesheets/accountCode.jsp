@@ -32,7 +32,7 @@
 		  
 	</e:paragraph>
 	
-	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
+	<h:form id="accountForm" >
 		<e:panelGrid columns="3">
 			<e:outputLabel for="code" value="#{msgs[beanCode.key]}" />
 			<e:inputText id="code" value="#{beanCode.value}" required="#{beanCode.required}" validator="#{beanCode.validator.validate}">

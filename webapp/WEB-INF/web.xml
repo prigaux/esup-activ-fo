@@ -153,7 +153,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>CAS Filter</filter-name>
-		<url-pattern>/stylesheets/cas.faces</url-pattern>
+		<url-pattern>/stylesheets/welcome.faces</url-pattern> <!-- /stylesheets/cas.faces -->
 	</filter-mapping>
 
 	<servlet>

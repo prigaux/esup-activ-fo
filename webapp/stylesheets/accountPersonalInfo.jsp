@@ -60,7 +60,7 @@
 	
 	<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}" />
 	
-	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
+	<h:form id="accountForm" >
 	  <h:dataTable value="#{accountController.listBeanPersoInfo}" var="entry" columnClasses="firstColumn,secondColumn,thirdColumn"> 
 		<h:column >						
 		  <e:outputLabel value="#{msgs[entry.key]}" />

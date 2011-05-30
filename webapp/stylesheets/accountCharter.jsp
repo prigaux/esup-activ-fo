@@ -19,8 +19,7 @@
 	
 	<e:paragraph escape="false" value="#{msgs['CHARTER.TEXT.TOP']}" />
 
-	<h:form id="accountForm"
-		rendered="#{sessionController.currentUser == null}">
+	<h:form id="accountForm">
 
 		<e:outputLabel for="charterAgreement" value="#{msgs['CHARTER.TEXT.AGREE']}" />
 		<e:selectBooleanCheckbox id="charterAgreement" value="#{accountController.currentAccount.charterAgreement}" required="true" />

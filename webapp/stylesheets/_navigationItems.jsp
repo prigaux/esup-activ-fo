@@ -18,7 +18,7 @@
 <e:menuItem id="about" value="#{msgs['NAVIGATION.TEXT.ABOUT']}"
 	accesskey="#{msgs['NAVIGATION.ACCESSKEY.ABOUT']}"
 	action="#{aboutController.enter}" />
-<e:menuItem id="login" action="navigationLogin"
+<e:menuItem id="login" action="casLogin"
 	value="#{msgs['NAVIGATION.TEXT.LOGIN']}"
 	accesskey="#{msgs['NAVIGATION.ACCESSKEY.LOGIN']}"
 	rendered="#{sessionController.printLogin}" />

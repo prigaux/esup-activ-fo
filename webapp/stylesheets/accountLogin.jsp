@@ -26,7 +26,7 @@
 	<e:paragraph escape="false" value="#{msgs['LOGIN.TEXT.TOP']}" rendered="#{accountController.activ == true}"/>
 	
 
-	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
+	<h:form id="accountForm" >
 		
 		
 		<e:panelGrid columns="4">

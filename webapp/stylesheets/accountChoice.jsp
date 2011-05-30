@@ -26,7 +26,7 @@
 
 <e:messages />
 
-	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
+	<h:form id="accountForm" >
 		
 		<e:paragraph escape="false" value="#{msgs['CHOICE.TEXT.WITHOUTEMAIL.TOP']}" rendered="#{accountController.partialMailPerso==''&&accountController.partialPager!=''}">
 		  <f:param value="#{accountController.partialPager}" />

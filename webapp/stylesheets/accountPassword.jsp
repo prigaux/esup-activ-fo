@@ -194,7 +194,7 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 
 
 
-	<h:form id="accountForm" rendered="#{sessionController.currentUser == null}">
+	<h:form id="accountForm" >
 						
 		<e:panelGrid columns="4">
   			<e:outputLabel for="password" value="#{msgs[beanNewPassword.key]}"/>
