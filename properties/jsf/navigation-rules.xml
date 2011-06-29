@@ -11,14 +11,21 @@
 
 <faces-config>
 
-	
-
 	<navigation-rule>
 		<display-name>index.jsp -> welcome.jsp</display-name>
 		<from-view-id>/index.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>welcome</from-outcome>
 			<to-view-id>/stylesheets/welcome.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>index.jsp -> welcomeCas.jsp</display-name>
+		<from-view-id>/index.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>welcomeCas</from-outcome>
+			<to-view-id>/stylesheets/welcomeCas.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 
@@ -143,8 +150,6 @@
 			<to-view-id>/stylesheets/accountLogin.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-		
-		
 	
 	<navigation-rule>
 		<display-name>accountCharterToPassword</display-name>
@@ -172,6 +177,16 @@
 			<to-view-id>/stylesheets/accountAuthentification.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+
+	<navigation-rule>
+		<display-name>accountWelcomeToAuthentification</display-name>
+		<from-view-id>/stylesheets/welcomeCas.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoAuthentification</from-outcome>
+			<to-view-id>/stylesheets/accountAuthentification.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
 	
 	<navigation-rule>
 		<display-name>accountAuthentificationToPersonalInfo</display-name>
@@ -187,6 +202,15 @@
 		<from-view-id>/stylesheets/accountAuthentification.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoDataChange</from-outcome>
+			<to-view-id>/stylesheets/accountDataChange.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>welcomToDataChange</display-name>
+		<from-view-id>/stylesheets/welcome.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoDataChangeWithCas</from-outcome>
 			<to-view-id>/stylesheets/accountDataChange.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
@@ -285,6 +309,25 @@
 			<to-view-id>/stylesheets/ldapResults.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>accountWelcomeToAuthentificationCas</display-name>
+		<from-view-id>/stylesheets/welcome.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoAuthentificationCas</from-outcome>
+			<to-view-id>/stylesheets/accountAuthentificationCas.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>accountAuthentificationCasToPersonalInfo</display-name>
+		<from-view-id>/stylesheets/accountAuthentificationCas.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoPersonalInfo</from-outcome>
+			<to-view-id>/stylesheets/accountPersonalInfo.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
 	
 	
 	

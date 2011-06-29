@@ -36,7 +36,7 @@
 
 	<%@include file="_navigation.jsp"%>
 	
-	<e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" rendered="#{accountController.dataChange == true}" />
+	<e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}"  />
    
 	<t:div styleClass="secondStepImage3fleches" rendered="#{accountController.dataChange == true&&accountController.viewDataChange == false}" >
 	<t:htmlTag styleClass="processSteps" value="ul">
@@ -47,7 +47,7 @@
 	</t:htmlTag>
 	</t:div>
 	
-	<t:div styleClass="thirdStepImage3fleches" rendered="#{accountController.dataChange == true&&accountController.viewDataChange == true}" >
+	<t:div styleClass="thirdStepImage3fleches" rendered="#{accountController.dataChange == false&&accountController.viewDataChange == true}" >
 	<t:htmlTag styleClass="processSteps" value="ul">
 	    <t:htmlTag styleClass="homeStep" value="li"><t:graphicImage title="Accueil" value="/media/home.jpg"  style="border: 0;cursor:pointer;" onclick="simulateLinkClick('restart:restartButton');"/></t:htmlTag>
 		<t:htmlTag styleClass="firstStep" value="li"><t:outputText escape="false" value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.ETAPE1.TEXT']}"/></t:htmlTag>
