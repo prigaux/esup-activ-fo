@@ -47,6 +47,9 @@ public class SessionController extends AbstractDomainAwareBean {
 	 */
 	private String casLogoutUrl;
 	
+	private String homeUrl="welcome.faces";
+	
+	
 	/**
 	 * Constructor.
 	 */
@@ -72,7 +75,11 @@ public class SessionController extends AbstractDomainAwareBean {
 	public User getCurrentUser() {
 		return authenticator.getUser();
 	}
-
+	
+	public String getPT() {
+		return authenticator.getUser().getPt();
+	}
+	
 	/**
 	 * @return true if the login button should be printed. 
 	 */
@@ -144,6 +151,18 @@ public class SessionController extends AbstractDomainAwareBean {
 		facesContext.responseComplete();
 		return null;
 	}
+	
+	public void restart() {
+		exceptionController.restart();
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = facesContext.getExternalContext();
+		try {
+			externalContext.redirect(homeUrl);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
 
 	/**
 	 * @param exceptionController the exceptionController to set
@@ -172,5 +191,8 @@ public class SessionController extends AbstractDomainAwareBean {
 	public void setCasLogoutUrl(final String casLogoutUrl) {
 		this.casLogoutUrl = StringUtils.nullIfEmpty(casLogoutUrl);
 	}
+
+		
+	
 	
 }

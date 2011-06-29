@@ -3,18 +3,23 @@
  */
 package org.esupportail.activfo.services.authentication; 
 
+import java.io.IOException;
 import java.io.Serializable;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 import org.esupportail.activfo.domain.DomainService;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.commons.services.authentication.AuthUtils;
 import org.esupportail.commons.services.authentication.AuthenticationService;
 import org.esupportail.commons.services.authentication.info.AuthInfo;
+import org.esupportail.commons.services.cas.CasService;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.utils.ContextUtils;
 import org.springframework.beans.factory.InitializingBean;
+import org.xml.sax.SAXException;
 
 /**
  * A basic authenticator implementation.
@@ -36,6 +41,9 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 	 */
 	private static final String USER_ATTRIBUTE = AuthenticatorImpl.class.getName() + ".user";
 	
+	
+	private static final String PROXY_TICKET = AuthenticatorImpl.class.getName() + ".proxyticket";
+	
 	/**
 	 * A logger.
 	 */
@@ -50,6 +58,9 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 	 * The domain authenticator.
 	 */
 	private DomainService domainService;
+	
+	
+	private CasService casService;
 	
 	/**
 	 * Bean constructor.
@@ -72,6 +83,7 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 	 */
 	public User getUser() {
 		AuthInfo authInfo = (AuthInfo) ContextUtils.getSessionAttribute(AUTH_INFO_ATTRIBUTE);
+		
 		if (authInfo != null) {
 			User user = (User) ContextUtils.getSessionAttribute(USER_ATTRIBUTE);
 			if (logger.isDebugEnabled()) {
@@ -83,16 +95,23 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 			logger.debug("no auth info found in session");
 		}
 		authInfo = authenticationService.getAuthInfo();
+		
 		if (authInfo == null) {
 			return null;
 		}
+		
+		String proxyticket = casService.getProxyTicket("https://busan-desktop.univ-paris1.fr:7080");
+
 		if (AuthUtils.CAS.equals(authInfo.getType())) {
 			User user = getDomainService().getUser(authInfo.getId());
+			user.setPt(proxyticket);
 			storeToSession(authInfo, user);
 			return user;
 		} 
 		return null;
 	}
+	
+	
 
 	/**
 	 * Store the authentication information to the session.
@@ -108,7 +127,7 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 		ContextUtils.setSessionAttribute(AUTH_INFO_ATTRIBUTE, authInfo);
 		ContextUtils.setSessionAttribute(USER_ATTRIBUTE, user);
 	}
-
+	
 	/**
 	 * @param authenticationService the authenticationService to set
 	 */
@@ -137,5 +156,21 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 	public void setDomainService(final DomainService domainService) {
 		this.domainService = domainService;
 	}
+
+	/**
+	 * @return the casService
+	 */
+	public CasService getCasService() {
+		return casService;
+	}
+
+	/**
+	 * @param casService the casService to set
+	 */
+	public void setCasService(CasService casService) {
+		this.casService = casService;
+	}
+
+	
 
 }

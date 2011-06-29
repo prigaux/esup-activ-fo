@@ -20,6 +20,7 @@ import org.esupportail.activfo.exceptions.LoginException;
 import org.esupportail.activfo.exceptions.PrincipalNotExistsException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.activfo.services.client.AccountManagement;
+import org.esupportail.activfo.services.client.CasAccountManagement;
 import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.application.Version;
@@ -45,6 +46,8 @@ public class DomainServiceImpl<LdapSchema> implements DomainService, Initializin
 	private static final long serialVersionUID = -8200845058340254019L;
 
 	private AccountManagement service;
+	
+	private CasAccountManagement casAcountService;
 	
 	
 	/**
@@ -300,6 +303,16 @@ public class DomainServiceImpl<LdapSchema> implements DomainService, Initializin
 	public void setService(AccountManagement service) {
 		this.service = service;
 	}
+	
+	public CasAccountManagement getCasAcountService() {
+		return casAcountService;
+	}
+
+	public void setCasAcountService(CasAccountManagement casAcountService) {
+		this.casAcountService = casAcountService;
+	}
+
+	
 	public boolean validateCode(String id,String code)throws UserPermissionException{
 		return service.validateCode(id, code);
 	}
@@ -320,6 +333,14 @@ public class DomainServiceImpl<LdapSchema> implements DomainService, Initializin
 	 */
 	public void setLdapEntityService(LdapEntityService ldapEntityService) {
 		this.ldapEntityService = ldapEntityService;
+	}
+	
+	public HashMap<String,String> authentificateUserWithCas(String id,String proxyticket,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException{
+		return casAcountService.authentificateUserWithCas(id, proxyticket,attrPersoInfo);
+	}
+	
+	public HashMap<String,String> authentificateUserWithCodeKey(String id,String accountCodeKey,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException{
+		return casAcountService.authentificateUserWithCodeKey(id, accountCodeKey,attrPersoInfo);
 	}
 	
 	

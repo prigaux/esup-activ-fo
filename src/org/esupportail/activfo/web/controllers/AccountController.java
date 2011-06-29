@@ -28,12 +28,14 @@ import org.esupportail.activfo.web.beans.BeanMultiValue;
 import org.esupportail.activfo.web.beans.BeanMultiValueImpl;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
+import org.esupportail.commons.web.controllers.ExceptionController;
 
 import org.esupportail.commons.services.smtp.AsynchronousSmtpServiceImpl;
 import org.esupportail.commons.utils.Assert;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+
 /**
  * A visual bean for the welcome page.
  */
@@ -144,6 +146,9 @@ public class AccountController extends AbstractContextAwareController implements
 	private String body1DataChange;
 	private String body2DataChange;
 	
+	private SessionController sessionController;
+	
+	private ExceptionController exceptionController;
 	
 	/**
 	 * Bean constructor.
@@ -182,6 +187,7 @@ public class AccountController extends AbstractContextAwareController implements
 			activ=false;
 			loginChange=false;
 			dataChange=false;
+			viewDataChange=false;
 		}
 		else if (currentAccount.getOneRadioProcedure().equals(procedurePasswordChange)){
 			passwChange=true;
@@ -189,6 +195,7 @@ public class AccountController extends AbstractContextAwareController implements
 			activ=false;
 			loginChange=false;
 			dataChange=false;
+			viewDataChange=false;
 			return "gotoAuthentification";
 		}
 		else if (currentAccount.getOneRadioProcedure().equals(procedureDataChange)) {
@@ -197,7 +204,8 @@ public class AccountController extends AbstractContextAwareController implements
 			reinit=false;
 			loginChange=false;
 			dataChange=true;
-			return "gotoAuthentification";
+			viewDataChange=false;
+			return "gotoDataChangeWithCas";
 		}
 		else if (currentAccount.getOneRadioProcedure().equals(procedureLoginChange)){
 			passwChange=false;
@@ -205,6 +213,7 @@ public class AccountController extends AbstractContextAwareController implements
 			activ=false;
 			dataChange=false;
 			loginChange=true;
+			viewDataChange=false;
 			return "gotoAuthentification";
 		}
 		else{
@@ -212,6 +221,8 @@ public class AccountController extends AbstractContextAwareController implements
 			reinit=false;
 			passwChange=false;
 			loginChange=false;
+			dataChange=false;
+			viewDataChange=false;
 		}
 		
 		
@@ -406,6 +417,7 @@ public class AccountController extends AbstractContextAwareController implements
 				}
 				else if (dataChange) {
 					viewDataChange=true;
+					dataChange=false;
 					return "gotoViewDataChange";
 				}
 				else 
@@ -428,20 +440,22 @@ public class AccountController extends AbstractContextAwareController implements
 			return null;
 			
 	}
-	public String pushAuthentificate(){
+	public String pushAuthentificate() {
 		try{
 			//Attributs concernant les informations personnelles que l'on souhaite afficher
 			
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			List<String> attrDataChange=Arrays.asList(attributesDataChange.split(","));
 			
-			
-			if (dataChange)
-				accountDescr=this.getDomainService().authentificateUser(beanLogin.getValue().toString(), beanPassword.getValue().toString(),attrDataChange);
-			else
+			if (dataChange) {
+				
+				if (currentAccount.getAttribute(accountCodeKey)!=null) 
+					accountDescr=this.getDomainService().authentificateUserWithCodeKey(sessionController.getCurrentUser().getId(),currentAccount.getAttribute(accountCodeKey),attrDataChange);
+				else
+					accountDescr=this.getDomainService().authentificateUserWithCas(sessionController.getCurrentUser().getId(),sessionController.getPT(),attrDataChange);
+				
+			}else
 				accountDescr=this.getDomainService().authentificateUser(beanLogin.getValue().toString(), beanPassword.getValue().toString(),attrPersoInfo);
-			
-			logger.debug("beanlogin :"+beanLogin.getValue().toString());
 			
 			logger.debug("accountDescr :"+accountDescr.toString());
 			
@@ -458,9 +472,8 @@ public class AccountController extends AbstractContextAwareController implements
 					
 					this.addInfoMessage(null, "AUTHENTIFICATION.MESSAGE.VALID");
 					if (dataChange) {
-						logger.debug("Check isDataChangeProcedure : "+dataChange);
-						viewDataChange=false;
-						return "gotoDataChange";
+						//viewDataChange=false;
+						return null; 
 					} else {
 						logger.debug("Check isDataChangeProcedure : "+dataChange);
 						return "gotoPersonalInfo";
@@ -479,10 +492,12 @@ public class AccountController extends AbstractContextAwareController implements
 		}catch(AuthentificationException e){
 			logger.error(e.getMessage());
 			addErrorMessage(null, "AUTHENTIFICATION.MESSAGE.INVALID");
-		
+	        sessionController.restart();
+			
 		}catch (LdapProblemException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
+			sessionController.restart();
 		
 		}catch (UserPermissionException e) {
 			logger.error(e.getMessage());
@@ -1335,7 +1350,7 @@ public class AccountController extends AbstractContextAwareController implements
 
 
 	/**
-	 * @return the body1DataChange
+	 * @return the body1DataChangeisFirstCasAuth=true;
 	 */
 	public String getBody1DataChange() {
 		return body1DataChange;
@@ -1379,8 +1394,43 @@ public class AccountController extends AbstractContextAwareController implements
 	}
 	
 	public List<CategoryBeanField> getBeanData() {
+		if (dataChange) pushAuthentificate();
 		if (viewDataChange) return listBeanViewDataChange;
 		else return listBeanDataChange;
 	}
+
+
+
+	/**
+	 * @return the sessionController
+	 */
+	public SessionController getSessionController() {
+		return sessionController;
+	}
+
+
+	/**
+	 * @param sessionController the sessionController to set
+	 */
+	public void setSessionController(SessionController sessionController) {
+		this.sessionController = sessionController;
+	}
+
+
+	/**
+	 * @return the exceptionController
+	 */
+	public ExceptionController getExceptionController() {
+		return exceptionController;
+	}
+
+
+	/**
+	 * @param exceptionController the exceptionController to set
+	 */
+	public void setExceptionController(ExceptionController exceptionController) {
+		this.exceptionController = exceptionController;
+	}
+	
 
 }

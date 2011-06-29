@@ -15,7 +15,19 @@
 		<property name="serviceClass" 
 			value="org.esupportail.activfo.services.client.AccountManagement" />
 		<property name="wsdlDocumentUrl" 
-			value="${webservice.backoffice.access}" />
+			value="${webservice.backoffice.access}/AccountManagement?WSDL" />
+		<property name="lookupServiceOnStartup">
+			<value type="boolean">false</value>
+		</property>
+</bean>
+
+<bean id="remoteCasAccountManagement"
+		lazy-init="true"
+		class="org.codehaus.xfire.spring.remoting.XFireClientFactoryBean">
+		<property name="serviceClass" 
+			value="org.esupportail.activfo.services.client.CasAccountManagement" />
+		<property name="wsdlDocumentUrl" 
+			value="${webservice.backoffice.access}/CasAccountManagement?WSDL" />
 		<property name="lookupServiceOnStartup">
 			<value type="boolean">false</value>
 		</property>

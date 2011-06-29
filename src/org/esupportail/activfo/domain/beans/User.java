@@ -38,6 +38,9 @@ public class User implements Serializable {
      */
     private String language;
     
+    
+    private String pt;
+    
 	/**
 	 * Bean constructor.
 	 */
@@ -73,7 +76,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User#" + hashCode() + "[id=[" + id + "], displayName=[" + displayName 
-		+ "], admin=[" + admin + "], language=[" + language + "]]";
+		+ "], admin=[" + admin + "], language=[" + language + "]], pt=[" + pt + "]]";
 	}
 
 	/**
@@ -130,5 +133,21 @@ public class User implements Serializable {
 	public void setLanguage(final String language) {
 		this.language = StringUtils.nullIfEmpty(language);
 	}
+
+	/**
+	 * @return the pt
+	 */
+	public String getPt() {
+		return pt;
+	}
+
+	/**
+	 * @param pt the pt to set
+	 */
+	public void setPt(final String pt) {
+		this.pt = StringUtils.nullIfEmpty(pt);
+	}
+	
+	
 
 }
