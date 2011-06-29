@@ -113,6 +113,11 @@
 
 <!--BEGIN-SERVLET-ONLY-->
 
+    <context-param>
+        <param-name>edu.yale.its.tp.cas.proxyUrl</param-name>
+        <param-value>${cas.url}/proxy</param-value>
+    </context-param>
+
 	<filter>
 		<description>
 			The CAS filter, used to authenticate users.
@@ -145,6 +150,10 @@
 			<param-value>${tomcat.host}${tomcat.port.string}</param-value>
 		</init-param>
 		<init-param>
+            <param-name>edu.yale.its.tp.cas.client.filter.proxyCallbackUrl</param-name>
+            <param-value>https://${tomcat.host}${tomcat.port.string}/CasProxyServlet</param-value>
+        </init-param>	
+		<init-param>
 			<param-name>
 				edu.yale.its.tp.cas.client.filter.wrapRequest
 			</param-name>
@@ -153,8 +162,25 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>CAS Filter</filter-name>
-		<url-pattern>/stylesheets/welcome.faces</url-pattern> <!-- /stylesheets/cas.faces -->
+		<url-pattern>/stylesheets/welcomeCas.faces</url-pattern>
+		 
 	</filter-mapping>
+	
+	<filter-mapping>
+		<filter-name>CAS Filter</filter-name>
+		<url-pattern>/stylesheets/accountDataChange.faces</url-pattern>
+		 
+	</filter-mapping>
+	
+	<servlet>
+        <servlet-name>ProxyTicketReceptor</servlet-name>
+        <servlet-class>edu.yale.its.tp.cas.proxy.ProxyTicketReceptor</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ProxyTicketReceptor</servlet-name>
+        <url-pattern>/CasProxyServlet</url-pattern>
+    </servlet-mapping>
 
 	<servlet>
 		<description>

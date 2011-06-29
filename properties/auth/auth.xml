@@ -11,8 +11,14 @@
         class="org.esupportail.activfo.services.authentication.AuthenticatorImpl">
         <property name="authenticationService" ref="${auth.bean}" />
         <property name="domainService" ref="domainService" />
+        <property name="casService" ref="casService" />
     </bean>
-
+    
+    <bean
+    	id="casService"
+    	class="org.esupportail.commons.services.cas.ServletCasServiceImpl" >
+	</bean>
+ 
     <bean id="servletAuthenticationService" lazy-init="true"
         class="org.esupportail.commons.services.authentication.CasFilterAuthenticationService">
         
