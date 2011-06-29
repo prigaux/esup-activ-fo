@@ -76,8 +76,8 @@ public class SessionController extends AbstractDomainAwareBean {
 		return authenticator.getUser();
 	}
 	
-	public String getPT() {
-		return authenticator.getUser().getPt();
+	public String getProxyTicket() {
+		return authenticator.getUser().getProxyTicket();
 	}
 	
 	/**

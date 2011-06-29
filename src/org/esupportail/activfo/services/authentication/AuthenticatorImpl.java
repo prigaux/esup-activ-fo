@@ -62,6 +62,8 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 	
 	private CasService casService;
 	
+	private String targetService;
+	
 	/**
 	 * Bean constructor.
 	 */
@@ -100,11 +102,11 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 			return null;
 		}
 		
-		String proxyticket = casService.getProxyTicket("https://busan-desktop.univ-paris1.fr:7080");
+		String proxyticket = casService.getProxyTicket(targetService);
 
 		if (AuthUtils.CAS.equals(authInfo.getType())) {
 			User user = getDomainService().getUser(authInfo.getId());
-			user.setPt(proxyticket);
+			user.setProxyTicket(proxyticket);
 			storeToSession(authInfo, user);
 			return user;
 		} 
@@ -171,6 +173,18 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 		this.casService = casService;
 	}
 
-	
+	/**
+	 * @return the targetService
+	 */
+	public String getTargetService() {
+		return targetService;
+	}
+
+	/**
+	 * @param targetService the targetService to set
+	 */
+	public void setTargetService(String targetService) {
+		this.targetService = targetService;
+	}
 
 }

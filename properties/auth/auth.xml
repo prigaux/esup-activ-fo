@@ -12,6 +12,7 @@
         <property name="authenticationService" ref="${auth.bean}" />
         <property name="domainService" ref="domainService" />
         <property name="casService" ref="casService" />
+        <property name="targetService" value="${cas.targetService}"/>
     </bean>
     
     <bean

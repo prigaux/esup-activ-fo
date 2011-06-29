@@ -452,7 +452,7 @@ public class AccountController extends AbstractContextAwareController implements
 				if (currentAccount.getAttribute(accountCodeKey)!=null) 
 					accountDescr=this.getDomainService().authentificateUserWithCodeKey(sessionController.getCurrentUser().getId(),currentAccount.getAttribute(accountCodeKey),attrDataChange);
 				else
-					accountDescr=this.getDomainService().authentificateUserWithCas(sessionController.getCurrentUser().getId(),sessionController.getPT(),attrDataChange);
+					accountDescr=this.getDomainService().authentificateUserWithCas(sessionController.getCurrentUser().getId(),sessionController.getProxyTicket(),attrDataChange);
 				
 			}else
 				accountDescr=this.getDomainService().authentificateUser(beanLogin.getValue().toString(), beanPassword.getValue().toString(),attrPersoInfo);

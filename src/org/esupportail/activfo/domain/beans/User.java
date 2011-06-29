@@ -39,7 +39,7 @@ public class User implements Serializable {
     private String language;
     
     
-    private String pt;
+    private String proxyTicket;
     
 	/**
 	 * Bean constructor.
@@ -76,7 +76,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User#" + hashCode() + "[id=[" + id + "], displayName=[" + displayName 
-		+ "], admin=[" + admin + "], language=[" + language + "]], pt=[" + pt + "]]";
+		+ "], admin=[" + admin + "], language=[" + language + "]], proxyTicket=[" + proxyTicket + "]]";
 	}
 
 	/**
@@ -135,18 +135,21 @@ public class User implements Serializable {
 	}
 
 	/**
-	 * @return the pt
+	 * @return the proxyTicket
 	 */
-	public String getPt() {
-		return pt;
+	public String getProxyTicket() {
+		return proxyTicket;
 	}
 
 	/**
-	 * @param pt the pt to set
+	 * @param proxyTicket the proxyTicket to set
 	 */
-	public void setPt(final String pt) {
-		this.pt = StringUtils.nullIfEmpty(pt);
+	public void setProxyTicket(String proxyTicket) {
+		this.proxyTicket = proxyTicket;
 	}
+	
+	
+
 	
 	
 
