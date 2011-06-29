@@ -118,6 +118,8 @@
 		<property name="body1DataChange" value="${datachange.body1.fr}"/>
 		<property name="body2DataChange" value="${datachange.body2.fr}"/>
 		
+		<property name="exceptionController" ref="exceptionController"/>
+		
 		<property name="listBeanPersoInfo">
 			<list>
 				<ref bean="beanDisplayName"/>
@@ -180,9 +182,10 @@
 			<list>
 				<ref bean="beanActivation"/>
 				<ref bean="beanReinitialisation"/>
-				<ref bean="beanPasswordChange"/>
+				<ref bean="beanDataChange"/> 
+				
 				<!--
-				<ref bean="beanDataChange"/>
+				<ref bean="beanPasswordChange"/>
 				<ref bean="beanLoginChange"/>
 				-->
 			</list>
@@ -208,7 +211,6 @@
 				<ref bean="beanApogeeInfo"/>
 			</list>
 		</property>
-		
 		
 	    <property name="listBeanViewDataChange">
 			<list>
