@@ -119,6 +119,7 @@
 		<property name="body2DataChange" value="${datachange.body2.fr}"/>
 		
 		<property name="exceptionController" ref="exceptionController"/>
+		<property name="targetService" value="${cas.targetService}"/>
 		
 		<property name="listBeanPersoInfo">
 			<list>
