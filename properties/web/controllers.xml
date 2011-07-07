@@ -128,7 +128,6 @@
 				<ref bean="beanEduPersonPrimaryAffiliation"/> 
 			    <ref bean="beanEduPersonAffiliation"/>
 			    <ref bean="beanMailRedirect"/> 
-			    <ref bean="beanKeepMail"/> 
 			    <ref bean="beanMobilePhone"/>
 			    <ref bean="beanSMSAgreement"/>
 			    <ref bean="beanListeRouge"/>
@@ -184,9 +183,8 @@
 				<ref bean="beanActivation"/>
 				<ref bean="beanReinitialisation"/>
 				<ref bean="beanDataChange"/> 
-				
-				<!--
 				<ref bean="beanPasswordChange"/>
+				<!--
 				<ref bean="beanLoginChange"/>
 				-->
 			</list>

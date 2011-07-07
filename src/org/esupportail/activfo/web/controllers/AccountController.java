@@ -376,6 +376,8 @@ public class AccountController extends AbstractContextAwareController implements
 						BeanMultiValue bmv=(BeanMultiValue)itBeanPersoInfo.next();
 						if (j>0)valueBeanMulti+=getSeparator()+bmv.getValue();
 						else valueBeanMulti=bmv.getValue();
+						//if (beanPersoInfo.getName().contains("mailForwardingAddress")) valueBeanMulti=currentAccount.getEmailPerso();
+						
 						if(dataChange && !currentAccount.getAttributes(beanPersoInfo.getName()).contains(bmv.getValue()) && !beanPersoInfo.isUpdateable()) {
 							oldValue.put(beanPersoInfo.getName(), currentAccount.getAttributes(beanPersoInfo.getName()).toString());
 							newValue.put(beanPersoInfo.getName(), bmv.getValue());
@@ -394,9 +396,9 @@ public class AccountController extends AbstractContextAwareController implements
 						}
 					}
 					else {
-						if (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null )
+						if (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null ) {
 							hashBeanPersoInfo.put(beanPersoInfo.getName(), valueBeanMulti);
-						else 
+						} else 
 							hashBeanPersoInfo.put(beanPersoInfo.getName(), null);
 						
 					}

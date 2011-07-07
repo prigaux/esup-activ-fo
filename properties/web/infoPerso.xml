@@ -169,34 +169,42 @@
 		scope="session"
 		>
 		<property name="key" value="PERSOINFO.MAILFORWARD.LABEL"/>
-		<property name="fieldType" value="selectOneRadio"/>
-		<property name="isMultiValue" value="false"/>	
-		<property name="oneRadioItems">
+		<property name="fieldType" value="selectManyCheckbox"/>
+		<property name="isMultiValue" value="true"/>	
+		<property name="displayItems">
 		   <list>
-        	 <ref bean="beanRadioTRUE"/><!-- oui email perso -->
-		     <ref bean="beanRadioFALSE"/><!-- non vide -->
+        	 <ref bean="beanSelectRediriger"/>
+		     <ref bean="beanSelectConserver"/>
 		   </list>
 		</property>
 		<property name="name" value="mailForwardingAddress"/>
 		<property name="disable" value="false"/>
 	</bean>
-	<bean
-		id="beanKeepMail"
-		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+	
+	
+	
+	<bean  
+		id="beanSelectRediriger"
+		class="org.esupportail.activfo.web.beans.MailforwardItem"
 		scope="session"
 		>
-		<property name="key" value="PERSOINFO.MAILFORWARD.KEEPMAIL.LABEL"/>
-		<property name="fieldType" value="selectOneRadio"/>
-		<property name="isMultiValue" value="false"/>	
-		<property name="oneRadioItems">
-		   <list>
-        	 <ref bean="beanRadioTRUE"/> <!-- / -->
-		     <ref bean="beanRadioFALSE"/><!-- supprimer / -->
-		   </list>
-		</property>
-		<property name="name" value="mailForwardingAddress"/>
-		<property name="disable" value="false"/>
+		
+		<property name="label" value="PERSOINFO.REDIRIGER.LABEL"/>
+		<property name="account" ref="account"/>
+		<property name="attributename" value="supannMailPerso"/>
 	</bean>
+	
+	<bean  
+		id="beanSelectConserver"
+		class="org.esupportail.activfo.web.beans.MailforwardItem"
+		scope="session"
+		>
+		<property name="label" value="PERSOINFO.CONSERVER.LABEL"/>
+		<property name="account" ref="account"/>
+		<property name="attributename" value="uid"/>
+	</bean>
+	
+	
 	
 	 
 	<bean

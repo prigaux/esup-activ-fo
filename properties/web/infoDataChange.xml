@@ -54,8 +54,8 @@
 		</property>
 		<property name="listBeanField">
 		  <list>
-		    <ref bean="beanEduPersonPrimaryAffiliation"/>
 		    <ref bean="beanEduPersonAffiliation"/>
+		    <ref bean="beanEduPersonPrimaryAffiliation"/>
 		    <ref bean="beanEmployeeType"/>
 		  </list>
 		</property> 
