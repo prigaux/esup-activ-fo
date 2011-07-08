@@ -75,8 +75,8 @@
 	   <h:column  >						
 		  <e:outputLabel style="vertical-align:top;" value="#{msgs[beanfield.key]}" rendered="#{beanfield.size>1}"/>
 		  <e:outputLabel value="#{msgs[beanfield.key]}" rendered="#{beanfield.size<=1}"/>
-		</h:column>
-		<h:column >    
+	   </h:column>
+	   <h:column >    
 		<t:dataList value="#{beanfield.values}" var="sub"  rendered="#{beanfield.fieldType!='selectManyCheckbox'&&!accountController.viewDataChange}" >
 		    
 		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'&&!sub.convertedValue}" styleClass="#{beanfield.name}show">
@@ -105,15 +105,20 @@
 	            <t:htmlTag value="br" />
 	        </t:div>
         </t:dataList>
+        <!-- 
+        <t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}">             
+             	<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'}" layout="pageDirection">
+                  <f:selectItems value="#{beanfield.displayItems}" />
+             	</h:selectManyCheckbox>        
+            </t:div> 
+         -->
   		</h:column>  
  
        	<h:column >
        	  <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable}"/>			
           <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.notice]}" value="/media/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable}"/>
-          <t:div >
-			<h:graphicImage alt="#{beanfield.name}" styleClass="show" value="/media/add.png"  style="border: 0;" rendered="#{beanfield.isMultiValue!=null&&beanfield.isMultiValue==true&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>
-			<h:graphicImage alt="#{beanfield.name}" styleClass="hide" value="/media/remove.png"  style="border: 0;" rendered="#{beanfield.isMultiValue!=null&&beanfield.isMultiValue==true&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>
-		  </t:div>
+          <h:graphicImage alt="#{beanfield.name}" styleClass="show" value="/media/add.png"  style="border: 0;" rendered="#{beanfield.isMultiValue!=null&&beanfield.isMultiValue==true&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>
+		  <h:graphicImage alt="#{beanfield.name}" styleClass="hide" value="/media/remove.png"  style="border: 0;" rendered="#{beanfield.isMultiValue!=null&&beanfield.isMultiValue==true&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>
 		</h:column>										
 	  </h:dataTable>
 	 </t:div>
@@ -123,6 +128,17 @@
     </t:dataList>
   </div>
 
+
+   <!-- 
+		<h:selectOneMenu id="som" value="TableBean.perInfoAll" title="select any one in this menu">
+  <f:selectItem id="si1" itemLabel="Thums Up" itemValue="11" />
+  <f:selectItem id="si2" itemLabel="Limca" itemValue="22" />
+  <f:selectItem id="si3" itemLabel="Pepsi" itemValue="33" />
+  <f:selectItem id="si4" itemLabel="Sprite" itemValue="44" />
+  <f:selectItem id="si5" itemLabel="Frooti" itemValue="55" />
+  <f:selectItem id="si6" itemLabel="Coca-Cola" itemValue="66" />
+</h:selectOneMenu>
+		 -->
 
 
 	<t:div style="margin-top:30;" rendered="#{accountController.viewDataChange == false}">
@@ -135,8 +151,6 @@
 	  <e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
 	</h:form>
 	
-	<e:subSection value="#{msgs['ENABLED.SUBTITLE.ESUPACCESS']}"  rendered="#{accountController.viewDataChange == true}"/>
-	<e:paragraph escape="false" value="#{msgs['ENABLED.TEXT.ESUPURL']}"  rendered="#{accountController.viewDataChange == true}" />
 	<h:form  rendered="#{accountController.viewDataChange == true}">
 	  <e:commandButton id="retartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
 	</h:form>

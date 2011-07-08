@@ -57,6 +57,7 @@
 		    <ref bean="beanEduPersonAffiliation"/>
 		    <ref bean="beanEduPersonPrimaryAffiliation"/>
 		    <ref bean="beanEmployeeType"/>
+		    <ref bean="beanSupannEntiteAffectation"/>
 		  </list>
 		</property> 
 	</bean>
@@ -130,8 +131,10 @@
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanHomePostalAddress"/>
-		    <ref bean="beanEmailPerso"/>		
+		    <ref bean="beanEmailPerso"/>
+		    <ref bean="beanMailRedirect"/> 		
 		    <ref bean="beanMobilePhone"/>
+		    <ref bean="beanSMSAgreement"/>
 		  </list>
 		</property> 
 	</bean>
@@ -160,7 +163,6 @@
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanHarpegeeNumber"/>
-		    <ref bean="beanSupannEntiteAffectation"/>
 		  </list>
 		</property>
 		
@@ -389,5 +391,7 @@
 		  </list>
 		</property> 
 	</bean>
+	
+	
 		 
 </beans>

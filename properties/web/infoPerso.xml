@@ -226,6 +226,14 @@
 		scope="session"
 		>
 		<property name="key" value="DATACHANGE.SUPANNCIVILITE.TEXT.LABEL"/>
+ 		<property name="fieldType" value="selectOneMenu"/> 
+<!--
+		<property name="displayItems" ref="">
+		   <list>
+		     <ref bean="beanSelectMme"/> M
+		   </list>
+		</property>
+-->
 		<property name="required" value="true" />
 		<property name="name" value="supannCivilite"/>
 		<property name="disable" value="false"/>
@@ -308,6 +316,8 @@
 		<property name="name" value="telephoneNumber"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
+		<property name="help" value="PERSOINFO.MOBILE.TEXT.HELP"/>
+		<property name="isMultiValue" value="true"/>
 		<property name="notice" value="DATACHANGE.PHONE.TEXT.HELP"/>
 	</bean>
 	
