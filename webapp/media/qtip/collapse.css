@@ -9,7 +9,7 @@
 
 #switch, .switch {margin-bottom:5px; text-align:right}
 
-.expand{padding-bottom:.75em}
+.expand{padding-bottom:.75em;width:50%;}
 
 /* --- Links  --- */
 a:link, a:visited {
@@ -36,8 +36,14 @@ a:active, a:focus {
   border-width:1px;
   background-image:url("/media/arrow-down.gif"),url("/media/idcback2.jpg");
   background-repeat:no-repeat,repeat;
-  background-position:98% 50%;
-  color : #B6ECFF;
+  background-position:5px 50%;
+  color : white;
+  padding-left: 25px;
+  border-bottom: 1px solid black !important;
+  border-left: 1px solid #999999;
+  border-right: 1px solid #999999;
+  border-top: 1px solid #999999;
+  -moz-border-radius:4;
 }
 .expand a:hover, .expand a:active, .expand a:focus {
   text-decoration:underline
@@ -47,6 +53,13 @@ a:active, a:focus {
   /*background:#c9f1a5 url(/media/arrow-up.gif) no-repeat 98% 50%*/
   background-image:url(/media/arrow-up.gif),url(/media/idcback1.jpg);
   background-repeat:no-repeat,repeat;
-  background-position:98% 50%;
-  color : #C9F1A5;
+  background-position:5px 50%;
+  color : white;
+  padding-left: 25px;
+  border-bottom: 1px solid black !important;
+  border-left: 1px solid #999999;
+  border-right: 1px solid #999999;
+  border-top: 1px solid #999999;
+  -moz-border-radius:4;
+  
 }
