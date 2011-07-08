@@ -164,7 +164,7 @@
 	</bean>
 	
 	<bean
-		id="beanMailRedirect"
+		id="beanRedirectMail"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
@@ -173,35 +173,35 @@
 		<property name="isMultiValue" value="true"/>	
 		<property name="displayItems">
 		   <list>
-        	 <ref bean="beanSelectRediriger"/>
-		     <ref bean="beanSelectConserver"/>
+        	 <ref bean="beanSelectRedirectMail"/>
+		     <ref bean="beanSelectKeepMail"/>
 		   </list>
 		</property>
 		<property name="name" value="mailForwardingAddress"/>
 		<property name="disable" value="false"/>
 	</bean>
 	
-	
-	
+		
 	<bean  
-		id="beanSelectRediriger"
-		class="org.esupportail.activfo.web.beans.MailforwardItem"
+		id="beanSelectRedirectMail"
+		class="org.esupportail.activfo.web.beans.LdapAttributeItem"
 		scope="session"
 		>
 		
 		<property name="label" value="PERSOINFO.REDIRIGER.LABEL"/>
 		<property name="account" ref="account"/>
-		<property name="attributename" value="supannMailPerso"/>
+		<property name="attributeName" value="supannMailPerso"/>
 	</bean>
 	
 	<bean  
-		id="beanSelectConserver"
-		class="org.esupportail.activfo.web.beans.MailforwardItem"
+		id="beanSelectKeepMail"
+		class="org.esupportail.activfo.web.beans.LdapAttributeItem"
 		scope="session"
 		>
 		<property name="label" value="PERSOINFO.CONSERVER.LABEL"/>
 		<property name="account" ref="account"/>
-		<property name="attributename" value="uid"/>
+		<property name="attributeName" value="uid"/>
+		<property name="preValue" value="\"/>
 	</bean>
 	
 	

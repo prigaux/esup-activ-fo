@@ -127,7 +127,7 @@
 				<ref bean="beanEmailPerso"/>		
 				<ref bean="beanEduPersonPrimaryAffiliation"/> 
 			    <ref bean="beanEduPersonAffiliation"/>
-			    <ref bean="beanMailRedirect"/> 
+			    <ref bean="beanRedirectMail"/> 
 			    <ref bean="beanMobilePhone"/>
 			    <ref bean="beanSMSAgreement"/>
 			    <ref bean="beanListeRouge"/>
