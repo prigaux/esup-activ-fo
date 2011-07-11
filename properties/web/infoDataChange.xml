@@ -132,7 +132,7 @@
 		  <list>
 		    <ref bean="beanHomePostalAddress"/>
 		    <ref bean="beanEmailPerso"/>
-		    <ref bean="beanMailRedirect"/> 		
+		    <ref bean="beanRedirectMail"/> 		
 		    <ref bean="beanMobilePhone"/>
 		    <ref bean="beanSMSAgreement"/>
 		  </list>
