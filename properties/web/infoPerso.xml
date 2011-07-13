@@ -57,6 +57,7 @@
 		>
 		<property name="key" value="PERSOINFO.SMSAGREEMENT.TEXT.LABEL"/>
 		<property name="fieldType" value="selectManyCheckbox"/>
+		
 		<property name="displayItems">
 		   <list>
 		     <ref bean="beanSelectSMSUCG"/>
@@ -226,12 +227,28 @@
 		scope="session"
 		>
 		<property name="key" value="DATACHANGE.SUPANNCIVILITE.TEXT.LABEL"/>
+ 		<property name="fieldType" value="selectOneMenu"/>
+ 		<property name="displayItems" ref="beanSelectItemList"/>
 		<property name="required" value="true" />
 		<property name="name" value="supannCivilite"/>
 		<property name="disable" value="false"/>
-		<property name="updateable" value="false"/>
+		<property name="updateable" value="true"/>
 		<property name="notice" value="DATACHANGE.SUPANNCIVILITE.TEXT.HELP"/>
 	</bean>
+	
+	<bean
+		id="beanSelectItemList"
+		class="org.esupportail.activfo.web.beans.SelectItemsList"
+		scope="session"
+		>
+		<property name="selectItemList">
+		  <map>
+		    <entry key="Mlle" value="Mlle" />
+    	    <entry key="Mme" value="Mme" />
+    	    <entry key="M." value="M." />
+		  </map>
+		</property>
+    </bean>
 	
 	<bean
 		id="beanSn"
@@ -352,7 +369,9 @@
 		<property name="notice" value="DATACHANGE.HARPEGEENUMBER.TEXT.HELP"/>
 	</bean>
 	
-	<bean 
+	<bean 	
+	
+	
 		id="beanSupannEntiteAffectation"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"

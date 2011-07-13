@@ -76,42 +76,47 @@
 		  <e:outputLabel style="vertical-align:top;" value="#{msgs[beanfield.key]}" rendered="#{beanfield.size>1}"/>
 		  <e:outputLabel value="#{msgs[beanfield.key]}" rendered="#{beanfield.size<=1}"/>
 	   </h:column>
-	   <h:column >    
+	   <h:column >
+	    
 		<t:dataList value="#{beanfield.values}" var="sub"  rendered="#{beanfield.fieldType!='selectManyCheckbox'&&!accountController.viewDataChange}" >
 		    
-		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'&&!sub.convertedValue}" styleClass="#{beanfield.name}show">
+		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'&&!sub.convertedValue&&beanfield.fieldType!='selectOneMenu'}" styleClass="#{beanfield.name}show">
 			    <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value!=''&&!sub.convertedValue}" />
 	            <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value!=''&&!sub.convertedValue}" />
 	            <t:htmlTag value="br"  />
 	        </t:div>
 	        
 	        
-	        <t:div rendered="#{sub.value==''&&beanfield.isMultiValue!=null&&beanfield.isMultiValue!=true&&beanfield.fieldType!='selectOneRadio'}" styleClass="#{beanfield.name}show">
+	        <t:div rendered="#{sub.value==''&&beanfield.isMultiValue!=null&&beanfield.isMultiValue!=true&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='selectOneMenu'}" styleClass="#{beanfield.name}show">
 			    <h:inputText value="#{sub.value}" required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''}" />
 	            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''}" />
 	            <t:htmlTag value="br"  />
 	        </t:div>
 	        
-	        <t:div rendered="#{sub.value==''&&beanfield.isMultiValue!=null&&beanfield.isMultiValue==true&&beanfield.fieldType!='selectOneRadio'}" style="display:none;" styleClass="#{beanfield.name}hide" >    
+	        <t:div rendered="#{sub.value==''&&beanfield.isMultiValue!=null&&beanfield.isMultiValue==true&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='selectOneMenu'}" style="display:none;" styleClass="#{beanfield.name}hide" >    
 	            <h:inputText value="#{sub.value}" required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''}" />
 	            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''}" />
 	            <t:htmlTag value="br" />
             </t:div>
+            
+            <t:div rendered="#{beanfield.fieldType=='selectOneMenu'}">             
+             	<h:selectOneMenu value="#{sub.value}" rendered="#{beanfield.fieldType=='selectOneMenu'}" >
+                  <f:selectItems value="#{beanfield.displayItems}" />
+             	</h:selectOneMenu>        
+            </t:div> 
+            
         </t:dataList>
         
-        <t:dataList value="#{beanfield.values}" var="sub"  rendered="#{beanfield.fieldType!='selectManyCheckbox'&&accountController.viewDataChange}" >
-		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'&&!sub.convertedValue}" styleClass="portlet-section-text">
+        <t:dataList value="#{beanfield.values}" var="sub"  rendered="#{beanfield.fieldType!='selectManyCheckbox'&&accountController.viewDataChange&&beanfield.fieldType!='selectOneMenu'}" >
+		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'&&!sub.convertedValue&&beanfield.fieldType!='selectOneMenu'}" styleClass="portlet-section-text">
 			    <h:outputText value="#{sub.value}" converter="#{beanfield.converter}" rendered="#{!sub.convertedValue}"/>
 	            <t:htmlTag value="br" />
 	        </t:div>
         </t:dataList>
-        <!-- 
-        <t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}">             
-             	<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'}" layout="pageDirection">
-                  <f:selectItems value="#{beanfield.displayItems}" />
-             	</h:selectManyCheckbox>        
-            </t:div> 
-         -->
+        
+        
+        
+      
   		</h:column>  
  
        	<h:column >
@@ -124,8 +129,9 @@
 	 </t:div>
 	 
 	 
-	 
+	
     </t:dataList>
+      
   </div>
 
 
