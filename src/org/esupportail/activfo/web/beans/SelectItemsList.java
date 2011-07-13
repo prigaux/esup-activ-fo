@@ -32,7 +32,6 @@ public class SelectItemsList extends ArrayList<SelectItem>  {
 		Set<String> keys = selectItemList.keySet();
 		for(String key: keys) {
 			String s = selectItemList.get(key);
-			logger.debug("** s "+s+","+key);
 			SelectItem si = new SelectItem();
 			si.setLabel(s);
 			si.setValue(key);
