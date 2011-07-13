@@ -100,9 +100,12 @@
             </t:div>
             
             <t:div rendered="#{beanfield.fieldType=='selectOneMenu'}">             
-             	<h:selectOneMenu value="#{sub.value}" rendered="#{beanfield.fieldType=='selectOneMenu'}" >
+             	<h:selectOneMenu value="#{sub.value}" rendered="#{beanfield.fieldType=='selectOneMenu'&&!sub.convertedValue}" >
                   <f:selectItems value="#{beanfield.displayItems}" />
-             	</h:selectOneMenu>        
+             	</h:selectOneMenu>
+             	<h:selectOneMenu converter="#{beanfield.converter}" value="#{sub.value}" rendered="#{beanfield.fieldType=='selectOneMenu'&&sub.convertedValue}" >
+                  <f:selectItems value="#{beanfield.displayItems}" />
+             	</h:selectOneMenu>              
             </t:div> 
             
         </t:dataList>
@@ -113,6 +116,12 @@
 	            <t:htmlTag value="br" />
 	        </t:div>
         </t:dataList>
+        
+        <t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}">             
+             	<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'}" layout="pageDirection">
+                  <f:selectItems value="#{beanfield.displayItems}" />
+             	</h:selectManyCheckbox>        
+            </t:div> 
         
         
         

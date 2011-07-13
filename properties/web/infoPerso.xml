@@ -70,6 +70,22 @@
 	</bean>
 	
 	<bean  
+		id="beanSelectSMSUCG"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="Université Paris 1"/>
+		<property name="value" value="{SMSU}CG" />
+	</bean>
+	
+	<bean  
+		id="beanSelectSMSUCROUS"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="CROUS"/>
+		<property name="value" value="{SMSU}CROUS" />
+	</bean>
+	
+	<bean  
 		id="beanEduPersonPrimaryAffiliation"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
@@ -112,22 +128,6 @@
 		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
 		
-	</bean>
-	
-	<bean  
-		id="beanSelectSMSUCG"
-		class="javax.faces.model.SelectItem"
-		>
-		<property name="label" value="Université Paris 1"/>
-		<property name="value" value="{SMSU}CG" />
-	</bean>
-	
-	<bean  
-		id="beanSelectSMSUCROUS"
-		class="javax.faces.model.SelectItem"
-		>
-		<property name="label" value="CROUS"/>
-		<property name="value" value="{SMSU}CROUS" />
 	</bean>
 	
 	<bean
@@ -189,7 +189,7 @@
 		scope="session"
 		>
 		
-		<property name="label" value="PERSOINFO.REDIRIGER.LABEL"/>
+		<property name="label" value="Rediriger vers le courrierl personnel"/>
 		<property name="account" ref="account"/>
 		<property name="attributeName" value="supannMailPerso"/>
 	</bean>
@@ -199,7 +199,7 @@
 		class="org.esupportail.activfo.web.beans.LdapAttributeItem"
 		scope="session"
 		>
-		<property name="label" value="PERSOINFO.CONSERVER.LABEL"/>
+		<property name="label" value="Conserver une copie dans votre boite paris 1"/>
 		<property name="account" ref="account"/>
 		<property name="attributeName" value="uid"/>
 		<property name="preValue" value="\"/>
@@ -370,8 +370,6 @@
 	</bean>
 	
 	<bean 	
-	
-	
 		id="beanSupannEntiteAffectation"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
@@ -380,6 +378,8 @@
 		<property name="key" value="DATACHANGE.SUPANNENTITEAFFECTATION.TEXT.LABEL"/>
 		<property name="required" value="true" />
 		<property name="name" value="supannEntiteAffectation"/>
+		<property name="fieldType" value="selectOneMenu"/>
+ 		<property name="displayItems" ref="beanSelectFloorList"/>
 		<property name="converter" ref="ldapConverter"/>
 		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
@@ -413,6 +413,84 @@
 		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
 	</bean>
+	
+	<bean
+		id="beanInfo"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+		<property name="key" value="PERSOINFO.INFO.TEXT.LABEL"/>
+		<property name="help" value="PERSOINFO.INFO.TEXT.HELP"/>
+		<property name="required" value="false" />
+		<property name="updateable" value="true"/>
+		<property name="name" value="info"/>
+		<property name="disable" value="false"/>
+	</bean>
+	
+	<bean
+		id="beanRoomNumber"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+		<property name="key" value="PERSOINFO.ROOMNUMBER.TEXT.LABEL"/>
+		<property name="help" value="PERSOINFO.ROOMNUMBER.TEXT.HELP"/>
+		<property name="required" value="false" />
+		<property name="updateable" value="true"/>
+		<property name="name" value="roomNumber"/>
+		<property name="disable" value="false"/>
+	</bean>
+	
+	
+	
+	<bean
+		id="beanUp1FloorNumber"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+		<property name="key" value="PERSOINFO.UP1FLOORNUMBER.TEXT.LABEL"/>
+		<property name="help" value="PERSOINFO.UP1FLOORNUMBER.TEXT.HELP"/>
+		<property name="fieldType" value="selectOneMenu"/>
+ 		<property name="displayItems" ref="beanSelectFloorList"/>
+		<property name="required" value="false" />
+		<property name="updateable" value="true"/>
+		<property name="name" value="up1FloorNumber"/>
+		<property name="disable" value="false"/>
+	</bean>
+	
+	
+	<bean
+		id="beanSelectFloorList"
+		class="org.esupportail.activfo.web.beans.SelectItemsList"
+		scope="session"
+		>
+		<property name="selectItemList">
+		  <map>
+		    <entry key="" value="Sélectionnez un étage" />
+    	    <entry key="Niveau -2" value="Niveau -2" />
+    	    <entry key="Niveau -1" value="Niveau -1" />
+    	    <entry key="Rez-de-chaussée" value="Rez-de-chaussée" />
+    	    <entry key="1er" value="1er" />
+    	    <entry key="2e" value="2e" />
+    	    <entry key="3e" value="3e" />
+    	    <entry key="4e" value="4e" />
+    	    <entry key="5e" value="5e" />
+    	    <entry key="6e" value="6e" />
+    	    <entry key="7e" value="7e" />
+    	    <entry key="8e" value="8e" />
+    	    <entry key="9e" value="9e" />
+    	    <entry key="10e" value="10e" />
+    	    <entry key="11e" value="11e" />
+    	    <entry key="12e" value="12e" />
+    	    <entry key="13e" value="13e" />
+    	    <entry key="14e" value="14e" />
+    	    <entry key="15e" value="15e" />
+    	    <entry key="16e" value="16e" />
+    	    <entry key="17e" value="17e" />
+    	    <entry key="18e" value="18e" />
+    	    <entry key="19e" value="19e" />
+		  </map>
+		</property>
+    </bean>
 	
 
 	

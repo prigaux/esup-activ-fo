@@ -22,7 +22,6 @@ public class LdapAttributeItem extends SelectItem {
 	private String attributeName;
 	private String preValue="";
 	private String postValue="";
-
 	
 	public String getValue() {
 		String value=account.getAttribute(attributeName);
@@ -98,17 +97,6 @@ public class LdapAttributeItem extends SelectItem {
 	public void setAttributeName(String attributeName) {
 		this.attributeName = attributeName;
 	}
-
-	
-
-
-	
-
-
-	
-
-	
-	
 
 	
 }
