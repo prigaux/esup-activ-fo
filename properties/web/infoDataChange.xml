@@ -167,6 +167,8 @@
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanHarpegeeNumber"/>
+		    <ref bean="beanBirthNameInfo"/>
+		    <ref bean="beanBirthDateInfo"/>
 		  </list>
 		</property>
 		

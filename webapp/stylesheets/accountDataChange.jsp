@@ -56,9 +56,10 @@
 	</t:htmlTag>
 	</t:div>
 	
-	<e:messages/>
+	<e:messages rendered="#{accountController.dataChange == true}"/>
 	
-	<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}" />
+	<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}" rendered="#{accountController.dataChange == true&&accountController.viewDataChange == false}" />
+	<e:paragraph value="#{msgs['PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL']}" rendered="#{accountController.dataChange == false&&accountController.viewDataChange == true}"/>
 	
 	<h:form id="accountForm" >
 	
@@ -100,13 +101,13 @@
             </t:div>
             
             <t:div rendered="#{beanfield.fieldType=='selectOneMenu'}">             
-             	<h:selectOneMenu value="#{sub.value}" rendered="#{beanfield.fieldType=='selectOneMenu'&&!sub.convertedValue}" >
+             	<h:selectOneMenu value="#{sub.value}" rendered="#{beanfield.fieldType=='selectOneMenu'}" >
                   <f:selectItems value="#{beanfield.displayItems}" />
              	</h:selectOneMenu>
-             	<h:selectOneMenu converter="#{beanfield.converter}" value="#{sub.value}" rendered="#{beanfield.fieldType=='selectOneMenu'&&sub.convertedValue}" >
-                  <f:selectItems value="#{beanfield.displayItems}" />
-             	</h:selectOneMenu>              
-            </t:div> 
+             	            
+            </t:div>
+            
+           
             
         </t:dataList>
         
