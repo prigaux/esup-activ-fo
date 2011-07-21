@@ -145,5 +145,17 @@
     	
 	</bean>
 	
+	<bean 
+		id="validatorPhone"
+		class="org.esupportail.activfo.web.validators.ValidatorPhone"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Phone and Fax.
+    	</description>
+    	<property name="caracterPattern" value="${caracter.pattern}"/>
+    	
+	</bean>
+	
 
 </beans>

@@ -119,5 +119,16 @@
     	<property name="ldapEntityService" ref="ldapEntityService"/>
     	
 	</bean>
+	
+	<bean 
+		id="ldapPhoneFaxConverter"
+		class="org.esupportail.activfo.web.converters.LdapPhoneFaxConverter"
+		scope="session"
+		>
+    	<description>
+			A converter for....
+    	</description>
+    	
+	</bean>
  	
 </beans>
