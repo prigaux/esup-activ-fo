@@ -381,6 +381,7 @@ public class AccountController extends AbstractContextAwareController implements
 						if(dataChange && !currentAccount.getAttributes(beanPersoInfo.getName()).contains(bmv.getValue()) && !beanPersoInfo.isUpdateable()) {
 							oldValue.put(beanPersoInfo.getName(), currentAccount.getAttributes(beanPersoInfo.getName()).toString());
 							newValue.put(beanPersoInfo.getName(), bmv.getValue());
+							//logger.debug("Attribute,oldValue and newValue : "+beanPersoInfo.getName()+", "+currentAccount.getAttributes(beanPersoInfo.getName()).toString()+","+bmv.getValue());
 						} else 
 							beanPersoInfo.setUpdateable(true);
 						j++;
@@ -474,7 +475,7 @@ public class AccountController extends AbstractContextAwareController implements
 						this.buildListPersoInfo(listDataChangeInfos,attrDataChange);
 					else this.buildListPersoInfo(listBeanPersoInfo,attrPersoInfo);
 					
-					this.addInfoMessage(null, "AUTHENTIFICATION.MESSAGE.VALID");
+					//this.addInfoMessage(null, "AUTHENTIFICATION.MESSAGE.VALID");
 					if (dataChange) {
 						//viewDataChange=false;
 						return null; 
