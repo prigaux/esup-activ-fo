@@ -1,9 +1,7 @@
 package org.esupportail.activfo.web.beans;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import org.esupportail.commons.services.ldap.LdapEntity;
 import org.esupportail.commons.services.ldap.LdapEntityService;
@@ -24,9 +22,7 @@ public class LdapStructureList extends ArrayList<SelectItem> implements Initiali
 	
 	public void afterPropertiesSet() throws Exception {
 		
-		String ret=null;
 		List<LdapEntity> ldapEntities = ldapEntityService.getLdapEntitiesFromFilter(ldapSearchFilter);
-		
 		logger.debug("filter is "+ldapSearchFilter);
 		
 		for(int i=0;i<ldapEntities.size();i++)

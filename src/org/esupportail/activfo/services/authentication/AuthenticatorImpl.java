@@ -3,10 +3,7 @@
  */
 package org.esupportail.activfo.services.authentication; 
 
-import java.io.IOException;
 import java.io.Serializable;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.esupportail.activfo.domain.DomainService;
 import org.esupportail.activfo.domain.beans.User;
@@ -19,7 +16,6 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
 import org.esupportail.commons.utils.ContextUtils;
 import org.springframework.beans.factory.InitializingBean;
-import org.xml.sax.SAXException;
 
 /**
  * A basic authenticator implementation.

@@ -5,8 +5,6 @@ import java.util.List;
 
 import org.esupportail.activfo.domain.beans.Account;
 
-
-
 public interface CategoryBeanField {
 
 	public String getTitle();

@@ -30,8 +30,6 @@ public class AdministratorsController extends AbstractContextAwareController imp
 	 * The user of whom the administrator's privileges will be revoked.
 	 */
 	private User userToDelete;
-	
-	
 
     /**
      * The paginator.

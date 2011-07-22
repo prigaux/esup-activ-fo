@@ -1,13 +1,10 @@
 package org.esupportail.activfo.web.beans;
 
-
-
 import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 
 import javax.faces.model.SelectItem;
-
 
 public class LdapAttributeItem extends SelectItem {
 	

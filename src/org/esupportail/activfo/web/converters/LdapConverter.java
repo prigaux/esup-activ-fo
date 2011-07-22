@@ -47,7 +47,6 @@ public class LdapConverter implements Converter {
     	String filter = "(supannCodeEntite="+base+")";
     	String returnValue=null;
     	
-    	
     	List<LdapEntity> ldapentite = ldapEntityService.getLdapEntitiesFromFilter(filter);
     	logger.debug("return Value is "+ldapentite.get(0).getAttribute("description"));
     	returnValue=ldapentite.get(0).getAttribute("description");

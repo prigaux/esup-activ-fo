@@ -21,8 +21,6 @@ import org.esupportail.commons.exceptions.ConfigException;
 import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.application.Version;
 import org.esupportail.commons.services.ldap.LdapEntityService;
-import org.esupportail.commons.services.ldap.LdapGroupService;
-import org.esupportail.commons.services.ldap.LdapUserService;
 import org.esupportail.commons.web.beans.Paginator;
 
 /**
