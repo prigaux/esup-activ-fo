@@ -77,4 +77,6 @@ public interface BeanField<T> {
 	
 	public int getSize();
 	
+	public void setUseDisplayItems(boolean useDisplayItems);
+	
 }

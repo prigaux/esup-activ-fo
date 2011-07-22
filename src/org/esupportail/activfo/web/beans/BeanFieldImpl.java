@@ -12,7 +12,6 @@ import org.esupportail.activfo.web.validators.Validator;
 
 public class BeanFieldImpl<T> implements BeanField<T> {
 	
-	//private String label;
 	private String key;
 	private T value;
 	private String fieldType=INPUTTEXT;
@@ -42,12 +41,10 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	private boolean disable;
 	
 	private boolean updateable;
+	private boolean useDisplayItems; //si oui, ne considère que les valeurs présentes dans le champ displayItems. Sinon ne prend pas en compte displayItems
 	
-	//private String category;
 	
 	private String notice;
-	
-	//private List<SelectItem> ListCategory=new ArrayList<SelectItem>(); 
 	
 	public String getId() {
 		return id;
@@ -110,7 +107,6 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	{
        if(MANYCHECKBOX.equals(fieldType))
 		{
-
     	   values.clear();			
 			for(String s : selectedItems){
 				BeanMultiValue bmv = new BeanMultiValueImpl();
@@ -119,25 +115,27 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 			}
 			for(BeanMultiValue bmv: hideItems)
 				this.values.add(bmv);								
-		}
-		 
+		}		 
 		return this.values;
 	}
 
 	public void setValues(List<BeanMultiValue> values){
-		if(MANYCHECKBOX.equals(fieldType)){
-			
-			for(BeanMultiValue bmv : values)
-				if(stringDisplayItems.contains(bmv.getValue()))
+		this.values=values;
+		selectedItems.clear();
+		hideItems.clear();
+		if(MANYCHECKBOX.equals(fieldType)){			
+			if(useDisplayItems){
+				for(BeanMultiValue bmv : values)
+					if(stringDisplayItems.contains(bmv.getValue()))
+						selectedItems.add(bmv.getValue());
+					else 
+						hideItems.add(bmv);
+			}
+			else for(BeanMultiValue bmv : values)				
 					selectedItems.add(bmv.getValue());
-				else
-					hideItems.add(bmv);
-		} else
-			this.values=values;
-
+		}
 		for(BeanMultiValue bmv : values) 
 			bmv.setConverter(converter);
-
 	}
 	
 	public String getIsMultiValue() {
@@ -267,6 +265,20 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 			return values.size();
 		else
 			return 0;
+	}
+
+	/**
+	 * @return the useDisplayItems
+	 */
+	public boolean isUseDisplayItems() {
+		return useDisplayItems;
+	}
+
+	/**
+	 * @param useDisplayItems the useDisplayItems to set
+	 */
+	public void setUseDisplayItems(boolean useDisplayItems) {
+		this.useDisplayItems = useDisplayItems;
 	}
 	
 }
