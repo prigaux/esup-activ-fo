@@ -396,12 +396,11 @@
 		class="org.esupportail.activfo.web.beans.LdapStructureList"
 		scope="session"
 		>
-		<property name="ldapStructureList">
-		  <map>
-		    <entry key="" value="Sélectionnez un étage" />
-    	    <entry key="7e" value="7e" />
-		  </map>
-		</property>
+		
+		<property name="ldapEntityService" ref="ldapEntityService"/>
+		<property name="ldapSearchFilter" value="${ldap.search.filter}"/>
+		
+		
     </bean>
 	
 	<bean

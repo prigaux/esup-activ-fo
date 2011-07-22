@@ -10,62 +10,34 @@ import org.esupportail.commons.services.ldap.LdapEntityService;
 
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
+import org.springframework.beans.factory.InitializingBean;
 
 import javax.faces.model.SelectItem;
 
-public class LdapStructureList extends ArrayList<SelectItem>  {
+public class LdapStructureList extends ArrayList<SelectItem> implements InitializingBean {
 	
 	private final Logger logger = new LoggerImpl(getClass());
 	
 	private LdapEntityService ldapEntityService;
 	
-	private HashMap<String,String> ldapStructureList;
+	private String ldapSearchFilter;
 	
-	
-	
-	/**
-	 * @return the selectItemList
-	 */
-	public HashMap<String, String> getLdapStructureList() {
-		return new HashMap<String,String>();
-	}
-
-	/**
-	 * @param selectItemList the selectItemList to set
-	 */
-	public void setLdapStructureList(HashMap<String, String> ldapStructureList) {
+	public void afterPropertiesSet() throws Exception {
 		
-		this.ldapStructureList = ldapStructureList;
+		String ret=null;
+		List<LdapEntity> ldapEntities = ldapEntityService.getLdapEntitiesFromFilter(ldapSearchFilter);
 		
-    	/*
-    	returnValue=ldapentite.get(0).getAttribute("description");
-        
-    	logger.debug("return value is "+returnValue);
-		*/
+		logger.debug("filter is "+ldapSearchFilter);
 		
-		
-		Set<String> keys = ldapStructureList.keySet();
-		for(String key: keys) {
-			String s = ldapStructureList.get(key);
+		for(int i=0;i<ldapEntities.size();i++)
+		{
 			SelectItem si = new SelectItem();
-			si.setLabel(s);
-			si.setValue(key);
+			si.setLabel(ldapEntities.get(i).getAttribute("description"));
+			si.setValue(ldapEntities.get(i).getAttribute("supannCodeEntite"));
 			this.add(si);
 		}
 	}
 	
-	public List<SelectItem> getStructureList() {
-		
-		String ret=null;
-		
-		String filter = "(supannCodeEntite=*)";
-    	List<LdapEntity> ldapentite = ldapEntityService.getLdapEntitiesFromFilter(filter);
-        ret=ldapentite.get(0).getAttribute("description");
-        
-    	logger.debug("return value is "+ret);
-		return null;
-	}
-
 	/**
 	 * @return the ldapEntityService
 	 */
@@ -78,6 +50,21 @@ public class LdapStructureList extends ArrayList<SelectItem>  {
 	 */
 	public void setLdapEntityService(LdapEntityService ldapEntityService) {
 		this.ldapEntityService = ldapEntityService;
+	}
+
+	/**
+	 * @return the ldapSearchFilter
+	 */
+	public String getLdapSearchFilter() {
+		return ldapSearchFilter;
+	}
+
+
+	/**
+	 * @param ldapSearchFilter the ldapSearchFilter to set
+	 */
+	public void setLdapSearchFilter(String ldapSearchFilter) {
+		this.ldapSearchFilter = ldapSearchFilter;
 	}
 		
 }
