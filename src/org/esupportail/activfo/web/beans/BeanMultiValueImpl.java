@@ -1,6 +1,8 @@
 package org.esupportail.activfo.web.beans;
 
+import javax.faces.component.UIInput;
 import javax.faces.convert.Converter;
+import javax.faces.event.ValueChangeEvent;
 
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
@@ -33,6 +35,13 @@ public String getValue() {
  */
 public void setValue(String value) {
 	this.value = value;
+}
+
+//immediate input hack: update model at apply-request, not update-model
+public void setValue(ValueChangeEvent evt) {
+	setValue((String) evt.getNewValue());
+	  // prevent setter being called again during update-model phase
+	  ((UIInput) evt.getComponent()).setLocalValueSet(false);
 }
 
 public boolean isConvertedValue() {

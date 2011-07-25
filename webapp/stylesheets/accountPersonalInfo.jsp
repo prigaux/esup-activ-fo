@@ -69,30 +69,30 @@
 		<t:dataList value="#{entry.values}" var="sub"  rendered="#{entry.fieldType!='selectManyCheckbox'}" >
 		
 		    <t:div rendered="#{sub.value!=''&&entry.fieldType!='selectOneRadio'}" styleClass="#{entry.name}show">
-			    <h:inputText value="#{sub.value}" disabled="#{entry.disable}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value!=''}" />
-	            <h:inputText value="#{sub.value}" disabled="#{entry.disable}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value!=''}" />
+			    <h:inputText value="#{sub.value}" disabled="#{entry.disable}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value!=''}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+	            <h:inputText value="#{sub.value}" disabled="#{entry.disable}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value!=''}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 	            <t:htmlTag value="br"  />
 	        </t:div>
 	         
 	        <t:div rendered="#{sub.value==''&&entry.isMultiValue!=null&&entry.isMultiValue!=true&&entry.fieldType!='selectOneRadio'}" styleClass="#{entry.name}show">
-			    <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value==''}" />
-	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value==''}" />
+			    <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value==''}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value==''}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 	            <t:htmlTag value="br"  />
 	        </t:div>
 	        <t:div rendered="#{sub.value==''&&entry.isMultiValue!=null&&entry.isMultiValue==true&&entry.fieldType!='selectOneRadio'}" style="display:none;" styleClass="#{entry.name}hide" >    
-	            <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value==''}" />
-	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value==''}" />
+	            <h:inputText value="#{sub.value}" required="#{entry.required}" size="35" validator="#{entry.validator.validate}" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value==''}" immediate="true" valueChangeListener="#{sub.setValue}" />
+	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value==''}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 	            <t:htmlTag value="br"  />
             </t:div>
             <t:div rendered="#{entry.fieldType=='selectOneRadio'}">             
-            	<h:selectOneRadio value="#{sub.value}"  >
+            	<h:selectOneRadio value="#{sub.value}">
                   <f:selectItems value="#{entry.oneRadioItems}" />
              	</h:selectOneRadio>              
             </t:div> 
         </t:dataList>
                        
             <t:div rendered="#{entry.fieldType=='selectManyCheckbox'}">             
-             	<h:selectManyCheckbox value="#{entry.selectedItems}" rendered="#{entry.fieldType=='selectManyCheckbox'}" layout="pageDirection">
+             	<h:selectManyCheckbox value="#{entry.selectedItems}" rendered="#{entry.fieldType=='selectManyCheckbox'}" validator="#{entry.validator.validate}" layout="pageDirection">
                   <f:selectItems value="#{entry.displayItems}" />
              	</h:selectManyCheckbox>        
             </t:div> 
