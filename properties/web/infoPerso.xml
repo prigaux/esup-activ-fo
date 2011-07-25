@@ -209,13 +209,13 @@
 	
 	 
 	<bean
-		id="beanUid"
+		id="beanSupannAliasLogin"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
 		<property name="key" value="DATACHANGE.UID.TEXT.LABEL"/>
 		<property name="required" value="true" />
-		<property name="name" value="uid"/>
+		<property name="name" value="supannAliasLogin"/>
 		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
 		<property name="notice" value="DATACHANGE.UID.TEXT.HELP"/>

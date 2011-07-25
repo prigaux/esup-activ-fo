@@ -16,7 +16,7 @@
 		<property name="name" value="principalInfo"/>
 		<property name="listBeanField"> 
 		  <list>
-		    <ref bean="beanUid"/>
+		    <ref bean="beanSupannAliasLogin"/>
 		    <ref bean="beanSupannCivilite"/>
 		    <ref bean="beanSn"/>
 		    <ref bean="beanGivenName"/>
