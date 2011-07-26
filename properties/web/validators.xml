@@ -145,7 +145,31 @@
     	<property name="displayNameAttr" value="${account.key.displayname}"/>
     	
 	</bean>
-	
+	<bean 
+		id="validatorSMSAgreement"
+		class="org.esupportail.activfo.web.validators.ValidatorCheckboxLinkedInput"
+		parent="abstractI18nAwareBean"
+		scope="session"
+		>
+    	<description>
+			A validator for SMS Terms of use.
+    	</description>
+    	<property name="beanField" ref="beanMobilePhone"/>
+    	<property name="errorMessage" value="VALIDATOR.SMSAGREEMENT.MOBILEREQUIRED"/>
+    	
+	</bean>
+	<bean 
+		id="validatorRedirectMail"
+		class="org.esupportail.activfo.web.validators.ValidatorCheckboxLinkedInput"
+		parent="abstractI18nAwareBean"
+		scope="session"
+		>
+    	<description>
+			A validator for Redirect mail.
+    	</description>
+    	<property name="beanField" ref="beanEmailPerso"/>
+    	<property name="errorMessage" value="VALIDATOR.MAILFORWARD.PERSOMAILREQUIRED"/>
+    </bean>
 	<bean 
 		id="validatorPhone"
 		class="org.esupportail.activfo.web.validators.ValidatorPhone"
