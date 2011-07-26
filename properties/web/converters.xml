@@ -130,5 +130,16 @@
     	</description>
     	
 	</bean>
+	
+	<bean 
+		id="postalAddressConverter"
+		class="org.esupportail.activfo.web.converters.PostalAddressConverter"
+		scope="session"
+		>
+    	<description>
+			A converter for....
+    	</description>
+    	
+	</bean>
  	
 </beans>

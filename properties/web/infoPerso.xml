@@ -310,6 +310,7 @@
 		<property name="key" value="DATACHANGE.POSTALADDRESS.TEXT.LABEL"/>
 		<property name="required" value="true" />
 		<property name="name" value="postalAddress"/>
+		<property name="converter" ref="postalAddressConverter" />
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
 		<property name="notice" value="DATACHANGE.POSTALADDRESS.TEXT.HELP"/>
@@ -356,8 +357,9 @@
 		<property name="key" value="DATACHANGE.HOMEPOSTALADDRESS.TEXT.LABEL"/>
 		<property name="required" value="true" />
 		<property name="name" value="homePostalAddress"/>
+		<property name="converter" ref="postalAddressConverter" />
 		<property name="disable" value="false"/>
-		<property name="updateable" value="true"/>
+		<property name="updateable" value="false"/>
 		<property name="notice" value="DATACHANGE.HOMEPOSTALADDRESS.TEXT.HELP"/>
 	</bean>
 	
