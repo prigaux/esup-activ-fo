@@ -52,36 +52,8 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 			throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",specialmessage));
 		}
 		
-		/*
-		if (this.compareInsensitive(account.getAttribute(this.displayNameAttr), val)) {
-			
-		}
-		else{
-			throw new ValidatorException(getFacesErrorMessage("VALIDATOR.DISPLAYNAME.INVALID"));
-		}
-		*/
 	}
 	
-	public boolean compareInsensitive(String str1, String str2) {
-
-		if (str2==null) return false;
-		
-		logger.debug("str1 et str2 sont "+str1+", "+str2);
-		
-		String strTmp1 = str1.replaceAll("[-|']+", " ");
-		String strTmp2 = str2.replaceAll("[-|']+", " ");
-		Collator collator = Collator.getInstance();
-		collator.setStrength(Collator.PRIMARY);
-		
-
-		if (collator.compare(strTmp1, strTmp2) == 0) {
-			logger.debug("Strings are equivalent");
-			return true;
-		}
-
-		logger.debug("Strings  are different");
-		return false;
-	}
 	
 	private boolean isContainFirstName(String firstName)
 	{
@@ -89,25 +61,18 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 		
 		String compareSN=account.getAttribute("sn").toLowerCase();
 		String compareUp1BirthName=account.getAttribute("up1BirthName").toLowerCase();
-				
-    	/*
-    	
-    	String stringTrim[] = null;
-		stringTrim=returnValue.toLowerCase().split(" ");
-		
-    	for(int i=0;i<stringTrim.length;i++) {
-    		if (compareSN.contains(stringTrim[i]) || compareUp1BirthName.contains(stringTrim[i]))
-    			permit=true;
-    	}
-    	*/
-    	if (firstName.toLowerCase().contains(compareSN)) {
-    		logger.debug("True : The string("+firstName+") contains SN ("+compareSN+")");
-    		permit=true;
-    	}
-    	if (firstName.toLowerCase().contains(compareUp1BirthName)) {
-    		logger.debug("True : The string("+firstName+") contains up1BirthName ("+compareUp1BirthName+")");
-    		permit=true;
-    	}
+		if (!"".equals(compareSN)) {		
+	    	if (firstName.toLowerCase().contains(compareSN)) {
+	    		logger.debug("True : The string("+firstName+") contains SN ("+compareSN+")");
+	    		permit=true;
+	    	}
+		}
+		if (!"".equals(compareUp1BirthName)) {
+	    	if (firstName.toLowerCase().contains(compareUp1BirthName)) {
+	    		logger.debug("True : The string("+firstName+") contains up1BirthName ("+compareUp1BirthName+")");
+	    		permit=true;
+	    	}
+		}
     	
     	return permit;
 	}
@@ -118,25 +83,19 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 		
 		String compareGivenName=account.getAttribute("givenName").toLowerCase();
 		String compareUp1AltGivenName=account.getAttribute("up1AltGivenName").toLowerCase();
-				
-    	/*
-    	
-    	String stringTrim[] = null;
-		stringTrim=returnValue.toLowerCase().split(" ");
 		
-    	for(int i=0;i<stringTrim.length;i++) {
-    		if (compareGivenName.contains(stringTrim[i]) || compareUp1AltGivenName.contains(stringTrim[i]))
-    			permit=true;
-    	}
-    	*/
-    	if (lastName.toLowerCase().contains(compareGivenName)) {
-    		logger.debug("True : The string("+lastName+") contains givenName("+compareGivenName+")");
-    		permit=true;
-    	}
-    	if (lastName.toLowerCase().contains(compareUp1AltGivenName)) {
-    		logger.debug("True : The string("+lastName+") contains up1AltGivenName("+compareUp1AltGivenName+")");
-    		permit=true;
-    	}
+		if (!"".equals(compareGivenName)) {		
+	    	if (lastName.toLowerCase().contains(compareGivenName)) {
+	    		logger.debug("True : The string("+lastName+") contains givenName("+compareGivenName+")");
+	    		permit=true;
+	    	}
+		}
+		if (!"".equals(compareUp1AltGivenName)) {
+	    	if (lastName.toLowerCase().contains(compareUp1AltGivenName)) {
+	    		logger.debug("True : The string("+lastName+") contains up1AltGivenName("+compareUp1AltGivenName+")");
+	    		permit=true;
+	    	}
+		}
     	return permit;
 	}
 	
