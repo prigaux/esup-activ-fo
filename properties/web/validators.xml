@@ -27,6 +27,7 @@
     	
     	<property name="account" ref="account"/>
     	<property name="displayNameAttr" value="${account.key.displayname}"/>
+    	<property name="caracterForbiddenDisplayName" value="${caracter.forbidden}"/>
     		
 	</bean>
 	
