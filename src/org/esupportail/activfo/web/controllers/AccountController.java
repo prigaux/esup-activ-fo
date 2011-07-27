@@ -391,7 +391,7 @@ public class AccountController extends AbstractContextAwareController implements
 						if (beanPersoInfo.isUpdateable() && (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null) ){
 							hashBeanPersoInfo.put(beanPersoInfo.getName(), valueBeanMulti);
 						}
-						else {
+						else if (beanPersoInfo.isUpdateable() && ("".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()==null) ) {
 							DataChangeMaps.put(beanPersoInfo.getName(), valueBeanMulti);
 							hashBeanPersoInfo.put(beanPersoInfo.getName(), null);
 						}
