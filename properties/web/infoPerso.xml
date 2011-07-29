@@ -213,7 +213,7 @@
 		class="org.esupportail.activfo.web.beans.LdapAttributeItem"
 		scope="session"
 		>
-		<property name="label" value="Conserver une copie dans votre boite paris 1"/>
+		<property name="label" value="Conserver une copie dans votre boîte Paris 1"/>
 		<property name="account" ref="account"/>
 		<property name="attributeName" value="uid"/>
 		<property name="preValue" value="\"/>
