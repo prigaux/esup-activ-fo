@@ -141,5 +141,14 @@
     	</description>
     	
 	</bean>
+	<bean 
+		id="redirectMailConverter"
+		class="org.esupportail.activfo.web.converters.RedirectMailConverter"
+		scope="session">
+    	<description>
+			A converter for redirect mail checkbox 
+    	</description>   
+    	<property name="beanField" ref="beanEmailPerso"/>     
+	</bean>
  	
 </beans>
