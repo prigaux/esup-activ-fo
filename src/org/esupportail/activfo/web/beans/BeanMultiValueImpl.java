@@ -22,11 +22,14 @@ private Converter converter;
 private final Logger logger = new LoggerImpl(getClass());
 
 private String convertedValue=null;
+private boolean useConvertedValue;
 
 /**
  * @return the value
  */
 public String getValue() {
+	if(useConvertedValue)
+		return converter.getAsObject(null, null, value).toString();
 	return value;
 }
 
@@ -35,6 +38,8 @@ public String getValue() {
  */
 public void setValue(String value) {
 	this.value = value;
+	if(useConvertedValue)
+		this.value=converter.getAsString(null, null, value);
 }
 
 //immediate input hack: update model at apply-request, not update-model
@@ -67,6 +72,20 @@ public Converter getConverter() {
  */
 public void setConverter(Converter converter) {
 	this.converter = converter;
+}
+
+/**
+ * @return the useConvertedValue
+ */
+public boolean isUseConvertedValue() {
+	return useConvertedValue;
+}
+
+/**
+ * @param useConvertedValue the useConvertedValue to set
+ */
+public void setUseConvertedValue(boolean useConvertedValue) {
+	this.useConvertedValue = useConvertedValue;
 }
 
 

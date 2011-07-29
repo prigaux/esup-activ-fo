@@ -79,4 +79,7 @@ public interface BeanField<T> {
 	
 	public void setUseDisplayItems(boolean useDisplayItems);
 	
+	public boolean isUseConvertedValue();	
+	public void setUseConvertedValue(boolean useConvertedValue);
+	
 }

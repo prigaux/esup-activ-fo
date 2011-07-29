@@ -25,5 +25,8 @@ public interface BeanMultiValue {
 	public void setConverter(Converter converter);
 	
 	public boolean isConvertedValue();
-
+	
+	public boolean isUseConvertedValue();	
+	public void setUseConvertedValue(boolean useConvertedValue);
+	
 }

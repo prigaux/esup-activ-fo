@@ -42,7 +42,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private boolean updateable;
 	private boolean useDisplayItems; //si oui, ne considère que les valeurs présentes dans le champ displayItems. Sinon ne prend pas en compte displayItems
-	
+	private boolean useConvertedValue;
 	
 	private String notice;
 	
@@ -111,6 +111,8 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 			for(String s : selectedItems){
 				BeanMultiValue bmv = new BeanMultiValueImpl();
 				bmv.setValue(s);
+				bmv.setConverter(converter);
+				bmv.setUseConvertedValue(useConvertedValue);
 				values.add(bmv);				
 			}
 			for(BeanMultiValue bmv: hideItems)
@@ -279,6 +281,20 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	 */
 	public void setUseDisplayItems(boolean useDisplayItems) {
 		this.useDisplayItems = useDisplayItems;
+	}
+
+	/**
+	 * @return the useConvertedValue
+	 */
+	public boolean isUseConvertedValue() {
+		return useConvertedValue;
+	}
+
+	/**
+	 * @param useConvertedValue the useConvertedValue to set
+	 */
+	public void setUseConvertedValue(boolean useConvertedValue) {
+		this.useConvertedValue = useConvertedValue;
 	}
 	
 }
