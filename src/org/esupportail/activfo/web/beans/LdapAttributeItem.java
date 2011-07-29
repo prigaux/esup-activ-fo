@@ -19,12 +19,13 @@ public class LdapAttributeItem extends SelectItem {
 	private String attributeName;
 	private String preValue="";
 	private String postValue="";
+	private String defaultValue="";
 	
 	public String getValue() {
 		String value=account.getAttribute(attributeName);
-		if(value==null) {
+		if(value==null||value.equals("")) {
 			logger.warn(account.getId()+"'s account contains no value for attribute "+attributeName);
-			value="";
+			value=defaultValue;
 		}
 		value=preValue+value+postValue;
 		return value;		
@@ -93,6 +94,22 @@ public class LdapAttributeItem extends SelectItem {
 	 */
 	public void setAttributeName(String attributeName) {
 		this.attributeName = attributeName;
+	}
+
+
+	/**
+	 * @return the defaultValue
+	 */
+	public String getDefaultValue() {
+		return defaultValue;
+	}
+
+
+	/**
+	 * @param defaultValue the defaultValue to set
+	 */
+	public void setDefaultValue(String defaultValue) {
+		this.defaultValue = defaultValue;
 	}
 
 	
