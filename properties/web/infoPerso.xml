@@ -62,8 +62,10 @@
 		   <list>
 		     <ref bean="beanSelectSMSUCG"/>
 		     <ref bean="beanSelectSMSUCROUS"/>
+		      <ref bean="beanSelectSMSUMP"/>
 		   </list>
 		</property>
+		<property name="useDisplayItems" value="true"/>
 		<property name="validator" ref="validatorSMSAgreement"/>
 		<property name="isMultiValue" value="true"/>	
 		<property name="name" value="up1TermsOfUse"/>
@@ -84,6 +86,13 @@
 		>
 		<property name="label" value="CROUS"/>
 		<property name="value" value="{SMSU}CROUS" />
+	</bean>
+		<bean  
+		id="beanSelectSMSUMP"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="Mairie de Paris"/>
+		<property name="value" value="{SMSU}MP" />
 	</bean>
 	
 	<bean  
