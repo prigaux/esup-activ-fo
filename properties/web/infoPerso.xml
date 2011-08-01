@@ -85,7 +85,7 @@
 		class="javax.faces.model.SelectItem"
 		>
 		<property name="label" value="CROUS"/>
-		<property name="value" value="{SMSU}CROUS" />
+		<property name="value" value="{SMSU}crous" />
 	</bean>
 		<bean  
 		id="beanSelectSMSUMP"
