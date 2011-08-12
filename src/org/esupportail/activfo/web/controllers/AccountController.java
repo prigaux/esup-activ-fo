@@ -382,8 +382,7 @@ public class AccountController extends AbstractContextAwareController implements
 							oldValue.put(beanPersoInfo.getName(), currentAccount.getAttributes(beanPersoInfo.getName()).toString());
 							newValue.put(beanPersoInfo.getName(), bmv.getValue());
 							//logger.debug("Attribute,oldValue and newValue : "+beanPersoInfo.getName()+", "+currentAccount.getAttributes(beanPersoInfo.getName()).toString()+","+bmv.getValue());
-						} else 
-							beanPersoInfo.setUpdateable(true);
+						}
 						j++;
 					}
 					
