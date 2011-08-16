@@ -109,9 +109,9 @@
             </t:div>                                                                     
         </t:dataList>
         
-        <t:dataList value="#{beanfield.values}" var="sub"  rendered="#{beanfield.fieldType!='selectManyCheckbox'&&accountController.viewDataChange&&beanfield.fieldType!='selectOneMenu'}" >
-		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'&&!sub.convertedValue&&beanfield.fieldType!='selectOneMenu'}" styleClass="portlet-section-text">
-			    <h:outputText value="#{sub.value}" converter="#{beanfield.converter}" rendered="#{!sub.convertedValue}"/>
+        <t:dataList value="#{beanfield.values}" var="sub"  rendered="#{accountController.viewDataChange}" >
+		    <t:div styleClass="portlet-section-text">
+			    <h:outputText value="#{sub.value}" converter="#{beanfield.converter}" rendered="#{sub.value!=''}"/>
 	        </t:div>
         </t:dataList>
         
