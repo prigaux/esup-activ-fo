@@ -62,9 +62,8 @@ public class AccountController extends AbstractContextAwareController implements
 	private String accountPossibleChannelsKey;
 	private String accountEmpIdKey;
 	
-	private String labelCanalMailPerso;
-	private String labelCanalPager;
-	private String labelCanalGest;
+	private HashMap<String,String> channelLabels;
+	
 	
 	//liste des champs pour l'affichage des informations personnelles
 	private List<BeanField> listBeanPersoInfo;
@@ -89,7 +88,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private List<BeanField> listInfoOldStudentToValidate;
 	private List<BeanField> listInfoAnotherStudentToValidate;
 	
-	private List<BeanField> listBeanCanal;
+	private List<BeanField<String>> channels;
 	
 	
 	//liste des champs correspondant aux procedures
@@ -288,23 +287,18 @@ public class AccountController extends AbstractContextAwareController implements
 					List<String> listPossibleChannels = currentAccount.getAttributes(accountPossibleChannelsKey);
 					
 					logger.debug("listpossible "+listPossibleChannels.toString());
-					
-					if (listPossibleChannels.size()>1){
-						buildListBeanCanal(listPossibleChannels);
+					buildChannels(listPossibleChannels);
+					if (channels.size()>1){						
 						this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 						return "gotoChoice"; 	
-					}
-						
-					else if (listPossibleChannels.size()==1){
-							
-						currentAccount.setOneChoiceCanal(listPossibleChannels.get(0));
-						this.getDomainService().sendCode(currentAccount.getAttribute(this.accountIdKey),listPossibleChannels.get(0));
+					}	
+					else if (channels.size()==1){		
+						currentAccount.setOneChoiceCanal(channels.get(0).getValue());
+						this.getDomainService().sendCode(currentAccount.getAttribute(this.accountIdKey),channels.get(0).getValue());
 						addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
-						logger.debug("Code envoy�");
+						logger.debug("Code envoyé via le canal : "+channels.get(0).getValue());
 						return "gotoPushCode";
-						
 					}
-												
 					else{
 						logger.debug("aucun canal d'envoi n'est disponible");
 						addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
@@ -790,28 +784,15 @@ public class AccountController extends AbstractContextAwareController implements
 			smtpService.send(mail, subjectDataChange, mailBody, "");
 	}
 	
-	private void buildListBeanCanal(List<String>listPossibleChannels){
-		listBeanCanal=new ArrayList<BeanField>();
-		for(int i=0;i<listPossibleChannels.size();i++){
-			if (listPossibleChannels.get(i).equalsIgnoreCase(accountMailPersoKey)){
-				BeanFieldImpl bean=new BeanFieldImpl();
-				bean.setValue(accountMailPersoKey);
-				bean.setKey(labelCanalMailPerso);
-				listBeanCanal.add(bean);
-			}
-			
-			if (listPossibleChannels.get(i).equalsIgnoreCase(accountGestKey)){
-				BeanFieldImpl bean=new BeanFieldImpl();
-				bean.setValue(accountGestKey);
-				bean.setKey(labelCanalGest);
-				listBeanCanal.add(bean);
-			}
-		
-			if (listPossibleChannels.get(i).equalsIgnoreCase(accountPagerKey)){
-				BeanFieldImpl bean=new BeanFieldImpl();
-				bean.setValue(accountPagerKey);
-				bean.setKey(labelCanalPager);
-				listBeanCanal.add(bean);
+	private void buildChannels(List<String>listPossibleChannels){
+		channels=new ArrayList<BeanField<String>>();
+		for(String possibleChannel:listPossibleChannels){
+			String channelLabel=channelLabels.get(possibleChannel);
+			if(channelLabel!=null){
+				BeanFieldImpl<String> bean=new BeanFieldImpl<String>();
+				bean.setValue(possibleChannel);
+				bean.setKey(channelLabel);
+				channels.add(bean);
 			}
 		}
 	}
@@ -936,15 +917,6 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setAccountPagerKey(String accountPagerKey) {
 		this.accountPagerKey = accountPagerKey;
 	}
-
-	public List<BeanField> getListBeanCanal() {
-		return listBeanCanal;
-	}
-
-	public void setListBeanCanal(List<BeanField> listBeanCanal) {
-		this.listBeanCanal = listBeanCanal;
-	}
-
 	
 	public boolean isLoginChange() {
 		return loginChange;
@@ -1000,31 +972,6 @@ public class AccountController extends AbstractContextAwareController implements
 
 	public void setAccountGestKey(String accountGestKey) {
 		this.accountGestKey = accountGestKey;
-	}
-	
-	
-	public String getLabelCanalMailPerso() {
-		return labelCanalMailPerso;
-	}
-
-	public void setLabelCanalMailPerso(String labelCanalMailPerso) {
-		this.labelCanalMailPerso = labelCanalMailPerso;
-	}
-
-	public String getLabelCanalPager() {
-		return labelCanalPager;
-	}
-
-	public void setLabelCanalPager(String labelCanalPager) {
-		this.labelCanalPager = labelCanalPager;
-	}
-
-	public String getLabelCanalGest() {
-		return labelCanalGest;
-	}
-
-	public void setLabelCanalGest(String labelCanalGest) {
-		this.labelCanalGest = labelCanalGest;
 	}
 	
 	public String getAccountPossibleChannelsKey() {
@@ -1450,6 +1397,38 @@ public class AccountController extends AbstractContextAwareController implements
 	 */
 	public void setTargetService(String targetService) {
 		this.targetService = targetService;
+	}
+
+
+	/**
+	 * @return the channelLabels
+	 */
+	public HashMap<String, String> getChannelLabels() {
+		return channelLabels;
+	}
+
+
+	/**
+	 * @param channelLabels the channelLabels to set
+	 */
+	public void setChannelLabels(HashMap<String, String> channelLabels) {
+		this.channelLabels = channelLabels;
+	}
+
+
+	/**
+	 * @param listBeanCanal the listBeanCanal to set
+	 */
+	public void setListBeanCanal(List<BeanField<String>> listBeanCanal) {
+		this.channels = listBeanCanal;
+	}
+
+
+	/**
+	 * @return the listBeanCanal
+	 */
+	public List<BeanField<String>> getListBeanCanal() {
+		return channels;
 	}
 	
 	

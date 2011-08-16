@@ -109,10 +109,14 @@
 		<property name="attributesOldStudentToValidate" value="${attributes.validation.alumni.student}"/>
 		<property name="attributesAnotherStudentToValidate" value="${attributes.validation.another.student}"/>
 		
-		<property name="labelCanalMailPerso" value="CHOICE.CANAL.MAILPERSO.RADIOBUTTON.LABEL"/>
-		<property name="labelCanalGest" value="CHOICE.CANAL.GEST.RADIOBUTTON.LABEL"/>
-		<property name="labelCanalPager" value="CHOICE.CANAL.PAGER.RADIOBUTTON.LABEL"/>
-		
+		<property name="channelLabels">
+			<map>
+			 	<entry key="email2gest" value="CHOICE.CANAL.GEST.RADIOBUTTON.LABEL"/>
+		 		<entry key="supannMailPerso" value="CHOICE.CANAL.MAILPERSO.RADIOBUTTON.LABEL"/>
+				<entry key="pager" value="CHOICE.CANAL.PAGER.RADIOBUTTON.LABEL"/>	
+			</map>
+		</property>
+						
 		<property name="smtpService" ref="smtpService"/>
 		<property name="subjectDataChange" value="${datachange.subject}"/>
 		<property name="body1DataChange" value="${datachange.body1.fr}"/>
