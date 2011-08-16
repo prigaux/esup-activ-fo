@@ -15,7 +15,7 @@ $(function() {
 	$(".hide").click(function () {
 		if( $("." + $(this).attr("alt")+"show").size() > 1    ) {
 			$("." + $(this).attr("alt")+"show:last").hide();
-		    $("." + $(this).attr("alt")+"show:last").children("input:text").val("");
+		    $("." + $(this).attr("alt")+"show:last").children("input,select").val("");
 		    $("." + $(this).attr("alt")+"show:last").removeClass().addClass($(this).attr("alt")+"hide");
 		}
 	});

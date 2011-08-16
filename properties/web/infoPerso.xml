@@ -403,6 +403,8 @@
 		<property name="fieldType" value="selectOneMenu"/>
  		<property name="displayItems" ref="beanLdapStructureList"/>
 		<property name="converter" ref="ldapConverter"/>
+		<property name="isMultiValue" value="true"/>
+		<property name="numberOfValue" value="5"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="true"/>
 		<property name="notice" value="DATACHANGE.SUPANNENTITEAFFECTATION.TEXT.HELP"/> <!-- note -->
