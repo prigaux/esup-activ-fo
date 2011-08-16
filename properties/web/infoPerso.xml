@@ -193,6 +193,7 @@
 		<property name="useConvertedValue" value="true"/>
 		<property name="name" value="mailForwardingAddress"/>
 		<property name="disable" value="false"/>
+		<property name="updateable" value="true"/>
 	</bean>
 	
 		
@@ -397,26 +398,33 @@
 		>
 
 		<property name="key" value="DATACHANGE.SUPANNENTITEAFFECTATION.TEXT.LABEL"/>
-		<property name="required" value="true" />
+		<property name="required" value="false" />
 		<property name="name" value="supannEntiteAffectation"/>
 		<property name="fieldType" value="selectOneMenu"/>
  		<property name="displayItems" ref="beanLdapStructureList"/>
 		<property name="converter" ref="ldapConverter"/>
-		<property name="disable" value="true"/>
-		<property name="updateable" value="false"/>
+		<property name="disable" value="false"/>
+		<property name="updateable" value="true"/>
 		<property name="notice" value="DATACHANGE.SUPANNENTITEAFFECTATION.TEXT.HELP"/> <!-- note -->
 	</bean>
 	
 	<bean
 		id="beanLdapStructureList"
 		class="org.esupportail.activfo.web.beans.LdapStructureList"
-		scope="session"
+		scope="singleton"
 		>
 		
 		<property name="ldapEntityService" ref="ldapEntityService"/>
 		<property name="ldapSearchFilter" value="${ldap.search.filter}"/>
-		
-		
+		<property name="firstLabel" value="Veuillez sélectionner une structure"/>
+		<property name="businessCategoryMap">
+		 <map>
+		    <entry key="library" value="Bibliothèques" />
+    	    <entry key="pedagogy" value="Composantes" />
+    	    <entry key="research" value="Laboratoires" />
+    	    <entry key="administration" value="Services centraux et communs" />    	
+    	 </map> 
+    	 </property>  				
     </bean>
 	
 	<bean

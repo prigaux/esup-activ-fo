@@ -28,7 +28,7 @@
 				The LDAP template used to access the LDAP directory.
 			</description>
 		</property>
-		<property name="dnSubPath" value="${ldap.dn.people}">
+		<property name="dnSubPath" value="${ldap.dn.structures}">
 			<description>The DN sub path.</description>
 		</property>
 		
