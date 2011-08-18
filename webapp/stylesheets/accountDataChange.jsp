@@ -122,7 +122,7 @@
         </t:div>                               
   		</h:column>  
        	<h:column >
-       	  <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}"/>			
+       	  <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}"/>			
           <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.notice]}" value="/media/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}"/>
           <h:graphicImage alt="#{beanfield.name}" styleClass="show" value="/media/add.png"  style="border: 0;" rendered="#{beanfield.isMultiValue==true&&!beanfield.disable&&!accountController.viewDataChange&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}"/>
 		  <h:graphicImage alt="#{beanfield.name}" styleClass="hide" value="/media/remove.png"  style="border: 0;" rendered="#{beanfield.isMultiValue==true&&!beanfield.disable&&!accountController.viewDataChange&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}"/>
