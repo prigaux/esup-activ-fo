@@ -134,10 +134,10 @@
 	<bean 
 		id="postalAddressConverter"
 		class="org.esupportail.activfo.web.converters.PostalAddressConverter"
-		scope="session"
+		scope="prototype"
 		>
     	<description>
-			A converter for....
+			A converter to delete "$" in the diplay of postal address
     	</description>
     	
 	</bean>

@@ -13,22 +13,24 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 
 
 /**
- * A JSF converter to pass Integer instances.
+ * A JSF converter to delete "$" in the diplay of postal address
  */
 public class PostalAddressConverter implements Converter {
 	
 	private final Logger logger = new LoggerImpl(getClass());
 	
-	public PostalAddressConverter() {
-    }
- 
+	private String initialValue;
+	
+	//envoi au BO
     public Object getAsObject(
     		@SuppressWarnings("unused") final FacesContext context, 
 			@SuppressWarnings("unused") final UIComponent component, 
 			final String value){
-    	
-    	
-    	return value;
+    	//retourne la valeur initiale si elle n'a pas été modifiée par l'utilisateur
+    	if(initialValue.replaceAll("\\$"," ").equals(value))
+    		return initialValue;
+    	else
+    		return value;
     }
  
   //Affichage standard
@@ -36,9 +38,8 @@ public class PostalAddressConverter implements Converter {
     		@SuppressWarnings("unused") final FacesContext context, 
 			@SuppressWarnings("unused") final UIComponent component, 
 			final Object value) {
-    	String strValue = (String) value;
-    	strValue=strValue.replaceAll("\\$", " ");
-    	return strValue;
+    	initialValue = (String) value;
+    	return initialValue.replaceAll("\\$", " ");
     }
 	
 }
