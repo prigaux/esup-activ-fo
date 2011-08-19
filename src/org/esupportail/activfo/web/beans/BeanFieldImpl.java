@@ -30,8 +30,6 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private List<BeanMultiValue> hideItems=new ArrayList<BeanMultiValue>(); // valeurs recupérées du BO mais non exploitées par le FO. Lors de l'enregistrement, à renvoyer au BO
 	
-	private List<SelectItem> oneRadioItems = new ArrayList<SelectItem>();
-	
 	private boolean multiValue;
 	
 	private String name;
@@ -117,7 +115,17 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 			}
 			for(BeanMultiValue bmv: hideItems)
 				this.values.add(bmv);								
-		}		 
+		}
+       
+       if(ONERADIO.equals(fieldType)){
+    	   values.clear();	
+    	   BeanMultiValue bmv = new BeanMultiValueImpl();
+    	   bmv.setValue((String)value);
+    	   bmv.setConverter(converter);
+    	   bmv.setUseConvertedValue(useConvertedValue);
+    	   values.add(bmv);				
+       }
+       
 		return this.values;
 	}
 
@@ -138,6 +146,10 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		}
 		for(BeanMultiValue bmv : values) 
 			bmv.setConverter(converter);
+		
+		if(!values.isEmpty()){
+			value=(T)values.get(0).getValue();
+		}
 	}
 	
 	public String getName() {
@@ -209,20 +221,6 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	 */
 	public void setKey(String key) {
 		this.key = key;
-	}
-
-	/**
-	 * @return the oneRadioItems
-	 */
-	public List<SelectItem> getOneRadioItems() {
-		return oneRadioItems;
-	}
-
-	/**
-	 * @param oneRadioItems the oneRadioItems to set
-	 */
-	public void setOneRadioItems(List<SelectItem> oneRadioItems) {
-		this.oneRadioItems = oneRadioItems;
 	}
 
 		/**

@@ -146,8 +146,9 @@
 		scope="session"
 		>
 		<property name="key" value="PERSOINFO.LISTEROUGE.TEXT.LABEL"/>
+		<property name="help" value="PERSOINFO.LISTEROUGE.TEXT.HELP"/>
 		<property name="fieldType" value="selectOneRadio"/>
-		<property name="oneRadioItems">
+		<property name="displayItems">
 		   <list>
         	 <ref bean="beanRadioTRUE"/>
 		     <ref bean="beanRadioFALSE"/>
@@ -155,6 +156,7 @@
 		</property>
 		<property name="name" value="supannListeRouge"/>
 		<property name="disable" value="false"/>
+		<property name="updateable" value="true"/>
 	</bean>
 	
 	<bean  

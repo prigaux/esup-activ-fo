@@ -119,7 +119,12 @@
              	<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'}" validator="#{beanfield.validator.validate}" layout="pageDirection">
                   <f:selectItems value="#{beanfield.displayItems}" />
              	</h:selectManyCheckbox>        
-        </t:div>                               
+        </t:div>    
+        <t:div rendered="#{beanfield.fieldType=='selectOneRadio'}">        
+            	<h:selectOneRadio value="#{beanfield.value}">
+                  <f:selectItems value="#{beanfield.displayItems}" />
+             	</h:selectOneRadio>              
+        </t:div>                            
   		</h:column>  
        	<h:column >
        	  <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}"/>			

@@ -84,19 +84,17 @@
 	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value==''}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 	            <t:htmlTag value="br"  />
             </t:div>
-            <t:div rendered="#{entry.fieldType=='selectOneRadio'}">             
-            	<h:selectOneRadio value="#{sub.value}">
-                  <f:selectItems value="#{entry.oneRadioItems}" />
-             	</h:selectOneRadio>              
-            </t:div> 
-        </t:dataList>
-                       
-            <t:div rendered="#{entry.fieldType=='selectManyCheckbox'}">             
+        </t:dataList>             
+        <t:div rendered="#{entry.fieldType=='selectManyCheckbox'}">             
              	<h:selectManyCheckbox value="#{entry.selectedItems}" rendered="#{entry.fieldType=='selectManyCheckbox'}" validator="#{entry.validator.validate}" layout="pageDirection">
                   <f:selectItems value="#{entry.displayItems}" />
              	</h:selectManyCheckbox>        
-            </t:div> 
-                               
+        </t:div> 
+        <t:div rendered="#{entry.fieldType=='selectOneRadio'}">        
+            	<h:selectOneRadio value="#{entry.value}">
+                  <f:selectItems value="#{entry.displayItems}" />
+        		</h:selectOneRadio>              
+         </t:div>                    
        		</h:column>  
         	<h:column>			
 		  	<h:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>

@@ -81,6 +81,7 @@
 		</property>
 		<property name="listBeanField">
 		  <list>
+		    <ref bean="beanListeRouge"/>
 		    <ref bean="beanEduPersonPrimaryAffiliation"/>
 		    <ref bean="beanSupannCodeINE"/>
 		    <ref bean="beanMail"/>
@@ -110,6 +111,7 @@
 		</property>
 		<property name="listBeanField">
 		  <list>
+		    <ref bean="beanListeRouge"/>
 		    <ref bean="beanMail"/>
 		    <ref bean="beanPostalAddress"/>
 		    <ref bean="beanPhone"/>

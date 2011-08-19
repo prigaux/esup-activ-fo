@@ -12,6 +12,7 @@ public interface BeanField<T> {
 	
 	public static final String MANYCHECKBOX="selectManyCheckbox";
 	public static final String INPUTTEXT="inputText";
+	public static final String ONERADIO="selectOneRadio";
 	
 	public String getKey();
 	
@@ -64,9 +65,6 @@ public interface BeanField<T> {
 	
 	public List<SelectItem> getDisplayItems();
 	public void setDisplayItems(List<SelectItem> displayItems);
-	
-	public List<SelectItem> getOneRadioItems();
-	public void setOneRadioItems(List<SelectItem> oneRadioItems);
 	
 	public boolean isUpdateable();
 	public void setUpdateable(boolean updateable);
