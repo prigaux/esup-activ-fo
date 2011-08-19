@@ -84,7 +84,7 @@
 		    <t:div rendered="#{sub.value!=''&&beanfield.fieldType!='selectOneRadio'&&!sub.convertedValue}" styleClass="#{beanfield.name}show">
 			    <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value!=''&&!sub.convertedValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 	            <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value!=''&&!sub.convertedValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-	            <h:selectOneMenu value="#{sub.value}" rendered="#{beanfield.fieldType=='selectOneMenu'}" >
+	            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'}" >
                   <f:selectItems value="#{beanfield.displayItems}" />
              	</h:selectOneMenu>    
 	        </t:div>
@@ -93,7 +93,7 @@
 	        <t:div rendered="#{sub.value==''&&!beanfield.multiValue&&beanfield.fieldType!='selectOneRadio'}" styleClass="#{beanfield.name}show">
 			    <h:inputText value="#{sub.value}" required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 	            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-	            <h:selectOneMenu value="#{sub.value}" rendered="#{beanfield.fieldType=='selectOneMenu'}" >
+	            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'}" >
                   <f:selectItems value="#{beanfield.displayItems}" />
              	</h:selectOneMenu> 
 	        </t:div>
@@ -103,7 +103,7 @@
 	            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''&&sub.convertedValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 	            <h:inputText value="#{sub.value}"  converter="#{beanfield.converter}" size="35" validator="#{beanfield.validator.validate}"  rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''&&!sub.convertedValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 	            <h:inputText value="#{sub.value}"  converter="#{beanfield.converter}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''&&!sub.convertedValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-	            <h:selectOneMenu value="#{sub.value}" rendered="#{beanfield.fieldType=='selectOneMenu'}" >
+	            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'}" >
                   <f:selectItems value="#{beanfield.displayItems}" />
              	</h:selectOneMenu> 	            
             </t:div>                                                                     
@@ -127,8 +127,8 @@
         </t:div>                            
   		</h:column>  
        	<h:column >
-       	  <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}"/>			
-          <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.notice]}" value="/media/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}"/>
+       	  <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.notice]}" value="/media/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}"/>
+       	  <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}"/>			        
           <h:graphicImage alt="#{beanfield.name}" styleClass="show" value="/media/add.png"  style="border: 0;" rendered="#{beanfield.multiValue&&!beanfield.disable&&!accountController.viewDataChange&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}"/>
 		  <h:graphicImage alt="#{beanfield.name}" styleClass="hide" value="/media/remove.png"  style="border: 0;" rendered="#{beanfield.multiValue&&!beanfield.disable&&!accountController.viewDataChange&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}"/>
 		</h:column>										
