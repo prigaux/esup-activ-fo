@@ -32,7 +32,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private List<SelectItem> oneRadioItems = new ArrayList<SelectItem>();
 	
-	private String isMultiValue="false";
+	private boolean multiValue;
 	
 	private String name;
 	
@@ -138,13 +138,6 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		}
 		for(BeanMultiValue bmv : values) 
 			bmv.setConverter(converter);
-	}
-	
-	public String getIsMultiValue() {
-		return isMultiValue;
-	}
-	public void setIsMultiValue(String isMultiValue) {
-		this.isMultiValue = isMultiValue;
 	}
 	
 	public String getName() {
@@ -295,6 +288,20 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	 */
 	public void setUseConvertedValue(boolean useConvertedValue) {
 		this.useConvertedValue = useConvertedValue;
+	}
+
+	/**
+	 * @return the multiValue
+	 */
+	public boolean isMultiValue() {
+		return multiValue;
+	}
+
+	/**
+	 * @param multiValue the multiValue to set
+	 */
+	public void setMultiValue(boolean multiValue) {
+		this.multiValue = multiValue;
 	}
 	
 }
