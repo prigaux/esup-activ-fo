@@ -96,27 +96,20 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	}
 
 	public boolean getAccess() {
-		
-		boolean returnValue=false;
-		//String vs;
-		
+				
 		if (profile!=null && account !=null) {
-			Set keySet = profile.keySet();
-			for(Object ks : keySet) {
-				List<String> ls=profile.get(ks);
-				//logger.debug("  key:"+ks.toString());
-				for (String vs : ls) { 
-					//logger.debug("    vs:"+vs);
-					if (account.getAttribute(ks.toString()).contains(vs)) {
-						returnValue=true;
-						//logger.debug("    vs:"+vs+"** : "+account.getAttribute(ks.toString())+"T/F:"+account.getAttribute(ks.toString()).contains(vs));
-					}
-				}
+			Set<String> keySet = profile.keySet();
+			for(String attribute : keySet) {
+				List<String> profileValues=profile.get(attribute);
+				List<String> accountValues=account.getAttributes(attribute);
+				for(String accountValue:accountValues)
+					if(profileValues.contains(accountValue))		
+						return true;																					
 			}
 		} else
-			returnValue=true;
+			return true;
 		
-		return returnValue;
+		return false;
     }
 
 	/**
