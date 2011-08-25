@@ -12,7 +12,18 @@
     .thirdColumn {
     vertical-align: top;
     padding-top: 6px;
+    } 
+    
+    .viewCol1 {
+     vertical-Align: top;
+     padding-top: 6px;
     }
+    
+    .viewCol2 {
+     padding-top: 6px;
+    }
+    
+    
     
     .firstStepImage {
     height: 53px;
