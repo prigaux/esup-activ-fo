@@ -500,10 +500,12 @@ public class AccountController extends AbstractContextAwareController implements
 		}catch (UserPermissionException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
+			sessionController.restart();
 		
 		}catch (LoginException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
+			sessionController.restart();
 			
 		}
 		return null;
@@ -666,7 +668,7 @@ public class AccountController extends AbstractContextAwareController implements
 		    for(int i=0;i<buildlist.size();i++)
 			{													
 					
-				logger.debug("currentAccount attribute : "+currentAccount.getAttributes(buildlist.get(i).getName()));
+				logger.debug("currentAccount attribute : "+buildlist.get(i).getName()+" "+currentAccount.getAttributes(buildlist.get(i).getName()));
 				
 				//listBeanPersoInfo.get(i).getName().contains(attributesInfos)
 				
@@ -1339,7 +1341,8 @@ public class AccountController extends AbstractContextAwareController implements
 			List<BeanField> bflist=cbf.getListBeanField();
 			for(BeanField bf: bflist) {
 			    logger.debug("Beanfield : "+bf);
-				listDataChangeInfos.add(bf);
+			    if(!listDataChangeInfos.contains(bf))
+			    	listDataChangeInfos.add(bf);
 			}
 		}
 	}
