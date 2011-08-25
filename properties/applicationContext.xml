@@ -52,4 +52,5 @@
 	<import resource="web/fieldLogin.xml" />
 	<import resource="web/fieldNewLogin.xml" />
     <import resource="web/infoDataChange.xml" />
+       <import resource="web/infoDataView.xml" />
 </beans>
