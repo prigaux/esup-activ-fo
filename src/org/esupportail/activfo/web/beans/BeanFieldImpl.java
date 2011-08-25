@@ -125,8 +125,9 @@ public class BeanFieldImpl<T> implements BeanField<T> {
     	   bmv.setUseConvertedValue(useConvertedValue);
     	   values.add(bmv);				
        }
-       
-		return this.values;
+       if(!values.isEmpty())
+			value=(T)values.get(0).getValue();
+	   return this.values;
 	}
 
 	public void setValues(List<BeanMultiValue> values){
