@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.exceptions.AuthentificationException;
@@ -403,6 +404,14 @@ public class AccountController extends AbstractContextAwareController implements
 				this.getDomainService().updatePersonalInformations(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),hashBeanPersoInfo);
 					
 				this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
+				//Maj Account
+				Set<String> keySet=hashBeanPersoInfo.keySet();
+				for(String key:keySet)
+					if(hashBeanPersoInfo.get(key)!=null)
+						this.accountDescr.put(key, hashBeanPersoInfo.get(key));
+				this.updateCurrentAccount();
+				
+				logger.debug("Informations Account mises à jour :"+accountDescr.toString());
 				
 				if (dataChange) this.sendMessage(oldValue,newValue);
 				
