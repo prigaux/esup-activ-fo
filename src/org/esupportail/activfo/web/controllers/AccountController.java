@@ -320,8 +320,7 @@ public class AccountController extends AbstractContextAwareController implements
 			
 		}catch (AuthentificationException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
-			
+			addErrorMessage(null, statusStudent.equals(currentAccount.getOneRadioValue()) ? "IDENTIFICATION.MESSAGE.INVALIDACCOUNT.STUDENT" : "IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
 		}catch (LoginException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
