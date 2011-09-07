@@ -33,14 +33,14 @@
       <t:htmlTag value="h2" styleClass="expand" rendered="#{category.access}" ><h:outputText value="#{msgs[category.title]}"/></t:htmlTag>
 	 
 	  <t:div styleClass="collapse" >
-	   <h:dataTable value="#{category.listBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="viewCol1,viewCol2">	  
-	   <h:column  >						
+	   <h:dataTable value="#{category.profilingListBeanField}" rendered="#{category.access&&#beanfield.value!=''}" var="beanfield" columnClasses="viewCol1,viewCol2">	  
+	   <h:column>						
 		  <e:outputLabel value="#{msgs[beanfield.key]}" rendered="#{beanfield.value!=''&&beanfield.size>1}"/>
 		  <e:outputLabel value="#{msgs[beanfield.key]}" rendered="#{beanfield.value!=''&&beanfield.size<=1}"/>
 	   </h:column>
 	   <h:column >        
-        <t:dataList value="#{beanfield.values}" var="sub">
-		    <t:div styleClass="portlet-section-text">
+        <t:dataList value="#{beanfield.values}" var="sub" rendered="#{beanfield.value!=''}">
+		    <t:div styleClass="portlet-section-text" rendered="#{sub.value!=''}">
 			    <h:outputText value="#{sub.value}" converter="#{beanfield.converter}" rendered="#{sub.value!=''}"/>
 	        </t:div>
          </t:dataList>                 

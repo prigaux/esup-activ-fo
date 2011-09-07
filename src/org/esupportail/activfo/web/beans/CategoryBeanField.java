@@ -14,6 +14,8 @@ public interface CategoryBeanField {
 	public String getName();
 
 	public void setName(String name);
+		
+	public List<BeanField> getProfilingListBeanField();
 	
 	public List<BeanField> getListBeanField();
 	
@@ -29,4 +31,7 @@ public interface CategoryBeanField {
 	
 	public boolean getAccess();
 	
+	public HashMap<BeanField, HashMap<String, List<String>>> getBeanFieldProfile();
+	
+	public void setBeanFieldProfile(HashMap<BeanField, HashMap<String, List<String>>> beanFieldProfile);
 }

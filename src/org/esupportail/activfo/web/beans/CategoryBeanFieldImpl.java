@@ -18,6 +18,7 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	private String name;
 	private List<BeanField> listBeanField=new ArrayList<BeanField>(); 
 	private HashMap<String,List<String>> profile;
+	private HashMap<BeanField,HashMap<String,List<String>>> beanFieldProfile;
 	private  Account account;
 	private final Logger logger = new LoggerImpl(getClass());
 	
@@ -25,13 +26,13 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
 	 */
 	public void afterPropertiesSet() throws Exception {
-		if ((profile==null && account !=null))  {
+		if (profile==null && beanFieldProfile==null && account!=null)  {
 			Assert.notNull(this.profile, 
-					"property profile of class " + this.getClass().getName() + " can not be null");
-			Assert.hasText(this.profile.toString(),"property profile of class  " + this.getClass().getName()+ " can not be null");
+					"property profile or beanFieldProfile of class " + this.getClass().getName() + " can not be null");
+			Assert.hasText(this.profile.toString(),"property profile or beanFieldProfile of class  " + this.getClass().getName()+ " can not be null");
 		}
 		
-		if (profile!=null && account ==null)  {
+		if ((profile!=null ||beanFieldProfile!=null) && account==null)  {
 			Assert.notNull(this.account, 
 					"property account of class " + this.getClass().getName() + " can not be null");
 			Assert.hasText(this.account.toString(),"property account of class  " + this.getClass().getName()+ " can not be null");
@@ -65,6 +66,37 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	/**
+	 * @return the profiling listBeanField
+	 */
+	//TODO améliorer la lisibilité de l'algo
+	public List<BeanField> getProfilingListBeanField() {
+		if(beanFieldProfile==null) return listBeanField;
+		
+		List<BeanField> profilingListBeanField = new ArrayList<BeanField>();
+		for(BeanField beanField:listBeanField){
+			HashMap<String,List<String>> fieldProfiling=beanFieldProfile.get(beanField);
+			boolean nextBeanField=false;
+			if(fieldProfiling!=null && account!=null){
+				Set<String> keySet = fieldProfiling.keySet();
+				for(String attribute : keySet) {
+					List<String> profileValues=fieldProfiling.get(attribute);
+					List<String> accountValues=account.getAttributes(attribute);
+					for(String profileValue:profileValues)
+						if(accountValues.contains(profileValue)){		
+							profilingListBeanField.add(beanField);
+							nextBeanField=true;
+							break;
+						}
+					if(nextBeanField) break; //Pas besoin de tester les autres attributs du beanField courant
+				}				
+			}
+			else profilingListBeanField.add(beanField);			
+		}	
+		
+		return profilingListBeanField;
 	}
 
 	/**
@@ -124,6 +156,21 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	 */
 	public void setAccount(Account account) {
 		this.account = account;
+	}
+
+	/**
+	 * @return the beanFieldProfile
+	 */
+	public HashMap<BeanField, HashMap<String, List<String>>> getBeanFieldProfile() {
+		return beanFieldProfile;
+	}
+
+	/**
+	 * @param beanFieldProfile the beanFieldProfile to set
+	 */
+	public void setBeanFieldProfile(
+			HashMap<BeanField, HashMap<String, List<String>>> beanFieldProfile) {
+		this.beanFieldProfile = beanFieldProfile;
 	}
 
 	

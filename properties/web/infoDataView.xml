@@ -17,11 +17,9 @@
 		<property name="account" ref="account"/>
 		<property name="profile">
 		  <map>
-		    <entry key="eduPersonPrimaryAffiliation">
+		    <entry key="supannListeRouge">
 		      <list>
-		        <value>employee</value>
-		        <value>researcher</value>
-		        <value>faculty</value>
+		        <value>FALSE</value>		        
 		      </list>
 		    </entry>
 		  </map>
@@ -95,8 +93,7 @@
 		    <ref bean="beanHomePostalAddress"/>
 		    <ref bean="beanEmailPerso"/>		
 		    <ref bean="beanMobilePhone"/>
-		    <ref bean="beanSupannEntiteAffectation"/>
-		    
+		    <ref bean="beanSupannEntiteAffectation"/>		    
 		  </list>
 		</property> 
 	</bean>
@@ -132,25 +129,37 @@
 		</property> 
 	</bean>
 	
-	<bean
-		id="beanPersonalPageDirectory"
+	<bean id="beanPersonalPageDirectory"
 		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
-		scope="session"
-		>
-
+		scope="session">
 		<property name="title" value="INFO.PERSONALPAGE.TEXT.LABEL"/>
 		<property name="name" value="personalPageInfo"/>
 		<property name="account" ref="account"/>
 		<property name="profile">
 		  <map>
-		    <entry key="eduPersonPrimaryAffiliation">
+		    <entry key="eduPersonAffiliation">
 		      <list>
 		        <value>researcher</value>
 		      </list>
 		    </entry>
 		  </map>
 		</property>
-
+		<property name="beanFieldProfile">
+		<map>		 	
+			<entry>
+			<key>
+				<ref bean="beanFax"/>
+			</key>
+			<map>
+				<entry key="supannListeRouge">
+					<list>
+		       	 		<value>FALSE</value>
+		      		</list>		
+				</entry>
+			</map>
+			</entry>
+		</map>
+		</property>
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanDisplayName"/>
