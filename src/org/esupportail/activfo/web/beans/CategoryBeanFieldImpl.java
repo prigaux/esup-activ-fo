@@ -71,32 +71,29 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	/**
 	 * @return the profiling listBeanField
 	 */
-	//TODO améliorer la lisibilité de l'algo
 	public List<BeanField> getProfilingListBeanField() {
 		if(beanFieldProfile==null) return listBeanField;
 		
 		List<BeanField> profilingListBeanField = new ArrayList<BeanField>();
 		for(BeanField beanField:listBeanField){
-			HashMap<String,List<String>> fieldProfiling=beanFieldProfile.get(beanField);
-			boolean nextBeanField=false;
-			if(fieldProfiling!=null && account!=null){
-				Set<String> keySet = fieldProfiling.keySet();
-				for(String attribute : keySet) {
-					List<String> profileValues=fieldProfiling.get(attribute);
-					List<String> accountValues=account.getAttributes(attribute);
-					for(String profileValue:profileValues)
-						if(accountValues.contains(profileValue)){		
-							profilingListBeanField.add(beanField);
-							nextBeanField=true;
-							break;
-						}
-					if(nextBeanField) break; //Pas besoin de tester les autres attributs du beanField courant
-				}				
-			}
-			else profilingListBeanField.add(beanField);			
-		}	
-		
+			if (isBeanFieldAllowed(beanField))
+				profilingListBeanField.add(beanField);			
+		}		
 		return profilingListBeanField;
+	}
+
+	private boolean isBeanFieldAllowed(BeanField beanField) {
+		HashMap<String,List<String>> fieldProfiling=beanFieldProfile.get(beanField);
+		if(fieldProfiling ==null || account==null) return true;
+		
+		for(String attribute : fieldProfiling.keySet()) {
+			List<String> profileValues=fieldProfiling.get(attribute);
+			List<String> accountValues=account.getAttributes(attribute);
+			for(String profileValue:profileValues)
+				if(accountValues.contains(profileValue))		
+					return true;						
+		}
+		return false;
 	}
 
 	/**
