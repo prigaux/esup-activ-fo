@@ -34,7 +34,7 @@ a:active, a:focus {
 }
 .expand a:link, .expand a:visited {
   border-width:1px;
-  background-image:url("/media/arrow-down.gif"),url("/media/idcback2.jpg");
+  background-image:url("/media/images/arrow-down.gif"),url("/media/images/idcback2.jpg");
   background-repeat:no-repeat,repeat;
   background-position:5px 50%;
   color : white;
@@ -51,7 +51,7 @@ a:active, a:focus {
 .expand a.open:link, .expand a.open:visited {
   border-style:solid;
   /*background:#c9f1a5 url(/media/arrow-up.gif) no-repeat 98% 50%*/
-  background-image:url(/media/arrow-up.gif),url(/media/idcback1.jpg);
+  background-image:url(/media/images/arrow-up.gif),url(/media/images/idcback1.jpg);
   background-repeat:no-repeat,repeat;
   background-position:5px 50%;
   color : white;

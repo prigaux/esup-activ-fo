@@ -18,7 +18,7 @@
 	
 	<t:div styleClass="firstStepImage" rendered="#{accountController.activ == true}">
 	<t:htmlTag styleClass="processSteps" value="ul">
-	<t:htmlTag styleClass="homeStep" value="li"><t:graphicImage title="Acceuil" value="/media/home.jpg"  style="border: 0;cursor:pointer;" onclick="simulateLinkClick('restart:restartButton');"/></t:htmlTag>
+	<t:htmlTag styleClass="homeStep" value="li"><t:graphicImage title="Acceuil" value="/media/images/home.jpg"  style="border: 0;cursor:pointer;" onclick="simulateLinkClick('restart:restartButton');"/></t:htmlTag>
 	<t:htmlTag styleClass="currentTab" value="li"><t:outputText escape="false" value="#{msgs['ACTIVATION.COMPTE.ETAPE1.TEXT']}" /></t:htmlTag>
 	
 	<t:htmlTag styleClass="secondStep" value="li">
@@ -38,7 +38,7 @@
 	
 	<t:div styleClass="firstStepImage5fleches" rendered="#{accountController.reinit == true}">
 	<t:htmlTag styleClass="processSteps" value="ul">
-	    <t:htmlTag styleClass="homeStep" value="li"><t:graphicImage title="Accueil" value="/media/home.jpg"  style="border: 0;cursor:pointer;" onclick="simulateLinkClick('restart:restartButton');"/></t:htmlTag>
+	    <t:htmlTag styleClass="homeStep" value="li"><t:graphicImage title="Accueil" value="/media/images/home.jpg"  style="border: 0;cursor:pointer;" onclick="simulateLinkClick('restart:restartButton');"/></t:htmlTag>
 		<t:htmlTag styleClass="currentTab" value="li"><t:outputText escape="false" value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE1.TEXT']}"/></t:htmlTag>
 		<t:htmlTag styleClass="secondStep" value="li"><t:outputText escape="false" value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE2.TEXT']}" /></t:htmlTag>
 		<t:htmlTag styleClass="thirdStep" value="li"><t:outputText escape="false" value="#{msgs['IDENTIFICATION.REINITIALISATION.ETAPE3.TEXT']}"/></t:htmlTag>
@@ -66,7 +66,7 @@
              	</h:selectOneMenu>
 			</h:column><input style="width:100px" />
 			<h:column>									
-				<t:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
+				<t:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
 			</h:column>													
 		</h:dataTable>
 				

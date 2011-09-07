@@ -1,6 +1,6 @@
 <%@include file="_include.jsp"%>
 
-<script type="text/javascript" src="/media/qtip/jquery.js"></script>
+<script type="text/javascript" src="/media/scripts/jquery.js"></script>
 <script type="text/javascript">
  $(document).ready(function(){  
    if($("#[value='activation']").attr("checked") ||
