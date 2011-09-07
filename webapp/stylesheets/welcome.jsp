@@ -10,11 +10,11 @@
    
    $(":radio").click(function(){
      if(this.value=="activation" || this.value=="reinitialisation"){       
-       $("#[id='welcomeForm:statusDiv']").slideDown();     
+       $("#[id='welcomeForm:statusDiv']").show();     
     }
      else 
      if(this.value=="passwordchange" || this.value=="loginchange" || this.value=="datachange"){        
-           $("#[id='welcomeForm:statusDiv']").slideUp();                           
+           $("#[id='welcomeForm:statusDiv']").hide();                           
            $("#[name='welcomeForm:statusRadio']:first").attr("checked","checked");                   
                          
           }
