@@ -14,7 +14,7 @@ import org.springframework.beans.factory.InitializingBean;
 /**
  * The class that represent net account.
  */
-public class Account implements InitializingBean, Resettable {
+public class Account implements InitializingBean{
 	
 	private static final long serialVersionUID = 5854730800181753413L;
 	
