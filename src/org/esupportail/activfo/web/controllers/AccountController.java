@@ -456,7 +456,7 @@ public class AccountController extends AbstractContextAwareController implements
 			if (dataChange) {
 				
 				if (currentAccount.getAttribute(accountCodeKey)!=null) 
-					accountDescr=this.getDomainService().authentificateUserWithCodeKey(sessionController.getCurrentUser().getId(),currentAccount.getAttribute(accountCodeKey),attrDataChange);
+					accountDescr=this.getDomainService().authentificateUserWithCodeKey(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),attrDataChange);
 				else
 					accountDescr=this.getDomainService().authentificateUserWithCas(sessionController.getCurrentUser().getId(),sessionController.getProxyTicket(),targetService,attrDataChange);
 				
