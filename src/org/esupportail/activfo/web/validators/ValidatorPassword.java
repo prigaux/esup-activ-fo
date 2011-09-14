@@ -11,6 +11,7 @@ import org.esupportail.commons.beans.AbstractI18nAwareBean;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 
+import org.apache.commons.lang.CharUtils;
 import org.apache.commons.lang.StringUtils;
 
 
@@ -105,20 +106,14 @@ public class ValidatorPassword extends AbstractI18nAwareBean implements Validato
 					}
 				}
 				
-				String[] stringArrayPassword = new String[passwd.length()];  
+				for(int index=0;index<passwd.length();index++) 
+					if (!CharUtils.isAsciiPrintable(passwd.charAt(index)) ) 
+						throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",passwd.charAt(index)));
 				
-				for(int index=0;index<passwd.length();index++) {
-					stringArrayPassword[index]=passwd.substring(index, index+1);
-					if (!StringUtils.isAsciiPrintable(stringArrayPassword[index]) ) 
-						throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",stringArrayPassword[index]));
-					
-                    if (StringUtils.isBlank(stringArrayPassword[index])) {
-						specialmessage="espace";
-						throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",specialmessage));
-					}
-					
+				if(StringUtils.isBlank(passwd)) {
+					specialmessage="espace";
+					throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",specialmessage));
 				}
-				
 				
 				// SPECIAL CHAR
 				p = Pattern.compile(".??[:,!,@,#,$,%,^,&,*,?,_,~]");
