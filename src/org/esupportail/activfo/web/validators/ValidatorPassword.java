@@ -8,6 +8,12 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
+
+import org.apache.commons.lang.StringUtils;
+
+
 
 public class ValidatorPassword extends AbstractI18nAwareBean implements Validator{
 	
@@ -16,22 +22,8 @@ public class ValidatorPassword extends AbstractI18nAwareBean implements Validato
 	 */
 	private static final long serialVersionUID = 8849185735359561457L;
 	
-	private String caracterForbidden;
-
-	/**
-	 * @return the caracterForbidden
-	 */
-	public String getCaracterForbidden() {
-		return caracterForbidden;
-	}
-
-	/**
-	 * @param caracterForbidden the caracterForbidden to set
-	 */
-	public void setCaracterForbidden(String caracterForbidden) {
-		this.caracterForbidden = caracterForbidden;
-	}
-
+	private final Logger logger = new LoggerImpl(getClass());
+	
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		
 			String PASSWORD_MIXED_CASE = "1";
@@ -113,15 +105,20 @@ public class ValidatorPassword extends AbstractI18nAwareBean implements Validato
 					}
 				}
 				
-				p=Pattern.compile(caracterForbidden);
-				m=p.matcher(passwd);
+				String[] stringArrayPassword = new String[passwd.length()];  
+				
+				for(int index=0;index<passwd.length();index++) {
+					stringArrayPassword[index]=passwd.substring(index, index+1);
+					if (!StringUtils.isAsciiPrintable(stringArrayPassword[index]) ) 
+						throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",stringArrayPassword[index]));
 					
-				if(m.find()) {
-					if (m.group(0).equals(" "))
+                    if (StringUtils.isBlank(stringArrayPassword[index])) {
 						specialmessage="espace";
-					else specialmessage=m.group(0);
-					throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",specialmessage));
+						throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",specialmessage));
+					}
+					
 				}
+				
 				
 				// SPECIAL CHAR
 				p = Pattern.compile(".??[:,!,@,#,$,%,^,&,*,?,_,~]");
