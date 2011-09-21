@@ -372,30 +372,20 @@ public class AccountController extends AbstractContextAwareController implements
 						else valueBeanMulti=bmv.getValue();
 						//if (beanPersoInfo.getName().contains("mailForwardingAddress")) valueBeanMulti=currentAccount.getEmailPerso();
 						
-						if(dataChange && !currentAccount.getAttributes(beanPersoInfo.getName()).contains(bmv.getValue()) && !beanPersoInfo.isUpdateable()) {
+						if(!currentAccount.getAttributes(beanPersoInfo.getName()).contains(bmv.getValue()) && !beanPersoInfo.isUpdateable()) {
 							oldValue.put(beanPersoInfo.getName(), currentAccount.getAttributes(beanPersoInfo.getName()).toString());
 							newValue.put(beanPersoInfo.getName(), bmv.getValue());
 							//logger.debug("Attribute,oldValue and newValue : "+beanPersoInfo.getName()+", "+currentAccount.getAttributes(beanPersoInfo.getName()).toString()+","+bmv.getValue());
 						}
 						j++;
+					}									
+					if (beanPersoInfo.isUpdateable() && (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null) ){
+						hashBeanPersoInfo.put(beanPersoInfo.getName(), valueBeanMulti);
 					}
-					
-					if(dataChange) {
-						if (beanPersoInfo.isUpdateable() && (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null) ){
-							hashBeanPersoInfo.put(beanPersoInfo.getName(), valueBeanMulti);
-						}
-						else if (beanPersoInfo.isUpdateable() && ("".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()==null) ) {
-							DataChangeMaps.put(beanPersoInfo.getName(), valueBeanMulti);
-							hashBeanPersoInfo.put(beanPersoInfo.getName(), null);
-						}
-					}
-					else {
-						if (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null ) {
-							hashBeanPersoInfo.put(beanPersoInfo.getName(), valueBeanMulti);
-						} else 
-							hashBeanPersoInfo.put(beanPersoInfo.getName(), null);
-						
-					}
+					else if (beanPersoInfo.isUpdateable() && ("".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()==null) ) {
+						DataChangeMaps.put(beanPersoInfo.getName(), valueBeanMulti);
+						hashBeanPersoInfo.put(beanPersoInfo.getName(), null);
+					}					
 					i++;
 				}
 				logger.info("Informations personnelles envoy�es au BO pour mise � jour: "+hashBeanPersoInfo.toString());
@@ -412,7 +402,7 @@ public class AccountController extends AbstractContextAwareController implements
 				
 				logger.debug("Informations Account mises à jour :"+accountDescr.toString());
 				
-				if (dataChange) this.sendMessage(oldValue,newValue);
+				this.sendMessage(oldValue,newValue);
 				
 				if (activ){
 					return "gotoCharterAgreement";
@@ -790,7 +780,7 @@ public class AccountController extends AbstractContextAwareController implements
 			logger.debug("Error Handling for InternetAddress ");
 		}
 		
-		if (dataChange && newValue.size()>0)
+		if (newValue.size()>0)
 			smtpService.send(mail, subjectDataChange, mailBody, "");
 	}
 	
