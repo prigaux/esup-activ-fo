@@ -751,15 +751,16 @@ public class AccountController extends AbstractContextAwareController implements
 		}
 		return newPager;	
 	}
-	
+	//TODO externaliser cette fonction. 
+	//Rendre plus générique pour permettre des envois de mail suivant le profil de l'utilisateur
 	public void sendMessage(HashMap<String,String> oldValue, HashMap<String,String> newValue) {
 		
 		InternetAddress mail=null;
 		
 		String mailBody=this.body1DataChange;
 		String mailBody2=this.body2DataChange;
-		mailBody=mailBody.replace("{0}", currentAccount.getAttribute(accountDNKey));
-		mailBody=mailBody.replace("{1}", currentAccount.getAttribute(accountEmpIdKey));
+		mailBody=mailBody.replace("{0}", currentAccount.getAttribute(accountDNKey)!=null?currentAccount.getAttribute(accountDNKey):"");
+		mailBody=mailBody.replace("{1}", currentAccount.getAttribute(accountEmpIdKey)!=null?currentAccount.getAttribute(accountDNKey):"");
 		
 		mailBody=mailBody+mailBody2;
 		
