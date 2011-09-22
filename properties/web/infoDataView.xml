@@ -78,9 +78,9 @@
 		  <map>
 		    <entry key="eduPersonPrimaryAffiliation">
 		      <list>
-		        <value>employee</value>
+		        <value>staff</value>
 		        <value>researcher</value>
-		        <value>faculty</value>
+		        <value>teacher</value>
 		      </list>
 		    </entry>
 		  </map>
