@@ -56,11 +56,16 @@ public class LdapPhoneFaxConverter implements Converter {
     	
     	if ("".equals(strValue))
     		returnValue=null;
-    	else {
+    	else if (strValue.contains("+33")) {
     		newString = strValue.split("\\+33");
     		splitString=newString[1].replaceAll(" ", "");
-    		returnValue="0"+splitString;
+    		if (splitString.substring(0, 1).equals("0"))
+    			returnValue=splitString;
+    		else
+    			returnValue="0"+splitString;
     	}
+    	else
+    		returnValue=strValue;
     	
     	return returnValue;
     }
