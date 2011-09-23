@@ -29,19 +29,15 @@ public class LdapPhoneFaxConverter implements Converter {
     	
     	
     	String strValue=(String) value;
-    	String returnValue=null;
     	if ("".equals(strValue))
     		return 	value;
     	else if (strValue.length()!=10)
     		return strValue;
     	else {
-	    	for(int i=0;i<5;i++) {
-	    		if (i==0) returnValue="+33 "+strValue.substring(1,2);
-	    		else returnValue+=strValue.substring(i*2, i*2+2);
-	    		if (i!=4) returnValue+=" ";
-	    	}
+    		strValue = strValue.replaceAll("(..)(..)(..)(..)(..)", "$1 $2 $3 $4 $5");
+	    	strValue = strValue.replaceAll("^0", "+33 "); 
     	}
-        return returnValue;
+        return strValue;
     }
  
   //Affichage standard
@@ -50,24 +46,12 @@ public class LdapPhoneFaxConverter implements Converter {
 			@SuppressWarnings("unused") final UIComponent component, 
 			final Object value) {
     	String strValue = (String) value;
-    	String newString[]=null;
-    	String splitString=null;
-    	String returnValue=null;
     	
     	if ("".equals(strValue))
-    		returnValue=null;
-    	else if (strValue.contains("+33")) {
-    		newString = strValue.split("\\+33");
-    		splitString=newString[1].replaceAll(" ", "");
-    		if (splitString.substring(0, 1).equals("0"))
-    			returnValue=splitString;
-    		else
-    			returnValue="0"+splitString;
-    	}
+    		return null;
     	else
-    		returnValue=strValue;
+    		strValue=strValue.replaceAll(" ", "").replaceAll("^\\+330", "0").replaceAll("^\\+33", "0");
     	
-    	return returnValue;
+    	return strValue;
     }
-	
 }
