@@ -54,7 +54,7 @@
 	
 		<h:dataTable value="#{accountController.listInfoToValidate}" var="entry"> 
 		 	<h:column>						  					
-				<e:outputLabel value="#{msgs[entry.key]}" />
+				<t:outputText styleClass="labeltext"  value="#{msgs[entry.key]}" />
 			</h:column>
 			<h:column>						
 				<e:inputText value="#{entry.value}"  required="#{entry.required}" style="width:100%"  validator="#{entry.validator.validate}" converter="#{entry.converter}" rendered="#{entry.converter!=null&&entry.validator!=null&&entry.fieldType=='inputText'}"/>

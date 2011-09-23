@@ -63,7 +63,7 @@
 	<h:form id="accountForm" >
 	  <h:dataTable value="#{accountController.listBeanPersoInfo}" var="entry" columnClasses="firstColumn,secondColumn,thirdColumn"> 
 		<h:column >						
-		  <e:outputLabel value="#{msgs[entry.key]}" />
+		  <t:outputText styleClass="labeltext" value="#{msgs[entry.key]}" />
 		</h:column>
 		<h:column>
 		<t:dataList value="#{entry.values}" var="sub">

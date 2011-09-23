@@ -144,3 +144,14 @@
 	padding-top:10px !important;
 	width:135px !important;
 	}
+	
+	.labeltexttop {
+	font-weight:bold;
+	font-size:12px;
+	vertical-align:top;
+	}
+	.labeltext {
+	font-weight:bold;
+	font-size:12px;
+	}
+	

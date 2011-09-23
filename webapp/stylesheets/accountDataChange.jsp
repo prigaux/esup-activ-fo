@@ -38,11 +38,8 @@
 	   <h:dataTable  value="#{category.listBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn">
 	  
 	   <h:column  >
-	    						
-		  <t:outputText  style="font-weight:bold;font-size:12px;vertical-align:top;" value="#{msgs[beanfield.key]}" rendered="#{beanfield.size>1}"/>
-		  <t:outputText  style="font-weight:bold;font-size:12px;" value="#{msgs[beanfield.key]}" rendered="#{beanfield.size<=1}"/>
-		  
-		  
+		  <t:outputText styleClass="labeltexttop"  value="#{msgs[beanfield.key]}" rendered="#{beanfield.size>1}"/>
+		  <t:outputText styleClass="labeltext"  value="#{msgs[beanfield.key]}" rendered="#{beanfield.size<=1}"/>
 	   </h:column>
 	   <h:column >
 	    

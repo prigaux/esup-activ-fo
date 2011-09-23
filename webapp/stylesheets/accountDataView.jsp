@@ -35,8 +35,8 @@
 	  <t:div styleClass="collapse" >
 	   <h:dataTable value="#{category.profilingListBeanField}" rendered="#{category.access&&#beanfield.value!=''}" var="beanfield" columnClasses="viewCol1,viewCol2">	  
 	   <h:column>						
-		  <e:outputLabel value="#{msgs[beanfield.key]}" rendered="#{beanfield.value!=''&&beanfield.size>1}"/>
-		  <e:outputLabel value="#{msgs[beanfield.key]}" rendered="#{beanfield.value!=''&&beanfield.size<=1}"/>
+		  <t:outputText styleClass="labeltexttop" value="#{msgs[beanfield.key]}" rendered="#{beanfield.value!=''&&beanfield.size>1}"/>
+		  <t:outputText styleClass="labeltext" value="#{msgs[beanfield.key]}" rendered="#{beanfield.value!=''&&beanfield.size<=1}"/>
 	   </h:column>
 	   <h:column >        
         <t:dataList value="#{beanfield.values}" var="sub" rendered="#{beanfield.value!=''}">
