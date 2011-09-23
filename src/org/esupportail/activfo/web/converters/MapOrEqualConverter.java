@@ -36,8 +36,6 @@ public class MapOrEqualConverter implements Converter {
 			@SuppressWarnings("unused") final UIComponent component, 
 			final Object value) {
      	
-    	logger.debug("value.toString : "+value.toString());
-    	
     	if (mapping.get(value)==null) return value.toString();
     	else return mapping.get(value).toString();
     }
