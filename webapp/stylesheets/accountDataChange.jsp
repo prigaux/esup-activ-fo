@@ -35,11 +35,14 @@
       <t:htmlTag value="h2" styleClass="expand" rendered="#{category.access}" ><h:outputText value="#{msgs[category.title]}"/></t:htmlTag>
 	 
 	  <t:div styleClass="collapse" >
-	   <h:dataTable value="#{category.listBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn">
+	   <h:dataTable  value="#{category.listBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn">
 	  
-	   <h:column  >						
-		  <e:outputLabel style="vertical-align:top;" value="#{msgs[beanfield.key]}" rendered="#{beanfield.size>1}"/>
-		  <e:outputLabel value="#{msgs[beanfield.key]}" rendered="#{beanfield.size<=1}"/>
+	   <h:column  >
+	    						
+		  <t:outputText  style="font-weight:bold;font-size:12px;vertical-align:top;" value="#{msgs[beanfield.key]}" rendered="#{beanfield.size>1}"/>
+		  <t:outputText  style="font-weight:bold;font-size:12px;" value="#{msgs[beanfield.key]}" rendered="#{beanfield.size<=1}"/>
+		  
+		  
 	   </h:column>
 	   <h:column >
 	    
@@ -47,7 +50,7 @@
 		    
 		    <t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue)}" styleClass="#{beanfield.name}show">
 			    <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&(sub.value!=''||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-	            <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" 								   			   required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+	            <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 	            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" >
                   <f:selectItems value="#{beanfield.displayItems}" />
              	</h:selectOneMenu>    
@@ -68,7 +71,7 @@
              	</h:selectManyCheckbox>        
         </t:div>    
         <t:div rendered="#{beanfield.fieldType=='selectOneRadio'}">        
-            	<h:selectOneRadio value="#{beanfield.value}">
+            	<h:selectOneRadio value="#{beanfield.value}" rendered="#{beanfield.fieldType=='selectOneRadio'}">
                   <f:selectItems value="#{beanfield.displayItems}" />
              	</h:selectOneRadio>              
         </t:div>                            
