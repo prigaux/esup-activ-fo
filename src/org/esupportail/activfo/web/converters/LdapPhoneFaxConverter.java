@@ -29,14 +29,10 @@ public class LdapPhoneFaxConverter implements Converter {
     	
     	
     	String strValue=(String) value;
-    	if ("".equals(strValue))
-    		return 	value;
-    	else if (strValue.length()!=10)
-    		return strValue;
-    	else {
-    		strValue = strValue.replaceAll("(..)(..)(..)(..)(..)", "$1 $2 $3 $4 $5");
-	    	strValue = strValue.replaceAll("^0", "+33 "); 
-    	}
+    	
+    	strValue = strValue.replaceAll("(..)(..)(..)(..)(..)", "$1 $2 $3 $4 $5");
+	    strValue = strValue.replaceAll("^0", "+33 "); 
+    	
         return strValue;
     }
  
@@ -47,10 +43,7 @@ public class LdapPhoneFaxConverter implements Converter {
 			final Object value) {
     	String strValue = (String) value;
     	
-    	if ("".equals(strValue))
-    		return null;
-    	else
-    		strValue=strValue.replaceAll(" ", "").replaceAll("^\\+330", "0").replaceAll("^\\+33", "0");
+    	strValue=strValue.replaceAll(" ", "").replaceAll("^\\+330", "0").replaceAll("^\\+33", "0");
     	
     	return strValue;
     }
