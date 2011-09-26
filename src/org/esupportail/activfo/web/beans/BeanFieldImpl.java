@@ -145,8 +145,10 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 			else for(BeanMultiValue bmv : values)				
 					selectedItems.add(bmv.getValue());
 		}
-		for(BeanMultiValue bmv : values) 
+		for(BeanMultiValue bmv : values){ 
 			bmv.setConverter(converter);
+			bmv.setUseConvertedValue(useConvertedValue);
+		}
 		
 		if(!values.isEmpty()){
 			value=(T)values.get(0).getValue();
