@@ -759,6 +759,7 @@ public class AccountController extends AbstractContextAwareController implements
 		
 		String mailBody=this.body1DataChange;
 		String mailBody2=this.body2DataChange;
+		String newSubject = null;
 		mailBody=mailBody.replace("{0}", currentAccount.getAttribute(accountDNKey)!=null?currentAccount.getAttribute(accountDNKey):"");
 		mailBody=mailBody.replace("{1}", currentAccount.getAttribute(accountEmpIdKey)!=null?currentAccount.getAttribute(accountDNKey):"");
 		
@@ -781,8 +782,11 @@ public class AccountController extends AbstractContextAwareController implements
 			logger.debug("Error Handling for InternetAddress ");
 		}
 		
+		
+		newSubject=subjectDataChange.replace("{0}", currentAccount.getAttribute(accountDNKey)!=null?currentAccount.getAttribute(accountDNKey):"");
+		
 		if (newValue.size()>0)
-			smtpService.send(mail, subjectDataChange, mailBody, "");
+			smtpService.send(mail, newSubject, mailBody, "");
 	}
 	
 	private void buildChannels(List<String>listPossibleChannels){
