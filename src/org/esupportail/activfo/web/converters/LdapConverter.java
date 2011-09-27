@@ -40,18 +40,19 @@ public class LdapConverter implements Converter {
 			@SuppressWarnings("unused") final UIComponent component, 
 			final Object value) {
 
+ 
     	String base = value.toString();
-    	
-    	logger.debug("base value : "+base);
     	
     	String filter = "(supannCodeEntite="+base+")";
     	String returnValue=null;
-    	
+    	try {
     	List<LdapEntity> ldapentite = ldapEntityService.getLdapEntitiesFromFilter(filter);
-    	logger.debug("return Value is "+ldapentite.get(0).getAttribute("description"));
     	returnValue=ldapentite.get(0).getAttribute("description");
-        
+    	} catch (Exception e) {
+    		logger.debug("La valeur de rattachement "+base+" n'exsite aps : "+e);
+    	}
     	return returnValue;
+    	
     
     }
 
