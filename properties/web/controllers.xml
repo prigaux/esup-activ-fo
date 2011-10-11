@@ -108,15 +108,7 @@
 		<property name="attributesPersonnelToValidate" value="${attributes.validation.personnel}"/>
 		<property name="attributesOldStudentToValidate" value="${attributes.validation.alumni.student}"/>
 		<property name="attributesAnotherStudentToValidate" value="${attributes.validation.another.student}"/>
-		
-		<property name="channelLabels">
-			<map>
-			 	<entry key="email2gest" value="CHOICE.CANAL.GEST.RADIOBUTTON.LABEL"/>
-		 		<entry key="supannMailPerso" value="CHOICE.CANAL.MAILPERSO.RADIOBUTTON.LABEL"/>
-				<entry key="pager" value="CHOICE.CANAL.PAGER.RADIOBUTTON.LABEL"/>	
-			</map>
-		</property>
-						
+										
 		<property name="smtpService" ref="smtpService"/>
 		<property name="subjectDataChange" value="${datachange.subject}"/>
 		<property name="body1DataChange" value="${datachange.body1.fr}"/>
@@ -124,7 +116,15 @@
 		
 		<property name="exceptionController" ref="exceptionController"/>
 		<property name="targetService" value="${cas.targetService}"/>
-		
+		<property name="channels">
+			<list>
+				<ref bean="codeChannel"/>										
+				<ref bean="supannMailPerso"/>
+				<ref bean="pager"/>		
+				<ref bean="email2gest"/>
+				<ref bean="email2gestetu"/>
+			</list>
+		</property>
 		<property name="listBeanPersoInfo">
 			<list>
 				<ref bean="beanDisplayName"/>
@@ -257,11 +257,46 @@
 	</bean>
 	
 	<bean id="account"
-		class="org.esupportail.activfo.domain.beans.Account"
-		scope="session"
-    	>
+		class="org.esupportail.activfo.domain.beans.Account" scope="session">
 	</bean>
-
+	<bean id="codeChannel"
+		class="org.esupportail.activfo.domain.beans.channels.ChannelImpl">
+		<property name="name" value="codeChannel"/>
+		<property name="label" value="CHANNEL.CODE.LABEL"/>
+		<property name="homeMsg" value="CHANNEL.CODE.HOMEMSG"/>		
+		<property name="codeMsg" value="CHANNEL.CODE.CODEMSG"/>
+	</bean>
+	<bean id="email2gest"
+		class="org.esupportail.activfo.domain.beans.channels.ChannelImpl">
+		<property name="name" value="email2gest"/>
+		<property name="label" value="CHANNEL.GEST.LABEL"/>
+		<property name="homeMsg" value="CHANNEL.GEST.HOMEMSG"/>				
+		<property name="codeMsg" value="CHANNEL.GEST.CODEMSG"/>
+	</bean>
+	<bean id="email2gestetu"
+		class="org.esupportail.activfo.domain.beans.channels.ChannelImpl">
+		<property name="name" value="email2gestetu"/>
+		<property name="label" value="CHANNEL.GESTETU.LABEL"/>
+		<property name="homeMsg" value="CHANNEL.GESTETU.HOMEMSG"/>				
+		<property name="codeMsg" value="CHANNEL.GESTETU.CODEMSG"/>
+	</bean>
+	<bean id="supannMailPerso"
+		class="org.esupportail.activfo.domain.beans.channels.ChannelMailPerso" scope="session">
+		<property name="name" value="supannMailPerso"/>
+		<property name="label" value="CHANNEL.MAILPERSO.LABEL"/>
+		<property name="homeMsg" value="CHANNEL.MAILPERSO.HOMEMSG"/>				
+		<property name="codeMsg" value="CHANNEL.MAILPERSO.CODEMSG"/>
+		<property name="account" ref="account"/>
+	</bean>
+	<bean id="pager"
+		class="org.esupportail.activfo.domain.beans.channels.ChannelPager" scope="session">
+		<property name="name" value="pager"/>
+		<property name="label" value="CHANNEL.PAGER.LABEL"/>		
+		<property name="homeMsg" value="CHANNEL.PAGER.HOMEMSG"/>				
+		<property name="codeMsg" value="CHANNEL.PAGER.CODEMSG"/>
+		<property name="account" ref="account"/>
+	</bean>
+	
 	<!-- uncomment this bean and include _debug.jsp to get debug info
 	<bean id="debugController"
 		class="org.esupportail.commons.web.controllers.DebugController"

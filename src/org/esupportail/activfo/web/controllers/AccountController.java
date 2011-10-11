@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.esupportail.activfo.domain.beans.Account;
+import org.esupportail.activfo.domain.beans.channels.Channel;
 import org.esupportail.activfo.exceptions.AuthentificationException;
 import org.esupportail.activfo.exceptions.ChannelException;
 import org.esupportail.activfo.exceptions.KerberosException;
@@ -62,9 +63,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String accountGestKey;
 	private String accountPossibleChannelsKey;
 	private String accountEmpIdKey;
-	
-	private HashMap<String,String> channelLabels;
-	
+		
 	
 	//liste des champs pour l'affichage des informations personnelles
 	private List<BeanField> listBeanPersoInfo;
@@ -80,6 +79,8 @@ public class AccountController extends AbstractContextAwareController implements
 	private String attributesOldStudentToValidate;
 	private String attributesAnotherStudentToValidate;
 	
+	private List<Channel> availableChannels;
+	
 	
 	//liste g�n�rique des champs pour la validation
 	private List<BeanField> listInfoToValidate;
@@ -89,7 +90,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private List<BeanField> listInfoOldStudentToValidate;
 	private List<BeanField> listInfoAnotherStudentToValidate;
 	
-	private List<BeanField<String>> channels;
+	private List<BeanField<String>> beanFieldChannels;	
 	
 	
 	//liste des champs correspondant aux procedures
@@ -145,6 +146,9 @@ public class AccountController extends AbstractContextAwareController implements
 	private String subjectDataChange;
 	private String body1DataChange;
 	private String body2DataChange;
+	
+	private List<Channel> channels;
+	private String oneChoiceCanal;
 	
 	private SessionController sessionController;
 	private ExceptionController exceptionController;
@@ -289,15 +293,15 @@ public class AccountController extends AbstractContextAwareController implements
 					
 					logger.debug("listpossible "+listPossibleChannels.toString());
 					buildChannels(listPossibleChannels);
-					if (channels.size()>1){						
+					if (beanFieldChannels.size()>1){						
 						this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 						return "gotoChoice"; 	
 					}	
-					else if (channels.size()==1){		
-						currentAccount.setOneChoiceCanal(channels.get(0).getValue());
-						this.getDomainService().sendCode(currentAccount.getAttribute(this.accountIdKey),channels.get(0).getValue());
+					else if (beanFieldChannels.size()==1){		
+						oneChoiceCanal=beanFieldChannels.get(0).getValue();
+						this.getDomainService().sendCode(currentAccount.getAttribute(this.accountIdKey),beanFieldChannels.get(0).getValue());
 						addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
-						logger.debug("Code envoyé via le canal : "+channels.get(0).getValue());
+						logger.debug("Code envoyé via le canal : "+beanFieldChannels.get(0).getValue());
 						return "gotoPushCode";
 					}
 					else{
@@ -334,6 +338,12 @@ public class AccountController extends AbstractContextAwareController implements
 		return null;
 	}
 	
+	public Channel getSentChannel(){		
+		for(Channel c:channels)
+			if(c.getName().equals(oneChoiceCanal))
+				return c;
+		return null;
+	}
 	
 	public String pushChangeInfoPerso() {
 			
@@ -574,8 +584,8 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushChoice(){
 		try{
 			
-			this.getDomainService().sendCode(currentAccount.getAttribute(accountIdKey),currentAccount.getOneChoiceCanal());
-			logger.info("Code envoy� par le FO sur le canal choisi par l'utilisateur");
+			this.getDomainService().sendCode(currentAccount.getAttribute(accountIdKey),oneChoiceCanal);
+			logger.debug("Code demandé par utilisateur pour le recevoir sur le canal : "+oneChoiceCanal);
 			return "gotoPushCode";
 			
 					
@@ -732,25 +742,7 @@ public class AccountController extends AbstractContextAwareController implements
 		currentAccount.setEmailPerso(currentAccount.getAttribute(accountMailPersoKey));
 		currentAccount.setPager(currentAccount.getAttribute(accountPagerKey));
 	}
-	
-	
-	public String getPartialMailPerso(){
-		String mailPerso=currentAccount.getEmailPerso();
-		String newMailPerso="";
-		if (!"".equals(mailPerso)){	
-			newMailPerso="xxxxxx"+mailPerso.substring(6);
-		}
-		return newMailPerso;
-	}
-	
-	public String getPartialPager(){
-		String pager=currentAccount.getPager();
-		String newPager="";
-		if (!"".equals(pager)){
-		newPager=pager.substring(0,6)+"XXXX";
-		}
-		return newPager;	
-	}
+		
 	//TODO externaliser cette fonction. 
 	//Rendre plus générique pour permettre des envois de mail suivant le profil de l'utilisateur
 	public void sendMessage(HashMap<String,String> oldValue, HashMap<String,String> newValue) {
@@ -790,16 +782,16 @@ public class AccountController extends AbstractContextAwareController implements
 	}
 	
 	private void buildChannels(List<String>listPossibleChannels){
-		channels=new ArrayList<BeanField<String>>();
-		for(String possibleChannel:listPossibleChannels){
-			String channelLabel=channelLabels.get(possibleChannel);
-			if(channelLabel!=null){
+		beanFieldChannels=new ArrayList<BeanField<String>>();
+		availableChannels=new ArrayList<Channel>();
+		for(Channel channel:channels)
+			if(listPossibleChannels.contains(channel.getName())){		
 				BeanFieldImpl<String> bean=new BeanFieldImpl<String>();
-				bean.setValue(possibleChannel);
-				bean.setKey(channelLabel);
-				channels.add(bean);
+				bean.setValue(channel.getName());
+				bean.setKey(channel.getLabel());
+				beanFieldChannels.add(bean);	
+				availableChannels.add(channel);
 			}
-		}
 	}
 	
 	public String getAttributesStudentToValidate() {
@@ -1405,28 +1397,11 @@ public class AccountController extends AbstractContextAwareController implements
 		this.targetService = targetService;
 	}
 
-
-	/**
-	 * @return the channelLabels
-	 */
-	public HashMap<String, String> getChannelLabels() {
-		return channelLabels;
-	}
-
-
-	/**
-	 * @param channelLabels the channelLabels to set
-	 */
-	public void setChannelLabels(HashMap<String, String> channelLabels) {
-		this.channelLabels = channelLabels;
-	}
-
-
 	/**
 	 * @param listBeanCanal the listBeanCanal to set
 	 */
 	public void setListBeanCanal(List<BeanField<String>> listBeanCanal) {
-		this.channels = listBeanCanal;
+		this.beanFieldChannels = listBeanCanal;
 	}
 
 
@@ -1434,7 +1409,46 @@ public class AccountController extends AbstractContextAwareController implements
 	 * @return the listBeanCanal
 	 */
 	public List<BeanField<String>> getListBeanCanal() {
+		return beanFieldChannels;
+	}
+
+	/**
+	 * @return the availableChannels
+	 */
+	public List<Channel> getAvailableChannels() {
+		return availableChannels;
+	}
+
+
+	/**
+	 * @return the channels
+	 */
+	public List<Channel> getChannels() {
 		return channels;
+	}
+
+
+	/**
+	 * @param channels the channels to set
+	 */
+	public void setChannels(List<Channel> channels) {
+		this.channels = channels;
+	}
+
+
+	/**
+	 * @return the oneChoiceCanal
+	 */
+	public String getOneChoiceCanal() {
+		return oneChoiceCanal;
+	}
+
+
+	/**
+	 * @param oneChoiceCanal the oneChoiceCanal to set
+	 */
+	public void setOneChoiceCanal(String oneChoiceCanal) {
+		this.oneChoiceCanal = oneChoiceCanal;
 	}
 	
 	

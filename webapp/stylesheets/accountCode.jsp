@@ -18,20 +18,13 @@
 	</t:div>
 	
 	<e:messages />
-		
-		
-	<e:paragraph escape="false" value="#{msgs['CODE.TEXT.MAILPERSO.TOP']}" rendered="#{accountController.currentAccount.oneChoiceCanal==accountController.accountMailPersoKey}">
-		  <f:param value="#{accountController.partialMailPerso}" />
+					
+	<e:paragraph escape="false" value="#{msgs[accountController.sentChannel.codeMsg]}">
+		<f:param value="#{accountController.sentChannel.paramMsg}" />
 	</e:paragraph>
-	
-	<e:paragraph escape="false" value="#{msgs['CODE.TEXT.PAGER.TOP']}" rendered="#{accountController.currentAccount.oneChoiceCanal==accountController.accountPagerKey}">
-		  <f:param value="#{accountController.partialPager}" />
-	</e:paragraph>
-	
-	<e:paragraph escape="false" value="#{msgs['CODE.TEXT.GEST.TOP']}" rendered="#{accountController.currentAccount.oneChoiceCanal==accountController.accountGestKey}">
-		  
-	</e:paragraph>
-	
+		 	
+	<e:paragraph escape="false" value="#{msgs['CHANNEL.SENT.TEXT']}"/>
+		  	
 	<h:form id="accountForm" >
 		<e:panelGrid columns="3">
 			<e:outputLabel for="code" value="#{msgs[beanCode.key]}" />

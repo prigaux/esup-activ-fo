@@ -26,23 +26,17 @@
 
 <e:messages />
 
-	<h:form id="accountForm" >
+	
+	<t:dataList value="#{accountController.availableChannels}" var="entry">
+		<e:paragraph escape="false" value="#{msgs[entry.homeMsg]}">
+			<f:param value="#{entry.paramMsg}" />
+		</e:paragraph>			
+	</t:dataList>
+	<e:paragraph escape="false" value="#{msgs['CHANNEL.HOME.TEXT']}"/>
 		
-		<e:paragraph escape="false" value="#{msgs['CHOICE.TEXT.WITHOUTEMAIL.TOP']}" rendered="#{accountController.partialMailPerso==''&&accountController.partialPager!=''}">
-		  <f:param value="#{accountController.partialPager}" />
-		</e:paragraph>
-		
-		<e:paragraph escape="false" value="#{msgs['CHOICE.TEXT.WITHOUTPHONE.TOP']}" rendered="#{accountController.partialMailPerso!=''&&accountController.partialPager==''}">
-		  <f:param value="#{accountController.partialMailPerso}" />
-		</e:paragraph>
-		
-		<e:paragraph escape="false" value="#{msgs['CHOICE.TEXT.TOP']}" rendered="#{accountController.partialMailPerso!=''&&accountController.partialPager!=''}">
-		  <f:param value="#{accountController.partialMailPerso}" />
-		  <f:param value="#{accountController.partialPager}" />
-		</e:paragraph>
-		
+	<h:form id="accountForm" >										
 		<t:div>
-			<t:selectOneRadio required="true" value="#{accountController.currentAccount.oneChoiceCanal}">
+			<t:selectOneRadio required="true" value="#{accountController.oneChoiceCanal}">
 	 			<t:selectItems value="#{accountController.listBeanCanal}" var="entry" itemLabel="#{msgs[entry.key]}" itemValue="#{entry.value}"></t:selectItems>
 			</t:selectOneRadio>	
 		</t:div>

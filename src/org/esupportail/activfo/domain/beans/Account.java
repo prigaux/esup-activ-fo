@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.esupportail.activfo.domain.beans.channels.Channel;
 import org.esupportail.commons.web.controllers.Resettable;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -39,18 +40,7 @@ public class Account implements InitializingBean{
 	private String oneRadioValue;
 	
 	private String oneRadioProcedure;
-	
-	private String oneChoiceCanal;
-	
-	
-	public String getOneChoiceCanal() {
-		return oneChoiceCanal;
-	}
-
-	public void setOneChoiceCanal(String oneChoiceCanal) {
-		this.oneChoiceCanal = oneChoiceCanal;
-	}
-
+		
 	public String getOneRadioValue() {
 		return oneRadioValue;
 	}
@@ -177,4 +167,5 @@ public class Account implements InitializingBean{
 		attributes=new HashMap<String,List<String>>();
 		
 	}
+
 }
