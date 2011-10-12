@@ -180,5 +180,43 @@
     	
 	</bean>
 	
-
+	<bean 
+		id="validatorPager"
+		class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for mobile phone (pager)
+    	</description>
+    	<property name="regex" value="^0[6|7][0-9]{8}$|^$"/>
+    	<property name="errorMsg" value="VALIDATOR.MOBILE.INVALID"/>
+    	
+	</bean>
+	<bean 
+		id="validatorMailPersoOrMobilePhone"
+		class="org.esupportail.activfo.web.validators.ValidatorBeanFieldOrINotEmpty"
+		parent="abstractI18nAwareBean" scope="session">
+    	<description>
+			The BeanField or validate's component must be not empty
+    	</description>
+    	<property name="beanField" ref="beanEmailPerso"/>
+    	<property name="errorMsg" value="VALIDATOR.MOBILEORMAILPERSO.INVALID"/>
+    	
+	</bean>
+	
+	<bean 
+		id="validatorMobileStudent"
+		class="org.esupportail.activfo.web.validators.ValidatorList"
+		parent="abstractI18nAwareBean" scope="session">
+    	<description>
+			A validator for mobile phone (pager) for student
+    	</description>
+    	<property name="validators">
+    	<list>
+    	 	<ref bean="validatorMailPersoOrMobilePhone"/>
+    	 	<ref bean="validatorPager"/>
+    	</list>    	
+    	</property>    	  	
+    	<property name="converter" ref="emptyConverter"/>
+	</bean>
 </beans>
