@@ -753,8 +753,7 @@ public class AccountController extends AbstractContextAwareController implements
 		String mailBody2=this.body2DataChange;
 		String newSubject = null;
 		mailBody=mailBody.replace("{0}", currentAccount.getAttribute(accountDNKey)!=null?currentAccount.getAttribute(accountDNKey):"");
-		mailBody=mailBody.replace("{1}", currentAccount.getAttribute(accountEmpIdKey)!=null?currentAccount.getAttribute(accountDNKey):"");
-		
+		mailBody=mailBody.replace("{1}", currentAccount.getAttribute(accountEmpIdKey)!=null?currentAccount.getAttribute(accountEmpIdKey):"");
 		mailBody=mailBody+mailBody2;
 		
         Iterator<Map.Entry<String, String>> it=oldValue.entrySet().iterator();
