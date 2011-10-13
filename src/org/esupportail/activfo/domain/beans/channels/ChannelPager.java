@@ -31,7 +31,7 @@ public class ChannelPager extends ChannelImpl{
 	 */
 	public String getParamMsg() {
 		String pager=account.getPager();
-		if(pager!=null) pager=pager.substring(0,6)+"XXXX";
+		if(pager!=null) pager=pager.substring(0,6)+"****";
 		return pager;
 		
 	}		

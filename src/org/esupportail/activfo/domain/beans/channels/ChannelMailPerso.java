@@ -31,7 +31,7 @@ public class ChannelMailPerso extends ChannelImpl{
 	 */
 	public String getParamMsg() {
 		String mailPerso=account.getEmailPerso();
-		if(mailPerso!=null) mailPerso="xxxx"+mailPerso.substring(4);
+		if(mailPerso!=null) mailPerso="****"+mailPerso.substring(4);
 		return mailPerso;
 		
 	}		
