@@ -70,26 +70,13 @@ public class AccountController extends AbstractContextAwareController implements
 		
 	//liste des attributs pour l'affichage des informations personnelles
 	private String attributesInfPerso;
-	
-	//liste g�n�rique d'attributs � valider
-	private List<String> attrToValidate;
-	
-	private String attributesStudentToValidate;
-	private String attributesPersonnelToValidate;
-	private String attributesOldStudentToValidate;
-	private String attributesAnotherStudentToValidate;
-	
+		
 	private List<Channel> availableChannels;
 	
 	
 	//liste g�n�rique des champs pour la validation
 	private List<BeanField> listInfoToValidate;
-	
-	private List<BeanField> listInfoStudentToValidate;
-	private List<BeanField> listInfoPersonnelToValidate;
-	private List<BeanField> listInfoOldStudentToValidate;
-	private List<BeanField> listInfoAnotherStudentToValidate;
-	
+			
 	private List<BeanField<String>> beanFieldChannels;	
 	
 	
@@ -97,8 +84,9 @@ public class AccountController extends AbstractContextAwareController implements
 	private List<BeanField> listBeanProcedureWithCas;
 	private List<BeanField> listBeanProcedureWithoutCas;
 	
-	//liste des champs correspondant aux statuts de l'utilisateur
-	private List<BeanField> listBeanStatus;
+	//Les status pris en compte par l'application
+	//Chaque status contient une liste de champs de validation spécifiques
+	private HashMap<BeanField,List<BeanField>> beanFieldStatus;
 	
 	private List<CategoryBeanField> listBeanDataChange;
 	private List<BeanField> listDataChangeInfos=new ArrayList<BeanField>();
@@ -134,12 +122,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String procedurePasswordChange;
 	private String procedureLoginChange;
 	private String procedureDataChange;
-	
-	private String statusStudent;
-	private String statusPersonnel;
-	private String statusOldStudent;
-	private String statusAnotherStudent;
-	
+		
 	private String separator;
 	
 	private AsynchronousSmtpServiceImpl smtpService;
@@ -230,23 +213,10 @@ public class AccountController extends AbstractContextAwareController implements
 			viewDataChange=false;
 		}
 		
+		for(BeanField<String> bf : beanFieldStatus.keySet())
+			if(bf.getValue().equals(currentAccount.getOneRadioValue()))
+					this.listInfoToValidate=beanFieldStatus.get(bf);			
 		
-		if(currentAccount.getOneRadioValue().equals(statusStudent)){
-			this.listInfoToValidate=listInfoStudentToValidate;
-			attrToValidate=Arrays.asList(attributesStudentToValidate.split(","));
-		}
-		else if (currentAccount.getOneRadioValue().equals(this.statusPersonnel)){
-			this.listInfoToValidate=listInfoPersonnelToValidate;
-			attrToValidate=Arrays.asList(attributesPersonnelToValidate.split(","));
-		}
-		else if (currentAccount.getOneRadioValue().equals(this.statusAnotherStudent)) {
-			this.listInfoToValidate=listInfoAnotherStudentToValidate;
-			attrToValidate=Arrays.asList(attributesAnotherStudentToValidate.split(","));
-		}
-		else{
-			this.listInfoToValidate=listInfoOldStudentToValidate;
-			attrToValidate=Arrays.asList(attributesOldStudentToValidate.split(","));
-		}
 		return "goToInfoToValidate";
 	}
 	
@@ -254,10 +224,11 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushValid() {
 		try {
 			
-			HashMap<String,String> hashInfToValidate;
-			hashInfToValidate=this.getMap(listInfoToValidate, attrToValidate);
+			HashMap<String,String> hashInfToValidate=new HashMap<String,String>();
+			for(BeanField<String> bf:listInfoToValidate)
+				hashInfToValidate.put(bf.getName(), bf.getValue());
 			
-			logger.info("La validation concerne les donn�es suivantes: "+hashInfToValidate.toString());
+			logger.debug("La validation concerne les donn�es suivantes: "+hashInfToValidate.toString());
 			
 			//Attributs concernant les informations personnelles que l'on souhaite afficher
 			
@@ -324,7 +295,8 @@ public class AccountController extends AbstractContextAwareController implements
 			
 		}catch (AuthentificationException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, statusStudent.equals(currentAccount.getOneRadioValue()) ? "IDENTIFICATION.MESSAGE.INVALIDACCOUNT.STUDENT" : "IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
+	//TODO		addErrorMessage(null, statusStudent.equals(currentAccount.getOneRadioValue()) ? "IDENTIFICATION.MESSAGE.INVALIDACCOUNT.STUDENT" : "IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
+			addErrorMessage(null, "IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
 		}catch (LoginException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
@@ -706,19 +678,7 @@ public class AccountController extends AbstractContextAwareController implements
 		        else k++;
 		    
 	}
-	
-	private HashMap<String,String> getMap(List<BeanField> listeInfoToValidate,List<String>attrToValidate){
-
-		HashMap<String,String> hashInfToValidate=new HashMap<String,String>();
-	
-		for(int j=0;j<listeInfoToValidate.size();j++)
-			hashInfToValidate.put(attrToValidate.get(j), listeInfoToValidate.get(j).getValue().toString());
-		
-		return hashInfToValidate;
-		
-	}
-	
-	
+			
 	public HashMap<String,List<String>> convertHash(HashMap<String,String> hash){
 		
 		HashMap<String,List<String>> newHash=new HashMap<String,List<String>>();
@@ -791,39 +751,10 @@ public class AccountController extends AbstractContextAwareController implements
 				beanFieldChannels.add(bean);	
 				availableChannels.add(channel);
 			}
-	}
-	
-	public String getAttributesStudentToValidate() {
-		return attributesStudentToValidate;
-	}
-
-	public void setAttributesStudentToValidate(String attributesStudentToValidate) {
-		this.attributesStudentToValidate = attributesStudentToValidate;
-	}
-
-	public String getAttributesPersonnelToValidate() {
-		return attributesPersonnelToValidate;
-	}
-
-	public void setAttributesPersonnelToValidate(
-			String attributesPersonnelToValidate) {
-		this.attributesPersonnelToValidate = attributesPersonnelToValidate;
-	}
+	}	
 
 	public List<BeanField> getListInfoToValidate() {
 		return listInfoToValidate;
-	}
-
-	public void setListInfoToValidate(List<BeanField> listInfoToValidate) {
-		this.listInfoToValidate = listInfoToValidate;
-	}
-
-	public List<String> getAttrToValidate() {
-		return attrToValidate;
-	}
-
-	public void setAttrToValidate(List<String> attrToValidate) {
-		this.attrToValidate = attrToValidate;
 	}
 
 	public String getProcedureReinitialisation() {
@@ -848,38 +779,6 @@ public class AccountController extends AbstractContextAwareController implements
 
 	public void setProcedurePasswordChange(String procedurePasswordChange) {
 		this.procedurePasswordChange = procedurePasswordChange;
-	}
-
-	public String getStatusStudent() {
-		return statusStudent;
-	}
-
-	public void setStatusStudent(String statusStudent) {
-		this.statusStudent = statusStudent;
-	}
-
-	public String getStatusPersonnel() {
-		return statusPersonnel;
-	}
-
-	public void setStatusPersonnel(String statusPersonnel) {
-		this.statusPersonnel = statusPersonnel;
-	}
-
-	public String getStatusOldStudent() {
-		return statusOldStudent;
-	}
-
-	public void setStatusOldStudent(String statusOldStudent) {
-		this.statusOldStudent = statusOldStudent;
-	}
-	
-	public String getStatusAnotherStudent() {
-		return statusAnotherStudent;
-	}
-
-    public void setStatusAnotherStudent(String statusAnotherStudent) {
-		this.statusAnotherStudent = statusAnotherStudent;
 	}
 
 	public boolean isActiv() {
@@ -1098,67 +997,9 @@ public class AccountController extends AbstractContextAwareController implements
 		this.listBeanProcedureWithoutCas = listBeanProcedureWithoutCas;
 	}
 	
-	public List<BeanField> getListBeanStatus() {
-		return listBeanStatus;
-	}
-
-	public void setListBeanStatus(List<BeanField> listBeanStatus) {
-		this.listBeanStatus = listBeanStatus;
-	}
-
-	public String getAttributesOldStudentToValidate() {
-		return attributesOldStudentToValidate;
-	}
-
-	public void setAttributesOldStudentToValidate(
-			String attributesOldStudentToValidate) {
-		this.attributesOldStudentToValidate = attributesOldStudentToValidate;
-	}
-	
-	public String getAttributesAnotherStudentToValidate() {
-		return attributesAnotherStudentToValidate;
-	}
-
-    public void setAttributesAnotherStudentToValidate(
-			String attributesAnotherStudentToValidate) {
-		this.attributesAnotherStudentToValidate = attributesAnotherStudentToValidate;
-	}
-
-
-	public List<BeanField> getListInfoStudentToValidate() {
-		return listInfoStudentToValidate;
-	}
-
-	public void setListInfoStudentToValidate(
-			List<BeanField> listInfoStudentToValidate) {
-		this.listInfoStudentToValidate = listInfoStudentToValidate;
-	}
-
-	public List<BeanField> getListInfoPersonnelToValidate() {
-		return listInfoPersonnelToValidate;
-	}
-
-	public void setListInfoPersonnelToValidate(
-			List<BeanField> listInfoPersonnelToValidate) {
-		this.listInfoPersonnelToValidate = listInfoPersonnelToValidate;
-	}
-
-	public List<BeanField> getListInfoOldStudentToValidate() {
-		return listInfoOldStudentToValidate;
-	}
-
-	public void setListInfoOldStudentToValidate(
-			List<BeanField> listInfoOldStudentToValidate) {
-		this.listInfoOldStudentToValidate = listInfoOldStudentToValidate;
-	}
-	
-	public List<BeanField> getListInfoAnotherStudentToValidate() {
-		return listInfoAnotherStudentToValidate;
-	}
-
-	public void setListInfoAnotherStudentToValidate(
-			List<BeanField> listInfoAnotherStudentToValidate) {
-		this.listInfoAnotherStudentToValidate = listInfoAnotherStudentToValidate;
+	public Set<BeanField> getListBeanStatus() {
+		
+		return beanFieldStatus.keySet();
 	}
 
 	public String getSeparator() {
@@ -1448,6 +1289,23 @@ public class AccountController extends AbstractContextAwareController implements
 	 */
 	public void setOneChoiceCanal(String oneChoiceCanal) {
 		this.oneChoiceCanal = oneChoiceCanal;
+	}
+
+
+	/**
+	 * @return the beanFieldStatus
+	 */
+	public HashMap<BeanField, List<BeanField>> getBeanFieldStatus() {
+		return beanFieldStatus;
+	}
+
+
+	/**
+	 * @param beanFieldStatus the beanFieldStatus to set
+	 */
+	public void setBeanFieldStatus(
+			HashMap<BeanField, List<BeanField>> beanFieldStatus) {
+		this.beanFieldStatus = beanFieldStatus;
 	}
 	
 	

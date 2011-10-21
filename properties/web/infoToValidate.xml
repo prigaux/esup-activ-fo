@@ -14,6 +14,7 @@
 
 		<property name="key" value="IDENTIFICATION.HARPEGENUMBER.TEXT.LABEL"/>
 		<property name="value" value=""/>
+		<property name="name" value="supannEmpId"/>
 		<property name="validator" ref="validatorHarpegeNumber"/>
 		<property name="help" value="IDENTIFICATION.HARPEGENUMBER.TEXT.HELP"/>
 		<property name="required" value="true" />
@@ -28,6 +29,7 @@
 
 		<property name="key" value="IDENTIFICATION.BIRTHNAME.TEXT.LABEL"/>
 		<property name="value" value=""/>
+		<property name="name" value="up1BirthName"/>
 		<property name="validator" ref="validatorBirthName"/>
 		<property name="required" value="true" />
 	</bean>
@@ -40,6 +42,7 @@
 
 		<property name="key" value="IDENTIFICATION.STUDENTNUMBER.TEXT.LABEL"/>
 		<property name="value" value=""/>
+		<property name="name" value="supannEtuId"/>
 		<property name="id" value="studentnumber"/>
 		<property name="help" value="IDENTIFICATION.STUDENTNUMBER.TEXT.HELP"/>
 		<property name="required" value="true" />
@@ -54,6 +57,7 @@
 
 		<property name="key" value="IDENTIFICATION.STUDENTNUMBER.TEXT.LABEL"/>
 		<property name="value" value=""/>
+		<property name="name" value="supannEtuId"/>
 		<property name="id" value="studentnumber"/>
 		<property name="help" value="IDENTIFICATION.ALUMSTUDENTNUMBER.TEXT.HELP"/>
 		<property name="required" value="true" />
@@ -68,6 +72,7 @@
 
 		<property name="key" value="IDENTIFICATION.BIRTHDATE.TEXT.LABEL"/>
 		<property name="value" value=""/>
+		<property name="name" value="up1BirthDay"/>
 		<property name="validator" ref="validatorBirthDate"/>
 		<property name="converter" ref="ldapDateConverter"/>
 		<property name="required" value="true" />
@@ -82,6 +87,7 @@
 
 		<property name="key" value="IDENTIFICATION.STUDENTINEBEA.TEXT.LABEL"/>
 		<property name="value" value=""/>
+		<property name="name" value="supannCodeINE"/>
 		<property name="required" value="true" />
 		
 	</bean>
@@ -94,6 +100,7 @@
 
 		<property name="key" value="IDENTIFICATION.ANOTHERSTUDENTNUMBER.TEXT.LABEL"/>
 		<property name="converter" ref="anotherStudentConverter"/>
+		<property name="name" value="supannEtuId"/>
 		<property name="id" value="studentnumber"/>
 		<property name="help" value="IDENTIFICATION.STUDENTNUMBER.TEXT.HELP"/>
 		<property name="required" value="true" />
@@ -108,6 +115,7 @@
 
 		<property name="key" value="IDENTIFICATION.ETABLISSEMENT.TEXT.LABEL"/>
 		<property name="value" value=""/>
+		<property name="name" value="supannEtuId"/>
 		<property name="fieldType" value="selectOneMenu"/>
 		<property name="required" value="true" />
 		<property name="displayItems">

@@ -13,7 +13,7 @@
 		>
 
 		<property name="key" value="WELCOME.STATUS.STUDENT.RADIOBUTTON.LABEL"/>
-		<property name="value" value="${view.status.student}"/>
+		<property name="value" value="student"/>
 		
 		
 	</bean>
@@ -25,7 +25,7 @@
 		>
 
 		<property name="key" value="WELCOME.STATUS.PERSONNEL.RADIOBUTTON.LABEL"/>
-		<property name="value" value="${view.status.personnel}"/>
+		<property name="value" value="personnel"/>
 		
 	</bean>
 	
@@ -37,7 +37,7 @@
 		>
 
 		<property name="key" value="WELCOME.STATUS.ALUMNI.STUDENT.RADIOBUTTON.LABEL"/>
-		<property name="value" value="${view.status.alumni.student}"/>
+		<property name="value" value="alumni"/>
 		
 	</bean>
 	
@@ -48,7 +48,7 @@
 		>
 
 		<property name="key" value="WELCOME.STATUS.ANOTHER.STUDENT.RADIOBUTTON.LABEL"/>
-		<property name="value" value="${view.status.another.student}"/>
+		<property name="value" value="another.student"/>
 		
 	</bean>
 

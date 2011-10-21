@@ -95,20 +95,10 @@
 		<property name="procedurePasswordChange" value="${view.procedure.passwordchange}"/>
 		<property name="procedureLoginChange" value="${view.procedure.loginchange}"/>	
 		<property name="procedureDataChange" value="${view.procedure.datachange}"/>
-		
-		<property name="statusStudent" value="${view.status.student}"/>
-		<property name="statusPersonnel" value="${view.status.personnel}"/>
-		<property name="statusOldStudent" value="${view.status.alumni.student}"/>
-		<property name="statusAnotherStudent" value="${view.status.another.student}"/>
-		
+				
 		<property name="attributesInfPerso" value="${attributes.information}"/>
 		<property name="attributesDataChange" value="${attributes.datachange}"/>
-		
-		<property name="attributesStudentToValidate" value="${attributes.validation.student}"/>
-		<property name="attributesPersonnelToValidate" value="${attributes.validation.personnel}"/>
-		<property name="attributesOldStudentToValidate" value="${attributes.validation.alumni.student}"/>
-		<property name="attributesAnotherStudentToValidate" value="${attributes.validation.another.student}"/>
-										
+												
 		<property name="smtpService" ref="smtpService"/>
 		<property name="subjectDataChange" value="${datachange.subject}"/>
 		<property name="body1DataChange" value="${datachange.body1.fr}"/>
@@ -137,39 +127,7 @@
 			    <ref bean="beanListeRouge"/>
 			</list>
 		</property>
-		
-		<property name="listInfoPersonnelToValidate">
-			<list>
-				<ref bean="beanHarpegeNumber"/>
-				<ref bean="beanBirthName"/>
-				<ref bean="beanBirthDate"/>
-			</list>
-		</property>
-		
-		<property name="listInfoStudentToValidate">
-			<list>
-				<ref bean="beanStudentNumber"/>
-				<ref bean="beanBirthName"/>
-				<ref bean="beanBirthDate"/>
-			</list>
-		</property>
-		
-		<property name="listInfoOldStudentToValidate">
-			<list>
-				<ref bean="beanAlumStudentNumber"/>
-				<ref bean="beanBirthName"/>
-				<ref bean="beanBirthDate"/>
-			</list>
-		</property>
-		
-		<property name="listInfoAnotherStudentToValidate">
-			<list>
-				<ref bean="beanEtablissement"/>
-				<ref bean="beanAnotherStudentNumber"/>
-				<ref bean="beanBirthDate"/>
-			</list>
-		</property>
-		
+				
 		<property name="listBeanProcedureWithCas">
 			<list>
 			    <!-- 
@@ -194,15 +152,43 @@
 			</list>
 		</property>
 		
-		<property name="listBeanStatus">
-			<list>
-				<ref bean="beanStudent"/>
-				<ref bean="beanPersonnel"/>
-				<ref bean="beanOldStudent"/>
-				<ref bean="beanAnotherStudent"/>
-			</list>
-		</property>
-		
+		<property name="beanFieldStatus">
+		 <map>
+		 	<entry>
+		 		<key><ref bean="beanPersonnel"/></key>
+		 		<list>		 			
+					<ref bean="beanHarpegeNumber"/>
+					<ref bean="beanBirthName"/>
+					<ref bean="beanBirthDate"/>
+		 		</list>
+		 	</entry>
+		 	<entry>
+		 		<key><ref bean="beanStudent"/></key>
+		 		<list>
+		 			<ref bean="beanStudentNumber"/>
+					<ref bean="beanBirthName"/>
+					<ref bean="beanBirthDate"/>
+		 		</list>
+		 	</entry>
+		 	<entry>
+		 		<key><ref bean="beanAnotherStudent"/></key>
+		 		<list>		 			
+					<ref bean="beanEtablissement"/>
+					<ref bean="beanBirthName"/>
+					<ref bean="beanBirthDate"/>
+		 		</list>
+		 	</entry>
+		 	<entry>
+		 		<key><ref bean="beanOldStudent"/></key>
+		 		<list>
+		 			<ref bean="beanAlumStudentNumber"/>
+					<ref bean="beanBirthName"/>
+					<ref bean="beanBirthDate"/>
+		 		</list>
+		 	</entry>
+		 </map>
+		 </property>
+
 		<property name="listBeanDataChange">
 			<list>
 			    <ref bean="beanPrincipalInfo" />
