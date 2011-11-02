@@ -6,6 +6,9 @@ package org.esupportail.activfo.domain.beans;
 
 import java.io.Serializable;
 
+import org.esupportail.activfo.services.authentication.ProxyTicketGenerator;
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.strings.StringUtils;
 
 /**
@@ -39,7 +42,13 @@ public class User implements Serializable {
     private String language;
     
     
-    private String proxyTicket;
+    private ProxyTicketGenerator proxyTicketGenerator;
+
+	
+	/**
+	 * A logger.
+	 */
+	private final Logger logger = new LoggerImpl(getClass());
     
 	/**
 	 * Bean constructor.
@@ -76,7 +85,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User#" + hashCode() + "[id=[" + id + "], displayName=[" + displayName 
-		+ "], admin=[" + admin + "], language=[" + language + "]], proxyTicket=[" + proxyTicket + "]]";
+		+ "], admin=[" + admin + "], language=[" + language + "]]";
 	}
 
 	/**
@@ -137,20 +146,26 @@ public class User implements Serializable {
 	/**
 	 * @return the proxyTicket
 	 */
+	public String getProxyTicket(String targetService) {
+	
+		return proxyTicketGenerator.getProxyTicket(targetService);
+	}
 	public String getProxyTicket() {
-		return proxyTicket;
+		
+		return proxyTicketGenerator.getProxyTicket();
 	}
 
 	/**
-	 * @param proxyTicket the proxyTicket to set
+	 * @return the proxyTicketGenerator
 	 */
-	public void setProxyTicket(String proxyTicket) {
-		this.proxyTicket = proxyTicket;
+	public ProxyTicketGenerator getProxyTicketGenerator() {
+		return proxyTicketGenerator;
 	}
-	
-	
 
-	
-	
-
+	/**
+	 * @param proxyTicketGenerator the proxyTicketGenerator to set
+	 */
+	public void setProxyTicketGenerator(ProxyTicketGenerator proxyTicketGenerator) {
+		this.proxyTicketGenerator = proxyTicketGenerator;
+	}
 }

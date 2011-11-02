@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.esupportail.activfo.domain.beans.Account;
+import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.channels.Channel;
 import org.esupportail.activfo.exceptions.AuthentificationException;
 import org.esupportail.activfo.exceptions.ChannelException;
@@ -425,13 +426,10 @@ public class AccountController extends AbstractContextAwareController implements
 			List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			List<String> attrDataChange=Arrays.asList(attributesDataChange.split(","));
 			
-			if (dataChange) {
-				
-				if (currentAccount.getAttribute(accountCodeKey)!=null) 
-					accountDescr=this.getDomainService().authentificateUserWithCodeKey(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),attrDataChange);
-				else
-					accountDescr=this.getDomainService().authentificateUserWithCas(sessionController.getCurrentUser().getId(),sessionController.getProxyTicket(),targetService,attrDataChange);
-				
+			if (dataChange) {	
+					User user=sessionController.getCurrentUser();
+					accountDescr=this.getDomainService().authentificateUserWithCas(user.getId(),user.getProxyTicket(targetService),targetService,attrDataChange);
+						
 			}else
 				accountDescr=this.getDomainService().authentificateUser(beanLogin.getValue().toString(), beanPassword.getValue().toString(),attrPersoInfo);
 			
@@ -1308,8 +1306,4 @@ public class AccountController extends AbstractContextAwareController implements
 		this.beanFieldStatus = beanFieldStatus;
 	}
 	
-	
-	
-	
-
 }

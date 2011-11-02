@@ -55,10 +55,7 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 	 */
 	private DomainService domainService;
 	
-	
-	private CasService casService;
-	
-	private String targetService;
+	private ProxyTicketGenerator proxyTicketGenerator;
 	
 	/**
 	 * Bean constructor.
@@ -86,7 +83,8 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 			User user = (User) ContextUtils.getSessionAttribute(USER_ATTRIBUTE);
 			if (logger.isDebugEnabled()) {
 				logger.debug("found auth info in session: " + user);
-			}
+				
+			}			
 			return user;
 		}
 		if (logger.isDebugEnabled()) {
@@ -96,13 +94,10 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 		
 		if (authInfo == null) {
 			return null;
-		}
-		
-		String proxyticket = casService.getProxyTicket(targetService);
-
+		}		
 		if (AuthUtils.CAS.equals(authInfo.getType())) {
 			User user = getDomainService().getUser(authInfo.getId());
-			user.setProxyTicket(proxyticket);
+			user.setProxyTicketGenerator(proxyTicketGenerator);
 			storeToSession(authInfo, user);
 			return user;
 		} 
@@ -154,33 +149,18 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 	public void setDomainService(final DomainService domainService) {
 		this.domainService = domainService;
 	}
-
 	/**
-	 * @return the casService
+	 * @return the proxyTicketGenerator
 	 */
-	public CasService getCasService() {
-		return casService;
+	public ProxyTicketGenerator getProxyTicketGenerator() {
+		return proxyTicketGenerator;
 	}
 
 	/**
-	 * @param casService the casService to set
+	 * @param proxyTicketGenerator the proxyTicketGenerator to set
 	 */
-	public void setCasService(CasService casService) {
-		this.casService = casService;
-	}
-
-	/**
-	 * @return the targetService
-	 */
-	public String getTargetService() {
-		return targetService;
-	}
-
-	/**
-	 * @param targetService the targetService to set
-	 */
-	public void setTargetService(String targetService) {
-		this.targetService = targetService;
+	public void setProxyTicketGenerator(ProxyTicketGenerator proxyTicketGenerator) {
+		this.proxyTicketGenerator = proxyTicketGenerator;
 	}
 
 }
