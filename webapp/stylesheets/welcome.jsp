@@ -37,18 +37,18 @@
 	
 		<e:paragraph escape="false" value="#{msgs['WELCOME.PROCEDURE.TEXT.TOP']}" />
 	
-			<t:selectOneRadio layout="pageDirection" required="true" value="#{accountController.currentAccount.oneRadioProcedure}" rendered="#{sessionController.currentUser==null}">
+			<t:selectOneRadio layout="pageDirection" required="true" value="#{accountController.currentAccount.process}" rendered="#{sessionController.currentUser==null}">
 	           		
 	 			<t:selectItems value="#{accountController.listBeanProcedureWithoutCas}" var="entry" itemLabel="#{msgs[entry.key]}" itemValue="#{entry.value}" ></t:selectItems>
 			</t:selectOneRadio>
-			<t:selectOneRadio layout="pageDirection" required="true" value="#{accountController.currentAccount.oneRadioProcedure}" rendered="#{sessionController.currentUser!=null}">
+			<t:selectOneRadio layout="pageDirection" required="true" value="#{accountController.currentAccount.process}" rendered="#{sessionController.currentUser!=null}">
 	           		
 	 			<t:selectItems value="#{accountController.listBeanProcedureWithCas}" var="entry" itemLabel="#{msgs[entry.key]}" itemValue="#{entry.value}" ></t:selectItems>
 			</t:selectOneRadio>					
 	
 	<t:div id="statusDiv">
 		<e:paragraph escape="false" value="#{msgs['WELCOME.STATUS.TEXT.TOP']}" />		
-			<t:selectOneRadio id="statusRadio" required="true" value="#{accountController.currentAccount.oneRadioValue}">
+			<t:selectOneRadio id="statusRadio" required="true" value="#{accountController.currentAccount.status}">
 				<t:selectItems value="#{accountController.listBeanStatus}" var="entry" itemLabel="#{msgs[entry.key]}" itemValue="#{entry.value}"></t:selectItems>
 			</t:selectOneRadio>	
 		</t:div>

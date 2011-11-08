@@ -170,7 +170,7 @@ public class AccountController extends AbstractContextAwareController implements
 			return null;
 		}
 		
-		if (currentAccount.getOneRadioProcedure().equals(procedureReinitialisation)){
+		if (currentAccount.getProcess().equals(procedureReinitialisation)){
 			reinit=true;
 			passwChange=false;
 			activ=false;
@@ -178,7 +178,7 @@ public class AccountController extends AbstractContextAwareController implements
 			dataChange=false;
 			viewDataChange=false;
 		}
-		else if (currentAccount.getOneRadioProcedure().equals(procedurePasswordChange)){
+		else if (currentAccount.getProcess().equals(procedurePasswordChange)){
 			passwChange=true;
 			reinit=false;
 			activ=false;
@@ -187,7 +187,7 @@ public class AccountController extends AbstractContextAwareController implements
 			viewDataChange=false;
 			return "gotoAuthentification";
 		}
-		else if (currentAccount.getOneRadioProcedure().equals(procedureDataChange)) {
+		else if (currentAccount.getProcess().equals(procedureDataChange)) {
 			passwChange=false;
 			activ=false;
 			reinit=false;
@@ -196,7 +196,7 @@ public class AccountController extends AbstractContextAwareController implements
 			viewDataChange=false;
 			return "gotoDataChangeWithCas";
 		}
-		else if (currentAccount.getOneRadioProcedure().equals(procedureLoginChange)){
+		else if (currentAccount.getProcess().equals(procedureLoginChange)){
 			passwChange=false;
 			reinit=false;
 			activ=false;
@@ -215,7 +215,7 @@ public class AccountController extends AbstractContextAwareController implements
 		}
 		
 		for(BeanField<String> bf : beanFieldStatus.keySet())
-			if(bf.getValue().equals(currentAccount.getOneRadioValue()))
+			if(bf.getValue().equals(currentAccount.getStatus()))
 					this.listInfoToValidate=beanFieldStatus.get(bf);			
 		
 		return "goToInfoToValidate";

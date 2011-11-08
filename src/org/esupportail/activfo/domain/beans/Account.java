@@ -35,18 +35,10 @@ public class Account implements InitializingBean{
 	
 	private HashMap<String, List<String>> attributes = new HashMap<String,List<String>>();
 	
-	private String oneRadioValue;
+	private String status;
 	
-	private String oneRadioProcedure;
+	private String process;
 		
-	public String getOneRadioValue() {
-		return oneRadioValue;
-	}
-
-	public void setOneRadioValue(String oneRadioValue) {
-		this.oneRadioValue = oneRadioValue;
-	}
-
 	public Account() {
 		super();
 		
@@ -83,15 +75,6 @@ public class Account implements InitializingBean{
 	public void setEmailPerso(String emailPerso) {
 		this.emailPerso = emailPerso;
 	}
-
-	public String getOneRadioProcedure() {
-		return oneRadioProcedure;
-	}
-
-	public void setOneRadioProcedure(String oneRadioProcedure) {
-		this.oneRadioProcedure = oneRadioProcedure;
-	}
-
 	
 	public String getPager() {
 		return pager;
@@ -156,6 +139,34 @@ public class Account implements InitializingBean{
 		liste.add(value);
 		attributes.put(name, liste);
 		
+	}
+
+	/**
+	 * @return the status
+	 */
+	public String getStatus() {
+		return status;
+	}
+
+	/**
+	 * @param status the status to set
+	 */
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	/**
+	 * @return the process
+	 */
+	public String getProcess() {
+		return process;
+	}
+
+	/**
+	 * @param process the process to set
+	 */
+	public void setProcess(String process) {
+		this.process = process;
 	}
 
 }
