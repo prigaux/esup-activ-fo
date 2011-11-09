@@ -295,9 +295,8 @@ public class AccountController extends AbstractContextAwareController implements
 			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
 			
 		}catch (AuthentificationException e) {
-			logger.error(e.getMessage());
-	//TODO		addErrorMessage(null, statusStudent.equals(currentAccount.getOneRadioValue()) ? "IDENTIFICATION.MESSAGE.INVALIDACCOUNT.STUDENT" : "IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
-			addErrorMessage(null, "IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
+			logger.error(e.getMessage());	
+			addErrorMessage(null, currentAccount.getStatus()!=null?"IDENTIFICATION.MESSAGE.INVALIDACCOUNT."+currentAccount.getStatus().toUpperCase():"IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
 		}catch (LoginException e) {
 			logger.error(e.getMessage());
 			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
