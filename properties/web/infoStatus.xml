@@ -48,7 +48,7 @@
 		>
 
 		<property name="key" value="WELCOME.STATUS.ANOTHER.STUDENT.RADIOBUTTON.LABEL"/>
-		<property name="value" value="another.student"/>
+		<property name="value" value="external.student"/>
 		
 	</bean>
 
