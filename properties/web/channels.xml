@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
+	>
+	<bean id="codeChannel"
+		class="org.esupportail.activfo.domain.beans.channels.ChannelImpl">
+		<property name="name" value="codeChannel"/>
+		<property name="label" value="CHANNEL.CODE.LABEL"/>
+		<property name="homeMsg" value="CHANNEL.CODE.HOMEMSG"/>		
+		<property name="codeMsg" value="CHANNEL.CODE.CODEMSG"/>
+	</bean>
+	<bean id="email2gest"
+		class="org.esupportail.activfo.domain.beans.channels.ChannelImpl">
+		<property name="name" value="email2gest"/>
+		<property name="label" value="CHANNEL.GEST.LABEL"/>
+		<property name="homeMsg" value="CHANNEL.GEST.HOMEMSG"/>				
+		<property name="codeMsg" value="CHANNEL.GEST.CODEMSG"/>
+	</bean>
+	<bean id="email2gestetu"
+		class="org.esupportail.activfo.domain.beans.channels.ChannelImpl">
+		<property name="name" value="email2gestetu"/>
+		<property name="label" value="CHANNEL.GESTETU.LABEL"/>
+		<property name="homeMsg" value="CHANNEL.GESTETU.HOMEMSG"/>				
+		<property name="codeMsg" value="CHANNEL.GESTETU.CODEMSG"/>
+	</bean>
+	<bean id="supannMailPerso"
+		class="org.esupportail.activfo.domain.beans.channels.ChannelMailPerso" scope="session">
+		<property name="name" value="supannMailPerso"/>
+		<property name="label" value="CHANNEL.MAILPERSO.LABEL"/>
+		<property name="homeMsg" value="CHANNEL.MAILPERSO.HOMEMSG"/>				
+		<property name="codeMsg" value="CHANNEL.MAILPERSO.CODEMSG"/>
+		<property name="account" ref="account"/>
+	</bean>
+	<bean id="pager"
+		class="org.esupportail.activfo.domain.beans.channels.ChannelPager" scope="session">
+		<property name="name" value="pager"/>
+		<property name="label" value="CHANNEL.PAGER.LABEL"/>		
+		<property name="homeMsg" value="CHANNEL.PAGER.HOMEMSG"/>				
+		<property name="codeMsg" value="CHANNEL.PAGER.CODEMSG"/>
+		<property name="account" ref="account"/>
+	</bean>
+
+</beans>

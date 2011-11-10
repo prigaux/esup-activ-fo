@@ -44,7 +44,7 @@
 	<import resource="web/infoToValidate.xml" />
 	<import resource="web/infoProcedure.xml" />
 	<import resource="web/infoStatus.xml" />
-	<import resource="web/infoCanal.xml" />
+	<import resource="web/channels.xml" />
 	<import resource="web/validators.xml" />
 	<import resource="web/fieldNewPassword.xml" />
 	<import resource="web/fieldCode.xml" />
