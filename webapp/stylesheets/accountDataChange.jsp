@@ -25,7 +25,7 @@
 	
 	<e:messages/>
 	
-	<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}"/>
+	<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}" escape="false"/>
 	<h:form id="accountForm" >
 	<div class="mainBlock">
 	
