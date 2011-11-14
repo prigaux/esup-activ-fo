@@ -58,7 +58,7 @@
 
 	<e:messages/>
 	
-	<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}" />
+	<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}" escape="false"/>
 	
 	<h:form id="accountForm" >
 	  <h:dataTable value="#{accountController.listBeanPersoInfo}" var="entry" columnClasses="firstColumn,secondColumn,thirdColumn"> 
