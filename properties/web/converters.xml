@@ -70,26 +70,27 @@
 	<bean 
 		id="mapOrEqualConverter"
 		class="org.esupportail.activfo.web.converters.MapOrEqualConverter"
-		scope="session"
 		>
     	<description>
 			A converter for.... 
     	</description>
     	<property name="mapping" >
     	  <map>
-    	    <entry key="employee" value="Personnel administratif / technique / de bibliothèque" />
-    	    <entry key="faculty" value="Enseignant" />
+    	   	<entry key="staff" value="Personnel administratif / technique / de bibliothèque" />
+    	    <entry key="teacher" value="Enseignant" />
     	    <entry key="researcher" value="Chercheur" />
     	    <entry key="student" value="Etudiant" />
+    	    <entry key="alum" value="Ancien Etudiant" />
+    	    <entry key="emeritus" value="Professeur émérite"/>
+    	    <entry key="retired" value="Retraité"/>
+    	    <entry key="registered-reader" value="Lecteur de bibliothèque"/>
     	  </map>
     	</property>
     </bean>
     
     <bean 
 		id="mapOrDefaultConverter"
-		class="org.esupportail.activfo.web.converters.MapOrDefaultConverter"
-		scope="session"
-		>
+		class="org.esupportail.activfo.web.converters.MapOrDefaultConverter">
     	<description>
 			A converter for.... 
     	</description>
@@ -100,9 +101,9 @@
     	    <entry key="researcher" value="Chercheur" />
     	    <entry key="student" value="Etudiant" />
     	    <entry key="alum" value="Ancien Etudiant" />
-    	    <entry key="emeritus" value="professeur émérite"/>
-    	    <entry key="retired" value="retraité"/>
-    	    <entry key="registered-reader" value="lecteur de bibliothèque"/>
+    	    <entry key="emeritus" value="Professeur émérite"/>
+    	    <entry key="retired" value="Retraité"/>
+    	    <entry key="registered-reader" value="Lecteur de bibliothèque"/>
     	  </map>
     	</property>
     </bean>

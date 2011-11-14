@@ -45,14 +45,14 @@
 	
 	<bean 
 		id="validatorMobilePhone"
-		class="org.esupportail.activfo.web.validators.ValidatorMobilePhone"
+				class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
 		parent="abstractI18nAwareBean"
 		>
     	<description>
-			A validator for Mobile.
+			A validator for mobile phone (mobile)
     	</description>
-    	
-    	
+    	<property name="regex" value="^0[6|7][0-9]{8}$|^\\+33[6|7][0-9]{8}$"/>
+    	<property name="errorMsg" value="VALIDATOR.MOBILE.INVALID"/>
 	</bean>
 	
 	
