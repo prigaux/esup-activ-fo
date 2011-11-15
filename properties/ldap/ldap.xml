@@ -28,15 +28,12 @@
 				The LDAP template used to access the LDAP directory.
 			</description>
 		</property>
-		<property name="dnSubPath" value="${ldap.dn.structures}">
-			<description>The DN sub path.</description>
-		</property>
 		
-		<property name="idAttribute" value="supannCodeEntite">
+		<property name="idAttribute" value="ou">
 			<description>idAttribute</description>
 		</property>
 		
-		<property name="objectClass" value="${ldap.structures.objectClass}">
+		<property name="objectClass" value="organizationalUnit">
 			<description>objectClass</description>
 		</property>
 
