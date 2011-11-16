@@ -78,7 +78,8 @@
 		    <ref bean="beanListeRouge"/>
 		    <ref bean="beanMail"/>
 		    <ref bean="beanEduPersonAffiliation"/>
-		    <ref bean="beanSupannCodeINE"/>		   
+		    <ref bean="beanSupannEntiteAffectation"/>
+		    <ref bean="beanSupannEtuEtape"/>		   
 		  </list>
 		</property> 
 	</bean>
@@ -140,7 +141,7 @@
 	</bean>
 	
 	<bean
-		id="beanHarpegeeApogeeInfo"
+		id="beanHarpegeInfo"
 		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
 		scope="session"
 		>
@@ -192,7 +193,9 @@
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanSupannEtuId"/>
-		    <ref bean="beanSupannEntiteAffectation"/>
+		    <ref bean="beanSupannCodeINE"/>		    
+		    <ref bean="beanBirthNameInfo"/>
+		    <ref bean="beanBirthDateInfo"/>
 		  </list>
 		</property>
 		

@@ -111,7 +111,6 @@
     <bean 
 		id="ldapConverter"
 		class="org.esupportail.activfo.web.converters.LdapConverter"
-		scope="session"
 		>
     	<description>
 			A converter for....
@@ -120,11 +119,19 @@
     	<property name="ldapEntityService" ref="ldapEntityService"/>
     	
 	</bean>
+	<bean id="EtuEtapeConverter"
+		class="org.esupportail.activfo.web.converters.EtuEtapeConverter"
+		scope="session">
+    	<description>A converter for supannEtuEtape</description>    	
+    	<property name="account" ref="account"/>   
+    	<property name="ldapEntityService" ref="ldapEntityService"/>  
+    	<property name="etablissement" value="${converter.supannEtuEtape.etablissement}"/>  		
+    	<property name="branch" value="${converter.supannEtuEtape.ldapBranch}"/>
+	</bean>
 	
 	<bean 
 		id="ldapPhoneFaxConverter"
 		class="org.esupportail.activfo.web.converters.LdapPhoneFaxConverter"
-		scope="session"
 		>
     	<description>
 			A converter for....
@@ -135,7 +142,6 @@
 	<bean 
 		id="postalAddressConverter"
 		class="org.esupportail.activfo.web.converters.PostalAddressConverter"
-		scope="prototype"
 		>
     	<description>
 			A converter to delete "$" in the diplay of postal address

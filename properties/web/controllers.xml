@@ -196,7 +196,7 @@
 				<ref bean="beanStudentCaracterInfo" />
 				<ref bean="beanProfessionalInfo"/>
 				<ref bean="beanPersonalInfo"/>
-				<ref bean="beanHarpegeeApogeeInfo"/>
+				<ref bean="beanHarpegeInfo"/>
 				<ref bean="beanApogeeInfo"/>
 			</list>
 		</property>
@@ -204,11 +204,8 @@
 	    <property name="listBeanViewDataChange">
 			<list>
 			    <ref bean="beanPublicDirectory" />
-			    <ref bean="beanStudentPublicDirectory" />
 				<ref bean="beanPrivateDirectory"/>
-				<ref bean="beanStudentPrivateDirectory"/>
 				<ref bean="beanPersonalPageDirectory"/>
-				<ref bean="beanPhDPersonalPageDirectory"/>
 			</list>
 		</property>
 		
