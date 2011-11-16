@@ -35,7 +35,7 @@
       <t:htmlTag value="h2" styleClass="expand" rendered="#{category.access}" ><h:outputText value="#{msgs[category.title]}"/></t:htmlTag>
 	 
 	  <t:div styleClass="collapse" >
-	   <h:dataTable  value="#{category.listBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn">
+	   <h:dataTable  value="#{category.profilingListBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn">
 	  
 	   <h:column  >
 		  <t:outputText styleClass="labeltexttop"  value="#{msgs[beanfield.key]}" rendered="#{beanfield.size>1}"/>
