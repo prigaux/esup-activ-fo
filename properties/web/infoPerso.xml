@@ -496,7 +496,6 @@
 		scope="session"
 		>
 		<property name="key" value="PERSOINFO.ROOMNUMBER.TEXT.LABEL"/>
-		<property name="help" value="PERSOINFO.ROOMNUMBER.TEXT.HELP"/>
 		<property name="required" value="false" />
 		<property name="updateable" value="true"/>
 		<property name="name" value="roomNumber"/>
@@ -511,7 +510,6 @@
 		scope="session"
 		>
 		<property name="key" value="PERSOINFO.UP1FLOORNUMBER.TEXT.LABEL"/>
-		<property name="help" value="PERSOINFO.UP1FLOORNUMBER.TEXT.HELP"/>
 		<property name="fieldType" value="selectOneMenu"/>
  		<property name="displayItems" ref="beanSelectFloorList"/>
 		<property name="required" value="false" />
