@@ -154,6 +154,20 @@ public class EtuEtapeConverter implements Converter {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	/**
+	 * @return the etablissement
+	 */
+	public String getEtablissement() {
+		return etablissement;
+	}
+
+	/**
+	 * @param etablissement the etablissement to set
+	 */
+	public void setEtablissement(String etablissement) {
+		this.etablissement = etablissement;
 	}	
 		
 }
