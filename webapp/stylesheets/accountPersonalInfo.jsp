@@ -59,55 +59,55 @@
 	<e:messages/>
 	
 	<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}" escape="false"/>
-	
+
 	<h:form id="accountForm" >
-	  <h:dataTable value="#{accountController.listBeanPersoInfo}" var="entry" columnClasses="firstColumn,secondColumn,thirdColumn"> 
+	<t:dataList value="#{accountController.beanData}" var="category">
+	  <h:dataTable  value="#{category.profilingListBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn"> 
 		<h:column >						
-		  <t:outputText styleClass="labeltext" value="#{msgs[entry.key]}" />
+		  <t:outputText styleClass="labeltext" value="#{msgs[beanfield.key]}" />
 		</h:column>
 		<h:column>
-		<t:dataList value="#{entry.values}" var="sub">
-			<t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!entry.multiValue)}" styleClass="#{entry.name}show">
-			    <h:inputText value="#{sub.value}"  disabled="#{entry.disable}" converter="#{entry.converter}" validator="#{entry.validator.validate}"  required="#{entry.required}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&(sub.value!=''||(sub.value==''&&!entry.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-	            <h:inputText value="#{sub.value}"  disabled="#{entry.disable}" converter="#{entry.converter}" required="#{entry.required}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!entry.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-	            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{entry.fieldType=='selectOneMenu'&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!entry.multiValue))}" >
-                  <f:selectItems value="#{entry.displayItems}" />
+		<t:dataList value="#{beanfield.values}" var="sub">
+			<t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue)}" styleClass="#{beanfield.name}show">
+			    <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&(sub.value!=''||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+	            <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+	            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" >
+                  <f:selectItems value="#{beanfield.displayItems}" />
              	</h:selectOneMenu>    
 	        </t:div>
 	        	       	        
-	        <t:div rendered="#{sub.value==''&&entry.multiValue}" style="display:none;" styleClass="#{entry.name}hide" >    
-	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator!=null&&sub.value==''&&entry.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-	            <h:inputText value="#{sub.value}" size="35" rendered="#{entry.fieldType=='inputText'&&entry.validator==null&&sub.value==''&&entry.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-	            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{entry.fieldType=='selectOneMenu'&&sub.value==''&&entry.multiValue}" >
-                  <f:selectItems value="#{entry.displayItems}" />
+	        <t:div rendered="#{sub.value==''&&beanfield.multiValue}" style="display:none;" styleClass="#{beanfield.name}hide" >    
+	            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+	            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+	            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&sub.value==''&&beanfield.multiValue}" >
+                  <f:selectItems value="#{beanfield.displayItems}" />
              	</h:selectOneMenu> 	            
             </t:div>   		
         </t:dataList>             
-        <t:div rendered="#{entry.fieldType=='selectManyCheckbox'}">             
-             	<h:selectManyCheckbox value="#{entry.selectedItems}" rendered="#{entry.fieldType=='selectManyCheckbox'}" validator="#{entry.validator.validate}" layout="pageDirection">
-                  <f:selectItems value="#{entry.displayItems}" />
+        <t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}">             
+             	<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'}" validator="#{beanfield.validator.validate}" layout="pageDirection">
+                  <f:selectItems value="#{beanfield.displayItems}" />
              	</h:selectManyCheckbox>        
         </t:div> 
-        <t:div rendered="#{entry.fieldType=='selectOneRadio'}">        
-            	<h:selectOneRadio value="#{entry.value}">
-                  <f:selectItems value="#{entry.displayItems}" />
+        <t:div rendered="#{beanfield.fieldType=='selectOneRadio'}">        
+            	<h:selectOneRadio value="#{beanfield.value}">
+                  <f:selectItems value="#{beanfield.displayItems}" />
         		</h:selectOneRadio>              
          </t:div>                    
        		</h:column>  
         	<h:column>
-        		<h:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.notice]}" value="/media/images/redtriangular.jpg"  style="border: 0;" rendered="#{!entry.updateable&&!entry.disable&&!accountController.viewDataChange}"/>
-       	 		<h:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{entry.help!=null&&!accountController.viewDataChange}"/>					  	
+        		<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.notice]}" value="/media/images/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}"/>
+       	 		<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}"/>					  	
 		  	<t:div >
-			  <h:graphicImage alt="#{entry.name}" styleClass="show" value="/media/images/add.png"  style="border: 0;" rendered="#{entry.multiValue&&entry.fieldType=='inputText'&&(!entry.disable)}"/>
-			  <h:graphicImage alt="#{entry.name}" styleClass="hide" value="/media/images/remove.png"  style="border: 0;" rendered="#{entry.multiValue&&entry.fieldType=='inputText'&&(!entry.disable)}"/>
+			  <h:graphicImage alt="#{beanfield.name}" styleClass="show" value="/media/images/add.png"  style="border: 0;" rendered="#{beanfield.multiValue&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>
+			  <h:graphicImage alt="#{beanfield.name}" styleClass="hide" value="/media/images/remove.png"  style="border: 0;" rendered="#{beanfield.multiValue&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>
 		  	</t:div>
 			</h:column>										
 	  	</h:dataTable>
-											
+	</t:dataList>										
 	<t:div style="margin-top:30;">
 		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
 	</t:div>
-	
 	</h:form>
 	
 	<h:form id="restart" style="display:none;">

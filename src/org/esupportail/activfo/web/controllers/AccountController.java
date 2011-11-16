@@ -64,11 +64,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String accountGestKey;
 	private String accountPossibleChannelsKey;
 	private String accountEmpIdKey;
-		
-	
-	//liste des champs pour l'affichage des informations personnelles
-	private List<BeanField> listBeanPersoInfo;
-		
+			
 	//liste des attributs pour l'affichage des informations personnelles
 	private String attributesInfPerso;
 		
@@ -90,7 +86,9 @@ public class AccountController extends AbstractContextAwareController implements
 	private HashMap<BeanField,List<BeanField>> beanFieldStatus;
 		
 	private List<BeanField> listDataChangeInfos=new ArrayList<BeanField>();
-		
+	private List<BeanField> listBeanPersoInfo=new ArrayList<BeanField>();
+	
+	private List<CategoryBeanField> categoryBeanDataChangeDigest;
 	private List<CategoryBeanField> categoryBeanDataChange;
 	private List<CategoryBeanField> categoryBeanViewDataChange;
 	
@@ -146,7 +144,26 @@ public class AccountController extends AbstractContextAwareController implements
 		super();
 		
 	}
-
+	
+	@Override
+	public void afterPropertiesSetInternal() {
+		Assert.notNull(this.categoryBeanDataChange, "property categoryBeanDataChange of class " 
+				+ this.getClass().getName() + " can not be null");
+		
+		for(CategoryBeanField cbf : categoryBeanDataChange){ 
+			List<BeanField> bflist=cbf.getListBeanField();
+			for(BeanField bf: bflist)			 
+			    if(!listDataChangeInfos.contains(bf))
+			    	listDataChangeInfos.add(bf);			
+		}
+		
+		for(CategoryBeanField cbf : categoryBeanDataChangeDigest){ 
+			List<BeanField> bflist=cbf.getListBeanField();
+			for(BeanField bf: bflist)
+			    if(!listBeanPersoInfo.contains(bf))
+			    	listBeanPersoInfo.add(bf);		
+		}
+	}
 		
 	/**
 	 * @see org.esupportail.activ.web.controllers.AbstractDomainAwareBean#reset()
@@ -1164,25 +1181,12 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setBody2DataChange(String body2DataChange) {
 		this.body2DataChange = body2DataChange;
 	}
-	
-	@Override
-	public void afterPropertiesSetInternal() {
-		Assert.notNull(this.categoryBeanDataChange, "property categoryBeanDataChange of class " 
-				+ this.getClass().getName() + " can not be null");
-		for(CategoryBeanField cbf : categoryBeanDataChange){ 
-			List<BeanField> bflist=cbf.getListBeanField();
-			for(BeanField bf: bflist) {
-			    logger.debug("Beanfield : "+bf);
-			    if(!listDataChangeInfos.contains(bf))
-			    	listDataChangeInfos.add(bf);
-			}
-		}
-	}
-	
-	public List<CategoryBeanField> getBeanData() {
-		if (dataChange) pushAuthentificate();
+		
+	public List<CategoryBeanField> getBeanData() {		
 		if (viewDataChange) return categoryBeanViewDataChange;
-		else return categoryBeanDataChange;
+		pushAuthentificate();
+		if(dataChange)return categoryBeanDataChange;
+		else return categoryBeanDataChangeDigest;
 	}
 
 
@@ -1303,6 +1307,23 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setBeanFieldStatus(
 			HashMap<BeanField, List<BeanField>> beanFieldStatus) {
 		this.beanFieldStatus = beanFieldStatus;
+	}
+
+
+	/**
+	 * @return the categoryBeanDataChangeDigest
+	 */
+	public List<CategoryBeanField> getCategoryBeanDataChangeDigest() {
+		return categoryBeanDataChangeDigest;
+	}
+
+
+	/**
+	 * @param categoryBeanDataChangeDigest the categoryBeanDataChangeDigest to set
+	 */
+	public void setCategoryBeanDataChangeDigest(
+			List<CategoryBeanField> categoryBeanDataChangeDigest) {
+		this.categoryBeanDataChangeDigest = categoryBeanDataChangeDigest;
 	}
 	
 }
