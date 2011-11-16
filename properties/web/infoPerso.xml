@@ -532,6 +532,7 @@
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
 		<property name="name" value="up1BirthName"/>
+		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
 	</bean>
 	
 		<bean id="beanSupannEtuEtape"
@@ -559,7 +560,7 @@
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
 		<property name="name" value="up1BirthDay"/>
-		
+		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
 	</bean>
 	
 	 
