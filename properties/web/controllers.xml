@@ -114,20 +114,7 @@
 				<ref bean="email2gest"/>
 				<ref bean="email2gestetu"/>
 			</list>
-		</property>
-		<property name="listBeanPersoInfo">
-			<list>
-				<ref bean="beanDisplayName"/>
-				<ref bean="beanEmailPerso"/>		
-				<ref bean="beanEduPersonPrimaryAffiliation"/> 
-			    <ref bean="beanEduPersonAffiliation"/>
-			    <ref bean="beanRedirectMail"/> 
-			    <ref bean="beanMobilePhone"/>
-			    <ref bean="beanSMSAgreement"/>
-			    <ref bean="beanListeRouge"/>
-			</list>
-		</property>
-				
+		</property>				
 		<property name="listBeanProcedureWithCas">
 			<list>
 			    <!-- 
@@ -188,6 +175,12 @@
 		 	</entry>
 		 </map>
 		 </property>
+		 
+		 <property name="categoryBeanDataChangeDigest">
+			<list>
+			    <ref bean="beanPersonalInfoDigest" />
+			</list>
+		</property>
 
 		<property name="categoryBeanDataChange">
 			<list>

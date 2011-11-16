@@ -141,6 +141,46 @@
 	</bean>
 	
 	<bean
+		id="beanPersonalInfoDigest"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session"
+		>
+		<property name="title" value="INFO.PERSONAL.TEXT.LABEL"/>
+		<property name="name" value="personalInfo"/>
+		<property name="account" ref="account"/>
+		<property name="beanFieldProfile">
+		<map>		 	
+			<entry>
+			<key>
+				<ref bean="beanRedirectMail"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>employee</value>
+		       	 		<value>staff</value>
+		       	 		<value>faculty</value>
+		       	 		<value>emeritus</value>
+		       	 		<value>retired</value>
+		       	 		<value>teacher</value>
+		      		</list>		
+				</entry>
+			</map>
+			</entry>			
+		</map>
+		</property>
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanDisplayName"/>
+		    <ref bean="beanEmailPerso"/>
+		    <ref bean="beanRedirectMail"/> 		
+		    <ref bean="beanMobilePhone"/>
+		    <ref bean="beanSMSAgreement"/>
+		  </list>
+		</property> 
+	</bean>
+	
+	<bean
 		id="beanHarpegeInfo"
 		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
 		scope="session"
