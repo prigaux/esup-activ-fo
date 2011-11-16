@@ -88,11 +88,11 @@ public class AccountController extends AbstractContextAwareController implements
 	//Les status pris en compte par l'application
 	//Chaque status contient une liste de champs de validation spécifiques
 	private HashMap<BeanField,List<BeanField>> beanFieldStatus;
-	
-	private List<CategoryBeanField> listBeanDataChange;
+		
 	private List<BeanField> listDataChangeInfos=new ArrayList<BeanField>();
-	
-	private List<CategoryBeanField> listBeanViewDataChange;
+		
+	private List<CategoryBeanField> categoryBeanDataChange;
+	private List<CategoryBeanField> categoryBeanViewDataChange;
 	
 	private String attributesDataChange;
 	
@@ -1036,38 +1036,38 @@ public class AccountController extends AbstractContextAwareController implements
 
 
 	/**
-	 * @return the listBeanDataChange
+	 * @return the categoryBeanDataChange
 	 */
-	public List<CategoryBeanField> getListBeanDataChange() {
-		return listBeanDataChange;
+	public List<CategoryBeanField> getCategoryBeanDataChange() {
+		return categoryBeanDataChange;
 	}
 
 
 	/**
-	 * @param listBeanDataChange the listBeanDataChange to set
+	 * @param categoryBeanDataChange the categoryBeanDataChange to set
 	 */
-	public void setListBeanDataChange(List<CategoryBeanField> listBeanDataChange) {
+	public void setCategoryBeanDataChange(List<CategoryBeanField> categoryBeanDataChange) {
 		
-		this.listBeanDataChange = listBeanDataChange;
+		this.categoryBeanDataChange = categoryBeanDataChange;
 						
 	}
 	
 	
 
 	/**
-	 * @return the listBeanViewDataChange
+	 * @return the categoryBeanViewDataChange
 	 */
-	public List<CategoryBeanField> getListBeanViewDataChange() {
-		return listBeanViewDataChange;
+	public List<CategoryBeanField> getCategoryBeanViewDataChange() {
+		return categoryBeanViewDataChange;
 	}
 
 
 	/**
-	 * @param listBeanViewDataChange the listBeanViewDataChange to set
+	 * @param categoryBeanViewDataChange the categoryBeanViewDataChange to set
 	 */
-	public void setListBeanViewDataChange(
-			List<CategoryBeanField> listBeanViewDataChange) {
-		this.listBeanViewDataChange = listBeanViewDataChange;
+	public void setCategoryBeanViewDataChange(
+			List<CategoryBeanField> categoryBeanViewDataChange) {
+		this.categoryBeanViewDataChange = categoryBeanViewDataChange;
 	}
 
 
@@ -1167,9 +1167,9 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	@Override
 	public void afterPropertiesSetInternal() {
-		Assert.notNull(this.listBeanDataChange, "property listBeanDataChange of class " 
+		Assert.notNull(this.categoryBeanDataChange, "property categoryBeanDataChange of class " 
 				+ this.getClass().getName() + " can not be null");
-		for(CategoryBeanField cbf : listBeanDataChange){ 
+		for(CategoryBeanField cbf : categoryBeanDataChange){ 
 			List<BeanField> bflist=cbf.getListBeanField();
 			for(BeanField bf: bflist) {
 			    logger.debug("Beanfield : "+bf);
@@ -1181,8 +1181,8 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	public List<CategoryBeanField> getBeanData() {
 		if (dataChange) pushAuthentificate();
-		if (viewDataChange) return listBeanViewDataChange;
-		else return listBeanDataChange;
+		if (viewDataChange) return categoryBeanViewDataChange;
+		else return categoryBeanDataChange;
 	}
 
 

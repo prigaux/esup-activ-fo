@@ -189,7 +189,7 @@
 		 </map>
 		 </property>
 
-		<property name="listBeanDataChange">
+		<property name="categoryBeanDataChange">
 			<list>
 			    <ref bean="beanPrincipalInfo" />
 				<ref bean="beanFunctionInfo"/>
@@ -201,7 +201,7 @@
 			</list>
 		</property>
 		
-	    <property name="listBeanViewDataChange">
+	    <property name="categoryBeanViewDataChange">
 			<list>
 			    <ref bean="beanPublicDirectory" />
 				<ref bean="beanPrivateDirectory"/>
