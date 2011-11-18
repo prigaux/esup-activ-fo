@@ -19,6 +19,7 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	private List<BeanField> listBeanField=new ArrayList<BeanField>(); 
 	private HashMap<String,List<String>> profile;
 	private HashMap<BeanField,HashMap<String,List<String>>> beanFieldProfile;
+	private HashMap<BeanField,HashMap<String,List<String>>> deniedBeanFieldProfile;
 	private  Account account;
 	private final Logger logger = new LoggerImpl(getClass());
 	
@@ -26,13 +27,13 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
 	 */
 	public void afterPropertiesSet() throws Exception {
-		if (profile==null && beanFieldProfile==null && account!=null)  {
+		if (profile==null && beanFieldProfile==null && deniedBeanFieldProfile==null && account!=null)  {
 			Assert.notNull(this.profile, 
-					"property profile or beanFieldProfile of class " + this.getClass().getName() + " can not be null");
+					"property profile, beanFieldProfile or deniedBeanFieldProfile of class " + this.getClass().getName() + " can not be null");
 			Assert.hasText(this.profile.toString(),"property profile or beanFieldProfile of class  " + this.getClass().getName()+ " can not be null");
 		}
 		
-		if ((profile!=null ||beanFieldProfile!=null) && account==null)  {
+		if ((profile!=null ||beanFieldProfile!=null || deniedBeanFieldProfile!=null) && account==null)  {
 			Assert.notNull(this.account, 
 					"property account of class " + this.getClass().getName() + " can not be null");
 			Assert.hasText(this.account.toString(),"property account of class  " + this.getClass().getName()+ " can not be null");
@@ -72,20 +73,33 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	 * @return the profiling listBeanField
 	 */
 	public List<BeanField> getProfilingListBeanField() {
-		if(beanFieldProfile==null) return listBeanField;
-		
+		if(beanFieldProfile==null && deniedBeanFieldProfile==null) return listBeanField;
+				
 		List<BeanField> profilingListBeanField = new ArrayList<BeanField>();
-		for(BeanField beanField:listBeanField){
+		for(BeanField beanField:listBeanField)
 			if (isBeanFieldAllowed(beanField))
 				profilingListBeanField.add(beanField);			
-		}		
+		
 		return profilingListBeanField;
 	}
 
 	private boolean isBeanFieldAllowed(BeanField beanField) {
-		HashMap<String,List<String>> fieldProfiling=beanFieldProfile.get(beanField);
-		if(fieldProfiling ==null || account==null) return true;
+		HashMap<String,List<String>> fieldProfiling=beanFieldProfile!=null?beanFieldProfile.get(beanField):null;
+		HashMap<String,List<String>> deniedFieldProfiling=deniedBeanFieldProfile!=null?deniedBeanFieldProfile.get(beanField):null;
+						
+		if(fieldProfiling==null && deniedFieldProfiling==null) return true; //si pas de définition de droit d'accès, le beanFiled est disponible pour tout profil
 		
+		if(deniedFieldProfiling!=null && profileMatches(deniedFieldProfiling))				
+			return false;																					
+					
+		if(fieldProfiling!=null && profileMatches(fieldProfiling))
+			return true;
+						
+		if(deniedFieldProfiling!=null) return true; 
+		else return false;	
+	}
+	
+	private boolean profileMatches(HashMap<String,List<String>> fieldProfiling){				
 		for(String attribute : fieldProfiling.keySet()) {
 			List<String> profileValues=fieldProfiling.get(attribute);
 			List<String> accountValues=account.getAttributes(attribute);
@@ -93,7 +107,7 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 				if(accountValues.contains(profileValue))		
 					return true;						
 		}
-		return false;
+		return false;		
 	}
 
 	/**
@@ -170,5 +184,19 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 		this.beanFieldProfile = beanFieldProfile;
 	}
 
+	/**
+	 * @return the deniedBeanFieldProfile
+	 */
+	public HashMap<BeanField, HashMap<String, List<String>>> getDeniedBeanFieldProfile() {
+		return deniedBeanFieldProfile;
+	}
+
+	/**
+	 * @param deniedBeanFieldProfile the deniedBeanFieldProfile to set
+	 */
+	public void setDeniedBeanFieldProfile(
+			HashMap<BeanField, HashMap<String, List<String>>> deniedBeanFieldProfile) {
+		this.deniedBeanFieldProfile = deniedBeanFieldProfile;
+	}
 	
 }
