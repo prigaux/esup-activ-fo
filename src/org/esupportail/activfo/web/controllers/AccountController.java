@@ -149,20 +149,25 @@ public class AccountController extends AbstractContextAwareController implements
 	public void afterPropertiesSetInternal() {
 		Assert.notNull(this.categoryBeanDataChange, "property categoryBeanDataChange of class " 
 				+ this.getClass().getName() + " can not be null");
-		
+		Assert.notNull(this.categoryBeanDataChangeDigest, "property categoryBeanDataChangeDigest of class " 
+				+ this.getClass().getName() + " can not be null");		
+	}
+	
+	private void buildProfilingListDataChangeInfos(){
 		for(CategoryBeanField cbf : categoryBeanDataChange){ 
-			List<BeanField> bflist=cbf.getListBeanField();
+			List<BeanField> bflist=cbf.getProfilingListBeanField();
 			for(BeanField bf: bflist)			 
 			    if(!listDataChangeInfos.contains(bf))
 			    	listDataChangeInfos.add(bf);			
 		}
-		
+	}
+	private void buildProfilingListBeanPersoInfo(){			
 		for(CategoryBeanField cbf : categoryBeanDataChangeDigest){ 
-			List<BeanField> bflist=cbf.getListBeanField();
+			List<BeanField> bflist=cbf.getProfilingListBeanField();
 			for(BeanField bf: bflist)
 			    if(!listBeanPersoInfo.contains(bf))
 			    	listBeanPersoInfo.add(bf);		
-		}
+		}			
 	}
 		
 	/**
@@ -434,6 +439,7 @@ public class AccountController extends AbstractContextAwareController implements
 			return null;
 			
 	}
+	//TODO revoir cette procédure
 	public String pushAuthentificate() {
 		
 		try{
@@ -458,9 +464,14 @@ public class AccountController extends AbstractContextAwareController implements
 								
 				if (currentAccount.getAttribute(accountCodeKey)!=null) {
 					logger.info("Construction de la liste des informations personnelles du compte");
-					if (dataChange)
-						this.buildListPersoInfo(listDataChangeInfos,attrDataChange);
-					else this.buildListPersoInfo(listBeanPersoInfo,attrPersoInfo);
+					if (dataChange){
+							this.buildProfilingListDataChangeInfos();
+							this.buildListPersoInfo(listDataChangeInfos,attrDataChange);
+					}
+					else{
+							this.buildProfilingListBeanPersoInfo();
+							this.buildListPersoInfo(listBeanPersoInfo,attrPersoInfo);
+					}
 					
 					//this.addInfoMessage(null, "AUTHENTIFICATION.MESSAGE.VALID");
 					if (dataChange) {
