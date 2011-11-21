@@ -107,10 +107,10 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		{
     	   values.clear();			
 			for(String s : selectedItems){
-				BeanMultiValue bmv = new BeanMultiValueImpl();
-				bmv.setValue(s);
+				BeanMultiValue bmv = new BeanMultiValueImpl();				
 				bmv.setConverter(converter);
 				bmv.setUseConvertedValue(useConvertedValue);
+				bmv.setValue(s);
 				values.add(bmv);				
 			}
 			for(BeanMultiValue bmv: hideItems)
@@ -119,10 +119,10 @@ public class BeanFieldImpl<T> implements BeanField<T> {
        
        if(ONERADIO.equals(fieldType)){
     	   values.clear();	
-    	   BeanMultiValue bmv = new BeanMultiValueImpl();
-    	   bmv.setValue((String)value);
+    	   BeanMultiValue bmv = new BeanMultiValueImpl();    	 
     	   bmv.setConverter(converter);
     	   bmv.setUseConvertedValue(useConvertedValue);
+    	   bmv.setValue((String)value);
     	   values.add(bmv);				
        }
        if(!values.isEmpty())
