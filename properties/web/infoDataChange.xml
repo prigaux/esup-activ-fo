@@ -122,11 +122,9 @@
 		</property> 
 	</bean>
 	
-	<bean
-		id="beanPersonalInfo"
+	<bean id="beanPersonalInfo"
 		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
-		scope="session"
-		>
+		scope="session">
 		<property name="title" value="INFO.PERSONAL.TEXT.LABEL"/>
 		<property name="name" value="personalInfo"/>		
 		<property name="account" ref="account"/>
@@ -134,43 +132,31 @@
 		<map>		 	
 			<entry>
 			<key>
-				<ref bean="beanRedirectMail"/>
+				<ref bean="beanRedirectMailEtu"/>
 			</key>
 			<map>
 				<entry key="eduPersonAffiliation">
 					<list>
-		       	 		<value>employee</value>
-		       	 		<value>staff</value>
-		       	 		<value>faculty</value>
-		       	 		<value>emeritus</value>
-		       	 		<value>retired</value>
-		       	 		<value>teacher</value>
+		       	 		<value>student</value>		       	 		
 		      		</list>		
 				</entry>
 			</map>
-			</entry>			
+			</entry>
+			<entry>
+			<key>
+				<ref bean="beanMobilePhoneEtu"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>student</value>		       	 		
+		      		</list>		
+				</entry>
+			</map>
+			</entry>								
 		</map>
 		</property>
-		<property name="listBeanField">
-		  <list>
-		    <ref bean="beanHomePostalAddress"/>
-		    <ref bean="beanEmailPerso"/>
-		    <ref bean="beanRedirectMail"/> 		
-		    <ref bean="beanMobilePhone"/>
-		    <ref bean="beanSMSAgreement"/>
-		  </list>
-		</property> 
-	</bean>
-	
-	<bean
-		id="beanPersonalInfoDigest"
-		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
-		scope="session"
-		>
-		<property name="title" value="INFO.PERSONAL.TEXT.LABEL"/>
-		<property name="name" value="personalInfo"/>
-		<property name="account" ref="account"/>
-		<property name="beanFieldProfile">
+		<property name="deniedBeanFieldProfile">
 		<map>		 	
 			<entry>
 			<key>
@@ -179,23 +165,94 @@
 			<map>
 				<entry key="eduPersonAffiliation">
 					<list>
-		       	 		<value>employee</value>
-		       	 		<value>staff</value>
-		       	 		<value>faculty</value>
-		       	 		<value>emeritus</value>
-		       	 		<value>retired</value>
-		       	 		<value>teacher</value>
+		       	 		<value>student</value>		       	 		
+		      		</list>		
+				</entry>				
+			</map>
+			</entry>	
+			<entry>
+			<key>
+				<ref bean="beanMobilePhone"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>student</value>		       	 		
+		      		</list>		
+				</entry>
+			</map>
+			</entry>					
+		</map>
+		</property>		
+		<property name="listBeanField">
+		  <list>
+		    <ref bean="beanHomePostalAddress"/>
+		    <ref bean="beanEmailPerso"/>
+		    <ref bean="beanRedirectMail"/> 
+		    <ref bean="beanRedirectMailEtu"/>		
+		    <ref bean="beanMobilePhone"/>
+		    <ref bean="beanMobilePhoneEtu"/>
+		    <ref bean="beanSMSAgreement"/>
+		  </list>
+		</property> 
+	</bean>
+	
+	<bean id="beanPersonalInfoDigest"
+		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session">
+		<property name="title" value="INFO.PERSONAL.TEXT.LABEL"/>
+		<property name="name" value="personalInfo"/>
+		<property name="account" ref="account"/>
+		<property name="beanFieldProfile">
+		<map>		 	
+			<entry>
+			<key>
+				<ref bean="beanRedirectMailEtu"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>student</value>		       	 		
+		      		</list>		
+				</entry>
+			</map>
+			</entry>	
+			<entry>
+			<key>
+				<ref bean="beanMobilePhoneEtu"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>student</value>		       	 		
+		      		</list>		
+				</entry>
+			</map>
+			</entry>					
+		</map>
+		</property>
+		<property name="deniedBeanFieldProfile">
+		<map>		 	
+			<entry>
+			<key>
+				<ref bean="beanMobilePhone"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>student</value>		       	 		
 		      		</list>		
 				</entry>
 			</map>
 			</entry>			
 		</map>
-		</property>
+		</property>	
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanDisplayName"/>
 		    <ref bean="beanEmailPerso"/>
-		    <ref bean="beanRedirectMail"/> 		
+		    <ref bean="beanRedirectMailEtu"/>	
+		    <ref bean="beanMobilePhoneEtu"/>
 		    <ref bean="beanMobilePhone"/>
 		    <ref bean="beanSMSAgreement"/>
 		  </list>
@@ -245,13 +302,46 @@
 		<property name="account" ref="account"/>
 		<property name="profile">
 		  <map>
-		    <entry key="eduPersonPrimaryAffiliation">
+		    <entry key="eduPersonAffiliation">
 		      <list>
 		        <value>student</value>
+		        <value>alum</value>
 		      </list>
-		    </entry>
+		    </entry>		   
 		  </map>
 		</property>
+		<property name="beanFieldProfile">
+		<map>		 	
+			<entry>
+			<key>
+				<ref bean="beanSupannEtuId"/>
+			</key>
+			<map>
+				<entry key="supannEtablissement">
+					<list>
+		       	 		<value>{UAI}0751717J</value>		       	 		
+		      		</list>		
+				</entry>
+			</map>
+			</entry>								
+		</map>
+		</property>
+		<property name="deniedBeanFieldProfile">
+		<map>		 	
+			<entry>
+			<key>
+				<ref bean="beanSupannCodeINE"/>
+			</key>
+			<map>
+				<entry key="supannEtablissement">
+					<list>
+		       	 		<value>{UAI}0751717J</value>		       	 		
+		      		</list>		
+				</entry>				
+			</map>
+			</entry>					
+		</map>
+		</property>		
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanSupannEtuId"/>

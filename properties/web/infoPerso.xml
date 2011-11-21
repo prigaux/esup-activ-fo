@@ -41,6 +41,19 @@
 		scope="session"
 		>
 		<property name="key" value="PERSOINFO.MOBILE.TEXT.LABEL"/>
+		<property name="validator" ref="validatorPager"/>		
+		<property name="help" value="PERSOINFO.MOBILE.TEXT.HELP"/>		
+		<property name="required" value="false" />
+		<property name="updateable" value="true"/>
+		<property name="name" value="pager"/>
+		<property name="disable" value="false"/>
+	</bean>
+		<bean
+		id="beanMobilePhoneEtu"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+		<property name="key" value="PERSOINFO.MOBILE.TEXT.LABEL"/>
 		<property name="validator" ref="validatorMobileStudent"/>
 		<property name="converter" ref="emptyConverter"/>
 		<property name="useConvertedValue" value="true"/>
@@ -215,7 +228,36 @@
 		<property name="updateable" value="true"/>
 	</bean>
 	
-		
+	<bean id="beanRedirectMailEtu"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session">
+		<property name="key" value="PERSOINFO.MAILFORWARDETU.LABEL"/>
+		<property name="help" value="PERSOINFO.MAILFORWARDETU.TEXT.HELP"/>
+		<property name="fieldType" value="selectManyCheckbox"/>
+		<property name="multiValue" value="true"/>	
+		<property name="displayItems">
+		   <list>
+        	 <ref bean="beanSelectRedirectMailEtu"/>
+		   </list>
+		</property>
+		<property name="validator" ref="validatorRedirectMail"/>
+		<property name="converter" ref="redirectMailConverter"/>
+		<property name="useConvertedValue" value="true"/>
+		<property name="name" value="mailForwardingAddress"/>
+		<property name="disable" value="false"/>
+		<property name="updateable" value="true"/>
+	</bean>
+	
+	<bean  
+		id="beanSelectRedirectMailEtu"
+		class="org.esupportail.activfo.web.beans.LdapAttributeItem"
+		scope="session">		
+		<property name="label" value="Oui"/>
+		<property name="account" ref="account"/>
+		<property name="attributeName" value="supannMailPerso"/>
+		<property name="defaultValue" value="defaultValue"/>
+	</bean>
+			
 	<bean  
 		id="beanSelectRedirectMail"
 		class="org.esupportail.activfo.web.beans.LdapAttributeItem"
