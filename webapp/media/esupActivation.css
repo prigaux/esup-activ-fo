@@ -24,7 +24,17 @@
     }
     
     
-    
+    .firstStepImage2fleches {
+    height: 53px;
+    width: 745px;
+    background: url('/media/images/bandeau-activation-2fleches01-ent.png') no-repeat left top;
+    }
+    .secondStepImage2fleches {
+    height: 53px;
+	width: 745x;
+    background: url('/media/images/bandeau-activation-2fleches02-ent.png') no-repeat left top;
+    }
+        
     .firstStepImage {
     height: 53px;
     width: 780px;
@@ -137,6 +147,16 @@
 	font-weight: bold;
 	padding-top:10px !important;
 	width:128px !important;
+	}
+	ul.processSteps li.currentTabModification{
+	color: #c9f1a5;
+	font-weight: bold;
+	padding-top:10px !important;
+	width:300px !important;
+	}
+	ul.processSteps li.firstImage2 {
+	padding-top:10px !important;
+	width:300px !important;
 	}
 	ul.processSteps li.currentTabLogin {
 	color: #c9f1a5;
