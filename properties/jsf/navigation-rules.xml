@@ -179,7 +179,16 @@
 			<to-view-id>/stylesheets/accountDataView.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
-
+	
+	<navigation-rule>
+		<display-name>dataViewToDataChange</display-name>
+		<from-view-id>/stylesheets/accountDataView.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoDataChange</from-outcome>
+			<to-view-id>/stylesheets/accountDataChange.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
 	<navigation-rule>
 		<display-name>accountWelcomeToAuthentificationCas</display-name>
 		<from-view-id>/stylesheets/welcome.jsp</from-view-id>
