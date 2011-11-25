@@ -4,12 +4,6 @@
 
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 	
-	<t:documentHead>
-		<meta http-equiv="Expires" content="0">
-		<meta http-equiv="cache-control" content="no-cache,no-store">
-		<meta http-equiv="pragma" content="no-cache">
-	</t:documentHead>
-
 	<%@include file="_navigation.jsp"%>
 	
 	<e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}"  />
@@ -18,7 +12,7 @@
 	<t:htmlTag styleClass="processSteps" value="ul">
 	    <t:htmlTag styleClass="homeStep" value="li"><t:graphicImage title="Accueil" value="/media/images/home.jpg"  style="border: 0;cursor:pointer;" onclick="simulateLinkClick('restart:restartButton');"/></t:htmlTag>		
 		<t:htmlTag styleClass="currentTabModification" value="li"><t:outputText escape="false" value="#{msgs['DATACHANGE.MODIFICATION.TEXT']}"/></t:htmlTag>
-		<t:htmlTag styleClass="secondStep" value="li"><t:outputText escape="false" value="#{msgs['DATACHANGE.DISPLAY.TEXT']}"/></t:htmlTag>
+		<t:htmlTag styleClass="secondStep" value="li"><t:commandLink styleClass="commandLink" onclick="simulateLinkClick('accountForm:next');"><t:outputText escape="false" value="#{msgs['DATACHANGE.DISPLAY.TEXT']}"/></t:commandLink></t:htmlTag>
 	</t:htmlTag>
 	</t:div>
 	
@@ -84,7 +78,7 @@
   </div>
 
 	<t:div style="margin-top:30;">
-	  <e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
+	  <e:commandButton id="next" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
 	</t:div>
 	
   </h:form>

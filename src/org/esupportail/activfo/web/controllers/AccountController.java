@@ -419,6 +419,11 @@ public class AccountController extends AbstractContextAwareController implements
 					dataChange=false;
 					return "gotoViewDataChange";
 				}
+				else if(viewDataChange){
+					viewDataChange=false;
+					dataChange=true;
+					return "gotoDataChange";
+				}
 				else 
 					return "gotoPasswordChange";
 				

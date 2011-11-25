@@ -4,12 +4,6 @@
 
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 	
-	<t:documentHead>
-		<meta http-equiv="Expires" content="0">
-		<meta http-equiv="cache-control" content="no-cache,no-store">
-		<meta http-equiv="pragma" content="no-cache">
-	</t:documentHead>
-
 	<%@include file="_navigation.jsp"%>
 	
 	<e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}"  />
@@ -17,7 +11,7 @@
 	<t:div styleClass="secondStepImage2fleches">
 	<t:htmlTag styleClass="processSteps" value="ul">
 	    <t:htmlTag styleClass="homeStep" value="li"><t:graphicImage title="Accueil" value="/media/images/home.jpg"  style="border: 0;cursor:pointer;" onclick="simulateLinkClick('restart:restartButton');"/></t:htmlTag>		
-		<t:htmlTag styleClass="firstImage2" value="li"><t:outputText escape="false" value="#{msgs['DATACHANGE.MODIFICATION.TEXT']}"/></t:htmlTag>
+		<t:htmlTag styleClass="firstImage2" value="li"><t:commandLink styleClass="commandLink" onclick="simulateLinkClick('accountForm:preview');"><t:outputText escape="false" value="#{msgs['DATACHANGE.MODIFICATION.TEXT']}"/></t:commandLink></t:htmlTag>
 		<t:htmlTag styleClass="currentTab" value="li"><t:outputText escape="false" value="#{msgs['DATACHANGE.DISPLAY.TEXT']}"/></t:htmlTag>
 	</t:htmlTag>
 	</t:div>
@@ -47,10 +41,12 @@
 	  </h:dataTable>
 	 </t:div>	 	 
     </t:dataList>      
-  </div>
-		
+  </div>		
+	<h:form id="accountForm" style="display:none;" >
+		<e:commandButton id="preview" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}"/>
+	</h:form>
 	<h:form>
-	  <e:commandButton id="retartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
+	  <e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
 	</h:form>
 	
 	<h:form id="restart" style="display:none;"  >

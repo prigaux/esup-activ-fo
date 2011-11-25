@@ -175,3 +175,15 @@
 	font-size:12px;
 	}
 	
+	.commandLink a, a.commandLink{
+  	background: transparent !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    text-decoration: none !important;
+    border: 0px none transparent !important;
+    cursor:pointer;
+	}
+	.commandLink a:hover, a.commandLink:hover{
+    font-weight:bold; !important;    
+	}
+	
