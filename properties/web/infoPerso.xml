@@ -404,7 +404,6 @@
 		<property name="name" value="telephoneNumber"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="true"/>
-		<property name="help" value="PERSOINFO.MOBILE.TEXT.HELP"/>
 		<property name="multiValue" value="true"/>
 		<property name="numberOfValue" value="5"/>
 		<property name="converter" ref="ldapPhoneFaxConverter" />
@@ -469,7 +468,7 @@
 		<property name="multiValue" value="true"/>
 		<property name="numberOfValue" value="5"/>
 		<property name="disable" value="false"/>
-		<property name="updateable" value="true"/>
+		<property name="updateable" value="false"/>
 		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
 	</bean>
 	
