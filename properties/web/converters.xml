@@ -163,5 +163,12 @@
     	<description/>
 		<property name="emptyValue" value="DEFAULT_VALUE"/>     
 	</bean>
+	
+	<bean 
+		id="attributeReplaceConverter"
+		class="org.esupportail.activfo.web.converters.AttributesReplaceConverter" scope="session">		
+    	<description/>
+		<property name="account" ref="account"/>     
+	</bean>
  	
 </beans>
