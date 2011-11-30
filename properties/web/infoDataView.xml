@@ -26,6 +26,7 @@
 		</property>
 		<property name="listBeanField">
 		  <list>
+		   	<ref bean="appAnnuairePublic"/>
 		    <ref bean="beanDisplayName"/>
 		    <ref bean="beanMail"/>
 		    <ref bean="beanEduPersonAffiliation"/>
@@ -46,8 +47,29 @@
 
 		<property name="title" value="INFO.PRIVATEDIRECTORY.TEXT.LABEL"/>
 		<property name="name" value="privateDirectoryInfo"/>
+		<property name="account" ref="account"/>
+		<property name="beanFieldProfile">
+		 <map>		 	
+			<entry>
+			<key>
+				<ref bean="appAnnuairePrive"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>staff</value>
+		       	 		<value>faculty</value>
+		       	 		<value>teacher</value>
+		       	 		<value>emeritus</value>
+		      		</list>		
+				</entry>
+			</map>
+			</entry>				
+		 </map>
+		</property>
 		<property name="listBeanField">
 		  <list>
+		 	<ref bean="appAnnuairePrive"/>
 			<ref bean="beanDisplayName"/>
 		    <ref bean="beanMail"/>
 		    <ref bean="beanEduPersonAffiliation"/>
@@ -96,11 +118,12 @@
 		      		</list>		
 				</entry>
 			</map>
-			</entry>			
+			</entry>				
 		</map>
 		</property>
 		<property name="listBeanField">
 		  <list>
+		 	<ref bean="appPagePerso"/>
 		    <ref bean="beanDisplayName"/>
 		    <ref bean="beanEmployeeType"/>
 		    <ref bean="beanSupannEntiteAffectation"/>
@@ -111,6 +134,26 @@
 		    <ref bean="beanPostalAddress"/>	
 		  </list>
 		</property> 
+	</bean>
+	
+	<bean id="appAnnuairePublic"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl">
+		<property name="key" value="DATACHANGE.DISPLAY.APPLICATION.LABEL"/>	
+		<property name="fieldType" value="link"/>	
+		<property name="value" value="DATACHANGE.DISPLAY.APPLICATION.ANNUAIREPUBLIC"/>		
+	</bean>
+	<bean id="appAnnuairePrive"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl">
+		<property name="key" value="DATACHANGE.DISPLAY.APPLICATION.LABEL"/>	
+		<property name="fieldType" value="link"/>	
+		<property name="value" value="DATACHANGE.DISPLAY.APPLICATION.ANNUAIREPRIVE"/>		
+	</bean>
+	<bean id="appPagePerso"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl" scope="session">
+		<property name="key" value="DATACHANGE.DISPLAY.APPLICATION.LABEL"/>	
+		<property name="converter" ref="attributeReplaceConverter"/>
+		<property name="fieldType" value="link"/>	
+		<property name="value" value="DATACHANGE.DISPLAY.APPLICATION.PAGEPERSO"/>		
 	</bean>
 				 
 </beans>
