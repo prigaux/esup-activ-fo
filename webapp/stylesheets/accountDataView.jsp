@@ -16,7 +16,8 @@
 	</t:htmlTag>
 	</t:div>
 	
-	<e:paragraph value="#{msgs['PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL']}"/>
+	<e:paragraph escape="false" value="#{msgs['PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL']}"/>
+	<e:paragraph escape="false" value="#{msgs['DATACHANGE.DISPLAY.TOP']}"/>
 	
 	<div class="mainBlock">
 	
@@ -31,10 +32,13 @@
 		  <t:outputText styleClass="labeltexttop" value="#{msgs[beanfield.key]}" rendered="#{beanfield.value!=''&&beanfield.size>1}"/>
 		  <t:outputText styleClass="labeltext" value="#{msgs[beanfield.key]}" rendered="#{beanfield.value!=''&&beanfield.size<=1}"/>
 	   </h:column>
-	   <h:column >        
-        <t:dataList value="#{beanfield.values}" var="sub" rendered="#{beanfield.value!=''}">
+	   <h:column >    
+	   <t:div styleClass="portlet-section-text" rendered="#{sub.value!=''}">   
+	    	<h:outputText escape="false" converter="#{beanfield.converter}" rendered="#{beanfield.fieldType=='link'}" value="#{msgs[beanfield.value]}"/>
+	    </t:div>	 	    
+        <t:dataList value="#{beanfield.values}" var="sub" rendered="#{beanfield.value!=''&&sub.value!=''}">
 		    <t:div styleClass="portlet-section-text" rendered="#{sub.value!=''}">
-			    <h:outputText value="#{sub.value}" converter="#{beanfield.converter}" rendered="#{sub.value!=''}"/>
+			    <h:outputText value="#{sub.value}" converter="#{beanfield.converter}" rendered="#{sub.value!=''}"/>			  	
 	        </t:div>
          </t:dataList>                 
   		</h:column>  								
