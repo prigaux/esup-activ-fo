@@ -42,7 +42,7 @@
 	    
 		<t:dataList value="#{beanfield.values}" var="sub"  >
 		    		    
-		     <t:div styleClass="#{beanfield.name}output portlet-section-text">
+		     <t:div styleClass="#{beanfield.name}output portlet-section-text" rendered="#{beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&!sub.convertedValue}">
 			   		<h:outputText value="#{sub.value}" rendered="#{beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'}" converter="#{beanfield.converter}"/>			   		
 	        </t:div>
 	        
