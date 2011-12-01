@@ -11,23 +11,6 @@
 
 .expand{padding-bottom:.75em;width:50%;}
 
-/* --- Links  --- */
-a:link, a:visited {
-  border:1px dotted #ccc;
-  border-width:0 0 1px;
-  text-decoration:none;
-  color:blue;
-  border-style:solid;
-  background-color:#b6ecff
-}
-a:hover, a:active, a:focus {
-  border-style:solid;
-  background-color:#c9f1a5;
-  outline:0 none
-}
-a:active, a:focus {
-  color:red;
-}
 .expand a {
   display:block;
   padding:3px 10px
