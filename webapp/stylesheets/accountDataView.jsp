@@ -33,11 +33,11 @@
 		  <t:outputText styleClass="labeltext" value="#{msgs[beanfield.key]}" rendered="#{beanfield.value!=''&&beanfield.size<=1}"/>
 	   </h:column>
 	   <h:column >    
-	   <t:div styleClass="portlet-section-text" rendered="#{sub.value!=''}">   
+	   <t:div styleClass="portlet-section-text" rendered="#{sub.value!=''&&beanfield.fieldType=='link'}">   
 	    	<h:outputText escape="false" converter="#{beanfield.converter}" rendered="#{beanfield.fieldType=='link'}" value="#{msgs[beanfield.value]}"/>
 	    </t:div>	 	    
         <t:dataList value="#{beanfield.values}" var="sub" rendered="#{beanfield.value!=''&&sub.value!=''}">
-		    <t:div styleClass="portlet-section-text" rendered="#{sub.value!=''}">
+		    <t:div styleClass="portlet-section-text" rendered="#{sub.value!=''&&!sub.convertedValue}">
 			    <h:outputText value="#{sub.value}" converter="#{beanfield.converter}" rendered="#{sub.value!=''}"/>			  	
 	        </t:div>
          </t:dataList>                 
