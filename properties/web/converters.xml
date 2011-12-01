@@ -170,5 +170,69 @@
     	<description/>
 		<property name="account" ref="account"/>     
 	</bean>
+	
+	<bean 
+		id="cnuConverter"
+		class="org.esupportail.activfo.web.converters.MapOrEqualConverter">		
+		<property name="mapping" >
+    	  <map>
+    	  	<entry key="CNU 01" value="Section CNU 01 - Droit privé et sciences criminelles" />
+	        <entry key="CNU 02" value="Section CNU 02 - Droit public" />
+	        <entry key="CNU 03" value="Section CNU 03 - Histoire du droit et des institutions" />
+	        <entry key="CNU 04" value="Section CNU 04 - Science politique" />
+	        <entry key="CNU 05" value="Section CNU 05 - Sciences économiques" />
+	        <entry key="CNU 06" value="Section CNU 06 - Sciences de gestion" />
+	        <entry key="CNU 07" value="Section CNU 07 - Sciences du langage : linguistique et phonétique générales" />
+	        <entry key="CNU 08" value="Section CNU 08 - Langues et littératures anciennes" />
+	        <entry key="CNU 09" value="Section CNU 09 - Langue et littérature francaises" />
+	        <entry key="CNU 10" value="Section CNU 10 - Littératures comparées" />
+			<entry key="CNU 11" value="Section CNU 11 - Langues et littératures anglaises et anglo-saxonnes" />
+	        <entry key="CNU 12" value="Section CNU 12 - Langues et littératures germaniques et scandinaves" />
+	        <entry key="CNU 13" value="Section CNU 13 - Langues et littératures slaves" />
+	        <entry key="CNU 14" value="Section CNU 14 - Langues et littératures romanes : espagnol, italien, ..." />
+	        <entry key="CNU 15" value="Section CNU 15 - Langues et littératures arabes, chinoises, japonaises, ..." />
+	        <entry key="CNU 16" value="Section CNU 16 - Psychologie, psychologie clinique, psychologie sociale" />
+	        <entry key="CNU 17" value="Section CNU 17 - Philosophie" />
+	        <entry key="CNU 18" value="Section CNU 18 - Architecture (ses théories et ses pratiques), arts appliqués, arts plastiques, ..." />
+	        <entry key="CNU 19" value="Section CNU 19 - Sociologie, démographie" />
+	        <entry key="CNU 20" value="Section CNU 20 - Anthropologie, ethnologie, préhistoire" />
+	        <entry key="CNU 21" value="Section CNU 21 - Histoire, civilisation, archéol. et art des mondes anciens et ..." />
+	        <entry key="CNU 22" value="Section CNU 22 - Histoire et civilisations : histoire des mondes modernes..." />
+	        <entry key="CNU 23" value="Section CNU 23 - Géographie physique, humaine, économique et régionale" />
+	        <entry key="CNU 24" value="Section CNU 24 - Aménagement de l'espace, urbanisme" />
+	        <entry key="CNU 25" value="Section CNU 25 - Mathématiques" />
+	        <entry key="CNU 26" value="Section CNU 26 - Mathématiques appliquées et applications des mathématiques" />
+	        <entry key="CNU 27" value="Section CNU 27 - Informatique" />
+	        <entry key="CNU 28" value="Section CNU 28 - Milieux denses et matériaux" />
+	        <entry key="CNU 29" value="Section CNU 29 - Constituants élémentaires" />
+	        <entry key="CNU 30" value="Section CNU 30 - Milieux dilués et optique" />
+	        <entry key="CNU 31" value="Section CNU 31 - Chimie théorique, physique, analytique" />
+	        <entry key="CNU 32" value="Section CNU 32 - Chimie organique, minérale, industrielle" />
+	        <entry key="CNU 33" value="Section CNU 33 - Chimie des matériaux" />
+	        <entry key="CNU 34" value="Section CNU 34 - Astronomie, astrophysique" />
+	        <entry key="CNU 35" value="Section CNU 35 - Structure et évolution de la terre et des autres plan�tes" />
+	        <entry key="CNU 36" value="Section CNU 36 - Terre solide : géodynamique des enveloppes supérieures, ..." />
+	        <entry key="CNU 37" value="Section CNU 37 - Météorologie, océanographie physique et physique" />
+	        <entry key="CNU 60" value="Section CNU 60 - Mécanique, génie mécanique, génie civil" />
+	        <entry key="CNU 61" value="Section CNU 61 - Génie informatique, automatique et traitement du signal" />
+	        <entry key="CNU 62" value="Section CNU 62 - Energétique, génie des procédés" />
+	        <entry key="CNU 63" value="Section CNU 63 - Electronique, optronique et systèmes" />
+	        <entry key="CNU 64" value="Section CNU 64 - Biochimie et biologie moléculaire" />
+	        <entry key="CNU 65" value="Section CNU 65 - Biologie cellulaire" />
+	        <entry key="CNU 66" value="Section CNU 66 - Physiologie" />
+	        <entry key="CNU 67" value="Section CNU 67 - Biologie des populations et écologie" />
+	        <entry key="CNU 68" value="Section CNU 68 - Biologie des organismes" />
+	        <entry key="CNU 69" value="Section CNU 69 - Neurosciences" />
+	        <entry key="CNU 39" value="Section CNU 39 - Sciences physico" />
+	        <entry key="CNU 40" value="Section CNU 40 - Sciences du médicament" />
+	        <entry key="CNU 41" value="Section CNU 41 - Sciences biologiques pharmaceutiques" />
+	        <entry key="CNU 70" value="Section CNU 70 - Sciences de l'éducation" />
+	        <entry key="CNU 71" value="Section CNU 71 - Sciences de l'information et de la communication" />
+	        <entry key="CNU 72" value="Section CNU 72 - Epistémologie, histoire des sciences et des techniques" />
+	        <entry key="CNU 73" value="Section CNU 73 - Cultures et langues régionales" />
+	        <entry key="CNU 74" value="Section CNU 74 - Sciences et techniques des activités physiques et sportives" />
+    	  </map>
+    	  </property>     
+	</bean>
  	
 </beans>

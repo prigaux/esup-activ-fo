@@ -46,11 +46,29 @@
 		    </entry>
 		  </map>
 		</property>
+		<property name="beanFieldProfile">
+		 <map>		 	
+			<entry>
+			<key>
+				<ref bean="beanDepartmentNumber"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>teacher</value>		       	 		
+		       	 		<value>faculty</value>
+		      		</list>		
+				</entry>
+			</map>
+			</entry>
+		 </map>
+		</property>
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanEduPersonAffiliation"/>
 		    <ref bean="beanEduPersonPrimaryAffiliation"/>
 		    <ref bean="beanEmployeeType"/>
+		    <ref bean="beanDepartmentNumber"/>
 		  </list>
 		</property> 
 	</bean>
