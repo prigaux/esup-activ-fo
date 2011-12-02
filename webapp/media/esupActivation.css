@@ -9,9 +9,15 @@
     .secondColumn {
     vertical-align: center;
     }
+    
     .thirdColumn {
-    vertical-align: top;
-    padding-top: 6px;
+      vertical-align: top;
+      padding-top: 6px;
+    }
+    
+    .thirdColumn img{   
+    float: left;
+    border: 0;
     } 
     .fourthColumn {
     vertical-align: top;
