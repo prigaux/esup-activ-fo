@@ -216,3 +216,10 @@
 	text-overflow:ellipsis;
 	}
 	
+	.constrainte{
+	color: gray;
+    font-family: Verdana,Impact,"Times New Roman",serif;
+    font-size: 0.8em;
+    text-align: left;
+	}
+	
