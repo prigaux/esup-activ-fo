@@ -64,7 +64,7 @@
 				<h:selectOneMenu value="#{entry.value}" rendered="#{entry.fieldType=='selectOneMenu'}" valueChangeListener="#{entry.changeValue}" immediate="true">
                   <f:selectItems value="#{entry.displayItems}" />
              	</h:selectOneMenu>
-			</h:column><input style="width:100px" />
+			</h:column>
 			<h:column>									
 				<t:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
 			</h:column>													
