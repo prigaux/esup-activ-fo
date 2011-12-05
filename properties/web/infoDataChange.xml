@@ -65,6 +65,8 @@
 		</property>
 		<property name="listBeanField">
 		  <list>
+		  	<ref bean="beanDescription"/>
+		    <ref bean="beanInfo"/>
 		    <ref bean="beanEduPersonAffiliation"/>
 		    <ref bean="beanEduPersonPrimaryAffiliation"/>
 		    <ref bean="beanEmployeeType"/>
@@ -126,9 +128,7 @@
 		<property name="listBeanField">
 		  <list>
 		    <ref bean="beanListeRouge"/>
-		    <ref bean="beanMail"/>
-		    <ref bean="beanDescription"/>
-		    <ref bean="beanInfo"/>
+		    <ref bean="beanMail"/>		    
 		    <ref bean="beanSupannEntiteAffectation"/>
 		    <ref bean="beanPhone"/>
 		    <ref bean="beanFax"/>
