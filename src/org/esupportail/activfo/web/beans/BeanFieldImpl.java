@@ -43,7 +43,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	private boolean useConvertedValue;
 	
 	private String notice;
-	private String constrainte;
+	private String constraint;
 	
 	public String getId() {
 		return id;
@@ -307,17 +307,16 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	}
 
 	/**
-	 * @return the constrainte
+	 * @return the constraint
 	 */
-	public String getConstrainte() {
-		return constrainte;
+	public String getConstraint() {
+		return constraint;
 	}
 
 	/**
-	 * @param constrainte the constrainte to set
+	 * @param constraint the constraint to set
 	 */
-	public void setConstrainte(String constrainte) {
-		this.constrainte = constrainte;
-	}
-	
+	public void setConstraint(String constraint) {
+		this.constraint = constraint;
+	}	
 }

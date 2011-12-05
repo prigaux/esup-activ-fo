@@ -72,8 +72,8 @@ public interface BeanField<T> {
 	public String getNotice();
 	public void setNotice(String notice);
 	
-	public String getConstrainte();
-	public void setConstrainte(String constrainte);
+	public String getConstraint();
+	public void setConstraint(String constraint);
 		
 	public int getSize();
 	

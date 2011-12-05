@@ -94,7 +94,7 @@
                   <f:selectItems value="#{beanfield.displayItems}" />
         		</h:selectOneRadio>              
          </t:div>   
-         <h:outputText styleClass="constrainte" value="#{msgs[beanfield.constrainte]}" rendered="#{beanfield.constrainte!=null}"/>                 
+         <h:outputText styleClass="constraint" value="#{msgs[beanfield.constraint]}" rendered="#{beanfield.constraint!=null}"/>                 
        		</h:column>  
         	<h:column>
         		<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.notice]}" value="/media/images/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}"/>
