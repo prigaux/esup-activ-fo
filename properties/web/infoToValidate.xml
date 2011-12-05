@@ -76,6 +76,7 @@
 		<property name="validator" ref="validatorBirthDate"/>
 		<property name="converter" ref="ldapDateConverter"/>
 		<property name="required" value="true" />
+		<property name="constraint" value="PERSOINFO.BIRTHDATE.CONSTRAINT"/>
 		
 	</bean>
 	
