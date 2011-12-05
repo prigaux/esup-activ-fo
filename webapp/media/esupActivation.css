@@ -210,3 +210,9 @@
 		margin: 1em;
 	}
 	
+	option{
+	max-width:60em;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	}
+	
