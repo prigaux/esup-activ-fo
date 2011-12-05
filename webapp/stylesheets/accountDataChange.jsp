@@ -46,8 +46,7 @@
 	   <h:dataTable  value="#{category.profilingListBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn,fourthColumn">
 	  
 	   <h:column  >
-		  <t:outputText styleClass="labeltexttop"  value="#{msgs[beanfield.key]}" rendered="#{beanfield.size>1}"/>
-		  <t:outputText styleClass="labeltext"  value="#{msgs[beanfield.key]}" rendered="#{beanfield.size<=1}"/>
+		  <t:outputText styleClass="labeltexttop#{beanfield.size>1}"  value="#{msgs[beanfield.key]}"/>		 
 	   </h:column>
 	   <h:column >
 	    

@@ -179,12 +179,12 @@
 	width:135px !important;
 	}
 	
-	.labeltexttop {
+	.labeltexttoptrue{
 	font-weight:bold;
 	font-size:12px;
 	vertical-align:top;
 	}
-	.labeltext {
+	.labeltexttopfalse {
 	font-weight:bold;
 	font-size:12px;
 	}
