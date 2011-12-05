@@ -189,6 +189,11 @@
 	font-size:12px;
 	}
 	
+	.labeltext{
+	font-weight:bold;
+	font-size:12px;
+	}
+	
 	.commandLink a, a.commandLink{
   	background: transparent !important;
     font-size: inherit !important;
