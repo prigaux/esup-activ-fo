@@ -15,13 +15,24 @@
 		<t:htmlTag styleClass="secondStep" value="li"><t:commandLink styleClass="commandLink" onclick="simulateLinkClick('accountForm:next');"><t:outputText escape="false" value="#{msgs['DATACHANGE.DISPLAY.TEXT']}"/></t:commandLink></t:htmlTag>
 	</t:htmlTag>
 	</t:div>
-	
-	<e:messages/>
-	
+	<e:messages/>	
 	<e:paragraph value="#{msgs['DATACHANGE.TEXT.TOP']}" escape="false"/>
-	<t:htmlTag id="AllModifyLink" value="a">			
-  				<h:outputText value="#{msgs['DATACHANGE.MODIFICATION.ALL.LINK']}"/>  				
-  	</t:htmlTag>
+	<f:verbatim>
+		<fieldset class="legend">
+       	 	<legend><h:outputText value="#{msgs['DATACHANGE.TEXT.LEGEND']}"/></legend>
+      		<h:panelGrid columns="4" columnClasses="legendCol1,legendCol2,legendCol3,legendCol4">
+      			<div><h:graphicImage value="/media/images/help.jpg"/><h:outputText styleClass="portlet-section-text" value=": #{msgs['DATACHANGE.TEXT.LEGEND.HELP']}"/></div>        		
+      			<div><h:graphicImage value="/media/images/redtriangular.jpg"/><h:outputText styleClass="portlet-section-text" value=": #{msgs['DATACHANGE.TEXT.LEGEND.NOTE']}"/></div>
+      			<div><h:graphicImage value="/media/images/add.png"/><h:outputText styleClass="portlet-section-text" value=": #{msgs['DATACHANGE.TEXT.LEGEND.ADD']}"/></div>
+      			<div><h:graphicImage value="/media/images/remove.png"/><h:outputText styleClass="portlet-section-text" value=": #{msgs['DATACHANGE.TEXT.LEGEND.REMOVE']}"/></div>
+      		</h:panelGrid>
+    	</fieldset>		
+	</f:verbatim>
+	<t:div>
+		<t:htmlTag id="AllModifyLink" value="a">			
+  			<h:outputText value="#{msgs['DATACHANGE.MODIFICATION.ALL.LINK']}"/>  				
+  		</t:htmlTag>
+  	</t:div>
 	
 	<h:form id="accountForm" >
 	<div class="mainBlock">
