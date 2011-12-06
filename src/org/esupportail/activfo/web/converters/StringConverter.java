@@ -3,15 +3,12 @@
  */
 package org.esupportail.activfo.web.converters;
 
-import java.text.Normalizer;
 import java.util.HashMap;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.ConverterException;
 
-import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 
