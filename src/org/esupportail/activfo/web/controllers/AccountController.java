@@ -339,6 +339,28 @@ public class AccountController extends AbstractContextAwareController implements
 		return null;
 	}
 	
+	private boolean setMailSendingValues(BeanField beanPersoInfo,HashMap<String,List<String>> oldValue,HashMap<String,List<String>> newValue){
+		boolean sendMail=false;
+		
+		List<String> accountValues=currentAccount.getAttributes(beanPersoInfo.getName());
+		List<BeanMultiValue> beanPersoInfoValues=beanPersoInfo.getValues();
+		List<String> newStringValues=new ArrayList<String>();
+		List<String> newStringValuesComp=new ArrayList<String>();
+		for(BeanMultiValue bmv:beanPersoInfoValues)
+			if(bmv.getValue()!=null&&!bmv.getValue().isEmpty()){
+				newStringValues.add(bmv.getValue());
+				newStringValuesComp.add(bmv.getValue());
+			}
+			
+		if(newStringValuesComp.retainAll(accountValues)){
+			oldValue.put(beanPersoInfo.getName(), accountValues);
+			newValue.put(beanPersoInfo.getName(),newStringValues);
+			sendMail=true;
+		}
+						
+		return sendMail;
+	}
+	
 	public String pushChangeInfoPerso() {
 			
 			Iterator it;
@@ -359,8 +381,8 @@ public class AccountController extends AbstractContextAwareController implements
 				if(dataChange)it=listDataChangeInfos.iterator();
 				else it=listBeanPersoInfo.iterator();	
 				int i=0;
-				HashMap<String,String> oldValue=new HashMap<String,String>();
-				HashMap<String,String> newValue=new HashMap<String,String>();
+				HashMap<String,List<String>> oldValue=new HashMap<String,List<String>>();
+				HashMap<String,List<String>> newValue=new HashMap<String,List<String>>();
 				while(it.hasNext()){
 					BeanField beanPersoInfo=(BeanField)it.next();
 					
@@ -370,19 +392,18 @@ public class AccountController extends AbstractContextAwareController implements
 					
 					String valueBeanMulti=null;
 					int j=0;
+									
 					while(itBeanPersoInfo.hasNext()) {
 						BeanMultiValue bmv=(BeanMultiValue)itBeanPersoInfo.next();
 						if (j>0)valueBeanMulti+=getSeparator()+bmv.getValue();
-						else valueBeanMulti=bmv.getValue();
-						//if (beanPersoInfo.getName().contains("mailForwardingAddress")) valueBeanMulti=currentAccount.getEmailPerso();
-						
-						if(!currentAccount.getAttributes(beanPersoInfo.getName()).contains(bmv.getValue()) && !beanPersoInfo.isUpdateable()) {
-							oldValue.put(beanPersoInfo.getName(), currentAccount.getAttributes(beanPersoInfo.getName()).toString());
-							newValue.put(beanPersoInfo.getName(), bmv.getValue());
-							//logger.debug("Attribute,oldValue and newValue : "+beanPersoInfo.getName()+", "+currentAccount.getAttributes(beanPersoInfo.getName()).toString()+","+bmv.getValue());
-						}
+						else valueBeanMulti=bmv.getValue();										
 						j++;
-					}									
+					}
+					
+					
+					if(!beanPersoInfo.isUpdateable())
+						this.setMailSendingValues(beanPersoInfo, oldValue, newValue);
+					
 					if (beanPersoInfo.isUpdateable() && (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null) ){
 						hashBeanPersoInfo.put(beanPersoInfo.getName(), valueBeanMulti);
 					}
@@ -735,9 +756,10 @@ public class AccountController extends AbstractContextAwareController implements
 		
 	//TODO externaliser cette fonction. 
 	//Rendre plus générique pour permettre des envois de mail suivant le profil de l'utilisateur
-	public void sendMessage(HashMap<String,String> oldValue, HashMap<String,String> newValue) {
+	public void sendMessage(HashMap<String,List<String>> oldValue, HashMap<String,List<String>> newValue) {
 		
 		InternetAddress mail=null;
+		String sep=", ";
 		
 		String mailBody=this.body1DataChange;
 		String mailBody2=this.body2DataChange;
@@ -746,16 +768,25 @@ public class AccountController extends AbstractContextAwareController implements
 		mailBody=mailBody.replace("{1}", currentAccount.getAttribute(accountEmpIdKey)!=null?currentAccount.getAttribute(accountEmpIdKey):"");
 		mailBody=mailBody+mailBody2;
 		
-        Iterator<Map.Entry<String, String>> it=oldValue.entrySet().iterator();
-        Iterator<Map.Entry<String, String>> itnew=newValue.entrySet().iterator();
-        
-		while(it.hasNext()){
-			Map.Entry<String, String> o=it.next();
-			Map.Entry<String, String> n=itnew.next();
-			mailBody=mailBody+"<tr><td>"+o.getKey()+"</td><td>"+o.getValue()+"</td><td>"+Arrays.asList(n.getValue().split(getSeparator()))+"</td><tr>";
+		Set<String> keys=oldValue.keySet();
+		
+		for(String key:keys)
+		{
+			mailBody=mailBody+"<tr><td>"+key+"</td><td>";
+			List<String> oldAttrValues=oldValue.get(key);
+			String oldAttrs="";
+			for(String attr:oldAttrValues)
+				oldAttrs+=sep+attr;
+			
+			List<String> newAttrValues=newValue.get(key);
+			String newAttrs="";
+			for(String attr:newAttrValues)
+				newAttrs+=sep+attr;
+						
+			mailBody+=oldAttrs.replaceFirst(sep, "")+"</td><td>"+newAttrs.replaceFirst(sep, "")+"</td><tr>";;						
 		}
 		
-		mailBody=mailBody+"</table>";
+    	mailBody=mailBody+"</table>";
 		
 		try {
 			mail = new InternetAddress(smtpService.getFromAddress().getAddress());
