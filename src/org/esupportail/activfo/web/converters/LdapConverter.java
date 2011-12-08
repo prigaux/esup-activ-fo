@@ -49,7 +49,7 @@ public class LdapConverter implements Converter {
     	List<LdapEntity> ldapentite = ldapEntityService.getLdapEntitiesFromFilter(filter);
     	returnValue=ldapentite.get(0).getAttribute("description");
     	} catch (Exception e) {
-    		logger.debug("La valeur de rattachement "+base+" n'exsite aps : "+e);
+    		logger.debug("La valeur de rattachement "+base+" n'existe pas : "+e);
     	}
     	return returnValue;
     	
