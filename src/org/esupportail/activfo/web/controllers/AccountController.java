@@ -409,25 +409,21 @@ public class AccountController extends AbstractContextAwareController implements
 						else valueBeanMulti=bmv.getValue();										
 						j++;
 					}
-					
-					
+										
 					if(!beanPersoInfo.isUpdateable())
 						this.setMailSendingValues(beanPersoInfo, oldValue, newValue);
-					
-					if (beanPersoInfo.isUpdateable() && (!"".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()!=null) ){
+					else if(isChange(beanPersoInfo)){						
 						hashBeanPersoInfo.put(beanPersoInfo.getName(), valueBeanMulti);
-					}
-					else if (beanPersoInfo.isUpdateable() && ("".equals(beanPersoInfo.getValues()) || beanPersoInfo.getValues()==null) ) {
-						DataChangeMaps.put(beanPersoInfo.getName(), valueBeanMulti);
-						hashBeanPersoInfo.put(beanPersoInfo.getName(), null);
-					}					
+					}							
 					i++;
 				}
-				logger.info("Informations personnelles envoy�es au BO pour mise � jour: "+hashBeanPersoInfo.toString());
 				
-				this.getDomainService().updatePersonalInformations(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),hashBeanPersoInfo);
-					
-				this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
+				if(hashBeanPersoInfo.size()>0){
+					logger.info("Informations personnelles envoy�es au BO pour mise � jour: "+hashBeanPersoInfo.toString());
+					this.getDomainService().updatePersonalInformations(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),hashBeanPersoInfo);				
+					this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
+				}
+				else logger.debug("Pas de mise à jour envoyée BO");
 				//Maj Account
 				Set<String> keySet=hashBeanPersoInfo.keySet();
 				for(String key:keySet)
