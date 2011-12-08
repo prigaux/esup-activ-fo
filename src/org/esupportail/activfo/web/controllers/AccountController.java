@@ -339,26 +339,36 @@ public class AccountController extends AbstractContextAwareController implements
 		return null;
 	}
 	
-	private boolean setMailSendingValues(BeanField beanPersoInfo,HashMap<String,List<String>> oldValue,HashMap<String,List<String>> newValue){
-		boolean sendMail=false;
+	private void setMailSendingValues(final BeanField beanPersoInfo,HashMap<String,List<String>> oldValue,HashMap<String,List<String>> newValue){
 		
-		List<String> accountValues=currentAccount.getAttributes(beanPersoInfo.getName());
+		if(isChange(beanPersoInfo)){
+			oldValue.put(beanPersoInfo.getName(),currentAccount.getAttributes(beanPersoInfo.getName()));
+			newValue.put(beanPersoInfo.getName(),getPersoInfoValues(beanPersoInfo));
+		}						
+	}
+	
+	/**
+	 * 
+	 * @param beanPersoInfo
+	 * @return renvoi la liste des valeurs non vide et non null d'un BeanField
+	 */
+	private List<String> getPersoInfoValues(BeanField beanPersoInfo){
 		List<BeanMultiValue> beanPersoInfoValues=beanPersoInfo.getValues();
-		List<String> newStringValues=new ArrayList<String>();
-		List<String> newStringValuesComp=new ArrayList<String>();
+		List<String> persoInfoValues=new ArrayList<String>();
 		for(BeanMultiValue bmv:beanPersoInfoValues)
-			if(bmv.getValue()!=null&&!bmv.getValue().isEmpty()){
-				newStringValues.add(bmv.getValue());
-				newStringValuesComp.add(bmv.getValue());
-			}
-			
-		if(newStringValuesComp.retainAll(accountValues)){
-			oldValue.put(beanPersoInfo.getName(), accountValues);
-			newValue.put(beanPersoInfo.getName(),newStringValues);
-			sendMail=true;
-		}
-						
-		return sendMail;
+			if(bmv.getValue()!=null&&!bmv.getValue().isEmpty())				
+				persoInfoValues.add(bmv.getValue());
+		return persoInfoValues;
+	}
+	
+	/**
+	 * 
+	 * @param beanPersoInfo
+	 * @return indique si ce champ a été modifié ou non
+	 */
+	private boolean isChange(BeanField beanPersoInfo){							
+		List<String> newStringValuesComp=getPersoInfoValues(beanPersoInfo);
+		return newStringValuesComp.retainAll(currentAccount.getAttributes(beanPersoInfo.getName()));				
 	}
 	
 	public String pushChangeInfoPerso() {
