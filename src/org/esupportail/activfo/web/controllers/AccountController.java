@@ -367,8 +367,19 @@ public class AccountController extends AbstractContextAwareController implements
 	 * @return indique si ce champ a été modifié ou non
 	 */
 	private boolean isChange(BeanField beanPersoInfo){							
-		List<String> newStringValuesComp=getPersoInfoValues(beanPersoInfo);
-		return newStringValuesComp.retainAll(currentAccount.getAttributes(beanPersoInfo.getName()));				
+		List<String> newValues=getPersoInfoValues(beanPersoInfo);
+		List<String> currentValues=new ArrayList<String>();
+		
+		//on ne compare pas avec les champs vide ou null
+		for(String s:currentAccount.getAttributes(beanPersoInfo.getName()))
+		  if(!s.isEmpty() && s!=null)
+			  currentValues.add(s);
+				
+		if(currentValues.size()==0&&newValues.size()==0)
+			return false;	
+			
+		return !(newValues.containsAll(currentValues) &&
+				currentValues.containsAll(newValues));				
 	}
 	
 	public String pushChangeInfoPerso() {
