@@ -374,10 +374,7 @@ public class AccountController extends AbstractContextAwareController implements
 		for(String s:currentAccount.getAttributes(beanPersoInfo.getName()))
 		  if(!s.isEmpty() && s!=null)
 			  currentValues.add(s);
-				
-		if(currentValues.size()==0&&newValues.size()==0)
-			return false;	
-			
+
 		return !(newValues.containsAll(currentValues) &&
 				currentValues.containsAll(newValues));				
 	}
