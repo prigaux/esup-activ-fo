@@ -15,7 +15,7 @@
       padding-top: 6px;
     }
     
-    .thirdColumn img{   
+    .thirdColumn > img, .thirdColumn > div{  
     float: left;
     border: 0;
     } 
