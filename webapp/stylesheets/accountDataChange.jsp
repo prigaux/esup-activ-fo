@@ -17,17 +17,19 @@
 	</t:div>
 	<e:messages/>	
 	<e:paragraph value="#{msgs['DATACHANGE.TEXT.TOP']}" escape="false"/>
+
 	<f:verbatim>
 		<fieldset class="legend">
        	 	<legend><h:outputText value="#{msgs['DATACHANGE.TEXT.LEGEND']}"/></legend>
-      		<h:panelGrid columns="4" columnClasses="legendCol1,legendCol2,legendCol3,legendCol4">
-      			<div><h:graphicImage value="/media/images/help.jpg"/><h:outputText styleClass="portlet-section-text" value=": #{msgs['DATACHANGE.TEXT.LEGEND.HELP']}"/></div>        		
-      			<div><h:graphicImage value="/media/images/redtriangular.jpg"/><h:outputText styleClass="portlet-section-text" value=": #{msgs['DATACHANGE.TEXT.LEGEND.NOTE']}"/></div>
-      			<div><h:graphicImage value="/media/images/add.png"/><h:outputText styleClass="portlet-section-text" value=": #{msgs['DATACHANGE.TEXT.LEGEND.ADD']}"/></div>
-      			<div><h:graphicImage value="/media/images/remove.png"/><h:outputText styleClass="portlet-section-text" value=": #{msgs['DATACHANGE.TEXT.LEGEND.REMOVE']}"/></div>
+      		<h:panelGrid columns="2" columnClasses="legendCol1,legendCol2">
+      			<t:div><h:graphicImage value="/media/images/help.jpg"/><h:outputText styleClass="portlet-section-text" value=": #{msgs['DATACHANGE.TEXT.LEGEND.HELP']}"/></t:div>    		
+      			<t:div><h:graphicImage value="/media/images/redtriangular.jpg"/><h:outputText styleClass="portlet-section-text" value=": #{msgs['DATACHANGE.TEXT.LEGEND.NOTE']}"/></t:div> 
+      			<t:div><h:graphicImage value="/media/images/add.png"/><h:outputText styleClass="portlet-section-text" value=": #{msgs['DATACHANGE.TEXT.LEGEND.ADD']}"/></t:div> 
+      			<t:div><h:graphicImage value="/media/images/remove.png"/><h:outputText styleClass="portlet-section-text" value=": #{msgs['DATACHANGE.TEXT.LEGEND.REMOVE']}"/></t:div> 
       		</h:panelGrid>
     	</fieldset>		
 	</f:verbatim>
+
 	<t:div>
 		<t:htmlTag id="AllModifyLink" value="a">			
   			<h:outputText value="#{msgs['DATACHANGE.MODIFICATION.ALL.LINK']}"/>  				
