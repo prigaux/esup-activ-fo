@@ -36,6 +36,8 @@ import org.esupportail.commons.web.controllers.ExceptionController;
 import org.esupportail.commons.services.smtp.AsynchronousSmtpServiceImpl;
 import org.esupportail.commons.utils.Assert;
 
+import org.apache.commons.lang.StringUtils;
+
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
@@ -787,17 +789,10 @@ public class AccountController extends AbstractContextAwareController implements
 		for(String key:keys)
 		{
 			mailBody=mailBody+"<tr><td>"+key+"</td><td>";
-			List<String> oldAttrValues=oldValue.get(key);
-			String oldAttrs="";
-			for(String attr:oldAttrValues)
-				oldAttrs+=sep+attr;
-			
-			List<String> newAttrValues=newValue.get(key);
-			String newAttrs="";
-			for(String attr:newAttrValues)
-				newAttrs+=sep+attr;
+			String oldAttrs=join(oldValue.get(key), sep);
+			String newAttrs=join(newValue.get(key), sep);
 						
-			mailBody+=oldAttrs.replaceFirst(sep, "")+"</td><td>"+newAttrs.replaceFirst(sep, "")+"</td><tr>";;						
+			mailBody+=oldAttrs+"</td><td>"+newAttrs+"</td><tr>";;						
 		}
 		
     	mailBody=mailBody+"</table>";
@@ -813,6 +808,10 @@ public class AccountController extends AbstractContextAwareController implements
 		
 		if (newValue.size()>0)
 			smtpService.send(mail, newSubject, mailBody, "");
+	}
+
+	public static String join(Iterable<?> elements, String separator) {
+		return StringUtils.join(elements.iterator(), separator);
 	}
 	
 	private void buildChannels(List<String>listPossibleChannels){
