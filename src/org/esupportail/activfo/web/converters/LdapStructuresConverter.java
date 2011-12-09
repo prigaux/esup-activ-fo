@@ -19,13 +19,13 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 /**
  * A JSF converter to pass Integer instances.
  */
-public class LdapConverter implements Converter {
+public class LdapStructuresConverter implements Converter {
 	
 	private LdapEntityService ldapEntityService;
 	
 	private final Logger logger = new LoggerImpl(getClass());
 	
-	public LdapConverter() {
+	public LdapStructuresConverter() {
     }
  
     public Object getAsObject(

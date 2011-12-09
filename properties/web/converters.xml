@@ -110,7 +110,7 @@
     
     <bean 
 		id="ldapConverter"
-		class="org.esupportail.activfo.web.converters.LdapConverter"
+		class="org.esupportail.activfo.web.converters.LdapStructuresConverter"
 		>
     	<description>
 			A converter for....
