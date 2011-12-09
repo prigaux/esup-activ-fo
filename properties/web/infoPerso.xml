@@ -521,6 +521,7 @@
 		>
 		<property name="key" value="PERSOINFO.MOBILE.TEXT.LABEL"/>
 		<property name="validator" ref="validatorMobilePhone"/>
+		<property name="converter" ref="ldapPhoneFaxConverter" />
 		<property name="required" value="false" />
 		<property name="name" value="mobile"/>
 		<property name="disable" value="false"/>

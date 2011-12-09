@@ -51,7 +51,7 @@
     	<description>
 			A validator for mobile phone (mobile)
     	</description>
-    	<property name="regex" value="^0[6|7][0-9]{8}$|^\\+33[6|7][0-9]{8}$"/>
+    	<property name="regex" value="(^0[6|7][0-9]{8}$)|(^\+33\s[6|7](\s\d\d){4}$)|(^$)"/>
     	<property name="errorMsg" value="VALIDATOR.MOBILE.INVALID"/>
 	</bean>
 	
