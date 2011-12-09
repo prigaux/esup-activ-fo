@@ -5,6 +5,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 
 public class ValidatorValueMatches extends AbstractI18nAwareBean implements Validator {
 	
@@ -14,14 +16,18 @@ public class ValidatorValueMatches extends AbstractI18nAwareBean implements Vali
 	private static final long serialVersionUID = 1L;
 	private String regex;
 	private String errorMsg;
+	
+	private final Logger logger = new LoggerImpl(getClass());
 
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
 		
 		if (value instanceof String) {
-			String strValue = (String) value;
+			String strValue = (String) value;	
 			if (!strValue.matches(regex)) {
+				logger.debug("Doesn't Matches, regex="+regex+" : value="+strValue);
 				throw new ValidatorException(getFacesErrorMessage(errorMsg));
 			}
+			logger.debug("Matches, regex="+regex+" : value="+strValue);
 		}
 	}
 
