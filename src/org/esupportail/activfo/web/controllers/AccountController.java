@@ -163,6 +163,24 @@ public class AccountController extends AbstractContextAwareController implements
 			    	listDataChangeInfos.add(bf);			
 		}
 	}
+	
+	private List<BeanField> getAllData(){
+		List<BeanField> data=new ArrayList<BeanField>();
+		for(CategoryBeanField cbf : categoryBeanDataChange){ 
+			List<BeanField> bflist=cbf.getListBeanField();
+			for(BeanField bf: bflist)			 
+			    if(!data.contains(bf))
+			    	data.add(bf);			
+		}
+		for(CategoryBeanField cbf : categoryBeanViewDataChange){ 
+			List<BeanField> bflist=cbf.getListBeanField();
+			for(BeanField bf: bflist)			 
+			    if(!data.contains(bf))
+			    	data.add(bf);			
+		}
+		return data;
+	}
+	
 	private void buildProfilingListBeanPersoInfo(){			
 		for(CategoryBeanField cbf : categoryBeanDataChangeDigest){ 
 			List<BeanField> bflist=cbf.getProfilingListBeanField();
@@ -508,7 +526,7 @@ public class AccountController extends AbstractContextAwareController implements
 					logger.info("Construction de la liste des informations personnelles du compte");
 					if (dataChange){
 							this.buildProfilingListDataChangeInfos();
-							this.buildListPersoInfo(listDataChangeInfos,attrDataChange);
+							this.buildListPersoInfo(this.getAllData(),attrDataChange);
 					}
 					else{
 							this.buildProfilingListBeanPersoInfo();
