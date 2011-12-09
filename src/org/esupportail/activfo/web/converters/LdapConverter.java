@@ -43,15 +43,19 @@ public class LdapConverter implements Converter {
  
     	String base = value.toString();
     	
+    	if(base.equals("")||base==null) return base;
+    	
     	String filter = "(supannCodeEntite="+base+")";
-    	String returnValue=null;
+    	String convertedValue=base;
     	try {
     	List<LdapEntity> ldapentite = ldapEntityService.getLdapEntitiesFromFilter(filter);
-    	returnValue=ldapentite.get(0).getAttribute("description");
+    	if(ldapentite.size()>0)
+    		convertedValue=ldapentite.get(0).getAttribute("description");
+    	else logger.debug("La valeur de rattachement "+base+" n'existe pas");
     	} catch (Exception e) {
-    		logger.debug("La valeur de rattachement "+base+" n'existe pas : "+e);
+    		logger.error(e);
     	}
-    	return returnValue;
+    	return convertedValue;
     	
     
     }
