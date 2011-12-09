@@ -131,6 +131,7 @@
 		    <ref bean="beanMail"/>		    
 		    <ref bean="beanSupannEntiteAffectation"/>
 		    <ref bean="beanPhone"/>
+		    <ref bean="beanOtherPhone"/>
 		    <ref bean="beanFax"/>
 		    <ref bean="beanMobilePro"/>
 		    <ref bean="beanRoomNumber"/>

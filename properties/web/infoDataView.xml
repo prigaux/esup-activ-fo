@@ -80,6 +80,7 @@
  			<ref bean="beanDescription"/>		   		  
 		    <ref bean="beanInfo"/>
 		    <ref bean="beanPhone"/>
+		    <ref bean="beanOtherPhone"/>
 		    <ref bean="beanFax"/>
 		    <ref bean="beanMobilePro"/>
 		    <ref bean="beanPostalAddress"/>		    

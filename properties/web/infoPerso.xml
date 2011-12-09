@@ -402,11 +402,30 @@
 		scope="session"
 		>
 		<property name="key" value="DATACHANGE.PHONE.TEXT.LABEL"/>
+		<property name="help" value="PERSOINFO.PHONE.TEXT.HELP"/>
 		<property name="required" value="false" />
 		<property name="name" value="telephoneNumber"/>		
 		<property name="disable" value="false"/>
 		<property name="updateable" value="true"/>
-		<property name="multiValue" value="true"/>
+		<property name="multiValue" value="false"/>	
+		<property name="converter" ref="ldapPhoneFaxConverter" />
+		<property name="validator" ref="validatorPhone"/>
+		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
+		<property name="constraint" value="PERSOINFO.PHONE.CONSTRAINT"/>
+	</bean>
+	
+	<bean
+		id="beanOtherPhone"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+		<property name="key" value="DATACHANGE.OTHERPHONE.TEXT.LABEL"/>
+		<property name="help" value="PERSOINFO.OTHERPHONE.TEXT.HELP"/>
+		<property name="required" value="false" />
+		<property name="name" value="supannAutreTelephone"/>		
+		<property name="disable" value="false"/>
+		<property name="updateable" value="true"/>
+		<property name="multiValue" value="true"/>	
 		<property name="numberOfValue" value="5"/>
 		<property name="converter" ref="ldapPhoneFaxConverter" />
 		<property name="validator" ref="validatorPhone"/>
