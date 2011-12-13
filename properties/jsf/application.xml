@@ -18,22 +18,6 @@
 		<locale-config>
 			<default-locale>fr</default-locale>
 			<!-- <supported-locale>en</supported-locale> -->
-		</locale-config>
-		
-		
-		
-	</application>
-	
-	<converter>
-  <description>
-    Converter for credit card 
-    numbers that normalizes 
-    the input to a standard format
-  </description>
-  <converter-id>smsAgreementConverter</converter-id>
-  <converter-class>
-    org.esupportail.activfo.web.converters.SmsAgreementConverter
-  </converter-class>
-</converter> 
-
+		</locale-config>						
+	</application>	
 </faces-config>
