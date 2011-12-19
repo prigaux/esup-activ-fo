@@ -72,21 +72,17 @@
 	</context-param>
 
 <!--BEGIN-SERVLET-ONLY-->
-
 	<context-param>
 		<param-name>org.apache.myfaces.CHECK_EXTENSIONS_FILTER</param-name>
 		<param-value>true</param-value>
 	</context-param>
-
-<!--END-SERVLET-ONLY-->
+ <!--END-SERVLET-ONLY-->
 
 <!--BEGIN-PORTLET-ONLY-->
-
 	<context-param>
 		<param-name>org.apache.myfaces.CHECK_EXTENSIONS_FILTER</param-name>
 		<param-value>false</param-value>
 	</context-param>
-
 <!--END-PORTLET-ONLY-->
 
 	<context-param>
@@ -111,13 +107,13 @@
 		</listener-class>
 	</listener>
 
-<!--BEGIN-SERVLET-ONLY-->
 
-    <context-param>
+	<context-param>
         <param-name>edu.yale.its.tp.cas.proxyUrl</param-name>
         <param-value>${cas.url}/proxy</param-value>
-    </context-param>
+	</context-param>
 
+<!--BEGIN-SERVLET-ONLY-->
 	<filter>
 		<description>
 			The CAS filter, used to authenticate users.
@@ -162,26 +158,24 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>CAS Filter</filter-name>
-		<url-pattern>/stylesheets/welcomeCas.faces</url-pattern>
-		 
-	</filter-mapping>
-	
+		<url-pattern>/stylesheets/welcomeCas.faces</url-pattern>		 
+	</filter-mapping>	
 	<filter-mapping>
 		<filter-name>CAS Filter</filter-name>
-		<url-pattern>/stylesheets/accountDataChange.faces</url-pattern>
-		 
+		<url-pattern>/stylesheets/accountDataChange.faces</url-pattern>		 
 	</filter-mapping>
-	
+ <!--END-SERVLET-ONLY-->
+ 	
 	<servlet>
         <servlet-name>ProxyTicketReceptor</servlet-name>
         <servlet-class>edu.yale.its.tp.cas.proxy.ProxyTicketReceptor</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>ProxyTicketReceptor</servlet-name>
         <url-pattern>/CasProxyServlet</url-pattern>
     </servlet-mapping>
-
+  
+ <!--BEGIN-SERVLET-ONLY-->
 	<servlet>
 		<description>
 			The main servlet of the application. This class inherits from 
@@ -199,11 +193,9 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.faces</url-pattern>
 	</servlet-mapping>
-
-<!--END-SERVLET-ONLY-->
+ <!--END-SERVLET-ONLY-->
 
 <!--BEGIN-PORTLET-ONLY-->
-
 	<servlet> 
 		<servlet-name>esup-activ-fo</servlet-name>
 		<servlet-class>
@@ -224,19 +216,7 @@
 		<servlet-name>esup-activ-fo</servlet-name>
 		<url-pattern>/esup-activ-fo/*</url-pattern>
 	</servlet-mapping>
-
 <!--END-PORTLET-ONLY-->
-
-	<servlet>
-		<servlet-name>Download Servlet</servlet-name>
-		<servlet-class>
-			org.esupportail.commons.web.servlet.DownloadServlet
-		</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>Download Servlet</servlet-name>
-		<url-pattern>/download</url-pattern>
-	</servlet-mapping>
 
 	<filter>
 		<description>

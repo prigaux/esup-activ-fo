@@ -39,4 +39,8 @@
 		<description>the uid of the portal user</description>
 		<name>uid</name>
 	</user-attribute>
+	<user-attribute>
+         <description>get proxy ticket from portal</description>
+         <name>casProxyTicket</name>
+         </user-attribute>
 </portlet-app>

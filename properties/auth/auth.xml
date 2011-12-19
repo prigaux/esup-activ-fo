@@ -3,36 +3,65 @@
 <beans 
 	xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"	
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
 	>
 
 
     <bean id="authenticator" lazy-init="true"
         class="org.esupportail.activfo.services.authentication.AuthenticatorImpl">
-        <property name="authenticationService" ref="${auth.bean}" />
+        <property name="authenticationService" ref="authenticationService" />
         <property name="domainService" ref="domainService" />
         <property name="proxyTicketGenerator" ref="proxyTicketGenerator" />
     </bean>
     
-    <bean
-    	id="casService"
-    	class="org.esupportail.commons.services.cas.ServletCasServiceImpl" >
-	</bean>
-	
 	<bean id="proxyTicketGenerator" lazy-init="true"
         class="org.esupportail.activfo.services.authentication.ProxyTicketGeneratorImpl">
-        <property name="casService" ref="casService" />
+        <property name="casService" ref="${auth.bean}" />
         <property name="targetService" value="${cas.targetService}"/>        
     </bean>
- 
-    <bean id="servletAuthenticationService" lazy-init="true"
-        class="org.esupportail.commons.services.authentication.CasFilterAuthenticationService">
-        
+         
+    <bean 
+		id="authenticationService"
+		class="org.esupportail.commons.services.authentication.PortalOrCasFilterAuthenticationService"
+		>
+		<description>
+			The name of the Portal attribute that holds the uid of users, as set in portlet.xml.
+		</description>
+		<property name="uidPortalAttribute" value="${cas.uidAttribute}" />
+	</bean>
+
+    <bean 
+        id="servletCasService"
+        class="org.esupportail.commons.services.cas.ServletCasServiceImpl"
+        >
     </bean>
 
-    <bean id="portletAuthenticationService" lazy-init="true"
-        class="org.esupportail.commons.services.authentication.CasifiedPortalAuthenticationService">
-        <property name="uidPortalAttribute" value="${auth.portal.uidAttribute}" />
-    </bean>
+    <bean 
+        id="portletCasService"
+        class="org.esupportail.commons.services.cas.PortletCasServiceImpl"
+        scope="session"
+        >
+        <property name="service" value="${cas.targetService}" >
+            <description>
+                The service that retrieves PTs from the CAS server. This property
+                must be the same as the one set in parameter casTargetService
+                used when publishing the portlet.
+            </description>
+        </property>
+        <property name="casValidateUrl" value="${cas.url}/proxyValidate" >
+            <description>
+                The URL used on the CAS server to validate the ticket passed by 
+                the portal to the portlet.
+            </description>
+        </property>
+        <property name="proxyCallbackUrl" value="${cas.proxyCallbackUrl}" >
+            <description>
+                The callback URL used by the CAS server to pass the PGT to
+                the portlet.
+            </description>
+        </property>
+        <aop:scoped-proxy/>
+    </bean>    
 
 </beans>
