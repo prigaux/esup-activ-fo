@@ -181,6 +181,17 @@
 	</navigation-rule>
 	
 	<navigation-rule>
+		<navigation-case>
+			<from-outcome>applicationRestarted</from-outcome>
+			<to-view-id>/stylesheets/welcome.jsp</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-outcome>navigationWelcome</from-outcome>
+			<to-view-id>/stylesheets/welcome.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	<navigation-rule>
 		<display-name>dataViewToDataChange</display-name>
 		<from-view-id>/stylesheets/accountDataView.jsp</from-view-id>
 		<navigation-case>
