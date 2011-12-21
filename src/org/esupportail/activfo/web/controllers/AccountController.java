@@ -583,7 +583,7 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			this.getDomainService().changeLogin(currentAccount.getAttribute(accountIdKey), currentAccount.getAttribute(accountCodeKey), beanNewLogin.getValue().toString());
 			currentAccount.setId(beanNewLogin.getValue().toString());
-			currentAccount.clear();
+			currentAccount.reset();
 			logger.info("Changement de login r�ussi");
 			this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
 			return "gotoAccountEnabled";
@@ -617,6 +617,7 @@ public class AccountController extends AbstractContextAwareController implements
 				currentAccount.setId(beanNewLogin.getValue().toString());
 				logger.info("Changement de login r�ussi");
 				this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
+				currentAccount.reset();
 				return "gotoAccountEnabled";
 			
 			}catch (LdapProblemException ex) {
@@ -704,7 +705,7 @@ public class AccountController extends AbstractContextAwareController implements
 			this.getDomainService().setPassword(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(this.accountCodeKey),beanNewPassword.getValue().toString());
 			logger.info("Changement de mot de passe r�ussi");
 			this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
-			currentAccount.clear();
+			currentAccount.reset();
 			//beanNewPassword.setValue("");
 			return "gotoAccountEnabled";
 
