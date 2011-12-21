@@ -168,5 +168,10 @@ public class Account implements InitializingBean{
 	public void setProcess(String process) {
 		this.process = process;
 	}
+	
+	public void clear()
+	{
+		attributes = new HashMap<String,List<String>>();
+	}
 
 }

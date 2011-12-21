@@ -583,6 +583,7 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			this.getDomainService().changeLogin(currentAccount.getAttribute(accountIdKey), currentAccount.getAttribute(accountCodeKey), beanNewLogin.getValue().toString());
 			currentAccount.setId(beanNewLogin.getValue().toString());
+			currentAccount.clear();
 			logger.info("Changement de login r�ussi");
 			this.addInfoMessage(null, "LOGIN.MESSAGE.CHANGE.SUCCESSFULL");
 			return "gotoAccountEnabled";
@@ -703,6 +704,7 @@ public class AccountController extends AbstractContextAwareController implements
 			this.getDomainService().setPassword(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(this.accountCodeKey),beanNewPassword.getValue().toString());
 			logger.info("Changement de mot de passe r�ussi");
 			this.addInfoMessage(null, "PASSWORD.MESSAGE.CHANGE.SUCCESSFULL");
+			currentAccount.clear();
 			//beanNewPassword.setValue("");
 			return "gotoAccountEnabled";
 
@@ -782,8 +784,23 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	
 	
-	public void updateCurrentAccount(){
-		currentAccount.setAttributes(this.convertHash(accountDescr));
+	public void updateCurrentAccount(){		
+		HashMap<String,List<String>> attributes=this.convertHash(accountDescr);
+								
+		if(attributes.get(accountIdKey)==null&&currentAccount.getAttribute(accountIdKey)!=null){
+			ArrayList<String> accountIdValue=new ArrayList<String>();
+			accountIdValue.add(currentAccount.getAttribute(accountIdKey));
+			attributes.put(accountIdKey,accountIdValue);
+		}
+		
+		if(attributes.get(accountCodeKey)==null&&currentAccount.getAttribute(accountCodeKey)!=null){
+			ArrayList<String> accountCodeValue=new ArrayList<String>();			
+			accountCodeValue.add(currentAccount.getAttribute(accountCodeKey));
+			attributes.put(accountCodeKey,accountCodeValue);
+		}
+		
+		currentAccount.setAttributes(attributes);
+		
 		currentAccount.setId(currentAccount.getAttribute(accountIdKey));
 		currentAccount.setMail(currentAccount.getAttribute(accountMailKey));
 		currentAccount.setEmailPerso(currentAccount.getAttribute(accountMailPersoKey));
