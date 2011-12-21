@@ -163,7 +163,7 @@
 	</navigation-rule>
 	
 	<navigation-rule>
-		<display-name>welcomToDataChange</display-name>
+		<display-name>welcomeToDataChange</display-name>
 		<from-view-id>/stylesheets/welcome.jsp</from-view-id>
 		<navigation-case>
 			<from-outcome>gotoDataChangeWithCas</from-outcome>
