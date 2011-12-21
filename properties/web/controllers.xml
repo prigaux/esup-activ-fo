@@ -160,7 +160,7 @@
 		 	<entry>
 		 		<key><ref bean="beanAnotherStudent"/></key>
 		 		<list>		 			
-					<ref bean="beanEtablissement"/>
+					<ref bean="beanCodeINE"/>
 					<ref bean="beanBirthName"/>
 					<ref bean="beanBirthDate"/>
 		 		</list>

@@ -80,18 +80,15 @@
 		
 	</bean>
 	
-	<bean
-		id="beanIdentificationNumber"
-		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
-		scope="session"
-		>
-
-		<property name="key" value="IDENTIFICATION.STUDENTINEBEA.TEXT.LABEL"/>
-		<property name="value" value=""/>
-		<property name="name" value="supannCodeINE"/>
-		<property name="required" value="true" />
-		
-	</bean>
+	<bean id="beanCodeINE"
+          class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+          scope="session">
+       <property name="name" value="supannCodeINE"/>   
+       <property name="key" value="IDENTIFICATION.CODEINE.TEXT.LABEL"/>
+       <property name="help" value="IDENTIFICATION.CODEINE.TEXT.HELP"/>
+       <property name="constraint" value="IDENTIFICATION.CODEINE.CONSTRAINT"/>          
+       <property name="required" value="true" />
+    </bean>
 	
 	<bean
 		id="beanAnotherStudentNumber"
