@@ -293,7 +293,8 @@ public class AccountController extends AbstractContextAwareController implements
 					this.addErrorMessage(null, "IDENTIFICATION.REINITIALISATION.MESSAGE.ACCOUNT.NONACTIVATED");
 				}else if(activ){
 					logger.info("Construction de la liste des informations personnelles du compte");
-					this.buildListPersoInfo(listBeanPersoInfo,attrPersoInfo);
+					this.buildProfilingListBeanPersoInfo();
+					this.buildListPersoInfo(listBeanPersoInfo,attrPersoInfo);					
 					this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 					return "gotoPersonalInfo";
 				}
@@ -302,6 +303,7 @@ public class AccountController extends AbstractContextAwareController implements
 					
 				if (reinit){
 					logger.info("Construction de la liste des informations personnelles du compte");
+					this.buildProfilingListBeanPersoInfo();
 					this.buildListPersoInfo(listBeanPersoInfo,attrPersoInfo);
 					List<String> listPossibleChannels = currentAccount.getAttributes(accountPossibleChannelsKey);
 					
@@ -1262,7 +1264,7 @@ public class AccountController extends AbstractContextAwareController implements
 		
 	public List<CategoryBeanField> getBeanData() {		
 		if (viewDataChange) return categoryBeanViewDataChange;
-		pushAuthentificate();
+		if(!reinit && !activ) pushAuthentificate();
 		if(dataChange)return categoryBeanDataChange;
 		else return categoryBeanDataChangeDigest;
 	}
