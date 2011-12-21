@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.esupportail.commons.web.controllers.Resettable;
+
 import org.springframework.beans.factory.InitializingBean;
 
 /**
  * The class that represent net account.
  */
-public class Account implements InitializingBean{
+public class Account implements InitializingBean,Resettable{
 	
 	private static final long serialVersionUID = 5854730800181753413L;
 	
@@ -169,7 +171,10 @@ public class Account implements InitializingBean{
 		this.process = process;
 	}
 	
-	public void clear()
+	/* (non-Javadoc) 
+	* @see org.esupportail.commons.web.controllers.Resettable#reset() 
+	*/
+	public void reset()
 	{
 		attributes = new HashMap<String,List<String>>();
 	}
