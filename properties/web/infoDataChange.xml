@@ -65,6 +65,7 @@
 		</property>
 		<property name="listBeanField">
 		  <list>
+		  	<ref bean="beanSupannRoleGenerique"/>
 		  	<ref bean="beanDescription"/>
 		    <ref bean="beanInfo"/>
 		    <ref bean="beanEduPersonAffiliation"/>
