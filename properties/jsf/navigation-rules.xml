@@ -181,6 +181,25 @@
 	</navigation-rule>
 	
 	<navigation-rule>
+		<display-name>accountLoginToEnabled</display-name>
+		<from-view-id>/stylesheets/accountLogin.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoAccountEnabled</from-outcome>
+			<to-view-id>/stylesheets/accountEnabled.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+		<display-name>accountPasswordToEnabled</display-name>
+		<from-view-id>/stylesheets/accountPassword.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoAccountEnabled</from-outcome>
+			<to-view-id>/stylesheets/accountEnabled.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	
+	<navigation-rule>
 		<navigation-case>
 			<from-outcome>applicationRestarted</from-outcome>
 			<to-view-id>/stylesheets/welcome.jsp</to-view-id>
