@@ -33,10 +33,6 @@ public class Mailing {
 	private String body1DataChange;
 	private String body2DataChange;
 	
-	private String accountDNKey;
-	private String accountEmpIdKey;
-
-	
 	public void sendMessage(Account currentAccount, HashMap<String,List<String>> oldValue, HashMap<String,List<String>> newValue) {
 		
 		InternetAddress mail=null;
@@ -144,36 +140,6 @@ public class Mailing {
 	public void setBody2DataChange(String body2DataChange) {
 		this.body2DataChange = body2DataChange;
 	}
-
-	/**
-	 * @return the accountDNKey
-	 */
-	public String getAccountDNKey() {
-		return accountDNKey;
-	}
-
-	/**
-	 * @param accountDNKey the accountDNKey to set
-	 */
-	public void setAccountDNKey(String accountDNKey) {
-		this.accountDNKey = accountDNKey;
-	}
-
-	/**
-	 * @return the accountEmpIdKey
-	 */
-	public String getAccountEmpIdKey() {
-		return accountEmpIdKey;
-	}
-
-	/**
-	 * @param accountEmpIdKey the accountEmpIdKey to set
-	 */
-	public void setAccountEmpIdKey(String accountEmpIdKey) {
-		this.accountEmpIdKey = accountEmpIdKey;
-	}
-
-
 
 	/**
 	 * @return the regexAttribute

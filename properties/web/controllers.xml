@@ -238,9 +238,6 @@
 		<property name="subjectDataChange" value="${datachange.subject}"/>
 		<property name="body1DataChange" value="${datachange.body1.fr}"/>
 		<property name="body2DataChange" value="${datachange.body2.fr}"/>
-		
-		<property name="accountDNKey" value="${account.key.displayname}"/>
-		<property name="accountEmpIdKey" value="${account.key.supannEmpId}"/>		
 	</bean>
 	
 	
