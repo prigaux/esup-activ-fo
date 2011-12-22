@@ -24,6 +24,7 @@ public class AttributesReplaceConverter implements Converter {
 		
 	private Account account;
 	private String regex="(\\{([^{}]*)\\})";
+	private String none="";
 		
 	private final Logger logger = new LoggerImpl(getClass());
 		
@@ -44,7 +45,7 @@ public class AttributesReplaceConverter implements Converter {
     	Pattern p=Pattern.compile(regex);
    	  	Matcher m=p.matcher(text);
    	  	while(m.find()) 
-   	  		text=text.replace(m.group(1), account.getAttribute(m.group(2)));
+   	  		text=text.replace(m.group(1), account.getAttribute(m.group(2))!=null?account.getAttribute(m.group(2)):none);
    	  	
    	  	logger.debug("Converted string : "+text);
     	
@@ -78,6 +79,20 @@ public class AttributesReplaceConverter implements Converter {
 	 */
 	public void setRegex(String regex) {
 		this.regex = regex;
+	}
+
+	/**
+	 * @return the none
+	 */
+	public String getNone() {
+		return none;
+	}
+
+	/**
+	 * @param none the none to set
+	 */
+	public void setNone(String none) {
+		this.none = none;
 	}
 		
 }
