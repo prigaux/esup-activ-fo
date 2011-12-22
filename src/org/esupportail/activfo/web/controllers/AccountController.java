@@ -39,6 +39,7 @@ import org.esupportail.commons.utils.Assert;
 
 import org.apache.commons.lang.StringUtils;
 
+import javax.faces.convert.Converter;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
@@ -362,8 +363,21 @@ public class AccountController extends AbstractContextAwareController implements
 	private void setMailSendingValues(final BeanField beanPersoInfo,HashMap<String,List<String>> oldValue,HashMap<String,List<String>> newValue){
 		
 		if(isChange(beanPersoInfo)){
-			oldValue.put(beanPersoInfo.getName(),currentAccount.getAttributes(beanPersoInfo.getName()));
-			newValue.put(beanPersoInfo.getName(),getPersoInfoValues(beanPersoInfo));
+			Converter converter=beanPersoInfo.getConverter();			
+			List<String> oldValueList=currentAccount.getAttributes(beanPersoInfo.getName());
+			List<String> newValueList=getPersoInfoValues(beanPersoInfo);
+			if(converter!=null)
+			{
+				oldValueList=new ArrayList<String>();
+				for(String s:currentAccount.getAttributes(beanPersoInfo.getName()))
+					oldValueList.add(converter.getAsString(null,null,s));
+					
+				newValueList=new ArrayList<String>();	
+				for(String s:getPersoInfoValues(beanPersoInfo))
+					newValueList.add(converter.getAsString(null,null,s));
+			}
+			oldValue.put(this.getI18nService().getString(beanPersoInfo.getKey()),oldValueList);
+			newValue.put(this.getI18nService().getString(beanPersoInfo.getKey()),newValueList);
 		}						
 	}
 	
