@@ -27,6 +27,8 @@ public class LdapSchema implements InitializingBean{
 	
 	private String supannCodeEntite;
 	
+	private String displayName;
+	
 	
 	public void afterPropertiesSet() throws Exception {
 		// TODO Auto-generated method stub
@@ -129,6 +131,20 @@ public class LdapSchema implements InitializingBean{
 	 */
 	public void setSupannCodeEntite(String supannCodeEntite) {
 		this.supannCodeEntite = supannCodeEntite;
+	}
+
+	/**
+	 * @return the displayName
+	 */
+	public String getDisplayName() {
+		return displayName;
+	}
+
+	/**
+	 * @param displayName the displayName to set
+	 */
+	public void setDisplayName(String displayName) {
+		this.displayName = displayName;
 	}
 	
 	

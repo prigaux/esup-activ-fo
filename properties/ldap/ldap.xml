@@ -29,10 +29,10 @@
 			</description>
 		</property>
 		
-		<property name="idAttribute" value="ou">
+		<property name="idAttribute" value="entryUUID">
 			<description>idAttribute</description>
 		</property>
-		
+				
 		<property name="objectClass" value="organizationalUnit">
 			<description>objectClass</description>
 		</property>
@@ -47,6 +47,34 @@
 				<value>${ldap.attribute.labeledURI}</value>
 				<value>${ldap.attribute.ou}</value>
 				<value>${ldap.attribute.supannCodeEntite}</value>
+			</list>
+		</property>
+	</bean>
+
+		<bean id="ldapTableService"
+		class="org.esupportail.commons.services.ldap.SimpleLdapEntityServiceImpl" >
+		<description/>		
+		<property name="ldapTemplate" ref="readOnlyLdapTemplate">
+			<description>
+				The LDAP template used to access the LDAP directory.
+			</description>
+		</property>
+		
+		<property name="idAttribute" value="entryUUID">
+			<description>idAttribute</description>
+		</property>
+				
+		<property name="objectClass" value="up1TableEntry">
+			<description>objectClass</description>
+		</property>
+
+		<property name="attributes">
+			<description>
+				The LDAP attributes to retrieve.
+			</description>
+			<list>			  		
+				<value>${ldap.attribute.displayName}</value>
+				<value>${ldap.attribute.description}</value>
 			</list>
 		</property>
 	</bean>
@@ -110,6 +138,7 @@
 		    <property name="labeledURI" value="${ldap.attribute.labeledURI}" />
 		    <property name="ou" value="${ldap.attribute.ou}" />
 		    <property name="supannCodeEntite" value="${ldap.attribute.supannCodeEntite}" />
+		    <property name="displayName" value="${ldap.attribute.displayName}" />
 	</bean>
 		
 

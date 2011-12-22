@@ -119,6 +119,11 @@
     	<property name="ldapEntityService" ref="ldapEntityService"/>
     	
 	</bean>
+	<bean id="ldapTablesConverter"
+			class="org.esupportail.activfo.web.converters.LdapTablesConverter">
+    	<property name="ldapEntityService" ref="ldapTableService"/>    	
+	</bean>
+	
 	<bean id="EtuEtapeConverter"
 		class="org.esupportail.activfo.web.converters.EtuEtapeConverter"
 		scope="session">

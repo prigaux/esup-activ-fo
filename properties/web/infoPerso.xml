@@ -641,13 +641,12 @@
 		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
 		<property name="constraint" value="PERSOINFO.BIRTHDATE.CONSTRAINT"/>
 	</bean>
-	<bean
-		id="beanSupannRoleGenerique"
+	
+	<bean id="beanSupannRoleGenerique"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session">
-
 		<property name="key" value="IDENTIFICATION.ROLEGENERIQUE.TEXT.LABEL"/>
-		<!-- <property name="converter" ref="ldapTablesConverter"/>-->
+		<property name="converter" ref="ldapTablesConverter"/>
 		<property name="required" value="false" />
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
