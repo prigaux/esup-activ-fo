@@ -6,6 +6,8 @@ package org.esupportail.activfo.domain.beans;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
@@ -23,6 +25,9 @@ public class Mailing {
 
 	private final Logger logger = new LoggerImpl(getClass());
 	
+	private String regexAttribute="(\\{([^{}]*)\\})";
+	private String none="";
+	
 	private AsynchronousSmtpServiceImpl smtpService;
 	private String subjectDataChange;
 	private String body1DataChange;
@@ -37,11 +42,10 @@ public class Mailing {
 		InternetAddress mail=null;
 		String sep=", ";
 		
-		String mailBody=this.body1DataChange;
+		String mailBody=attributeReplace(currentAccount,this.body1DataChange);
 		String mailBody2=this.body2DataChange;
 		String newSubject = null;
-		mailBody=mailBody.replace("{0}", currentAccount.getAttribute(accountDNKey)!=null?currentAccount.getAttribute(accountDNKey):"");
-		mailBody=mailBody.replace("{1}", currentAccount.getAttribute(accountEmpIdKey)!=null?currentAccount.getAttribute(accountEmpIdKey):"");
+	
 		mailBody=mailBody+mailBody2;
 		
 		Set<String> keys=oldValue.keySet();
@@ -64,14 +68,25 @@ public class Mailing {
 		}
 		
 		
-		newSubject=subjectDataChange.replace("{0}", currentAccount.getAttribute(accountDNKey)!=null?currentAccount.getAttribute(accountDNKey):"");
+		newSubject=attributeReplace(currentAccount,subjectDataChange);
+		
 		
 		if (newValue.size()>0)
 			smtpService.send(mail, newSubject, mailBody, "");
 	}
 	
+	
+	
 	public static String join(Iterable<?> elements, String separator) {
 		return StringUtils.join(elements.iterator(), separator);
+	}
+	
+	private  String attributeReplace(Account account,String text){
+		Pattern p=Pattern.compile(regexAttribute);
+   	  	Matcher m=p.matcher(text);
+   	  	while(m.find()) 
+   	  		text=text.replace(m.group(1), account.getAttribute(m.group(2))!=null?account.getAttribute(m.group(2)):none);
+   	  	return text;
 	}
 	
 	/**
@@ -156,5 +171,41 @@ public class Mailing {
 	 */
 	public void setAccountEmpIdKey(String accountEmpIdKey) {
 		this.accountEmpIdKey = accountEmpIdKey;
+	}
+
+
+
+	/**
+	 * @return the regexAttribute
+	 */
+	public String getRegexAttribute() {
+		return regexAttribute;
+	}
+
+
+
+	/**
+	 * @param regexAttribute the regexAttribute to set
+	 */
+	public void setRegexAttribute(String regexAttribute) {
+		this.regexAttribute = regexAttribute;
+	}
+
+
+
+	/**
+	 * @return the none
+	 */
+	public String getNone() {
+		return none;
+	}
+
+
+
+	/**
+	 * @param none the none to set
+	 */
+	public void setNone(String none) {
+		this.none = none;
 	}
 }
