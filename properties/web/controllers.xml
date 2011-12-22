@@ -83,11 +83,10 @@
 		<property name="accountMailKey" value="${account.key.mail}"/>
 		<property name="accountMailPersoKey" value="${account.key.mailperso}"/>
 		<property name="accountPagerKey" value="${account.key.pager}"/>
-		<property name="accountDNKey" value="${account.key.displayname}"/>
 		<property name="accountCodeKey" value="${account.key.code}"/>
 		<property name="accountGestKey" value="${account.key.gest}"/>
 		<property name="accountPossibleChannelsKey" value="${account.key.possibleChannels}"/>
-		<property name="accountEmpIdKey" value="${account.key.supannEmpId}"/>				
+				
 		<property name="currentAccount" ref="account"/>
 		
 		<property name="procedureActivation" value="${view.procedure.activation}"/>
@@ -98,13 +97,10 @@
 				
 		<property name="attributesInfPerso" value="${attributes.information}"/>
 		<property name="attributesDataChange" value="${attributes.datachange}"/>
-												
-		<property name="smtpService" ref="smtpService"/>
-		<property name="subjectDataChange" value="${datachange.subject}"/>
-		<property name="body1DataChange" value="${datachange.body1.fr}"/>
-		<property name="body2DataChange" value="${datachange.body2.fr}"/>
-		
-		<property name="exceptionController" ref="exceptionController"/>
+														
+		<property name="mailing" ref="mailing"/>														
+														
+		<property name="exceptionController" ref="exceptionController"/>		
 		<property name="targetService" value="${cas.targetService}"/>
 		<property name="channels">
 			<list>
@@ -235,6 +231,19 @@
 	<bean id="account"
 		class="org.esupportail.activfo.domain.beans.Account" scope="session">
 	</bean>
+	
+	<bean id="mailing"
+		class="org.esupportail.activfo.domain.beans.Mailing">
+		<property name="smtpService" ref="smtpService"/>
+		<property name="subjectDataChange" value="${datachange.subject}"/>
+		<property name="body1DataChange" value="${datachange.body1.fr}"/>
+		<property name="body2DataChange" value="${datachange.body2.fr}"/>
+		
+		<property name="accountDNKey" value="${account.key.displayname}"/>
+		<property name="accountEmpIdKey" value="${account.key.supannEmpId}"/>		
+	</bean>
+	
+	
 	
 	<!-- uncomment this bean and include _debug.jsp to get debug info
 	<bean id="debugController"

@@ -14,6 +14,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.esupportail.activfo.domain.beans.Account;
+import org.esupportail.activfo.domain.beans.Mailing;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.channels.Channel;
 import org.esupportail.activfo.exceptions.AuthentificationException;
@@ -61,11 +62,11 @@ public class AccountController extends AbstractContextAwareController implements
 	private String accountMailKey;
 	private String accountMailPersoKey;
 	private String accountPagerKey;
-	private String accountDNKey;
 	private String accountCodeKey;
 	private String accountGestKey;
 	private String accountPossibleChannelsKey;
-	private String accountEmpIdKey;
+	
+	private Mailing mailing;
 			
 	//liste des attributs pour l'affichage des informations personnelles
 	private String attributesInfPerso;
@@ -126,11 +127,6 @@ public class AccountController extends AbstractContextAwareController implements
 		
 	private String separator;
 	
-	private AsynchronousSmtpServiceImpl smtpService;
-	private String subjectDataChange;
-	private String body1DataChange;
-	private String body2DataChange;
-	
 	private List<Channel> channels;
 	private String oneChoiceCanal;
 	
@@ -152,7 +148,9 @@ public class AccountController extends AbstractContextAwareController implements
 		Assert.notNull(this.categoryBeanDataChange, "property categoryBeanDataChange of class " 
 				+ this.getClass().getName() + " can not be null");
 		Assert.notNull(this.categoryBeanDataChangeDigest, "property categoryBeanDataChangeDigest of class " 
-				+ this.getClass().getName() + " can not be null");		
+				+ this.getClass().getName() + " can not be null");	
+		Assert.notNull(this.mailing, "property mailing of class " 
+				+ this.getClass().getName() + " can not be null");
 	}
 	
 	private void buildProfilingListDataChangeInfos(){
@@ -463,7 +461,7 @@ public class AccountController extends AbstractContextAwareController implements
 				
 				logger.debug("Informations Account mises à jour :"+accountDescr.toString());
 				
-				this.sendMessage(oldValue,newValue);
+				mailing.sendMessage(currentAccount,oldValue,newValue);
 				
 				if (activ){
 					return "gotoCharterAgreement";
@@ -807,51 +805,7 @@ public class AccountController extends AbstractContextAwareController implements
 		currentAccount.setEmailPerso(currentAccount.getAttribute(accountMailPersoKey));
 		currentAccount.setPager(currentAccount.getAttribute(accountPagerKey));
 	}
-		
-	//TODO externaliser cette fonction. 
-	//Rendre plus générique pour permettre des envois de mail suivant le profil de l'utilisateur
-	public void sendMessage(HashMap<String,List<String>> oldValue, HashMap<String,List<String>> newValue) {
-		
-		InternetAddress mail=null;
-		String sep=", ";
-		
-		String mailBody=this.body1DataChange;
-		String mailBody2=this.body2DataChange;
-		String newSubject = null;
-		mailBody=mailBody.replace("{0}", currentAccount.getAttribute(accountDNKey)!=null?currentAccount.getAttribute(accountDNKey):"");
-		mailBody=mailBody.replace("{1}", currentAccount.getAttribute(accountEmpIdKey)!=null?currentAccount.getAttribute(accountEmpIdKey):"");
-		mailBody=mailBody+mailBody2;
-		
-		Set<String> keys=oldValue.keySet();
-		
-		for(String key:keys)
-		{
-			mailBody=mailBody+"<tr><td>"+key+"</td><td>";
-			String oldAttrs=join(oldValue.get(key), sep);
-			String newAttrs=join(newValue.get(key), sep);
-						
-			mailBody+=oldAttrs+"</td><td>"+newAttrs+"</td><tr>";;						
-		}
-		
-    	mailBody=mailBody+"</table>";
-		
-		try {
-			mail = new InternetAddress(smtpService.getFromAddress().getAddress());
-		} catch (AddressException e) {
-			logger.debug("Error Handling for InternetAddress ");
-		}
-		
-		
-		newSubject=subjectDataChange.replace("{0}", currentAccount.getAttribute(accountDNKey)!=null?currentAccount.getAttribute(accountDNKey):"");
-		
-		if (newValue.size()>0)
-			smtpService.send(mail, newSubject, mailBody, "");
-	}
-
-	public static String join(Iterable<?> elements, String separator) {
-		return StringUtils.join(elements.iterator(), separator);
-	}
-	
+			
 	private void buildChannels(List<String>listPossibleChannels){
 		beanFieldChannels=new ArrayList<BeanField<String>>();
 		availableChannels=new ArrayList<Channel>();
@@ -1011,14 +965,6 @@ public class AccountController extends AbstractContextAwareController implements
 
 	public void setAccountMailKey(String accountMailKey) {
 		this.accountMailKey = accountMailKey;
-	}
-
-	public String getAccountDNKey() {
-		return accountDNKey;
-	}
-
-	public void setAccountDNKey(String accountDNKey) {
-		this.accountDNKey = accountDNKey;
 	}
 
 	public List<BeanField> getListBeanPersoInfo() {
@@ -1199,86 +1145,7 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setViewDataChange(boolean viewDataChange) {
 		this.viewDataChange = viewDataChange;
 	}
-
-
-	/**
-	 * @return the smtpService
-	 */
-	public AsynchronousSmtpServiceImpl getSmtpService() {
-		return smtpService;
-	}
-
-
-	/**
-	 * @param smtpService the smtpService to set
-	 */
-	public void setSmtpService(AsynchronousSmtpServiceImpl smtpService) {
-		this.smtpService = smtpService;
-	}
-
-
-	/**
-	 * @return the subjectDataChange
-	 */
-	public String getSubjectDataChange() {
-		return subjectDataChange;
-	}
-
-
-	/**
-	 * @param subjectDataChange the subjectDataChange to set
-	 */
-	public void setSubjectDataChange(String subjectDataChange) {
-		this.subjectDataChange = subjectDataChange;
-	}
-
-
-	/**
-	 * @return the accountEmpIdKey
-	 */
-	public String getAccountEmpIdKey() {
-		return accountEmpIdKey;
-	}
-
-
-	/**
-	 * @param accountEmpIdKey the accountEmpIdKey to set
-	 */
-	public void setAccountEmpIdKey(String accountEmpIdKey) {
-		this.accountEmpIdKey = accountEmpIdKey;
-	}
-
-
-	/**
-	 * @return the body1DataChangeisFirstCasAuth=true;
-	 */
-	public String getBody1DataChange() {
-		return body1DataChange;
-	}
-
-
-	/**
-	 * @param body1DataChange the body1DataChange to set
-	 */
-	public void setBody1DataChange(String body1DataChange) {
-		this.body1DataChange = body1DataChange;
-	}
-
-
-	/**
-	 * @return the body2DataChange
-	 */
-	public String getBody2DataChange() {
-		return body2DataChange;
-	}
-
-
-	/**
-	 * @param body2DataChange the body2DataChange to set
-	 */
-	public void setBody2DataChange(String body2DataChange) {
-		this.body2DataChange = body2DataChange;
-	}
+	
 		
 	public List<CategoryBeanField> getBeanData() {		
 		if (viewDataChange) return categoryBeanViewDataChange;
@@ -1422,6 +1289,20 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setCategoryBeanDataChangeDigest(
 			List<CategoryBeanField> categoryBeanDataChangeDigest) {
 		this.categoryBeanDataChangeDigest = categoryBeanDataChangeDigest;
+	}
+
+	/**
+	 * @return the mailing
+	 */
+	public Mailing getMailing() {
+		return mailing;
+	}
+
+	/**
+	 * @param mailing the mailing to set
+	 */
+	public void setMailing(Mailing mailing) {
+		this.mailing = mailing;
 	}
 	
 }
