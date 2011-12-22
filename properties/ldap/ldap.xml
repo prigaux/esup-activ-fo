@@ -75,6 +75,7 @@
 			<list>			  		
 				<value>${ldap.attribute.displayName}</value>
 				<value>${ldap.attribute.description}</value>
+				<value>${ldap.attribute.supannRoleGenerique}</value>
 			</list>
 		</property>
 	</bean>

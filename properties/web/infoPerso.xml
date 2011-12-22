@@ -513,6 +513,24 @@
     	 </map> 
     	 </property>  				
     </bean>
+    
+    <bean
+		id="beanLdapSupannRoleGeneriqueList"
+		class="org.esupportail.activfo.web.beans.LdapStructureList"
+		scope="singleton">
+		
+		<property name="ldapEntityService" ref="ldapTableService"/>
+		<property name="ldapSearchFilter" value="(objectClass=up1TableEntry)"/>
+		<property name="firstLabel" value="Veuillez sélectionner votre fonction à l'université"/>
+		<property name="businessCategory" value="supannRoleGenerique"/>
+		<property name="value" value="supannRoleGenerique"/>
+		<property name="label" value="displayName"/>
+		<property name="businessCategoryMap">
+		 <map>
+		    <entry key="*" value="Responsabilités structurelles" />    	        	
+    	 </map> 
+    	 </property>  				
+    </bean>
 	
 	<bean
 		id="beanMobilePro"
@@ -646,11 +664,15 @@
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session">
 		<property name="key" value="IDENTIFICATION.ROLEGENERIQUE.TEXT.LABEL"/>
-		<property name="converter" ref="ldapTablesConverter"/>
 		<property name="required" value="false" />
+		<property name="name" value="supannRoleGenerique"/>
+		<property name="fieldType" value="selectOneMenu"/>
+		<property name="displayItems" ref="beanLdapSupannRoleGeneriqueList"/>
+		<property name="converter" ref="ldapTablesConverter"/>
+		<property name="multiValue" value="true"/>
+		<property name="numberOfValue" value="5"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
-		<property name="name" value="supannRoleGenerique"/>
 		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>		
 	</bean>
 	 
