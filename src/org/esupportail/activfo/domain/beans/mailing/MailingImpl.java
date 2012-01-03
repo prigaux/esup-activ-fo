@@ -1,7 +1,7 @@
 /**
  * permet l'envoi de mail pour signaler des modifications de données personnelles nécessitant une validation
  */
-package org.esupportail.activfo.domain.beans;
+package org.esupportail.activfo.domain.beans.mailing;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,6 +13,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.lang.StringUtils;
+import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.services.smtp.AsynchronousSmtpServiceImpl;
@@ -21,7 +22,7 @@ import org.esupportail.commons.services.smtp.AsynchronousSmtpServiceImpl;
  * @author aanli
  *
  */
-public class Mailing {
+public class MailingImpl implements Mailing {
 
 	private final Logger logger = new LoggerImpl(getClass());
 	
@@ -29,9 +30,14 @@ public class Mailing {
 	private String none="";
 	
 	private AsynchronousSmtpServiceImpl smtpService;
+	
 	private String subjectDataChange;
 	private String body1DataChange;
 	private String body2DataChange;
+	private String mail2Gest;
+	
+	private HashMap<String,List<String>> access;
+	private HashMap<String,List<String>> deny;
 	
 	public void sendMessage(Account currentAccount, HashMap<String,List<String>> oldValue, HashMap<String,List<String>> newValue) {
 		
@@ -56,22 +62,42 @@ public class Mailing {
 		}
 		
     	mailBody=mailBody+"</table>";
-		
+    	newSubject=attributeReplace(currentAccount,subjectDataChange);
+    	
 		try {
-			mail = new InternetAddress(smtpService.getFromAddress().getAddress());
-		} catch (AddressException e) {
-			logger.debug("Error Handling for InternetAddress ");
+			mail = new InternetAddress(mail2Gest);
+			if (newValue.size()>0)
+				smtpService.send(mail, newSubject, mailBody, "");
+		} 
+		catch (AddressException e) {
+			logger.error("Error Handling for InternetAddress ");
 		}
-		
-		
-		newSubject=attributeReplace(currentAccount,subjectDataChange);
-		
-		
-		if (newValue.size()>0)
-			smtpService.send(mail, newSubject, mailBody, "");
 	}
 	
+	public boolean isAllowed(Account currentAccount){
+		if(access==null && deny==null) return true; //si pas de définition de droit d'accès, le mail de notification est envoyé pour tout profil
+		
+		if(deny!=null && profileMatches(deny,currentAccount))				
+			return false;																					
+					
+		if(access!=null && profileMatches(access,currentAccount))
+			return true;
+		
+		if(deny!=null) return true; 
+		else return false;
+	}
 	
+	private boolean profileMatches(HashMap<String,List<String>> profile, Account currentAccount){
+		Set<String> keySet = profile.keySet();
+		for(String attribute : keySet) {
+			List<String> values=profile.get(attribute);
+			List<String> userValues=currentAccount.getAttributes(attribute);				
+			for(String userValue:userValues)
+				if(values.contains(userValue))		
+					return true;																					
+		}
+		return false;
+	}
 	
 	public static String join(Iterable<?> elements, String separator) {
 		return StringUtils.join(elements.iterator(), separator);
@@ -173,5 +199,51 @@ public class Mailing {
 	 */
 	public void setNone(String none) {
 		this.none = none;
+	}
+
+
+
+	/**
+	 * @return the mail2Gest
+	 */
+	public String getMail2Gest() {
+		return mail2Gest;
+	}
+
+
+
+	/**
+	 * @param mail2Gest the mail2Gest to set
+	 */
+	public void setMail2Gest(String mail2Gest) {
+		this.mail2Gest = mail2Gest;
+	}
+
+	/**
+	 * @return the access
+	 */
+	public HashMap<String, List<String>> getAccess() {
+		return access;
+	}
+
+	/**
+	 * @param access the access to set
+	 */
+	public void setAccess(HashMap<String, List<String>> access) {
+		this.access = access;
+	}
+
+	/**
+	 * @return the deny
+	 */
+	public HashMap<String, List<String>> getDeny() {
+		return deny;
+	}
+
+	/**
+	 * @param deny the deny to set
+	 */
+	public void setDeny(HashMap<String, List<String>> deny) {
+		this.deny = deny;
 	}
 }

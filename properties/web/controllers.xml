@@ -98,7 +98,11 @@
 		<property name="attributesInfPerso" value="${attributes.information}"/>
 		<property name="attributesDataChange" value="${attributes.datachange}"/>
 														
-		<property name="mailing" ref="mailing"/>														
+		<property name="mailing">
+			<list>
+				<ref bean="mailingPers"/>
+			</list>
+		</property>														
 														
 		<property name="exceptionController" ref="exceptionController"/>		
 		<property name="targetService" value="${cas.targetService}"/>
@@ -233,11 +237,28 @@
 	</bean>
 	
 	<bean id="mailing"
-		class="org.esupportail.activfo.domain.beans.Mailing">
+		class="org.esupportail.activfo.domain.beans.mailing.MailingImpl" abstract="true">
 		<property name="smtpService" ref="smtpService"/>
-		<property name="subjectDataChange" value="${datachange.subject}"/>
-		<property name="body1DataChange" value="${datachange.body1.fr}"/>
-		<property name="body2DataChange" value="${datachange.body2.fr}"/>
+		<property name="subjectDataChange" value="${mailing.subject}"/>
+		<property name="body1DataChange" value="${mailing.body1.fr}"/>
+		<property name="body2DataChange" value="${mailing.body2.fr}"/>
+	</bean>
+	
+	<bean id="mailingPers" parent="mailing">		
+		<property name="mail2Gest" value="${mailing.mail2Gest.pers}"/>
+		<property name="access">
+			<map>
+		    	<entry key="eduPersonAffiliation">
+  		      		<list>  		      					        		
+		        		<value>employee</value>		
+		        		<value>staff</value>
+		        		<value>researcher</value>
+		        		<value>faculty</value>	
+		        		<value>teacher</value>		        		        		                
+		    		</list>
+		    	</entry>
+		  </map>
+		</property>
 	</bean>
 	
 	

@@ -14,9 +14,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.esupportail.activfo.domain.beans.Account;
-import org.esupportail.activfo.domain.beans.Mailing;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.channels.Channel;
+import org.esupportail.activfo.domain.beans.mailing.Mailing;
 import org.esupportail.activfo.exceptions.AuthentificationException;
 import org.esupportail.activfo.exceptions.ChannelException;
 import org.esupportail.activfo.exceptions.KerberosException;
@@ -67,7 +67,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String accountGestKey;
 	private String accountPossibleChannelsKey;
 	
-	private Mailing mailing;
+	private List<Mailing> mailing;
 			
 	//liste des attributs pour l'affichage des informations personnelles
 	private String attributesInfPerso;
@@ -474,8 +474,10 @@ public class AccountController extends AbstractContextAwareController implements
 				this.updateCurrentAccount();
 				
 				logger.debug("Informations Account mises à jour :"+accountDescr.toString());
-				
-				mailing.sendMessage(currentAccount,oldValue,newValue);
+				if(!newValue.isEmpty())
+					for(Mailing m:mailing)
+						if(m.isAllowed(currentAccount))
+							m.sendMessage(currentAccount,oldValue,newValue);
 				
 				if (activ){
 					return "gotoCharterAgreement";
@@ -1308,14 +1310,14 @@ public class AccountController extends AbstractContextAwareController implements
 	/**
 	 * @return the mailing
 	 */
-	public Mailing getMailing() {
+	public List<Mailing> getMailing() {
 		return mailing;
 	}
 
 	/**
 	 * @param mailing the mailing to set
 	 */
-	public void setMailing(Mailing mailing) {
+	public void setMailing(List<Mailing> mailing) {
 		this.mailing = mailing;
 	}
 	
