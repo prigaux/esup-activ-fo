@@ -211,11 +211,20 @@
 			<param-name>portlet-guid</param-name>
 			<param-value>esup-activ-fo.esup-activ-fo</param-value>
 		</init-param>
+        <init-param>
+            <param-name>portlet-name</param-name>
+            <param-value>esup-activ-fo</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>		
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>esup-activ-fo</servlet-name>
 		<url-pattern>/esup-activ-fo/*</url-pattern>
 	</servlet-mapping>
+	<servlet-mapping>
+        <servlet-name>esup-activ-fo</servlet-name>
+        <url-pattern>/PlutoInvoker/esup-activ-fo</url-pattern>
+    </servlet-mapping>
 <!--END-PORTLET-ONLY-->
 
 	<filter>
