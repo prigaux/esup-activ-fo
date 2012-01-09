@@ -522,12 +522,12 @@
 		<property name="ldapEntityService" ref="ldapTableService"/>
 		<property name="ldapSearchFilter" value="(objectClass=up1TableEntry)"/>
 		<property name="firstLabel" value="Veuillez sélectionner votre fonction à l'université"/>
-		<property name="businessCategory" value="supannRoleGenerique"/>
+		<property name="businessCategory" value="supannRefId"/>
 		<property name="value" value="supannRoleGenerique"/>
 		<property name="label" value="displayName"/>
 		<property name="businessCategoryMap">
 		 <map>
-		    <entry key="*" value="Responsabilités structurelles" />    	        	
+		    <entry key="{HARPEGE.FCSTR}*" value="Responsabilités structurelles" />    	        	
     	 </map> 
     	 </property>  				
     </bean>
