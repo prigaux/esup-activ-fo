@@ -83,6 +83,8 @@
 		    <ref bean="beanOtherPhone"/>
 		    <ref bean="beanFax"/>
 		    <ref bean="beanMobilePro"/>
+		    <ref bean="beanRoomNumber"/>
+		    <ref bean="beanUp1FloorNumber"/>
 		    <ref bean="beanPostalAddress"/>		    
 		  </list>
 		</property> 
