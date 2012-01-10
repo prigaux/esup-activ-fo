@@ -55,6 +55,17 @@
     	<property name="errorMsg" value="VALIDATOR.MOBILE.INVALID"/>
 	</bean>
 	
+	<bean 
+		id="validatorRoomNumber"
+				class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for room number
+    	</description>
+    	<property name="regex" value="(([A-Z]\s[0-9]+)|([0-9]+(\s[A-Z])?))(\sbis|\ster)?"/>
+    	<property name="errorMsg" value="VALIDATOR.ROOMNUMBER.INVALID"/>
+	</bean>
 	
 	<bean 
 		id="validatorHarpegeNumber"
