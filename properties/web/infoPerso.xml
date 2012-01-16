@@ -199,7 +199,7 @@
 		>
 		<property name="key" value="PERSOINFO.DESCRIPTION.TEXT.LABEL"/>
 		<property name="required" value="false" />
-		<property name="updateable" value="false"/>
+		<property name="updateable" value="true"/>
 		<property name="name" value="description"/>
 		<property name="multiValue" value="true"/>	
 		<property name="numberOfValue" value="5"/>
