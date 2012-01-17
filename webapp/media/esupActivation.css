@@ -216,7 +216,7 @@
 	}
 	
 	option{
-	max-width:60em;
+	max-width:30em;
 	overflow:hidden;
 	text-overflow:ellipsis;
 	}
