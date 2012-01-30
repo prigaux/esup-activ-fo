@@ -537,7 +537,7 @@
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"
 		>
-		<property name="key" value="PERSOINFO.MOBILE.TEXT.LABEL"/>
+		<property name="key" value="PERSOINFO.MOBILEPRO.TEXT.LABEL"/>
 		<property name="validator" ref="validatorMobilePhone"/>
 		<property name="converter" ref="ldapPhoneFaxConverter" />
 		<property name="required" value="false" />
