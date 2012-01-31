@@ -228,6 +228,7 @@
 		<property name="name" value="mailForwardingAddress"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="true"/>
+		<property name="constraint" value="PERSOINFO.MAILFORWARD.CONSTRAINT"/>
 	</bean>
 	
 	<bean id="beanRedirectMailEtu"
