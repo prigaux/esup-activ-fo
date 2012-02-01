@@ -53,7 +53,7 @@
 			</t:selectOneRadio>	
 		</t:div>
 					
-		<t:div style="margin-top:30;">
+		<t:div style="margin-top:1em;">
 			<e:commandButton id="application" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.enter}"/>
 		</t:div>
 		

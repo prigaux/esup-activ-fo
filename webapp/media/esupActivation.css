@@ -1,7 +1,13 @@
+a:hover {
+        cursor: pointer;
+}
+
  /* common to all columns*/
+    .mainBlock td { 
+	padding-right: 0.5em;
+    }
     .firstColumn {
-    vertical-Align: top;
-    padding-top: 6px;
+    vertical-align: top;
     }
     .firstColumn#sizeEx {
     vertical-align: top;
@@ -12,7 +18,6 @@
     
     .thirdColumn {
       vertical-align: top;
-      padding-top: 6px;
     }
     
     .thirdColumn > img, .thirdColumn > div{  
@@ -21,20 +26,13 @@
     } 
     .fourthColumn {
     vertical-align: top;
-    padding-top: 6px;
     } 
-    
-    .output{
-     position:relative;top:0.2em;
-    }
     
     .viewCol1 {
      vertical-Align: top;
-     padding-top: 6px;
     }
     
     .viewCol2 {
-     padding-top: 6px;
     }
     
     
@@ -181,17 +179,14 @@
 	
 	.labeltexttoptrue{
 	font-weight:bold;
-	font-size:12px;
 	vertical-align:top;
 	}
 	.labeltexttopfalse {
 	font-weight:bold;
-	font-size:12px;
 	}
 	
 	.labeltext{
 	font-weight:bold;
-	font-size:12px;
 	}
 	
 	.commandLink a, a.commandLink{
@@ -205,13 +200,16 @@
 	.commandLink a:hover, a.commandLink:hover{
     font-weight:bold; !important;    
 	}
-	
+
+	.legend .portlet-section-text {
+	    margin-left: 0.2em;
+	}	
 	.legendCol2{
-	 padding-left:1em;
+	 padding-left:1em !important;
 	}
 	
 	.legend {
-		width:30%;
+		max-width: 30em;
 		margin: 1em;
 	}
 	

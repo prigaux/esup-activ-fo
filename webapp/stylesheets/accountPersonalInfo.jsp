@@ -106,7 +106,7 @@
 			</h:column>										
 	  	</h:dataTable>
 	</t:dataList>										
-	<t:div style="margin-top:30;">
+	<t:div style="margin-top:1em;">
 		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
 	</t:div>
 	</h:form>

@@ -221,7 +221,7 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
   			 
 		</e:panelGrid>
 									
-		<t:div style="margin-top:30;">
+		<t:div style="margin-top:1em;">
 		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangePassword}" />
 		</t:div>
 	</h:form>

@@ -73,7 +73,7 @@
 			</h:column>													
 		</h:dataTable>
 				
-		<t:div style="margin-top:30;">
+		<t:div style="margin-top:1em;">
 			<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushValid}" />
 		</t:div>
 		

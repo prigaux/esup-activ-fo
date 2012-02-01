@@ -33,7 +33,7 @@
 		    <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanCode.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanCode.help!=null}"/>
 		</e:panelGrid>
 		
-		<t:div style="margin-top:30;">
+		<t:div style="margin-top:1em;">
 			<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushVerifyCode}" />
 		</t:div>
 		<e:message for="code" />	

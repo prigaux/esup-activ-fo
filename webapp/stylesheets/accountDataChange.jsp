@@ -106,7 +106,7 @@
     </t:dataList>      
   </div>
 
-	<t:div style="margin-top:30;">
+	<t:div style="margin-top:1em;">
 	  <e:commandButton id="next" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
 	</t:div>
 	

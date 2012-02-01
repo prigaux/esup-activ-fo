@@ -66,7 +66,7 @@
 			<e:message for="password" />
 		</e:panelGrid>
 												
-		<t:div style="margin-top:30;">
+		<t:div style="margin-top:1em;">
 		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushAuthentificate}" />
 		</t:div>
 	</h:form>

@@ -41,7 +41,7 @@
 			</t:selectOneRadio>	
 		</t:div>
 		
-		<t:div style="margin-top:30;">
+		<t:div style="margin-top:1em;">
 			<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChoice}" />
 		</t:div>
 	</h:form>

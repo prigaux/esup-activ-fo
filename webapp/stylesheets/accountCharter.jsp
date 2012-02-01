@@ -23,7 +23,7 @@
 
 		<e:outputLabel for="charterAgreement" value="#{msgs['CHARTER.TEXT.AGREE']}" />
 		<e:selectBooleanCheckbox id="charterAgreement" value="#{accountController.currentAccount.charterAgreement}" required="true" />
-		<t:div style="margin-top:30;">
+		<t:div style="margin-top:1em;">
 			<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushCharterAgreement}" />
 		</t:div>
 	</h:form>
