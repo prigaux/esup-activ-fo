@@ -267,7 +267,7 @@
 		scope="session"
 		>
 		
-		<property name="label" value="Rediriger vers le courriel altérnatif"/>
+		<property name="label" value="Rediriger vers le courriel alternatif"/>
 		<property name="account" ref="account"/>
 		<property name="attributeName" value="supannMailPerso"/>
 		<property name="defaultValue" value="defaultValue"/>
