@@ -210,9 +210,12 @@ a:hover {
 	
 	.legend {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		max-width: 30em;
 		margin: 1em;
 =======
+=======
+>>>>>>> a235690... css : au lieu de forcer la legende a max-width 30em, dimensionner a la taille du contenu
 		display: inline;	
 		margin: 0 1em 1em;
 		border: 2px groove threeDface;
