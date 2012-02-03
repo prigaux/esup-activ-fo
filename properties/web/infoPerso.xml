@@ -601,9 +601,7 @@
 		<property name="disable" value="false"/>
 		<property name="constraint" value="PERSOINFO.ROOMNUMBER.CONSTRAINT"/>
 	</bean>
-	
-	
-	
+		
 	<bean
 		id="beanUp1FloorNumber"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
@@ -615,6 +613,18 @@
 		<property name="required" value="false" />
 		<property name="updateable" value="true"/>
 		<property name="name" value="up1FloorNumber"/>
+		<property name="disable" value="false"/>
+	</bean>
+	
+	<bean id="beanUp1RoomAccess"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session">
+		<property name="key" value="PERSOINFO.UP1ROOMACESS.TEXT.LABEL"/>
+		<property name="fieldType" value="selectOneMenu"/>
+ 		<property name="displayItems" ref="beanSelectRoomAccessList"/>
+		<property name="required" value="false" />
+		<property name="updateable" value="true"/>
+		<property name="name" value="up1RoomAccess"/>
 		<property name="disable" value="false"/>
 	</bean>
 	
@@ -712,6 +722,35 @@
 		</property>
     </bean>
 	
+		<bean id="beanSelectRoomAccessList"
+		class="org.esupportail.activfo.web.beans.SelectItemsList">
+		<property name="selectItemList">
+		  <map>
+		  		<entry key="" value="ne pas préciser"/>
+		  		<entry key="Aile Cujas" value="Aile Cujas"/>
+				<entry key="Aile Soufflot" value="Aile Soufflot"/>
+				<entry key="Cour d'honneur" value="Cour d'honneur"/>
+				<entry key="Esc. A" value="Esc. A"/>
+				<entry key="Esc. B" value="Esc. B"/>
+				<entry key="Esc. C" value="Esc. C"/>
+				<entry key="Esc. D" value="Esc. D"/>
+				<entry key="Esc. E" value="Esc. E"/>
+				<entry key="Esc. F" value="Esc. F"/>
+				<entry key="Esc. G" value="Esc. G"/>
+				<entry key="Esc. H" value="Esc. H"/>
+				<entry key="Esc. I" value="Esc. I"/>
+				<entry key="Esc. J" value="Esc. J"/>
+				<entry key="Esc. K" value="Esc. K"/>
+				<entry key="Esc. L" value="Esc. L"/>
+				<entry key="Esc. M" value="Esc. M"/>
+				<entry key="Esc. N" value="Esc. N"/>
+				<entry key="Esc. O" value="Esc. O"/>
+				<entry key="Tour A" value="Tour A"/>
+				<entry key="Tour B" value="Tour B"/>
+				<entry key="Tour C" value="Tour C"/>
+		  </map>
+		</property>
+    </bean>
 
 	
 </beans>
