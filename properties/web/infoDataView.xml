@@ -35,6 +35,9 @@
 		    <ref bean="beanSupannEtuEtape"/>	
  			<ref bean="beanDescription"/>		   		  
 		    <ref bean="beanInfo"/>
+		    <ref bean="beanRoomNumber"/>
+		    <ref bean="beanUp1FloorNumber"/>
+		    <ref bean="beanUp1RoomAccess"/>
 		    <ref bean="beanPostalAddress"/>		    
 		  </list>
 		</property> 
