@@ -6,14 +6,52 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd"
 	>
 	
-	 <bean
-		id="beanPrincipalInfo"
-		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
-		scope="session"
-		>
+	 <bean id="beanPrincipalInfo" class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
+		scope="session">
 
 		<property name="title" value="INFO.PRINCIPAL.TEXT.LABEL"/>
 		<property name="name" value="principalInfo"/>
+		<property name="account" ref="account"/>
+		<property name="deniedBeanFieldProfile">
+		<map>		 	
+			<entry>
+			<key>
+				<ref bean="beanSupannCivilite"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>student</value>		       	 		
+		      		</list>		
+				</entry>				
+			</map>
+			</entry>	
+			<entry>
+			<key>
+				<ref bean="beanSn"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>student</value>		       	 		
+		      		</list>		
+				</entry>
+			</map>
+			</entry>
+			<entry>
+			<key>
+				<ref bean="beanGivenName"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>student</value>		       	 		
+		      		</list>		
+				</entry>
+			</map>
+			</entry>					
+		</map>
+		</property>		
 		<property name="listBeanField"> 
 		  <list>
 		    <ref bean="beanSupannAliasLogin"/>
@@ -99,7 +137,7 @@
 		    <ref bean="beanListeRouge"/>
 		    <ref bean="beanMail"/>
 		    <ref bean="beanEduPersonAffiliation"/>
-		    <ref bean="beanSupannEntiteAffectation"/>
+		    <ref bean="beanSupannEntiteAffectationEtu"/>
 		    <ref bean="beanSupannEtuEtape"/>		   
 		  </list>
 		</property> 
@@ -202,7 +240,19 @@
 		      		</list>		
 				</entry>
 			</map>
-			</entry>					
+			</entry>
+			<entry>
+			<key>
+				<ref bean="beanHomePostalAddress"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>student</value>		       	 		
+		      		</list>		
+				</entry>
+			</map>
+			</entry>								
 		</map>
 		</property>		
 		<property name="listBeanField">
@@ -367,8 +417,8 @@
 		  <list>
 		    <ref bean="beanSupannEtuId"/>
 		    <ref bean="beanSupannCodeINE"/>		    
-		    <ref bean="beanBirthNameInfo"/>
-		    <ref bean="beanBirthDateInfo"/>
+		    <ref bean="beanBirthNameInfoEtu"/>
+		    <ref bean="beanBirthDateInfoEtu"/>
 		  </list>
 		</property>
 		

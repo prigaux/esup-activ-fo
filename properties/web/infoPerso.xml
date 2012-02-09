@@ -495,6 +495,19 @@
 		<property name="updateable" value="false"/>
 		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
 	</bean>
+		<bean 	
+		id="beanSupannEntiteAffectationEtu"	class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session">
+
+		<property name="key" value="DATACHANGE.SUPANNENTITEAFFECTATION.TEXT.LABEL"/>
+		<property name="required" value="false" />
+		<property name="name" value="supannEntiteAffectation"/>
+		<property name="fieldType" value="selectOneMenu"/>
+ 		<property name="displayItems" ref="beanLdapStructureList"/>
+		<property name="converter" ref="ldapConverter"/>				
+		<property name="disable" value="true"/>
+		<property name="updateable" value="false"/>		
+	</bean>
 	
 	<bean
 		id="beanLdapStructureList"
@@ -642,6 +655,18 @@
 		<property name="name" value="up1BirthName"/>
 		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
 	</bean>
+	<bean id="beanBirthNameInfoEtu"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session">
+
+		<property name="key" value="IDENTIFICATION.BIRTHNAME.TEXT.LABEL"/>
+		<property name="validator" ref="validatorBirthName"/>
+		<property name="required" value="true" />
+		<property name="disable" value="true"/>
+		<property name="updateable" value="false"/>
+		<property name="name" value="up1BirthName"/>		
+	</bean>
+	
 	
 		<bean id="beanSupannEtuEtape"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
@@ -658,8 +683,7 @@
 	<bean
 		id="beanBirthDateInfo"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
-		scope="session"
-		>
+		scope="session">
 
 		<property name="key" value="IDENTIFICATION.BIRTHDATE.TEXT.LABEL"/>
 		<property name="validator" ref="validatorBirthDate"/>
@@ -670,6 +694,18 @@
 		<property name="name" value="up1BirthDay"/>
 		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
 		<property name="constraint" value="PERSOINFO.BIRTHDATE.CONSTRAINT"/>
+	</bean>
+		<bean
+		id="beanBirthDateInfoEtu"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session">
+
+		<property name="key" value="IDENTIFICATION.BIRTHDATE.TEXT.LABEL"/>
+		<property name="validator" ref="validatorBirthDate"/>
+		<property name="converter" ref="ldapDateConverter"/>		
+		<property name="disable" value="true"/>
+		<property name="updateable" value="false"/>
+		<property name="name" value="up1BirthDay"/>				
 	</bean>
 	
 	<bean id="beanSupannRoleGenerique"
@@ -753,7 +789,5 @@
 				<entry key="Tour C" value="Tour C"/>
 		  </map>
 		</property>
-    </bean>
-
-	
+    </bean>	
 </beans>
