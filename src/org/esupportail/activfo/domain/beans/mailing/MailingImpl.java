@@ -106,9 +106,15 @@ public class MailingImpl implements Mailing {
 	private  String attributeReplace(Account account,String text){
 		Pattern p=Pattern.compile(regexAttribute);
    	  	Matcher m=p.matcher(text);
-   	  	while(m.find()) 
-   	  		text=text.replace(m.group(1), account.getAttribute(m.group(2))!=null?account.getAttribute(m.group(2)):none);
-   	  	return text;
+   	  	while(m.find()) {
+   	  		List<String> attrValues=account.getAttributes(m.group(2));
+   	  		String attrValue=none;
+   	  		if(attrValues!=null)
+   	  			attrValue=attrValues.size()==1?attrValues.get(0):attrValues.toString();
+   	  	
+   	  		text=text.replace(m.group(1),attrValue);
+   	  	}
+   	  	return text;   	 
 	}
 	
 	/**
