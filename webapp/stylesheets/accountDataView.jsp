@@ -1,9 +1,8 @@
 <%@include file="_include.jsp"%>
-<%@include file="_includeScript.jsp"%>
-<script type="text/javascript" src="/media/scripts/block.js"></script>
 
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
-	
+	<%@include file="_includeScript.jsp"%>
+	<script type="text/javascript" src="/media/scripts/block.js"></script>	
 	<%@include file="_navigation.jsp"%>
 	
 	<e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}"  />

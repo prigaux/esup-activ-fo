@@ -1,29 +1,26 @@
 <%@include file="_include.jsp"%>
-
-<script type="text/javascript" src="/media/scripts/jquery.js"></script>
-<script type="text/javascript">
- $(document).ready(function(){  
-   if($("#[value='activation']").attr("checked") ||
-      $("#[value='reinitialisation']").attr("checked"))
-   		$("#[id='welcomeForm:statusDiv']").show();
-   else $("#[id='welcomeForm:statusDiv']").hide();		
-   
-   $(":radio").click(function(){
-     if(this.value=="activation" || this.value=="reinitialisation"){       
-       $("#[id='welcomeForm:statusDiv']").slideDown();     
-    }
-     else 
-     if(this.value=="passwordchange" || this.value=="loginchange" || this.value=="datachange"){        
-           $("#[id='welcomeForm:statusDiv']").slideUp();                           
-           $("#[name='welcomeForm:statusRadio']:first").attr("checked","checked");                   
-                         
-          }
-   });
- });
-</script>
-
 <e:page stringsVar="msgs" menuItem="welcome" locale="#{sessionController.locale}" >
- 
+	<script type="text/javascript" src="/media/scripts/jquery.js"></script>
+	<script type="text/javascript">
+	 $(document).ready(function(){  
+	   if($("#[value='activation']").attr("checked") ||
+	      $("#[value='reinitialisation']").attr("checked"))
+	   		$("#[id='welcomeForm:statusDiv']").show();
+	   else $("#[id='welcomeForm:statusDiv']").hide();		
+	   
+	   $(":radio").click(function(){
+	     if(this.value=="activation" || this.value=="reinitialisation"){       
+	       $("#[id='welcomeForm:statusDiv']").slideDown();     
+	    }
+	     else 
+	     if(this.value=="passwordchange" || this.value=="loginchange" || this.value=="datachange"){        
+	           $("#[id='welcomeForm:statusDiv']").slideUp();                           
+	           $("#[name='welcomeForm:statusRadio']:first").attr("checked","checked");                   
+	                         
+	          }
+	   });
+	 });
+	</script>
 	<%@include file="_navigation.jsp"%>
 	<e:section value="#{msgs['WELCOME.TITLE']}" />
 	

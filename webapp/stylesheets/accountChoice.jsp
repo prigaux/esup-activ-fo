@@ -1,5 +1,4 @@
 <%@include file="_include.jsp"%>
-<%@include file="_includeScript.jsp"%>
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 
 <%-- Data mustn't be recorded in this form, even by using back button --%> 
@@ -8,7 +7,7 @@
 		<meta http-equiv="cache-control" content="no-cache,no-store">
 		<meta http-equiv="pragma" content="no-cache">
 	</t:documentHead>
-
+<%@include file="_includeScript.jsp"%>
 <%@include file="_navigation.jsp"%>
 
 <e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}" />
