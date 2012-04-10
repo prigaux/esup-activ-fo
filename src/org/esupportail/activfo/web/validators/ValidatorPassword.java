@@ -106,14 +106,14 @@ public class ValidatorPassword extends AbstractI18nAwareBean implements Validato
 					}
 				}
 				
+				// Le mot de passe ne doit pas contenir des espaces.				
+				if (passwd.indexOf(' ')!= -1 )	
+					throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.WITHSPACE"));
+				
 				for(int index=0;index<passwd.length();index++) 
 					if (!CharUtils.isAsciiPrintable(passwd.charAt(index)) ) 
 						throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",passwd.charAt(index)));
 				
-				if(StringUtils.isBlank(passwd)) {
-					specialmessage="espace";
-					throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",specialmessage));
-				}
 				
 				// SPECIAL CHAR
 				p = Pattern.compile(".??[:,!,@,#,$,%,^,&,*,?,_,~]");
