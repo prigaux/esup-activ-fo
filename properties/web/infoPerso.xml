@@ -726,9 +726,7 @@
 	 
 	<bean
 		id="beanSelectFloorList"
-		class="org.esupportail.activfo.web.beans.SelectItemsList"
-		scope="session"
-		>
+		class="org.esupportail.activfo.web.beans.SelectItemsList">
 		<property name="selectItemList">
 		  <map>
 		    <entry key="" value="Sélectionnez un étage" />
