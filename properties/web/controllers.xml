@@ -242,6 +242,7 @@
 		<property name="subjectDataChange" value="${mailing.subject}"/>
 		<property name="body1DataChange" value="${mailing.body1.fr}"/>
 		<property name="body2DataChange" value="${mailing.body2.fr}"/>
+		<property name="sep" value="&lt;br/&gt;"/>
 	</bean>
 	
 	<bean id="mailingPers" parent="mailing">		

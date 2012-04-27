@@ -28,6 +28,7 @@ public class MailingImpl implements Mailing {
 	
 	private String regexAttribute="(\\{([^{}]*)\\})";
 	private String none="";
+	private String sep=", ";
 	
 	private AsynchronousSmtpServiceImpl smtpService;
 	
@@ -41,8 +42,7 @@ public class MailingImpl implements Mailing {
 	
 	public void sendMessage(Account currentAccount, HashMap<String,List<String>> oldValue, HashMap<String,List<String>> newValue) {
 		
-		InternetAddress mail=null;
-		String sep=", ";
+		InternetAddress mail=null;		
 		
 		String mailBody=attributeReplace(currentAccount,this.body1DataChange);
 		String mailBody2=this.body2DataChange;
@@ -251,5 +251,19 @@ public class MailingImpl implements Mailing {
 	 */
 	public void setDeny(HashMap<String, List<String>> deny) {
 		this.deny = deny;
+	}
+
+	/**
+	 * @return the sep
+	 */
+	public String getSep() {
+		return sep;
+	}
+
+	/**
+	 * @param sep the sep to set
+	 */
+	public void setSep(String sep) {
+		this.sep = sep;
 	}
 }
