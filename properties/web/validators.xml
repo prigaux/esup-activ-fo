@@ -38,7 +38,7 @@
     	<description>
 			A validator for Email
     	</description>
-    	<property name="regex" value="${mail.univ}"/>
+    	<property name="regex" value="${mail.perso}"/>
     	<property name="errorMsg" value="VALIDATOR.EMAIL.FORBIDDEN"/>
 	</bean>
    
@@ -149,7 +149,7 @@
     	<description>
 			A validator for Password.
     	</description>
-    	<property name="regex" value="^(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,}$"/>
+    	<property name="regex" value="(?=.*[0-9])(?=.*[A-Z])(?=.*[a-z]).{8,}"/>
     	<property name="errorMsg" value="VALIDATOR.PASSWORD.RULE"/>
     	
 	</bean>	
@@ -275,7 +275,7 @@
     	<description>
 			A validator for password
     	</description>
-    	<property name="regex" value="\S*$" />	
+    	<property name="regex" value="\S*" />	
     	<property name="errorMsg" value="VALIDATOR.PASSWORD.WITHSPACE"/>
     	
 	</bean>
