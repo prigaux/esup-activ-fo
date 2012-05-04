@@ -30,18 +30,45 @@
     	<property name="caracterForbiddenDisplayName" value="${caracter.forbidden.displayName}"/>
     		
 	</bean>
-	
 	<bean 
-		id="validatorEmail"
-		class="org.esupportail.activfo.web.validators.ValidatorEmail"
+		id="validatorEmailForbiden"
+		class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
 		parent="abstractI18nAwareBean"
 		>
     	<description>
 			A validator for Email
     	</description>
-    	
-    	
+    	<property name="regex" value="${mail.univ}"/>
+    	<property name="errorMsg" value="VALIDATOR.EMAIL.FORBIDDEN"/>
 	</bean>
+   
+	
+	<bean 
+		id="validatorEmailInvalid"
+		class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Email
+    	</description>
+    	<property name="regex" value="^[a-zA-Z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,4}$" />
+    	<property name="errorMsg" value="VALIDATOR.EMAIL.INVALID"/>
+	</bean>	
+	<bean 
+		id="validatorEmailMutiple"
+		class="org.esupportail.activfo.web.validators.ValidatorList"
+		parent="abstractI18nAwareBean" scope="session">
+    	<description>
+			A validator for password
+    	</description>
+    	<property name="validators">
+    	<list>
+    	 	<ref bean="validatorEmailInvalid"/>
+    	 	<ref bean="validatorEmailForbiden"/>
+    	</list>    	
+    	</property>
+	</bean>
+	
 	
 	<bean 
 		id="validatorMobilePhone"
@@ -99,10 +126,6 @@
     	<description>
 			A validator for BirthName.
     	</description>
-    	
-    	
-    	
-    	
 	</bean>
 	
 	<bean 
@@ -115,20 +138,33 @@
     	</description>
     	
     	<property name="formatLdapDate" value="${format.date.ldap}"/>
+	</bean>
+	
+	<!-- Le mot de passe doit etre de 7 caractères minimum et contenir au moins	1 chiffre, au moins 1 lettre mimuscule, au moins 1 lettre majuscule	 -->
+	<bean 
+		id="validatorPassword"
+		class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Password.
+    	</description>
+    	<property name="regex" value="^(?=^.{7,}$)((?=.*[A-Za-z0-9])(?=.*[A-Z])(?=.*[a-z]))^.*$"/>
+    	<property name="errorMsg" value="VALIDATOR.PASSWORD.RULE"/>
     	
 	</bean>
 	
 	<bean 
-		id="validatorPassword"
+		id="validatorPasswordisAsciiPrintable"
 		class="org.esupportail.activfo.web.validators.ValidatorPassword"
 		parent="abstractI18nAwareBean"
 		>
     	<description>
 			A validator for Password.
     	</description>
-    	
+     	
 	</bean>
-	
+		
 	<bean 
 		id="validatorCode"
 		class="org.esupportail.activfo.web.validators.ValidatorCode"
@@ -230,4 +266,39 @@
     	</property>    	  	
     	<property name="converter" ref="emptyConverter"/>
 	</bean>
+	
+	<!-- Le mot de passe ne doit pas contenir des espaces -->
+	<bean 
+		id="validatorSpace"
+		class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for password
+    	</description>
+    	<property name="regex" value="\S*$" />	
+    	<property name="errorMsg" value="VALIDATOR.PASSWORD.WITHSPACE"/>
+    	
+	</bean>
+	
+	<bean 
+		id="validatorPasswordAndSpace"
+		class="org.esupportail.activfo.web.validators.ValidatorList"
+		parent="abstractI18nAwareBean" scope="session">
+    	<description>
+			A validator for password
+    	</description>
+    	<property name="validators">
+    	<list>
+    	 	
+    	 	
+    	 	<ref bean="validatorPassword"/>
+    	 	<ref bean="validatorSpace"/>
+    	 	<ref bean="validatorPasswordisAsciiPrintable"/>
+    	 	
+    	</list>    	
+    	</property>
+	</bean>
+	
+	
 </beans>

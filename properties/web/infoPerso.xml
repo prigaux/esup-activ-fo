@@ -27,7 +27,7 @@
 		scope="session"
 		>
 		<property name="key" value="PERSOINFO.MAILPERSO.TEXT.LABEL"/>
-		<property name="validator" ref="validatorEmail"/>	
+		<property name="validator" ref="validatorEmailMutiple"/>	
 		<property name="help" value="PERSOINFO.EMAILPERSO.TEXT.HELP"/>
 		<property name="required" value="false" />
 		<property name="updateable" value="true"/>

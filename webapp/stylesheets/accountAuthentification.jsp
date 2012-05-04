@@ -60,7 +60,7 @@
 			<e:message for="login" />
 
 			<e:outputLabel for="password" value="#{msgs[beanPassword.key]}" />
-			<e:inputSecret id="password" value="#{beanPassword.value}" required="#{beanPassword.required}"> </e:inputSecret>
+			<e:inputSecret id="password" value="#{beanPassword.value}" required="#{beanPassword.required}" validator="#{beanPassword.validator.validate}"> </e:inputSecret>
 			<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanPassword.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanPassword.help!=null}"/>
 			<t:htmlTag value="span" rendered="#{beanLogin.help==null}"/>
 			<e:message for="password" />
