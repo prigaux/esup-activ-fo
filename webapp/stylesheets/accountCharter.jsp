@@ -1,8 +1,8 @@
 <%@include file="_include.jsp"%>
 <e:page stringsVar="msgs" menuItem="account"
 	locale="#{sessionController.locale}">
-	<%@include file="_navigation.jsp"%>
 	<%@include file="_includeScript.jsp"%>
+	<%@include file="_navigation.jsp"%>
 	<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}" />
 	
 	<t:div styleClass="thirdStepImage" rendered="#{accountController.activ == true}">
