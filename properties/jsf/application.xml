@@ -18,6 +18,10 @@
 		<locale-config>
 			<default-locale>fr</default-locale>
 			<!-- <supported-locale>en</supported-locale> -->
-		</locale-config>						
-	</application>	
+		</locale-config>
+		<!-- Prendre en compte le nouveau fichier ermettant la surcharge des messages par défaut -->
+		<message-bundle>properties/i18n/bundles/JsfMessages</message-bundle>
+	</application>
+		
+		
 </faces-config>

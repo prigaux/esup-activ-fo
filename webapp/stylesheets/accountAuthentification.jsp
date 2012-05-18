@@ -44,14 +44,14 @@
 	</t:htmlTag>
 	</t:div>
 	
-	<e:messages />
-	
+	<!-- N'afficher qu'une fois le message global -->
+	 <t:div rendered="#{! empty facesContext.maximumSeverity}"  styleClass= "portlet-msg-error">      
+	   		<e:paragraph value="#{msgs['MESSAGE.ERROR.VALIDATION']}"/>			   		
+	 </t:div>	
 	<e:paragraph escape="false" value="#{msgs['AUTHENTIFICATION.TEXT.TOP']}" />
 	
 
-	<h:form id="accountForm" >
-		
-		
+	<h:form id="accountForm" >		
 		<e:panelGrid columns="4">
 			<e:outputLabel for="login" value="#{msgs[beanLogin.key]}" />
 			<e:inputText id="login" value="#{beanLogin.value}" required="#{beanLogin.required}" > </e:inputText>
@@ -60,11 +60,13 @@
 			<e:message for="login" />
 
 			<e:outputLabel for="password" value="#{msgs[beanPassword.key]}" />
-			<e:inputSecret id="password" value="#{beanPassword.value}" required="#{beanPassword.required}" validator="#{beanPassword.validator.validate}"> </e:inputSecret>
+			<e:inputSecret id="password" value="#{beanPassword.value}" required="#{beanPassword.required}" validator="#{beanPassword.validator.validate}"> </e:inputSecret> 
 			<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanPassword.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanPassword.help!=null}"/>
 			<t:htmlTag value="span" rendered="#{beanLogin.help==null}"/>
 			<e:message for="password" />
 		</e:panelGrid>
+		
+		
 												
 		<t:div style="margin-top:1em;">
 		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushAuthentificate}" />
