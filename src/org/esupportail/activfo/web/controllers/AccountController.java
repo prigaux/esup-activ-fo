@@ -278,23 +278,17 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			accountDescr=this.getDomainService().validateAccount(hashInfToValidate,attrPersoInfo);
 			
-			logger.info("accoutDescr : "+accountDescr.toString());
-			
-			//recuperation liste pour attributs perso info
-				
-			logger.info("Identification valide");
-			
 			this.updateCurrentAccount();
 				
 			if (currentAccount.getAttribute(accountCodeKey)!=null) {
 				if (reinit){
 					logger.info("Reinitialisation impossible, compte non activ�");
-					this.addErrorMessage(null, "IDENTIFICATION.REINITIALISATION.MESSAGE.ACCOUNT.NONACTIVATED");
+					this.addErrorMessage("messageErrControleur", "IDENTIFICATION.REINITIALISATION.MESSAGE.ACCOUNT.NONACTIVATED");
 				}else if(activ){
 					logger.info("Construction de la liste des informations personnelles du compte");
 					this.buildProfilingListBeanPersoInfo();
 					this.buildListPersoInfo(listBeanPersoInfo,attrPersoInfo);					
-					this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+					this.addInfoMessage("messageErrControleur", "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 					return "gotoPersonalInfo";
 				}
 			}
@@ -309,47 +303,45 @@ public class AccountController extends AbstractContextAwareController implements
 					logger.debug("listpossible "+listPossibleChannels.toString());
 					buildChannels(listPossibleChannels);
 					if (beanFieldChannels.size()>1){						
-						this.addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+						this.addInfoMessage("messageErrControleur", "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 						return "gotoChoice"; 	
 					}	
 					else if (beanFieldChannels.size()==1){		
 						oneChoiceCanal=beanFieldChannels.get(0).getValue();
 						this.getDomainService().sendCode(currentAccount.getAttribute(this.accountIdKey),beanFieldChannels.get(0).getValue());
-						addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+						addInfoMessage("messageErrControleur", "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
 						logger.debug("Code envoyé via le canal : "+beanFieldChannels.get(0).getValue());
 						return "gotoPushCode";
 					}
 					else{
 						logger.debug("aucun canal d'envoi n'est disponible");
-						addInfoMessage(null, "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
-						addErrorMessage(null, "IDENTIFICATION.MESSAGE.NONECANAL");
+						addInfoMessage("messageErrControleur", "IDENTIFICATION.MESSAGE.VALIDACCOUNT");
+						addErrorMessage("messageErrControleur", "IDENTIFICATION.MESSAGE.NONECANAL");
 					}
 				
 				}
 				else if(activ){
 					logger.info("Compte d�ja activ�");
-					addErrorMessage(null, "IDENTIFICATION.ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
+					addErrorMessage("messageErrControleur", "IDENTIFICATION.ACTIVATION.MESSAGE.ALREADYACTIVATEDACCOUNT");
 				}
 			}
 			
 		}
 		catch (LdapProblemException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
+			addErrorMessage("messageErrControleur", "LDAP.MESSAGE.PROBLEM");
 			
 		}catch (AuthentificationException e) {
 			logger.error(e.getMessage());	
-			addErrorMessage(null, currentAccount.getStatus()!=null?"IDENTIFICATION.MESSAGE.INVALIDACCOUNT."+currentAccount.getStatus().toUpperCase():"IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
+			addErrorMessage("messageErrControleur", currentAccount.getStatus()!=null?"IDENTIFICATION.MESSAGE.INVALIDACCOUNT."+currentAccount.getStatus().toUpperCase():"IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
 		}catch (LoginException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
+			addErrorMessage("messageErrControleur", "APPLICATION.MESSAGE.NULLLOGIN");
 			
 		}catch (ChannelException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "CODE.ERROR.SENDING");
+			addErrorMessage("messageErrControleur", "CODE.ERROR.SENDING");
 		}
-		
-		
 		return null;
 	}
 	
@@ -548,8 +540,7 @@ public class AccountController extends AbstractContextAwareController implements
 							this.buildProfilingListBeanPersoInfo();
 							this.buildListPersoInfo(listBeanPersoInfo,attrPersoInfo);
 					}
-					
-					//this.addInfoMessage(null, "AUTHENTIFICATION.MESSAGE.VALID");
+				
 					if (dataChange) {
 						//viewDataChange=false;
 						return null; 
@@ -560,33 +551,29 @@ public class AccountController extends AbstractContextAwareController implements
 				}
 				else{
 					logger.info("Changement de mot de passe impossible, compte non activ�");
-					this.addErrorMessage(null, "AUTHENTIFICATION.MESSAGE.ACCOUNT.NONACTIVATED");
+					this.addErrorMessage("messageErrControleur", "AUTHENTIFICATION.MESSAGE.ACCOUNT.NONACTIVATED");
 				}
 			
 			}
 			else {
-				addErrorMessage(null, "AUTHENTIFICATION.MESSAGE.INVALID");
+				addErrorMessage("messageErrControleur", "AUTHENTIFICATION.MESSAGE.INVALID");
 			}
 			
 		}catch(AuthentificationException e){
-			logger.error(e.getMessage());
-			addErrorMessage(null, "AUTHENTIFICATION.MESSAGE.INVALID");
-	        sessionController.restart();
-			
+			logger.error(e.getMessage()+"t1");
+			addErrorMessage("messageErrControleur", "AUTHENTIFICATION.MESSAGE.INVALID");
+	 		
 		}catch (LdapProblemException e) {
-			logger.error(e.getMessage());
-			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
-			sessionController.restart();
+			logger.error(e.getMessage()+"t2");
+			addErrorMessage("messageErrControleur", "LDAP.MESSAGE.PROBLEM");
 		
 		}catch (UserPermissionException e) {
-			logger.error(e.getMessage());
-			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
-			sessionController.restart();
+			logger.error(e.getMessage()+"t3");
+			addErrorMessage("messageErrControleur", "APPLICATION.USERPERMISSION.PROBLEM");
 		
 		}catch (LoginException e) {
-			logger.error(e.getMessage());
-			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
-			sessionController.restart();
+			logger.error(e.getMessage()+"t4");
+			addErrorMessage("messageErrControleur", "APPLICATION.MESSAGE.NULLLOGIN");
 			
 		}
 		return null;
@@ -1320,5 +1307,6 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setMailing(List<Mailing> mailing) {
 		this.mailing = mailing;
 	}
+
 	
 }

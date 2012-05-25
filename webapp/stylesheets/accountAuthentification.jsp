@@ -46,8 +46,13 @@
 	
 	<!-- N'afficher qu'une fois le message global -->
 	 <t:div rendered="#{! empty facesContext.maximumSeverity}"  styleClass= "portlet-msg-error">      
-	   		<e:paragraph value="#{msgs['MESSAGE.ERROR.VALIDATION']}"/>			   		
+	   	<e:paragraph id="messageErrControleur" value="#{msgs['MESSAGE.ERROR.VALIDATION']}"/>	  		   		
 	 </t:div>	
+	<br/>
+	<e:message for="messageErrControleur" />	
+	 
+	 
+	 
 	<e:paragraph escape="false" value="#{msgs['AUTHENTIFICATION.TEXT.TOP']}" />
 	
 
@@ -66,8 +71,6 @@
 			<e:message for="password" />
 		</e:panelGrid>
 		
-		
-												
 		<t:div style="margin-top:1em;">
 		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushAuthentificate}" />
 		</t:div>

@@ -47,7 +47,14 @@
 	</t:htmlTag>
 	</t:div>
 
-	<e:messages/>
+
+<!-- N'afficher qu'une fois le message global -->
+	 <t:div rendered="#{! empty facesContext.maximumSeverity}"  styleClass= "portlet-msg-error">      
+	   	<e:paragraph id="messageErrControleur" value="#{msgs['MESSAGE.ERROR.VALIDATION']}"/>	  		   		
+	 </t:div>	
+	<br/>
+	<e:message for="messageErrControleur" />	
+
 	<h:form id="accountForm" rendered="#{accountController.currentAccount.activated == false}">
 	
 		<e:paragraph  escape="false" value="#{msgs['IDENTIFICATION.TEXT.TOP']}" />
@@ -58,18 +65,24 @@
 			</h:column>
 			<h:column>	
 			 <t:div>					
-				<h:inputText value="#{entry.value}"  required="#{entry.required}" validator="#{entry.validator.validate}" converter="#{entry.converter}" rendered="#{entry.converter!=null&&entry.validator!=null&&entry.fieldType=='inputText'}"/>
-				<h:inputText value="#{entry.value}"  required="#{entry.required}" converter="#{entry.converter}" rendered="#{entry.converter!=null&&entry.validator==null&&entry.fieldType=='inputText'}"/>
-				<h:inputText value="#{entry.value}"  required="#{entry.required}" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null&&entry.validator!=null&&entry.fieldType=='inputText'}"/>	
-				<h:inputText value="#{entry.value}"  required="#{entry.required}" rendered="#{entry.converter==null&&entry.validator==null&&entry.fieldType=='inputText'}"/>
+				<h:inputText id="mess1" value="#{entry.value}"  required="#{entry.required}" validator="#{entry.validator.validate}" converter="#{entry.converter}" rendered="#{entry.converter!=null&&entry.validator!=null&&entry.fieldType=='inputText'}"/>
+				<h:inputText id="mess2" value="#{entry.value}"  required="#{entry.required}" converter="#{entry.converter}" rendered="#{entry.converter!=null&&entry.validator==null&&entry.fieldType=='inputText'}"/>
+				<h:inputText id="mess3" value="#{entry.value}"  required="#{entry.required}" validator="#{entry.validator.validate}"  rendered="#{entry.converter==null&&entry.validator!=null&&entry.fieldType=='inputText'}"/>	
+				<h:inputText id="mess4" value="#{entry.value}"  required="#{entry.required}" rendered="#{entry.converter==null&&entry.validator==null&&entry.fieldType=='inputText'}"/>
 				<h:selectOneMenu value="#{entry.value}" rendered="#{entry.fieldType=='selectOneMenu'}" valueChangeListener="#{entry.changeValue}" immediate="true">
                   <f:selectItems value="#{entry.displayItems}" />
              	</h:selectOneMenu>
-           	 </t:div>
+          	 </t:div>
              <h:outputText styleClass="constraint" value="#{msgs[entry.constraint]}" rendered="#{entry.constraint!=null}"/>
 			</h:column>
 			<h:column>									
 				<t:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
+			</h:column>	
+			<h:column>									
+				<e:message for="mess1" />
+				<e:message for="mess2" />
+				<e:message for="mess3" />
+				<e:message for="mess4" />
 			</h:column>													
 		</h:dataTable>
 				
