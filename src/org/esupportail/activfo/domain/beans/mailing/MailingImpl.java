@@ -42,7 +42,8 @@ public class MailingImpl implements Mailing {
 	
 	public void sendMessage(Account currentAccount, HashMap<String,List<String>> oldValue, HashMap<String,List<String>> newValue) {
 		
-		InternetAddress mail=null;		
+		InternetAddress mail=null;
+		InternetAddress fromAdress=null;	
 		
 		String mailBody=attributeReplace(currentAccount,this.body1DataChange);
 		String mailBody2=this.body2DataChange;
@@ -66,7 +67,9 @@ public class MailingImpl implements Mailing {
     	
 		try {
 			mail = new InternetAddress(mail2Gest);
+			fromAdress = new InternetAddress(currentAccount.getMail());
 			if (newValue.size()>0)
+				smtpService.setFromAddress(fromAdress);
 				smtpService.send(mail, newSubject, mailBody, "");
 		} 
 		catch (AddressException e) {
