@@ -1,7 +1,9 @@
 package org.esupportail.activfo.web.validators;
 
-import java.text.Collator;
 import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -16,7 +18,11 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 
 public class ValidatorDisplayName extends AbstractI18nAwareBean implements Validator{
 	
-	/**
+	/** But: 
+	 * Le champ "Nom usage" est une combinaison possible des champs Nom usage, Nom de jeune fille, Prénom et autres prénoms.
+	 * Les accents, les tiret,les espace et les majuscules sont acceptés.
+	 * En entrée: Nom usage
+	 * En sortie:  Retourne un message d'erreur s'il ne correspond à aucune des combinaisons définies.
 	 * 
 	 */
 	private static final long serialVersionUID = 8849185735359561457L;
@@ -24,93 +30,71 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 
 	private Account account;
 	private String displayNameAttr;
-	private String caracterForbiddenDisplayName;
+	private String caracterForbiddenDisplayName; 
 	
 	/**
 	 * 
 	 */
 
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {
-		String val=(String)value;
 		
-		Pattern p;
-		Matcher m;
-		String specialmessage=null;
+		String strPattern="";
+		String strValue=(String)value;
+		List<String> listAtt=new ArrayList<String>();
 		
-		p=Pattern.compile(caracterForbiddenDisplayName);
-		m=p.matcher(val);
+		
+		if (value instanceof String) {	
 			
-		if(! m.find() || m.group(0).equals(" ")) {
-			if (this.isContainFirstName(val) && this.isContainLastName(val)) {
-				
-			} else {
-				throw new ValidatorException(getFacesErrorMessage("VALIDATOR.DISPLAYNAME.INVALID"));
+			strValue =normalize(strValue);
+			
+			// Récupérer la valeur des attributs de LDAP
+			List<String> attrPersoInfo=Arrays.asList(displayNameAttr.split(","));
+			
+			for (int j=0;j<attrPersoInfo.size();j++){
+				listAtt.add(normalize(account.getAttribute(attrPersoInfo.get(j))));	
 			}
 			
-		} else {
-			specialmessage=m.group(0);
-			throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PASSWORD.CARACTERFORBIDDEN",specialmessage));
+			//Liste de combinaisons possibles (sn,up1BirthName,givenName,up1AltGivenName nommés respectivement 1,2,3,4)
+			/* [1,3][1,4][1,3,4][1,4,3] ( sn+givenName,up1AltGivenName) 
+			 * [2,3][2,4][2,3,4][2,4,3]( up1BirthName+ givenName,up1AltGivenName)	  
+			 * [1,2,3][1,2,4][1,2,3,4][1,2,4,3]((sn,up1BirthName) + givenName,up1AltGivenName) 
+			 * [2,1,3][2,1,4][2,1,3,4][2,1,4,3]((up1BirthName,sn) + givenName,up1AltGivenName)
+			*/
+			// Construction de l'expression régulière
+			if (listAtt.size()>0 && attrPersoInfo.size()==listAtt.size())		
+				strPattern= "^(" +listAtt.get(0)+listAtt.get(2)+"|"+(listAtt.get(3).length()>0? listAtt.get(0)+listAtt.get(3)+"|" : "")+listAtt.get(0)+listAtt.get(2)+listAtt.get(3)+"|"+listAtt.get(0)+listAtt.get(3)+listAtt.get(2) +"|"
+						 +(listAtt.get(1).length()>0? listAtt.get(1)+listAtt.get(2)+"|" : "")+(listAtt.get(1).length()>0 && listAtt.get(3).length()>0  ? listAtt.get(1)+listAtt.get(3)+"|" : "")+(listAtt.get(1).length()>0? listAtt.get(1)+listAtt.get(2)+listAtt.get(3)+"|" : "")+(listAtt.get(1).length()>0? listAtt.get(1)+listAtt.get(3)+listAtt.get(2)+"|" : "")
+						 +listAtt.get(0)+listAtt.get(1)+listAtt.get(2)+"|"+(listAtt.get(3).length()>0? listAtt.get(0)+listAtt.get(1)+listAtt.get(3)+"|" : "")+(listAtt.get(3).length()>0? listAtt.get(0)+listAtt.get(1)+listAtt.get(2)+"|" : "")+ 
+						 listAtt.get(0)+listAtt.get(1)+listAtt.get(3)+listAtt.get(2)+"|"+listAtt.get(1)+listAtt.get(0)+listAtt.get(2)+"|"+(listAtt.get(3).length()>0? listAtt.get(2)+listAtt.get(1)+listAtt.get(3)+"|" : "")+listAtt.get(1)+listAtt.get(0)+listAtt.get(2)+listAtt.get(3)+"|"+listAtt.get(1)+listAtt.get(0)+listAtt.get(3)+listAtt.get(2)+			
+					")$";
+			
+			// Rechercher si le displayName saisi correspond à l'expression régulière 
+			Pattern pat = Pattern.compile(strPattern);
+			Matcher match = pat.matcher(strValue);
+			if (! (match.find()))throw new ValidatorException(getFacesErrorMessage("VALIDATOR.DISPLAYNAME.INVALID"));
+			
 		}
 		
 	}
 	
 	
-	private boolean isContainFirstName(String firstName)
+	private String normalize(String strValue)
 	{
-		boolean permit=false;
-		
-		String compareSN=account.getAttribute("sn").toLowerCase();
-		String compareUp1BirthName=account.getAttribute("up1BirthName").toLowerCase();
-		if (!"".equals(compareSN)) {		
-	    	if (firstName.toLowerCase().contains(compareSN)) {
-	    		logger.debug("True : The string("+firstName+") contains SN ("+compareSN+")");
-	    		permit=true;
-	    	}
+		String returnValue="";
+		if (strValue instanceof String) {	
+			// Convertir une chaîne accentué en chaîne sans accent.
+			returnValue = Normalizer.normalize(strValue, Normalizer.Form.NFD);
+			// Supprimer les espaces,les caractères diacritiques et le tiret  
+			returnValue=returnValue.replaceAll("[\u0300-\u036F\\s|-]", "");
+			
+			returnValue=returnValue.toUpperCase();
 		}
-		if (!"".equals(compareUp1BirthName)) {
-	    	if (firstName.toLowerCase().contains(compareUp1BirthName)) {
-	    		logger.debug("True : The string("+firstName+") contains up1BirthName ("+compareUp1BirthName+")");
-	    		permit=true;
-	    	}
-		}
-    	
-    	return permit;
+    	return returnValue;
 	}
 
-	private boolean isContainLastName(String lastName)
-	{
-		boolean permit=false;
-		
-		String compareGivenName=account.getAttribute("givenName").toLowerCase();
-		String compareUp1AltGivenName=account.getAttribute("up1AltGivenName").toLowerCase();
-		
-		if (!"".equals(compareGivenName)) {		
-	    	if (lastName.toLowerCase().contains(compareGivenName)) {
-	    		logger.debug("True : The string("+lastName+") contains givenName("+compareGivenName+")");
-	    		permit=true;
-	    	}
-		}
-		if (!"".equals(compareUp1AltGivenName)) {
-	    	if (lastName.toLowerCase().contains(compareUp1AltGivenName)) {
-	    		logger.debug("True : The string("+lastName+") contains up1AltGivenName("+compareUp1AltGivenName+")");
-	    		permit=true;
-	    	}
-		}
-    	return permit;
-	}
 	
 	
-	public static String cleanAllSpecialChar(String str) {
-
-		//Logger.debug("Comparing : " + str1 + " and " + str2);
-
-		String strTmp1 = str.toLowerCase();
-		strTmp1 = strTmp1.replaceAll("[^a-z]+", "");
-
-		//strTmp1 = Normalizer.normalize(strTmp1, Normalizer.DECOMP, 0);
-	    return strTmp1.replaceAll("[^\\p{ASCII}]","");
-	}
-
+	
 	public Account getAccount() {
 		return account;
 	}
@@ -146,7 +130,6 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	public void setCaracterForbiddenDisplayName(String caracterForbiddenDisplayName) {
 		this.caracterForbiddenDisplayName = caracterForbiddenDisplayName;
 	}
-	
 	
 	
 }
