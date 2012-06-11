@@ -31,6 +31,7 @@
 				<entry key="org.esupportail.commons.services.ldap.LdapConnectionException" value="/stylesheets/ldapException.jsp" />
 				<entry key="com.mysql.jdbc.CommunicationsException" value="/stylesheets/databaseException.jsp" />
 				<entry key="com.mchange.v2.resourcepool.CannotAcquireResourceException" value="/stylesheets/databaseException.jsp" />
+				<entry key="java.lang.Exception" value="/stylesheets/exceptionCustomized.jsp" />
 			</map>
 		</property>
 		<property name="noEmailExceptions" >
