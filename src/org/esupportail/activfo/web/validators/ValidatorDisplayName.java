@@ -61,13 +61,33 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 			 * [2,1,3][2,1,4][2,1,3,4][2,1,4,3]((up1BirthName,sn) + givenName,up1AltGivenName)
 			*/
 			// Construction de l'expression régulière
-			if (listAtt.size()>0 && attrPersoInfo.size()==listAtt.size())		
-				strPattern= "^(" +listAtt.get(0)+listAtt.get(2)+"|"+(listAtt.get(3).length()>0? listAtt.get(0)+listAtt.get(3)+"|" : "")+listAtt.get(0)+listAtt.get(2)+listAtt.get(3)+"|"+listAtt.get(0)+listAtt.get(3)+listAtt.get(2) +"|"
-						 +(listAtt.get(1).length()>0? listAtt.get(1)+listAtt.get(2)+"|" : "")+(listAtt.get(1).length()>0 && listAtt.get(3).length()>0  ? listAtt.get(1)+listAtt.get(3)+"|" : "")+(listAtt.get(1).length()>0? listAtt.get(1)+listAtt.get(2)+listAtt.get(3)+"|" : "")+(listAtt.get(1).length()>0? listAtt.get(1)+listAtt.get(3)+listAtt.get(2)+"|" : "")
-						 +listAtt.get(0)+listAtt.get(1)+listAtt.get(2)+"|"+(listAtt.get(3).length()>0? listAtt.get(0)+listAtt.get(1)+listAtt.get(3)+"|" : "")+(listAtt.get(3).length()>0? listAtt.get(0)+listAtt.get(1)+listAtt.get(2)+"|" : "")+ 
-						 listAtt.get(0)+listAtt.get(1)+listAtt.get(3)+listAtt.get(2)+"|"+listAtt.get(1)+listAtt.get(0)+listAtt.get(2)+"|"+(listAtt.get(3).length()>0? listAtt.get(2)+listAtt.get(1)+listAtt.get(3)+"|" : "")+listAtt.get(1)+listAtt.get(0)+listAtt.get(2)+listAtt.get(3)+"|"+listAtt.get(1)+listAtt.get(0)+listAtt.get(3)+listAtt.get(2)+			
-					")$";
-			
+			if (listAtt.size()>0 && attrPersoInfo.size()==listAtt.size()) {
+                String e0 = listAtt.get(0);
+                String e1 = listAtt.get(1);
+                String e2 = listAtt.get(2);
+                String e3 = listAtt.get(3);
+                strPattern=
+                "^("
+                  +e0+e2+"|"
+                  +(e3.length()>0? e0+e3+"|" : "")
+                  +e0+e2+e3+"|"
+                  +e0+e3+e2 +"|"
+                  +(e1.length()>0? e1+e2+"|" : "")
+                  +(e1.length()>0 && e3.length()>0  ? e1+e3+"|" : "")
+                  +(e1.length()>0? e1+e2+e3+"|" : "")
+                  +(e1.length()>0? e1+e3+e2+"|" : "")
+                  +e0+e1+e2+"|"
+                  +(e3.length()>0? e0+e1+e3+"|" : "")
+                  +(e3.length()>0? e0+e1+e2+"|" : "")
+                  +e0+e1+e3+e2+"|"
+                  +e1+e0+e2+"|"
+                  +(e3.length()>0? e2+e1+e3+"|" : "")
+                  +e1+e0+e2+e3+"|"
+                  +e1+e0+e3+e2+           
+                ")$";
+            }
+
+				
 			// Rechercher si le displayName saisi correspond à l'expression régulière 
 			Pattern pat = Pattern.compile(strPattern);
 			Matcher match = pat.matcher(strValue);
