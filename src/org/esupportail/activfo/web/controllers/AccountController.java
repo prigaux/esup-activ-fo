@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.codehaus.xfire.XFireRuntimeException;
 import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.domain.beans.channels.Channel;
@@ -33,15 +34,12 @@ import org.esupportail.activfo.web.beans.BeanMultiValueImpl;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.web.controllers.ExceptionController;
-
-import org.esupportail.commons.services.smtp.AsynchronousSmtpServiceImpl;
 import org.esupportail.commons.utils.Assert;
 
-import org.apache.commons.lang.StringUtils;
-
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * A visual bean for the welcome page.
@@ -218,6 +216,7 @@ public class AccountController extends AbstractContextAwareController implements
 			loginChange=false;
 			dataChange=false;
 			viewDataChange=false;
+			
 		}
 		else if (currentAccount.getProcess().equals(procedurePasswordChange)){
 			passwChange=true;
@@ -327,21 +326,23 @@ public class AccountController extends AbstractContextAwareController implements
 			}
 			
 		}
+		
+		catch(XFireRuntimeException  e){
+			logger.error("t01", e);
+			addErrorMessage("messageErrControleur", "LDAP.MESSAGE.BO.INDISPONIBLE");}
 		catch (LdapProblemException e) {
 			logger.error(e.getMessage());
-			addErrorMessage("messageErrControleur", "LDAP.MESSAGE.PROBLEM");
-			
-		}catch (AuthentificationException e) {
+			addErrorMessage("messageErrControleur", "LDAP.MESSAGE.PROBLEM");}
+		catch (AuthentificationException e) {
 			logger.error(e.getMessage());	
-			addErrorMessage("messageErrControleur", currentAccount.getStatus()!=null?"IDENTIFICATION.MESSAGE.INVALIDACCOUNT."+currentAccount.getStatus().toUpperCase():"IDENTIFICATION.MESSAGE.INVALIDACCOUNT");
-		}catch (LoginException e) {
+			addErrorMessage("messageErrControleur", currentAccount.getStatus()!=null?"IDENTIFICATION.MESSAGE.INVALIDACCOUNT."+currentAccount.getStatus().toUpperCase():"IDENTIFICATION.MESSAGE.INVALIDACCOUNT");}
+		catch (LoginException e) {
 			logger.error(e.getMessage());
-			addErrorMessage("messageErrControleur", "APPLICATION.MESSAGE.NULLLOGIN");
-			
-		}catch (ChannelException e) {
+			addErrorMessage("messageErrControleur", "APPLICATION.MESSAGE.NULLLOGIN");}
+		catch (ChannelException e) {
 			logger.error(e.getMessage());
-			addErrorMessage("messageErrControleur", "CODE.ERROR.SENDING");
-		}
+			addErrorMessage("messageErrControleur", "CODE.ERROR.SENDING");}
+		
 		return null;
 	}
 	
@@ -406,7 +407,7 @@ public class AccountController extends AbstractContextAwareController implements
 	}
 	
 	public String pushChangeInfoPerso() {
-			
+				
 			Iterator it;
 			
 			HashMap<String,String> DataChangeMaps=new HashMap<String,String>();
@@ -455,7 +456,14 @@ public class AccountController extends AbstractContextAwareController implements
 				if(hashBeanPersoInfo.size()>0){
 					logger.info("Informations personnelles envoyï¿½es au BO pour mise ï¿½ jour: "+hashBeanPersoInfo.toString());
 					this.getDomainService().updatePersonalInformations(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),hashBeanPersoInfo);				
-					this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
+					
+					
+					// On n'envoie pas de message après la MAJ des données de la page "accountPersonalInfo.jsp".
+					FacesContext facesContext = FacesContext.getCurrentInstance();
+					ExternalContext externalContext = facesContext.getExternalContext();
+					HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
+					if (request.getRequestURL().indexOf("stylesheets/accountPersonalInfo")==-1)				
+						this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
 				}
 				else logger.debug("Pas de mise Ã  jour envoyÃ©e BO");
 				//Maj Account
@@ -491,6 +499,9 @@ public class AccountController extends AbstractContextAwareController implements
 					return "gotoPasswordChange";
 				
 			}
+			catch(XFireRuntimeException  e){
+				logger.error("t02", e);
+				addErrorMessage(null, "LDAP.MESSAGE.BO.INDISPONIBLE");}
 			catch (LdapProblemException e) {
 				logger.error(e.getMessage());
 				addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
@@ -522,8 +533,6 @@ public class AccountController extends AbstractContextAwareController implements
 						
 			}else
 				accountDescr=this.getDomainService().authentificateUser(beanLogin.getValue().toString(), beanPassword.getValue().toString(),attrPersoInfo);
-			
-			logger.debug("accountDescr :"+accountDescr.toString());
 			
 			if (accountDescr!=null){
 				
@@ -558,24 +567,29 @@ public class AccountController extends AbstractContextAwareController implements
 			else {
 				addErrorMessage("messageErrControleur", "AUTHENTIFICATION.MESSAGE.INVALID");
 			}
-			
+		}catch(XFireRuntimeException  e){
+			logger.error("t03", e);
+			addErrorMessage("messageErrControleur", "LDAP.MESSAGE.BO.INDISPONIBLE");
+
 		}catch(AuthentificationException e){
-			logger.error(e.getMessage()+"t1");
+			logger.debug("e1",e);
 			addErrorMessage("messageErrControleur", "AUTHENTIFICATION.MESSAGE.INVALID");
 	 		
 		}catch (LdapProblemException e) {
-			logger.error(e.getMessage()+"t2");
+			logger.debug("e2",e);
 			addErrorMessage("messageErrControleur", "LDAP.MESSAGE.PROBLEM");
 		
 		}catch (UserPermissionException e) {
-			logger.error(e.getMessage()+"t3");
+			logger.debug("e3",e);
 			addErrorMessage("messageErrControleur", "APPLICATION.USERPERMISSION.PROBLEM");
 		
 		}catch (LoginException e) {
-			logger.error(e.getMessage()+"t4");
+			logger.debug("e4",e);
 			addErrorMessage("messageErrControleur", "APPLICATION.MESSAGE.NULLLOGIN");
-			
+		
 		}
+		
+	
 		return null;
 	}
 	
@@ -590,28 +604,25 @@ public class AccountController extends AbstractContextAwareController implements
 			return "gotoAccountEnabled";
 			
 		}
-
+		catch(XFireRuntimeException  e){
+			logger.error("t04", e);
+			addErrorMessage("messageErrControleur", "LDAP.MESSAGE.BO.INDISPONIBLE");}
 		catch (LdapProblemException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
-		}
+			addErrorMessage("messageErrControleur", "LDAP.MESSAGE.PROBLEM");}
 		catch (LoginAlreadyExistsException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "LOGIN.MESSAGE.PROBLEM");
-		
-		}catch (UserPermissionException e) {
+			addErrorMessage("messageErrControleur", "LOGIN.MESSAGE.PROBLEM");}
+		catch (UserPermissionException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
-		
-		}catch (KerberosException e) {
+			addErrorMessage("messageErrControleur", "APPLICATION.USERPERMISSION.PROBLEM");}
+		catch (KerberosException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "KERBEROS.MESSAGE.PROBLEM");
-		
-		}catch (LoginException e) {
+			addErrorMessage("messageErrControleur", "KERBEROS.MESSAGE.PROBLEM");}
+		catch (LoginException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
-		
-		}catch (PrincipalNotExistsException e) {
+			addErrorMessage("messageErrControleur", "APPLICATION.MESSAGE.NULLLOGIN");}
+		catch (PrincipalNotExistsException e) {
 			
 			try{
 				this.getDomainService().setPassword(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(this.accountCodeKey),beanNewLogin.getValue().toString(),beanNewPassword.getValue().toString());
@@ -621,22 +632,22 @@ public class AccountController extends AbstractContextAwareController implements
 				currentAccount.reset();
 				return "gotoAccountEnabled";
 			
-			}catch (LdapProblemException ex) {
+			}
+			catch(XFireRuntimeException  e1){
+				logger.error("t05", e1);
+				addErrorMessage("messageErrControleur", "LDAP.MESSAGE.BO.INDISPONIBLE");}
+			catch (LdapProblemException ex) {
 					logger.error(e.getMessage());
-					addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
-				
-				}catch (UserPermissionException ex) {
+					addErrorMessage("messageErrControleur", "LDAP.MESSAGE.PROBLEM");}
+			catch (UserPermissionException ex) {
 					logger.error(e.getMessage());
-					addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
-				
-				}catch (KerberosException ex) {
+					addErrorMessage("messageErrControleur", "APPLICATION.USERPERMISSION.PROBLEM");}
+			catch (KerberosException ex) {
 					logger.error(e.getMessage());
-					addErrorMessage(null, "KERBEROS.MESSAGE.PROBLEM");
-				
-				}catch (LoginException ex) {
+					addErrorMessage("messageErrControleur", "KERBEROS.MESSAGE.PROBLEM");}
+			catch (LoginException ex) {
 					logger.error(e.getMessage());
-					addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
-				}
+					addErrorMessage("messageErrControleur", "APPLICATION.MESSAGE.NULLLOGIN");}
 		}
 
 		return null;
@@ -669,11 +680,13 @@ public class AccountController extends AbstractContextAwareController implements
 				beanCode.setValue("");
 				return "gotoPersonalInfo";
 			}
-			
-		}catch (UserPermissionException e){
-			logger.error(e.getMessage());
-			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
 		}
+		catch(XFireRuntimeException  e1){
+			logger.error("t06", e1);
+			addErrorMessage(null, "LDAP.MESSAGE.BO.INDISPONIBLE");}
+		catch (UserPermissionException e){
+			logger.error(e.getMessage());
+			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");}
 		
 		addErrorMessage(null, "VALIDATOR.CODE.INVALID");
 		return null;
@@ -711,22 +724,25 @@ public class AccountController extends AbstractContextAwareController implements
 			return "gotoAccountEnabled";
 
 		}
-
+		catch(XFireRuntimeException  e1){
+			logger.error("t07", e1);
+			addErrorMessage("messageErrControleur", "LDAP.MESSAGE.BO.INDISPONIBLE");}
+		
 		catch (LdapProblemException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "LDAP.MESSAGE.PROBLEM");
+			addErrorMessage("messageErrControleur", "LDAP.MESSAGE.PROBLEM");
 		
 		}catch (UserPermissionException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "APPLICATION.USERPERMISSION.PROBLEM");
+			addErrorMessage("messageErrControleur", "APPLICATION.USERPERMISSION.PROBLEM");
 		
 		}catch (KerberosException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "KERBEROS.MESSAGE.PROBLEM");
+			addErrorMessage("messageErrControleur", "KERBEROS.MESSAGE.PROBLEM");
 		
 		}catch (LoginException e) {
 			logger.error(e.getMessage());
-			addErrorMessage(null, "APPLICATION.MESSAGE.NULLLOGIN");
+			addErrorMessage("messageErrControleur", "APPLICATION.MESSAGE.NULLLOGIN");
 			
 		}
 
