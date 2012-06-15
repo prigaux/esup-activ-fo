@@ -38,7 +38,13 @@
 	</t:div>
 	
 	
-	<e:messages />
+	<!-- N'afficher qu'une fois le message global -->
+	 <t:div rendered="#{! empty facesContext.maximumSeverity}"  styleClass= "portlet-msg-error">      
+	   	<e:paragraph id="messageErrControleur" value="#{msgs['MESSAGE.ERROR.VALIDATION']}"/>	  		   		
+	 </t:div>	
+	<br/>
+	<e:message for="messageErrControleur" />	
+	 
 	
 	<e:paragraph escape="false" value="#{msgs['PASSWORD.TEXT.TOP']}" rendered="#{accountController.passwChange == false}"/>
 	<e:paragraph escape="false" value="#{msgs['PASSWORD.CHANGEMENT.TEXT.TOP']}" rendered="#{accountController.passwChange == true}"/>
@@ -196,29 +202,32 @@ function updatestrength(passwd,msg_verystrong,msg_strong,msg_mediocre,msg_weak,m
 
 	<h:form id="accountForm" >
 						
-		<e:panelGrid columns="4">
+		<e:panelGrid columns="5">
   			<e:outputLabel for="password" value="#{msgs[beanNewPassword.key]}"/>
 	  		<e:inputSecret id="password" value="#{beanNewPassword.value}"
 	     		required="#{beanNewPassword.required}" onkeyup="updatestrength( this.value, '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYSTRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.STRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.MEDIUM']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.WEAK']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}');" validator="#{beanNewPassword.validator.validate}" >
 	  		</e:inputSecret>
 	  		<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanNewPassword.help]}" value="/media/images/help.jpg"  style="border: 0;"/>
-			<t:htmlTag value="span"/>
-			
-      		<e:outputLabel for="verdict" value="#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH']}" />
+	  		<e:message for="password" /> 
+	  		<t:htmlTag value="span"/>
+	  
+		    <e:outputLabel for="verdict" value="#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH']}" />
       		<h:panelGroup>      		
 	      		<h:outputText  id="verdict" value="#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}" />
 	      		<t:htmlTag value="div" id="strengthbar" style="font-size: 1px; height: 3px; width: 0px; border: 1px solid white;" ></t:htmlTag>
 	      	</h:panelGroup>	   
-	      	<t:htmlTag value="span"/>   	      		      		      		
-      		<e:message for="verdict" /> 
-			
-			 
-  			<e:outputLabel for="password" value="#{msgs['PASSWORD.TEXT.LABEL.VERIFYPASSWORD']}" />
-			<e:inputSecret id="verifyPassword" required="true"  >
+	  		<e:message for="verdict" /> 
+	  		 <e:outputLabel value=""/>
+	  		<t:htmlTag value="span"/>
+	  		
+	  		<e:outputLabel for="password" value="#{msgs['PASSWORD.TEXT.LABEL.VERIFYPASSWORD']}" />
+  			<e:inputSecret id="verifyPassword" required="true"  >
+  				
 				<t:validateEqual for="password" />
 			</e:inputSecret>
-			<t:htmlTag value="span"/>
-  			 
+			<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanNewPassword.help]}" value="/media/images/help.jpg"  style="border: 0;"/>
+			<e:message for="verifyPassword" /> 
+			<t:htmlTag value="span"/> 
 		</e:panelGrid>
 									
 		<t:div style="margin-top:1em;">

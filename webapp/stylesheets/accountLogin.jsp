@@ -1,7 +1,9 @@
 <%@include file="_include.jsp"%>
+<%@include file="_includeScript.jsp"%>
 
-<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >	
-	<%@include file="_includeScript.jsp"%>	
+<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
+	
+		
 	<%@include file="_navigation.jsp"%>
 	
 	<e:section value="#{msgs['LOGIN.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}" />
@@ -19,10 +21,16 @@
 	</t:div>
 	
 	
-	<e:messages />
+<!-- N'afficher qu'une fois le message global -->
+	 <t:div rendered="#{!empty facesContext.maximumSeverity||facesContext.maximumSeverity!=null}"  styleClass= "portlet-msg-error">      
+	   	<e:paragraph id="messageErrControleur" value="#{msgs['MESSAGE.ERROR.VALIDATION']}"/>	  		   		
+	 </t:div>	
+	<br/>
+	<e:message for="messageErrControleur" /> 
+	<br/>
+	<br/>
 	
 	<e:paragraph escape="false" value="#{msgs['LOGIN.TEXT.TOP']}" rendered="#{accountController.activ == true}"/>
-	
 
 	<h:form id="accountForm" >
 		
@@ -32,7 +40,7 @@
 			<e:inputText id="login" value="#{beanNewLogin.value}" required="#{beanNewLogin.required}" validator="#{beanNewLogin.validator.validate}" converter="#{beanNewLogin.converter}">
 			</e:inputText>
 			<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanNewLogin.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanNewLogin.help!=null}"/>
-			<e:message for="newlogin" />
+			<e:message for="login" />
 		</e:panelGrid>
 						
 		<t:div style="margin-top:1em;">
