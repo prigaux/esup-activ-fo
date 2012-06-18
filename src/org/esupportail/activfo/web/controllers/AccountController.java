@@ -35,11 +35,7 @@ import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.web.controllers.ExceptionController;
 import org.esupportail.commons.utils.Assert;
-
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * A visual bean for the welcome page.
@@ -133,7 +129,6 @@ public class AccountController extends AbstractContextAwareController implements
 	private ExceptionController exceptionController;
 	
 	private String targetService;
-	private Boolean fromAccountPersonalInfo=false;
 	
 	/**
 	 * Bean constructor.
@@ -407,12 +402,17 @@ public class AccountController extends AbstractContextAwareController implements
 				currentValues.containsAll(newValues));				
 	}
 	
-	public  String pushChangeInfoPersonal() {
-		fromAccountPersonalInfo=true;
-		return pushChangeInfoPerso();
+	// Ne pas utiliser des attributs d'objet
+	// mais plutôt des paramètres car AccountController est un singleton, il est créer une seule fois au début, de ce fait les attributs ne sont pas correctement initialisés contrairement aux paramètres).
+	public String pushChangeInfoPersonal() {
+		return _pushChangeInfoPerso(true);
 	}
 	
 	public String pushChangeInfoPerso() {
+		return _pushChangeInfoPerso(false);
+	}
+
+	private String _pushChangeInfoPerso(boolean fromAccountPersonalInfo) {
 				
 			Iterator it;
 			
