@@ -133,6 +133,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private ExceptionController exceptionController;
 	
 	private String targetService;
+	private Boolean fromAccountPersonalInfo=false;
 	
 	/**
 	 * Bean constructor.
@@ -406,6 +407,11 @@ public class AccountController extends AbstractContextAwareController implements
 				currentValues.containsAll(newValues));				
 	}
 	
+	public  String pushChangeInfoPersonal() {
+		fromAccountPersonalInfo=true;
+		return pushChangeInfoPerso();
+	}
+	
 	public String pushChangeInfoPerso() {
 				
 			Iterator it;
@@ -458,11 +464,8 @@ public class AccountController extends AbstractContextAwareController implements
 					this.getDomainService().updatePersonalInformations(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),hashBeanPersoInfo);				
 					
 					
-					// On n'envoie pas de message après la MAJ des données de la page "accountPersonalInfo.jsp".
-					FacesContext facesContext = FacesContext.getCurrentInstance();
-					ExternalContext externalContext = facesContext.getExternalContext();
-					HttpServletRequest request = (HttpServletRequest) externalContext.getRequest();
-					if (request.getRequestURL().indexOf("stylesheets/accountPersonalInfo")==-1)				
+					// Pas d'envoie de message après la MAJ des données de la page "accountPersonalInfo.jsp".
+					if (! fromAccountPersonalInfo)				
 						this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
 				}
 				else logger.debug("Pas de mise Ã  jour envoyÃ©e BO");

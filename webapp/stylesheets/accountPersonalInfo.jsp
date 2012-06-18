@@ -105,7 +105,7 @@
 	  	</h:dataTable>
 	</t:dataList>										
 	<t:div style="margin-top:1em;">
-		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
+		<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPersonal}" />
 	</t:div>
 	</h:form>
 	
