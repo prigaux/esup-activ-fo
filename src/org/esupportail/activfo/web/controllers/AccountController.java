@@ -274,8 +274,11 @@ public class AccountController extends AbstractContextAwareController implements
 		else if (exception instanceof KerberosException)addErrorMessage("messageErrControleur", "KERBEROS.MESSAGE.PROBLEM");
 		else if (exception instanceof LoginAlreadyExistsException)addErrorMessage("messageErrControleur", "LOGIN.MESSAGE.PROBLEM");
 		else if (exception instanceof ChannelException)addErrorMessage("messageErrControleur", "CODE.ERROR.SENDING");
+		else if (exception instanceof RuntimeException) throw (RuntimeException)(exception);
+		else logger.error("Erreur inattendue");
 		
 	}
+		
 		
 	public String pushValid() {
 		try {
