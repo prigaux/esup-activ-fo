@@ -535,7 +535,7 @@
 		
 		<property name="ldapEntityService" ref="ldapTableService"/>
 		<property name="ldapSearchFilter" value="(objectClass=up1TableEntry)"/>
-		<property name="firstLabel" value="Veuillez sélectionner votre fonction à l'université"/>
+		<property name="firstLabel" value="Ne pas préciser"/>
 		<property name="businessCategory" value="supannRefId"/>
 		<property name="value" value="supannRoleGenerique"/>
 		<property name="label" value="displayName"/>
