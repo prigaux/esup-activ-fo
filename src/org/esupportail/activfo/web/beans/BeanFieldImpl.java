@@ -45,6 +45,8 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	private String notice;
 	private String constraint;
 	
+	private String digestConstraint;
+	
 	public String getId() {
 		return id;
 	}
@@ -319,4 +321,12 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	public void setConstraint(String constraint) {
 		this.constraint = constraint;
 	}	
+	public String getDigestConstraint() {
+		return digestConstraint;
+	}
+
+	public void setDigestConstraint(String digestConstraint) {
+		this.digestConstraint = digestConstraint;
+	}
+
 }

@@ -74,6 +74,9 @@ public interface BeanField<T> {
 	
 	public String getConstraint();
 	public void setConstraint(String constraint);
+	
+	public String getDigestConstraint();
+	public void setDigestConstraint(String digestConstraint);
 		
 	public int getSize();
 	
