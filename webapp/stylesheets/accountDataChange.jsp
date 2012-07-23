@@ -85,7 +85,10 @@
              	</h:selectOneRadio>              
         </t:div>   
         <h:outputText style="display:none" styleClass="#{beanfield.name}show constraint" value="#{msgs[beanfield.constraint]}" rendered="#{beanfield.constraint!=null}"/>
-        <h:outputText styleClass="constraint" value="#{msgs[beanfield.constraint]}" rendered="#{beanfield.constraint!=null&&(beanfield.fieldType=='selectOneRadio'||beanfield.fieldType=='selectManyCheckbox')}"/>                         
+        <h:outputText styleClass="constraint" value="#{msgs[beanfield.constraint]}" rendered="#{beanfield.constraint!=null&&(beanfield.fieldType=='selectOneRadio'||beanfield.fieldType=='selectManyCheckbox')}"/>
+          <h:outputText style="display:none" styleClass="#{beanfield.name}show digestConstraint" value="#{msgs[beanfield.digestConstraint]}" rendered="#{beanfield.digestConstraint!=null}"/>
+        <h:outputText styleClass="digestConstraint" value="#{msgs[beanfield.digestConstraint]}" rendered="#{beanfield.digestConstraint!=null&&(beanfield.fieldType=='selectOneRadio'||beanfield.fieldType=='selectManyCheckbox')}"/>                         
+  	                         
   		</h:column>  		
        	<h:column >
        		<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}"/>
