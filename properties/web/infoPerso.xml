@@ -126,7 +126,6 @@
 		<property name="updateable" value="false"/>
 		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
 		<property name="digestConstraint" value="PERSOINFO.DIGESTCONSTRAINT.LABEL"/>
-		
 	</bean>
 	
 	<bean
@@ -422,9 +421,7 @@
 		<property name="multiValue" value="false"/>	
 		<property name="converter" ref="ldapPhoneFaxConverter" />
 		<property name="validator" ref="validatorPhone"/>
-		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
 		<property name="constraint" value="PERSOINFO.PHONE.CONSTRAINT"/>
-		<property name="digestConstraint" value="PERSOINFO.DIGESTCONSTRAINT.LABEL"/>
 	</bean>
 	
 	<bean
@@ -438,13 +435,11 @@
 		<property name="name" value="supannAutreTelephone"/>		
 		<property name="disable" value="false"/>
 		<property name="updateable" value="true"/>
-		<property name="multiValue" value="true"/>	
+		<property name="multiValue" value="false"/>	
 		<property name="numberOfValue" value="5"/>
 		<property name="converter" ref="ldapPhoneFaxConverter" />
 		<property name="validator" ref="validatorPhone"/>
-		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
 		<property name="constraint" value="PERSOINFO.PHONE.CONSTRAINT"/>
-		<property name="digestConstraint" value="PERSOINFO.DIGESTCONSTRAINT.LABEL"/>
 	</bean>
 	
 	<bean
@@ -459,10 +454,8 @@
 		<property name="updateable" value="true"/>
 		<property name="converter" ref="ldapPhoneFaxConverter" />
 		<property name="validator" ref="validatorPhone"/>
-		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
 		<property name="constraint" value="PERSOINFO.FAX.CONSTRAINT"/>
-		<property name="digestConstraint" value="PERSOINFO.DIGESTCONSTRAINT.LABEL"/>
-	</bean>
+</bean>
 	
 	<bean
 		id="beanHomePostalAddress"
@@ -489,8 +482,6 @@
 		<property name="name" value="supannEmpId"/>
 		<property name="disable" value="true"/>
 		<property name="updateable" value="false"/>
-		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
-		<property name="digestConstraint" value="PERSOINFO.DIGESTCONSTRAINT.LABEL"/>
 	</bean>
 	
 	<bean 	
@@ -741,8 +732,6 @@
 		<property name="numberOfValue" value="5"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
-		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>	
-		<property name="digestConstraint" value="PERSOINFO.DIGESTCONSTRAINT.LABEL"/>
 	</bean>
 	 
 	<bean
