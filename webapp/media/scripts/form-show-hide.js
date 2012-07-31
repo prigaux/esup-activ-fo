@@ -22,7 +22,8 @@ $(function() {
 	$("[class$='_modifyLink']").click(function () {	
 		$("." + $(this).attr("class").replace(/_modifyLink.*/,"")+"show").show(500);
 		$("." + $(this).attr("class").replace(/_modifyLink.*/,"")+"modify").show(500);				
-		$("." + $(this).attr("class").replace(/_modifyLink.*/,"")+"output").hide();				
+		$("." + $(this).attr("class").replace(/_modifyLink.*/,"")+"output").hide();	
+		$("." + $(this).attr("class")replace(/_modifyLink.*/,"")+"constraint").show();
 		$(this).hide();				
 	});
 	

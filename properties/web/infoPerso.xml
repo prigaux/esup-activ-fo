@@ -206,8 +206,6 @@
 		<property name="multiValue" value="true"/>	
 		<property name="numberOfValue" value="5"/>
 		<property name="disable" value="false"/>
-		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
-		<property name="digestConstraint" value="PERSOINFO.DIGESTCONSTRAINT.LABEL"/>
 	</bean>
 	
 	<bean
@@ -435,7 +433,7 @@
 		<property name="name" value="supannAutreTelephone"/>		
 		<property name="disable" value="false"/>
 		<property name="updateable" value="true"/>
-		<property name="multiValue" value="false"/>	
+		<property name="multiValue" value="true"/>	
 		<property name="numberOfValue" value="5"/>
 		<property name="converter" ref="ldapPhoneFaxConverter" />
 		<property name="validator" ref="validatorPhone"/>
@@ -732,6 +730,8 @@
 		<property name="numberOfValue" value="5"/>
 		<property name="disable" value="false"/>
 		<property name="updateable" value="false"/>
+		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
+		<property name="digestConstraint" value="PERSOINFO.DIGESTCONSTRAINT.LABEL"/>
 	</bean>
 	 
 	<bean
