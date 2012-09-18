@@ -62,6 +62,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String accountPossibleChannelsKey;
 	
 	private List<Mailing> mailing;
+	private List<Mailing> mailingUpdateableField;
 			
 	//liste des attributs pour l'affichage des informations personnelles
 	private String attributesInfPerso;
@@ -259,7 +260,7 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	/**
 	 * But : Gestion des exceptions
-	 * @param exception à catcher,
+	 * @param exception ï¿½ catcher,
 	 *        errMess vaut null si utilisation du Tag Messages sinon vaut "messageErrControleur" si utilisation du Tag Message
 	 * @return Rien
 	 *        
@@ -413,7 +414,7 @@ public class AccountController extends AbstractContextAwareController implements
 	}
 	
 	// Ne pas utiliser des attributs d'objet
-	// mais plutôt des paramètres car AccountController est un singleton, il est créer une seule fois au début, de ce fait les attributs ne sont pas correctement initialisés contrairement aux paramètres).
+	// mais plutï¿½t des paramï¿½tres car AccountController est un singleton, il est crï¿½er une seule fois au dï¿½but, de ce fait les attributs ne sont pas correctement initialisï¿½s contrairement aux paramï¿½tres).
 	public String pushChangeInfoPersonal() {
 		return _pushChangeInfoPerso(true);
 	}
@@ -423,7 +424,6 @@ public class AccountController extends AbstractContextAwareController implements
 	}
 
 	private String _pushChangeInfoPerso(boolean fromAccountPersonalInfo) {
-				
 			Iterator it;
 			
 			HashMap<String,String> DataChangeMaps=new HashMap<String,String>();
@@ -431,6 +431,7 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			if(dataChange) {
 				List<String> attrPersoInfo=Arrays.asList(attributesDataChange.split(","));
+				
 			} else {
 				List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
 			}
@@ -442,8 +443,14 @@ public class AccountController extends AbstractContextAwareController implements
 				if(dataChange)it=listDataChangeInfos.iterator();
 				else it=listBeanPersoInfo.iterator();	
 				int i=0;
+				
 				HashMap<String,List<String>> oldValue=new HashMap<String,List<String>>();
 				HashMap<String,List<String>> newValue=new HashMap<String,List<String>>();
+				
+				HashMap<String,List<String>> oldValueNotUpdateableFiel=new HashMap<String,List<String>>();
+				HashMap<String,List<String>> newValueNotUpdateableFiel=new HashMap<String,List<String>>();
+				
+				// parcourir les champs
 				while(it.hasNext()){
 					BeanField beanPersoInfo=(BeanField)it.next();
 					
@@ -460,12 +467,19 @@ public class AccountController extends AbstractContextAwareController implements
 						else valueBeanMulti=bmv.getValue();										
 						j++;
 					}
-										
-					if(!beanPersoInfo.isUpdateable())
+						
+					// Si le champ est modifiï¿½ et ï¿½ valider par le gestionnaire, sauvegarder l'ancienne et la nouvelle valeur
+					if(!beanPersoInfo.isUpdateable() )
 						this.setMailSendingValues(beanPersoInfo, oldValue, newValue);
-					else if(isChange(beanPersoInfo)){						
+					//  Si le champ est modifiï¿½
+					else if(isChange(beanPersoInfo)){
 						hashBeanPersoInfo.put(beanPersoInfo.getName(), valueBeanMulti);
-					}							
+					}	
+					//Si le champ est modifiï¿½ et si un mail est ï¿½ envoyer
+					if (beanPersoInfo.isSendMail())
+						this.setMailSendingValues(beanPersoInfo, oldValueNotUpdateableFiel, newValueNotUpdateableFiel);
+					
+											
 					i++;
 				}
 				
@@ -474,11 +488,13 @@ public class AccountController extends AbstractContextAwareController implements
 					this.getDomainService().updatePersonalInformations(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),hashBeanPersoInfo);				
 					
 					
-					// Pas d'envoie de message après la MAJ des données de la page "accountPersonalInfo.jsp".
+					// Pas d'envoie de message aprï¿½s la MAJ des donnï¿½es de la page "accountPersonalInfo.jsp".
 					if (! fromAccountPersonalInfo)				
 						this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
 				}
-				else logger.debug("Pas de mise Ã  jour envoyÃ©e BO");
+					else logger.debug("Pas de mise Ã  jour envoyÃ©e BO");
+				
+				
 				//Maj Account
 				Set<String> keySet=hashBeanPersoInfo.keySet();
 				for(String key:keySet)
@@ -487,11 +503,18 @@ public class AccountController extends AbstractContextAwareController implements
 				this.updateCurrentAccount();
 				
 				logger.debug("Informations Account mises Ã  jour :"+accountDescr.toString());
+				// Envoi de mail demandant au gestionnaire de valider le(s) champ(s) modifiï¿½s
 				if(!newValue.isEmpty())
 					for(Mailing m:mailing)
 						if(m.isAllowed(currentAccount))
 							m.sendMessage(currentAccount,oldValue,newValue);
+				// Envoi de mail informant le gestionnaire des modifications des champs
+				if(!newValueNotUpdateableFiel.isEmpty())
+					for(Mailing m:mailingUpdateableField)
+						if(m.isAllowed(currentAccount))
+							m.sendMessage(currentAccount,oldValueNotUpdateableFiel,newValueNotUpdateableFiel);
 				
+				// Rediriger vers la page adï¿½quate
 				if (activ){
 					return "gotoCharterAgreement";
 				}
@@ -510,7 +533,7 @@ public class AccountController extends AbstractContextAwareController implements
 				}
 				else 
 					return "gotoPasswordChange";
-				
+					
 			}
 			catch(Exception  e){exceptions (e,null);}
 			
@@ -1244,6 +1267,16 @@ public class AccountController extends AbstractContextAwareController implements
 	public void setMailing(List<Mailing> mailing) {
 		this.mailing = mailing;
 	}
+
+	public List<Mailing> getMailingUpdateableField() {
+		return mailingUpdateableField;
+	}
+
+	public void setMailingUpdateableField(List<Mailing> mailingUpdateableField) {
+		this.mailingUpdateableField = mailingUpdateableField;
+	}
+
+	
 
 	
 }

@@ -47,6 +47,8 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private String digestConstraint;
 	
+	private boolean sendMail;// envoyer un mail au gestionnaire lorsque un champ est udaptable sur LDAP
+	
 	public String getId() {
 		return id;
 	}
@@ -327,6 +329,14 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 
 	public void setDigestConstraint(String digestConstraint) {
 		this.digestConstraint = digestConstraint;
+	}
+
+	public boolean isSendMail() {
+		return sendMail;
+	}
+
+	public void setSendMail(boolean sendMail) {
+		this.sendMail = sendMail;
 	}
 
 }

@@ -85,4 +85,8 @@ public interface BeanField<T> {
 	public boolean isUseConvertedValue();	
 	public void setUseConvertedValue(boolean useConvertedValue);
 	
+	public boolean isSendMail();
+	public void setSendMail(boolean sendMai);
+	
+	
 }

@@ -102,7 +102,15 @@
 			<list>
 				<ref bean="mailingPers"/>
 			</list>
-		</property>														
+		</property>	
+		
+		<!-- mailing suite à une modification d'un champ updateable dans LDAP	-->
+		<property name="mailingUpdateableField">
+			<list>
+				<ref bean="mailingUpdateableFieldGest"/>
+			</list>
+		</property>
+																
 														
 		<property name="exceptionController" ref="exceptionController"/>		
 		<property name="targetService" value="${cas.targetService}"/>
@@ -247,6 +255,32 @@
 	
 	<bean id="mailingPers" parent="mailing">		
 		<property name="mail2Gest" value="${mailing.mail2Gest.pers}"/>
+		<property name="access">
+			<map>
+		    	<entry key="eduPersonAffiliation">
+  		      		<list>  		      					        		
+		        		<value>employee</value>		
+		        		<value>staff</value>
+		        		<value>researcher</value>
+		        		<value>faculty</value>	
+		        		<value>teacher</value>		        		        		                
+		    		</list>
+		    	</entry>
+		  </map>
+		</property>
+	</bean>
+	
+	<bean id="mailingUpdateableField"
+		class="org.esupportail.activfo.domain.beans.mailing.MailingImpl" abstract="true">
+		<property name="smtpService" ref="smtpService"/>
+		<property name="subjectDataChange" value="${mailingUpdateableField.subject}"/>
+		<property name="body1DataChange" value="${mailingUpdateableField.body1.fr}"/>
+		<property name="body2DataChange" value="${mailingUpdateableField.body2.fr}"/>
+		<property name="sep" value="&lt;br/&gt;"/>
+	</bean>
+	
+	<bean id="mailingUpdateableFieldGest" parent="mailingUpdateableField">		
+		<property name="mail2Gest" value="${mailingUpdateableField.gest}"/>
 		<property name="access">
 			<map>
 		    	<entry key="eduPersonAffiliation">

@@ -206,6 +206,7 @@
 		<property name="multiValue" value="true"/>	
 		<property name="numberOfValue" value="5"/>
 		<property name="disable" value="false"/>
+		<property name="sendMail" value="true"/>
 	</bean>
 	
 	<bean
@@ -733,6 +734,15 @@
 		<property name="notice" value="PERSOINFO.NOTICE.LABEL"/>
 		<property name="digestConstraint" value="PERSOINFO.DIGESTCONSTRAINT.LABEL"/>
 	</bean>
+<!-- 	<bean id="beanJpegPhoto"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session">
+		<property name="key" value="IDENTIFICATION.ROLEGENERIQUE.TEXT.LABEL"/>
+		<property name="required" value="false" />
+		<property name="name" value="jpegPhoto"/>
+		<property name="disable" value="false"/>
+		<property name="updateable" value="false"/>
+	</bean> -->
 	 
 	<bean
 		id="beanSelectFloorList"
