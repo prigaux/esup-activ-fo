@@ -3,6 +3,15 @@
 	<script type="text/javascript" src="/media/scripts/jquery.js"></script>
 	<script type="text/javascript">
 	 $(document).ready(function(){  
+		 
+	  // selectionner le premier bouton par défaut
+	  $('input:radio:first').attr('checked',true);	
+	  // si le premier radio bouton sélectionné est "Activation de votre compte"
+	  // alors sélectionner le premier radio bouton qui lui est lié
+		if($("#[value='activation']").attr("checked"))	 $("#[name='welcomeForm:statusRadio']:first").attr("checked","checked");  
+	  
+		 
+		 
 	   if($("#[value='activation']").attr("checked") ||
 	      $("#[value='reinitialisation']").attr("checked"))
 	   		$("#[id='welcomeForm:statusDiv']").show();
