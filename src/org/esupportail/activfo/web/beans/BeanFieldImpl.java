@@ -1,5 +1,7 @@
 package org.esupportail.activfo.web.beans;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,10 +9,17 @@ import javax.faces.convert.Converter;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
 
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.io.IOUtils;
+import org.apache.myfaces.custom.fileupload.UploadedFile;
 import org.esupportail.activfo.web.validators.Validator;
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
+
 
 
 public class BeanFieldImpl<T> implements BeanField<T> {
+	private final Logger logger = new LoggerImpl(getClass());
 	
 	private String key;
 	private T value;
@@ -49,6 +58,101 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private boolean sendMail;// envoyer un mail au gestionnaire lorsque un champ est udaptable sur LDAP
 	
+	private  UploadedFile fileUpLoad;
+	
+	public List<BeanMultiValue> getValues()	
+	{  
+		
+		
+	  if(MANYCHECKBOX.equals(fieldType))
+		{
+    	   values.clear();			
+			for(String s : selectedItems){
+				BeanMultiValue bmv = new BeanMultiValueImpl();				
+				bmv.setConverter(converter);
+				bmv.setUseConvertedValue(useConvertedValue);
+				bmv.setValue(s);
+				values.add(bmv);				
+			}
+			for(BeanMultiValue bmv: hideItems)
+				this.values.add(bmv);								
+		}
+       
+       if(ONERADIO.equals(fieldType)){
+    	   values.clear();	
+    	   BeanMultiValue bmv = new BeanMultiValueImpl();    	 
+    	   bmv.setConverter(converter);
+    	   bmv.setUseConvertedValue(useConvertedValue);
+    	   bmv.setValue((String)value);
+    	   values.add(bmv);				
+       }
+        
+          
+      if(INPUTFILE.equals(fieldType)){
+    	  UploadedFile fileUp;
+    	  values.clear();	
+		  BeanMultiValue bmv = new BeanMultiValueImpl();
+		  fileUp= getFileUpLoad();
+		   if (fileUp!=null){   
+	 			try {
+					// Convertir le uploadfile en string 
+					InputStream streamFile;
+					streamFile = fileUp.getInputStream();
+					byte[] bytesVal = Base64.encodeBase64(IOUtils.toByteArray(streamFile));
+					String stringVal = new String(bytesVal);
+					// La chaine "encodeBase64" indique que ce champ encodé est à décoder dans la méthode org.esupportail.activbo.services.ldap.WriteableLdapUserServiceImpl.mapToContext
+					bmv.setValue("encodeBase64"+stringVal);
+				   	} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				  values.add(bmv);
+   	 	   }
+		  
+	   }
+      
+       if(!values.isEmpty()&& !INPUTFILE.equals(fieldType)){
+   		value=(T)values.get(0).getValue();
+		}
+    
+      
+	   return this.values;
+	}
+
+	public void setValues(List<BeanMultiValue> values){
+		this.values=values;
+		selectedItems.clear();
+		hideItems.clear();
+		if(MANYCHECKBOX.equals(fieldType)){			
+			if(useDisplayItems){
+				for(BeanMultiValue bmv : values)
+					if(stringDisplayItems.contains(bmv.getValue()))
+						selectedItems.add(bmv.getValue());
+					else 
+						hideItems.add(bmv);
+			}
+			else for(BeanMultiValue bmv : values)				
+					selectedItems.add(bmv.getValue());
+		}
+		for(BeanMultiValue bmv : values){ 
+			bmv.setConverter(converter);
+			bmv.setUseConvertedValue(useConvertedValue);
+		}
+		
+		if(!values.isEmpty() && !INPUTFILE.equals(fieldType)){
+			value=(T)values.get(0).getValue();
+		}
+		
+	}
+	
+	public UploadedFile getFileUpLoad() {
+		return fileUpLoad;
+	}
+
+	public void setFileUpLoad(UploadedFile fileUpLoad) {
+		this.fileUpLoad = fileUpLoad;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -73,7 +177,12 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	}
 	
 	public T getValue() {
-		return value;
+		// L'attribut jsf graphicImage (dans accountDataChange.jsp) ne permet pas d'utiliser un convertisseur
+		// il faut donc le forcer dans le code java
+		if(this.isUseConvertedValue())
+			return (T)converter.getAsString(null, null, value);
+		else
+			return value;
 	}
 	
 	public void setValue(T value) {
@@ -106,59 +215,6 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		this.help = help;
 	}
 	
-	public List<BeanMultiValue> getValues()	
-	{
-       if(MANYCHECKBOX.equals(fieldType))
-		{
-    	   values.clear();			
-			for(String s : selectedItems){
-				BeanMultiValue bmv = new BeanMultiValueImpl();				
-				bmv.setConverter(converter);
-				bmv.setUseConvertedValue(useConvertedValue);
-				bmv.setValue(s);
-				values.add(bmv);				
-			}
-			for(BeanMultiValue bmv: hideItems)
-				this.values.add(bmv);								
-		}
-       
-       if(ONERADIO.equals(fieldType)){
-    	   values.clear();	
-    	   BeanMultiValue bmv = new BeanMultiValueImpl();    	 
-    	   bmv.setConverter(converter);
-    	   bmv.setUseConvertedValue(useConvertedValue);
-    	   bmv.setValue((String)value);
-    	   values.add(bmv);				
-       }
-       if(!values.isEmpty())
-			value=(T)values.get(0).getValue();
-	   return this.values;
-	}
-
-	public void setValues(List<BeanMultiValue> values){
-		this.values=values;
-		selectedItems.clear();
-		hideItems.clear();
-		if(MANYCHECKBOX.equals(fieldType)){			
-			if(useDisplayItems){
-				for(BeanMultiValue bmv : values)
-					if(stringDisplayItems.contains(bmv.getValue()))
-						selectedItems.add(bmv.getValue());
-					else 
-						hideItems.add(bmv);
-			}
-			else for(BeanMultiValue bmv : values)				
-					selectedItems.add(bmv.getValue());
-		}
-		for(BeanMultiValue bmv : values){ 
-			bmv.setConverter(converter);
-			bmv.setUseConvertedValue(useConvertedValue);
-		}
-		
-		if(!values.isEmpty()){
-			value=(T)values.get(0).getValue();
-		}
-	}
 	
 	public String getName() {
 		return name;
@@ -338,5 +394,6 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	public void setSendMail(boolean sendMail) {
 		this.sendMail = sendMail;
 	}
+
 
 }

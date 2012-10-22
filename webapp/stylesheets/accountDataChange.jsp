@@ -16,7 +16,7 @@
 	</t:div>
 	<e:messages/>	
 	<e:paragraph value="#{msgs['DATACHANGE.TEXT.TOP']}" escape="false"/>
-
+	
 	<f:verbatim>
 		<fieldset class="legend">
        	 	<legend><h:outputText value="#{msgs['DATACHANGE.TEXT.LEGEND']}"/></legend>
@@ -35,7 +35,7 @@
   		</t:htmlTag>
   	</t:div>
 	
-	<h:form id="accountForm" >
+	<h:form id="accountForm" enctype="multipart/form-data">
 	<div class="mainBlock">
 	
 	 <t:dataList value="#{accountController.beanData}" var="category">
@@ -46,56 +46,64 @@
 	  <t:div styleClass="collapse" >
 	   <h:dataTable  value="#{category.profilingListBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn,fourthColumn">
 	  
-	   <h:column  >
-		  <t:outputText styleClass="labeltexttop#{beanfield.size>1}"  value="#{msgs[beanfield.key]}"/>		 
+	   <h:column>  
+	   	
+			<t:outputText styleClass="labeltexttop#{beanfield.size>1}"  value="#{msgs[beanfield.key]}" rendered="#{beanfield.fieldType!='inputFileUpload'}"/>	
+	    	<t:div rendered="#{beanfield.fieldType=='inputFileUpload'}" >
+   	   		<h:graphicImage  value="#{beanfield.value}"  width="100px" height="100px" /> 
+   	   		</t:div>
+   		 
 	   </h:column>
+	   
 	   <h:column >
-	    
-		<t:dataList value="#{beanfield.values}" var="sub"  >
-		    		    
-		     <t:div styleClass="#{beanfield.name}output portlet-section-text output" rendered="#{beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&!sub.convertedValue}">
-			   		<h:outputText value="#{sub.value}" rendered="#{beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'}" converter="#{beanfield.converter}"/>			   		
-	        </t:div>
+		 	<t:dataList value="#{beanfield.values}" var="sub"  > 		    		    
+			     <t:div styleClass="#{beanfield.name}output portlet-section-text output" rendered="#{beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'&&!sub.convertedValue}">
+			     		<h:outputText value="#{sub.value}" rendered="#{beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'}" converter="#{beanfield.converter}"/>
+			      </t:div>
+		      <t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue)}" style="display:none;" styleClass="#{beanfield.name}show">
+				    <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&(sub.value!=''||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+		            <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+		            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" >
+	                  <f:selectItems value="#{beanfield.displayItems}" />
+	             	</h:selectOneMenu>               	             	             	  
+		        </t:div>
+		        	       	        
+		        <t:div rendered="#{sub.value==''&&beanfield.multiValue}" style="display:none;" styleClass="#{beanfield.name}hide" >  
+		        	<h:inputText value="#{sub.value}" size="35" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+		            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+		            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&sub.value==''&&beanfield.multiValue}" >
+	                  <f:selectItems value="#{beanfield.displayItems}" />
+	             	</h:selectOneMenu> 	            
+	            </t:div>                                                                     
+	        </t:dataList>
 	        
-		    <t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue)}" style="display:none;" styleClass="#{beanfield.name}show">
-			    <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&(sub.value!=''||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-	            <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-	            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" >
-                  <f:selectItems value="#{beanfield.displayItems}" />
-             	</h:selectOneMenu>               	             	             	  
-	        </t:div>
-	        	       	        
-	        <t:div rendered="#{sub.value==''&&beanfield.multiValue}" style="display:none;" styleClass="#{beanfield.name}hide" >  
-	        	<h:inputText value="#{sub.value}" size="35" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-	            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-	            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&sub.value==''&&beanfield.multiValue}" >
-                  <f:selectItems value="#{beanfield.displayItems}" />
-             	</h:selectOneMenu> 	            
-            </t:div>                                                                     
-        </t:dataList>
+	      	 <t:div rendered="#{beanfield.fieldType=='inputFileUpload'}" style="display:none;" styleClass="#{beanfield.name}show">
+	     	     <t:inputFileUpload value="#{beanfield.fileUpLoad}"  storage="file" accept="image/jpeg"> </t:inputFileUpload>
+	      	</t:div> 
+	
                 
-        <t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}">             
-             	<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'}" validator="#{beanfield.validator.validate}" layout="pageDirection">
-                  <f:selectItems value="#{beanfield.displayItems}" />
-             	</h:selectManyCheckbox>        
-        </t:div>    
-        <t:div rendered="#{beanfield.fieldType=='selectOneRadio'}">        
-            	<h:selectOneRadio value="#{beanfield.value}" rendered="#{beanfield.fieldType=='selectOneRadio'}">
-                  <f:selectItems value="#{beanfield.displayItems}" />
-             	</h:selectOneRadio>              
-        </t:div>   
-        <h:outputText style="display:none" styleClass="#{beanfield.name}constraint constraint" value="#{msgs[beanfield.constraint]}" rendered="#{beanfield.constraint!=null}"/>
-        <h:outputText styleClass="constraint" value="#{msgs[beanfield.constraint]}" rendered="#{beanfield.constraint!=null&&(beanfield.fieldType=='selectOneRadio'||beanfield.fieldType=='selectManyCheckbox')}"/>
-          <h:outputText style="display:none" styleClass="#{beanfield.name}constraint digestConstraint" value="#{msgs[beanfield.digestConstraint]}" rendered="#{beanfield.digestConstraint!=null}"/>
-        <h:outputText styleClass="digestConstraint" value="#{msgs[beanfield.digestConstraint]}" rendered="#{beanfield.digestConstraint!=null&&(beanfield.fieldType=='selectOneRadio'||beanfield.fieldType=='selectManyCheckbox')}"/>                         
-  	                         
-  		</h:column>  		
+	        <t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}">             
+	             	<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'}" validator="#{beanfield.validator.validate}" layout="pageDirection">
+	                  <f:selectItems value="#{beanfield.displayItems}" />
+	             	</h:selectManyCheckbox>        
+	        </t:div>    
+	        <t:div rendered="#{beanfield.fieldType=='selectOneRadio'}">        
+	            	<h:selectOneRadio value="#{beanfield.value}" rendered="#{beanfield.fieldType=='selectOneRadio'}">
+	                  <f:selectItems value="#{beanfield.displayItems}" />
+	             	</h:selectOneRadio>              
+	        </t:div>  
+	        <h:outputText style="display:none" styleClass="#{beanfield.name}constraint constraint" value="#{msgs[beanfield.constraint]}" rendered="#{beanfield.constraint!=null}"/>
+	        <h:outputText styleClass="constraint" value="#{msgs[beanfield.constraint]}" rendered="#{beanfield.constraint!=null&&(beanfield.fieldType=='selectOneRadio'||beanfield.fieldType=='selectManyCheckbox')}"/>
+	          <h:outputText style="display:none" styleClass="#{beanfield.name}constraint digestConstraint" value="#{msgs[beanfield.digestConstraint]}" rendered="#{beanfield.digestConstraint!=null}"/>
+	        <h:outputText styleClass="digestConstraint" value="#{msgs[beanfield.digestConstraint]}" rendered="#{beanfield.digestConstraint!=null&&(beanfield.fieldType=='selectOneRadio'||beanfield.fieldType=='selectManyCheckbox')}"/>                         
+  		</h:column>  
+  				
        	<h:column >
        		<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}"/>
        		<t:div style="display:none" styleClass="#{beanfield.name}modify">
        	  		<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanfield.notice]}" value="/media/images/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}"/>			        
           		<h:graphicImage alt="#{beanfield.name}" styleClass="show" value="/media/images/add.png"  style="border: 0;cursor:pointer" rendered="#{beanfield.multiValue&&!beanfield.disable&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}"/>
-		  		<h:graphicImage alt="#{beanfield.name}" styleClass="hide" value="/media/images/remove.png"  style="border: 0;cursor:pointer" rendered="#{beanfield.multiValue&&!beanfield.disable&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}"/>
+		 		<h:graphicImage alt="#{beanfield.name}" styleClass="hide" value="/media/images/remove.png"  style="border: 0;cursor:pointer" rendered="#{beanfield.multiValue&&!beanfield.disable&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}"/>
 		  </t:div>	       	         	         	  
 		</h:column>	
 		<h:column >
@@ -108,7 +116,7 @@
     </t:dataList>      
   </div>
 
-	<t:div style="margin-top:1em;">
+	<t:div style="margin-top:1em;"> 		
 	  <e:commandButton id="next" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
 	</t:div>
 	

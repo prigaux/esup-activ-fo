@@ -5,6 +5,7 @@ import java.util.List;
 import javax.faces.convert.Converter;
 import javax.faces.model.SelectItem;
 
+import org.apache.myfaces.custom.fileupload.UploadedFile;
 import org.esupportail.activfo.web.validators.Validator;
 
 
@@ -13,6 +14,7 @@ public interface BeanField<T> {
 	public static final String MANYCHECKBOX="selectManyCheckbox";
 	public static final String INPUTTEXT="inputText";
 	public static final String ONERADIO="selectOneRadio";
+	public static final String INPUTFILE="inputFileUpload";
 	
 	public String getKey();
 	
@@ -87,6 +89,9 @@ public interface BeanField<T> {
 	
 	public boolean isSendMail();
 	public void setSendMail(boolean sendMai);
+	
+	public UploadedFile getFileUpLoad();
+	public void setFileUpLoad(UploadedFile fileUpLoad);
 	
 	
 }

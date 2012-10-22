@@ -54,6 +54,7 @@
 		</property>		
 		<property name="listBeanField"> 
 		  <list>
+		    <ref bean="beanJpegPhoto"/>
 		    <ref bean="beanSupannAliasLogin"/>
 		    <ref bean="beanSupannCivilite"/>
 		    <ref bean="beanSn"/>
