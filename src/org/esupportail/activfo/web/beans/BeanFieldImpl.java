@@ -59,6 +59,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	private boolean sendMail;// envoyer un mail au gestionnaire lorsque un champ est udaptable sur LDAP
 	
 	private  UploadedFile fileUpLoad;
+	private int deleteJpegPhoto=0; 
 	
 	public List<BeanMultiValue> getValues()	
 	{  
@@ -93,23 +94,30 @@ public class BeanFieldImpl<T> implements BeanField<T> {
     	  values.clear();	
 		  BeanMultiValue bmv = new BeanMultiValueImpl();
 		  fileUp= getFileUpLoad();
-		   if (fileUp!=null){   
-	 			try {
-					// Convertir le uploadfile en string 
-					InputStream streamFile;
-					streamFile = fileUp.getInputStream();
-					byte[] bytesVal = Base64.encodeBase64(IOUtils.toByteArray(streamFile));
-					String stringVal = new String(bytesVal);
-					// La chaine "encodeBase64" indique que ce champ encodé est à décoder dans la méthode org.esupportail.activbo.services.ldap.WriteableLdapUserServiceImpl.mapToContext
-					bmv.setValue("encodeBase64"+stringVal);
-				   	} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				  values.add(bmv);
-   	 	   }
-		  
-	   }
+		  if (deleteJpegPhoto!=2){
+			   if (fileUp!=null){   
+		 			try {
+						// Convertir le uploadfile en string 
+						InputStream streamFile;
+						streamFile = fileUp.getInputStream();
+						byte[] bytesVal = Base64.encodeBase64(IOUtils.toByteArray(streamFile));
+						String stringVal = new String(bytesVal);
+						// La chaine "encodeBase64" indique que ce champ encodé est à décoder dans la méthode org.esupportail.activbo.services.ldap.WriteableLdapUserServiceImpl.mapToContext
+						bmv.setValue("encodeBase64"+stringVal);
+					   	} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					  values.add(bmv);
+	   	 	   }
+			  
+		   }
+		  else{
+			  bmv.setValue(" ");
+			  values.add(bmv);
+		  }
+			  
+      }
       
        if(!values.isEmpty()&& !INPUTFILE.equals(fieldType)){
    		value=(T)values.get(0).getValue();
@@ -120,6 +128,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	}
 
 	public void setValues(List<BeanMultiValue> values){
+		
 		this.values=values;
 		selectedItems.clear();
 		hideItems.clear();
@@ -138,8 +147,17 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 			bmv.setConverter(converter);
 			bmv.setUseConvertedValue(useConvertedValue);
 		}
+	
+		if(INPUTFILE.equals(fieldType)){
+			if(!values.get(0).getValue().isEmpty())	{
+				logger.debug("photo 1:"+values.get(0).getValue());
+				deleteJpegPhoto=1;}
+			else {deleteJpegPhoto=0;}
+				
+			
+		}
 		
-		if(!values.isEmpty() && !INPUTFILE.equals(fieldType)){
+		if(!values.isEmpty()&&!INPUTFILE.equals(fieldType)){
 			value=(T)values.get(0).getValue();
 		}
 		
@@ -395,5 +413,12 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		this.sendMail = sendMail;
 	}
 
+	public int getDeleteJpegPhoto() {
+		return deleteJpegPhoto;
+	}
+
+	public void setDeleteJpegPhoto(int deleteJpegPhoto) {
+		this.deleteJpegPhoto = deleteJpegPhoto;
+	}
 
 }

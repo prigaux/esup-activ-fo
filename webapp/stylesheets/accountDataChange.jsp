@@ -50,7 +50,7 @@
 	   	
 			<t:outputText styleClass="labeltexttop#{beanfield.size>1}"  value="#{msgs[beanfield.key]}" rendered="#{beanfield.fieldType!='inputFileUpload'}"/>	
 	    	<t:div rendered="#{beanfield.fieldType=='inputFileUpload'}" >
-   	   		<h:graphicImage  value="#{beanfield.value}"  width="100px" height="100px" /> 
+   	   		<h:graphicImage  value="#{beanfield.value}"  width="100px" height="100px" styleClass="Photo"/> 
    	   		</t:div>
    		 
 	   </h:column>
@@ -78,7 +78,10 @@
 	        </t:dataList>
 	        
 	      	 <t:div rendered="#{beanfield.fieldType=='inputFileUpload'}" style="display:none;" styleClass="#{beanfield.name}show">
-	     	     <t:inputFileUpload value="#{beanfield.fileUpLoad}"  storage="file" accept="image/jpeg"> </t:inputFileUpload>
+	      	    	<t:inputFileUpload value="#{beanfield.fileUpLoad}" styleClass="upload" storage="file" accept="image/jpeg"> </t:inputFileUpload>	      	    	
+	     	     	<h:graphicImage alt="#{beanfield.name}" styleClass="delete" value="/media/images/delete.png" style="float:right;margin:0;" rendered="#{beanfield.fieldType=='inputFileUpload'&&beanfield.deleteJpegPhoto==1}"/>
+	     	     	<h:inputText value="#{beanfield.deleteJpegPhoto}" styleClass="deletePhoto" style="display:none;"/>	
+	    
 	      	</t:div> 
 	
                 

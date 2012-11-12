@@ -17,6 +17,28 @@ $(function() {
 		    $("." + $(this).attr("alt")+"show:last").children("input,select").val("");
 		    $("." + $(this).attr("alt")+"show:last").removeClass().addClass($(this).attr("alt")+"hide");
 		}
+	}); 
+	<!--Avant de supprimer la photo d''identité, afficher une boite de dialogue demandant la confirmation de la suppression-->
+	<!--	Si oui, le beanFild deletePhoto aura la valeur 2 (cette variable permet de gérer l''affichage de l''icone de suppression de la page jsp mais également la sauvegarde de la photo) -->
+	<!--	la photo sera remplacee par une image de suppression,le upload file et le bouton de suppression de photo seront rendus invisibles-->
+	<!--	Sinon le beanFild deletePhoto aura la valeur 0.-->
+	
+	
+	$(".delete").click(function () {	
+		var answer = confirm('Etes-vous sûr de vouloir supprimer la photo?');
+		if(answer){
+			$('.deletePhoto').val(2);
+			$('.photo').attr("src","/media/images/deletedPhoto.png");
+			$('.upload').hide();
+			$(this).hide();
+			
+		}
+		else
+			{
+			$('.deletePhoto').val(0);
+			}
+		return answer
+	
 	});
 	
 	$("[class$='_modifyLink']").click(function () {	

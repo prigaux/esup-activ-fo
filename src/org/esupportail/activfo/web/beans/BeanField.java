@@ -93,5 +93,8 @@ public interface BeanField<T> {
 	public UploadedFile getFileUpLoad();
 	public void setFileUpLoad(UploadedFile fileUpLoad);
 	
+	public int getDeleteJpegPhoto();
+	public void setDeleteJpegPhoto(int deleteJpegPhoto);
+	
 	
 }
