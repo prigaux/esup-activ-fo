@@ -15,8 +15,7 @@
 		properties/exceptionHandling/exceptionHandling.xml
 		properties/export/export.xml
 		properties/i18n/i18n.xml
-		properties/i18n/bundles/Messages*.properties
-		properties/i18n/bundles/Custom*.properties
+		properties/i18n/bundles/*.properties		
 		properties/init/init.xml
 		properties/jsf/application.xml
 		properties/jsf/navigation-rules.xml
