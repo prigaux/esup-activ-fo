@@ -41,6 +41,15 @@ $(function() {
 	
 	});
 	
+	//Si l'utilisateur clique sur le lien "Editer", n'afficher en modification que les champs de la catégorie sélectionnée 
+	$(".modifyLinkByCategory").each(function(){		 
+	 $(this).click(function() {
+		 $(this).closest('.mainModifyLinkByCategory').find("[class*='_modifyLink']").click()
+	    return false;
+	  });
+	});	
+	
+	
 	$("[class$='_modifyLink']").click(function () {	
 		$("." + $(this).attr("class").replace(/_modifyLink.*/,"")+"show").show(500);
 		$("." + $(this).attr("class").replace(/_modifyLink.*/,"")+"modify").show(500);				
