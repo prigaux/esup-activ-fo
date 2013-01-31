@@ -39,73 +39,73 @@ a:hover {
     .firstStepImage2fleches {
     height: 53px;
     width: 745px;
-    background: url('/media/images/bandeau-activation-2fleches01-ent.png') no-repeat left top;
+    background: url('images/bandeau-activation-2fleches01-ent.png') no-repeat left top;
     }
     .secondStepImage2fleches {
     height: 53px;
 	width: 745x;
-    background: url('/media/images/bandeau-activation-2fleches02-ent.png') no-repeat left top;
+    background: url('images/bandeau-activation-2fleches02-ent.png') no-repeat left top;
     }
         
     .firstStepImage {
     height: 53px;
     width: 780px;
     
-    background: url('/media/images/bandeau-activation-4fleches01-ent.png') no-repeat left top;
+    background: url('bandeau-activation-4fleches01-ent.png') no-repeat left top;
     }
     .secondStepImage {
     height: 53px;
     width: 780px;
-    background: url('/media/images/bandeau-activation-4fleches02-ent.png') no-repeat left top;
+    background: url('images/bandeau-activation-4fleches02-ent.png') no-repeat left top;
     }
     .thirdStepImage {
     height: 53px;
     width: 780px;
-    background: url('/media/images/bandeau-activation-4fleches03-ent.png') no-repeat left top;
+    background: url('images/bandeau-activation-4fleches03-ent.png') no-repeat left top;
     }
     .fourthStepImage {
     height: 53px;
     width: 780px;
-    background: url('/media/images/bandeau-activation-4fleches04-ent.png') no-repeat left top;
+    background: url('images/bandeau-activation-4fleches04-ent.png') no-repeat left top;
     }
     .firstStepImage5fleches {
     height: 53px;
     width: 930px;
-    background: url('/media/images/bandeau-activation-5fleches01-ent.png') no-repeat left top;
+    background: url('images/bandeau-activation-5fleches01-ent.png') no-repeat left top;
     }
     .secondStepImage5fleches {
     height: 53px;
 	width: 930px;
-    background: url('/media/images/bandeau-activation-5fleches02-ent.png') no-repeat left top;
+    background: url('images/bandeau-activation-5fleches02-ent.png') no-repeat left top;
     }
     .thirdStepImage5fleches {
     height: 53px;
-    background: url('/media/images/bandeau-activation-5fleches03-ent.png') no-repeat left top;
+    background: url('images/bandeau-activation-5fleches03-ent.png') no-repeat left top;
     }
     .fourthStepImage5fleches {
     height: 53px;
 	width: 930px;
-    background: url('/media/images/bandeau-activation-5fleches04-ent.png') no-repeat left top;
+    background: url('images/bandeau-activation-5fleches04-ent.png') no-repeat left top;
     }
     .fifthStepImage5fleches {
     height: 53px;
     width: 930px;
-    background: url('/media/images/bandeau-activation-5fleches05-ent.png') no-repeat left top;
+    background: url('images/bandeau-activation-5fleches05-ent.png') no-repeat left top;
     }
     .firstStepImage3fleches {
     height: 53px;
     width: 600px;
-    background: url('/media/images/bandeau-activation-3fleches01-ent.png') no-repeat left top;
+    background: url('images/bandeau-activation-3fleches01-ent.png') no-repeat left top;
     }
     .secondStepImage3fleches {
     height: 53px;
     width: 600px;
-    background: url('/media/images/bandeau-activation-3fleches02-ent.png') no-repeat left top;
+    background: url('images/bandeau-activation-3fleches02-ent.png') no-repeat left top;
     }
     .thirdStepImage3fleches {
     height: 53px;
    	width: 600px;
-    background: url('/media/images/bandeau-activation-3fleches03-ent.png') no-repeat left top;
+    background: url('images/bandeau-activation-3fleches03-ent.png') no-repeat left top;
     }
     
     ul.processSteps {
