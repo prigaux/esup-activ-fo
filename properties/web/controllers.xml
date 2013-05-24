@@ -97,6 +97,9 @@
 				
 		<property name="attributesInfPerso" value="${attributes.information}"/>
 		<property name="attributesDataChange" value="${attributes.datachange}"/>
+		<property name="attributesCsvFile" value="${attributes.csvFile}"/>
+		<property name="csvFileName" value="${csv.file.name}"/>
+		
 														
 		<property name="mailing">
 			<list>

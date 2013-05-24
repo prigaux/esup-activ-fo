@@ -4,15 +4,26 @@
  */
 package org.esupportail.activfo.web.controllers;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.xfire.XFireRuntimeException;
 import org.esupportail.activfo.domain.beans.Account;
 import org.esupportail.activfo.domain.beans.User;
@@ -130,6 +141,12 @@ public class AccountController extends AbstractContextAwareController implements
 	private ExceptionController exceptionController;
 	
 	private String targetService;
+	
+	private String csvFileName;
+	private String attributesCsvFile;
+	HashMap<BeanField,List<String>> attrNewCsv= new HashMap<BeanField,List<String>>();
+	HashMap<BeanField,List<String>> attrOldCsv= new HashMap<BeanField,List<String>>();
+
 	
 	/**
 	 * Bean constructor.
@@ -378,6 +395,8 @@ public class AccountController extends AbstractContextAwareController implements
 			}
 			oldValue.put(this.getI18nService().getString(beanPersoInfo.getKey()),oldValueList);
 			newValue.put(this.getI18nService().getString(beanPersoInfo.getKey()),newValueList);
+			attrNewCsv.put(beanPersoInfo, newValueList);
+			attrOldCsv.put(beanPersoInfo, oldValueList);
 		}						
 	}
 	
@@ -503,11 +522,15 @@ public class AccountController extends AbstractContextAwareController implements
 				this.updateCurrentAccount();
 				
 				logger.debug("Informations Account mises à jour :"+accountDescr.toString());
-				// Envoi de mail demandant au gestionnaire de valider le(s) champ(s) modifi�s
-				if(!newValue.isEmpty())
+				if(!newValue.isEmpty()){
+					// Envoi de mail demandant au gestionnaire de valider le(s) champ(s) modifi�s
 					for(Mailing m:mailing)
 						if(m.isAllowed(currentAccount))
 							m.sendMessage(currentAccount,oldValue,newValue);
+				
+					//Les données à valider seront stockées dans un fichier csv pour faire un tableau de bord
+					generateCsvFile();
+				}
 				// Envoi de mail informant le gestionnaire des modifications des champs
 				if(!newValueNotUpdateableFiel.isEmpty())
 					for(Mailing m:mailingUpdateableField)
@@ -540,6 +563,71 @@ public class AccountController extends AbstractContextAwareController implements
 			return null;
 			
 	}
+	public static String join(Iterable<?> elements, String separator) {
+		return StringUtils.join(elements.iterator(), separator);
+	}
+	
+	/**
+	 */
+	public void generateCsvFile() {
+		String sep=", ";
+		String newvalueList = "";
+		String separator=";";
+		String header = "Date";
+		
+		Calendar c = new GregorianCalendar();
+		Date date=c.getTime();
+		SimpleDateFormat sdf = new SimpleDateFormat("dd MM yyyy HH:mm");
+		String sdate=sdf.format(date);
+		String attrValue=sdate;
+		
+		
+		//Récupérer la valeur des données passées en paramètre (Date du jour, displayName, uid, supannEmpId, employeeType (corps))
+		List<String> attrCsvFile=Arrays.asList(attributesCsvFile.split(","));
+		for (int j=0;j<attrCsvFile.size();j++){	
+			attrValue= attrValue+separator+currentAccount.getAttribute(attrCsvFile.get(j));	
+			header=header+separator+attrCsvFile.get(j);
+		}
+		logger.debug("header:"+header);
+		//Récupérer le nom des champs,les anciennes et les nouvelles valeurs)
+		Set<BeanField> keys=attrNewCsv.keySet();
+		for(BeanField<String> bf : keys)
+		{
+			String newAttrs=join(attrNewCsv.get(bf), sep);
+			String oldAttrs=join(attrOldCsv.get(bf), sep);
+			newvalueList=newvalueList+attrValue+separator+bf.getName()+separator+oldAttrs+separator+newAttrs+"\n";
+			logger.debug("newAttrs2:"+newAttrs);
+		}
+		
+	
+		try {
+			BufferedReader lecteurAvecBuffer=null; 
+			String ligne;
+   		 	File file = new File(csvFileName);
+   		 	if (!file.exists()) {
+   		 		file.createNewFile();
+   		 	}
+   		 	//insérer entête, si fichier vide
+   			lecteurAvecBuffer = new BufferedReader(new FileReader(csvFileName));      		 
+	   		if ((ligne=lecteurAvecBuffer.readLine())==null) {
+	   			header=header+";Champs modifié;Acienne valeur;Nouvelle valeur\n";
+	   			newvalueList= header.toUpperCase()+newvalueList;
+			}
+	 	 	FileWriter fw = new FileWriter(file.getAbsoluteFile(),true);
+			BufferedWriter bw = new BufferedWriter(fw);			
+			bw.write(newvalueList);
+			bw.close();
+			
+			attrNewCsv.clear();
+			attrOldCsv.clear();
+			
+ 
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
 	//TODO revoir cette procédure
 	public String pushAuthentificate() {
 		
@@ -1276,7 +1364,22 @@ public class AccountController extends AbstractContextAwareController implements
 		this.mailingUpdateableField = mailingUpdateableField;
 	}
 
-	
+	public String getAttributesCsvFile() {
+		return attributesCsvFile;
+	}
 
+	public void setAttributesCsvFile(String attributesCsvFile) {
+		this.attributesCsvFile = attributesCsvFile;
+	}
+
+	public String getCsvFileName() {
+		return csvFileName;
+	}
+
+	public void setCsvFileName(String csvFileName) {
+		this.csvFileName = csvFileName;
+	}
+
+	
 	
 }
