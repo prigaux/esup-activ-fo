@@ -19,10 +19,10 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 public class ValidatorDisplayName extends AbstractI18nAwareBean implements Validator{
 	
 	/** But: 
-	 * Le champ "Nom usage" est une combinaison possible des champs Nom usage, Nom de jeune fille, Prénom et autres prénoms.
-	 * Les accents, les tiret,les espace et les majuscules sont acceptés.
-	 * En entrée: Nom usage
-	 * En sortie:  Retourne un message d'erreur s'il ne correspond à aucune des combinaisons définies.
+	 * Le champ "Nom usage" est une combinaison possible des champs Nom usage, Nom de jeune fille, Prï¿½nom et autres prï¿½noms.
+	 * Les accents, les tiret,les espace et les majuscules sont acceptï¿½s.
+	 * En entrï¿½e: Nom usage
+	 * En sortie:  Retourne un message d'erreur s'il ne correspond ï¿½ aucune des combinaisons dï¿½finies.
 	 * 
 	 */
 	private static final long serialVersionUID = 8849185735359561457L;
@@ -47,48 +47,36 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 			
 			strValue =normalize(strValue);
 			
-			// Récupérer la valeur des attributs de LDAP
+			// Rï¿½cupï¿½rer la valeur des attributs de LDAP
 			List<String> attrPersoInfo=Arrays.asList(displayNameAttr.split(","));
 			
 			for (int j=0;j<attrPersoInfo.size();j++){
 				listAtt.add(normalize(account.getAttribute(attrPersoInfo.get(j))));	
 			}
 			
-			//Liste de combinaisons possibles (sn,up1BirthName,givenName,up1AltGivenName nommés respectivement 1,2,3,4)
-			/* [1,3][1,4][1,3,4][1,4,3] ( sn+givenName,up1AltGivenName) 
-			 * [2,3][2,4][2,3,4][2,4,3]( up1BirthName+ givenName,up1AltGivenName)	  
-			 * [1,2,3][1,2,4][1,2,3,4][1,2,4,3]((sn,up1BirthName) + givenName,up1AltGivenName) 
-			 * [2,1,3][2,1,4][2,1,3,4][2,1,4,3]((up1BirthName,sn) + givenName,up1AltGivenName)
+			//Liste de combinaisons possibles (sn,up1BirthName,givenName,up1AltGivenName nommï¿½s respectivement 0,1,2,3)
+			/* [0,2][0,3][2,0][3,0][0,2,3][0,3,2] ( sn+givenName,up1AltGivenName)
+			 * [1,2][1,3][2,1][3,1][1,2,3][1,3,2]( up1BirthName+ givenName,up1AltGivenName) 
+			 * [0,1,2][0,1,3][0,1,2,3][0,1,3,2]((sn,up1BirthName) + givenName,up1AltGivenName)	
+			 * [1,0,2][1,0,3][1,0,2,3][1,0,3,2]((up1BirthName,sn) + givenName,up1AltGivenName)
 			*/
-			// Construction de l'expression régulière
+			// Construction de l'expression rï¿½guliï¿½re
 			if (listAtt.size()>0 && attrPersoInfo.size()==listAtt.size()) {
-                String e0 = listAtt.get(0);
-                String e1 = listAtt.get(1);
-                String e2 = listAtt.get(2);
-                String e3 = listAtt.get(3);
+                String e0 = (listAtt.get(0).length())>0? listAtt.get(0):"";
+                String e1 = (listAtt.get(1).length())>0? listAtt.get(1):"";
+                String e2 = (listAtt.get(2).length())>0? listAtt.get(2):"";
+                String e3 = (listAtt.get(3).length())>0? listAtt.get(3):"";
+                
                 strPattern=
                 "^("
-                  +e0+e2+"|"
-                  +(e3.length()>0? e0+e3+"|" : "")
-                  +e0+e2+e3+"|"
-                  +e0+e3+e2 +"|"
-                  +(e1.length()>0? e1+e2+"|" : "")
-                  +(e1.length()>0 && e3.length()>0  ? e1+e3+"|" : "")
-                  +(e1.length()>0? e1+e2+e3+"|" : "")
-                  +(e1.length()>0? e1+e3+e2+"|" : "")
-                  +e0+e1+e2+"|"
-                  +(e3.length()>0? e0+e1+e3+"|" : "")
-                  +(e3.length()>0? e0+e1+e2+"|" : "")
-                  +e0+e1+e3+e2+"|"
-                  +e1+e0+e2+"|"
-                  +(e3.length()>0? e2+e1+e3+"|" : "")
-                  +e1+e0+e2+e3+"|"
-                  +e1+e0+e3+e2+           
+                  +e0+e2+"|"+e0+e3+"|"+e2+e0+"|"+e3+e0+"|"+e0+e2+e3+"|"+e0+e3+e2 +"|"    
+                  +e1+e2+"|"+e1+e3+"|"+e2+e1+"|"+e3+e1+"|"+e1+e2+e3+"|"+e1+e3+e2+"|"
+                  +e0+e1+e2+"|"+ e0+e1+e3+"|"+ e0+e1+e2+"|"+e0+e1+e3+e2+"|"
+                  +e1+e0+e2+"|"+ e2+e1+e3+"|"+e1+e0+e2+e3+"|"+e1+e0+e3+e2+           
                 ")$";
             }
 
-				
-			// Rechercher si le displayName saisi correspond à l'expression régulière 
+			// Rechercher si le displayName saisi correspond ï¿½ l'expression rï¿½guliï¿½re 
 			Pattern pat = Pattern.compile(strPattern);
 			Matcher match = pat.matcher(strValue);
 			if (! (match.find()))throw new ValidatorException(getFacesErrorMessage("VALIDATOR.DISPLAYNAME.INVALID"));
@@ -102,9 +90,9 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	{
 		String returnValue="";
 		if (strValue instanceof String) {	
-			// Convertir une chaîne accentué en chaîne sans accent.
+			// Convertir une chaï¿½ne accentuï¿½ en chaï¿½ne sans accent.
 			returnValue = Normalizer.normalize(strValue, Normalizer.Form.NFD);
-			// Supprimer les espaces,les caractères diacritiques et le tiret  
+			// Supprimer les espaces,les caractï¿½res diacritiques et le tiret  
 			returnValue=returnValue.replaceAll("[\u0300-\u036F\\s|-]", "");
 			
 			returnValue=returnValue.toUpperCase();
