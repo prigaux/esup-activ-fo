@@ -18,15 +18,8 @@
 		<t:htmlTag styleClass="secondStep" value="li"><t:outputText escape="false" value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE2.TEXT']}"/></t:htmlTag>
 		<t:htmlTag styleClass="currentTabLogin" value="li"><t:outputText escape="false" value="#{msgs['IDENTIFICATION.LOGINCHANGE.ETAPE3.TEXT']}"/></t:htmlTag>
 	</t:htmlTag>
-	</t:div>
-	
-	
-<!-- N'afficher qu'une fois le message global -->
-	 <t:div rendered="#{!empty facesContext.maximumSeverity||facesContext.maximumSeverity!=null}"  styleClass= "portlet-msg-error">      
-	   	<e:paragraph id="messageErrControleur" value="#{msgs['MESSAGE.ERROR.VALIDATION']}"/>	  		   		
-	 </t:div>	
-	<br/>
-	<e:message for="messageErrControleur" /> 
+	</t:div>	
+	<%@include file="_includeMessage.jsp"%>
 	<br/>
 	<br/>
 	
