@@ -142,7 +142,7 @@
 			<list>
 				<ref bean="beanActivation"/>
 				<ref bean="beanReinitialisation"/>
-			<!-- 	<ref bean="beanDataChange"/> --> 
+				<!-- 	<ref bean="beanDataChange"/> --> 
 				<ref bean="beanPasswordChange"/>
 				<!--
 				<ref bean="beanLoginChange"/>
@@ -156,7 +156,7 @@
 		 		<key><ref bean="beanPersonnel"/></key>
 		 		<list>		 			
 					<ref bean="beanHarpegeNumber"/>
-					<ref bean="beanBirthName"/>
+					<!--<ref bean="beanBirthName"/>-->
 					<ref bean="beanBirthDate"/>
 		 		</list>
 		 	</entry>
@@ -164,7 +164,7 @@
 		 		<key><ref bean="beanStudent"/></key>
 		 		<list>
 		 			<ref bean="beanStudentNumber"/>
-					<ref bean="beanBirthName"/>
+					<!--<ref bean="beanBirthName"/>-->
 					<ref bean="beanBirthDate"/>
 		 		</list>
 		 	</entry>
@@ -172,7 +172,7 @@
 		 		<key><ref bean="beanAnotherStudent"/></key>
 		 		<list>		 			
 					<ref bean="beanCodeINE"/>
-					<ref bean="beanBirthName"/>
+					<!--<ref bean="beanBirthName"/>-->
 					<ref bean="beanBirthDate"/>
 		 		</list>
 		 	</entry>
@@ -180,7 +180,7 @@
 		 		<key><ref bean="beanOldStudent"/></key>
 		 		<list>
 		 			<ref bean="beanAlumStudentNumber"/>
-					<ref bean="beanBirthName"/>
+					<!--<ref bean="beanBirthName"/>-->
 					<ref bean="beanBirthDate"/>
 		 		</list>
 		 	</entry>
