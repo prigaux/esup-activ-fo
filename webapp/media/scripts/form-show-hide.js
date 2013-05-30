@@ -25,7 +25,7 @@ $(function() {
 	
 	
 	$(".delete").click(function () {	
-		var answer = confirm('Etes-vous sûr de vouloir supprimer la photo?');
+		var answer = confirm('Etes-vous s\373r de vouloir supprimer la photo?');
 		if(answer){
 			$('.deletePhoto').val(2);
 			$('.photo').attr("src","/media/images/deletedPhoto.png");
