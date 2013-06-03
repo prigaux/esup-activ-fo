@@ -86,18 +86,14 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	}
 	
 	
-	private String normalize(String strValue)
+	private String normalize(String value)
 	{
-		String returnValue="";
-		if (strValue instanceof String) {	
-			// Convertir une cha�ne accentu� en cha�ne sans accent.
-			returnValue = Normalizer.normalize(strValue, Normalizer.Form.NFD);
-			// Supprimer les espaces,les caract�res diacritiques et le tiret  
-			returnValue=returnValue.replaceAll("[\u0300-\u036F\\s|-]", "");
+			// Convertir une chaîne accentué en chaîne sans accent.
+			value = Normalizer.normalize(value, Normalizer.Form.NFD);
+			// Supprimer les espaces,les caractères diacritiques et le tiret  
+			value=value.replaceAll("[\u0300-\u036F\\s|-]", "");
 			
-			returnValue=returnValue.toUpperCase();
-		}
-    	return returnValue;
+			return value.toUpperCase();    	
 	}
 
 	
