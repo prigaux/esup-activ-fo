@@ -13,7 +13,7 @@
 		This file is referenced by /properties/applicationContext.xml.
 	-->
 
-	
+
 	<bean 
 		id="validatorDisplayName"
 		class="org.esupportail.activfo.web.validators.ValidatorDisplayName"
@@ -26,8 +26,8 @@
     	
     	
     	<property name="account" ref="account"/>
-    	<property name="displayNameAttr" value="${attributes.displayNameAttr}"/>
-    	<property name="caracterForbiddenDisplayName" value="${caracter.forbidden.displayName}"/>
+    	<property name="term1" value="${attributes.displayName.term1}"/>
+    	<property name="term2" value="${attributes.displayName.term2}"/>
     		
 	</bean>
 	<bean 
