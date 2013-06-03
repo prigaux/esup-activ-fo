@@ -30,7 +30,6 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 
 	private Account account;
 	private String displayNameAttr;
-	private String caracterForbiddenDisplayName; 
 	
 	/**
 	 * 
@@ -120,20 +119,5 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	public void setDisplayNameAttr(String displayNameAttr) {
 		this.displayNameAttr = displayNameAttr;
 	}
-
-	/**
-	 * @return the caracterForbiddenDisplayName
-	 */
-	public String getCaracterForbiddenDisplayName() {
-		return caracterForbiddenDisplayName;
-	}
-
-	/**
-	 * @param caracterForbiddenDisplayName the caracterForbiddenDisplayName to set
-	 */
-	public void setCaracterForbiddenDisplayName(String caracterForbiddenDisplayName) {
-		this.caracterForbiddenDisplayName = caracterForbiddenDisplayName;
-	}
-	
-	
+		
 }
