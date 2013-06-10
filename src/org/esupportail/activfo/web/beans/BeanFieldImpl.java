@@ -90,8 +90,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
         
           
       if(INPUTFILE.equals(fieldType)){
-    	  UploadedFile fileUp;
-    	  values.clear();	
+    	  UploadedFile fileUp;    	  
 		  BeanMultiValue bmv = new BeanMultiValueImpl();
 		  fileUp= getFileUpLoad();
 		  if (deleteJpegPhoto!=2){
@@ -108,11 +107,13 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
+		 				values.clear();	
 					  values.add(bmv);
 	   	 	   }
 			  
 		   }
 		  else{
+			  values.clear();	
 			  bmv.setValue(" ");
 			  values.add(bmv);
 		  }
