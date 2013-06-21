@@ -72,7 +72,7 @@
 							<h:column>
 								<t:outputText styleClass="labeltexttop#{beanfield.size>1}"	value="#{msgs[beanfield.key]}"rendered="#{beanfield.fieldType!='inputFileUpload'}" />
 								<t:div rendered="#{beanfield.fieldType=='inputFileUpload'}">
-									<h:graphicImage value="#{beanfield.value}" width="100px"height="100px" styleClass="Photo" />
+									<h:graphicImage value="#{beanfield.value}" width="100px"height="100px" styleClass="photo" />
 								</t:div>
 
 							</h:column>
