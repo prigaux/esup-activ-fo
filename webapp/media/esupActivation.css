@@ -238,5 +238,17 @@ a:hover {
 	}
 	
 	
+	.positionModifyLinkByCategory{
+		position: absolute; 
+		right: 50%; 
+		color: white; 
+		margin: 4px;
+	}
 	
+	.positionModifyLinkByCategory a{
+	    color: white;
+	    margin-left: 1em;
+	}
+	
+		
 	
