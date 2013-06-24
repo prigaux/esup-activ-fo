@@ -4,8 +4,9 @@
 	<script type="text/javascript">
 	 $(document).ready(function(){  
 		 
-	  // selectionner le premier bouton par défaut
-	  $('input:radio:first').attr('checked',true);	
+	  // selectionner le premier bouton par défaut et initialiser sa valeur.
+	  $('input:radio:first').attr('checked',true);
+	  $("#[name='welcomeForm:statusRadio']:first").attr("checked","checked"); 
 	  // si le premier radio bouton sélectionné est "Activation de votre compte"
 	  // alors sélectionner le premier radio bouton qui lui est lié
 		if($("#[value='activation']").attr("checked"))	 $("#[name='welcomeForm:statusRadio']:first").attr("checked","checked");  
