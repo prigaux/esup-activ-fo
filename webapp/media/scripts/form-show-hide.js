@@ -1,12 +1,6 @@
 
 $(function() {
-	<!--t:commandLink ne fonctionne pas en mode portlet, la solution consiste à utiliser <a></> et simuler l''action du bouton confirm-->
-	<!--Mettre \\ devant accountForm à cause du : -->
-	$(".valider").click(function() {
-		$("#accountForm\\:next").click();
-	});
-	
-    $(".hide").load(function() {
+   $(".hide").load(function() {
     	if( $("." + $(this).attr("alt")+"show").size()==0){
     		$("." + $(this).attr("alt")+"hide:first").removeClass().addClass($(this).attr("alt")+"show");
     	}
