@@ -4,13 +4,9 @@
 	<script type="text/javascript">
 	 $(document).ready(function(){  
 		 
-	  // selectionner le premier bouton par défaut et initialiser sa valeur.
+	  // selectionner les premiers boutons par défaut.
 	  $('input:radio:first').attr('checked',true);
-	  $("#[name='welcomeForm:statusRadio']:first").attr("checked","checked"); 
-	  // si le premier radio bouton sélectionné est "Activation de votre compte"
-	  // alors sélectionner le premier radio bouton qui lui est lié
-		if($("#[value='activation']").attr("checked"))	 $("#[name='welcomeForm:statusRadio']:first").attr("checked","checked");  
-	  
+	  $("#[name='welcomeForm:statusRadio']:first").attr("checked","checked");
 		 
 		 
 	   if($("#[value='activation']").attr("checked") ||
@@ -24,10 +20,8 @@
 	    }
 	     else 
 	     if(this.value=="passwordchange" || this.value=="loginchange" || this.value=="datachange"){        
-	           $("#[id='welcomeForm:statusDiv']").hide();                           
-	           $("#[name='welcomeForm:statusRadio']:first").attr("checked","checked");                   
-	                         
-	          }
+	           $("#[id='welcomeForm:statusDiv']").hide();
+	           }
 	   });
 	 });
 	</script>
@@ -42,21 +36,17 @@
 	</h:panelGroup>
 	 -->
 	<h:form id="welcomeForm">
-	
 		<e:paragraph escape="false" value="#{msgs['WELCOME.PROCEDURE.TEXT.TOP']}" />
+		<t:selectOneRadio layout="pageDirection" required="true" value="#{accountController.currentAccount.process}" rendered="#{sessionController.currentUser==null}">
+     		<t:selectItems value="#{accountController.listBeanProcedureWithoutCas}" var="entry" itemLabel="#{msgs[entry.key]}" itemValue="#{entry.value}" ></t:selectItems>
+		</t:selectOneRadio>
+		<t:selectOneRadio layout="pageDirection" required="true" value="#{accountController.currentAccount.process}" rendered="#{sessionController.currentUser!=null}">
+    		<t:selectItems value="#{accountController.listBeanProcedureWithCas}" var="entry" itemLabel="#{msgs[entry.key]}" itemValue="#{entry.value}" ></t:selectItems>
+		</t:selectOneRadio>					
 	
-			<t:selectOneRadio layout="pageDirection" required="true" value="#{accountController.currentAccount.process}" rendered="#{sessionController.currentUser==null}">
-	           		
-	 			<t:selectItems value="#{accountController.listBeanProcedureWithoutCas}" var="entry" itemLabel="#{msgs[entry.key]}" itemValue="#{entry.value}" ></t:selectItems>
-			</t:selectOneRadio>
-			<t:selectOneRadio layout="pageDirection" required="true" value="#{accountController.currentAccount.process}" rendered="#{sessionController.currentUser!=null}">
-	           		
-	 			<t:selectItems value="#{accountController.listBeanProcedureWithCas}" var="entry" itemLabel="#{msgs[entry.key]}" itemValue="#{entry.value}" ></t:selectItems>
-			</t:selectOneRadio>					
-	
-	<t:div id="statusDiv">
+		<t:div id="statusDiv">
 		<e:paragraph escape="false" value="#{msgs['WELCOME.STATUS.TEXT.TOP']}" />		
-			<t:selectOneRadio id="statusRadio" required="true" value="#{accountController.currentAccount.status}">
+			<t:selectOneRadio id="statusRadio" required="false" value="#{accountController.currentAccount.status}">
 				<t:selectItems value="#{accountController.listBeanStatus}" var="entry" itemLabel="#{msgs[entry.key]}" itemValue="#{entry.value}"></t:selectItems>
 			</t:selectOneRadio>	
 		</t:div>
