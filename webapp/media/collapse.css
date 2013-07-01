@@ -7,9 +7,12 @@
 }
 .collapse p {padding:0 10px 1em}
 
+
+div.mainBlock { display: inline-block; }
+
 #switch, .switch {margin-bottom:5px; text-align:right}
 
-.expand{padding-bottom:.75em;width:50%;}
+.expand{padding-bottom:.75em; }
 
 .expand a {
   display:block;
