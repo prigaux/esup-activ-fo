@@ -60,8 +60,8 @@
 
 				<t:div styleClass="mainModifyLinkByCategory">
 					<t:div rendered="#{category.access}" styleClass="positionModifyLinkByCategory"> 
-						<t:htmlTag rendered="#{category.access}" styleClass="modifyLinkByCategory" value="a" ><h:outputText styleClass="labeltext" value="Editer" /></t:htmlTag>
-						<t:commandLink rendered="#{category.access}"action="#{accountController.pushChangeInfoPerso}"><h:outputText styleClass="labeltext" value="Valider" /></t:commandLink>
+						<t:htmlTag rendered="#{category.access}" styleClass="modifyLinkByCategory" value="a" ><h:outputText value="Editer" /></t:htmlTag>
+						<t:commandLink rendered="#{category.access}"action="#{accountController.pushChangeInfoPerso}"><h:outputText value="Valider" /></t:commandLink>
 					</t:div>
 					<t:htmlTag value="h2" styleClass="expand" rendered="#{category.access}"><h:outputText value="#{msgs[category.title]}" /></t:htmlTag>
 
