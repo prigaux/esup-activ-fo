@@ -116,8 +116,10 @@
 								</t:div>
 								<h:outputText style="display:none" styleClass="#{beanfield.name}constraint constraint" value="#{msgs[beanfield.constraint]}" rendered="#{beanfield.constraint!=null}" />
 								<h:outputText styleClass="constraint" value="#{msgs[beanfield.constraint]}" rendered="#{beanfield.constraint!=null&&(beanfield.fieldType=='selectOneRadio'||beanfield.fieldType=='selectManyCheckbox')}" />
-								<h:outputText style="display:none" styleClass="#{beanfield.name}constraint digestConstraint" value="#{msgs[beanfield.digestConstraint]}" rendered="#{beanfield.digestConstraint!=null}" />
-								<h:outputText styleClass="digestConstraint" value="#{msgs[beanfield.digestConstraint]}"	rendered="#{beanfield.digestConstraint!=null&&(beanfield.fieldType=='selectOneRadio'||beanfield.fieldType=='selectManyCheckbox')}" />
+								<t:div>
+									<h:outputText style="display:none" styleClass="#{beanfield.name}constraint digestConstraint" value="#{msgs[beanfield.digestConstraint]}" rendered="#{beanfield.digestConstraint!=null}" />
+									<h:outputText styleClass="digestConstraint" value="#{msgs[beanfield.digestConstraint]}"	rendered="#{beanfield.digestConstraint!=null&&(beanfield.fieldType=='selectOneRadio'||beanfield.fieldType=='selectManyCheckbox')}" />
+								</t:div>	
 							</h:column>
 
 							<h:column>
