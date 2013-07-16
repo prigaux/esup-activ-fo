@@ -144,12 +144,22 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	
 	private String normalize(String value)
 	{
+			//Suppression des caractères spéciaux susceptibles de permettre une injection reg exp
+			value=value.replaceAll("([*.+?^|$\\)\\(\\[\\]])","");
 			// Convertir une chaîne accentué en chaîne sans accent.
 			value = Normalizer.normalize(value, Normalizer.Form.NFD);
 			// Supprimer les espaces,les caractères diacritiques, le tiret et la virgule  
 			value=value.replaceAll("[\u0300-\u036F]|\\s|-|,", "");
 			
 			return value.toUpperCase();    	
+	}
+
+	
+	private String preventRegExInjection(String value){
+		
+		
+		
+		return value;
 	}
 
 	
