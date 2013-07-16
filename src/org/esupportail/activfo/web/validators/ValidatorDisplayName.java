@@ -22,7 +22,7 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	
 	/** But: 
 	 * Le champ "Nom usage" (displayName) est une combinaison possible des champs Nom usage, Nom de jeune fille, Pr�nom et autres pr�noms.
-	 * Les accents, les tiret,les espace et les majuscules sont acceptées.
+	 * Les accents, les tirets,les espaces, les virgules et les majuscules sont acceptées.
 	 * En entrée: Nom usage
 	 * En sortie:  Retourne un message d'erreur s'il ne correspond à aucune des combinaisons définies.
 	 * 
@@ -146,8 +146,8 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	{
 			// Convertir une chaîne accentué en chaîne sans accent.
 			value = Normalizer.normalize(value, Normalizer.Form.NFD);
-			// Supprimer les espaces,les caractères diacritiques et le tiret  
-			value=value.replaceAll("[\u0300-\u036F\\s|-]", "");
+			// Supprimer les espaces,les caractères diacritiques, le tiret et la virgule  
+			value=value.replaceAll("[\u0300-\u036F]|\\s|-|,", "");
 			
 			return value.toUpperCase();    	
 	}
