@@ -153,17 +153,6 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 			
 			return value.toUpperCase();    	
 	}
-
-	
-	private String preventRegExInjection(String value){
-		
-		
-		
-		return value;
-	}
-
-	
-	
 	
 	public Account getAccount() {
 		return account;
