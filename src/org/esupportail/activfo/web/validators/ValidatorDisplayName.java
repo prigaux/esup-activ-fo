@@ -78,12 +78,12 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 			// Récupérer la valeur des attributs de LDAP			
 			for (String attr:attrsTerm1){
 				String valueAttr=account.getAttribute(attr);
-				if(valueAttr!=null && !attrsTerm1Values.contains(valueAttr=normalize(valueAttr))) attrsTerm1Values.add(valueAttr);	
+				if(valueAttr!=null && !attrsTerm1Values.contains(valueAttr=normalize(Pattern.quote(valueAttr)))) attrsTerm1Values.add(valueAttr);	
 			}
 											
 			for (String attr:attrsTerm2){
 				String valueAttr=account.getAttribute(attr);
-				if(valueAttr!=null && !attrsTerm2Values.contains(valueAttr=normalize(valueAttr))) attrsTerm2Values.add(valueAttr);	
+				if(valueAttr!=null && !attrsTerm2Values.contains(valueAttr=normalize(Pattern.quote(valueAttr)))) attrsTerm2Values.add(valueAttr);	
 			}	
 			
 			String p1=this.getPattern(attrsTerm1Values);
@@ -144,8 +144,6 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 	
 	private String normalize(String value)
 	{
-			//Suppression des caractères spéciaux susceptibles de permettre une injection reg exp
-			value=value.replaceAll("([*.+?^|$\\)\\(\\[\\]])","");
 			// Convertir une chaîne accentué en chaîne sans accent.
 			value = Normalizer.normalize(value, Normalizer.Form.NFD);
 			// Supprimer les espaces,les caractères diacritiques, le tiret et la virgule  
