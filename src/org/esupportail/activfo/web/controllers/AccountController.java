@@ -585,7 +585,7 @@ public class AccountController extends AbstractContextAwareController implements
 		//Récupérer la valeur des données passées en paramètre (Date du jour, displayName, uid, supannEmpId, employeeType (corps))
 		List<String> attrCsvFile=Arrays.asList(attributesCsvFile.split(","));
 		for (int j=0;j<attrCsvFile.size();j++){	
-			attrValue= attrValue+separator+currentAccount.getAttribute(attrCsvFile.get(j));	
+			attrValue= attrValue+separator+join(currentAccount.getAttributes(attrCsvFile.get(j)),sep);	
 			header=header+separator+attrCsvFile.get(j);
 		}
 		logger.debug("header:"+header);
@@ -596,9 +596,8 @@ public class AccountController extends AbstractContextAwareController implements
 			String newAttrs=join(attrNewCsv.get(bf), sep);
 			String oldAttrs=join(attrOldCsv.get(bf), sep);
 			newvalueList=newvalueList+attrValue+separator+bf.getName()+separator+oldAttrs+separator+newAttrs+"\n";
-			logger.debug("newAttrs2:"+newAttrs);
+			logger.debug("newvalueList:"+newvalueList);
 		}
-		
 	
 		try {
 			BufferedReader lecteurAvecBuffer=null; 
