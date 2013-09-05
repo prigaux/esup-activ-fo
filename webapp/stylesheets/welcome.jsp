@@ -28,6 +28,7 @@
  
 	<%@include file="_navigation.jsp"%>
 	<e:section value="#{msgs['WELCOME.TITLE']}" />
+	<t:outputText escape="false" value="#{msgs['WELCOME.EXPLAIN']}" style="font-style:italic;color:#263F82"/>
 	
 	<e:messages/>
 	<!-- 
