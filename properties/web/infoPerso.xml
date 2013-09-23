@@ -421,6 +421,7 @@
 		<property name="converter" ref="ldapPhoneFaxConverter" />
 		<property name="validator" ref="validatorPhone"/>
 		<property name="constraint" value="PERSOINFO.PHONE.CONSTRAINT"/>
+		<property name="mailToDPI" value="true"/>
 	</bean>
 	
 	<bean

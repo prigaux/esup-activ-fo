@@ -74,6 +74,7 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	private List<Mailing> mailing;
 	private List<Mailing> mailingUpdateableField;
+	private List<Mailing> mailingPhoneModified;
 			
 	//liste des attributs pour l'affichage des informations personnelles
 	private String attributesInfPerso;
@@ -469,6 +470,10 @@ public class AccountController extends AbstractContextAwareController implements
 				HashMap<String,List<String>> oldValueNotUpdateableFiel=new HashMap<String,List<String>>();
 				HashMap<String,List<String>> newValueNotUpdateableFiel=new HashMap<String,List<String>>();
 				
+				HashMap<String,List<String>> oldValuePhone=new HashMap<String,List<String>>();
+				HashMap<String,List<String>> newValuePhone=new HashMap<String,List<String>>();
+				
+				
 				// parcourir les champs
 				while(it.hasNext()){
 					BeanField beanPersoInfo=(BeanField)it.next();
@@ -498,6 +503,9 @@ public class AccountController extends AbstractContextAwareController implements
 					if (beanPersoInfo.isSendMail())
 						this.setMailSendingValues(beanPersoInfo, oldValueNotUpdateableFiel, newValueNotUpdateableFiel);
 					
+					//Si le champ telephone est modifié, envoyer à intervention DPI
+					if (beanPersoInfo.isMailToDPI())
+						this.setMailSendingValues(beanPersoInfo, oldValuePhone, newValuePhone);
 											
 					i++;
 				}
@@ -536,6 +544,12 @@ public class AccountController extends AbstractContextAwareController implements
 					for(Mailing m:mailingUpdateableField)
 						if(m.isAllowed(currentAccount))
 							m.sendMessage(currentAccount,oldValueNotUpdateableFiel,newValueNotUpdateableFiel);
+				//Anvoi de mail à DPI si tel modifié
+				if(!newValuePhone.isEmpty())
+					for(Mailing m:mailingPhoneModified)
+						if(m.isAllowed(currentAccount))
+							m.sendMessage(currentAccount,oldValuePhone,newValuePhone);
+				
 				
 				// Rediriger vers la page ad�quate
 				if (activ){
@@ -1363,6 +1377,14 @@ public class AccountController extends AbstractContextAwareController implements
 		this.mailingUpdateableField = mailingUpdateableField;
 	}
 
+	public List<Mailing> getMailingPhoneModified() {
+		return mailingPhoneModified;
+	}
+
+	public void setMailingPhoneModified(List<Mailing> mailingPhoneModified) {
+		this.mailingPhoneModified = mailingPhoneModified;
+	}
+	
 	public String getAttributesCsvFile() {
 		return attributesCsvFile;
 	}
