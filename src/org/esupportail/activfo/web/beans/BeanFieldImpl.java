@@ -57,7 +57,6 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	private String digestConstraint;
 	
 	private boolean sendMail;// envoyer un mail au gestionnaire lorsque un champ est udaptable sur LDAP
-	private boolean mailToDPI; // envoyéer un mail intervention DPI
 	
 	private  UploadedFile fileUpLoad;
 	private int deleteJpegPhoto=0; 
@@ -422,12 +421,4 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	public void setDeleteJpegPhoto(int deleteJpegPhoto) {
 		this.deleteJpegPhoto = deleteJpegPhoto;
 	}
-	public boolean isMailToDPI() {
-		return mailToDPI;
-	}
-
-	public void setMailToDPI(boolean mailToDPI) {
-		this.mailToDPI = mailToDPI;
-	}
-
 }

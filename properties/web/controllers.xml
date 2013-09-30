@@ -113,13 +113,6 @@
 				<ref bean="mailingUpdateableFieldGest"/>
 			</list>
 		</property>
-		<!-- mailing suite à une modification du champ tel	-->
-		<property name="mailingPhoneModified">
-			<list>
-				<ref bean="mailingToDPI"/>
-			</list>
-		</property>
-																
 														
 		<property name="exceptionController" ref="exceptionController"/>		
 		<property name="targetService" value="${cas.targetService}"/>
@@ -304,24 +297,6 @@
 		  </map>
 		</property>
 	</bean>
-	
-	<bean id="mailingToDPI" parent="mailingUpdateableFieldGest">		
-		<property name="mail2Gest" value="${mailing.mailToDPI}"/>
-		<property name="access">
-			<map>
-		    	<entry key="eduPersonAffiliation">
-  		      		<list>  		      					        		
-		        		<value>employee</value>		
-		        		<value>staff</value>
-		        		<value>researcher</value>
-		        		<value>faculty</value>	
-		        		<value>teacher</value>		        		        		                
-		    		</list>
-		    	</entry>
-		  </map>
-		</property>
-	</bean>
-	
 	
 	<!-- uncomment this bean and include _debug.jsp to get debug info
 	<bean id="debugController"

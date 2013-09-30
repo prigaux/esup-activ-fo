@@ -96,7 +96,4 @@ public interface BeanField<T> {
 	public int getDeleteJpegPhoto();
 	public void setDeleteJpegPhoto(int deleteJpegPhoto);
 	
-	public boolean isMailToDPI();
-	public void setMailToDPI(boolean mailToDPI);
-	
 }
