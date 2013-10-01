@@ -51,7 +51,7 @@
 			<!-- Parcourir les catégories et générer dynamiquement les onglets -->
 			<t:htmlTag styleClass="processSteps" value="ul">
 				<t:dataList value="#{accountController.beanData}"  var="category">
-					<t:htmlTag styleClass="homeStep activeClass" value="li" rendered="#{category.access}" >
+					<t:htmlTag styleClass="homeStep" value="li" rendered="#{category.access}" >
 						<t:htmlTag  value="a" styleClass="hrefId"><h:outputText rendered="#{category.access}" value="#{msgs[category.title]}" /></t:htmlTag>
 					</t:htmlTag>
 				</t:dataList>
