@@ -26,8 +26,6 @@
 		
 	});
 </script>
-<script type="text/javascript" src="/media/scripts/block.js"></script>
-
 
 <e:page stringsVar="msgs" menuItem="account"
 	locale="#{sessionController.locale}">
@@ -159,7 +157,7 @@
 								</t:htmlTag>
 								<t:htmlTag value="td" styleClass="columnHelp">									
 									<t:div styleClass="helppanel" >
-										<t:div>	<e:paragraph value="#{msgs['DATACHANGE.TEXT.TOP']}" escape="false"/>
+										<t:div>	<e:paragraph value="#{msgs['DATACHANGE.TEXT.TOP']}"escape="false"/>
 										</t:div>
 										<t:div>	<h:outputText value="#{msgs['DATACHANGE.TEXT.LEGEND']}" /></t:div>
 										<t:div>
