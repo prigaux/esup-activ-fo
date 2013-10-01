@@ -1,14 +1,16 @@
 
 $(function() {
+	// Mettre la premiere ligne des champs multi évalués à benaName+show
    $(".hide").load(function() {
     	if( $("." + $(this).attr("alt")+"show").size()==0){
     		$("." + $(this).attr("alt")+"hide:first").removeClass().addClass($(this).attr("alt")+"show");
+    		
     	}
     });
 	
 	$(".show").click(function () {
 	    $("." + $(this).attr("alt")+"hide:first").show();
-	    $("." + $(this).attr("alt")+"hide:first").removeClass().addClass($(this).attr("alt")+"show");
+	    $(("." + $(this).attr("alt")+"hide:first").removeClass().addClass($(this).attr("alt")+"show")).show(500);
 	});
 	
 	$(".hide").click(function () {
@@ -42,26 +44,26 @@ $(function() {
 	});
 	
 	//Si l'utilisateur clique sur le lien "Editer", n'afficher en modification que les champs de la catégorie sélectionnée 
-	$(".modifyLinkByCategory").each(function(){		 
+	$(".modifyByCategory").each(function(){	
 	 $(this).click(function() {
-		 $(this).closest('.mainModifyLinkByCategory').find("[class*='_modifyLink']").click();
+		 $(this).closest('.mainModifyLinkByCategory').find("[class*='_modify']").click();
+		 // Cacher le champ valider
+		 $(this).closest('.mainModifyLinkByCategory').find(".validate").show();
+		 $(this).hide();
 	    return false;
 	  });
 	});	
 	
-	
-	$("[class$='_modifyLink']").click(function () {	
-		$("." + $(this).attr("class").replace(/_modifyLink.*/,"")+"show").show(500);
-		$("." + $(this).attr("class").replace(/_modifyLink.*/,"")+"modify").show(500);				
-		$("." + $(this).attr("class").replace(/_modifyLink.*/,"")+"output").hide();	
-		$("." + $(this).attr("class").replace(/_modifyLink.*/,"")+"constraint").show();
-		$(this).hide();				
-	});
-	
-	$("#AllModifyLink").click(function () {	
-		$("[class*='_modifyLink']").click();		
+
+	// modifier les champs
+	$("[class*='_modify']").click(function () {	
+		var fieldClass=$(this).attr('class');
+		var field=fieldClass.substring(fieldClass.indexOf("_"),fieldClass.lenght);
+		
+		$("." + $(this).attr("class").replace(field,"")+"show").show(500);
+		$("." + $(this).attr("class").replace(field,"")+"modify").show(500);				
+		$("." + $(this).attr("class").replace(field,"")+"output").hide();	
+		$("." + $(this).attr("class").replace(field,"")+"constraint").show();		
 	});
 	
 });
-
-
