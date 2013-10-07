@@ -1,50 +1,45 @@
 <%@include file="_include.jsp"%>
 <%@include file="_includeScript.jsp"%>
 <%@include file="_navigation.jsp"%>
+<script type="text/javascript" src="/media/scripts/accountDataTabs.js"></script>
 <script>
-	$(function() {
-		// modifier le DOM pour pouvoir utiliser la méthode tabs() de jquery UI 
-		var id=1;
-		var id2=1;
-		 
-		$(".hrefId").each(function(){	
-		 $(this).attr("href","#tabs-"+id);
-		 id=id+1;
-		});	
-		
-		$(".hrefIdDetail").each(function(){
-		 $(this).attr("id","tabs-"+id2);
-		 id2=id2+1;
-		});	
-		// Exécuter la méthode tabs permettant de générer la gestion des onglets 
-		$(".tabs" ).tabs();
-		
-	});
+$(function() {	
+	// Afficher l'onglet Données affichées par défaut
+	$( ".tabs" ).tabs({ active: 1 });
+	//simuler le click
+	$('.hrefFirstTab').attr("onclick", "simulateLinkClick('accountForm:preview');");	
+});
 </script>
 
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
-<e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" />
-
-	<t:div styleClass="secondStepImage2fleches">
-	<t:htmlTag styleClass="processSteps" value="ul">
-	    <t:htmlTag styleClass="homeStep" value="li"><t:graphicImage title="Accueil" value="/media/images/home.jpg"  style="border: 0;cursor:pointer;" onclick="simulateLinkClick('restart:restartButton');"/></t:htmlTag>		
-		<t:htmlTag styleClass="firstImage2" value="li"><t:commandLink styleClass="commandLink" onclick="simulateLinkClick('accountForm:preview');"><t:outputText escape="false" value="#{msgs['DATACHANGE.MODIFICATION.TEXT']}"/></t:commandLink></t:htmlTag>
-		<t:htmlTag styleClass="currentTab" value="li"><t:outputText escape="false" value="#{msgs['DATACHANGE.DISPLAY.TEXT']}"/></t:htmlTag>
-	</t:htmlTag>
-	</t:div>
-	<e:paragraph escape="false" value="#{msgs['PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL']}"/>
-	<e:paragraph escape="false" value="#{msgs['DATACHANGE.DISPLAY.TOP']}"/>
-
-			<t:div styleClass="tabs" >
-			<!-- Parcourir les catégories et générer dynamiquement les onglets -->
-			<t:htmlTag styleClass="processSteps" value="ul">
-				<t:dataList value="#{accountController.beanData}"  var="category">
-					<t:htmlTag styleClass="homeStep" value="li" rendered="#{category.access}" >
-						<t:htmlTag  value="a" styleClass="hrefId"><h:outputText rendered="#{category.access}" value="#{msgs[category.title]}" /></t:htmlTag>
-					</t:htmlTag>
-				</t:dataList>
+	<e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" />
+	<t:div styleClass="tabs" >
+		<t:htmlTag styleClass="processSteps" value="ul">
+				<t:htmlTag styleClass="homeStep" value="li">
+					<t:graphicImage title="Accueil" value="/media/images/home.jpg"style="border: 0;cursor:pointer;"onclick="simulateLinkClick('restart:restartButton');" />
+				</t:htmlTag>				
+				<t:htmlTag styleClass="homeStep" value="li" >
+					<t:htmlTag  value="a" styleClass="hrefFirstTab"><t:outputText value="#{msgs['DATACHANGE.MODIFICATION.TEXT']}" /></t:htmlTag>
+				</t:htmlTag>
+				<t:htmlTag styleClass="homeStep" value="li">
+					<t:htmlTag  value="a" styleClass="hrefSecondTab"><t:outputText value="#{msgs['DATACHANGE.DISPLAY.TEXT']}" /></t:htmlTag>
+				</t:htmlTag>
 			</t:htmlTag>
-			<!-- Pour chaque catégorie récupérer les données associées -->	
+		
+		<t:div styleClass="idFirstTab" >
+		</t:div>		
+		<t:div styleClass="idSecondTab" >
+			<e:paragraph escape="false" value="#{msgs['PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL']}"/>
+			<t:div styleClass="moretabs" >
+				<!-- Parcourir les catégories et générer dynamiquement les onglets -->
+				<t:htmlTag styleClass="processSteps" value="ul">
+					<t:dataList value="#{accountController.beanData}"  var="category">
+						<t:htmlTag styleClass="homeStep" value="li" rendered="#{category.access}" >
+							<t:htmlTag  value="a" styleClass="hrefId"><h:outputText rendered="#{category.access}" value="#{msgs[category.title]}" /></t:htmlTag>
+						</t:htmlTag>
+					</t:dataList>
+				</t:htmlTag>
+				<!-- Pour chaque catégorie récupérer les données associées -->	
 				<t:dataList value="#{accountController.beanData}"  var="category" >	
 					<t:div styleClass="hrefIdDetail" rendered="#{category.access}">
 						<t:htmlTag value="table">
@@ -67,14 +62,22 @@
 										</h:column>
 									</h:dataTable>
 								</t:htmlTag>
+								<t:htmlTag value="td" styleClass="columnHelp">									
+									<t:div styleClass="helppanel" >
+										<t:div >	<e:paragraph escape="false" value="#{msgs['DATACHANGE.DISPLAY.TOP']}">
+														<f:param value="#{msgs[category.title]}" />
+													</e:paragraph> 
+										</t:div>
+									</t:div>
+								</t:htmlTag>
 							
 							</t:htmlTag>
 						</t:htmlTag>
 					</t:div>
-				</t:dataList>	
-			
-		</t:div>		
-		
+				</t:dataList>
+			</t:div>
+		</t:div>
+	</t:div>	
 	
 	<h:form id="accountForm" style="display:none;" >
 		<e:commandButton id="preview" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}"/>
