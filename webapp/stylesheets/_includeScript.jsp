@@ -4,3 +4,4 @@
 
 <style type="text/css">@import url("/media/esupActivation.css");</style>
 <style type="text/css">@import url("/media/jquery-ui-1.10.3.custom.css");</style>
+<style type="text/css">@import url("/media/jquery-ui-1.10.3.customs.surcharge.css");</style>
