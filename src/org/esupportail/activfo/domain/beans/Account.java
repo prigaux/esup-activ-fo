@@ -40,6 +40,8 @@ public class Account implements InitializingBean,Resettable{
 	private String status;
 	
 	private String process;
+	
+	private String eduPersonPrimaryAffiliation;
 		
 	public Account() {
 		super();
@@ -171,6 +173,15 @@ public class Account implements InitializingBean,Resettable{
 		this.process = process;
 	}
 	
+	
+	public String getEduPersonPrimaryAffiliation() {
+		return eduPersonPrimaryAffiliation;
+	}
+
+	public void setEduPersonPrimaryAffiliation(String eduPersonPrimaryAffiliation) {
+		this.eduPersonPrimaryAffiliation = eduPersonPrimaryAffiliation;
+	}
+
 	/* (non-Javadoc) 
 	* @see org.esupportail.commons.web.controllers.Resettable#reset() 
 	*/

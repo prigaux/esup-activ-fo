@@ -132,8 +132,10 @@
 									</t:htmlTag>
 									<t:htmlTag value="td" styleClass="columnHelp">									
 										<t:div styleClass="helppanel" >
-											<t:div>	<e:paragraph value="#{msgs['DATACHANGE.TEXT.TOP']}"escape="false"/>
+											<t:div>	<e:paragraph value="#{msgs['DATACHANGE.STUDENT.TEXT.TOP']}" rendered="#{accountController.currentAccount.eduPersonPrimaryAffiliation=='student'}" escape="false"/>
+													<e:paragraph value="#{msgs['DATACHANGE.TEXT.TOP']}" rendered="#{accountController.currentAccount.eduPersonPrimaryAffiliation!='student'}" escape="false"/>
 											</t:div>
+										
 											<t:div>	<h:outputText value="#{msgs['DATACHANGE.TEXT.LEGEND']}" /></t:div>
 											<t:div>
 												<h:panelGrid >

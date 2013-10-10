@@ -71,6 +71,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String accountCodeKey;
 	private String accountGestKey;
 	private String accountPossibleChannelsKey;
+	private String accountEduPersonPrimaryAffiliation;
 	
 	private List<Mailing> mailing;
 	private List<Mailing> mailingUpdateableField;
@@ -851,12 +852,12 @@ public class AccountController extends AbstractContextAwareController implements
 			attributes.put(accountCodeKey,accountCodeValue);
 		}
 		
-		currentAccount.setAttributes(attributes);
-		
+		currentAccount.setAttributes(attributes);		
 		currentAccount.setId(currentAccount.getAttribute(accountIdKey));
 		currentAccount.setMail(currentAccount.getAttribute(accountMailKey));
 		currentAccount.setEmailPerso(currentAccount.getAttribute(accountMailPersoKey));
 		currentAccount.setPager(currentAccount.getAttribute(accountPagerKey));
+		currentAccount.setEduPersonPrimaryAffiliation(currentAccount.getAttribute(accountEduPersonPrimaryAffiliation));
 	}
 			
 	private void buildChannels(List<String>listPossibleChannels){
@@ -1034,6 +1035,16 @@ public class AccountController extends AbstractContextAwareController implements
 
 	public void setAccountCodeKey(String accountCodeKey) {
 		this.accountCodeKey = accountCodeKey;
+	}
+	
+
+	public String getAccountEduPersonPrimaryAffiliation() {
+		return accountEduPersonPrimaryAffiliation;
+	}
+
+	public void setAccountEduPersonPrimaryAffiliation(
+			String accountEduPersonPrimaryAffiliation) {
+		this.accountEduPersonPrimaryAffiliation = accountEduPersonPrimaryAffiliation;
 	}
 
 	public boolean isReinit() {
