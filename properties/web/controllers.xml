@@ -86,7 +86,8 @@
 		<property name="accountCodeKey" value="${account.key.code}"/>
 		<property name="accountGestKey" value="${account.key.gest}"/>
 		<property name="accountPossibleChannelsKey" value="${account.key.possibleChannels}"/>
-				
+		<property name="accountEduPersonPrimaryAffiliation" value="${account.key.eduPersonPrimaryAffiliation}"/>
+			
 		<property name="currentAccount" ref="account"/>
 		
 		<property name="procedureActivation" value="${view.procedure.activation}"/>
@@ -141,7 +142,7 @@
 			<list>
 				<ref bean="beanActivation"/>
 				<ref bean="beanReinitialisation"/>
-				<!-- 	<ref bean="beanDataChange"/> --> 
+				<ref bean="beanDataChange"/> 
 				<ref bean="beanPasswordChange"/>
 				<!--
 				<ref bean="beanLoginChange"/>
