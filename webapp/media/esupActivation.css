@@ -250,10 +250,10 @@ a:hover {
 	}
 	.columnHelp .helppanel {
 		width: 300px;
-   		border-style: none none none solid;
+   		border-style: none none none solid ;
+   		border-color:#DDDDDD;
     	border-width:  0 0 0 1px;
     	padding: 5px 0px 10px 10px;
-    	color::#222222;
 	}
 	.columnData {
 		width: 750px;
