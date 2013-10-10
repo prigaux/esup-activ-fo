@@ -46,10 +46,7 @@ $(function() {
 	//Si l'utilisateur clique sur le lien "Editer", n'afficher en modification que les champs de la catégorie sélectionnée 
 	$(".modifyByCategory").each(function(){	
 	 $(this).click(function() {
-		 $(this).closest('.mainModifyLinkByCategory').find("[class*='_modify']").click();
-		 // Cacher le champ valider
-		 $(this).closest('.mainModifyLinkByCategory').find(".validate").show();
-		 $(this).hide();
+		$(this).closest('.mainModifyLinkByCategory').find("[class*='_modify']").click();
 	    return false;
 	  });
 	});	
@@ -63,7 +60,10 @@ $(function() {
 		$("." + $(this).attr("class").replace(field,"")+"show").show(500);
 		$("." + $(this).attr("class").replace(field,"")+"modify").show(500);				
 		$("." + $(this).attr("class").replace(field,"")+"output").hide();	
-		$("." + $(this).attr("class").replace(field,"")+"constraint").show();		
+		$("." + $(this).attr("class").replace(field,"")+"constraint").show();
+		 // Afficher le bouton Confirmer, cacher celui de Editer
+		 $(this).closest('.mainModifyLinkByCategory').find(".validate").show();
+		 $(this).closest('.mainModifyLinkByCategory').find(".modifyByCategory").hide();
 	});
 	
 });
