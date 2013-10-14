@@ -42,6 +42,8 @@ public class Account implements InitializingBean,Resettable{
 	private String process;
 	
 	private String eduPersonPrimaryAffiliation;
+	
+	private String supannCivilite;
 		
 	public Account() {
 		super();
@@ -180,6 +182,15 @@ public class Account implements InitializingBean,Resettable{
 
 	public void setEduPersonPrimaryAffiliation(String eduPersonPrimaryAffiliation) {
 		this.eduPersonPrimaryAffiliation = eduPersonPrimaryAffiliation;
+	}
+	
+
+	public String getSupannCivilite() {
+		return supannCivilite;
+	}
+
+	public void setSupannCivilite(String supannCivilite) {
+		this.supannCivilite = supannCivilite;
 	}
 
 	/* (non-Javadoc) 

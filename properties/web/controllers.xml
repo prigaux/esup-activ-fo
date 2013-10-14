@@ -87,7 +87,9 @@
 		<property name="accountGestKey" value="${account.key.gest}"/>
 		<property name="accountPossibleChannelsKey" value="${account.key.possibleChannels}"/>
 		<property name="accountEduPersonPrimaryAffiliation" value="${account.key.eduPersonPrimaryAffiliation}"/>
-			
+		<property name="accountDisplayName" value="${account.key.displayname}"/>
+		<property name="accountSupannCivilite" value="${account.key.civilite}"/>
+				
 		<property name="currentAccount" ref="account"/>
 		
 		<property name="procedureActivation" value="${view.procedure.activation}"/>
