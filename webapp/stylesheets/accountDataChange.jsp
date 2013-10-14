@@ -22,7 +22,14 @@
 			</t:htmlTag>
 		
 			<t:div styleClass="idFirstTab" >
-			<e:messages />
+				<e:messages />
+				<!-- Appeler la méthode getBeanData qui récupère les données, pour afficher la civilité et le displayName
+				car avant cette méthode, aucune données n'est récupérées
+				 -->
+				<t:outputText value="#{accountController.beanData}" style="display:none"></t:outputText>
+				<div>
+					<h:outputText style="text-transform : capitalize;"value="#{accountController.currentAccount.supannCivilite} #{accountController.currentAccount.displayName}" />
+				</div>
 				
 				<t:div styleClass="moretabs" >
 					<!-- Parcourir les catégories et générer dynamiquement les onglets -->
@@ -53,9 +60,6 @@
 													<!-- Afficher en mode affichage ( dès debut)  -->
 													<t:div	styleClass="#{beanfield.name}output portlet-section-text output" rendered="#{beanfield.disable&&beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'&&!sub.convertedValue}">
 														<h:outputText value="#{sub.value}" rendered="#{beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'}" converter="#{beanfield.converter}" />
-														
-														
-														
 													</t:div>
 													<t:div	styleClass="#{beanfield.name}output portlet-section-text output" rendered="#{!beanfield.disable&&beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'&&!sub.convertedValue}">
 														<h:outputText styleClass="#{beanfield.name}_modifyfield" value="#{sub.value}" rendered="#{beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'}" converter="#{beanfield.converter}" />
