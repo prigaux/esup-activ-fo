@@ -66,4 +66,28 @@ $(function() {
 		 $(this).closest('.mainModifyLinkByCategory').find(".modifyByCategory").hide();
 	});
 	
+	// Lorsque l'utilisateur modifie un champ nécessitant la validation de la DRH, 
+	// un popup s'affiche lui avertissant que le la donnée modifiée ne sera pas immédiatement perise en compte à l'écran 
+	$(".digestConstraintPopup").focusout(function() {
+		// Si les valeurs sont différentes affichée la popop
+		if(this.defaultValue!=this.value){
+		dialog("La donn\u00E9e que vous avez modifi\u00E9e, ne sera pas prise en compte imm\u00E9diatement sur l'\u00E9cran. Elle sera effective apr\u00E8s la validation de la DRH.");
+		}
+		
+	});
+	function dialog(a){
+		$("<div />", { text: a }).dialog({
+			title:"Attention",
+		    width: 370,
+	        position: [300,200],
+	        buttons: {
+	            "Ok": function() {
+	                $(this).dialog("close");
+	            }
+	        }
+	    });
+	};
+	
+	
+	
 });

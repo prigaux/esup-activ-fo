@@ -6,8 +6,8 @@
 <e:page stringsVar="msgs" menuItem="account"
 	locale="#{sessionController.locale}">
 	<e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" />
-	
-	<h:form id="accountForm" enctype="multipart/form-data">
+
+<h:form id="accountForm" enctype="multipart/form-data">
 		<t:div styleClass="tabs" >
 			<t:htmlTag styleClass="processSteps" value="ul">
 				<t:htmlTag styleClass="homeStep" value="li">
@@ -68,9 +68,12 @@
 													<!-- Affcher en mode modification ( click sur modifier) -->
 													<t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue)}" style="display:none;" styleClass="#{beanfield.name}show portlet-section-text">
 														<!-- Champs n'ayant pas besoin de confirmation de la DRH -->
-														<h:inputText value="#{sub.value}" disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}" required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&(sub.value!=''||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}" />
+														<h:inputText value="#{sub.value}" disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}" required="#{beanfield.required}" size="35" 
+														rendered="#{beanfield.fieldType=='inputText'&&beanfield.digestConstraint==null&&beanfield.validator!=null&&(sub.value!=''||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}" />
 														<!-- Champs nécessitant confirmation de la DRH -->
-														<h:inputText value="#{sub.value}" disabled="#{beanfield.disable}" converter="#{beanfield.converter}" required="#{beanfield.required}" size="35"rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}" />
+														<h:inputText styleClass="digestConstraintPopup" value="#{sub.value}" disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}" required="#{beanfield.required}" size="35" 
+														rendered="#{beanfield.fieldType=='inputText'&&beanfield.digestConstraint!=null&&beanfield.validator!=null&&(sub.value!=''||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}" />
+														<h:inputText styleClass="digestConstraintPopup" value="#{sub.value}" disabled="#{beanfield.disable}" converter="#{beanfield.converter}" required="#{beanfield.required}" size="35"rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}" />
 														<!-- Champs pour liste déroulante -->
 														<h:selectOneMenu value="#{sub.value}" style="max-width:23em"rendered="#{beanfield.fieldType=='selectOneMenu'&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}">
 															<f:selectItems value="#{beanfield.displayItems}" />
