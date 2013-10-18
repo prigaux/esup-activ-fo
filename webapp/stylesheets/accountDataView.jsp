@@ -82,10 +82,6 @@ $(function() {
 	<h:form id="accountForm" style="display:none;" >
 		<e:commandButton id="preview" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}"/>
 	</h:form>
-	<h:form>
-	  <e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
-	</h:form>
-	
 	<h:form id="restart" style="display:none;"  >
 	  <e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
 	</h:form>
