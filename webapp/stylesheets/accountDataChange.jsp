@@ -114,8 +114,7 @@
 												<h:outputText styleClass="constraint" value="#{msgs[beanfield.constraint]}" rendered="#{beanfield.constraint!=null&&(beanfield.fieldType=='selectOneRadio'||beanfield.fieldType=='selectManyCheckbox')}" />
 												<!--Afficher les messages d'information (les données seront valides ultérieurement)  -->
 												<t:div>
-													<h:outputText style="display:none" styleClass="#{beanfield.name}constraint digestConstraint" value="#{msgs[beanfield.digestConstraint]}" rendered="#{beanfield.digestConstraint!=null}" />
-													<h:outputText styleClass="digestConstraint" value="#{msgs[beanfield.digestConstraint]}"	rendered="#{beanfield.digestConstraint!=null&&(beanfield.fieldType=='selectOneRadio'||beanfield.fieldType=='selectManyCheckbox')}" />
+													<h:outputText style="display:none" styleClass="digestConstraint" value="#{msgs[beanfield.digestConstraint]}" rendered="#{beanfield.digestConstraint!=null}" />
 												</t:div>
 											</h:column>
 											<!--Afficher les boutons ajouter, supprimer et l'aide  -->
