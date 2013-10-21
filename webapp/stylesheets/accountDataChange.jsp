@@ -58,7 +58,10 @@
 											<h:column>
 												<t:dataList value="#{beanfield.values}" var="sub" >
 													<!-- Afficher en mode affichage ( dès debut)  -->
-													<t:div styleClass="#{beanfield.name}output portlet-section-text output" rendered="#{beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'&&!sub.convertedValue}">
+													<t:div	styleClass="#{beanfield.name}output portlet-section-text output" rendered="#{beanfield.disable&&beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'&&!sub.convertedValue}">
+														<h:outputText value="#{sub.value}" rendered="#{beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'}" converter="#{beanfield.converter}" />
+													</t:div>
+													<t:div	styleClass="#{beanfield.name}output portlet-section-text output" rendered="#{!beanfield.disable&&beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'&&!sub.convertedValue}">
 														<h:outputText styleClass="#{beanfield.name}_modifyfield" value="#{sub.value}" rendered="#{beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'}" converter="#{beanfield.converter}" />
 													</t:div>
 													
