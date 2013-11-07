@@ -49,7 +49,7 @@
 									<t:htmlTag value="td" styleClass="columnData">
 										<h:dataTable value="#{category.profilingListBeanField}"	rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn,fourthColumn">
 											<h:column>
-												<t:outputText styleClass="labeltexttop#{beanfield.size>1}"	value="#{msgs[beanfield.key]}"rendered="#{beanfield.fieldType!='inputFileUpload'}" />
+												<t:outputText styleClass="labeltexttop#{beanfield.size>1} portlet-section-text"	value="#{msgs[beanfield.key]}"rendered="#{beanfield.fieldType!='inputFileUpload'}" />
 												<t:div rendered="#{beanfield.fieldType=='inputFileUpload'}">
 													<h:graphicImage value="#{beanfield.value}" width="100px"height="100px" styleClass="photo" />
 												</t:div>
@@ -95,14 +95,14 @@
 												</t:div>
 												
 												<!--Afficher la données sous forme de checkbox  -->
-												<t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}">
-													<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'}" validator="#{beanfield.validator.validate}" layout="pageDirection">
+												<t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}" >
+													<h:selectManyCheckbox value="#{beanfield.selectedItems}" styleClass="portlet-section-text" rendered="#{beanfield.fieldType=='selectManyCheckbox'}" validator="#{beanfield.validator.validate}" layout="pageDirection">
 														<f:selectItems value="#{beanfield.displayItems}" />
 													</h:selectManyCheckbox>
 												</t:div>
 												<!--Afficher la données sous forme de radio bouton  -->
-												<t:div rendered="#{beanfield.fieldType=='selectOneRadio'}" >
-													<h:selectOneRadio value="#{beanfield.value}" rendered="#{beanfield.fieldType=='selectOneRadio'}">
+												<t:div rendered="#{beanfield.fieldType=='selectOneRadio'}"  >
+													<h:selectOneRadio value="#{beanfield.value}" styleClass="portlet-section-text" rendered="#{beanfield.fieldType=='selectOneRadio'}">
 														<f:selectItems value="#{beanfield.displayItems}" />
 													</h:selectOneRadio>
 												</t:div>
@@ -133,7 +133,7 @@
 										</h:dataTable>
 									</t:htmlTag>
 									<t:htmlTag value="td" styleClass="columnHelp">									
-										<t:div styleClass="helppanel" >
+										<t:div styleClass="helppanel portlet-section-text" >
 											<t:div>	<e:paragraph value="#{msgs['DATACHANGE.STUDENT.TEXT.TOP']}" rendered="#{accountController.currentAccount.eduPersonPrimaryAffiliation=='student'}" escape="false"/>
 													<e:paragraph value="#{msgs['DATACHANGE.TEXT.TOP']}" rendered="#{accountController.currentAccount.eduPersonPrimaryAffiliation!='student'}" escape="false"/>
 											</t:div>
