@@ -249,14 +249,14 @@ a:hover {
 	   margin-left: 1em;
 	}
 	.columnHelp .helppanel {
-		width: 300px;
+		max-width: 300px;
    		border-style: none none none solid ;
    		border-color:#DDDDDD;
     	border-width:  0 0 0 1px;
     	padding: 5px 0px 10px 10px;
 	}
 	.columnData {
-		width: 750px;
+		max-width: 750px;
    }
 	.legendlabel {
 		color: #A7A9AC;
