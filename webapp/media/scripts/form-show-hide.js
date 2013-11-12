@@ -70,7 +70,7 @@ $(function() {
 	});
 	// Lorsque l'utilisateur modifie un champ nécessitant la validation de la DRH, 
 	// un popup s'affiche lui avertissant que le la donnée modifiée ne sera pas immédiatement prise en compte à l'écran 
-	$("[class*='show']").focusout(function () {	
+	$("[class*='show']").change(function () {	
 		var getFirstClass = $(this).attr('class').split(' ')[0];
 		getFirstClass=getFirstClass.replace("show","");
 		getFirstClass=getFirstClass+"toValidateDRH";
