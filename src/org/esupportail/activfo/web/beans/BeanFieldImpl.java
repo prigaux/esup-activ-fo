@@ -35,6 +35,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private List<String> selectedItems=new ArrayList<String>(); // les champs sélectionnés par l'utilisateur
 	private List<SelectItem> displayItems=new ArrayList<SelectItem>(); // les champs à afficher à l'utilisateur
+	private List<ProfileItem> displayProfileItems=new ArrayList<ProfileItem>();// variable globale contenant la liste des items du beanSMSAgreement
 	private List<String> stringDisplayItems=new ArrayList<String>();
 	
 	private List<BeanMultiValue> hideItems=new ArrayList<BeanMultiValue>(); // valeurs recupérées du BO mais non exploitées par le FO. Lors de l'enregistrement, à renvoyer au BO
@@ -135,6 +136,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		hideItems.clear();
 		if(MANYCHECKBOX.equals(fieldType)){			
 			if(useDisplayItems){
+				initStringDisplayItems();
 				for(BeanMultiValue bmv : values)
 					if(stringDisplayItems.contains(bmv.getValue()))
 						selectedItems.add(bmv.getValue());
@@ -151,7 +153,6 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 		if(INPUTFILE.equals(fieldType)){
 			if(!values.get(0).getValue().isEmpty())	{
-				logger.debug("photo 1:"+values.get(0).getValue());
 				deleteJpegPhoto=1;}
 			else {deleteJpegPhoto=0;}
 				
@@ -263,7 +264,23 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	 * @return the displayItems
 	 */
 	public List<SelectItem> getDisplayItems() {
-		return displayItems;
+		return this.displayItems;
+	}
+	
+	private void initStringDisplayItems(){
+		if(displayProfileItems!=null){
+			for(ProfileItem si:displayProfileItems){
+				if (si!=null && si.getValue()!=null && si.isAllowed())	 stringDisplayItems.add(String.valueOf(si.getValue()));
+				
+			}
+			List<SelectItem> profileDisplayItems= new ArrayList<SelectItem>() ;
+			
+			for(ProfileItem si:displayProfileItems)
+				if ( si!=null && si.getValue()!=null && si.isAllowed()){
+					profileDisplayItems.add(si);
+		}
+			this.displayItems=profileDisplayItems;
+		}
 	}
 	/**
 	 * @param displayItems the displayItems to set
@@ -275,6 +292,18 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 			 //i18n
 		}
 		this.displayItems = displayItems;
+	}
+
+	public void setDisplayProfileItems(List<ProfileItem> displayProfileItems) {
+		/* Alimenter la variable globale this.displayProfileItems en effet
+		 * setDisplayProfileItems est appelé une seule fois lors du lancement de l'application,les items sont perdus en mode connecté. Ces données stockées dans la variable globale
+		 * seront utilisées dans initStringDisplayItems()
+		 * 
+		*/
+		
+		this.displayProfileItems = displayProfileItems;
+		
+		
 	}
 	/**
 	 * @return the disable

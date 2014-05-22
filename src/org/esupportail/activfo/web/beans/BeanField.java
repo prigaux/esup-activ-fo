@@ -96,4 +96,5 @@ public interface BeanField<T> {
 	public int getDeleteJpegPhoto();
 	public void setDeleteJpegPhoto(int deleteJpegPhoto);
 	
+	public void setDisplayProfileItems(List<ProfileItem> displayItems);
 }

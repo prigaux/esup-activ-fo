@@ -74,11 +74,12 @@
 		<property name="key" value="PERSOINFO.SMSAGREEMENT.TEXT.LABEL"/>
 		<property name="fieldType" value="selectManyCheckbox"/>
 		
-		<property name="displayItems">
+		<property name="displayProfileItems">
 		   <list>
 		     <ref bean="beanSelectSMSUCG"/>
 		     <ref bean="beanSelectSMSUCROUS"/>
-		      <ref bean="beanSelectSMSUMP"/>
+		     <ref bean="beanSelectSMSUMP"/>
+		     <ref bean="beanSelectPHOTO"/>
 		   </list>
 		</property>
 		<property name="useDisplayItems" value="true"/>
@@ -87,29 +88,41 @@
 		<property name="name" value="up1TermsOfUse"/>
 		<property name="updateable" value="true"/>
 		<property name="disable" value="false"/>
+		<property name="help" value="PERSOINFO.AUTORISE.PHOTO.TEXT.HELP"/>
 	</bean>
 	
 	<bean  
 		id="beanSelectSMSUCG"
-		class="javax.faces.model.SelectItem"
+		class="org.esupportail.activfo.web.beans.ProfileItem"
 		>
-		<property name="label" value="Université Paris 1"/>
+		<property name="label" value="Recevoir les SMS de l'université Paris 1"/>
 		<property name="value" value="{SMSU}CG" />
 	</bean>
 	
 	<bean  
 		id="beanSelectSMSUCROUS"
-		class="javax.faces.model.SelectItem"
+		class="org.esupportail.activfo.web.beans.ProfileItem"
 		>
-		<property name="label" value="CROUS"/>
+		<property name="label" value="Recevoir les SMS du CROUS"/>
 		<property name="value" value="{SMSU}crous" />
 	</bean>
 		<bean  
 		id="beanSelectSMSUMP"
-		class="javax.faces.model.SelectItem"
+		class="org.esupportail.activfo.web.beans.ProfileItem"
 		>
-		<property name="label" value="Mairie de Paris"/>
+		<property name="label" value="Recevoir les SMS de la Mairie de Paris"/>
 		<property name="value" value="{SMSU}MP" />
+	</bean>
+	<bean  
+		id="beanSelectPHOTO"
+		class="org.esupportail.activfo.web.beans.ProfileItem"
+		scope="session"
+		>
+		<property name="account" ref="account"/>
+		<property name="label" value="Utiliser ma photo à des fins pédagogiques"/>
+		<property name="value" value="{PHOTO}ACTIVE" />	
+		<property name="attributeName" value="up1BirthDay"/>
+		<property name="formatDateLdap" value="${format.date.ldap}"/>
 	</bean>
 	
 	<bean  
