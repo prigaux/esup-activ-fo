@@ -123,6 +123,7 @@
 		<property name="value" value="{PHOTO}ACTIVE" />	
 		<property name="attributeName" value="up1BirthDay"/>
 		<property name="formatDateLdap" value="${format.date.ldap}"/>
+		<property name="majorAge" value="${major.age}"/>
 	</bean>
 	
 	<bean  

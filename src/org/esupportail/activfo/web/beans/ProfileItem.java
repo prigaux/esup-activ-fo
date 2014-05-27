@@ -17,6 +17,7 @@ public class ProfileItem extends SelectItem {
 	private  Account account;
 	private String attributeName;
 	private String formatDateLdap;
+	private String majorAge;
 	
 	
 	public String getAttributeName() {
@@ -44,6 +45,15 @@ public class ProfileItem extends SelectItem {
 	public void setFormatDateLdap(String formatDateLdap) {
 		this.formatDateLdap = formatDateLdap;
 	}
+	
+
+	public String getMajorAge() {
+		return majorAge;
+	}
+
+	public void setMajorAge(String majorAge) {
+		this.majorAge = majorAge;
+	}
 
 	public String getAccountValue() {
 		String value=account.getAttribute(attributeName);
@@ -58,7 +68,7 @@ public class ProfileItem extends SelectItem {
 	
 	public boolean isAllowed() {
 		if (account!=null)
-				return isMajor(getAccountValue());
+				return isMajor(getAccountValue(), Integer.parseInt(getMajorAge()));
 		else return true;
 		
 	}
@@ -69,7 +79,7 @@ public class ProfileItem extends SelectItem {
 	 * En sortie : true si la personne est majeure sinon false
 	 * 
 	 */
-	private  boolean isMajor(String dateOfBirth)  {
+	private  boolean isMajor(String dateOfBirth, int majorAge )  {
 	    boolean major=false;
 	    Calendar curr = Calendar.getInstance();
 	    Calendar birth = Calendar.getInstance();
@@ -83,7 +93,7 @@ public class ProfileItem extends SelectItem {
 		      yeardiff = yeardiff - 1;
 		    }
 		    
-		    if (yeardiff>=18){
+		    if (yeardiff>=majorAge){
 		      major=true;
 		    }
 		} catch (ParseException e) {
