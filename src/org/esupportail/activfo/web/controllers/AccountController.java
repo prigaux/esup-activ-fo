@@ -880,6 +880,14 @@ public class AccountController extends AbstractContextAwareController implements
 	public List<BeanField> getListInfoToValidate() {
 		return listInfoToValidate;
 	}
+	
+	public List<BeanField> getListInfoToValidateRequired() {
+		List<BeanField> listInfoToValidateRequired=new ArrayList<BeanField>();
+		for(BeanField bf:listInfoToValidate)
+			if(bf.isRequired())
+				listInfoToValidateRequired.add(bf);				
+		return listInfoToValidateRequired;
+	}
 
 	public String getProcedureReinitialisation() {
 		return procedureReinitialisation;

@@ -54,7 +54,7 @@
 	
 		<e:paragraph  escape="false" value="#{msgs['IDENTIFICATION.TEXT.TOP']}" />
 	
-		<h:dataTable value="#{accountController.listInfoToValidate}" var="entry"  columnClasses="firstColumn,secondColumn,thirdColumn"> 
+		<h:dataTable value="#{accountController.listInfoToValidateRequired}" var="entry"  columnClasses="firstColumn,secondColumn,thirdColumn"> 
 		 	<h:column>						  					
 				<t:outputText styleClass="labeltext"  value="#{msgs[entry.key]}" />
 			</h:column>
