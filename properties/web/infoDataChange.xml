@@ -325,7 +325,19 @@
 		      		</list>		
 				</entry>
 			</map>
-			</entry>					
+			</entry>
+			<entry>
+			<key>
+				<ref bean="beanSMSAgreementEtu"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>student</value>		       	 		
+		      		</list>		
+				</entry>
+			</map>
+			</entry>						
 		</map>
 		</property>
 		<property name="deniedBeanFieldProfile">
@@ -333,6 +345,18 @@
 			<entry>
 			<key>
 				<ref bean="beanMobilePhone"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>student</value>		       	 		
+		      		</list>		
+				</entry>
+			</map>
+			</entry>	
+			<entry>
+			<key>
+				<ref bean="beanSMSAgreement"/>
 			</key>
 			<map>
 				<entry key="eduPersonAffiliation">
@@ -352,6 +376,7 @@
 		    <ref bean="beanMobilePhoneEtu"/>
 		    <ref bean="beanMobilePhone"/>
 		    <ref bean="beanSMSAgreement"/>
+		    <ref bean="beanSMSAgreementEtu"/>
 		  </list>
 		</property> 
 	</bean>
