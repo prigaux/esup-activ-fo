@@ -100,10 +100,10 @@
 		
 		<property name="displayProfileItems">
 		   <list>
+		     <ref bean="beanSelectPHOTO"/>
 		     <ref bean="beanSelectSMSUCG"/>
 		     <ref bean="beanSelectSMSUCROUS"/>
-		     <ref bean="beanSelectSMSUMP"/>
-		     <ref bean="beanSelectPHOTO"/>
+		     <ref bean="beanSelectSMSUMP"/>		    
 		   </list>
 		</property>
 		<property name="useDisplayItems" value="true"/>
@@ -119,7 +119,7 @@
 		id="beanSelectSMSUCG"
 		class="org.esupportail.activfo.web.beans.ProfileItem"
 		>
-		<property name="label" value="Recevoir les SMS de l'université Paris 1"/>
+		<property name="label" value="l'envoi de SMS par l'université Paris 1"/>
 		<property name="value" value="{SMSU}CG" />
 	</bean>
 	
@@ -127,14 +127,14 @@
 		id="beanSelectSMSUCROUS"
 		class="org.esupportail.activfo.web.beans.ProfileItem"
 		>
-		<property name="label" value="Recevoir les SMS du CROUS"/>
+		<property name="label" value="l'envoi de SMS par le CROUS"/>
 		<property name="value" value="{SMSU}crous" />
 	</bean>
 		<bean  
 		id="beanSelectSMSUMP"
 		class="org.esupportail.activfo.web.beans.ProfileItem"
 		>
-		<property name="label" value="Recevoir les SMS de la Mairie de Paris"/>
+		<property name="label" value="l'envoi de SMS par la Mairie de Paris"/>
 		<property name="value" value="{SMSU}MP" />
 	</bean>
 	<bean  
@@ -143,7 +143,7 @@
 		scope="session"
 		>
 		<property name="account" ref="account"/>
-		<property name="label" value="Utiliser ma photo à des fins pédagogiques"/>
+		<property name="label" value="l'utilisation de ma photo à des fins pédagogiques"/>
 		<property name="value" value="{PHOTO}ACTIVE" />	
 		<property name="attributeName" value="up1BirthDay"/>
 		<property name="formatDateLdap" value="${format.date.ldap}"/>
