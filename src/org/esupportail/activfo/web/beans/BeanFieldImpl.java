@@ -268,7 +268,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	}
 	
 	private void initStringDisplayItems(){
-		if(displayProfileItems!=null){
+		if(displayProfileItems.size()>0){
 			for(ProfileItem si:displayProfileItems){
 				if (si!=null && si.getValue()!=null && si.isAllowed())	 stringDisplayItems.add(String.valueOf(si.getValue()));
 				
