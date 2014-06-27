@@ -241,6 +241,18 @@
 		      		</list>		
 				</entry>				
 			</map>
+			</entry>
+			<entry>
+			<key>
+				<ref bean="beanKeepMail"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>student</value>		       	 		
+		      		</list>		
+				</entry>				
+			</map>
 			</entry>	
 			<entry>
 			<key>
@@ -285,6 +297,7 @@
 		    <ref bean="beanHomePostalAddress"/>
 		    <ref bean="beanEmailPerso"/>
 		    <ref bean="beanRedirectMail"/> 
+		    <ref bean="beanKeepMail"/>
 		    <ref bean="beanRedirectMailEtu"/>		
 		    <ref bean="beanMobilePhone"/>
 		    <ref bean="beanMobilePhoneEtu"/>

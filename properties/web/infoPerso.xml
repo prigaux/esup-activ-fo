@@ -259,7 +259,6 @@
 		<property name="displayItems">
 		   <list>
         	 <ref bean="beanSelectRedirectMail"/>
-		     <ref bean="beanSelectKeepMail"/>
 		   </list>
 		</property>
 		<property name="validator" ref="validatorRedirectMail"/>
@@ -269,6 +268,47 @@
 		<property name="disable" value="false"/>
 		<property name="updateable" value="true"/>
 		<property name="constraint" value="PERSOINFO.MAILFORWARD.CONSTRAINT"/>
+	</bean>
+	
+	<bean  
+		id="beanSelectRedirectMail"
+		class="org.esupportail.activfo.web.beans.LdapAttributeItem"
+		scope="session"
+		>
+		
+		<property name="label" value="Oui"/>
+		<property name="account" ref="account"/>
+		<property name="attributeName" value="supannMailPerso"/>
+		<property name="defaultValue" value="defaultValue"/>
+	</bean>
+
+	<bean
+		id="beanKeepMail"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+		<property name="key" value="PERSOINFO.MAILFDELIVERYOPTION.LABEL"/>
+		<property name="fieldType" value="selectManyCheckbox"/>
+		<property name="multiValue" value="true"/>
+		
+		<property name="displayItems">
+		   <list>
+		    <ref bean="beanSelectKeepMail"/>
+		   </list>
+		</property>
+		<property name="validator" ref="validatorRedirectMail"/>
+		<property name="useDisplayItems" value="true"/>
+		<property name="name" value="mailDeliveryOption"/>
+		<property name="updateable" value="true"/>
+		<property name="disable" value="false"/>
+	</bean> 
+	
+	<bean  
+		id="beanSelectKeepMail"
+		class="javax.faces.model.SelectItem"
+		>
+		<property name="label" value="Oui"/>
+		<property name="value" value="mailbox" />
 	</bean>
 	
 	<bean id="beanRedirectMailEtu"
@@ -301,32 +341,6 @@
 		<property name="defaultValue" value="defaultValue"/>
 	</bean>
 			
-	<bean  
-		id="beanSelectRedirectMail"
-		class="org.esupportail.activfo.web.beans.LdapAttributeItem"
-		scope="session"
-		>
-		
-		<property name="label" value="Rediriger vers le courriel alternatif"/>
-		<property name="account" ref="account"/>
-		<property name="attributeName" value="supannMailPerso"/>
-		<property name="defaultValue" value="defaultValue"/>
-	</bean>
-	
-	<bean  
-		id="beanSelectKeepMail"
-		class="org.esupportail.activfo.web.beans.LdapAttributeItem"
-		scope="session"
-		>
-		<property name="label" value="Conserver une copie dans votre boîte Paris 1"/>
-		<property name="account" ref="account"/>
-		<property name="attributeName" value="uid"/>
-		<property name="preValue" value="\"/>
-	</bean>
-	
-	
-	
-	 
 	<bean
 		id="beanSupannAliasLogin"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
