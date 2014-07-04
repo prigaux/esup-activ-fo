@@ -191,7 +191,7 @@
 	</bean>
 	<bean 
 		id="validatorSMSAgreement"
-		class="org.esupportail.activfo.web.validators.ValidatorCheckboxLinkedInput"
+		class="org.esupportail.activfo.web.validators.ValidatorCheckboxSMSAgreementLinkedInput"
 		parent="abstractI18nAwareBean"
 		scope="session"
 		>
