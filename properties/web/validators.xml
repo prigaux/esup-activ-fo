@@ -313,7 +313,7 @@
     	<property name="errorMsg" value="VALIDATOR.STUDENTNUMBERLENTH.INAVLID"/>    	
 	</bean>
 	
-	<!-- La longueur du numéro INE doit etre de 11 chiffres -->
+	<!-- La longueur du numéro INE doit etre de 11 caractères alphanumériques -->
 	<bean 
 		id="validatorCodeINE"
 		class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
@@ -322,8 +322,8 @@
     	<description>
 			A validator for Code INE
     	</description>
-    	<property name="regex" value="^[0-9]{11}$" />	
-    	<property name="errorMsg" value="VALIDATOR.STUDENTNUMBERLENTH.INAVLID"/>    	
+    	<property name="regex" value="\w{11}$" />	
+    	<property name="errorMsg" value="VALIDATOR.INENUMBERLENTH.INAVLID"/>    	
 	</bean>
 	
 </beans>
