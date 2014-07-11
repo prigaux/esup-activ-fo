@@ -300,4 +300,30 @@
 	</bean>
 	
 	
+	<!-- Le numéro étudiant doit etre de 7 ou 8 chiffres -->
+	<bean 
+		id="validatorStudentNumber"
+		class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Student number
+    	</description>
+    	<property name="regex" value="^[0-9]{7,8}$" />	
+    	<property name="errorMsg" value="VALIDATOR.STUDENTNUMBERLENTH.INAVLID"/>    	
+	</bean>
+	
+	<!-- La longueur du numéro INE doit etre de 11 chiffres -->
+	<bean 
+		id="validatorCodeINE"
+		class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Code INE
+    	</description>
+    	<property name="regex" value="^[0-9]{11}$" />	
+    	<property name="errorMsg" value="VALIDATOR.STUDENTNUMBERLENTH.INAVLID"/>    	
+	</bean>
+	
 </beans>

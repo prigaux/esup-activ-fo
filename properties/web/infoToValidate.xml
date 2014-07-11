@@ -46,7 +46,8 @@
 		<property name="id" value="studentnumber"/>
 		<property name="help" value="IDENTIFICATION.STUDENTNUMBER.TEXT.HELP"/>
 		<property name="required" value="true" />
-		<property name="constraint" value="PERSOINFO.STUDENTNUMBER.CONSTRAINT"/>		
+		<property name="constraint" value="PERSOINFO.STUDENTNUMBER.CONSTRAINT"/>
+		<property name="validator" ref="validatorStudentNumber"/>	
 	</bean>
 	
 		<bean
@@ -61,7 +62,8 @@
 		<property name="id" value="studentnumber"/>
 		<property name="help" value="IDENTIFICATION.ALUMSTUDENTNUMBER.TEXT.HELP"/>
 		<property name="required" value="true" />
-		<property name="constraint" value="PERSOINFO.STUDENTNUMBER.CONSTRAINT"/>				
+		<property name="constraint" value="PERSOINFO.STUDENTNUMBER.CONSTRAINT"/>
+		<property name="validator" ref="validatorStudentNumber"/>
 	</bean>
 	
 	<bean
@@ -88,6 +90,7 @@
        <property name="help" value="IDENTIFICATION.CODEINE.TEXT.HELP"/>
        <property name="constraint" value="IDENTIFICATION.CODEINE.CONSTRAINT"/>          
        <property name="required" value="true" />
+       <property name="validator" ref="validatorCodeINE"/>
     </bean>
 	
 	<bean
