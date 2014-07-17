@@ -273,7 +273,13 @@ public class AccountController extends AbstractContextAwareController implements
 		
 		for(BeanField<String> bf : beanFieldStatus.keySet())
 			if(bf.getValue().equals(currentAccount.getStatus()))
-					this.listInfoToValidate=beanFieldStatus.get(bf);			
+					this.listInfoToValidate=beanFieldStatus.get(bf);	
+					
+	   // Suite à un NullPointerException sur  listInfoToValidate en production dont on ignore la raison, mettre en place un moyen pour contourner le problème.
+		if (listInfoToValidate==null){
+			logger.error("ATTENTION listInfoToValidate est NULLE"+"Process et statut="+currentAccount.getProcess()+" "+currentAccount.getStatus());
+			return null;
+		}		
 		
 		return "goToInfoToValidate";
 	}
