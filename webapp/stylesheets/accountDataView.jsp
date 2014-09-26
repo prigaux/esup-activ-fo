@@ -18,7 +18,7 @@ $(function() {
 	<!-- <e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" /> -->
 	
 			<%@include file="_includeAccountData.jsp"%>
-			<div class="col-md-10">
+			<div class="col-md-9">
 				<div class="tab-content">
 				   <!-- Appeler la méthode getBeanData qui récupère les données, pour afficher la civilité et le displayName
 					car avant cette méthode, aucune données n'est récupérées
