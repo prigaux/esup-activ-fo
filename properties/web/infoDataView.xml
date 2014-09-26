@@ -14,6 +14,7 @@
 
 		<property name="title" value="INFO.PUBLICDIRECTORY.TEXT.LABEL"/>
 		<property name="name" value="publicDirectoryInfo"/>
+		<property name="icone" value="INFO.PUBLICDIRECTORY.ICONE"/>
 		<property name="account" ref="account"/>
 		<property name="profile">
 		  <map>
@@ -51,6 +52,7 @@
 
 		<property name="title" value="INFO.PRIVATEDIRECTORY.TEXT.LABEL"/>
 		<property name="name" value="privateDirectoryInfo"/>
+		<property name="icone" value="INFO.PRIVATEDIRECTORY.ICONE"/>
 		<property name="account" ref="account"/>
 		<property name="beanFieldProfile">
 		 <map>		 	

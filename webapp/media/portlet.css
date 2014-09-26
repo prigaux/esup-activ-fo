@@ -235,8 +235,8 @@ with class uportal-background-selected"  */
 
 	/*##  Section 10.6.7 Menus ##*/
 .portlet-menu {
-	/*background: #b7ddb4;*/
-	background-image: url("../media/images/banner.jpg");
+	background-color: #f5f5f5;
+	/*background-image: url("../media/images/banner.jpg");*/
 	background-repeat: no-repeat;
 	margin: 0;
 	padding: 0;

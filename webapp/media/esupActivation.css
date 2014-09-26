@@ -257,6 +257,7 @@ a:hover {
 	}
 	.columnData {
 		max-width: 750px;
+		padding-right: 10px;
    }
 	.legendlabel {
 		color: #A7A9AC;
@@ -264,6 +265,41 @@ a:hover {
     	font-size: 12px;
     	text-align: justify;
 	}
-
-		
+	
+	.sidenav > li > a {
+    border: 1px solid #e5e5e5;
+    display: block;
+    margin: 0 0 -1px;
+    padding: 8px 14px !important;
+	}
+	.nav-stacked > li + li {
+	    margin-top: 0 !important;
+	}
+	
+	.sidenav .glyphicon-chevron-right {
+	    float: right;
+	    margin-right: -6px;
+	    margin-top: 2px;
+	    opacity: 0.25;
+	}
+	.sidenav > li:first-child > a {
+	    border-radius: 6px 6px 0 0;
+	}
+	.glyphicon  {
+	    margin-right: 3px;
+	}
+	
+	.breadcrumbVertical {
+	    background-color: #f5f5f5;
+	    border-radius: 4px;
+	    list-style: none outside none;
+	    padding: 8px 15px;
+	}
+ .page-header {
+    border-bottom: 1px solid #eee;
+    margin: 1px 0 20px;
+    padding-bottom: 9px;
+ }	
+	
+}
 	

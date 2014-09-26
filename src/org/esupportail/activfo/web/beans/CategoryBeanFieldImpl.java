@@ -22,6 +22,7 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	private HashMap<BeanField,HashMap<String,List<String>>> deniedBeanFieldProfile;
 	private  Account account;
 	private final Logger logger = new LoggerImpl(getClass());
+	private String icone;
 	
 	/**
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
@@ -198,5 +199,16 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 			HashMap<BeanField, HashMap<String, List<String>>> deniedBeanFieldProfile) {
 		this.deniedBeanFieldProfile = deniedBeanFieldProfile;
 	}
+
+	public String getIcone() {
+		logger.debug("get ICone!!!!!!:"+icone);
+		return icone;
+	}
+
+	public void setIcone(String icone) {
+		this.icone = icone;
+		logger.debug("setIcone!!!!:"+this.icone);
+	}
+	
 	
 }

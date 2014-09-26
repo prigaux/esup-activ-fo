@@ -1,53 +1,39 @@
 <%@include file="_include.jsp"%>
 <%@include file="_includeScript.jsp"%>
-<%@include file="_navigation.jsp"%>
 <script type="text/javascript" src="/media/scripts/accountDataTabs.js"></script>
+
 <script>
 $(function() {	
-	// Afficher l'onglet Données affichées par défaut
-	$( ".tabs" ).tabs({ active: 1 });
-	//simuler le click
-	$('.hrefFirstTab').attr("onclick", "simulateLinkClick('accountForm:preview');");	
+	// Afficher par défaut le 1er onglet
+	$('.nav-stacked li:eq(0) a').tab('show');
+	// Afficher par défaut l'onglet Afficher les données
+	$('.nav-pills li:eq(2) a').tab('show');
+	
 });
 </script>
 
+
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
-	<e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" />
-	<t:div styleClass="tabs" >
-		<t:htmlTag styleClass="processSteps" value="ul">
-				<t:htmlTag styleClass="homeStep" value="li">
-					<t:graphicImage title="Accueil" value="/media/images/home.jpg"style="border: 0;cursor:pointer;"onclick="simulateLinkClick('restart:restartButton');" />
-				</t:htmlTag>				
-				<t:htmlTag styleClass="homeStep" value="li" >
-					<t:htmlTag  value="a" styleClass="hrefFirstTab"><t:outputText value="#{msgs['DATACHANGE.MODIFICATION.TEXT']}" /></t:htmlTag>
-				</t:htmlTag>
-				<t:htmlTag styleClass="homeStep" value="li">
-					<t:htmlTag  value="a" styleClass="hrefSecondTab"><t:outputText value="#{msgs['DATACHANGE.DISPLAY.TEXT']}" /></t:htmlTag>
-				</t:htmlTag>
-			</t:htmlTag>
-		
-		<t:div styleClass="idFirstTab" >
-		</t:div>		
-		<t:div styleClass="idSecondTab" >
-			<e:paragraph escape="false" value="#{msgs['PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL']}"/>
-			<t:div styleClass="moretabs" >
-				<!-- Parcourir les catégories et générer dynamiquement les onglets -->
-				<t:htmlTag styleClass="processSteps" value="ul">
-					<t:dataList value="#{accountController.beanData}"  var="category">
-						<t:htmlTag styleClass="homeStep" value="li" rendered="#{category.access}" >
-							<t:htmlTag  value="a" styleClass="hrefId"><h:outputText rendered="#{category.access}" value="#{msgs[category.title]}" /></t:htmlTag>
-						</t:htmlTag>
-					</t:dataList>
-				</t:htmlTag>
-				<!-- Pour chaque catégorie récupérer les données associées -->	
-				<t:dataList value="#{accountController.beanData}"  var="category" >	
-					<t:div styleClass="hrefIdDetail" rendered="#{category.access}">
-						<t:htmlTag value="table">
+<div class="container-fluid">
+	<!-- <e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" /> -->
+	
+			<%@include file="_includeAccountData.jsp"%>
+			<div class="col-md-10">
+				<div class="tab-content">
+				   <!-- Appeler la méthode getBeanData qui récupère les données, pour afficher la civilité et le displayName
+					car avant cette méthode, aucune données n'est récupérées
+					 -->
+					<t:outputText value="#{accountController.beanData}" style="display:none"></t:outputText>
+					<div class="page-header"><h:outputText style="text-transform : capitalize;"value="#{accountController.currentAccount.supannCivilite} #{accountController.currentAccount.displayName}" /></div>
+	    
+				   	<t:dataList value="#{accountController.beanData}"  var="category" >
+						<t:div styleClass="hrefIdDetail tab-pane" rendered="#{category.access}">
+							<t:htmlTag value="table">
 							<t:htmlTag value="tr">
 								<t:htmlTag value="td" styleClass="columnData">
 									 <h:dataTable value="#{category.profilingListBeanField}" rendered="#{category.access&&#beanfield.value!=''}" var="beanfield" columnClasses="viewCol1,viewCol2">
 										<h:column>						
-										  <t:outputText styleClass="labeltexttop#{beanfield.size>1}" value="#{msgs[beanfield.key]}" rendered="#{beanfield.value!=''}"/>
+										  <t:outputText styleClass="labeltexttop#{beanfield.size>1} portlet-section-text" value="#{msgs[beanfield.key]}" rendered="#{beanfield.value!=''}"/>
 									   </h:column>
 										
 										<h:column>
@@ -73,16 +59,20 @@ $(function() {
 							
 							</t:htmlTag>
 						</t:htmlTag>
-					</t:div>
-				</t:dataList>
-			</t:div>
-		</t:div>
-	</t:div>	
+							
+						</t:div>				
+					</t:dataList>
+				   </div><!-- tab content -->
+			</div>
+			
+		</div><!-- Fin row nav pills -->
 	
-	<h:form id="accountForm" style="display:none;" >
-		<e:commandButton id="preview" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}"/>
-	</h:form>
-	<h:form id="restart" style="display:none;"  >
-	  <e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
-	</h:form>
+
+</div><!-- Fin class="container" -->
+<h:form id="accountForm" style="display:none;" >
+	<e:commandButton id="preview" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}"/>
+</h:form>
+<h:form id="restart" style="display:none;">
+	<e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
+</h:form>
 </e:page>

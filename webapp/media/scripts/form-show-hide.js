@@ -45,14 +45,13 @@ $(function() {
 	
 	//Si l'utilisateur clique sur le lien "Editer", n'afficher en modification que les champs de la catégorie sélectionnée 
 	$(".modifyByCategory").each(function(){	
-	 $(this).click(function() {
-		$(this).closest('.mainModifyLinkByCategory').find("[class*='_modify']").click();
-	    return false;
-	  });
-	});	
+		 $(this).click(function() {
+			$(this).closest('.mainModifyLinkByCategory').find("[class*='_modify']").click();
+		    return false;
+		  });
+		});	
 	
-
-	$("[class*='_modify']").click(function () {	
+	$("[class*='_modify']").click(function () {
 		var field=$(this).attr('class').replace("_modifyLink","");
 		modify(field,this);
 	});
@@ -68,6 +67,17 @@ $(function() {
 		if (find.size()>0){modify(fieldConcate,this);}
 		//console.log(find);
 	});
+	
+	// Au click sur un libelle, afficher en mode modification le champ associé
+	// util lorsque le champs est vide
+	$("[class*='labeltexttop']").click(function () {
+		// Prendre la premiere classe de la liste, celle qui contient beanName+output
+		var getFirstClass = $(this).attr('class').split(' ')[0];
+		var fieldConcate=getFirstClass+"_modifyLink";
+		var find =$(this).closest('.mainModifyLinkByCategory').find("."+fieldConcate);
+		if (find.size()>0){modify(fieldConcate,this);}
+	});
+	
 	// Lorsque l'utilisateur modifie un champ nécessitant la validation de la DRH, 
 	// un popup s'affiche lui avertissant que le la donnée modifiée ne sera pas immédiatement prise en compte à l'écran 
 	$("[class*='show']").change(function () {	
@@ -80,13 +90,15 @@ $(function() {
 			dialog(val);}
 	});
 	
+	
+	
 	// Afficher le(s) champ(s) en mode modification
 	function modify(field,elt){
 		var field=field.replace("_modifyLink","");
 		 $("." + field+"show").show();
 		 $("." + field+"modify").show();
 		 $("." + field+"output").hide();
-		 $("." + field+"constraint").show();		 
+		 $("." + field+"constraint").show();
 		 $(elt).closest('.mainModifyLinkByCategory').find(".validate").show();
 		 $(elt).closest('.mainModifyLinkByCategory').find(".modifyByCategory").hide();
 	}
@@ -104,7 +116,7 @@ $(function() {
 	    });
 	};
 	
-	
-	
+	//Lors de la validation, appel à accountController.pushChangeInfoPerso
+	$('.validate').attr("onclick", "simulateLinkClick('accountForm:next');");
 	
 });

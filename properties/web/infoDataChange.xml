@@ -11,6 +11,7 @@
 
 		<property name="title" value="INFO.PRINCIPAL.TEXT.LABEL"/>
 		<property name="name" value="principalInfo"/>
+		<property name="icone" value="INFO.PRINCIPAL.ICONE"/>
 		<property name="account" ref="account"/>
 		<property name="deniedBeanFieldProfile">
 		<map>		 	
@@ -72,6 +73,7 @@
 
 		<property name="title" value="INFO.FUNCTION.TEXT.LABEL"/>
 		<property name="name" value="functionInfo"/>
+		<property name="icone" value="INFO.FUNCTION.ICONE"/>
 		<property name="account" ref="account"/>
 		<property name="profile">
 		  <map>
@@ -123,6 +125,7 @@
 
 		<property name="title" value="INFO.STUDENTCARACTER.TEXT.LABEL"/>
 		<property name="name" value="studentCaracterInfo"/>
+		<property name="icone" value="INFO.STUDENTCARACTER.ICONE"/>
 		<property name="account" ref="account"/>
 		<property name="profile">
 		  <map>
@@ -152,6 +155,7 @@
 
 		<property name="title" value="INFO.PROFESSIONAL.TEXT.LABEL"/>
 		<property name="name" value="professionalInfo"/>
+		<property name="icone" value="INFO.PROFESSIONAL.ICONE"/>
 		<property name="account" ref="account"/>
 		<property name="profile">
 		  <map>
@@ -186,7 +190,8 @@
 		class="org.esupportail.activfo.web.beans.CategoryBeanFieldImpl"
 		scope="session">
 		<property name="title" value="INFO.PERSONAL.TEXT.LABEL"/>
-		<property name="name" value="personalInfo"/>		
+		<property name="name" value="personalInfo"/>
+		<property name="icone" value="INFO.PERSONAL.ICONE"/>		
 		<property name="account" ref="account"/>
 		<property name="beanFieldProfile">
 		<map>		 	
@@ -312,6 +317,7 @@
 		scope="session">
 		<property name="title" value="INFO.PERSONAL.TEXT.LABEL"/>
 		<property name="name" value="personalInfo"/>
+		<property name="icone" value="INFO.PERSONAL.ICONE"/>
 		<property name="account" ref="account"/>
 		<property name="beanFieldProfile">
 		<map>		 	
@@ -402,6 +408,7 @@
 
 		<property name="title" value="INFO.IDENTICATION.TEXT.LABEL"/>
 		<property name="name" value="harpegeeApogeeInfo"/>
+		<property name="icone" value="INFO.IDENTICATION.ICONE"/>
 		<property name="account" ref="account"/>
 		<property name="profile">
 		  <map>
@@ -434,6 +441,7 @@
 
 		<property name="title" value="INFO.IDENTICATION.TEXT.LABEL"/>
 		<property name="name" value="apogeeInfo"/>
+		<property name="icone" value="INFO.IDENTICATION.ICONE"/>
 		<property name="account" ref="account"/>
 		<property name="profile">
 		  <map>
