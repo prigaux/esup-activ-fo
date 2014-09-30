@@ -123,17 +123,13 @@ $(function() {
 												</h:column>
 										</h:dataTable>
 										<t:div style="margin-top:1em;">
-											<t:htmlTag style="display:none"rendered="#{category.access}" styleClass="validate btn btn-primary" value="button" ><t:htmlTag  value="span" styleClass="glyphicon glyphicon glyphicon-edit"></t:htmlTag><h:outputText value="#{msgs['_.BUTTON.CONFIRM']}" /></t:htmlTag>
+											<t:htmlTag style="display:none"rendered="#{category.access}" styleClass="validate btn btn-primary" value="button" ><t:htmlTag  value="span" styleClass="glyphicon glyphicon glyphicon-ok"></t:htmlTag><h:outputText value="#{msgs['_.BUTTON.CONFIRM']}" /></t:htmlTag>
 											<t:htmlTag rendered="#{category.access}" styleClass="modifyByCategory btn btn-primary" value="button" ><t:htmlTag  value="span" styleClass="glyphicon glyphicon glyphicon-edit"></t:htmlTag><h:outputText value="Editer" /></t:htmlTag>
 										</t:div>		
 									</t:htmlTag><!-- Fin class=columnData -->
 									
 									<t:htmlTag value="td" styleClass="columnHelp">									
 										<t:div styleClass="helppanel" >
-											<t:div>	<e:paragraph value="#{msgs['DATACHANGE.STUDENT.TEXT.TOP']}" rendered="#{accountController.currentAccount.eduPersonPrimaryAffiliation=='student'}" escape="false"/>
-													<e:paragraph value="#{msgs['DATACHANGE.TEXT.TOP']}" rendered="#{accountController.currentAccount.eduPersonPrimaryAffiliation!='student'}" escape="false"/>
-											</t:div>
-										
 											<t:div>
 												<h:panelGrid >
 													<t:div styleClass="portlet-section-text">	<h:outputText value="#{msgs['DATACHANGE.TEXT.LEGEND']}" /></t:div>
