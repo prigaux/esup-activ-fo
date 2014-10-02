@@ -1,4 +1,5 @@
 <%@include file="_include.jsp"%>
+<%@include file="_includeScript.jsp"%>
 
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 
@@ -7,11 +8,8 @@
 		<meta http-equiv="Expires" content="0">
 		<meta http-equiv="cache-control" content="no-cache,no-store">
 		<meta http-equiv="pragma" content="no-cache">
-		
-		<%@include file="_includeScript.jsp"%>
 	</t:documentHead>
-
-	<%@include file="_navigation.jsp"%>
+	
 	<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}"rendered="#{accountController.activ == true}" />
 	<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}"rendered="#{accountController.reinit == true}" />
 	<e:section value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.TITLE']}"rendered="#{accountController.passwChange == true}" />

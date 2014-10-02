@@ -1,7 +1,6 @@
 <%@include file="_include.jsp"%>
 <e:page stringsVar="msgs" menuItem="preferences" locale="#{sessionController.locale}" authorized="#{preferencesController.pageAuthorized}">
-	<%@include file="_navigation.jsp"%>
-
+	
  	<e:form id="preferencesForm">
 		<e:section value="#{msgs['PREFERENCES.TITLE']}" />
 

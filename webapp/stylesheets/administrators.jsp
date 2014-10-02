@@ -2,8 +2,7 @@
 <e:page stringsVar="msgs" menuItem="administrators"
 	locale="#{sessionController.locale}"
 	authorized="#{administratorsController.pageAuthorized}">
-	<%@include file="_navigation.jsp"%>
-
+	
 	<e:form id="administratorsForm">
 		<e:panelGrid columns="2" columnClasses="colLeft,colRight" width="100%"
 			cellspacing="0" cellpadding="0">

@@ -10,10 +10,10 @@ $(function() {
 });
 </script>
 
-
+<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
+<div class="pc md">
 <div class="container-fluid">
-	<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
-	<!-- <e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" /> -->
+		<!-- <e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" /> -->
 	
 	
 	<h:form id="accountForm" enctype="multipart/form-data">
@@ -171,6 +171,7 @@ $(function() {
 		
 	</h:form>
 </div><!-- Fin class="container" -->
+</div><!-- Fin class="pc md" -->
 
 <h:form id="restart" style="display:none;">
 	<e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />

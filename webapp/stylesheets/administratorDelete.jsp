@@ -1,7 +1,6 @@
 <%@include file="_include.jsp"%>
-<e:page stringsVar="msgs" menuItem="administrators" locale="#{sessionController.locale}" authorized="#{administratorsController.currentUserCanDeleteAdmin}" >
-	<%@include file="_navigation.jsp"%>
 
+<e:page stringsVar="msgs" menuItem="administrators" locale="#{sessionController.locale}" authorized="#{administratorsController.currentUserCanDeleteAdmin}" >
 	<e:form >
 		<e:section value="#{msgs['ADMINISTRATOR_DELETE.TITLE']}">
 			<f:param

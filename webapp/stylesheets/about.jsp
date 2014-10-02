@@ -1,7 +1,6 @@
 <%@include file="_include.jsp"%>
 <e:page stringsVar="msgs" menuItem="about" locale="#{sessionController.locale}" authorized="#{aboutController.pageAuthorized}">
-	<%@include file="_navigation.jsp"%>
-
+	
 	<e:section value="#{msgs['ABOUT.TITLE']}">
 		<f:param value="#{applicationService.name}" />
 		<f:param value="#{applicationService.version}" />

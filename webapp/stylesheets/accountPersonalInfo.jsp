@@ -1,4 +1,8 @@
 <%@include file="_include.jsp"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>	
+<%@include file="_includeScript.jsp"%>
+
+
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 	
 	<t:documentHead>
@@ -6,9 +10,7 @@
 		<meta http-equiv="cache-control" content="no-cache,no-store">
 		<meta http-equiv="pragma" content="no-cache">
 	</t:documentHead>
-	<%@include file="_includeScript.jsp"%>
-	<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>	
-	<%@include file="_navigation.jsp"%>
+	
 	
 	<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
 	<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}" />

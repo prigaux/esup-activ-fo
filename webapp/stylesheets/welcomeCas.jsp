@@ -1,6 +1,9 @@
 <%@include file="_include.jsp"%>
+<%@include file="_includeScript.jsp"%>
+
+
 <e:page stringsVar="msgs" menuItem="welcome" locale="#{sessionController.locale}" >
-	<script type="text/javascript" src="/media/scripts/jquery.js"></script>
+		
 	<script type="text/javascript">
 	 $(document).ready(function(){  
 	   if($("#[value='activation']").attr("checked") ||
@@ -21,7 +24,8 @@
 	   });
 	 });
 	</script>
-	<%@include file="_navigation.jsp"%>
+	
+	
 	<e:section value="#{msgs['WELCOME.TITLE']}" />
 	
 	<e:messages/>

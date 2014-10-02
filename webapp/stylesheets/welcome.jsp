@@ -1,6 +1,7 @@
 <%@include file="_include.jsp"%>
+<%@include file="_includeScript.jsp"%>
+
 <e:page stringsVar="msgs" menuItem="welcome" locale="#{sessionController.locale}" >
-	<script type="text/javascript" src="/media/scripts/jquery.js"></script>
 	<script type="text/javascript">
 	 $(document).ready(function(){  
 		 
@@ -26,7 +27,6 @@
 	 });
 	</script>
  
-	<%@include file="_navigation.jsp"%>
 	<e:section value="#{msgs['WELCOME.TITLE']}" />
 	<t:outputText escape="false" value="#{msgs['WELCOME.EXPLAIN']}" style="font-style:italic;color:#263F82"/>
 	

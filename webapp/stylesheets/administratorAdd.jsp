@@ -1,7 +1,8 @@
 <%@include file="_include.jsp"%>
+
 <e:page stringsVar="msgs" menuItem="administrators" locale="#{sessionController.locale}"
 	authorized="#{administratorsController.currentUserCanAddAdmin}">
-	<%@include file="_navigation.jsp"%>
+
 	<e:form id="administratorAddForm">
 
 		<e:section value="#{msgs['ADMINISTRATOR_ADD.TITLE']}" />

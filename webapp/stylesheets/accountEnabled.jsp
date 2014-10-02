@@ -1,7 +1,6 @@
 <%@include file="_include.jsp"%>
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
-	<%@include file="_navigation.jsp"%>
-	
+		
 	<t:div rendered="#{accountController.activ == true}">
 		<e:section value="#{msgs['ENABLED.TITLE']}" />
 		<e:messages />
