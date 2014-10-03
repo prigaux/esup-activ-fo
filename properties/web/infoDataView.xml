@@ -101,6 +101,7 @@
 		scope="session">
 		<property name="title" value="INFO.PERSONALPAGE.TEXT.LABEL"/>
 		<property name="name" value="personalPageInfo"/>
+		<property name="icone" value="INFO.PERSONALPAGE.ICONE"/>
 		<property name="account" ref="account"/>
 		<property name="profile">
 		  <map>
