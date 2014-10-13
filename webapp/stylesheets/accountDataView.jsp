@@ -14,6 +14,7 @@ $(function() {
 
 
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
+<div class="pc">
 <div class="container-fluid">
 	<!-- <e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" /> -->
 	
@@ -37,11 +38,11 @@ $(function() {
 									   </h:column>
 										
 										<h:column>
-											<t:div styleClass="portlet-section-text" rendered="#{sub.value!=''&&beanfield.fieldType=='link'}">   
+											<t:div rendered="#{sub.value!=''&&beanfield.fieldType=='link'}">   
 										    	<h:outputText escape="false" converter="#{beanfield.converter}" rendered="#{beanfield.fieldType=='link'}" value="#{msgs[beanfield.value]}"/>
 										    </t:div>	
 											<t:dataList value="#{beanfield.values}" var="sub" rendered="#{beanfield.value!=''&&sub.value!=''}">
-											    <t:div styleClass="portlet-section-text" rendered="#{sub.value!=''&&!sub.convertedValue}">
+											    <t:div rendered="#{sub.value!=''&&!sub.convertedValue}">
 												    <h:outputText value="#{sub.value}" converter="#{beanfield.converter}" rendered="#{sub.value!=''}"/>			  	
 										        </t:div>
 									         </t:dataList>  
@@ -69,6 +70,7 @@ $(function() {
 	
 
 </div><!-- Fin class="container" -->
+</div><!-- Fin class="pc" -->
 <h:form id="accountForm" style="display:none;" >
 	<e:commandButton id="preview" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}"/>
 </h:form>

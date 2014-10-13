@@ -11,7 +11,7 @@ $(function() {
 </script>
 
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
-<div class="pc md">
+<div class="pc">
 <div class="container-fluid">
 		<!-- <e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" /> -->
 	
@@ -27,16 +27,15 @@ $(function() {
 					car avant cette méthode, aucune données n'est récupérées
 					 -->				
 	   				<t:outputText value="#{accountController.beanData}" style="display:none"></t:outputText>
-					<div class="page-header"><h:outputText style="text-transform : capitalize;"value="#{accountController.currentAccount.supannCivilite} #{accountController.currentAccount.displayName}" /></div>
-	    
-				  	<t:dataList value="#{accountController.beanData}"  var="category" >
+					<div class="page-header"><h:outputText value="#{accountController.currentAccount.supannCivilite} #{accountController.currentAccount.displayName}"  /></div>
+	    		 	<t:dataList value="#{accountController.beanData}"  var="category" >
 						<t:div styleClass="hrefIdDetail mainModifyLinkByCategory tab-pane" rendered="#{category.access}">
 								<t:htmlTag value="table">
 									<t:htmlTag value="tr">
 										<t:htmlTag value="td" styleClass="columnData">
 											<h:dataTable value="#{category.profilingListBeanField}"	rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn,fourthColumn">
 												<h:column>
-													<t:outputText styleClass="#{beanfield.name} labeltexttop#{beanfield.size>1} portlet-section-text"	value="#{msgs[beanfield.key]}"	rendered="#{beanfield.fieldType!='inputFileUpload'}" />
+													<t:outputText styleClass="#{beanfield.name} labeltexttop#{beanfield.size>1}"	value="#{msgs[beanfield.key]}"	rendered="#{beanfield.fieldType!='inputFileUpload'}" />
 													<t:div rendered="#{beanfield.fieldType=='inputFileUpload'}">
 														<h:graphicImage value="#{beanfield.value}" width="100px"height="100px" styleClass="photo" />
 													</t:div>			
@@ -44,17 +43,17 @@ $(function() {
 												<h:column>
 													<t:dataList value="#{beanfield.values}" var="sub" >
 														<!----------------- En affichage -->
-														<t:div styleClass="#{beanfield.name}output portlet-section-text" rendered="#{!beanfield.disable&&beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'&&!sub.convertedValue}">
+														<t:div styleClass="#{beanfield.name}output" rendered="#{!beanfield.disable&&beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'&&!sub.convertedValue}">
 															<h:outputText value="#{sub.value}" rendered="#{beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'}" converter="#{beanfield.converter}"/>
 														</t:div>
 														<!--griser les champs non modifable  -->
-														<t:div styleClass="legendlabel" rendered="#{beanfield.disable&&beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'&&!sub.convertedValue}">
+														<t:div styleClass="text-muted" rendered="#{beanfield.disable&&beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'&&!sub.convertedValue}">
 															<h:outputText value="#{sub.value}" rendered="#{beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'&&beanfield.fieldType!='inputFileUpload'}" converter="#{beanfield.converter}"/>
 														</t:div>
 														
 														<!-- ---------------En modification -->
 														<!--* Champs avec valeur non vide -->       	    
-														<t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue)}" style="display:none;" styleClass="#{beanfield.name}show portlet-section-text">
+														<t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue)}" style="display:none;" styleClass="#{beanfield.name}show">
 														   <!-- Avec validator -->
 														    <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" required="#{beanfield.required}" size="35" validator="#{beanfield.validator.validate}"  
 														    	rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&(sub.value!=''||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
@@ -69,7 +68,7 @@ $(function() {
 															       	    
 															       	    
 													    <!--* Champs avec valeur vide -->		       	        
-														<t:div rendered="#{sub.value==''&&beanfield.multiValue}" style="display:none;" styleClass="#{beanfield.name}hide portlet-section-text" >  
+														<t:div rendered="#{sub.value==''&&beanfield.multiValue}" style="display:none;" styleClass="#{beanfield.name}hide" >  
 															<h:inputText value="#{sub.value}" size="35" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 															 <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 															
@@ -79,7 +78,7 @@ $(function() {
 														</t:div>          
 													</t:dataList>
 													<!-- Modifier la photo -->
-													<t:div rendered="#{beanfield.fieldType=='inputFileUpload'}"	style="display:none;" styleClass="#{beanfield.name}show portlet-section-text" >
+													<t:div rendered="#{beanfield.fieldType=='inputFileUpload'}"	style="display:none;" styleClass="#{beanfield.name}show" >
 														<t:inputFileUpload value="#{beanfield.fileUpLoad}"	styleClass="upload" storage="file" accept="image/jpeg"></t:inputFileUpload>
 														<h:graphicImage alt="#{beanfield.name}" styleClass="delete"	value="/media/images/delete.png" style="float:right;margin:0;"	rendered="#{beanfield.fieldType=='inputFileUpload'&&beanfield.deleteJpegPhoto==1}" />
 														<h:inputText value="#{beanfield.deleteJpegPhoto}" styleClass="deletePhoto" style="display:none;" />
@@ -87,13 +86,13 @@ $(function() {
 													
 													<!--Afficher la données sous forme de checkbox  -->
 													<t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}" >
-														<h:selectManyCheckbox value="#{beanfield.selectedItems}" styleClass="portlet-section-text" rendered="#{beanfield.fieldType=='selectManyCheckbox'}" validator="#{beanfield.validator.validate}" layout="pageDirection">
+														<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'}" validator="#{beanfield.validator.validate}" layout="pageDirection">
 															<f:selectItems value="#{beanfield.displayItems}" />
 														</h:selectManyCheckbox>
 													</t:div>
 													<!--Afficher la données sous forme de radio bouton  -->
 													<t:div rendered="#{beanfield.fieldType=='selectOneRadio'}"  >
-														<h:selectOneRadio value="#{beanfield.value}" styleClass="portlet-section-text" rendered="#{beanfield.fieldType=='selectOneRadio'}">
+														<h:selectOneRadio value="#{beanfield.value}" rendered="#{beanfield.fieldType=='selectOneRadio'}">
 															<f:selectItems value="#{beanfield.displayItems}" />
 														</h:selectOneRadio>
 													</t:div>
@@ -123,37 +122,35 @@ $(function() {
 												</h:column>
 										</h:dataTable>
 										<t:div style="margin-top:1em;">
-											<t:htmlTag style="display:none"rendered="#{category.access}" styleClass="validate btn btn-primary" value="button" ><t:htmlTag  value="span" styleClass="glyphicon glyphicon glyphicon-ok"></t:htmlTag><h:outputText value="#{msgs['_.BUTTON.CONFIRM']}" /></t:htmlTag>
-											<t:htmlTag rendered="#{category.access}" styleClass="modifyByCategory btn btn-primary" value="button" ><t:htmlTag  value="span" styleClass="glyphicon glyphicon glyphicon-edit"></t:htmlTag><h:outputText value="Editer" /></t:htmlTag>
+											<t:htmlTag style="display:none"rendered="#{category.access}" styleClass="validate btn btn-primary" value="button" ><t:htmlTag  value="span" styleClass="glyphicon glyphicon-ok"></t:htmlTag><h:outputText value="#{msgs['_.BUTTON.CONFIRM']}" /></t:htmlTag>
+											<t:htmlTag rendered="#{category.access}" styleClass="modifyByCategory btn btn-primary" value="button" ><t:htmlTag  value="span" styleClass="glyphicon glyphicon-edit"></t:htmlTag><h:outputText value="Editer" /></t:htmlTag>
 										</t:div>		
 									</t:htmlTag><!-- Fin class=columnData -->
 									
 									<t:htmlTag value="td" styleClass="columnHelp">									
 										<t:div styleClass="helppanel" >
-											<t:div>
 												<h:panelGrid >
-													<t:div styleClass="portlet-section-text">	<h:outputText value="#{msgs['DATACHANGE.TEXT.LEGEND']}" /></t:div>
+													<t:div>	<h:outputText value="#{msgs['DATACHANGE.TEXT.LEGEND']}" /></t:div>
 										
 													<t:div>
-													<h:graphicImage value="/media/images/help.jpg" /><h:outputText styleClass="legendlabel" value=": #{msgs['DATACHANGE.TEXT.LEGEND.HELP']}" />
+													<h:graphicImage value="/media/images/help.jpg" /><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.HELP']}" />
 													</t:div>
 													<t:div>
-														<h:graphicImage value="/media/images/redtriangular.jpg" /><h:outputText styleClass="legendlabel" value=": #{msgs['DATACHANGE.TEXT.LEGEND.NOTE']}" />
+														<h:graphicImage value="/media/images/redtriangular.jpg" /><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.NOTE']}" />
 													</t:div>
 													<t:div>
-														<h:graphicImage value="/media/images/add.png" /><h:outputText styleClass="legendlabel"	value=": #{msgs['DATACHANGE.TEXT.LEGEND.ADD']}" />
+														<h:graphicImage value="/media/images/add.png" /><h:outputText styleClass="text-muted"	value=": #{msgs['DATACHANGE.TEXT.LEGEND.ADD']}" />
 													</t:div>
 													<t:div>
-														<h:graphicImage value="/media/images/remove.png" /><h:outputText styleClass="legendlabel" value=": #{msgs['DATACHANGE.TEXT.LEGEND.REMOVE']}" />
+														<h:graphicImage value="/media/images/remove.png" /><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.REMOVE']}" />
 													</t:div>
 												</h:panelGrid>
-											</t:div>
 										</t:div>
 									</t:htmlTag><!-- Fin class=columnHelp -->
 								</t:htmlTag>
 							</t:htmlTag>
 						</t:div>	
-					</t:dataList>
+					</t:dataList>					
 					<!-- 
 					<t:div style="margin-top:1em;">
 						<button style="display:none" type="submit" class="btn btn-primary validate" onclick="simulateLinkClick('accountForm:next');"><span class="glyphicon glyphicon-saved">Confirmer</span></button>
