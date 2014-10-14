@@ -260,10 +260,6 @@
 			<description>
 				All the JSP pages of the application.
 			</description>
-			<url-pattern>/stylesheets/about.jsp</url-pattern>
-			<url-pattern>/stylesheets/administrators.jsp</url-pattern>
-			<url-pattern>/stylesheets/administratorAdd.jsp</url-pattern>
-			<url-pattern>/stylesheets/administratorDelete.jsp</url-pattern>
 			<url-pattern>/stylesheets/accountIdentification.jsp</url-pattern>
 			<url-pattern>/stylesheets/accountAuthentification.jsp</url-pattern>
 			<url-pattern>/stylesheets/accountEnabled.jsp</url-pattern>
@@ -272,25 +268,7 @@
 			<url-pattern>/stylesheets/accountPassword.jsp</url-pattern>			
 			<url-pattern>/stylesheets/accountChoice.jsp</url-pattern>
 			<url-pattern>/stylesheets/accountLogin.jsp</url-pattern>
-			<url-pattern>/stylesheets/departments.jsp</url-pattern>
-			<url-pattern>/stylesheets/departmentAdd.jsp</url-pattern>
-			<url-pattern>/stylesheets/departmentDelete.jsp</url-pattern>
-			<url-pattern>/stylesheets/departmentEdit.jsp</url-pattern>
-			<url-pattern>/stylesheets/departmentView.jsp</url-pattern>
-			<url-pattern>/stylesheets/departmentManagerAdd.jsp</url-pattern>
-			<url-pattern>/stylesheets/departmentManagerDelete.jsp</url-pattern>
-			<url-pattern>/stylesheets/departmentManagerEdit.jsp</url-pattern>
 			<url-pattern>/stylesheets/exception.jsp</url-pattern>
-			<url-pattern>/stylesheets/ldapSearch.jsp</url-pattern>
-			<url-pattern>/stylesheets/ldapResults.jsp</url-pattern>
-			<url-pattern>/stylesheets/login.jsp</url-pattern>
-			<url-pattern>/stylesheets/logout.jsp</url-pattern>
-			<url-pattern>/stylesheets/preferences.jsp</url-pattern>
-			<url-pattern>/stylesheets/things.jsp</url-pattern>
-			<url-pattern>/stylesheets/thingDelete.jsp</url-pattern>
-			<url-pattern>/stylesheets/thingEdit.jsp</url-pattern>
-			<url-pattern>/stylesheets/files.jsp</url-pattern>
-			<url-pattern>/stylesheets/groups.jsp</url-pattern>
 			<url-pattern>/stylesheets/welcome.jsp</url-pattern>
 			<url-pattern>/stylesheets/_*</url-pattern>
 		</web-resource-collection>
