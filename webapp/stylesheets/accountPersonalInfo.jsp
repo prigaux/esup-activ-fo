@@ -4,7 +4,8 @@
 <script>
 $(function() {
 	if(${accountController.reinit}){progressBar(3);}
-	if(${accountController.activ}||${accountController.passwChange}){progressBar(1);}
+	if(${accountController.activ}||${accountController.passwChange} || ${accountController.loginChange}){progressBar(1);}
+	
 	
 });
 </script>
