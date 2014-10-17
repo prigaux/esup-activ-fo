@@ -26,7 +26,7 @@ $(function() {
 					<e:outputLabel for="newlogin" value="#{msgs[beanNewLogin.key]}" />
 					<e:inputText id="login" value="#{beanNewLogin.value}" required="#{beanNewLogin.required}" validator="#{beanNewLogin.validator.validate}" converter="#{beanNewLogin.converter}">
 					</e:inputText>
-					<h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanNewLogin.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanNewLogin.help!=null}"/>
+					<t:graphicImage title="#{msgs[beanNewLogin.help]}"	 value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanNewLogin.help!=null}"/>
 					<e:message for="login" />
 				</e:panelGrid>
 								

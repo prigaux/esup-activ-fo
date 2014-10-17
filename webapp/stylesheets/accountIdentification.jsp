@@ -43,7 +43,7 @@
 					            <h:outputText styleClass="constraint" value="#{msgs[entry.constraint]}" rendered="#{entry.constraint!=null}"/>
 							</h:column>
 							<h:column>									
-								<t:graphicImage styleClass="helpTip" longdesc="#{msgs[entry.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
+								<t:graphicImage title="#{msgs[entry.help]}"	 value="/media/images/help.jpg"  style="border: 0;" rendered="#{entry.help!=null}"/>
 							</h:column>	
 							<h:column>									
 								<e:message for="mess1" />

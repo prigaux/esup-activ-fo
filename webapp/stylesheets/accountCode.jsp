@@ -27,7 +27,7 @@ $(function() {
 					<e:outputLabel for="code" value="#{msgs[beanCode.key]}" />
 					<e:inputText id="code" value="#{beanCode.value}" required="#{beanCode.required}" validator="#{beanCode.validator.validate}">
 					</e:inputText>
-				    <h:graphicImage styleClass="helpTip" longdesc="#{msgs[beanCode.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanCode.help!=null}"/>
+				    <t:graphicImage title="#{msgs[beanCode.help]}"	 value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanCode.help!=null}"/>
 				    <e:message for="code" />	
 				</e:panelGrid>
 				
