@@ -1,24 +1,24 @@
 
 $(function() {
 	// Mettre la premiere ligne des champs multi évalués à beanName+show
-   $(".hide").load(function() {
+   $(".hideField").load(function() {
     	if( $("." + $(this).attr("alt")+"show").size()==0){
-    		$("." + $(this).attr("alt")+"hide:first").removeClass($(this).attr("alt")+"hide").addClass($(this).attr("alt")+"show");
+    		$("." + $(this).attr("alt")+"hideField:first").removeClass($(this).attr("alt")+"hideField").addClass($(this).attr("alt")+"show");
     	}
     });
 	
    //Permet de gérer l'ajout d'une ligne d'un champ multi évalué
 	$(".show").click(function () {
-	    $("." + $(this).attr("alt")+"hide:first").show();
-	    $(("." + $(this).attr("alt")+"hide:first").removeClass($(this).attr("alt")+"hide").addClass($(this).attr("alt")+"show")).show(500);
+	    $("." + $(this).attr("alt")+"hideField:first").show();
+	    $("." + $(this).attr("alt")+"hideField:first").removeClass($(this).attr("alt")+"hideField").addClass($(this).attr("alt")+"show");	  
 	});
 	
 	 //Permet de gérer la suppression d'une ligne d'un champ multi évalué
-	$(".hide").click(function () {
+	$(".hideField").click(function () {
 		if( $("." + $(this).attr("alt")+"show").size() > 1    ) {
 			$("." + $(this).attr("alt")+"show:last").hide();
 		    $("." + $(this).attr("alt")+"show:last").children("input,select").val("");
-		    $("." + $(this).attr("alt")+"show:last").removeClass().addClass($(this).attr("alt")+"hide");
+		    $("." + $(this).attr("alt")+"show:last").removeClass().addClass($(this).attr("alt")+"hideField");
 		}
 	}); 
 	
