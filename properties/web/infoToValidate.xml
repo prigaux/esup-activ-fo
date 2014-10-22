@@ -62,8 +62,8 @@
 		<property name="id" value="studentnumber"/>
 		<property name="help" value="IDENTIFICATION.ALUMSTUDENTNUMBER.TEXT.HELP"/>
 		<property name="required" value="true" />
-		<property name="constraint" value="PERSOINFO.STUDENTNUMBER.CONSTRAINT"/>
-		<property name="validator" ref="validatorStudentNumber"/>
+		<property name="constraint" value="PERSOINFO.ALUMSTUDENTNUMBER.CONSTRAINT"/>
+		<property name="validator" ref="validatorAlumStudentNumber"/>
 	</bean>
 	
 	<bean

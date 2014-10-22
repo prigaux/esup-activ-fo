@@ -313,6 +313,20 @@
     	<property name="errorMsg" value="VALIDATOR.STUDENTNUMBERLENTH.INAVLID"/>    	
 	</bean>
 	
+	<!-- Le numéro étudiant reseau pro doit etre de 7 ou 8 chiffres ou commencant par MU suivit de 5 ou 6 chiffre-->
+	<bean 
+		id="validatorAlumStudentNumber"
+		class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Student number
+    	</description>
+    	<property name="regex" value="^MU[0-9]{5,6}$|^[0-9]{7,8}$" />	
+     	<property name="errorMsg" value="VALIDATOR.ALUMSTUDENTNUMBER.INAVLID"/> 
+     	
+	</bean>
+	
 	<!-- La longueur du numéro INE doit etre de 11 caractères alphanumériques -->
 	<bean 
 		id="validatorCodeINE"
