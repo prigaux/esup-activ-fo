@@ -11,11 +11,10 @@ $(function() {
 </script>
 
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
-<div class="pc">
+
+<div class="pc md">
 <div class="container-fluid">
-		<!-- <e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" /> -->
-	
-	
+	<!-- <e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" /> -->	
 	<h:form id="accountForm" enctype="multipart/form-data">
 		<%@include file="_includeAccountData.jsp"%>	
 			<div class="col-md-9">
@@ -55,13 +54,13 @@ $(function() {
 														<!--* Champs avec valeur non vide -->       	    
 														<t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue)}" style="display:none;" styleClass="#{beanfield.name}show">
 														   <!-- Avec validator -->
-														    <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" required="#{beanfield.required}" size="35" validator="#{beanfield.validator.validate}"  
+														    <h:inputText value="#{sub.value}" styleClass="#{beanfield.name}Popup" disabled="#{beanfield.disable}" converter="#{beanfield.converter}" required="#{beanfield.required}" size="35" validator="#{beanfield.validator.validate}"  
 														    	rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&(sub.value!=''||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 												            <!-- Sans validator -->
-												            <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" required="#{beanfield.required}" size="35" 
+												            <h:inputText value="#{sub.value}" styleClass="#{beanfield.name}Popup" disabled="#{beanfield.disable}" converter="#{beanfield.converter}" required="#{beanfield.required}" size="35" 
 												            	rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 												            <!--Liste déroulante  -->
-												            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" >
+												            <h:selectOneMenu value="#{sub.value}" styleClass="#{beanfield.name}Popup" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" >
 											                  <f:selectItems value="#{beanfield.displayItems}" />
 											             	</h:selectOneMenu>               	             	             	  
 												        </t:div>    	    
@@ -122,10 +121,21 @@ $(function() {
 												</h:column>
 										</h:dataTable>
 										<t:div style="margin-top:1em;">
-											<t:htmlTag style="display:none"rendered="#{category.access}" styleClass="validate btn btn-primary" value="button" ><t:htmlTag  value="span" styleClass="glyphicon glyphicon-ok"></t:htmlTag><h:outputText value="#{msgs['_.BUTTON.CONFIRM']}" /></t:htmlTag>
-											<t:htmlTag rendered="#{category.access}" styleClass="modifyByCategory btn btn-primary" value="button" ><t:htmlTag  value="span" styleClass="glyphicon glyphicon-edit"></t:htmlTag><h:outputText value="Editer" /></t:htmlTag>
+											<!--Impossibilité d'utiliser le tag t:htmlTag de type bouton, car cela génère un bug (lié à esup-communs...)sur la boite de dialogue de type modal(la boite de dialogue apparait et disparait de suite) 
+											-->
+											<t:htmlTag style="display:none" rendered="#{category.access}" styleClass="validate btn btn-primary" value="a">
+											   <f:param name="href" value="#" />
+											   <t:htmlTag  value="span" styleClass="glyphicon glyphicon-ok"></t:htmlTag>
+											   <h:outputText value="#{msgs['_.BUTTON.CONFIRM']}" />
+											</t:htmlTag>
+											<t:htmlTag rendered="#{category.access}" styleClass="modifyByCategory btn btn-primary" value="a">
+											   <f:param name="href" value="#" />
+											   <t:htmlTag  value="span" styleClass="glyphicon glyphicon-edit"></t:htmlTag>
+											   <h:outputText value="Editer mes données" />
+											</t:htmlTag>
 										</t:div>		
 									</t:htmlTag><!-- Fin class=columnData -->
+									
 									
 									<t:htmlTag value="td" styleClass="columnHelp">									
 										<t:div styleClass="helppanel" >
@@ -151,22 +161,38 @@ $(function() {
 							</t:htmlTag>
 						</t:div>	
 					</t:dataList>					
-					<!-- 
-					<t:div style="margin-top:1em;">
-						<button style="display:none" type="submit" class="btn btn-primary validate" onclick="simulateLinkClick('accountForm:next');"><span class="glyphicon glyphicon-saved">Confirmer</span></button>
-						<button  class="btn btn-primary modifyByCategory" ><span class="glyphicon glyphicon-edit"></span>Editer</button>
-					</t:div>
-					 -->
+				
+					
 			    </div><!-- tab content -->
-			</div>			
-		</div><!-- Fin row nav pills -->
+			</div><!-- Fin col-md-9 -->			
+		</div><!--Fin row de  _includeAccountData.jsp -->
 	
-
+		
 		<t:div style="display:none">
 			<e:commandButton id="next" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
 		</t:div>
 		
 	</h:form>
+	
+ <!-- Button HTML (to Trigger Modal) -->   
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Confirmation</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Les données suivantes ont été modifiées</p>
+                    <p class="text-warning dataModifyToMyModal"></p>
+                    <p>Elles ne seront pas prises en compte immédiatement à l'écran. Elles seront effectives après la validation de la DRH.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="simulateLinkClick('accountForm:next');">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>    
 </div><!-- Fin class="container" -->
 </div><!-- Fin class="pc md" -->
 

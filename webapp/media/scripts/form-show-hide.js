@@ -1,5 +1,8 @@
 
 $(function() {
+	var paramDialog="";
+	
+
 	// Mettre la premiere ligne des champs multi évalués à beanName+show
    $(".hideField").load(function() {
     	if( $("." + $(this).attr("alt")+"show").size()==0){
@@ -78,18 +81,57 @@ $(function() {
 		if (find.size()>0){modify(fieldConcate,this);}
 	});
 	
-	// Lorsque l'utilisateur modifie un champ nécessitant la validation de la DRH, 
-	// un popup s'affiche lui avertissant que le la donnée modifiée ne sera pas immédiatement prise en compte à l'écran 
-	$("[class*='show']").change(function () {	
+
+
+	// Gérer les champs nécessitant la validation de la DRH:
+	// Si c'est un champ à valider par la DRH et si la valeur initiale est différente de celle saisie 
+	// alors ce champ va etre envoyé en paramètre à la boite de dialogue
+	$("[class*='Popup']").change(function () {	
+		var oldval;
+		var currentval;
 		var getFirstClass = $(this).attr('class').split(' ')[0];
-		getFirstClass=getFirstClass.replace("show","");
-		getFirstClass=getFirstClass+"toValidateDRH";
-		var find =$(this).closest('.mainModifyLinkByCategory').find("."+getFirstClass);
-		if (find.size()>0){
-			var val = $(".digestConstraint").html();
-			dialog(val);}
+		var fieldName=getFirstClass.replace("Popup","");
+		getFirstClasstoValidate=fieldName+"toValidateDRH";
+		var find =$(this).closest('.mainModifyLinkByCategory').find("."+getFirstClasstoValidate);
+		// Si le champ est à valider par la DRH
+		if (find.size()>0){	
+			var tagName=$(this).get(0).tagName;
+			// Impossibilité d'utiliser defaultValue pour les tagName de type select, d'ou utilisation de la solution suivante 
+			if(tagName=='SELECT'){
+				oldval = $("."+fieldName+"output").html();
+				currentval=$('.'+getFirstClass+' option:selected').text();
+				
+			}
+			if(tagName=='INPUT'){
+				oldval=this.defaultValue;
+				currentval=this.value;
+			}
+			
+			if(oldval!=this.value){
+				var modifiedFields = $("."+fieldName).html();
+				if(paramDialog=="")
+					paramDialog=paramDialog+modifiedFields;				
+				else
+					paramDialog=paramDialog+","+modifiedFields;
+				
+			}
+		}//fin find
 	});
 	
+	//Lors de la confirmation, si un champ modifié nécessite la validation de la DRH,
+	// un popup s'affichera lui avertissant que le la donnée modifiée ne sera pas immédiatement prise en compte à l'écran 	
+	$(".validate").click(function() {
+		if(paramDialog!=""){
+			$(".dataModifyToMyModal").text(paramDialog);
+			paramDialog="";
+			$("#myModal").modal('show');
+		}
+		else
+			{
+			simulateLinkClick('accountForm:next');
+			}
+		
+	 });
 	
 	
 	// Afficher le(s) champ(s) en mode modification
@@ -103,20 +145,7 @@ $(function() {
 		 $(elt).closest('.mainModifyLinkByCategory').find(".modifyByCategory").hide();
 	}
 	
-	function dialog(a){
-		$("<div />", { text: a }).dialog({
-			title:"Attention",
-		    width: 370,
-	        position: [300,200],
-	        buttons: {
-	            "Ok": function() {
-	                $(this).dialog("close");
-	            }
-	        }
-	    });
-	};
 	
-	//Lors de la validation, appel à accountController.pushChangeInfoPerso
-	$('.validate').attr("onclick", "simulateLinkClick('accountForm:next');");
 	
+
 });
