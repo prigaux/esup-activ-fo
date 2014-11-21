@@ -11,7 +11,7 @@ $(function() {
     });
 	
    //Permet de gérer l'ajout d'une ligne d'un champ multi évalué
-	$(".show").click(function () {
+	$(".showField").click(function () {
 	    $("." + $(this).attr("alt")+"hideField:first").show();
 	    $("." + $(this).attr("alt")+"hideField:first").removeClass($(this).attr("alt")+"hideField").addClass($(this).attr("alt")+"show");	  
 	});
@@ -144,8 +144,5 @@ $(function() {
 		 $(elt).closest('.mainModifyLinkByCategory').find(".validate").show();
 		 $(elt).closest('.mainModifyLinkByCategory').find(".modifyByCategory").hide();
 	}
-	
-	
-	
 
 });
