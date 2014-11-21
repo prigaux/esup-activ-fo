@@ -16,22 +16,29 @@ $(function() {
 <div class="container-fluid">
 	<!-- <e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" /> -->	
 	<h:form id="accountForm" enctype="multipart/form-data">
+	<div class="mainBlock">
 		<%@include file="_includeAccountData.jsp"%>	
-			<div class="col-md-9">
+			<div class="col-md-6">
 				<div class="tab-content">
 					<!-- Afficher message d'erreur -->
 					 <e:messages />
 					 
 			   		<!-- Appeler la méthode getBeanData qui récupère les données, pour afficher la civilité et le displayName
-					car avant cette méthode, aucune données n'est récupérées
-					 -->				
+					car avant cette méthode, aucune données n'est récupérées					 -->				
 	   				<t:outputText value="#{accountController.beanData}" style="display:none"></t:outputText>
-					<div class="page-header"><h:outputText value="#{accountController.currentAccount.supannCivilite} #{accountController.currentAccount.displayName}"  /></div>
-	    		 	<t:dataList value="#{accountController.beanData}"  var="category" >
+	   				
+					<t:dataList value="#{accountController.beanData}"  var="category" >
 						<t:div styleClass="hrefIdDetail mainModifyLinkByCategory tab-pane" rendered="#{category.access}">
 								<t:htmlTag value="table">
+								
+									<t:htmlTag value="tr" styleClass="page-header">
+										<t:htmlTag value="td">
+											<t:div><e:paragraph value="#{accountController.currentAccount.supannCivilite} #{accountController.currentAccount.displayName}"  /></t:div>
+										</t:htmlTag>
+									</t:htmlTag>
+									
 									<t:htmlTag value="tr">
-										<t:htmlTag value="td" styleClass="columnData">
+										<t:htmlTag value="td">
 											<h:dataTable value="#{category.profilingListBeanField}"	rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn,fourthColumn">
 												<h:column>
 													<t:outputText styleClass="#{beanfield.name} labeltexttop#{beanfield.size>1}"	value="#{msgs[beanfield.key]}"	rendered="#{beanfield.fieldType!='inputFileUpload'}" />
@@ -108,71 +115,58 @@ $(function() {
 												</h:column>
 												<!--Afficher les boutons ajouter, supprimer et l'aide  -->
 												<h:column>
-													<h:graphicImage title="#{msgs[beanfield.help]}"	value="/media/images/help.jpg" style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}" />
-													<t:div style="display:none" styleClass="#{beanfield.name}modify">
-														<h:graphicImage title="#{msgs[beanfield.notice]}" styleClass="#{beanfield.name}toValidateDRH" value="/media/images/redtriangular.jpg" style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}" />
-														<h:graphicImage alt="#{beanfield.name}" styleClass="showField" value="/media/images/add.png" style="border: 0;cursor:pointer" rendered="#{beanfield.multiValue&&!beanfield.disable&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}" />
-														<h:graphicImage alt="#{beanfield.name}" styleClass="hideField" value="/media/images/remove.png" style="border: 0;cursor:pointer"	rendered="#{beanfield.multiValue&&!beanfield.disable&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}" />
-													</t:div>
+														<h:graphicImage title="#{msgs[beanfield.help]}"	value="/media/images/help.jpg" style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}" />
+														<t:div style="display:none" styleClass="#{beanfield.name}modify">
+															<h:graphicImage title="#{msgs[beanfield.notice]}" styleClass="#{beanfield.name}toValidateDRH" value="/media/images/redtriangular.jpg" style="border: 0" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}" />
+															<h:graphicImage alt="#{beanfield.name}" styleClass="showField" value="/media/images/add.png" style="border: 0;cursor:pointer" rendered="#{beanfield.multiValue&&!beanfield.disable&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}" />
+															<h:graphicImage alt="#{beanfield.name}" styleClass="hideField" value="/media/images/remove.png" style="border: 0;cursor:pointer"	rendered="#{beanfield.multiValue&&!beanfield.disable&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}" />
+														</t:div>
 												</h:column>
 												<!--Permet de gérer l'affichage des champs en modification (voir form-show-hide.js)-->
 												<h:column>
 													<h:outputText styleClass="#{beanfield.name}_modifyLink" rendered="#{!beanfield.disable&&beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'}"/>
 												</h:column>
+												
 										</h:dataTable>
 										<t:div style="margin-top:1em;">
 											<!--Impossibilité d'utiliser le tag t:htmlTag de type bouton, car cela génère un bug (lié à esup-communs...)sur la boite de dialogue de type modal(la boite de dialogue apparait et disparait de suite) 
 											-->
 											<t:htmlTag style="display:none" rendered="#{category.access}" styleClass="validate btn btn-primary" value="a">
-											   <f:param name="href" value="#" />
-											   <t:htmlTag  value="span" styleClass="glyphicon glyphicon-ok"></t:htmlTag>
+											    <f:param name="href" value="#" /><t:htmlTag  value="span" styleClass="glyphicon glyphicon-ok"></t:htmlTag>
 											   <h:outputText value="#{msgs['_.BUTTON.CONFIRM']}" />
 											</t:htmlTag>
 											<t:htmlTag rendered="#{category.access}" styleClass="modifyByCategory btn btn-primary" value="a">
-											   <f:param name="href" value="#" />
-											   <t:htmlTag  value="span" styleClass="glyphicon glyphicon-edit"></t:htmlTag>
+											   <f:param name="href" value="#" /> <t:htmlTag  value="span" styleClass="glyphicon glyphicon-edit"></t:htmlTag>
 											   <h:outputText value="Editer mes données" />
 											</t:htmlTag>
 										</t:div>		
 									</t:htmlTag><!-- Fin class=columnData -->
 									
 									
-									<t:htmlTag value="td" styleClass="columnHelp">									
-										<t:div styleClass="helppanel" >
-												<h:panelGrid >
-													<t:div>	<h:outputText value="#{msgs['DATACHANGE.TEXT.LEGEND']}" /></t:div>
-										
-													<t:div>
-													<h:graphicImage value="/media/images/help.jpg" /><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.HELP']}" />
-													</t:div>
-													<t:div>
-														<h:graphicImage value="/media/images/redtriangular.jpg" /><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.NOTE']}" />
-													</t:div>
-													<t:div>
-														<h:graphicImage value="/media/images/add.png" /><h:outputText styleClass="text-muted"	value=": #{msgs['DATACHANGE.TEXT.LEGEND.ADD']}" />
-													</t:div>
-													<t:div>
-														<h:graphicImage value="/media/images/remove.png" /><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.REMOVE']}" />
-													</t:div>
-												</h:panelGrid>
-										</t:div>
-									</t:htmlTag><!-- Fin class=columnHelp -->
+									
 								</t:htmlTag>
 							</t:htmlTag>
 						</t:div>	
-					</t:dataList>					
-				
-					
-			    </div><!-- tab content -->
-			</div><!-- Fin col-md-9 -->			
+					</t:dataList>		
+			    </div><!-- tab content -->			    
+			    </div><!-- Fin col-md-6 -->				    
+			    <div class="col-md-3">
+			    	<div class="helppanel">		    			
+	  					<div><h:outputText value="#{msgs['DATACHANGE.TEXT.LEGEND']}" /></div>							
+						<div><img src="/media/images/help.jpg"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.HELP']}" /></div>
+						<div><img src="/media/images/redtriangular.jpg"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.NOTE']}" /></div>
+						<div><img src="/media/images/add.png"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.ADD']}" /></div>
+						<div><img src="/media/images/remove.png"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.REMOVE']}" /></div>		    			
+					</div>
+			   </div><!-- Fin col-md-3 -->					
 		</div><!--Fin row de  _includeAccountData.jsp -->
 	
 		
 		<t:div style="display:none">
 			<e:commandButton id="next" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
 		</t:div>
-		
-	</h:form>
+	</div><!--Fin class="mainBlock"-->
+</h:form>
 	
  <!-- Button HTML (to Trigger Modal) -->   
     <div id="myModal" class="modal fade">
@@ -194,9 +188,10 @@ $(function() {
         </div>
     </div>    
 </div><!-- Fin class="container" -->
-</div><!-- Fin class="pc md" -->
+
 
 <h:form id="restart" style="display:none;">
 	<e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
 </h:form>
+</div><!-- Fin class="pc md" -->
 </e:page>
