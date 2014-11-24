@@ -26,7 +26,6 @@
 				 	<t:dataList value="#{accountController.beanData}"  var="category">
 						<t:htmlTag styleClass="homeStep" value="li" rendered="#{category.access}" >
 							<t:htmlTag  value="a" styleClass="hrefId">
-								<t:htmlTag  value="span" styleClass="glyphicon #{msgs[category.icone]}"></t:htmlTag>								
 								<h:outputText rendered="#{category.access}" value="#{msgs[category.title]}" />	
 								<t:htmlTag  value="span" styleClass="glyphicon glyphicon-chevron-right"></t:htmlTag>
 							</t:htmlTag>
