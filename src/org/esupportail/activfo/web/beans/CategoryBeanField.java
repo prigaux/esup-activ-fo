@@ -32,6 +32,5 @@ public interface CategoryBeanField {
 	public HashMap<BeanField, HashMap<String, List<String>>> getDeniedBeanFieldProfile();
 	public void setDeniedBeanFieldProfile(HashMap<BeanField, HashMap<String, List<String>>> deniedBeanFieldProfile);
 	
-	public String getIcone();
-	public void setIcone(String icone);
+	
 }
