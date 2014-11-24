@@ -1,305 +1,113 @@
-a:hover {
-        cursor: pointer;
+ .mainBlock td {
+    padding-right: 0.5em;
+}
+ 
+ .firstColumn {
+ vertical-align: top;
+}
+ .secondColumn {
+ vertical-align: center;
+}
+ 
+ .thirdColumn {
+   vertical-align: top;
 }
 
- /* common to all columns*/
-    .mainBlock td { 
-	padding-right: 0.5em;
-    }
-    .firstColumn {
-    vertical-align: top;
-    }
-    .firstColumn#sizeEx {
-    vertical-align: top;
-    }
-    .secondColumn {
-    vertical-align: center;
-    }
-    
-    .thirdColumn {
-      vertical-align: top;
-    }
-    
-    .thirdColumn > img, .thirdColumn > div{  
+.thirdColumn > img, .thirdColumn > div {
     float: left;
-    border: 0;
-    } 
-    .fourthColumn {
-    vertical-align: top;
-    } 
-    
-    .viewCol1 {
-     vertical-Align: top;
-    }
-    
-    .viewCol2 {
-    }
-    
-    
-    .firstStepImage2fleches {
-    height: 53px;
-    width: 745px;
-    background: url('images/bandeau-activation-2fleches01-ent.png') no-repeat left top;
-    }
-    .secondStepImage2fleches {
-    height: 53px;
-	width: 745x;
-    background: url('images/bandeau-activation-2fleches02-ent.png') no-repeat left top;
-    }
-        
-    .firstStepImage {
-    height: 53px;
-    width: 780px;
-    
-    background: url('images/bandeau-activation-4fleches01-ent.png') no-repeat left top;
-    }
-    .secondStepImage {
-    height: 53px;
-    width: 780px;
-    background: url('images/bandeau-activation-4fleches02-ent.png') no-repeat left top;
-    }
-    .thirdStepImage {
-    height: 53px;
-    width: 780px;
-    background: url('images/bandeau-activation-4fleches03-ent.png') no-repeat left top;
-    }
-    .fourthStepImage {
-    height: 53px;
-    width: 780px;
-    background: url('images/bandeau-activation-4fleches04-ent.png') no-repeat left top;
-    }
-    .firstStepImage5fleches {
-    height: 53px;
-    width: 930px;
-    background: url('images/bandeau-activation-5fleches01-ent.png') no-repeat left top;
-    }
-    .secondStepImage5fleches {
-    height: 53px;
-	width: 930px;
-    background: url('images/bandeau-activation-5fleches02-ent.png') no-repeat left top;
-    }
-    .thirdStepImage5fleches {
-    height: 53px;
-    background: url('images/bandeau-activation-5fleches03-ent.png') no-repeat left top;
-    }
-    .fourthStepImage5fleches {
-    height: 53px;
-	width: 930px;
-    background: url('images/bandeau-activation-5fleches04-ent.png') no-repeat left top;
-    }
-    .fifthStepImage5fleches {
-    height: 53px;
-    width: 930px;
-    background: url('images/bandeau-activation-5fleches05-ent.png') no-repeat left top;
-    }
-    .firstStepImage3fleches {
-    height: 53px;
-    width: 600px;
-    background: url('images/bandeau-activation-3fleches01-ent.png') no-repeat left top;
-    }
-    .secondStepImage3fleches {
-    height: 53px;
-    width: 600px;
-    background: url('images/bandeau-activation-3fleches02-ent.png') no-repeat left top;
-    }
-    .thirdStepImage3fleches {
-    height: 53px;
-   	width: 600px;
-    background: url('images/bandeau-activation-3fleches03-ent.png') no-repeat left top;
-    }
-    
-    ul.processSteps {
-	list-style-type: none;
-	padding: 0px 0px 0px 0px;
-	margin: 0px 0px 0px 0px;
-	width: 100%;
-	font-size:11px;
-	}
-	ul.processSteps h6 {
-	color:#fff;
-	font-size:20px;
-	font-style:bold;
-	font-family:arial;
-	margin:0px !important;
-	padding:0px !important;
-	line-height:10px;
-	
-	}
-	ul.processSteps li  {
-	display: inline;
-	float: left;
-	color: #b6ecff;
-	padding-left:43px !important;
-	}
-	ul.processSteps li.homeStep {
-	padding-left:0px !important;
-	}
-	ul.processSteps li.firstStep {
-	padding-top:10px !important;
-	width:135px !important;
-	}
-	ul.processSteps li.secondStep {
-	padding-top:10px !important;
-	width:130px !important;
-	}
-    ul.processSteps li.thirdStep {
-	padding-top:10px !important;
-	width:128px !important;
-	}
-    ul.processSteps li.fourthStep {
-	padding-top:10px !important;
-	width:128px !important;
-	}
-    ul.processSteps li.fifthStep {
-	padding-top:10px !important;
-	width:128px !important;
-    }
-    ul.processSteps li.currentTab {
-	color: #c9f1a5;
-	font-weight: bold;
-	padding-top:10px !important;
-	width:128px !important;
-	}
-	ul.processSteps li.currentTabModification{
-	color: #c9f1a5;
-	font-weight: bold;
-	padding-top:10px !important;
-	width:300px !important;
-	}
-	ul.processSteps li.firstImage2 {
-	padding-top:10px !important;
-	width:300px !important;
-	}
-	ul.processSteps li.currentTabLogin {
-	color: #c9f1a5;
-	font-weight: bold;
-	padding-top:10px !important;
-	width:135px !important;
-	}
-	
-	.labeltexttoptrue{
+}
+ 
+ .fourthColumn {
+ vertical-align: top;
+} 
+ 
+ .viewCol1 {
+  vertical-Align: top;
+}
+ 
+ .viewCol2 {
+}
+   
+.labeltexttoptrue{
 	font-weight:bold;
 	vertical-align:top;
-	}
-	.labeltexttopfalse {
-	font-weight:bold;
-	}
-	
-	.labeltext{
-	font-weight:bold;
-	}
-	
-	.commandLink a, a.commandLink{
-  	background: transparent !important;
-    font-size: inherit !important;
-    color: inherit !important;
-    text-decoration: none !important;
-    border: 0px none transparent !important;
-    cursor:pointer;
-	}
-	.commandLink a:hover, a.commandLink:hover{
-    font-weight:bold; !important;    
-	}
-
-	.legend .portlet-section-text {
-	    margin-left: 0.2em;
-	}	
-	.legendCol2{
-	 padding-left:1em !important;
-	}
-	
-	.legend {
-		max-width: 30em;
-		display: inline;
-        margin: 0 1em 1em;
-        border: 2px groove threeDface;
-        padding: 0.3em 0.7em 0.8em;		
-	}
-	
-	option{
-	max-width:30em;
-	overflow:hidden;
-	text-overflow:ellipsis;
-	}
-	
-	.constraint{
-	color: gray;
-    font-family: Verdana,Impact,"Times New Roman",serif;
-    font-size: 0.8em;
-    text-align: left;
-	}
-	
-	
-	.digestConstraint{
-	color: red;
-    font-family: Verdana,Impact,"Times New Roman",serif;
-    font-size: 0.8em;
-    text-align: left;
-	}
-	
-	
-	.positionModifyLinkByCategory{
-	  color: white;
-	  float: right;
-	  margin: 4px;
-	}
-	
-	.positionModifyLinkByCategory a{
-	   color: white;
-	   margin-left: 1em;
-	}
-	.columnHelp .helppanel {
-		max-width: 300px;
-   		border-style: none none none solid ;
-   		border-color:#DDDDDD;
-    	border-width:  0 0 0 1px;
-    	padding: 5px 0px 10px 10px;
-	}
-	.columnData {
-		max-width: 750px;
-		padding-right: 10px;
-   }
-	.legendlabel {
-		color: #A7A9AC;
-		font-family: Verdana,Arial,Helvetica,sans-serif;
-    	font-size: 12px;
-    	text-align: justify;
-	}
-	
-	.sidenav > li > a {
-    border: 1px solid #e5e5e5;
-    display: block;
-    margin: 0 0 -1px;
-    padding: 8px 14px !important;
-	}
-	.nav-stacked > li + li {
-	    margin-top: 0 !important;
-	}
-	
-	.sidenav .glyphicon-chevron-right {
-	    float: right;
-	    margin-right: -6px;
-	    margin-top: 2px;
-	    opacity: 0.25;
-	}
-	.sidenav > li:first-child > a {
-	    border-radius: 6px 6px 0 0;
-	}
-	.glyphicon  {
-	    margin-right: 3px;
-	}
-	
-	.breadcrumbVertical {
-	    background-color: #f5f5f5;
-	    border-radius: 4px;
-	    list-style: none outside none;
-	    padding: 8px 15px;
-	}
- .page-header {
-    border-bottom: 1px solid #eee;
-    margin: 1px 0 20px;
-    padding-bottom: 9px;
- }	
-	
 }
-	
+
+.labeltexttopfalse {
+font-weight:bold;
+}
+
+.labeltext{
+font-weight:bold;
+}
+
+.constraint{
+color: gray;
+   font-family: Verdana,Impact,"Times New Roman",serif;
+   font-size: 0.8em;
+   text-align: left;
+}
+
+
+.digestConstraint{
+color: red;
+   font-family: Verdana,Impact,"Times New Roman",serif;
+   font-size: 0.8em;
+   text-align: left;
+}
+
+.pc .helppanel {
+    margin: 100px 0 0;
+    padding-left: 18px;
+    border-left: 1px solid #005bc3;
+}
+
+.sidenav > li > a {
+   border: 1px solid #e5e5e5;
+   display: block;
+   margin: 0 0 -1px;
+   padding: 8px 14px !important;
+}
+.nav-stacked > li + li {
+    margin-top: 0 !important;
+}
+
+.sidenav .glyphicon-chevron-right {
+    float: right;
+    margin-right: -6px;
+    margin-top: 2px;
+    opacity: 0.25;
+}
+
+.sidenav > li:first-child > a {
+    border-radius: 6px 6px 0 0;
+}
+
+.glyphicon  {
+    margin-right: 3px;
+}
+
+.breadcrumbVertical {
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    list-style: none outside none;
+    padding: 8px 15px;
+}
+ 
+ .labelOverride label {
+    display: inline-block;
+    font-weight: normal !important;
+    margin-bottom: 5px;
+}
+
+.footer {
+	background-color: #f5f5f5;
+	/*background-image: url("../media/images/banner.jpg");*/
+	background-repeat: no-repeat;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+	vertical-align : bottom;
+
+}
+

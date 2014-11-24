@@ -16,25 +16,25 @@
     		The bean 'tagsConfigurator' is used to set up the configuration of
     		the custom tags of consortium ESUP-Portail (see esup-commons.tld).
     	</description>
-    	<property name="messagesInfoClass" value="portlet-msg-info" >
+    	<property name="messagesInfoClass" value="text-info" >
     		<description>
     			The default value used for attribute infoClass of tags message 
     			and messages. It is the CSS class used for info messages.
     		</description>
     	</property>
-    	<property name="messagesWarnClass" value="portlet-msg-alert" >
+    	<property name="messagesWarnClass" value="text-warning" >
     		<description>
     			The default value used for attribute warnClass of tags message 
     			and messages. It is the CSS class used for warn messages.
     		</description>
     	</property>
-    	<property name="messagesErrorClass" value="portlet-msg-error" >
+    	<property name="messagesErrorClass" value="text-danger" >
     		<description>
     			The default value used for attribute errorClass of tags message 
     			and messages. It is the CSS class used for error messages.
     		</description>
     	</property>
-    	<property name="messagesFatalClass" value="portlet-msg-error" >
+    	<property name="messagesFatalClass" value="text-danger" >
     		<description>
     			The default value used for attribute fatalClass of tags message 
     			and messages. It is the CSS class used for fatal messages.
@@ -89,6 +89,7 @@
     			URLs are prefixed by property servletMediaPath.
     			Warning: this tag is ignored for portlet installations.
     		</description>
+    		<!-- portlet.css ne sera plus utilisé (à revoir) -->
     		<list>
     			<value>commons.css</value>
     			<value>../media/portlet.css</value>

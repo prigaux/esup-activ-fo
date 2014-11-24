@@ -11,7 +11,7 @@
 	    </div>
 	    <div class="row">
 			<div class="col-md-offset-3 col-md-4">
-	     	   <e:paragraph escape="false" value="#{msgs['PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL']}" rendered="#{accountController.viewDataChange}"/>
+			   <e:paragraph styleClass="text-success" escape="false" value="#{msgs['PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL']}" rendered="#{accountController.viewDataChange}"/>
 			</div>
 		</div>
 		
