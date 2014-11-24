@@ -5,8 +5,8 @@ $(function() {
 	progressBar(2);	
 });
 </script>
+<div class="pc">
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
-	<div class="pc">
 		<div class="container-fluid">
 		
 			<e:section value="#{msgs['LOGIN.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}" />
@@ -40,5 +40,5 @@ $(function() {
 				<e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
 			</h:form>
 		</div>
-	</div>
 </e:page>
+</div>

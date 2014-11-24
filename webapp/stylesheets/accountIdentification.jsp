@@ -1,8 +1,7 @@
 <%@include file="_include.jsp"%>
 <%@include file="_includeScript.jsp"%>
-
-<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 <div class="pc">
+<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 		<div class="container-fluid">
 		<%-- Data mustn't be recorded in this form, even by using back button --%> 
 			<t:documentHead>
@@ -66,5 +65,5 @@
 					</h:form>
 				</div>
 		</div>
-	</div>
 </e:page>
+</div>

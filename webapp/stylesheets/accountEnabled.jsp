@@ -1,7 +1,8 @@
 <%@include file="_include.jsp"%>
 <%@include file="_includeScript.jsp"%>
+<div class="pc">
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
-	<div class="pc">
+	
 			<div class="container-fluid">
 			
 				<t:div rendered="#{accountController.activ == true}">
@@ -54,8 +55,7 @@
 				 <h:form id="accountForm">
 					<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}"action="#{exceptionController.restart}" id="application" style="display:none;"/>
 					<button  class="btn btn-primary" onclick="simulateLinkClick('accountForm:application');"><span class="glyphicon glyphicon-ok"></span><h:outputText value="#{msgs['APPLICATION.BUTTON.RESTART']}" /></button>
-				</h:form>
-		 
+				</h:form>		 
 		</div>
-	</div>
 </e:page>
+</div>

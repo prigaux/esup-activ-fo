@@ -12,9 +12,8 @@ $(function() {
 });
 </script>
 
-
-<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 <div class="pc">
+<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 	<div class="container-fluid">
 		<!-- <e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" /> -->
 			<div class="mainBlock">
@@ -59,7 +58,6 @@ $(function() {
 				</div><!--Fin row de  _includeAccountData.jsp -->		
 			</div><!-- Fin class="mainBlock"-->
 	</div><!-- Fin container-fluid -->
-</div><!-- Fin class="pc" -->
 <h:form id="accountForm" style="display:none;" >
 	<e:commandButton id="preview" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}"/>
 </h:form>
@@ -67,3 +65,4 @@ $(function() {
 	<e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
 </h:form>
 </e:page>
+</div><!-- Fin class="pc" -->

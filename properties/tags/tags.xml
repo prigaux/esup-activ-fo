@@ -119,7 +119,8 @@
     			The default value used for attribute activeItemClass of tag panelNavigationItem. 
     		</description>
     	</property>
-    	<property name="footerStyleClass" value="portlet-menu" >
+    	<!-- Hidden-xs permet de ne pas afficher le pied de page lorqu'on est en mode mobile -->
+    	<property name="footerStyleClass" value="footer hidden-xs" >
     		<description>
     			The default value used for attribute styleClass of tag footer. 
     		</description>

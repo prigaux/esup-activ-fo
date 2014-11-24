@@ -1,9 +1,8 @@
 <%@include file="_include.jsp"%>
 <%@include file="_includeScript.jsp"%>
-<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 <div class="pc">
+	<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 		<div class="container-fluid">	
-	
 			<%-- Data mustn't be recorded in this form, even by using back button --%> 
 			<t:documentHead>
 				<meta http-equiv="Expires" content="0">
@@ -45,5 +44,5 @@
 					action="#{exceptionController.restart}" />
 			</h:form>
 		</div>
-	</div>
-</e:page>
+	</e:page>
+</div>

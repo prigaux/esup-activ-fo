@@ -160,9 +160,8 @@ $(function() {
 		}
 		
 		</script>
-
-<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 <div class="pc">
+<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 		<div class="container-fluid">
 			<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}"/>
 			<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
@@ -213,5 +212,5 @@ $(function() {
 					action="#{exceptionController.restart}" />
 			</h:form>
 			</div>
-		</div>
 </e:page>
+</div>

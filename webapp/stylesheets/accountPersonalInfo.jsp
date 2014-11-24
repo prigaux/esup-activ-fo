@@ -9,9 +9,9 @@ $(function() {
 	
 });
 </script>
-
-<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 <div class="pc">
+<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
+
 		<div class="container-fluid">
 				<t:documentHead>
 					<meta http-equiv="Expires" content="0">
@@ -83,6 +83,6 @@ $(function() {
 					<e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}"
 						action="#{exceptionController.restart}" />
 				</h:form>
-		</div>
-	</div>
+		</div>	
 </e:page>
+</div>
