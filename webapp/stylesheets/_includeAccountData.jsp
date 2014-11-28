@@ -19,10 +19,6 @@
 			<div class="col-md-3">
 			<!-- Sous menus -->
 			 	<ul class="nav nav-pills nav-stacked sidenav">
-					<div class="breadcrumbVertical">
-						<t:outputText value="#{msgs['DATACHANGE.MODIFICATION.TEXT']}" rendered="#{!accountController.viewDataChange}"/>
-						<t:outputText value="#{msgs['DATACHANGE.DISPLAY.TEXT']}" rendered="#{accountController.viewDataChange}"/>
-					</div>
 				 	<t:dataList value="#{accountController.beanData}"  var="category">
 						<t:htmlTag styleClass="homeStep" value="li" rendered="#{category.access}" >
 							<t:htmlTag  value="a" styleClass="hrefId">
