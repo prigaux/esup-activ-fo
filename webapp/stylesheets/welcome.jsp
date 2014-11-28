@@ -30,7 +30,7 @@
 	<e:page stringsVar="msgs" menuItem="welcome" locale="#{sessionController.locale}" >
 			<div class="container-fluid">
 				<div class="page-header"><t:outputText value="#{msgs['WELCOME.TITLE']}" /></div>
-				<div class="lead"><t:outputText escape="false" value="#{msgs['WELCOME.EXPLAIN']}" style="font-style:italic;color:#263F82"/></div>
+				<div style="margin: 20px 0 30px"><t:outputText escape="false" value="#{msgs['WELCOME.EXPLAIN']}" styleClass="text-info"/></div>
 				
 				<e:messages/>
 				<h:form id="welcomeForm">
@@ -42,14 +42,14 @@
 			    		<t:selectItems value="#{accountController.listBeanProcedureWithCas}" var="entry" itemLabel="#{msgs[entry.key]}" itemValue="#{entry.value}" ></t:selectItems>
 					</t:selectOneRadio>					
 				
-					<div id="statusDiv">
+					<div id="statusDiv" style="margin-top:1em;">
 						<e:paragraph escape="false" value="#{msgs['WELCOME.STATUS.TEXT.TOP']}" />		
 						<t:selectOneRadio id="statusRadio" required="false" value="#{accountController.currentAccount.status}" styleClass="labelOverride">
 							<t:selectItems value="#{accountController.listBeanStatus}" var="entry" itemLabel="#{msgs[entry.key]}" itemValue="#{entry.value}"></t:selectItems>
 						</t:selectOneRadio>	
 					</div>
 								
-					<t:div>
+					<t:div style="margin-top:1em;">
 						<e:commandButton id="application" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.enter}" style="display:none"/>
 						<button  class="btn btn-primary" onclick="simulateLinkClick('welcomeForm:application');"><span class="glyphicon glyphicon-ok"></span><h:outputText value="#{msgs['_.BUTTON.CONFIRM']}" /></button>
 					</t:div>
