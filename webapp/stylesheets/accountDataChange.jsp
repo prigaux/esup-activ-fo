@@ -148,7 +148,8 @@ $(function() {
 						</t:div>	
 					</t:dataList>		
 			    </div><!-- tab content -->			    
-			    </div><!-- Fin col-md-6 -->				    
+			    </div><!-- Fin col-md-6 -->	
+			    <!-- 			    
 			    <div class="col-md-3">
 			    	<div class="helppanel">		    			
 	  					<div><h:outputText value="#{msgs['DATACHANGE.TEXT.LEGEND']}" /></div>							
@@ -157,7 +158,8 @@ $(function() {
 						<div><img src="/media/images/add.png"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.ADD']}" /></div>
 						<div><img src="/media/images/remove.png"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.REMOVE']}" /></div>		    			
 					</div>
-			   </div><!-- Fin col-md-3 -->					
+			   </div> -->	
+			   			
 		</div><!--Fin row de  _includeAccountData.jsp -->
 	
 		

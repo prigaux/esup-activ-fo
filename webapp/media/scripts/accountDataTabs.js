@@ -17,7 +17,7 @@ $(function() {
 		 id2=id2+1;
 		});	
 			
-		// Afficher par défaut l'onglet coordonnées professionnelles
-		 $('.nav-stacked li:eq(2) a').tab('show');
+		// Afficher par défaut l'onglet Données personneles
+		 $('.nav-stacked li:eq(0) a').tab('show');
 		
 });
