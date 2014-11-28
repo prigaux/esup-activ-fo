@@ -110,21 +110,25 @@ $(function() {
 			if(oldval!=this.value){
 				var modifiedFields = $("."+fieldName).html();
 				if(paramDialog=="")
-					paramDialog=paramDialog+modifiedFields;				
+					paramDialog=paramDialog+modifiedFields+": "+currentval+"</br>";
 				else
-					paramDialog=paramDialog+","+modifiedFields;
-				
-			}
+					paramDialog="- "+paramDialog+"- "+modifiedFields+": "+currentval+"</br>";				
+				}
 		}//fin find
 	});
 	
 	//Lors de la confirmation, si un champ modifié nécessite la validation de la DRH,
 	// un popup s'affichera lui avertissant que le la donnée modifiée ne sera pas immédiatement prise en compte à l'écran 	
 	$(".validate").click(function() {
+		var essai="<p>champ1:titi</br>champ2:toto</p>";
 		if(paramDialog!=""){
-			$(".dataModifyToMyModal").text(paramDialog);
+			$('.dataModifyToMyModal').html(paramDialog);
 			paramDialog="";
 			$("#myModal").modal('show');
+			//Pouvoir déplacer la boite de dialogue
+			$("#myModal").draggable({
+			    handle: ".modal-header"
+			});
 		}
 		else
 			{

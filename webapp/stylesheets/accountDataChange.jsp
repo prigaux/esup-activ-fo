@@ -170,18 +170,19 @@ $(function() {
  <!-- Button HTML (to Trigger Modal) -->   
     <div id="myModal" class="modal fade">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
+            <div class="modal-content panel-warning">
+            	<!-- Icone, texte et entete en warning -->
+                <div class="modal-header panel-heading">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title">Confirmation</h4>
+                    <span class="glyphicon glyphicon-warning-sign" aria-hidden="true"> Attention</span>
                 </div>
                 <div class="modal-body">
-                    <p>Les données suivantes ont été modifiées</p>
+                    <p>Vous souhaitez modifier les données suivantes</p>
                     <p class="text-warning dataModifyToMyModal"></p>
                     <p>Elles ne seront pas prises en compte immédiatement à l'écran. Elles seront effectives après la validation de la DRH.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" onclick="simulateLinkClick('accountForm:next');">Fermer</button>
+                   <button type="button" class="btn btn-default" data-dismiss="modal" onclick="simulateLinkClick('accountForm:next');">Fermer</button>
                 </div>
             </div>
         </div>
