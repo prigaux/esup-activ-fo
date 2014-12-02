@@ -69,6 +69,11 @@ color: red;
    margin: 0 0 -1px;
    padding: 8px 14px !important;
 }
+
+.sidenav li.active a {
+background-color: #428bca !important;
+}
+
 .nav-stacked > li + li {
     margin-top: 0 !important;
 }
@@ -80,13 +85,18 @@ color: red;
     opacity: 0.25;
 }
 
-.sidenav > li:first-child > a {
-    border-radius: 6px 6px 0 0;
-}
-
 .glyphicon  {
     margin-right: 3px;
 }
+
+
+/* override uportal fss framework shit */
+.sidenav { margin-left: 0; margin-right: 0; }
+.sidenav li { list-style: none; }
+.sidenav li.active a { color: white !important; }
+.sidenav, #page { font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important; }
+.fl-theme-mist th { background-color: #eaeaea !important; border-left: none; border-right: none; }
+.container { background: white; }
 
  .labelOverride label {
     display: inline-block;
