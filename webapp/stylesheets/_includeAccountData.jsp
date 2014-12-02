@@ -18,7 +18,7 @@
 		<div class="row">
 			<div class="col-md-3">
 			<!-- Sous menus -->
-			 	<ul class="nav nav-pills nav-stacked sidenav">
+			 	<ul class="nav nav-stacked sidenav">
 				 	<t:dataList value="#{accountController.beanData}"  var="category">
 						<t:htmlTag styleClass="homeStep" value="li" rendered="#{category.access}" >
 							<t:htmlTag  value="a" styleClass="hrefId">
