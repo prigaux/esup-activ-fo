@@ -4,7 +4,7 @@
 
 <script>
 $(function() {
-	// Afficher par défaut l'onglet modifier les données
+	// Afficher par défaut l'onglet modifier les données du menu du haut
 	$('.nav-pills li:eq(1) a').tab('show');
 	
 });
@@ -38,6 +38,7 @@ $(function() {
 									
 									<t:htmlTag value="tr">
 										<t:htmlTag value="td">
+											<t:div style="margin-top:1em;"></t:div>
 											<h:dataTable value="#{category.profilingListBeanField}"	rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn,fourthColumn">
 												<h:column>
 													<t:outputText styleClass="#{beanfield.name} labeltexttop#{beanfield.size>1}"	value="#{msgs[beanfield.key]}"	rendered="#{beanfield.fieldType!='inputFileUpload'}" />
@@ -127,6 +128,7 @@ $(function() {
 												</h:column>
 												
 										</h:dataTable>
+										
 										<t:div style="margin-top:1em;">
 											<!--Impossibilité d'utiliser le tag t:htmlTag de type bouton, car cela génère un bug (lié à esup-communs...)sur la boite de dialogue de type modal(la boite de dialogue apparait et disparait de suite) 
 											-->
@@ -138,12 +140,10 @@ $(function() {
 											   <f:param name="href" value="#" /> <t:htmlTag  value="span" styleClass="glyphicon glyphicon-edit"></t:htmlTag>
 											   <h:outputText value="Editer mes données" />
 											</t:htmlTag>
-										</t:div>		
-									</t:htmlTag><!-- Fin class=columnData -->
-									
-									
-									
-								</t:htmlTag>
+										</t:div>
+										
+									</t:htmlTag><!-- Fin htmlTag value="td" -->
+								</t:htmlTag><!-- Fin htmlTag value="tr" -->
 							</t:htmlTag>
 						</t:div>	
 					</t:dataList>		
