@@ -18,10 +18,7 @@ $(function() {
 					<meta http-equiv="cache-control" content="no-cache,no-store">
 					<meta http-equiv="pragma" content="no-cache">
 				</t:documentHead>
-				<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
-				<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}" />
-				<e:section value="#{msgs['PASSWORD.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}" />
-				<e:section value="#{msgs['PERSOINFO.LOGINCHANGE.TITLE']}" rendered="#{accountController.loginChange == true}" />
+				<%@include file="_includeBreadcrumb.jsp"%>
 				<%@include file="_includeProgessBar.jsp"%>
 				<e:messages/>
 				

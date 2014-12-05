@@ -10,10 +10,7 @@
 				<meta http-equiv="pragma" content="no-cache">		
 			</t:documentHead>
 			
-			<e:section value="#{msgs['PASSWORD.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}"/>
-			<e:section value="#{msgs['AUTHENTIFICATION.LOGINCHANGE.TITLE']}" rendered="#{accountController.loginChange == true}"/>
-			<e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" rendered="#{accountController.dataChange == true}"/>
-			
+			<%@include file="_includeBreadcrumb.jsp"%>
 			<%@include file="_includeProgessBar.jsp"%>
 			<%@include file="_includeMessage.jsp"%>
 			 

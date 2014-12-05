@@ -5,7 +5,7 @@
 <script>
 $(function() {
 	// Afficher par défaut l'onglet modifier les données du menu du haut
-	$('.nav-pills li:eq(1) a').tab('show');
+	$('.nav-pills li:eq(0) a').tab('show');
 	
 });
 </script>
@@ -13,7 +13,7 @@ $(function() {
 <div class="pc">
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 <div class="container-fluid">
-	<!-- <e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" /> -->	
+	<%@include file="_includeBreadcrumb.jsp"%>
 	<h:form id="accountForm" enctype="multipart/form-data">
 	<div class="mainBlock">
 		<%@include file="_includeAccountData.jsp"%>	

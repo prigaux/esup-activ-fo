@@ -2,7 +2,6 @@
 		<!-- Menu principal -->
 			<div class="col-md-offset-3 col-md-9">
 	     	    <ul class="nav nav-pills">
-			      <li><a href="#" 	onclick="simulateLinkClick('restart:restartButton');"><span class="glyphicon glyphicon-home"></span>Accueil</a></li>
 			      <li><a href="#"	onclick="simulateLinkClick('accountForm:preview');"><span class="glyphicon glyphicon-edit"></span><t:outputText value="#{msgs['DATACHANGE.MODIFICATION.TEXT']}" /></a></li>
 			      <li><a href="#" 	onclick="simulateLinkClick('accountForm:next');"><span class="glyphicon glyphicon-list-alt"></span><t:outputText value="#{msgs['DATACHANGE.DISPLAY.TEXT']}"/></a></li>
 			    </ul>

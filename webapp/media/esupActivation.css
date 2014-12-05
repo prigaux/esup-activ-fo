@@ -118,4 +118,6 @@ background-color: #428bca !important;
 .pc .progress-bar {font-size: 14px;
     line-height: 30px;!important;
 }
+.pc .breadcrumb { background-color: white;margin-bottom: 10px;
+	border-bottom: 1px solid #eee;!important;}
 

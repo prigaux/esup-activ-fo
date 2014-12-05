@@ -9,11 +9,7 @@ $(function() {
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 		<div class="container-fluid">
 		
-			<e:section value="#{msgs['LOGIN.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}" />
-			<e:section value="#{msgs['LOGIN.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}" />
-			<e:section value="#{msgs['LOGIN.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}" />
-			<e:section value="#{msgs['PERSOINFO.LOGINCHANGE.TITLE']}" rendered="#{accountController.loginChange == true}" />
-			
+			<%@include file="_includeBreadcrumb.jsp"%>
 			<%@include file="_includeProgessBar.jsp"%>
 			<%@include file="_includeMessage.jsp"%>
 			<br/>

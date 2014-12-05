@@ -16,8 +16,7 @@ $(function() {
 					<meta http-equiv="pragma" content="no-cache">
 				</t:documentHead>
 				
-				<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}" />
-				
+				<%@include file="_includeBreadcrumb.jsp"%>
 				<%@include file="_includeProgessBar.jsp"%>
 				<e:messages />
 				<t:dataList value="#{accountController.availableChannels}" var="entry">

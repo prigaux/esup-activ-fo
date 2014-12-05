@@ -8,8 +8,7 @@ $(function() {
 <div class="pc">
 	<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 			<div class="container-fluid">
-				<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}" />
-			
+				<%@include file="_includeBreadcrumb.jsp"%>
 				<!-- Barre de progression pour la réinitialisation de mot de passe-->
 				<%@include file="_includeProgessBar.jsp"%>
 				<%@include file="_includeMessage.jsp"%>

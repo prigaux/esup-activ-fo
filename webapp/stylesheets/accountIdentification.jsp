@@ -10,10 +10,7 @@
 				<meta http-equiv="pragma" content="no-cache">
 			</t:documentHead>
 			
-			<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}"rendered="#{accountController.activ == true}" />
-			<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}"rendered="#{accountController.reinit == true}" />
-			<e:section value="#{msgs['IDENTIFICATION.PASSWORDCHANGE.TITLE']}"rendered="#{accountController.passwChange == true}" />
-			
+			<%@include file="_includeBreadcrumb.jsp"%>
 			<!-- Barre de progression pour la réinitialisation de mot de passe-->
 			<%@include file="_includeProgessBar.jsp"%>
 			<%@include file="_includeMessage.jsp"%>

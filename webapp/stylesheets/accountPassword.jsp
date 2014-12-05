@@ -163,9 +163,7 @@ $(function() {
 <div class="pc">
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 		<div class="container-fluid">
-			<e:section value="#{msgs['IDENTIFICATION.ACTIVATION.TITLE']}" rendered="#{accountController.activ == true}"/>
-			<e:section value="#{msgs['IDENTIFICATION.REINITIALISATION.TITLE']}" rendered="#{accountController.reinit == true}"/>
-			<e:section value="#{msgs['PASSWORD.PASSWORDCHANGE.TITLE']}" rendered="#{accountController.passwChange == true}"/>
+			<%@include file="_includeBreadcrumb.jsp"%>
 			<%@include file="_includeProgessBar.jsp"%>			
 			<%@include file="_includeMessage.jsp"%>
 			

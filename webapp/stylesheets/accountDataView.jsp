@@ -7,7 +7,7 @@ $(function() {
 	// Afficher par défaut le 1er onglet
 	$('.nav-stacked li:eq(0) a').tab('show');
 	// Afficher par défaut l'onglet Afficher les données
-	$('.nav-pills li:eq(2) a').tab('show');
+	$('.nav-pills li:eq(1) a').tab('show');
 	
 });
 </script>
@@ -15,7 +15,7 @@ $(function() {
 <div class="pc">
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 	<div class="container-fluid">
-		<!-- <e:section value="#{msgs['DATACHANGE.DATACHANGE.TITLE']}" /> -->
+			<%@include file="_includeBreadcrumb.jsp"%>
 			<div class="mainBlock">
 				<%@include file="_includeAccountData.jsp"%>
 				<div class="col-md-9">
@@ -32,6 +32,7 @@ $(function() {
 									</t:htmlTag>
 									<t:htmlTag value="tr">
 										<t:htmlTag value="td">
+											 <t:div style="margin-top:1em;"></t:div>
 											 <h:dataTable value="#{category.profilingListBeanField}" rendered="#{category.access&&#beanfield.value!=''}" var="beanfield" columnClasses="viewCol1,viewCol2">
 												<h:column>						
 												  <t:outputText styleClass="labeltexttop#{beanfield.size>1} portlet-section-text" value="#{msgs[beanfield.key]}" rendered="#{beanfield.value!=''}"/>
