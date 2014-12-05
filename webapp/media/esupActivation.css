@@ -113,3 +113,9 @@ background-color: #428bca !important;
 
 }
 
+/* override boostrap */
+.pc .progress {height: 30px;!important;}
+.pc .progress-bar {font-size: 14px;
+    line-height: 30px;!important;
+}
+
