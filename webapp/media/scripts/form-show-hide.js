@@ -132,7 +132,7 @@ $(function() {
 		}
 		else
 			{
-			simulateLinkClick('accountForm:next');
+			simulateLinkClick('accountForm:toDataChange');
 			}
 		
 	 });

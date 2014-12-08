@@ -171,15 +171,38 @@
 		</navigation-case>
 	</navigation-rule>
 	
+	<!--Après validation des modifications, rester sur la page modification de mes informations  -->
 	<navigation-rule>
 		<display-name>accountDataChangeToShowDataChange</display-name>
 		<from-view-id>/stylesheets/accountDataChange.jsp</from-view-id>
 		<navigation-case>
-			<from-outcome>gotoViewDataChange</from-outcome>
+			<from-outcome>gotoDataChange</from-outcome>
+			<to-view-id>/stylesheets/accountDataChange.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- From datachange(clic from menu)  to dataView  -->
+	<navigation-rule>
+		<display-name>accountDataChangeToShowDataView</display-name>
+		<from-view-id>/stylesheets/accountDataChange.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoDataView</from-outcome>
 			<to-view-id>/stylesheets/accountDataView.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>
 	
+	
+	<!-- From dataView to datachange -->
+	<navigation-rule>
+		<display-name>dataViewToDataChange</display-name>
+		<from-view-id>/stylesheets/accountDataView.jsp</from-view-id>
+		<navigation-case>
+			<from-outcome>gotoDataChange</from-outcome>
+			<!-- <to-view-id>/stylesheets/accountDataChange.jsp</to-view-id> -->
+			<to-view-id>/stylesheets/accountDataChange.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+		
 	<navigation-rule>
 		<display-name>accountLoginToEnabled</display-name>
 		<from-view-id>/stylesheets/accountLogin.jsp</from-view-id>
@@ -209,16 +232,7 @@
 			<to-view-id>/stylesheets/welcome.jsp</to-view-id>
 		</navigation-case>
 	</navigation-rule>	
-	
-	<navigation-rule>
-		<display-name>dataViewToDataChange</display-name>
-		<from-view-id>/stylesheets/accountDataView.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>gotoDataChange</from-outcome>
-			<to-view-id>/stylesheets/accountDataChange.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	
+		
 	<navigation-rule>
 		<display-name>accountWelcomeToAuthentificationCas</display-name>
 		<from-view-id>/stylesheets/welcome.jsp</from-view-id>

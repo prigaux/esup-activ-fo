@@ -22,17 +22,9 @@ $(function() {
 					<div class="tab-content">
 					   	<t:dataList value="#{accountController.beanData}"  var="category" >
 							<t:div styleClass="hrefIdDetail tab-pane" rendered="#{category.access}">							
-								<t:htmlTag value="table">
-									<t:htmlTag value="tr" styleClass="page-header">
-										<t:htmlTag value="td">
-											<e:paragraph  styleClass="text-info" escape="false" value="#{msgs['DATACHANGE.DISPLAY.TOP']}">
-												<f:param value="#{msgs[category.title]}" />
-											</e:paragraph>
-									</t:htmlTag>
-									</t:htmlTag>
+								<t:htmlTag value="table">									
 									<t:htmlTag value="tr">
 										<t:htmlTag value="td">
-											 <t:div style="margin-top:1em;"></t:div>
 											 <h:dataTable value="#{category.profilingListBeanField}" rendered="#{category.access&&#beanfield.value!=''}" var="beanfield" columnClasses="viewCol1,viewCol2">
 												<h:column>						
 												  <t:outputText styleClass="labeltexttop#{beanfield.size>1} portlet-section-text" value="#{msgs[beanfield.key]}" rendered="#{beanfield.value!=''}"/>
@@ -56,13 +48,14 @@ $(function() {
 						</t:dataList>
 					</div><!-- tab content -->
 				</div><!-- class="col-md-9" -->	
-				</div><!--Fin row de  _includeAccountData.jsp -->		
+				</div><!--Fin row de  _includeAccountData.jsp -->
+				<t:div style="margin-top:1em;"/>					
 			</div><!-- Fin class="mainBlock"-->
 	</div><!-- Fin container-fluid -->
 <h:form id="accountForm" style="display:none;" >
-	<e:commandButton id="preview" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}"/>
+	<e:commandButton id="toDataChange" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}"/>
 </h:form>
-<h:form id="restart" style="display:none;">
+<h:form id="restart" style="display:none;margin-top:1em">
 	<e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
 </h:form>
 </e:page>

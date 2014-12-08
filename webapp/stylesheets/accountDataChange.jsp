@@ -164,7 +164,8 @@ $(function() {
 	
 		
 		<t:div style="display:none">
-			<e:commandButton id="next" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
+			<e:commandButton id="toDataChange" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}" />
+			<e:commandButton id="toDataView" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPersoDataView}"/>
 		</t:div>
 	</div><!--Fin class="mainBlock"-->
 </h:form>
@@ -184,7 +185,7 @@ $(function() {
                     <p>Elles ne seront pas prises en compte immédiatement à l'écran. Elles seront effectives après la validation de la DRH.</p>
                 </div>
                 <div class="modal-footer">
-                   <button type="button" class="btn btn-default" data-dismiss="modal" onclick="simulateLinkClick('accountForm:next');">Fermer</button>
+                   <button type="button" class="btn btn-default" data-dismiss="modal" onclick="simulateLinkClick('accountForm:toDataChange');">Fermer</button>
                 </div>
             </div>
         </div>
