@@ -438,14 +438,21 @@ public class AccountController extends AbstractContextAwareController implements
 	// Ne pas utiliser des attributs d'objet
 	// mais plut�t des param�tres car AccountController est un singleton, il est cr�er une seule fois au d�but, de ce fait les attributs ne sont pas correctement initialis�s contrairement aux param�tres).
 	public String pushChangeInfoPersonal() {
-		return _pushChangeInfoPerso(true);
+		return _pushChangeInfoPerso(1);
 	}
 	
-	public String pushChangeInfoPerso() {
-		return _pushChangeInfoPerso(false);
+	public String pushChangeInfoPersoDataView() {
+		viewDataChange=true;
+		dataChange=false;
+		return _pushChangeInfoPerso(2);
 	}
+	public String pushChangeInfoPerso() {
+		viewDataChange=false;
+		dataChange=true;
+		return _pushChangeInfoPerso(3);
+	}	
 
-	private String _pushChangeInfoPerso(boolean fromAccountPersonalInfo) {
+	private String _pushChangeInfoPerso(Integer fromAccountPersonalInfo) {
 			Iterator it;
 			
 			HashMap<String,String> DataChangeMaps=new HashMap<String,String>();
@@ -513,11 +520,11 @@ public class AccountController extends AbstractContextAwareController implements
 					this.getDomainService().updatePersonalInformations(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),hashBeanPersoInfo);				
 					
 					
-					// Pas d'envoie de message apr�s la MAJ des donn�es de la page "accountPersonalInfo.jsp".
-					if (! fromAccountPersonalInfo)				
+					// Pas d'envoie de message apr�s la MAJ des donn�es de la page "accountPersonalInfo.jsp" et accountDataView.
+					if (fromAccountPersonalInfo==3)				
 						this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
 				}
-					else logger.debug("Pas de mise à jour envoyée BO");
+				else logger.debug("Pas de mise à jour envoyée BO");
 				
 				
 				//Maj Account
@@ -551,14 +558,14 @@ public class AccountController extends AbstractContextAwareController implements
 					return "gotoLoginChange";
 				}
 				else if (dataChange) {
-					viewDataChange=true;
-					dataChange=false;
-					return "gotoViewDataChange";
+					//viewDataChange=true;
+					//dataChange=false;
+					return "gotoDataChange";
 				}
 				else if(viewDataChange){
-					viewDataChange=false;
-					dataChange=true;
-					return "gotoDataChange";
+					//viewDataChange=false;
+					//dataChange=true;
+					return "gotoDataView";
 				}
 				else 
 					return "gotoPasswordChange";
