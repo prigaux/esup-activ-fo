@@ -33,6 +33,7 @@
 		src/**/*.java 
 		src/**/*.html 
     	webapp/media/**/*
+		webapp/fonts/*
 		webapp/META-INF/MANIFEST.MF
 		webapp/stylesheets/**/*.jsp
 		webapp/WEB-INF/lib/*
