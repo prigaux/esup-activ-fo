@@ -147,7 +147,10 @@
 		</init-param>
 		<init-param>
             <param-name>edu.yale.its.tp.cas.client.filter.proxyCallbackUrl</param-name>
-            <param-value>https://${tomcat.host}${tomcat.port.string}/CasProxyServlet</param-value>
+         	<!-- Diriger vers serveur service-test qui gère le proxy ticket-->
+			<!--composé de 'https'+ServerName+'/CasProxyServlet'--> 
+			<!-- Doit etre déclaré dans config.properties du BO -->
+              <param-value>${cas.proxyCallbackUrl}</param-value>
         </init-param>	
 		<init-param>
 			<param-name>
