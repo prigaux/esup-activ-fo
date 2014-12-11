@@ -87,7 +87,6 @@
 		<property name="name" value="up1TermsOfUse"/>
 		<property name="updateable" value="true"/>
 		<property name="disable" value="false"/>
-		<property name="help" value="PERSOINFO.AUTORISE.PHOTO.TEXT.HELP"/>
 	</bean>
 	
 	<bean
