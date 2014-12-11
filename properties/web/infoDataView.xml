@@ -27,6 +27,7 @@
 		<property name="listBeanField">
 		  <list>
 		   	<ref bean="appAnnuairePublic"/>
+		   	<ref bean="appPagePerso"/>
 		    <ref bean="beanDisplayName"/>
 		    <ref bean="beanMail"/>
 		    <ref bean="beanEduPersonAffiliation"/>
@@ -74,6 +75,7 @@
 		<property name="listBeanField">
 		  <list>
 		 	<ref bean="appAnnuairePrive"/>
+		 	<ref bean="appPagePerso"/>
 			<ref bean="beanDisplayName"/>
 		    <ref bean="beanMail"/>
 		    <ref bean="beanEduPersonAffiliation"/>
@@ -159,10 +161,9 @@
 	</bean>
 	<bean id="appPagePerso"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl" scope="session">
-		<property name="key" value="DATACHANGE.DISPLAY.APPLICATION.LABEL"/>	
-		<property name="converter" ref="attributeReplaceConverter"/>
-		<property name="fieldType" value="link"/>	
-		<property name="value" value="DATACHANGE.DISPLAY.APPLICATION.PAGEPERSO"/>		
-	</bean>
-				 
+		<property name="key" value="DATACHANGE.DISPLAY.APPLICATION.PERSONEL.LABEL"/>	
+		<property name="fieldType" value="linkPerso"/>
+		<property name="name" value="labeledURI"/>	
+		<property name="value" value="labeledURI"/>		
+	</bean>					 
 </beans>

@@ -8,7 +8,8 @@ $(function() {
 	$('.nav-stacked li:eq(0) a').tab('show');
 	// Afficher par défaut l'onglet Afficher les données
 	$('.nav-pills li:eq(1) a').tab('show');
-	
+	//Ouvrir sur une nouvelle page
+	$('.linkPerso').attr({"target" : "_blank"});
 });
 </script>
 
@@ -35,8 +36,13 @@ $(function() {
 												    	<h:outputText escape="false" converter="#{beanfield.converter}" rendered="#{beanfield.fieldType=='link'}" value="#{msgs[beanfield.value]}"/>
 												    </t:div>	
 													<t:dataList value="#{beanfield.values}" var="sub" rendered="#{beanfield.value!=''&&sub.value!=''}">
-													    <t:div rendered="#{sub.value!=''&&!sub.convertedValue}">
+													    <t:div rendered="#{sub.value!=''&&!sub.convertedValue&&beanfield.fieldType!='linkPerso'}">
 														    <h:outputText value="#{sub.value}" converter="#{beanfield.converter}" rendered="#{sub.value!=''}"/>			  	
+												        </t:div>
+												         <t:div rendered="#{sub.value!=''&&!sub.convertedValue&&beanfield.fieldType=='linkPerso'}">
+														   <h:outputLink styleClass="linkPerso" value="#{sub.value}">
+															    <h:outputText value="#{sub.value}" />
+															</h:outputLink>	  	
 												        </t:div>
 											         </t:dataList>  
 												</h:column>
