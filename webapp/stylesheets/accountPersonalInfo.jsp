@@ -1,16 +1,22 @@
 <%@include file="_include.jsp"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@include file="_includeScript.jsp"%>
+<div class="pc">
+<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
+
 <script>
 $(function() {
-	if(${accountController.reinit}){progressBar(3);}
-	if(${accountController.activ}||${accountController.passwChange} || ${accountController.loginChange}){progressBar(1);}
+	<!-- Ne pas utiliser ${accountController.activ}), cela ne fonctionne pas en portlet-->
+	<!-- Utiliser un tag jsf comme outputText-->
+	<!-- Mettre cette partie de code après e:page, sinon outputText ne sera jamais evalué -->
+	if(<t:outputText value="#{accountController.reinit}" />){progressBar(3);}
+	if(<t:outputText value="#{accountController.activ || accountController.passwChange || accountController.loginChange}" />){progressBar(1);}
 	
 	
 });
 </script>
-<div class="pc">
-<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
+
+
 
 		<div class="container-fluid">
 				<t:documentHead>

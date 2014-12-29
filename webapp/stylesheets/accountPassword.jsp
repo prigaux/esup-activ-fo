@@ -1,15 +1,7 @@
 <%@include file="_include.jsp"%>
 <%@include file="_includeScript.jsp"%>
 
-<script>
-$(function() {
-	 if(${accountController.activ}){progressBar(3);} 
-    if(${accountController.passwChange}){progressBar(2);} 
-    if(${accountController.reinit}){progressBar(4);}
-  
-	
-});
-</script>
+
 <script language="javascript" type="text/javascript">
 		    
 		    var minpwlength = 4;
@@ -162,6 +154,17 @@ $(function() {
 		</script>
 <div class="pc">
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
+		<script>
+		<!-- Ne pas utiliser ${accountController.activ}), cela ne fonctionne pas en portlet-->
+		<!-- Utiliser un tag jsf comme outputText-->
+		<!-- Mettre cette partie de code après e:page, sinon outputText ne sera jamais evalué -->
+		$(function() {
+	        if(<t:outputText value="#{accountController.activ}"/>){progressBar(3);} 
+		    if(<t:outputText value="#{accountController.passwChange}"/>){progressBar(2);} 
+		    if(<t:outputText value="#{accountController.reinit}"/>){progressBar(4);}	
+		});
+		</script>
+
 		<div class="container-fluid">
 			<%@include file="_includeBreadcrumb.jsp"%>
 			<%@include file="_includeProgessBar.jsp"%>			
