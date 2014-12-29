@@ -17,7 +17,7 @@ $(function() {
 	<h:form id="accountForm" enctype="multipart/form-data">
 	<div class="mainBlock">
 		<%@include file="_includeAccountData.jsp"%>	
-			<div class="col-md-6">
+			<div class="col-md-9">
 				<div class="tab-content">
 					<!-- Afficher message d'erreur -->
 					 <e:messages />
