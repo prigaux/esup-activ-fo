@@ -581,7 +581,8 @@
 		    <entry key="library" value="Bibliothèques" />
     	    <entry key="pedagogy" value="Composantes" />
     	    <entry key="research" value="Laboratoires" />
-    	    <entry key="administration" value="Services centraux et communs" />    	
+    	    <entry key="doctoralSchool" value="Ecoles doctorales" />
+    	    <entry key="administration" value="Services centraux et communs" />
     	 </map> 
     	 </property>  				
     </bean>
