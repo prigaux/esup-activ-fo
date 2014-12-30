@@ -7,6 +7,12 @@ $(function() {
 	// Afficher par défaut l'onglet modifier les données du menu du haut
 	$('.nav-pills li:eq(0) a').tab('show');
 	
+	// Sauvegarder l'onglet seléctionné dans sessionStorage
+    $(".nav-stacked").click(function (e) {
+        var idSelected = $(e.target).attr("href").substr(1);
+        sessionStorage.setItem("tabSelected",idSelected)
+    });
+	
 });
 </script>
 

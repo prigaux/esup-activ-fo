@@ -13,11 +13,15 @@ $(function() {
 		//
 		$(".hrefIdDetail").each(function(){
 		 $(this).attr("id","tab-"+id2);
-		 //$(this).attr("class","tab-pane");
 		 id2=id2+1;
 		});	
-			
-		// Afficher par défaut l'onglet Données personneles
-		 $('.nav-stacked li:eq(0) a').tab('show');
+		
+	   // Une fois la validation terminée, rester sur l'onglet sélectionné	
+	   var tabSelected = sessionStorage.getItem("tabSelected");
+	   if(tabSelected!=null)
+	     $('.nav-stacked a[href="#' + tabSelected + '"]').tab('show');
+	   else
+	   	 $('.nav-stacked a[href="#tab-1"]').tab('show');	   
+		 
 		
 });

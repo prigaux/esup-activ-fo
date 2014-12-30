@@ -10,6 +10,8 @@ $(function() {
 	$('.nav-pills li:eq(1) a').tab('show');
 	//Ouvrir sur une nouvelle page
 	$('.linkPerso').attr({"target" : "_blank"});
+	//Supprimer l'élément de session tabSelected,afin de remttre à l'état initiale les onglets de accountDataChange.jsp
+	 sessionStorage.removeItem("tabSelected");
 });
 </script>
 
