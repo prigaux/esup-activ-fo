@@ -136,7 +136,10 @@ $(function() {
 			}
 		
 	 });
-	
+	//Faire disparaitre les messages d'erreur ou de confirmation d'enregistrement de l'onglet actuel, lorsque l'utilisateur clique sur un autre onglet
+	$(".hrefId").click(function() {
+	 $(".tab-content>ul").css("display","none");
+	});
 	
 	// Afficher le(s) champ(s) en mode modification
 	function modify(field,elt){
