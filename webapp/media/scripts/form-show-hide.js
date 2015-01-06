@@ -146,7 +146,7 @@ $(function() {
 		var field=field.replace("_modifyLink","");
 		 $("." + field+"show").show();
 		 $("." + field+"modify").show();
-		 $("." + field+"output").hide();
+		 if(field!="jpegPhoto"){$("." + field+"output").hide();}
 		 $("." + field+"constraint").show();
 		 $(elt).closest('.mainModifyLinkByCategory').find(".validate").show();
 		 $(elt).closest('.mainModifyLinkByCategory').find(".modifyByCategory").hide();

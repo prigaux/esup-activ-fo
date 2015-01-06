@@ -48,7 +48,7 @@ $(function() {
 											<h:dataTable value="#{category.profilingListBeanField}"	rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn,fourthColumn">
 												<h:column>
 													<t:outputText styleClass="#{beanfield.name} labeltexttop#{beanfield.size>1}"	value="#{msgs[beanfield.key]}"	rendered="#{beanfield.fieldType!='inputFileUpload'}" />
-													<t:div rendered="#{beanfield.fieldType=='inputFileUpload'}">
+													<t:div styleClass="#{beanfield.name}output" rendered="#{beanfield.fieldType=='inputFileUpload'}">
 														<h:graphicImage value="#{beanfield.value}" width="100px"height="100px" styleClass="photo" />
 													</t:div>			
 												</h:column>
@@ -92,7 +92,7 @@ $(function() {
 													<!-- Modifier la photo -->
 													<t:div rendered="#{beanfield.fieldType=='inputFileUpload'}"	style="display:none;" styleClass="#{beanfield.name}show" >
 														<t:inputFileUpload value="#{beanfield.fileUpLoad}"	styleClass="upload" storage="file" accept="image/jpeg"></t:inputFileUpload>
-														<h:graphicImage alt="#{beanfield.name}" styleClass="delete"	value="/media/images/delete.png" style="float:right;margin:0;"	rendered="#{beanfield.fieldType=='inputFileUpload'&&beanfield.deleteJpegPhoto==1}" />
+														<h:graphicImage alt="#{beanfield.name}" styleClass="delete"	value="/media/images/delete.png" style="float:right;margin-right: -30px;margin-top: -24.9px;"	rendered="#{beanfield.fieldType=='inputFileUpload'&&beanfield.deleteJpegPhoto==1}" />
 														<h:inputText value="#{beanfield.deleteJpegPhoto}" styleClass="deletePhoto" style="display:none;" />
 													</t:div>
 													
