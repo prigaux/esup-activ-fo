@@ -24,14 +24,11 @@ $(function() {
 					</e:inputText>
 					<t:graphicImage title="#{msgs[beanNewLogin.help]}"	 value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanNewLogin.help!=null}"/>
 					<e:message for="login" />
-				</e:panelGrid>
-								
-				<t:div style="margin-top:1em;">
+				</e:panelGrid>								
 				<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushLogin}" style="display:none;" id="application"/>
-				<button  class="btn btn-primary" onclick="simulateLinkClick('accountForm:application');"><span class="glyphicon glyphicon-ok"></span><h:outputText value="#{msgs['_.BUTTON.CONFIRM']}" /></button>
-				</t:div>
 			</h:form>
-			
+			<button  class="btn btn-primary" onclick="simulateLinkClick('accountForm:application');"><span class="glyphicon glyphicon-ok"></span><h:outputText value="#{msgs['_.BUTTON.CONFIRM']}" /></button>
+		
 			<h:form id="restart" style="display:none;">
 				<e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
 			</h:form>
