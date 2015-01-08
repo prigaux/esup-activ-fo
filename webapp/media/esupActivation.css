@@ -124,6 +124,7 @@ background-color: #428bca !important;
 .pc .page-header {
     border-bottom: 1px solid #eee;
     margin: 0px 0px 0px;
-    padding-bottom: 9px;
+    font-size: 108%;
+    font-weight: bold;
 }
 
