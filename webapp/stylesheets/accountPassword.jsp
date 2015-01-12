@@ -179,7 +179,7 @@
 			  		<e:inputSecret id="password" value="#{beanNewPassword.value}"
 			     		required="#{beanNewPassword.required}" onkeyup="updatestrength( this.value, '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYSTRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.STRONG']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.MEDIUM']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.WEAK']}', '#{msgs['PASSWORD.TEXT.PASSWORDSTRENGTH.VERYWEAK']}');" validator="#{beanNewPassword.validator.validate}" >
 			  		</e:inputSecret>
-			  		<h:graphicImage title="#{msgs[beanNewPassword.help]}" value="/media/images/help.jpg"  style="border: 0;"/>
+			  		<h:graphicImage styleClass="toolTipShow" title="#{msgs[beanNewPassword.help]}" value="/media/images/help.jpg"  style="border: 0;"/>
 			  		<e:message for="password" /> 
 			  		<t:htmlTag value="span"/>
 			  
@@ -197,7 +197,7 @@
 		  				
 						<t:validateEqual for="password" />
 					</e:inputSecret>
-					<h:graphicImage title="#{msgs[beanNewPassword.help]}" value="/media/images/help.jpg"  style="border: 0;"/>
+					<h:graphicImage styleClass="toolTipShow" title="#{msgs[beanNewPassword.help]}" value="/media/images/help.jpg"  style="border: 0;"/>
 					<e:message for="verifyPassword" /> 
 					<t:htmlTag value="span"/> 
 				</e:panelGrid>

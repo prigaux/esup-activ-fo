@@ -2,6 +2,11 @@
 $(function() {
 	var paramDialog="";
 	
+	// Gestion de l'infobulle
+	$('.toolTipShow').attr("data-toggle","tooltip");	
+	$('[data-toggle="tooltip"]').tooltip({
+	    placement : 'right'
+	});
 
 	// Mettre la premiere ligne des champs multi évalués à beanName+show
    $(".hideField").load(function() {
@@ -120,7 +125,6 @@ $(function() {
 	//Lors de la confirmation, si un champ modifié nécessite la validation de la DRH,
 	// un popup s'affichera lui avertissant que le la donnée modifiée ne sera pas immédiatement prise en compte à l'écran 	
 	$(".validate").click(function() {
-		var essai="<p>champ1:titi</br>champ2:toto</p>";
 		if(paramDialog!=""){
 			$('.dataModifyToMyModal').html(paramDialog);
 			paramDialog="";
