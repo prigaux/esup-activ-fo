@@ -1,8 +1,8 @@
 <script>
 $(function() {	
-	$('.progress-bar').each(function(i) {
+	/*$('.progress-bar').each(function(i) {
 		$('.progress div.progress-bar').eq(i).append("<span class=\"glyphicon glyphicon-step-forward\"></span>");
-	});
+	});*/
 
 });
 //Gestion de la progression de la barre
