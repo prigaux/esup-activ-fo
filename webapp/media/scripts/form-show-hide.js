@@ -104,7 +104,7 @@ $(function() {
 			// Impossibilité d'utiliser defaultValue pour les tagName de type select, d'ou utilisation de la solution suivante 
 			if(tagName=='SELECT'){
 				oldval = $("."+fieldName+"output").html();
-				currentval=$('.'+getFirstClass+' option:selected').text();
+				currentval=$(this).find("option:selected").text();
 				
 			}
 			if(tagName=='INPUT'){
