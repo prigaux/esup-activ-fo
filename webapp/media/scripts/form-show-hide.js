@@ -152,6 +152,7 @@ $(function() {
 		 $("." + field+"modify").show();
 		 if(field!="jpegPhoto"){$("." + field+"output").hide();}
 		 $("." + field+"constraint").show();
+		 $("." + field+"digestConstraint").show();
 		 $(elt).closest('.mainModifyLinkByCategory').find(".validate").show();
 		 $(elt).closest('.mainModifyLinkByCategory').find(".modifyByCategory").hide();
 	}
