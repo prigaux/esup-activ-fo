@@ -61,7 +61,7 @@ $(function() {
 			</div><!-- Fin class="mainBlock"-->
 	</div><!-- Fin container-fluid -->
 <h:form id="accountForm" style="display:none;" >
-	<e:commandButton id="toDataChange" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPerso}"/>
+	<e:commandButton id="toDataChange" value="#{msgs['_.BUTTON.CONFIRM']} " action="#{accountController.pushFromDataView}"/>
 </h:form>
 <h:form id="restart" style="display:none;margin-top:1em">
 	<e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />

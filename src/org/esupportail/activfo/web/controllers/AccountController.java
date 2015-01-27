@@ -435,24 +435,37 @@ public class AccountController extends AbstractContextAwareController implements
 				currentValues.containsAll(newValues));				
 	}
 	
-	// Ne pas utiliser des attributs d'objet
-	// mais plut�t des param�tres car AccountController est un singleton, il est cr�er une seule fois au d�but, de ce fait les attributs ne sont pas correctement initialis�s contrairement aux param�tres).
-	public String pushChangeInfoPersonal() {
-		return _pushChangeInfoPerso(1);
-	}
-	
+	/**
+	*Traitement de l'affichage des données des onglet Modification de données et Données affichées de Modification personnelle	
+	*/
+	// De Modification de données vers Données affichées
 	public String pushChangeInfoPersoDataView() {
 		viewDataChange=true;
 		dataChange=false;
-		return _pushChangeInfoPerso(2);
+		return "gotoDataView";
 	}
+	// De données affichées vers modification de données
+	public String pushFromDataView() {
+		viewDataChange=false;
+		dataChange=true;
+		return "gotoDataChange";
+	}
+	
+	
+	
+	// Ne pas utiliser des attributs d'objet
+	// mais plut�t des param�tres car AccountController est un singleton, il est cr�er une seule fois au d�but, de ce fait les attributs ne sont pas correctement initialis�s contrairement aux param�tres).
+	public String pushChangeInfoPersonal() {
+		return _pushChangeInfoPerso(true);
+	}
+	
 	public String pushChangeInfoPerso() {
 		viewDataChange=false;
 		dataChange=true;
-		return _pushChangeInfoPerso(3);
-	}	
+		return _pushChangeInfoPerso(false);
+	}		
 
-	private String _pushChangeInfoPerso(Integer fromAccountPersonalInfo) {
+	private String _pushChangeInfoPerso(boolean fromAccountPersonalInfo) {
 			Iterator it;
 			
 			HashMap<String,String> DataChangeMaps=new HashMap<String,String>();
@@ -520,9 +533,9 @@ public class AccountController extends AbstractContextAwareController implements
 					this.getDomainService().updatePersonalInformations(currentAccount.getAttribute(accountIdKey),currentAccount.getAttribute(accountCodeKey),hashBeanPersoInfo);				
 					
 					
-					// Pas d'envoie de message apr�s la MAJ des donn�es de la page "accountPersonalInfo.jsp" et accountDataView.
-					if (fromAccountPersonalInfo==3)				
-						this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
+					// Pas d'envoie de message apr�s la MAJ des donn�es de la page "accountPersonalInfo.jsp".
+					if (! fromAccountPersonalInfo)
+					 	this.addInfoMessage(null, "PERSOINFO.MESSAGE.CHANGE.SUCCESSFULL");
 				}
 				else logger.debug("Pas de mise à jour envoyée BO");
 				

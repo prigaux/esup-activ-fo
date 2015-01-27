@@ -136,7 +136,7 @@ $(function() {
 		}
 		else
 			{
-			simulateLinkClick('accountForm:toDataChange');
+			simulateLinkClick('accountForm:saveDataChange');
 			}
 		
 	 });
