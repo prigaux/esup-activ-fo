@@ -132,6 +132,9 @@ $(function() {
 												<!--Permet de gérer l'affichage des champs en modification (voir form-show-hide.js)-->
 												<h:column>
 													<h:outputText styleClass="#{beanfield.name}_modifyLink" rendered="#{!beanfield.disable&&beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'}"/>
+													<!--Traitement pour les onglets ne contienant que des cases à cocher et radio buton, seul le bouton editer passe à confirmer)-->
+													<h:outputText styleClass="#{beanfield.name}_modifyLinkCkeckRadio" rendered="#{!beanfield.disable&&beanfield.fieldType=='selectManyCheckbox'||beanfield.fieldType=='selectOneRadio'}"/>
+										
 												</h:column>
 												
 										</h:dataTable>
