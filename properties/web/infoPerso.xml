@@ -801,6 +801,7 @@
 		<property name="useConvertedValue" value="true"/>
 		<property name="converter" ref="attributeReplaceConverter"/>
 		<property name="value" value="https://photo-ldap.univ-paris1.fr/ldap.php?uid={uid}&amp;test=1"/>
+		<property name="photoSize" value="283*343"/>
 	</bean> 
 	  
 	<bean

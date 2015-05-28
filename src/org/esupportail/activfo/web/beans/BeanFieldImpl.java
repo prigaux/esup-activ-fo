@@ -1,5 +1,6 @@
 package org.esupportail.activfo.web.beans;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -8,14 +9,17 @@ import java.util.List;
 import javax.faces.convert.Converter;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
+import javax.imageio.ImageIO;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.IOUtils;
+
+import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.myfaces.custom.fileupload.UploadedFile;
 import org.esupportail.activfo.web.validators.Validator;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-
+import org.imgscalr.Scalr;
+import org.imgscalr.Scalr.Mode;
 
 
 public class BeanFieldImpl<T> implements BeanField<T> {
@@ -61,7 +65,9 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private  UploadedFile fileUpLoad;
 	private int deleteJpegPhoto=0; 
+	private String photoSize; 
 	
+		
 	public List<BeanMultiValue> getValues()	
 	{  
 		
@@ -94,17 +100,42 @@ public class BeanFieldImpl<T> implements BeanField<T> {
     	  UploadedFile fileUp;    	  
 		  BeanMultiValue bmv = new BeanMultiValueImpl();
 		  fileUp= getFileUpLoad();
+		  		  
 		  if (deleteJpegPhoto!=2){
-			   if (fileUp!=null){   
+			  if (fileUp!=null){   
 		 			try {
-						// Convertir le uploadfile en string 
+						
 						InputStream streamFile;
 						streamFile = fileUp.getInputStream();
-						byte[] bytesVal = Base64.encodeBase64(IOUtils.toByteArray(streamFile));
+						BufferedImage img = ImageIO.read(streamFile);
+						
+						//Redimensionner l'image
+						//La taille de l'image est passé en paramètre exp:283*343
+						int p = photoSize.indexOf('*');
+						int width=0;
+						int height=0;
+						ByteArrayOutputStream baos = new ByteArrayOutputStream();
+						BufferedImage scaledImg = null;
+						byte[] buf = null;
+						
+						if (p >= 0) {
+							width = Integer.parseInt(photoSize.substring(0, p));
+							height = Integer.parseInt(photoSize.substring(p + 1));
+						}
+						if (img.getWidth()>width||img.getHeight()> height) {
+							scaledImg = Scalr.resize(img,Mode.AUTOMATIC,width,height);							
+						}
+						else scaledImg=img;
+										
+						ImageIO.write(scaledImg,fileUp.getContentType().substring(fileUp.getContentType().indexOf("/")+1), baos);
+						// Encoder l'image 						
+						buf = baos.toByteArray();							
+						byte[] bytesVal = Base64.encodeBase64(buf);
 						String stringVal = new String(bytesVal);
 						// La chaine "encodeBase64" indique que ce champ encodé est à décoder dans la méthode org.esupportail.activbo.services.ldap.WriteableLdapUserServiceImpl.mapToContext
 						bmv.setValue("encodeBase64"+stringVal);
-					   	} catch (IOException e) {
+					   
+		 			} catch (IOException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
@@ -450,4 +481,13 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	public void setDeleteJpegPhoto(int deleteJpegPhoto) {
 		this.deleteJpegPhoto = deleteJpegPhoto;
 	}
+
+	public String getPhotoSize() {
+		return photoSize;
+	}
+
+	public void setPhotoSize(String photoSize) {
+		this.photoSize = photoSize;
+	}
+	
 }
