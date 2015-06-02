@@ -113,6 +113,13 @@ background-color: #428bca !important;
 
 }
 
+.photoBorder{
+	border:1px solid;
+	width:100px;
+	height:123px;
+	border-color:gray;
+}
+
 /* override boostrap */
 .pc .progress {height: 30px;!important;}
 .pc .progress-bar {font-size: 14px;
