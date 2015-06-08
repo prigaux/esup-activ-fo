@@ -49,7 +49,20 @@
 		      		</list>		
 				</entry>
 			</map>
-			</entry>					
+			</entry>
+			<entry>
+			<key>
+				<ref bean="beanPHOTOPermission"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+		       	 		<value>student</value>		       	 		
+		      		</list>		
+				</entry>
+			</map>
+			</entry>
+								
 		</map>
 		</property>		
 		<property name="listBeanField"> 
@@ -60,6 +73,7 @@
 		    <ref bean="beanSn"/>
 		    <ref bean="beanGivenName"/>
 		    <ref bean="beanDisplayName"/>
+		    <ref bean="beanPHOTOPermission"/>
 		  </list>
 		</property>
 	</bean>
@@ -288,8 +302,8 @@
 		       	 		<value>student</value>		       	 		
 		      		</list>		
 				</entry>				
-			</map>
-			</entry>									
+			</map>			
+			</entry>										
 		</map>
 		</property>		
 		<property name="listBeanField">

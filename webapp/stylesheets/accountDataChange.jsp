@@ -97,8 +97,15 @@ $(function() {
 													</t:div>
 													
 													<!--Afficher la données sous forme de checkbox  -->
+													<!-- Avec validator -->
 													<t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}" >
-														<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'}" validator="#{beanfield.validator.validate}" layout="pageDirection">
+														<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'&&beanfield.validator!=null}" validator="#{beanfield.validator.validate}" layout="pageDirection">
+															<f:selectItems value="#{beanfield.displayItems}" />
+														</h:selectManyCheckbox>
+													</t:div>
+													<!-- Sans validator -->
+													<t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}" >
+														<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'&&beanfield.validator==null}" layout="pageDirection">
 															<f:selectItems value="#{beanfield.displayItems}" />
 														</h:selectManyCheckbox>
 													</t:div>

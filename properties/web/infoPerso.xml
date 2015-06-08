@@ -129,7 +129,7 @@
 		<property name="label" value="l'envoi de SMS par le CROUS"/>
 		<property name="value" value="{SMSU}crous" />
 	</bean>
-		<bean  
+	<bean  
 		id="beanSelectSMSUMP"
 		class="org.esupportail.activfo.web.beans.ProfileItem"
 		>
@@ -147,6 +147,49 @@
 		<property name="attributeName" value="up1BirthDay"/>
 		<property name="formatDateLdap" value="${format.date.ldap}"/>
 		<property name="majorAge" value="${major.age}"/>
+	</bean>
+	<bean  
+		id="beanSelectPHOTOINTRANET"
+		class="org.esupportail.activfo.web.beans.ProfileItem"
+		>
+		<property name="label" value="l'affichage de ma photo sur l'intranet"/>
+		<property name="value" value="{PHOTO}INTRANET" />
+	</bean>
+	<bean  
+		id="beanSelectPHOTOPUBLIC"
+		class="org.esupportail.activfo.web.beans.ProfileItem"
+		>
+		<property name="label" value="l'affichage de ma photo sur tout support"/>
+		<property name="value" value="{PHOTO}PUBLIC" />
+	</bean>
+	<bean  
+		id="beanSelectPHOTOSTUDENT"
+		class="org.esupportail.activfo.web.beans.ProfileItem"
+		>
+		<property name="label" value="l'affichage de ma photo pour les étudiants"/>
+		<property name="value" value="{PHOTO}STUDENT" />
+	</bean>
+		
+	<bean
+		id="beanPHOTOPermission"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+		<property name="key" value="PERSOINFO.SMSAGREEMENT.TEXT.LABEL"/>
+		<property name="fieldType" value="selectManyCheckbox"/>
+		
+		<property name="displayProfileItems">
+		   <list>
+		     <ref bean="beanSelectPHOTOINTRANET"/>
+		     <ref bean="beanSelectPHOTOPUBLIC"/>
+		     <ref bean="beanSelectPHOTOSTUDENT"/>
+		   </list>
+		</property>
+		<property name="useDisplayItems" value="true"/>
+		<property name="multiValue" value="true"/>	
+		<property name="name" value="up1TermsOfUse"/>
+		<property name="updateable" value="true"/>
+		<property name="disable" value="false"/>
 	</bean>
 	
 	<bean  
