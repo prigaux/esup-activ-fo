@@ -159,7 +159,7 @@
 		id="beanSelectPHOTOPUBLIC"
 		class="org.esupportail.activfo.web.beans.ProfileItem"
 		>
-		<property name="label" value="l'affichage de ma photo sur tout support"/>
+		<property name="label" value="l'affichage de ma photo sur l'annuaire public"/>
 		<property name="value" value="{PHOTO}PUBLIC" />
 	</bean>
 	<bean  
@@ -181,8 +181,8 @@
 		<property name="displayProfileItems">
 		   <list>
 		     <ref bean="beanSelectPHOTOINTRANET"/>
-		     <ref bean="beanSelectPHOTOPUBLIC"/>
 		     <ref bean="beanSelectPHOTOSTUDENT"/>
+		     <ref bean="beanSelectPHOTOPUBLIC"/>		     
 		   </list>
 		</property>
 		<property name="useDisplayItems" value="true"/>
@@ -190,6 +190,7 @@
 		<property name="name" value="up1TermsOfUse"/>
 		<property name="updateable" value="true"/>
 		<property name="disable" value="false"/>
+		<property name="help" value="PERSOINFO.AUTORISE.PHOTO.PERSONNEL.TEXT.HELP"/>
 	</bean>
 	
 	<bean  
