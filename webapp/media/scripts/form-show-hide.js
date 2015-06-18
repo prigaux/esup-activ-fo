@@ -59,12 +59,20 @@ $(function() {
 		  });
 		});	
 	
+	//appelée par $(".modifyByCategory").each(function(){	
 	$("[class*='_modify']").click(function () {
 		var field=$(this).attr('class').replace("_modifyLink","");
 		modify(field,this);
 	});
 	
-	// Au click sur un champ, afficher en mode modification
+	
+	//Au clic sur un champs de type case à cocher ou radio buton, seul le bouton editer passe à confirmer)
+	$(".showHideButton").click(function () {
+		 $(this).closest('.mainModifyLinkByCategory').find(".validate").show();
+		 $(this).closest('.mainModifyLinkByCategory').find(".modifyByCategory").hide();
+	});
+		
+	// Au clic sur un champ, afficher en mode modification
 	$("[class*='output']").click(function () {	
 		// Prendre la premiere classe de la liste, celle qui contient beanName+output
 		var getFirstClass = $(this).attr('class').split(' ')[0];
@@ -76,7 +84,7 @@ $(function() {
 		//console.log(find);
 	});
 	
-	// Au click sur un libelle, afficher en mode modification le champ associé
+	// Au clic sur un libelle, afficher en mode modification le champ associé
 	// util lorsque le champs est vide
 	$("[class*='labeltexttop']").click(function () {
 		// Prendre la premiere classe de la liste, celle qui contient beanName+output

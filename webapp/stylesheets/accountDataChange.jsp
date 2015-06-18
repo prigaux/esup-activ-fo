@@ -99,19 +99,19 @@ $(function() {
 													<!--Afficher la données sous forme de checkbox  -->
 													<!-- Avec validator -->
 													<t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}" >
-														<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'&&beanfield.validator!=null}" validator="#{beanfield.validator.validate}" layout="pageDirection">
+														<h:selectManyCheckbox styleClass="showHideButton" value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'&&beanfield.validator!=null}" validator="#{beanfield.validator.validate}" layout="pageDirection">
 															<f:selectItems value="#{beanfield.displayItems}" />
 														</h:selectManyCheckbox>
 													</t:div>
 													<!-- Sans validator -->
 													<t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}" >
-														<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'&&beanfield.validator==null}" layout="pageDirection">
+														<h:selectManyCheckbox styleClass="showHideButton" value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'&&beanfield.validator==null}" layout="pageDirection">
 															<f:selectItems value="#{beanfield.displayItems}" />
 														</h:selectManyCheckbox>
 													</t:div>
 													<!--Afficher la données sous forme de radio bouton  -->
 													<t:div rendered="#{beanfield.fieldType=='selectOneRadio'}"  >
-														<h:selectOneRadio value="#{beanfield.value}" rendered="#{beanfield.fieldType=='selectOneRadio'}">
+														<h:selectOneRadio  styleClass="showHideButton"value="#{beanfield.value}" rendered="#{beanfield.fieldType=='selectOneRadio'}">
 															<f:selectItems value="#{beanfield.displayItems}" />
 														</h:selectOneRadio>
 													</t:div>
@@ -136,12 +136,9 @@ $(function() {
 															<h:graphicImage alt="#{beanfield.name}" styleClass="hideField" value="/media/images/remove.png" style="border: 0;cursor:pointer"	rendered="#{beanfield.multiValue&&!beanfield.disable&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}" />
 														</t:div>
 												</h:column>
-												<!--Permet de gérer l'affichage des champs en modification (voir form-show-hide.js)-->
+												<!--Le styleClass="#{beanfield.name}_modifyLink" est un genre de tag qui permet de gérer l'affichage des champs en modification (voir form-show-hide.js)-->
 												<h:column>
 													<h:outputText styleClass="#{beanfield.name}_modifyLink" rendered="#{!beanfield.disable&&beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'}"/>
-													<!--Traitement pour les onglets ne contienant que des cases à cocher et radio buton, seul le bouton editer passe à confirmer)-->
-													<h:outputText styleClass="#{beanfield.name}_modifyLinkCkeckRadio" rendered="#{!beanfield.disable&&beanfield.fieldType=='selectManyCheckbox'||beanfield.fieldType=='selectOneRadio'}"/>
-										
 												</h:column>
 												
 										</h:dataTable>
