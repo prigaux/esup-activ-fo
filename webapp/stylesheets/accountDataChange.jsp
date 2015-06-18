@@ -139,6 +139,9 @@ $(function() {
 												<!--Le styleClass="#{beanfield.name}_modifyLink" est un genre de tag qui permet de gérer l'affichage des champs en modification (voir form-show-hide.js)-->
 												<h:column>
 													<h:outputText styleClass="#{beanfield.name}_modifyLink" rendered="#{!beanfield.disable&&beanfield.fieldType!='selectManyCheckbox'&&beanfield.fieldType!='selectOneRadio'}"/>
+													<!--Traitement pour les onglets ne contenant que des cases à cocher et ou radio buton à modifier, seul le bouton editer passe à confirmer)-->
+													<h:outputText styleClass="#{beanfield.name}_modifyLinkCkeckRadio" rendered="#{!beanfield.disable&&beanfield.fieldType=='selectManyCheckbox'||beanfield.fieldType=='selectOneRadio'}"/>
+										
 												</h:column>
 												
 										</h:dataTable>
