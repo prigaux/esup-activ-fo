@@ -340,4 +340,15 @@
     	<property name="errorMsg" value="VALIDATOR.INENUMBERLENTH.INAVLID"/>    	
 	</bean>
 	
+	<bean 
+		id="validatorPhoto"
+		class="org.esupportail.activfo.web.validators.ValidatorPhoto"
+		parent="abstractI18nAwareBean"
+		>
+    	<description>
+			A validator for Photo.
+    	</description>   	
+    	
+	</bean>
+	
 </beans>
