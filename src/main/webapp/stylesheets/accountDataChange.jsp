@@ -81,7 +81,7 @@ $(function() {
 															       	    
 													    <!--* Champs avec valeur vide -->		       	        
 														<t:div rendered="#{sub.value==''&&beanfield.multiValue}" style="display:none;" styleClass="#{beanfield.name}hideField" >  
-															<h:inputText value="#{sub.value}" styleClass="#{beanfield.name}Popup"size="35" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+															<h:inputText value="#{sub.value}" styleClass="#{beanfield.name}Popup" size="35" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 															 <h:inputText value="#{sub.value}" styleClass="#{beanfield.name}Popup" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
 															
 															 <h:selectOneMenu value="#{sub.value}" styleClass="#{beanfield.name}Popup" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&sub.value==''&&beanfield.multiValue}" >
@@ -111,7 +111,7 @@ $(function() {
 													</t:div>
 													<!--Afficher la données sous forme de radio bouton  -->
 													<t:div rendered="#{beanfield.fieldType=='selectOneRadio'}"  >
-														<h:selectOneRadio  styleClass="showHideButton"value="#{beanfield.value}" rendered="#{beanfield.fieldType=='selectOneRadio'}">
+														<h:selectOneRadio  styleClass="showHideButton" value="#{beanfield.value}" rendered="#{beanfield.fieldType=='selectOneRadio'}">
 															<f:selectItems value="#{beanfield.displayItems}" />
 														</h:selectOneRadio>
 													</t:div>

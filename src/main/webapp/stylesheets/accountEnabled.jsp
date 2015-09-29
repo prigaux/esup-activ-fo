@@ -29,7 +29,7 @@
 			</div>
 			
 			<h:form id="restart">
-				<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}"action="#{exceptionController.restart}" id="restartButton" style="display:none;"/>
+				<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" id="restartButton" style="display:none;"/>
 			</h:form>	 
 		</div>
 </div>
