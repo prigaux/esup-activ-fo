@@ -41,7 +41,7 @@ $(function() {
 					<h:column>
 					 <t:div rendered="#{beanfield.fieldType=='inputFileUpload'}">
 					   <t:inputFileUpload value="#{beanfield.fileUpLoad}"  styleClass="upload" storage="file" accept="image/jpeg" validator="#{beanfield.validator.validate}"></t:inputFileUpload>
-					   <h:graphicImage  alt="#{beanfield.name}" styleClass="delete" value="/media/images/delete.png" style="float:right;margin-right: -30px;margin-top: -24.9px;" rendered="#{beanfield.fieldType=='inputFileUpload'&&beanfield.deleteJpegPhoto==1}" />
+					   <h:graphicImage  alt="#{beanfield.name}" styleClass="delete" value="../media/images/delete.png" style="float:right;margin-right: -30px;margin-top: -24.9px;" rendered="#{beanfield.fieldType=='inputFileUpload'&&beanfield.deleteJpegPhoto==1}" />
              <h:inputText value="#{beanfield.deleteJpegPhoto}" styleClass="deletePhoto" style="display:none;" />
            </t:div>
 					<t:dataList value="#{beanfield.values}" var="sub">
@@ -75,11 +75,11 @@ $(function() {
 			         <t:div><h:outputText styleClass="digestConstraint" value="#{msgs[beanfield.digestConstraint]}" rendered="#{beanfield.digestConstraint!=null}"/> </t:div>
 			        </h:column>
 			        	<h:column>
-			        		<h:graphicImage styleClass="toolTipShow" title="#{msgs[beanfield.notice]}" value="/media/images/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}"/>
-			       	 		<h:graphicImage styleClass="toolTipShow" title="#{msgs[beanfield.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}"/>					  	
+			        		<h:graphicImage styleClass="toolTipShow" title="#{msgs[beanfield.notice]}" value="../media/images/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}"/>
+			       	 		<h:graphicImage styleClass="toolTipShow" title="#{msgs[beanfield.help]}" value="../media/images/help.jpg"  style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}"/>					  	
 					  	<t:div >
-						  <h:graphicImage alt="#{beanfield.name}" styleClass="show" value="/media/images/add.png"  style="border: 0;" rendered="#{beanfield.multiValue&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>
-						  <h:graphicImage alt="#{beanfield.name}" styleClass="hide" value="/media/images/remove.png"  style="border: 0;" rendered="#{beanfield.multiValue&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>
+						  <h:graphicImage alt="#{beanfield.name}" styleClass="show" value="../media/images/add.png"  style="border: 0;" rendered="#{beanfield.multiValue&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>
+						  <h:graphicImage alt="#{beanfield.name}" styleClass="hide" value="../media/images/remove.png"  style="border: 0;" rendered="#{beanfield.multiValue&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>
 					  	</t:div>
 						</h:column>										
 				  	</h:dataTable>

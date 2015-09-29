@@ -1,7 +1,7 @@
 <%@include file="_include.jsp"%>
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 <%@include file="_includeScript.jsp"%>
-<script type="text/javascript" src="/media/scripts/accountDataTabs.js"></script>
+<script type="text/javascript" src="../media/scripts/accountDataTabs.js"></script>
 
 <script>
 $(function() {
@@ -92,7 +92,7 @@ $(function() {
 													<!-- Modifier la photo -->
 													<t:div rendered="#{beanfield.fieldType=='inputFileUpload'}"	style="display:none;" styleClass="#{beanfield.name}show" >
 														<t:inputFileUpload value="#{beanfield.fileUpLoad}"	styleClass="upload" storage="file" accept="image/jpeg" validator="#{beanfield.validator.validate}"></t:inputFileUpload>
-														<h:graphicImage alt="#{beanfield.name}" styleClass="delete"	value="/media/images/delete.png" style="float:right;margin-right: -30px;margin-top: -24.9px;"	rendered="#{beanfield.fieldType=='inputFileUpload'&&beanfield.deleteJpegPhoto==1}" />
+														<h:graphicImage alt="#{beanfield.name}" styleClass="delete"	value="../media/images/delete.png" style="float:right;margin-right: -30px;margin-top: -24.9px;"	rendered="#{beanfield.fieldType=='inputFileUpload'&&beanfield.deleteJpegPhoto==1}" />
 														<h:inputText value="#{beanfield.deleteJpegPhoto}" styleClass="deletePhoto" style="display:none;" />
 													</t:div>
 													
@@ -129,11 +129,11 @@ $(function() {
 												</h:column>
 												<!--Afficher les boutons ajouter, supprimer et l'aide  -->
 												<h:column>
-														<h:graphicImage styleClass="toolTipShow"  title="#{msgs[beanfield.help]}"	value="/media/images/help.jpg" style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}" />
+														<h:graphicImage styleClass="toolTipShow"  title="#{msgs[beanfield.help]}"	value="../media/images/help.jpg" style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}" />
 														<t:div style="display:none" styleClass="#{beanfield.name}modify">
-															<h:graphicImage title="#{msgs[beanfield.notice]}" styleClass="#{beanfield.name}toValidateDRH toolTipShow" value="/media/images/redtriangular.jpg" style="border: 0" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}" />
-															<h:graphicImage alt="#{beanfield.name}" styleClass="showField" value="/media/images/add.png" style="border: 0;cursor:pointer" rendered="#{beanfield.multiValue&&!beanfield.disable&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}" />
-															<h:graphicImage alt="#{beanfield.name}" styleClass="hideField" value="/media/images/remove.png" style="border: 0;cursor:pointer"	rendered="#{beanfield.multiValue&&!beanfield.disable&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}" />
+															<h:graphicImage title="#{msgs[beanfield.notice]}" styleClass="#{beanfield.name}toValidateDRH toolTipShow" value="../media/images/redtriangular.jpg" style="border: 0" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}" />
+															<h:graphicImage alt="#{beanfield.name}" styleClass="showField" value="../media/images/add.png" style="border: 0;cursor:pointer" rendered="#{beanfield.multiValue&&!beanfield.disable&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}" />
+															<h:graphicImage alt="#{beanfield.name}" styleClass="hideField" value="../media/images/remove.png" style="border: 0;cursor:pointer"	rendered="#{beanfield.multiValue&&!beanfield.disable&&(beanfield.fieldType=='inputText'||beanfield.fieldType=='selectOneMenu')}" />
 														</t:div>
 												</h:column>
 												<!--Le styleClass="#{beanfield.name}_modifyLink" est un genre de tag qui permet de gérer l'affichage des champs en modification (voir form-show-hide.js)-->
@@ -170,10 +170,10 @@ $(function() {
 			    <div class="col-md-3">
 			    	<div class="helppanel">		    			
 	  					<div><h:outputText value="#{msgs['DATACHANGE.TEXT.LEGEND']}" /></div>							
-						<div><img src="/media/images/help.jpg"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.HELP']}" /></div>
-						<div><img src="/media/images/redtriangular.jpg"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.NOTE']}" /></div>
-						<div><img src="/media/images/add.png"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.ADD']}" /></div>
-						<div><img src="/media/images/remove.png"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.REMOVE']}" /></div>		    			
+						<div><img src="../media/images/help.jpg"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.HELP']}" /></div>
+						<div><img src="../media/images/redtriangular.jpg"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.NOTE']}" /></div>
+						<div><img src="../media/images/add.png"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.ADD']}" /></div>
+						<div><img src="../media/images/remove.png"><h:outputText styleClass="text-muted" value=": #{msgs['DATACHANGE.TEXT.LEGEND.REMOVE']}" /></div>		    			
 					</div>
 			   </div> -->	
 			   			

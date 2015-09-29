@@ -38,7 +38,7 @@ $(function() {
 		var answer = confirm('Etes-vous s\373r de vouloir supprimer la photo?');
 		if(answer){
 			$('.deletePhoto').val(2);
-			$('.photo').attr("src","/media/images/deletedPhoto.png");
+			$('.photo').attr("src","../media/images/deletedPhoto.png");
 			$('.upload').hide();
 			$(this).hide();
 			

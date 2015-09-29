@@ -250,19 +250,19 @@ td.btn-processactivation label, td.btn-processreinitialisation label, td.btn-pro
 
 
 td.btn-processactivation label { 
-  background: rgba(0, 0, 0, 0) url("/media/images/user.svg") no-repeat scroll right 15px top 8px / 2.6em auto; 
+  background: rgba(0, 0, 0, 0) url("images/user.svg") no-repeat scroll right 15px top 8px / 2.6em auto; 
 }   
 
 td.btn-processreinitialisation label { 
-  background: rgba(0, 0, 0, 0) url("/media/images/question.svg") no-repeat scroll right 15px top 8px / 2.6em auto; 
+  background: rgba(0, 0, 0, 0) url("images/question.svg") no-repeat scroll right 15px top 8px / 2.6em auto; 
 }  
   
 td.btn-processpasswordchange label { 
-  background: rgba(0, 0, 0, 0) url("/media/images/padlock.svg") no-repeat scroll right 15px top 8px / 2.6em auto; 
+  background: rgba(0, 0, 0, 0) url("images/padlock.svg") no-repeat scroll right 15px top 8px / 2.6em auto; 
 } 
 
 td.btn-processdatachange label {
-  background: rgba(0, 0, 0, 0) url("/media/images/user.svg") no-repeat scroll right 15px top 8px / 2.6em auto;
+  background: rgba(0, 0, 0, 0) url("images/user.svg") no-repeat scroll right 15px top 8px / 2.6em auto;
 }
 
 

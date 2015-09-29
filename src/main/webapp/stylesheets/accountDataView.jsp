@@ -1,7 +1,7 @@
 <%@include file="_include.jsp"%>
 <e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 <%@include file="_includeScript.jsp"%>
-<script type="text/javascript" src="/media/scripts/accountDataTabs.js"></script>
+<script type="text/javascript" src="../media/scripts/accountDataTabs.js"></script>
 
 <script>
 $(function() {	
