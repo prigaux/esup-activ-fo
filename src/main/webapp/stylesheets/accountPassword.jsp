@@ -1,4 +1,5 @@
 <%@include file="_include.jsp"%>
+<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 <%@include file="_includeScript.jsp"%>
 
 
@@ -153,7 +154,6 @@
 		
 		</script>
 <div class="pc">
-<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 		<script>
 		<!-- Ne pas utiliser ${accountController.activ}), cela ne fonctionne pas en portlet-->
 		<!-- Utiliser un tag jsf comme outputText-->
@@ -210,5 +210,5 @@
 					action="#{exceptionController.restart}" />
 			</h:form>
 			</div>
-</e:page>
 </div>
+</e:page>

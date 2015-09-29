@@ -1,8 +1,8 @@
 <%@include file="_include.jsp"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 <%@include file="_includeScript.jsp"%>
 <div class="pc">
-<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 
 <script>
 $(function() {
@@ -94,5 +94,5 @@ $(function() {
 						action="#{exceptionController.restart}" />
 				</h:form>
 		</div>	
-</e:page>
 </div>
+</e:page>

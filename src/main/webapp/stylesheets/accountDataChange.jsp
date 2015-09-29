@@ -1,4 +1,5 @@
 <%@include file="_include.jsp"%>
+<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 <%@include file="_includeScript.jsp"%>
 <script type="text/javascript" src="/media/scripts/accountDataTabs.js"></script>
 
@@ -17,7 +18,6 @@ $(function() {
 </script>
 
 <div class="pc">
-<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 <div class="container-fluid">
 	<%@include file="_includeBreadcrumb.jsp"%>
 	<h:form id="accountForm" enctype="multipart/form-data">
@@ -213,5 +213,5 @@ $(function() {
 <h:form id="restart" style="display:none;">
 	<e:commandButton id="restartButton" value="#{msgs['APPLICATION.BUTTON.RESTART']}" action="#{exceptionController.restart}" />
 </h:form>
-</e:page>
 </div><!-- Fin class="pc " -->
+</e:page>

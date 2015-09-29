@@ -1,4 +1,5 @@
 <%@include file="_include.jsp"%>
+<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 <%@include file="_includeScript.jsp"%>
 <script>
 $(function() {
@@ -6,7 +7,6 @@ $(function() {
 });
 </script>
 <div class="pc">
-	<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}">
 			<div class="container-fluid">
 				<%@include file="_includeBreadcrumb.jsp"%>
 				<!-- Barre de progression pour la réinitialisation de mot de passe-->
@@ -36,5 +36,5 @@ $(function() {
 						action="#{exceptionController.restart}" />
 				</h:form>
 			</div>
-	</e:page>
 </div>
+</e:page>

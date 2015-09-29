@@ -1,7 +1,7 @@
 <%@include file="_include.jsp"%>
+<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 <%@include file="_includeScript.jsp"%>
 <div class="pc">
-	<e:page stringsVar="msgs" menuItem="account" locale="#{sessionController.locale}" >
 		<div class="container-fluid">
 			<%@include file="_includeBreadcrumb.jsp"%>
 			<t:div rendered="#{accountController.activ == true}">
@@ -32,5 +32,5 @@
 				<e:commandButton value="#{msgs['APPLICATION.BUTTON.RESTART']}"action="#{exceptionController.restart}" id="restartButton" style="display:none;"/>
 			</h:form>	 
 		</div>
-	</e:page>
 </div>
+</e:page>

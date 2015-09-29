@@ -1,4 +1,5 @@
 <%@include file="_include.jsp"%>
+<e:page stringsVar="msgs" menuItem="welcome" locale="#{sessionController.locale}" >
 <%@include file="_includeScript.jsp"%>
 
  <script type="text/javascript">
@@ -49,7 +50,6 @@
 </script>
 
  <div class="pc">
-  <e:page stringsVar="msgs" menuItem="welcome" locale="#{sessionController.locale}" >
   	<div class="container-fluid">
 	  	<div class="breadcrumbAccueil"><span class="glyphicon glyphicon-home"></span><h:outputText value="Gestion de compte"/></div>
 	    <div class="text-info"><t:outputText escape="false" value="#{msgs['WELCOME.EXPLAIN']}"/></div>
