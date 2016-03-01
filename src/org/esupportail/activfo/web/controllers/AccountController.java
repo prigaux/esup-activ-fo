@@ -96,7 +96,7 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	//Les status pris en compte par l'application
 	//Chaque status contient une liste de champs de validation spécifiques
-	private HashMap<BeanField,List<BeanField>> beanFieldStatus;
+	private Map<BeanField,List<BeanField>> beanFieldStatus;
 		
 	private List<BeanField> listDataChangeInfos=new ArrayList<BeanField>();
 	private List<BeanField> listBeanPersoInfo=new ArrayList<BeanField>();
@@ -126,7 +126,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private CategoryBeanField beanTestInfo;  
 	
 	//decriptif du compte suite � validation
-	HashMap<String,String> accountDescr=new HashMap<String,String>();
+	Map<String,String> accountDescr=new HashMap<String,String>();
 	
 	
 	private String procedureReinitialisation;
@@ -147,8 +147,8 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	private String csvFileName;
 	private String attributesCsvFile;
-	HashMap<BeanField,List<String>> attrNewCsv= new HashMap<BeanField,List<String>>();
-	HashMap<BeanField,List<String>> attrOldCsv= new HashMap<BeanField,List<String>>();
+	Map<BeanField,List<String>> attrNewCsv= new HashMap<BeanField,List<String>>();
+	Map<BeanField,List<String>> attrOldCsv= new HashMap<BeanField,List<String>>();
 
 	
 	/**
@@ -304,7 +304,7 @@ public class AccountController extends AbstractContextAwareController implements
 	public String pushValid() {
 		try {
 			
-			HashMap<String,String> hashInfToValidate=new HashMap<String,String>();
+			Map<String,String> hashInfToValidate=new HashMap<String,String>();
 			for(BeanField<String> bf:listInfoToValidate)
 				hashInfToValidate.put(bf.getName(), bf.getValue());
 			
@@ -380,7 +380,7 @@ public class AccountController extends AbstractContextAwareController implements
 		return null;
 	}
 	
-	private void setMailSendingValues(final BeanField beanPersoInfo,HashMap<String,List<String>> oldValue,HashMap<String,List<String>> newValue){
+	private void setMailSendingValues(final BeanField beanPersoInfo,Map<String,List<String>> oldValue,Map<String,List<String>> newValue){
 		
 		if(isChange(beanPersoInfo)){
 			Converter converter=beanPersoInfo.getConverter();			
@@ -468,7 +468,7 @@ public class AccountController extends AbstractContextAwareController implements
 	private String _pushChangeInfoPerso(boolean fromAccountPersonalInfo) {
 			Iterator it;
 			
-			HashMap<String,String> DataChangeMaps=new HashMap<String,String>();
+			Map<String,String> DataChangeMaps=new HashMap<String,String>();
 			
 			
 			if(dataChange) {
@@ -481,19 +481,19 @@ public class AccountController extends AbstractContextAwareController implements
 			
 			try{
 				logger.info("Mise � jour des informations personnelles");
-				HashMap<String,String> hashBeanPersoInfo=new HashMap<String,String>();
+				Map<String,String> hashBeanPersoInfo=new HashMap<String,String>();
 				if(dataChange)it=listDataChangeInfos.iterator();
 				else it=listBeanPersoInfo.iterator();	
 				int i=0;
 				
-				HashMap<String,List<String>> oldValue=new HashMap<String,List<String>>();
-				HashMap<String,List<String>> newValue=new HashMap<String,List<String>>();
+				Map<String,List<String>> oldValue=new HashMap<String,List<String>>();
+				Map<String,List<String>> newValue=new HashMap<String,List<String>>();
 				
-				HashMap<String,List<String>> oldValueNotUpdateableFiel=new HashMap<String,List<String>>();
-				HashMap<String,List<String>> newValueNotUpdateableFiel=new HashMap<String,List<String>>();
+				Map<String,List<String>> oldValueNotUpdateableFiel=new HashMap<String,List<String>>();
+				Map<String,List<String>> newValueNotUpdateableFiel=new HashMap<String,List<String>>();
 				
-				HashMap<String,List<String>> oldValuePhone=new HashMap<String,List<String>>();
-				HashMap<String,List<String>> newValuePhone=new HashMap<String,List<String>>();
+				Map<String,List<String>> oldValuePhone=new HashMap<String,List<String>>();
+				Map<String,List<String>> newValuePhone=new HashMap<String,List<String>>();
 				
 				
 				// parcourir les champs
@@ -843,9 +843,9 @@ public class AccountController extends AbstractContextAwareController implements
 		    
 	}
 			
-	public HashMap<String,List<String>> convertHash(HashMap<String,String> hash){
+	public Map<String,List<String>> convertHash(Map<String,String> hash){
 		
-		HashMap<String,List<String>> newHash=new HashMap<String,List<String>>();
+		Map<String,List<String>> newHash=new HashMap<String,List<String>>();
 		Iterator<Map.Entry<String, String>> it=hash.entrySet().iterator();
 		
 		while(it.hasNext()){
@@ -860,7 +860,7 @@ public class AccountController extends AbstractContextAwareController implements
 	
 	
 	public void updateCurrentAccount(){		
-		HashMap<String,List<String>> attributes=this.convertHash(accountDescr);
+		Map<String,List<String>> attributes=this.convertHash(accountDescr);
 								
 		if(attributes.get(accountIdKey)==null&&currentAccount.getAttribute(accountIdKey)!=null){
 			ArrayList<String> accountIdValue=new ArrayList<String>();
@@ -1374,7 +1374,7 @@ public class AccountController extends AbstractContextAwareController implements
 	/**
 	 * @return the beanFieldStatus
 	 */
-	public HashMap<BeanField, List<BeanField>> getBeanFieldStatus() {
+	public Map<BeanField, List<BeanField>> getBeanFieldStatus() {
 		return beanFieldStatus;
 	}
 
@@ -1383,7 +1383,7 @@ public class AccountController extends AbstractContextAwareController implements
 	 * @param beanFieldStatus the beanFieldStatus to set
 	 */
 	public void setBeanFieldStatus(
-			HashMap<BeanField, List<BeanField>> beanFieldStatus) {
+			Map<BeanField, List<BeanField>> beanFieldStatus) {
 		this.beanFieldStatus = beanFieldStatus;
 	}
 

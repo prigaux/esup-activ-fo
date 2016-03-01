@@ -4,6 +4,7 @@
 package org.esupportail.activfo.web.converters;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 import javax.faces.component.UIComponent;
@@ -31,7 +32,7 @@ public class LdapTablesConverter implements Converter {
 	
 	//permet de renvoyer les codes associés au displayValue.
 	//il y a une bijection entre displayValue et code
-	private HashMap<String,String> codes=new HashMap<String,String>(); 
+	private Map<String,String> codes=new HashMap<String,String>(); 
 	
 	private final Logger logger = new LoggerImpl(getClass());
 	

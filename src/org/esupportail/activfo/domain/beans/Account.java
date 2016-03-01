@@ -6,6 +6,7 @@ package org.esupportail.activfo.domain.beans;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 import org.esupportail.commons.web.controllers.Resettable;
@@ -35,7 +36,7 @@ public class Account implements InitializingBean,Resettable{
 	
 	private String pager;
 	
-	private HashMap<String, List<String>> attributes = new HashMap<String,List<String>>();
+	private Map<String, List<String>> attributes = new HashMap<String,List<String>>();
 	
 	private String status;
 	
@@ -135,7 +136,7 @@ public class Account implements InitializingBean,Resettable{
 	}
 	
 	public void setAttributes(
-			final HashMap<String, List<String>> attributes) {
+			final Map<String, List<String>> attributes) {
 		this.attributes = attributes;
 	}
 	

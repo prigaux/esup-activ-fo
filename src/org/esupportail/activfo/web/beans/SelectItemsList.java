@@ -2,6 +2,7 @@ package org.esupportail.activfo.web.beans;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.esupportail.commons.services.logging.Logger;
@@ -13,21 +14,21 @@ public class SelectItemsList extends ArrayList<SelectItem>  {
 	
 	private final Logger logger = new LoggerImpl(getClass());
 	
-	private HashMap<String,String> selectItemList;
+	private Map<String,String> selectItemList;
 	
 	
 	
 	/**
 	 * @return the selectItemList
 	 */
-	public HashMap<String, String> getSelectItemList() {
+	public Map<String, String> getSelectItemList() {
 		return new HashMap<String,String>();
 	}
 
 	/**
 	 * @param selectItemList the selectItemList to set
 	 */
-	public void setSelectItemList(HashMap<String, String> selectItemList) {
+	public void setSelectItemList(Map<String, String> selectItemList) {
 		this.selectItemList = selectItemList;
 		Set<String> keys = selectItemList.keySet();
 		for(String key: keys) {

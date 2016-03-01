@@ -3,7 +3,7 @@
  */
 package org.esupportail.activfo.domain.beans.mailing;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -37,10 +37,10 @@ public class MailingImpl implements Mailing {
 	private String body2DataChange;
 	private String mail2Gest;
 	
-	private HashMap<String,List<String>> access;
-	private HashMap<String,List<String>> deny;
+	private Map<String,List<String>> access;
+	private Map<String,List<String>> deny;
 	
-	public void sendMessage(Account currentAccount, HashMap<String,List<String>> oldValue, HashMap<String,List<String>> newValue) {
+	public void sendMessage(Account currentAccount, Map<String,List<String>> oldValue, Map<String,List<String>> newValue) {
 		
 		InternetAddress mail=null;
 		InternetAddress fromAdress=null;	
@@ -90,7 +90,7 @@ public class MailingImpl implements Mailing {
 		else return false;
 	}
 	
-	private boolean profileMatches(HashMap<String,List<String>> profile, Account currentAccount){
+	private boolean profileMatches(Map<String,List<String>> profile, Account currentAccount){
 		Set<String> keySet = profile.keySet();
 		for(String attribute : keySet) {
 			List<String> values=profile.get(attribute);
@@ -231,28 +231,28 @@ public class MailingImpl implements Mailing {
 	/**
 	 * @return the access
 	 */
-	public HashMap<String, List<String>> getAccess() {
+	public Map<String, List<String>> getAccess() {
 		return access;
 	}
 
 	/**
 	 * @param access the access to set
 	 */
-	public void setAccess(HashMap<String, List<String>> access) {
+	public void setAccess(Map<String, List<String>> access) {
 		this.access = access;
 	}
 
 	/**
 	 * @return the deny
 	 */
-	public HashMap<String, List<String>> getDeny() {
+	public Map<String, List<String>> getDeny() {
 		return deny;
 	}
 
 	/**
 	 * @param deny the deny to set
 	 */
-	public void setDeny(HashMap<String, List<String>> deny) {
+	public void setDeny(Map<String, List<String>> deny) {
 		this.deny = deny;
 	}
 

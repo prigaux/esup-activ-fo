@@ -3,7 +3,7 @@ package org.esupportail.activfo.web.beans;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import java.util.Set;
 
@@ -32,7 +32,7 @@ public class LdapStructureList extends ArrayList<SelectItem> implements Initiali
 	private String firstLabel=""; 
 	private String label="description";	
 	private String value="supannCodeEntite";
-	private HashMap<String,String> businessCategoryMap;
+	private Map<String,String> businessCategoryMap;
 	
 	public void afterPropertiesSet() throws Exception {
 		SelectItem si = new SelectItem();		
@@ -150,14 +150,14 @@ public class LdapStructureList extends ArrayList<SelectItem> implements Initiali
 	/**
 	 * @return the businessCategoryMap
 	 */
-	public HashMap<String, String> getBusinessCategoryMap() {
+	public Map<String, String> getBusinessCategoryMap() {
 		return businessCategoryMap;
 	}
 
 	/**
 	 * @param businessCategoryMap the businessCategoryMap to set
 	 */
-	public void setBusinessCategoryMap(HashMap<String, String> businessCategoryMap) {
+	public void setBusinessCategoryMap(Map<String, String> businessCategoryMap) {
 		this.businessCategoryMap = businessCategoryMap;
 	}
 		

@@ -5,7 +5,7 @@
 package org.esupportail.activfo.domain;
 
 import java.io.Serializable;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 import org.esupportail.activfo.domain.beans.User;
@@ -118,15 +118,15 @@ public interface DomainService extends Serializable {
 	 */
 	boolean userCanDeleteAdmin(User user, User admin);
 	
-	public HashMap<String,String> validateAccount(HashMap<String,String> hashInfToValidate,List<String>attrPersoInfo) throws LdapProblemException,AuthentificationException,LoginException;
+	public Map<String,String> validateAccount(Map<String,String> hashInfToValidate,List<String>attrPersoInfo) throws LdapProblemException,AuthentificationException,LoginException;
 	
 	public void setPassword(String id,String code,final String currentPassword)throws LdapProblemException,UserPermissionException,KerberosException,LoginException;
 	
 	public void setPassword(String id,String code,String newLogin,final String currentPassword)throws LdapProblemException,UserPermissionException,KerberosException,LoginException;
 	
-	public void updatePersonalInformations(String id,String code,HashMap<String,String> hashBeanPersoInfo)throws LdapProblemException,UserPermissionException,LoginException;
+	public void updatePersonalInformations(String id,String code,Map<String,String> hashBeanPersoInfo)throws LdapProblemException,UserPermissionException,LoginException;
 	
-	public HashMap<String,String> authentificateUser(String id,String password,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException;
+	public Map<String,String> authentificateUser(String id,String password,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException;
 	
 	public void sendCode(String id,String canal)throws ChannelException;
 		
@@ -138,8 +138,8 @@ public interface DomainService extends Serializable {
 	
 	public void setLdapEntityService(LdapEntityService ldapEntityService);
 	
-	public HashMap<String,String> authentificateUserWithCas(String id,String proxyticket,String targetUrl,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException;
+	public Map<String,String> authentificateUserWithCas(String id,String proxyticket,String targetUrl,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException;
 	
-	public HashMap<String,String> authentificateUserWithCodeKey(String id,String accountCodeKey,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException;
+	public Map<String,String> authentificateUserWithCodeKey(String id,String accountCodeKey,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException;
 
 }

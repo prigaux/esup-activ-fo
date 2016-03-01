@@ -4,6 +4,7 @@
 package org.esupportail.activfo.web.converters;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -17,7 +18,7 @@ import org.esupportail.commons.services.logging.LoggerImpl;
  */
 public class MapOrDefaultConverter implements Converter {
 	
-	private HashMap<String,String> mapping = new HashMap<String,String>();
+	private Map<String,String> mapping = new HashMap<String,String>();
 	
 	private String defaultValue="";
 	
@@ -49,14 +50,14 @@ public class MapOrDefaultConverter implements Converter {
 	/**
 	 * @return the mapping
 	 */
-	public HashMap<String, String> getMapping() {
+	public Map<String, String> getMapping() {
 		return mapping;
 	}
 
 	/**
 	 * @param mapping the mapping to set
 	 */
-	public void setMapping(HashMap<String, String> mapping) {
+	public void setMapping(Map<String, String> mapping) {
 		this.mapping = mapping;
 	}
 	

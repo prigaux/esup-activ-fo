@@ -1,7 +1,7 @@
 package org.esupportail.activfo.web.beans;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 import java.util.Set;
 
@@ -17,9 +17,9 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	private String title;
 	private String name;
 	private List<BeanField> listBeanField=new ArrayList<BeanField>(); 
-	private HashMap<String,List<String>> profile;
-	private HashMap<BeanField,HashMap<String,List<String>>> beanFieldProfile;
-	private HashMap<BeanField,HashMap<String,List<String>>> deniedBeanFieldProfile;
+	private Map<String,List<String>> profile;
+	private Map<BeanField,Map<String,List<String>>> beanFieldProfile;
+	private Map<BeanField,Map<String,List<String>>> deniedBeanFieldProfile;
 	private  Account account;
 	private final Logger logger = new LoggerImpl(getClass());
 	
@@ -84,8 +84,8 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	}
 
 	private boolean isBeanFieldAllowed(BeanField beanField) {
-		HashMap<String,List<String>> fieldProfiling=beanFieldProfile!=null?beanFieldProfile.get(beanField):null;
-		HashMap<String,List<String>> deniedFieldProfiling=deniedBeanFieldProfile!=null?deniedBeanFieldProfile.get(beanField):null;
+		Map<String,List<String>> fieldProfiling=beanFieldProfile!=null?beanFieldProfile.get(beanField):null;
+		Map<String,List<String>> deniedFieldProfiling=deniedBeanFieldProfile!=null?deniedBeanFieldProfile.get(beanField):null;
 						
 		if(fieldProfiling==null && deniedFieldProfiling==null) return true; //si pas de définition de droit d'accès, le beanFiled est disponible pour tout profil
 		
@@ -99,7 +99,7 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 		else return false;	
 	}
 	
-	private boolean profileMatches(HashMap<String,List<String>> fieldProfiling){				
+	private boolean profileMatches(Map<String,List<String>> fieldProfiling){				
 		for(String attribute : fieldProfiling.keySet()) {
 			List<String> profileValues=fieldProfiling.get(attribute);
 			List<String> accountValues=account.getAttributes(attribute);
@@ -127,14 +127,14 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	/**
 	 * @return the profile
 	 */
-	public HashMap<String, List<String>> getProfile() {
+	public Map<String, List<String>> getProfile() {
 		return profile;
 	}
 
 	/**
 	 * @param profile the profile to set
 	 */
-	public void setProfile(HashMap<String, List<String>> profile) {
+	public void setProfile(Map<String, List<String>> profile) {
 		this.profile = profile;
 	}
 
@@ -172,7 +172,7 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	/**
 	 * @return the beanFieldProfile
 	 */
-	public HashMap<BeanField, HashMap<String, List<String>>> getBeanFieldProfile() {
+	public Map<BeanField, Map<String, List<String>>> getBeanFieldProfile() {
 		return beanFieldProfile;
 	}
 
@@ -180,14 +180,14 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	 * @param beanFieldProfile the beanFieldProfile to set
 	 */
 	public void setBeanFieldProfile(
-			HashMap<BeanField, HashMap<String, List<String>>> beanFieldProfile) {
+			Map<BeanField, Map<String, List<String>>> beanFieldProfile) {
 		this.beanFieldProfile = beanFieldProfile;
 	}
 
 	/**
 	 * @return the deniedBeanFieldProfile
 	 */
-	public HashMap<BeanField, HashMap<String, List<String>>> getDeniedBeanFieldProfile() {
+	public Map<BeanField, Map<String, List<String>>> getDeniedBeanFieldProfile() {
 		return deniedBeanFieldProfile;
 	}
 
@@ -195,7 +195,7 @@ public class CategoryBeanFieldImpl implements CategoryBeanField,InitializingBean
 	 * @param deniedBeanFieldProfile the deniedBeanFieldProfile to set
 	 */
 	public void setDeniedBeanFieldProfile(
-			HashMap<BeanField, HashMap<String, List<String>>> deniedBeanFieldProfile) {
+			Map<BeanField, Map<String, List<String>>> deniedBeanFieldProfile) {
 		this.deniedBeanFieldProfile = deniedBeanFieldProfile;
 	}
 

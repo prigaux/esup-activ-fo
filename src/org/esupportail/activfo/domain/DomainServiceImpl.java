@@ -4,7 +4,7 @@
  */
 package org.esupportail.activfo.domain;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.List;
 
 import org.esupportail.activfo.services.ldap.LdapSchema;
@@ -270,7 +270,7 @@ public class DomainServiceImpl<LdapSchema> implements DomainService, Initializin
 	}
 	
 	
-	public HashMap<String,String> validateAccount(HashMap<String,String> hashInfToValidate,List<String>attrPersoInfo) throws LdapProblemException,AuthentificationException,LoginException{
+	public Map<String,String> validateAccount(Map<String,String> hashInfToValidate,List<String>attrPersoInfo) throws LdapProblemException,AuthentificationException,LoginException{
 		return service.validateAccount(hashInfToValidate,attrPersoInfo);
 	}
 	
@@ -283,7 +283,7 @@ public class DomainServiceImpl<LdapSchema> implements DomainService, Initializin
 		service.setPassword(id,code,newLogin,currentPassword);
 	}
 	
-	public void updatePersonalInformations(String id,String code, HashMap<String,String> hashBeanPersoInfo)throws LdapProblemException,UserPermissionException,LoginException{
+	public void updatePersonalInformations(String id,String code, Map<String,String> hashBeanPersoInfo)throws LdapProblemException,UserPermissionException,LoginException{
 		service.updatePersonalInformations(id,code,hashBeanPersoInfo);
 	}
 	
@@ -317,7 +317,7 @@ public class DomainServiceImpl<LdapSchema> implements DomainService, Initializin
 		return service.validateCode(id, code);
 	}
 	
-	public HashMap<String,String> authentificateUser(String id,String password,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException{
+	public Map<String,String> authentificateUser(String id,String password,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException{
 		return service.authentificateUser(id, password,attrPersoInfo);
 	}
 
@@ -335,11 +335,11 @@ public class DomainServiceImpl<LdapSchema> implements DomainService, Initializin
 		this.ldapEntityService = ldapEntityService;
 	}
 	
-	public HashMap<String,String> authentificateUserWithCas(String id,String proxyticket,String targetUrl,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException{
+	public Map<String,String> authentificateUserWithCas(String id,String proxyticket,String targetUrl,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException{
 		return casAcountService.authentificateUserWithCas(id, proxyticket,targetUrl,attrPersoInfo);
 	}
 	
-	public HashMap<String,String> authentificateUserWithCodeKey(String id,String accountCodeKey,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException{
+	public Map<String,String> authentificateUserWithCodeKey(String id,String accountCodeKey,List<String>attrPersoInfo)throws AuthentificationException,LdapProblemException,UserPermissionException,LoginException{
 		return casAcountService.authentificateUserWithCodeKey(id, accountCodeKey,attrPersoInfo);
 	}
 	
