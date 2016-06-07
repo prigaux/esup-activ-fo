@@ -5,11 +5,4 @@
 <%@ taglib uri="http://commons.esup-portail.org" prefix="e"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-
-
-
-
-
-
-
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
