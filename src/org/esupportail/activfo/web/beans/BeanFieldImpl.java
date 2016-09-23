@@ -12,10 +12,10 @@ import javax.faces.model.SelectItem;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.codec.binary.Base64;
-
 import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.myfaces.custom.fileupload.UploadedFile;
 import org.esupportail.activfo.web.validators.Validator;
+import org.esupportail.activfo.web.validators.ValidatorPhoto;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.imgscalr.Scalr;
@@ -102,31 +102,45 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		  fileUp= getFileUpLoad();
 		  		  
 		  if (deleteJpegPhoto!=2){
-			  if (fileUp!=null){   
-		 			try {
-						
-						InputStream streamFile;
-						streamFile = fileUp.getInputStream();
-						BufferedImage img = ImageIO.read(streamFile);
-						
-						//Redimensionner l'image
-						//La taille de l'image est passé en paramètre exp:283*343
-						int p = photoSize.indexOf('*');
-						int width=0;
-						int height=0;
-						ByteArrayOutputStream baos = new ByteArrayOutputStream();
-						BufferedImage scaledImg = null;
-						byte[] buf = null;
-						
-						if (p >= 0) {
-							width = Integer.parseInt(photoSize.substring(0, p));
-							height = Integer.parseInt(photoSize.substring(p + 1));
-						}
-						if (img.getWidth()>width||img.getHeight()> height) {
-							scaledImg = Scalr.resize(img,Mode.AUTOMATIC,width,height);							
-						}
-						else scaledImg=img;
-										
+			  if (fileUp!=null){
+				  InputStream streamFile = null;
+				  BufferedImage img= null;
+				
+				  try {	
+						try {
+							streamFile = fileUp.getInputStream();
+							img = ImageIO.read(streamFile);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+							}
+				  } catch (IllegalArgumentException e) {
+					//Lors de la lecture d'une photo en noir et blanc ImageIO.read génère l'exception IllegalArgumentException
+					// BufferedImage.TYPE_BYTE_GRAY permet de remédier à ce probleme.
+					 ValidatorPhoto valphoto=new ValidatorPhoto();
+					 img=valphoto.getbyteGrayImage(fileUp);
+					
+		 			}
+					
+				  	//Redimensionner l'image
+					//La taille de l'image est passé en paramètre exp:283*343
+					int p = photoSize.indexOf('*');
+					int width=0;
+					int height=0;
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					BufferedImage scaledImg = null;
+					byte[] buf = null;
+					
+					if (p >= 0) {
+						width = Integer.parseInt(photoSize.substring(0, p));
+						height = Integer.parseInt(photoSize.substring(p + 1));
+					}
+					if (img.getWidth()>width||img.getHeight()> height) {
+						scaledImg = Scalr.resize(img,Mode.AUTOMATIC,width,height);							
+					}
+					else scaledImg=img;
+									
+					try {
 						ImageIO.write(scaledImg,fileUp.getContentType().substring(fileUp.getContentType().indexOf("/")+1), baos);
 						// Encoder l'image 						
 						buf = baos.toByteArray();							
@@ -134,15 +148,15 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 						String stringVal = new String(bytesVal);
 						// La chaine "encodeBase64" indique que ce champ encodé est à décoder dans la méthode org.esupportail.activbo.services.ldap.WriteableLdapUserServiceImpl.mapToContext
 						bmv.setValue("encodeBase64"+stringVal);
-					   
-		 			} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-		 				values.clear();	
-					  values.add(bmv);
-	   	 	   }
-			  
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}  
+					
+ 		 		values.clear();	
+ 				values.add(bmv);
+				  
+	   	 	  }			  
 		   }
 		  else{
 			  values.clear();	
@@ -159,7 +173,8 @@ public class BeanFieldImpl<T> implements BeanField<T> {
       
 	   return this.values;
 	}
-
+	
+	
 	public void setValues(List<BeanMultiValue> values){
 		
 		this.values=values;
