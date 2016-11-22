@@ -35,12 +35,19 @@ public class ValidatorPhoto extends AbstractI18nAwareBean implements Validator {
 	 */
 
 	public void validate(FacesContext context, UIComponent componentToValidate,Object object) throws ValidatorException{
-		
 		 UploadedFile uploadedFile = (UploadedFile)object;
 		 InputStream streamFile = null;
 		 BufferedImage img = null;
 		 
 		 if (uploadedFile!=null){
+			 String name=uploadedFile.getName();
+			 String regex="([^\\s]+(\\.(?i)(jpg|jpeg))$)";			 
+			 if (name!=null) {
+				if (!name.matches(regex)) {
+					throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PHOTO.FORMAT.INAVLID"));
+				}
+			 }	 			 
+			 
 			 try{
 				 try {
 					streamFile = uploadedFile.getInputStream() ;

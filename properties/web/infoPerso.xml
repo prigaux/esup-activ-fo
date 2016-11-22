@@ -99,7 +99,7 @@
 		
 		<property name="displayProfileItems">
 		   <list>
-		     <ref bean="beanSelectPHOTO"/>
+		     <!-- ref bean="beanSelectPHOTO"/> -->
 		     <ref bean="beanSelectSMSUCG"/>
 		     <ref bean="beanSelectSMSUCROUS"/>
 		     <ref bean="beanSelectSMSUMP"/>		    
@@ -137,17 +137,63 @@
 		<property name="value" value="{SMSU}MP" />
 	</bean>
 	<bean  
-		id="beanSelectPHOTO"
+		id="beanSelectPHOTOINTRANETEtu"
 		class="org.esupportail.activfo.web.beans.ProfileItem"
 		scope="session"
 		>
 		<property name="account" ref="account"/>
-		<property name="label" value="l'utilisation de ma photo à des fins pédagogiques"/>
-		<property name="value" value="{PHOTO}ACTIVE" />	
+		<property name="label" value="à des fins administratives et pédagogiques"/>
+		<property name="value" value="{PHOTO}INTRANET" />	
 		<property name="attributeName" value="up1BirthDay"/>
 		<property name="formatDateLdap" value="${format.date.ldap}"/>
 		<property name="majorAge" value="${major.age}"/>
 	</bean>
+	<bean  
+		id="beanSelectPHOTOPUBLICEtu"
+		class="org.esupportail.activfo.web.beans.ProfileItem"
+		scope="session"
+		>
+		<property name="account" ref="account"/>
+		<property name="label" value="à tout public"/>
+		<property name="value" value="{PHOTO}PUBLIC" />	
+		<property name="attributeName" value="up1BirthDay"/>
+		<property name="formatDateLdap" value="${format.date.ldap}"/>
+		<property name="majorAge" value="${major.age}"/>
+	</bean>
+	<bean  
+		id="beanSelectPHOTOSTUDENTEtu"
+		class="org.esupportail.activfo.web.beans.ProfileItem"
+		scope="session"
+		>
+		<property name="account" ref="account"/>
+		<property name="label" value="aux étudiants de l'université"/>
+		<property name="value" value="{PHOTO}STUDENT" />	
+		<property name="attributeName" value="up1BirthDay"/>
+		<property name="formatDateLdap" value="${format.date.ldap}"/>
+		<property name="majorAge" value="${major.age}"/>
+	</bean>
+	<!-- <bean  
+		id="beanSelectPHOTOPUBLICEtu"
+		class="org.esupportail.activfo.web.beans.ProfileItem"
+		>
+		<property name="account" ref="account"/>
+		<property name="label" value="à tout public"/>
+		<property name="value" value="{PHOTO}PUBLIC" />
+		<property name="attributeName" value="up1BirthDay"/>
+		<property name="formatDateLdap" value="${format.date.ldap}"/>
+		<property name="majorAge" value="${major.age}"/>
+	</bean>
+	<bean  
+		id="beanSelectPHOTOSTUDENTEtu"
+		class="org.esupportail.activfo.web.beans.ProfileItem"
+		>
+		<property name="account" ref="account"/>
+		<property name="label" value="aux étudiants de l'université"/>
+		<property name="value" value="{PHOTO}STUDENT" />
+		<property name="attributeName" value="up1BirthDay"/>
+		<property name="formatDateLdap" value="${format.date.ldap}"/>
+		<property name="majorAge" value="${major.age}"/>
+	</bean> -->
 	<bean  
 		id="beanSelectPHOTOINTRANET"
 		class="org.esupportail.activfo.web.beans.ProfileItem"
@@ -168,7 +214,7 @@
 		>
 		<property name="label" value="l'affichage de ma photo pour les étudiants"/>
 		<property name="value" value="{PHOTO}STUDENT" />
-	</bean>
+	</bean>	
 		
 	<bean
 		id="beanPHOTOPermission"
@@ -183,6 +229,28 @@
 		     <ref bean="beanSelectPHOTOINTRANET"/>
 		     <ref bean="beanSelectPHOTOSTUDENT"/>
 		     <ref bean="beanSelectPHOTOPUBLIC"/>		     
+		   </list>
+		</property>
+		<property name="useDisplayItems" value="true"/>
+		<property name="multiValue" value="true"/>	
+		<property name="name" value="up1TermsOfUse"/>
+		<property name="updateable" value="true"/>
+		<property name="disable" value="false"/>
+		<property name="help" value="PERSOINFO.AUTORISE.PHOTO.PERSONNEL.TEXT.HELP"/>
+	</bean>
+	<bean
+		id="beanPHOTOPermissionEtu"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+		<property name="key" value="PERSOINFO.SMSAGREEMENT.TEXT.LABEL"/>
+		<property name="fieldType" value="selectManyCheckbox"/>
+		
+		<property name="displayProfileItems">
+		   <list>
+		     <ref bean="beanSelectPHOTOINTRANETEtu"/>		     
+		     <ref bean="beanSelectPHOTOSTUDENTEtu"/>
+		     <ref bean="beanSelectPHOTOPUBLICEtu"/>		     
 		   </list>
 		</property>
 		<property name="useDisplayItems" value="true"/>
@@ -841,10 +909,11 @@
 		<property name="updateable" value="true"/>
 		<property name="multiValue" value="true"/>
 		<property name="fieldType" value="inputFileUpload"/>
+		<property name="constraint" value="PERSOINFO.FILE.FORMAT.PHOTO.CONSTRAINT"/>
 		<!-- Focer à appliquer le convertor -->
 		<property name="useConvertedValue" value="true"/>
 		<property name="converter" ref="attributeReplaceConverter"/>
-		<property name="value" value="https://photo-ldap.univ-paris1.fr/ldap.php?uid={uid}&amp;test=1"/>
+		<property name="value" value="https://userphoto-test.univ-paris1.fr/?&amp;ldap-test=1&amp;uid={uid}"/>
 		<property name="photoSize" value="283*343"/>
 		<property name="validator" ref="validatorPhoto"/>
 	</bean> 
