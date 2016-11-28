@@ -41,7 +41,8 @@ public class ValidatorPhoto extends AbstractI18nAwareBean implements Validator {
 		 
 		 if (uploadedFile!=null){
 			 String name=uploadedFile.getName();
-			 String regex="([^\\s]+(\\.(?i)(jpg|jpeg))$)";			 
+			 String regex=".*\\.(?i)(jpg|jpeg)";
+			boolean var=name.matches(regex);
 			 if (name!=null) {
 				if (!name.matches(regex)) {
 					throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PHOTO.FORMAT.INAVLID"));
