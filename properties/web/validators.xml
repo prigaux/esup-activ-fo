@@ -78,7 +78,7 @@
     	<description>
 			A validator for mobile phone (mobile)
     	</description>
-    	<property name="regex" value="(^0[6|7][0-9]{8}$)|(^\+33\s[6|7](\s\d\d){4}$)|(^$)"/>
+        <property name="regex" value="(^(\+33\s?|0)[67](\s\d{2}){4}$)"/>
     	<property name="errorMsg" value="VALIDATOR.MOBILE.INVALID"/>
 	</bean>
 	
@@ -224,6 +224,29 @@
     	</description>
     	<property name="caracterPattern" value="${caracter.pattern}"/>
     	
+	</bean>
+	<bean
+		id="validatorPhoneFax"
+		class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
+		parent="abstractI18nAwareBean"
+		>
+		<description>
+			A validator for Phone and Fax (Tel fixe français ou étranger).
+			 (?!\s?33)(\s?\d{1}){2}-->Pas suivi de 33
+		</description>
+		<property name="regex" value="(^((\+33\s?|0)[^67](\s\d{2}){4})|((\+|00)(?!\s?33)(\s?\d{1}){2}(\s?\d{1})*)$)"/>
+		<property name="errorMsg" value="VALIDATOR.PHONE.INVALID"/>
+	</bean>
+	<bean
+		id="validatorAutrePhone"
+		class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
+		parent="abstractI18nAwareBean"
+		>
+		<description>
+			A validator for other Phone (Tel fixe ou mobile ou etranger).
+		</description>
+		<property name="regex" value="(^((\+33\s?|0)[1-9](\s\d{2}){4})|((\+|00)(?!\s?33)(\s?\d{1}){2}(\s?\d{1})*)$)"/>
+		<property name="errorMsg" value="VALIDATOR.PHONE.INVALID"/>
 	</bean>
 	
 	<bean 
