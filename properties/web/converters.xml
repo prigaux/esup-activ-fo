@@ -163,8 +163,8 @@
     	<property name="beanField" ref="beanEmailPerso"/>     
 	</bean>
 	<bean 
-		id="emptyConverter"
-		class="org.esupportail.activfo.web.converters.EmptyConverter">		
+		id="emptyAndFormatPhoneNumberConverter"
+		class="org.esupportail.activfo.web.converters.EmptyAndFormatPhoneNumberConverter">
     	<description/>
 		<property name="emptyValue" value="DEFAULT_VALUE"/>     
 	</bean>

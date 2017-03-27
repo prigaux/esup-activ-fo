@@ -56,7 +56,7 @@
 		>
 		<property name="key" value="PERSOINFO.MOBILE.TEXT.LABEL"/>
 		<property name="validator" ref="validatorMobileStudent"/>
-		<property name="converter" ref="emptyConverter"/>
+		<property name="converter" ref="emptyAndFormatPhoneNumberConverter"/>
 		<property name="useConvertedValue" value="true"/>
 		<property name="help" value="PERSOINFO.MOBILE.TEXT.HELP"/>
 		<property name="constraint" value="PERSOINFO.PHONE.CONSTRAINT"/>		

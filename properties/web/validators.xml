@@ -286,7 +286,7 @@
     	 	<ref bean="validatorPager"/>
     	</list>    	
     	</property>    	  	
-    	<property name="converter" ref="emptyConverter"/>
+      <property name="converter" ref="emptyAndFormatPhoneNumberConverter"/>
 	</bean>
 	
 	<!-- Le mot de passe ne doit pas contenir des espaces -->
