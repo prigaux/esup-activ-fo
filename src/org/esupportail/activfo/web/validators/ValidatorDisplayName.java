@@ -78,12 +78,12 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 			// Récupérer la valeur des attributs de LDAP			
 			for (String attr:attrsTerm1){
 				String valueAttr=account.getAttribute(attr);
-				if(valueAttr!=null && !attrsTerm1Values.contains(valueAttr=normalize(Pattern.quote(valueAttr)))) attrsTerm1Values.add(valueAttr);	
+				if(valueAttr!=null && !attrsTerm1Values.contains(valueAttr)) attrsTerm1Values.add(valueAttr);	
 			}
 											
 			for (String attr:attrsTerm2){
 				String valueAttr=account.getAttribute(attr);
-				if(valueAttr!=null && !attrsTerm2Values.contains(valueAttr=normalize(Pattern.quote(valueAttr)))) attrsTerm2Values.add(valueAttr);	
+				if(valueAttr!=null && !attrsTerm2Values.contains(valueAttr)) attrsTerm2Values.add(valueAttr);	
 			}	
 			
 			String p1=this.getPattern(attrsTerm1Values);
@@ -131,8 +131,13 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
      * @return pattern
      */
     private String getPattern(ArrayList<String> t){
+    	ArrayList<String> t_ = new ArrayList<String>();
+        for (String valeur : t) {
+            t_.add(normalize(Pattern.quote(valeur)));
+        }
+        
     	ArrayList<String>c=new ArrayList<String>();
-    	combine(t,new ArrayList<Integer>(),c,null);
+    	combine(t_,new ArrayList<Integer>(),c,null);
     	
         String p="(";
         p+=StringUtils.join(c.toArray(),'|');
