@@ -78,16 +78,12 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 			// Récupérer la valeur des attributs de LDAP			
 			for (String attr:attrsTerm1){
 				String valueAttr=account.getAttribute(attr);
-				for (String valueDecomposed:valueAttr.split(" ")){
-                  if(valueDecomposed!=null && !attrsTerm1Values.contains(valueDecomposed=normalize(Pattern.quote(valueDecomposed)))) attrsTerm1Values.add(valueDecomposed);
-                }
+				if(valueAttr!=null && !attrsTerm1Values.contains(valueAttr=normalize(Pattern.quote(valueAttr)))) attrsTerm1Values.add(valueAttr);	
 			}
 											
 			for (String attr:attrsTerm2){
 				String valueAttr=account.getAttribute(attr);
-				for(String valueDecomposed:valueAttr.split(" ")){
-                  if(valueDecomposed!=null && !attrsTerm2Values.contains(valueDecomposed=normalize(Pattern.quote(valueDecomposed)))) attrsTerm2Values.add(valueDecomposed);
-                }
+				if(valueAttr!=null && !attrsTerm2Values.contains(valueAttr=normalize(Pattern.quote(valueAttr)))) attrsTerm2Values.add(valueAttr);	
 			}	
 			
 			String p1=this.getPattern(attrsTerm1Values);
