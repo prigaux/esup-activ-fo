@@ -133,12 +133,16 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
     private String getPattern(ArrayList<String> t){
     	ArrayList<String> t_ = new ArrayList<String>();
         for (String valeur : t) {
-            t_.add(normalize(Pattern.quote(valeur)));
+            t_.add(normalize(valeur));
         }
         
     	ArrayList<String>c=new ArrayList<String>();
     	combine(t_,new ArrayList<Integer>(),c,null);
-    	
+       
+        for (int i = 0; i < c.size(); i++) {
+            c.set(i, Pattern.quote(c.get(i)));
+        }
+        
         String p="(";
         p+=StringUtils.join(c.toArray(),'|');
         p+=")";
