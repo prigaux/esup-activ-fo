@@ -30,13 +30,21 @@ $(function() {
 				
 				<e:paragraph value="#{msgs['PERSOINFO.TEXT.TOP']}" escape="false"/>
 			
-				<h:form id="accountForm" >
+				<h:form id="accountForm" enctype="multipart/form-data">
 				<t:dataList value="#{accountController.beanData}" var="category">
 				  <h:dataTable  value="#{category.profilingListBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn"> 
 					<h:column >						
 					  <t:outputText styleClass="labeltext" value="#{msgs[beanfield.key]}" />
+					  <t:div styleClass="#{beanfield.name} photoBorder" rendered="#{beanfield.fieldType=='inputFileUpload'}" >
+					   <h:graphicImage value="#{beanfield.value}" styleClass="photo photoSize"/>
+					  </t:div>
 					</h:column>
 					<h:column>
+					 <t:div rendered="#{beanfield.fieldType=='inputFileUpload'}">
+					 <t:inputFileUpload value="#{beanfield.fileUpLoad}"  styleClass="upload" storage="file" accept="image/jpeg" validator="#{beanfield.validator.validate}"></t:inputFileUpload>
+             <h:graphicImage alt="#{beanfield.name}" styleClass="delete" value="/media/images/delete.png" style="float:right;margin-right: -30px;margin-top: -24.9px;" rendered="#{beanfield.fieldType=='inputFileUpload'&&beanfield.deleteJpegPhoto==1}" />
+             <h:inputText value="#{beanfield.deleteJpegPhoto}" styleClass="deletePhoto" style="display:none;"/>
+					 </t:div>
 					<t:dataList value="#{beanfield.values}" var="sub">
 						<t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue)}" styleClass="#{beanfield.name}show">
 						    <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&(sub.value!=''||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
