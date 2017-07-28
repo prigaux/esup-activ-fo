@@ -35,10 +35,15 @@ $(function() {
 				  <h:dataTable  value="#{category.profilingListBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn"> 
 					<h:column >						
 					  <t:outputText styleClass="labeltext" value="#{msgs[beanfield.key]}" />
+					  <t:div styleClass="#{beanfield.name photoBorder" rendered="#{beanfield.fieldType=='inputFileUpload'}" >
+              <h:graphicImage url="data:image/jpg;base64,#{beanfield.value}" styleClass="photo photoSize"></h:graphicImage>
+            </t:div>
 					</h:column>
 					<h:column>
 					 <t:div rendered="#{beanfield.fieldType=='inputFileUpload'}">
 					   <t:inputFileUpload value="#{beanfield.fileUpLoad}"  styleClass="upload" storage="file" accept="image/jpeg" validator="#{beanfield.validator.validate}"></t:inputFileUpload>
+					   <h:graphicImage  alt="#{beanfield.name}" styleClass="delete" value="/media/images/delete.png" style="float:right;margin-right: -30px;margin-top: -24.9px;" rendered="#{beanfield.fieldType=='inputFileUpload'&&beanfield.deleteJpegPhoto==1}" />
+             <h:inputText value="#{beanfield.deleteJpegPhoto}" styleClass="deletePhoto" style="display:none;" />
            </t:div>
 					<t:dataList value="#{beanfield.values}" var="sub">
 						<t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue)}" styleClass="#{beanfield.name}show">

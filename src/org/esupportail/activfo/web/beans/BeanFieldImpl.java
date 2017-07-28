@@ -205,7 +205,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 			
 		}
 		
-		if(!values.isEmpty()&&!INPUTFILE.equals(fieldType)){
+		if(!values.isEmpty()){
 			value=(T)values.get(0).getValue();
 		}
 		
