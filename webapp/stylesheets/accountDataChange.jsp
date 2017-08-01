@@ -49,7 +49,7 @@ $(function() {
 												<h:column>
 													<t:outputText styleClass="#{beanfield.name} labeltexttop#{beanfield.size>1}"	value="#{msgs[beanfield.key]}"	rendered="#{beanfield.fieldType!='inputFileUpload'}" />
 													<t:div styleClass="#{beanfield.name}output photoBorder" rendered="#{beanfield.fieldType=='inputFileUpload'}" >
-														<h:graphicImage value="#{beanfield.value}" styleClass="photo photoSize" />
+														<h:graphicImage url="data:image/jpg;base64,#{beanfield.value}" styleClass="photo photoSize"></h:graphicImage>
 													</t:div>		
 												</h:column>
 												<h:column>
