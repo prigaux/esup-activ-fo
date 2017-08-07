@@ -73,10 +73,8 @@ $(function() {
 			        		</h:selectOneRadio>              
 			         </t:div>   
 			         <h:outputText styleClass="constraint" value="#{msgs[beanfield.constraint]}" rendered="#{beanfield.constraint!=null}"/> 
-			         <t:div rendered="#{beanfield.fieldType=='inputFileUpload'}">
-			           <h:outputText styleClass="text-danger" value="#{msgs['ENABLED.TITLE.DANGER']}" />
-			         </t:div>
-			       		</h:column>  
+			         <t:div><h:outputText styleClass="digestConstraint" value="#{msgs[beanfield.digestConstraint]}" rendered="#{beanfield.digestConstraint!=null}"/> </t:div>
+			        </h:column>
 			        	<h:column>
 			        		<h:graphicImage styleClass="toolTipShow" title="#{msgs[beanfield.notice]}" value="/media/images/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}"/>
 			       	 		<h:graphicImage styleClass="toolTipShow" title="#{msgs[beanfield.help]}" value="/media/images/help.jpg"  style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}"/>					  	
