@@ -1,4 +1,4 @@
-		<div class="row"  style="height:70px;">
+		<div class="row">
 		<!-- Menu principal -->
 			<div class="col-md-offset-3 col-md-9">
 	     	    <ul class="nav nav-pills">
