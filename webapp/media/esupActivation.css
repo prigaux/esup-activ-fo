@@ -1,14 +1,14 @@
  .mainBlock td {
     padding-right: 0.5em;
 }
- 
+
  .firstColumn {
  vertical-align: top;
 }
  .secondColumn {
  vertical-align: center;
 }
- 
+
  .thirdColumn {
    vertical-align: top;
 }
@@ -16,21 +16,21 @@
 .thirdColumn > img, .thirdColumn > div {
     float: left;
 }
- 
+
  .fourthColumn {
  vertical-align: top;
-} 
- 
+}
+
  .viewCol1 {
   vertical-Align: top;
 }
- 
+
  .viewCol2 {
 }
-   
+
 .labeltexttoptrue{
-	font-weight:bold;
-	vertical-align:top;
+  font-weight:bold;
+  vertical-align:top;
 }
 
 .labeltexttopfalse {
@@ -71,7 +71,7 @@ color: red;
 }
 
 .sidenav li.active a {
-background-color: #428bca !important;
+background-color: #428bca ;
 }
 
 .nav-stacked > li + li {
@@ -93,7 +93,7 @@ background-color: #428bca !important;
 /* override uportal fss framework shit */
 .sidenav { margin-left: 0; margin-right: 0; }
 .sidenav li { list-style: none; }
-.sidenav li.active a { color: white !important; }
+.sidenav li.active a { color: white; }
 .sidenav, #page { font-family: "Helvetica Neue",Helvetica,Arial,sans-serif !important; }
 .fl-theme-mist th { background-color: #eaeaea !important; border-left: none; border-right: none; }
 .container { background: white; }
@@ -105,22 +105,22 @@ background-color: #428bca !important;
 }
 
 .footer {
-	background-repeat: no-repeat;
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	vertical-align : bottom;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  vertical-align : bottom;
 
 }
 
 .photoBorder{
-	border:1px solid #eee;
-	width:100px;
-	height:123px;
+  border:1px solid #eee;
+  width:100px;
+  height:123px;
 }
 .photoSize{
-	max-width:100%;
-	max-height:100%;
+  max-width:100%;
+  max-height:100%;
 }
 
 /* override boostrap */
@@ -129,7 +129,7 @@ background-color: #428bca !important;
     line-height: 30px;!important;
 }
 .pc .breadcrumb { background-color: white;margin-bottom: 10px;
-	border-bottom: 1px solid #eee;!important;}
+  border-bottom: 1px solid #eee;!important;}
 
 .pc .page-header {
     border-bottom: 1px solid #eee;
@@ -137,4 +137,409 @@ background-color: #428bca !important;
     font-size: 108%;
     font-weight: bold;
 }
+table {
+    font-size: inherit;
+}
+.breadcrumb, .breadcrumbAccueil
+{
+ padding : 8px 12px 40px 12px;
+ /* padding-bottom: 40px; list-style-type: none;
+ list-style-image: none; list-style-position: outside; */
+ background-color: #fff;
+ font-size:20px;
+ color: #00326E;
+}
 
+
+ .breadcrumb .glyphicon-home {  margin-right:13px;  }
+ .breadcrumb > li a { color: #00326E;  }
+ .breadcrumb > .active  { color:#c89108; color:#9F6C07; }
+ .pc .breadcrumb { border-bottom : none;}
+ .breadcrumbAccueil .glyphicon-home { margin-right: 13px; }
+
+
+  .breadcrumb > li + li::before {
+  /* color: #ccc; content: "/ "; padding: 0px 5px ; */
+     content: " ";
+}
+
+ /**** ENLEVER ACCUEIL dans le fil d'ariane *****/
+  .breadcrumbAccueil, .breadcrumb > li a {  display:none;  }
+
+
+
+
+/*--------------   ACCUEIL  ----------------*/
+
+
+
+.titleProcess { color:#C89108; font-size:18px;  font-weight:bold;  }
+
+div>.text-info {width:100%; text-align: center;  color:#555; font-size: 17px; margin:0px; padding:0; margin-bottom:40px; margin-top:30px; }
+
+
+ form#welcomeForm  {
+   border:1px dotted #888; border-right: none; border-left : none;
+   padding :4%; padding-bottom: 5%;
+   padding-left:10%; padding-right:7%;
+   margin-bottom:-5px !important; margin-top: 3px;
+}
+
+form#welcomeForm .badge {
+  background-color: #c89108;
+  margin-right: 12px;
+}
+
+
+
+
+/* case à cocher accueil +  pages */
+  label {font-weight: 700; font-weight: normal; color:#666; }
+label:hover { font-weight: normal; color:#333; }
+  .labeltext { font-weight: normal; }
+
+
+/* Accueil : table 2 */
+
+#statusDiv {    }
+#statusDiv table {  border-left :2px solid #ccc;  }
+#statusDiv table td { padding:0px; padding-left: 10px; }
+
+
+#statusDiv table label {
+ display: inline-block;
+ width: 100%;
+ background : none;
+ margin : 0px;
+ padding: 10px 5px 10px 12px;
+ border-bottom: 1px dotted #bbb;
+}
+
+
+table.labelOverride {
+ border:0px dotted blue;
+ margin-top: 30px;
+ min-width:300px;
+ font-size: 16px;
+ }
+
+
+#welcomeForm input {margin-right:6px; }
+
+.col-md-7 { width: 58.3333%;   margin-bottom : 40px;  }
+
+.col-md-7 .labelOverride label {
+
+   padding-right: 75px; padding-top:20px; padding-bottom: 20px;  border-width:  2px; }
+
+table.labelOverride {
+
+   font-size: 16px; margin-top: 30px; min-width: 300px;  }
+
+
+td.btn-processactivation label, td.btn-processreinitialisation label, td.btn-processpasswordchange label,td.btn-processdatachange label { 
+    /* display: inline-block;  */  
+    border: 2px solid #95A7CB; 
+    border: 1px solid #d5dcea; 
+    border-radius: 10px;
+    display: inline-block;
+    margin-bottom: 5px;
+    padding: 14px;
+    width: 100%; 
+}
+
+
+td.btn-processactivation label { 
+  background: rgba(0, 0, 0, 0) url("/media/images/user.svg") no-repeat scroll right 15px top 8px / 2.6em auto; 
+}   
+
+td.btn-processreinitialisation label { 
+  background: rgba(0, 0, 0, 0) url("/media/images/question.svg") no-repeat scroll right 15px top 8px / 2.6em auto; 
+}  
+  
+td.btn-processpasswordchange label { 
+  background: rgba(0, 0, 0, 0) url("/media/images/padlock.svg") no-repeat scroll right 15px top 8px / 2.6em auto; 
+} 
+
+td.btn-processdatachange label {
+  background: rgba(0, 0, 0, 0) url("/media/images/user.svg") no-repeat scroll right 15px top 8px / 2.6em auto;
+}
+
+
+#welcomeForm label:hover, #welcomeForm label.selected {
+   background-color: #d5dcEa; border-color: #95A7CB; cursor: pointer; }
+
+
+/*--------------   Pages Mdp + Data  ----------------*/
+
+
+/*--- Bloc nom  ---*/
+
+tr.page-header {
+   border :0px; border-bottom: 3px solid #95a7cb !important; border-top: 1px solid #95a7cb;  }
+
+tr.page-header p {
+   margin-bottom: 0px !important ; padding-bottom:0px;  }
+
+/* Texte nom dans les pages data */
+form#accountForm .tab-content .portlet-section-text {
+   font-size:20px; padding-left:10px; font-weight: normal; color: #444;  }
+
+/* span titre message dans les pages MdP */
+.portlet-section-text { padding-left: 30px; }
+
+
+
+
+
+.pc .progress { height:32px; }
+
+.progress-bar {
+
+ border-bottom: 3px solid #D5DCEB;
+ border-bottom: 3px solid #95A7CB;
+ font-size: 14px ;
+ line-height: 25px;
+ color: #777;
+ background : none;
+ box-shadow: none;
+ text-transform:uppercase;
+
+}
+
+.progress-bar-success {
+
+ background-color: #D5DCEB;
+ color: #333;
+ border-right: 2px #95A7CB solid;
+ border-top-right-radius : 9px;
+}
+
+
+/*----- border qui précede le bouton valider -----*/  /* CANICA */
+
+form#accountForm .tab-content {
+     border-bottom: 1px #666 dotted;
+     border-right:none; border-left:none;
+     margin-bottom: 35px; }
+
+form#accountForm   { margin: 2px; padding: 10px;  }
+form#accountForm td { padding: 6px; }
+
+form#accountForm p  { color: #666;  margin-bottom: 33px; }
+
+
+
+/**------------  MENU de GAuche page DATA --------------*/
+
+.col-md-3 {   width: 22%;  min-width: 280px;   }
+
+.sidenav {margin-bottom: 50px; border-top : 3px #95A7CB solid;   }
+.sidenav li :hover { background-color: #F4F6Fa !important; color: #333; }
+.sidenav li.active a { background-color: #D5DCeA; color: #444; font-weight: bold ; }
+.sidenav li.active a:hover { background-color: #D5DCeA !important; color: #000; }
+.sidenav > li > a {  border: 1px solid #AAAFB9; border-left:0px; border-right:0px;  }
+
+.sidenav .glyphicon-chevron-right { opacity: 0.0;  color:#95A7CB; }
+.sidenav li :hover .glyphicon-chevron-right { opacity: 0.95; }
+.sidenav li.active a .glyphicon-chevron-right { opacity: 0.95; }
+
+
+
+form#accountForm .tab-content  .firstColumn {
+   font-size:12px;
+   border-right : 1px #ccc dotted;
+   border-top : 1px #ccc dotted;
+   text-transform : uppercase;
+}
+
+form#accountForm .tab-content  tr:nth-child(1) td {  border-top : 0px white solid;   }
+
+form#accountForm .tab-content .secondColumn,
+form#accountForm .tab-content .thirdColumn,
+form#accountForm .tab-content .fourthColumn {
+   color: #00326E;
+   }
+
+
+
+  div.col-md-9  {  display: inline-block ;  width:auto ;  }   /* exception pages DATA width no total */
+
+ /*
+  form#accountForm #tab-1, form#accountForm #tab-2,
+  form#accountForm #tab-3, form#accountForm #tab-4,
+  form#accountForm #tab-5, form#accountForm #tab-6,
+ form#accountForm #tab-7    { border-bottom:1px dotted blueviolet !important;  }
+ */
+
+
+
+
+form#accountForm input { line-height:23px; }
+form#accountForm optgroup, form#accountForm button, form#accountForm select { line-height:23px }
+
+
+
+.labeltexttopfalse { font-weight: normal;  color: #666; }
+
+ td > .text-muted { color: #555; }                  /* -- les DATA NON modifiables ---  */
+
+.up1TermsOfUse.labeltexttoptrue {color : #666; }    /*----- autorisation photo------ */
+
+.labeltexttoptrue {font-weight: normal !important;} /*----- champs multi possibilité ----*/
+
+.up1BirthDayoutput { margin-bottom:50px;  }
+
+
+
+
+/*------- footer Esup caché -----------*/
+
+div.footer.hidden-xs {
+      /* margin-top: 51px; padding-bottom: 29px;
+       font-size: 11px; color: #777; text-transform: uppercase;  */
+      display: none;
+ }
+
+
+
+/* ------------------ MESSAGE WARNING , etc  ------------ */
+
+.panel-warning > .panel-heading  {
+
+                color: #333 !important;
+                font-size :20px;
+                background-color: #FCCC55;
+                border : #faebcc;
+ }
+
+.text-warning {  color: #00326E; font-weight: bold; }
+.modal-footer {  padding-top: 10px; padding-bottom: 10px; }
+
+.text-danger  {  color: #a94442; color:#E55302; COLOR:#9F5740; font-family: verdana,arial,sans-serif; }  /* 2e rouge up1 */
+
+                   /* message rouge NE redirigez boite webmail que ... */
+.digestConstraint { color: red; color :#E55302; COLOR:#9F5740; font-size: 0.9em; }
+
+
+/* ------------ MESSAGE  changement validé des DATA ---- */
+
+.tab-content span.text-info {
+
+    color:#333 ; font-size: 16px;
+    margin:20px; padding:8px; padding-left:12px; padding-right:12px;
+    background-color:#B5C1DA; background-color: #D8B252; /* doré pour alarme */
+    border-radius : 8px;
+}
+
+
+/**-------- BULL INFO -------**/
+
+ .tooltip-inner {
+   background-color: #D8B252; background-color: #B5C1DA;
+   border-radius: 4px;
+   color:#333;
+   font-size: 13px;
+   max-width: 250px; min-width:200px;
+   padding: 10px 10px 10px 19px;
+   text-align: left;
+   box-shadow: 1px 1px 2px 0px #777;
+
+}
+
+.tooltip.right .tooltip-arrow {  border-right-color: #B5C1DA; }  /* fleche */
+
+
+
+
+
+/* ---------------- Boutons  Bootstrap -------------- */
+
+
+.btn-primary {
+   position: absolute;
+   right:40px ;
+   width: 160px;  min-width: 190px;
+   margin-top:8px;
+   background-color: #20558A;
+   border:1px solid #174068;
+}
+
+
+/**----- Bouton Editer -----**/
+
+.modifyByCategory.btn-primary  {
+    background-color:#9F6C07;
+   border:1px solid #B87E07;
+
+}
+
+.btn-primary:hover { /*background-color:#00326E; */
+   opacity: 0.85
+}
+
+
+
+
+
+
+
+
+
+
+/****************  RESPONSIVE  Accueil ******************/
+
+/* form#welcomeForm { padding: 4% 7% 4% 10%; } */
+
+
+div.col-md-7, #statusDiv { display: inline-block ;}
+
+@media screen and (max-width: 550px)  {
+
+     form#welcomeForm {  padding:1% ;   }
+    .titleProcess { font-size: 15px; }
+     table.labelOverride { font-size: 15px; margin-top: 30px; }
+ }
+
+@media screen and (min-width : 560px) and (max-width: 900px)  {
+
+     form#welcomeForm {padding: 2% 1% 1% 2%}
+     .titleProcess { font-size: 16px; }
+     table.labelOverride { font-size: 15px; margin-top: 30px; min-width: 190px; }
+
+}
+
+/****************  RESPONSIVE  DATA  ******************/
+
+@media screen and (min-width : 900px) and (max-width: 1200px)  {
+      .col-md-9 {   }
+ }
+
+@media screen and (max-width: 880px)  {
+
+       #accountForm { padding:0px !important; padding-right:0px !important;   }
+      .sidenav { margin-bottom: 0px; font-size:13px; }
+      .sidenav > li > a { padding : 6px !important;  }
+      .col-md-3 { width: 15%; min-width: 250px; }
+     .page-header {border-top: 3px solid #95a7cb !important; }
+
+ }
+
+
+
+
+
+
+
+
+
+ /**** 4 Canica ****/
+   /*  MENU haut Donnéees affichées à enlever dans le programme   */
+div.col-md-offset-3.col-md-9 {display:none;  }
+
+
+
+  /************ FIN *****/
+
+
+}
