@@ -930,6 +930,7 @@
     <property name="constraint" value="PERSOINFO.FILE.FORMAT.PHOTO.CONSTRAINT"/>
     <property name="photoSize" value="283*343"/>
     <property name="validator" ref="validatorPhoto"/>
+    <property name="digestConstraint" value="PERSOINFO.JPEGPHOTO.DIGESTCONSTRAINT.LABEL"/>
   </bean>
 	  
 	<bean
