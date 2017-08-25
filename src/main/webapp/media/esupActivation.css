@@ -455,6 +455,9 @@ div.footer.hidden-xs {
 
 /* ---------------- Boutons  Bootstrap -------------- */
 
+body > div > .container-fluid {
+    padding-bottom: 42px;
+}
 
 .btn-primary {
    position: absolute;
