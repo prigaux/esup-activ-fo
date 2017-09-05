@@ -20,6 +20,9 @@ import org.esupportail.commons.beans.AbstractI18nAwareBean;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 
+import org.apache.commons.io.IOUtils;
+import java.io.File;
+
 public class ValidatorPhoto extends AbstractI18nAwareBean implements Validator {
 	
 	/**
@@ -45,6 +48,7 @@ public class ValidatorPhoto extends AbstractI18nAwareBean implements Validator {
 			boolean var=name.matches(regex);
 			 if (name!=null) {
 				if (!name.matches(regex)) {
+					logger.info("ValidatorPhoto VALIDATOR.PHOTO.FORMAT.INAVLID: " + name + " does not match " + regex);
 					throw new ValidatorException(getFacesErrorMessage("VALIDATOR.PHOTO.FORMAT.INAVLID"));
 				}
 			 }	 			 
@@ -54,10 +58,12 @@ public class ValidatorPhoto extends AbstractI18nAwareBean implements Validator {
 					streamFile = uploadedFile.getInputStream() ;
 					img = ImageIO.read(streamFile);
 				} catch (IOException e) {
+					logger.info("failed to read uploaded photo", e);
 					e.printStackTrace();
 				}
 			 }
 			 catch (IllegalArgumentException e) {				 
+				 logger.info("failed to read uploaded photo, retrying as gray image", e);
 				 img=getbyteGrayImage(uploadedFile);
 				 
 			 }
@@ -94,6 +100,7 @@ public class ValidatorPhoto extends AbstractI18nAwareBean implements Validator {
 	                	break;}
 	               
 	            } catch (Exception e1) {
+	            	logger.info("failed to read uploaded photo as gray image", e1);
 	            	e1.printStackTrace();
 	            } finally {
 	                if (null != reader) reader.dispose();               

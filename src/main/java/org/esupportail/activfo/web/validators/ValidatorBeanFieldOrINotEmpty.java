@@ -9,6 +9,8 @@ import javax.faces.validator.ValidatorException;
 import org.esupportail.activfo.web.beans.BeanField;
 import org.esupportail.activfo.web.beans.BeanMultiValue;
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 
 public class ValidatorBeanFieldOrINotEmpty extends AbstractI18nAwareBean implements Validator {
 	
@@ -19,13 +21,16 @@ public class ValidatorBeanFieldOrINotEmpty extends AbstractI18nAwareBean impleme
 	private static final long serialVersionUID = 1L;
 	private BeanField<String> beanField;
 	private String errorMsg;
+	private final Logger logger = new LoggerImpl(getClass());
 
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {					
 			if(value!=null && value.toString().isEmpty()){
 				List<BeanMultiValue> values=beanField.getValues();
 				
-				if(values.isEmpty() ||(!values.isEmpty() && values.get(0).getValue().isEmpty()))							
+				if(values.isEmpty() ||(!values.isEmpty() && values.get(0).getValue().isEmpty())) {							
+					logger.info("ValidatorBeanFieldOrINotEmpty " + errorMsg + " " + value + " " + values);
 					throw new ValidatorException(getFacesErrorMessage(errorMsg));
+				}
 			}
 	}
 

@@ -10,6 +10,9 @@ import javax.faces.validator.ValidatorException;
 import org.esupportail.activfo.web.beans.BeanField;
 import org.esupportail.activfo.web.beans.BeanMultiValue;
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
+
 /**
  * @author aanli
  * 
@@ -24,15 +27,18 @@ public class ValidatorCheckboxLinkedInput extends AbstractI18nAwareBean implemen
 
 	private  BeanField<String> beanField;
 	private String errorMessage;
-
+	private final Logger logger = new LoggerImpl(getClass());
+    
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {		
 		ArrayList<String> selectedValues=(ArrayList<String>)value;
 		
 		if(!selectedValues.isEmpty()){
 			List<BeanMultiValue> values=beanField.getValues();
 
-			if(!values.isEmpty()&&values.get(0).getValue().equals("")) //erreur de validation si la 1ère valeur du beanField lié est vide
+			if(!values.isEmpty()&&values.get(0).getValue().equals("")) { //erreur de validation si la 1ère valeur du beanField lié est vide
+				logger.info("ValidatorCheckboxLinkedInput " + errorMessage);   
 				throw new ValidatorException(getFacesErrorMessage(errorMessage));
+			}
 		}
 		
 	}

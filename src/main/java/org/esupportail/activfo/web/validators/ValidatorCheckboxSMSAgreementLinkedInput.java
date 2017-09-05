@@ -10,6 +10,8 @@ import javax.faces.validator.ValidatorException;
 import org.esupportail.activfo.web.beans.BeanField;
 import org.esupportail.activfo.web.beans.BeanMultiValue;
 import org.esupportail.commons.beans.AbstractI18nAwareBean;
+import org.esupportail.commons.services.logging.Logger;
+import org.esupportail.commons.services.logging.LoggerImpl;
 /**
  * @author csar
  * 
@@ -25,7 +27,8 @@ public class ValidatorCheckboxSMSAgreementLinkedInput extends AbstractI18nAwareB
 	private  BeanField<String> beanField;
 	private String errorMessage;
 	private boolean verify=false;
-
+	private final Logger logger = new LoggerImpl(getClass());
+    
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {		
 		ArrayList<String> selectedValues=(ArrayList<String>)value;
 		
@@ -43,9 +46,10 @@ public class ValidatorCheckboxSMSAgreementLinkedInput extends AbstractI18nAwareB
 		if(verify ){			
 			List<BeanMultiValue> values=beanField.getValues();
 
-			if(!values.isEmpty()&&values.get(0).getValue().equals("")) //erreur de validation si la 1ère valeur du beanField lié est vide
+			if(!values.isEmpty()&&values.get(0).getValue().equals("")) {//erreur de validation si la 1ère valeur du beanField lié est vide
+				logger.info("ValidatorCheckboxSMSAgreementLinkedInput " + errorMessage + " " + selectedValues + " " + values);
 				throw new ValidatorException(getFacesErrorMessage(errorMessage));
-			
+			}
 		}
 		
 	}
