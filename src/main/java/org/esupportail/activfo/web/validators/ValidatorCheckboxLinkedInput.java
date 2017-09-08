@@ -31,7 +31,9 @@ public class ValidatorCheckboxLinkedInput extends AbstractI18nAwareBean implemen
     
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {		
 		ArrayList<String> selectedValues=(ArrayList<String>)value;
-		
+
+        logger.debug("ValidatorCheckboxLinkedInput " + value + " vs " + (beanField.getValues().isEmpty() ? "null" : beanField.getValues().get(0).getValue()));
+
 		if(!selectedValues.isEmpty()){
 			List<BeanMultiValue> values=beanField.getValues();
 

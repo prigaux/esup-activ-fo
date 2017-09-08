@@ -24,6 +24,8 @@ public class ValidatorBeanFieldOrINotEmpty extends AbstractI18nAwareBean impleme
 	private final Logger logger = new LoggerImpl(getClass());
 
 	public void validate(FacesContext context, UIComponent componentToValidate,Object value) throws ValidatorException {					
+            logger.debug("ValidatorBeanFieldOrINotEmpty " + value + " vs " + (beanField.getValues().isEmpty() ? "null" : beanField.getValues().get(0).getValue()));
+
 			if(value!=null && value.toString().isEmpty()){
 				List<BeanMultiValue> values=beanField.getValues();
 				

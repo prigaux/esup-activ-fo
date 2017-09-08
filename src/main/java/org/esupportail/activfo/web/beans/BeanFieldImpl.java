@@ -304,6 +304,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	 * @param selectedItems the selectedItems to set
 	 */
 	public void setSelectedItems(List<String> selectedItems) {		
+        logger.debug("setSelectedItems (selectManyCheckbox) " + selectedItems);
 		this.selectedItems = selectedItems;
 	}
 	/**

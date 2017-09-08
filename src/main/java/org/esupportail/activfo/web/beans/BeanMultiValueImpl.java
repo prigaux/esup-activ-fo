@@ -44,6 +44,7 @@ public void setValue(String value) {
 
 //immediate input hack: update model at apply-request, not update-model
 public void setValue(ValueChangeEvent evt) {
+    logger.debug("setValue ValueChangeEvent: old=" + evt.getOldValue() + ", new=" + evt.getNewValue());
 	setValue((String) evt.getNewValue());
 	  // prevent setter being called again during update-model phase
 	  ((UIInput) evt.getComponent()).setLocalValueSet(false);
