@@ -96,7 +96,8 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 			return null;
 		}		
 		if (AuthUtils.CAS.equals(authInfo.getType())) {
-			User user = getDomainService().getUser(authInfo.getId());
+			User user = new User();
+			user.setId(authInfo.getId());
 			user.setProxyTicketGenerator(proxyTicketGenerator);
 			storeToSession(authInfo, user);
 			return user;

@@ -30,11 +30,6 @@ public class User implements Serializable {
 	 * Display Name of the user.
 	 */
     private String displayName;
-    
-    /**
-	 * True for administrators.
-	 */
-    private boolean admin;
 	
     /**
      * The prefered language.
@@ -85,7 +80,7 @@ public class User implements Serializable {
 	@Override
 	public String toString() {
 		return "User#" + hashCode() + "[id=[" + id + "], displayName=[" + displayName 
-		+ "], admin=[" + admin + "], language=[" + language + "]]";
+		+ "], language=[" + language + "]]";
 	}
 
 	/**
@@ -114,19 +109,6 @@ public class User implements Serializable {
 	 */
     public void setDisplayName(final String displayName) {
         this.displayName = StringUtils.nullIfEmpty(displayName);
-    }
-    
-    /**
-	 * @param admin  The admin to set.
-	 */
-    public void setAdmin(final boolean admin) {
-        this.admin = admin;
-    }
-    /**
-	 * @return  Returns the admin.
-	 */
-    public boolean getAdmin() {
-        return this.admin;
     }
 
 	/**

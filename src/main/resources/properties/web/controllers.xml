@@ -47,15 +47,6 @@
 		</property>
 	</bean>
 
-	<bean id="administratorsController"
-		class="org.esupportail.activfo.web.controllers.AdministratorsController"
-		parent="abstractContextAwareController"
-		scope="session"
-		>
-		<description>A bean to manage administrators.</description>
-		
-	</bean>
-
 	<bean id="preferencesController"
 		class="org.esupportail.activfo.web.controllers.PreferencesController"
 		parent="abstractContextAwareController"

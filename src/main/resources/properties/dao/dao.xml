@@ -26,12 +26,4 @@
 		
 	</bean>
 	
-	
-	<bean
-		id="daoService"
-		class="org.esupportail.activfo.dao.EmptyDaoService">
-		<property name="applicationService" ref="applicationService"/>
-	</bean>
-
-	
 </beans>

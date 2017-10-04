@@ -10,7 +10,6 @@
 		id="domainService"
 		class="org.esupportail.activfo.domain.DomainServiceImpl"
 		>
-		<property name="daoService" ref="daoService" />
 		<property name="displayNameLdapAttribute" value="displayName" />
 		<property name="service" ref="remoteAccountManagement" />
 		<property name="casAcountService" ref="remoteCasAccountManagement" />
