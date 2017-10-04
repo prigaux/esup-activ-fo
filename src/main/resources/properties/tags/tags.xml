@@ -45,13 +45,13 @@
     			The default value used for attribute layout of tag messages. 
     		</description>
     	</property>
-    	<property name="documentTitle" value="${title}" >
+    	<property name="documentTitle" value="" >
     		<description>
     			The default value for attribute title of tag document, used to 
     			generate the content of output tag TITLE, optional.
     		</description>
     	</property>
-    	<property name="documentTitleI18nKey" value="${titleI18nKey}" >
+    	<property name="documentTitleI18nKey" value="WINDOW.TITLE" >
     		<description>
     			The name oh the i18n key to use for the window title, optional.
     			Overrides documentTitle.
