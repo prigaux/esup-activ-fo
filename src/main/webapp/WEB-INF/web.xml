@@ -108,10 +108,6 @@
 	</listener>
 
 
-	<context-param>
-        <param-name>edu.yale.its.tp.cas.proxyUrl</param-name>
-        <param-value>${cas.url}/proxy</param-value>
-	</context-param>
 
 <!--BEGIN-SERVLET-ONLY-->
 	<filter>
@@ -172,6 +168,10 @@
 	<servlet>
         <servlet-name>ProxyTicketReceptor</servlet-name>
         <servlet-class>edu.yale.its.tp.cas.proxy.ProxyTicketReceptor</servlet-class>
+        <init-param>
+            <param-name>edu.yale.its.tp.cas.proxyUrl</param-name>
+            <param-value>${cas.url}/proxy</param-value>
+        </init-param>
     </servlet>
     <servlet-mapping>
         <servlet-name>ProxyTicketReceptor</servlet-name>
