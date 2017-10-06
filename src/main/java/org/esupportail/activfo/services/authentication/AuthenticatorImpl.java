@@ -36,9 +36,6 @@ public class AuthenticatorImpl implements Serializable, InitializingBean, Authen
 	 */
 	private static final String USER_ATTRIBUTE = AuthenticatorImpl.class.getName() + ".user";
 	
-	
-	private static final String PROXY_TICKET = AuthenticatorImpl.class.getName() + ".proxyticket";
-	
 	/**
 	 * A logger.
 	 */

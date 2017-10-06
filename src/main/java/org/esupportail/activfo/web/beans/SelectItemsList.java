@@ -14,8 +14,6 @@ public class SelectItemsList extends ArrayList<SelectItem>  {
 	
 	private final Logger logger = new LoggerImpl(getClass());
 	
-	private Map<String,String> selectItemList;
-	
 	
 	
 	/**
@@ -29,7 +27,6 @@ public class SelectItemsList extends ArrayList<SelectItem>  {
 	 * @param selectItemList the selectItemList to set
 	 */
 	public void setSelectItemList(Map<String, String> selectItemList) {
-		this.selectItemList = selectItemList;
 		Set<String> keys = selectItemList.keySet();
 		for(String key: keys) {
 			String s = selectItemList.get(key);

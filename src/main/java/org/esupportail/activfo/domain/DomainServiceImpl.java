@@ -29,7 +29,7 @@ import org.springframework.beans.factory.InitializingBean;
  * See /properties/domain/domain-example.xml 
  * @param <LdapSchema>
  */
-public class DomainServiceImpl<LdapSchema> implements DomainService, InitializingBean {
+public class DomainServiceImpl implements DomainService, InitializingBean {
 
 	/**
 	 * The serialization id.

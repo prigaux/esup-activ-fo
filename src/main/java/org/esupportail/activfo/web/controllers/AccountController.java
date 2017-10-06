@@ -474,15 +474,6 @@ public class AccountController extends AbstractContextAwareController implements
 	private String _pushChangeInfoPerso(boolean fromAccountPersonalInfo) {
 			Iterator it;
 			
-			Map<String,String> DataChangeMaps=new HashMap<String,String>();
-			
-			
-			if(dataChange) {
-				List<String> attrPersoInfo=Arrays.asList(attributesDataChange.split(","));
-				
-			} else {
-				List<String> attrPersoInfo=Arrays.asList(attributesInfPerso.split(","));
-			}
 			logger.info("List attrPersoInfo : "+attributesInfPerso.toString());
 			
 			try{
@@ -490,7 +481,6 @@ public class AccountController extends AbstractContextAwareController implements
 				Map<String,String> hashBeanPersoInfo=new HashMap<String,String>();
 				if(dataChange)it=listDataChangeInfos.iterator();
 				else it=listBeanPersoInfo.iterator();	
-				int i=0;
 				
 				Map<String,List<String>> oldValue=new HashMap<String,List<String>>();
 				Map<String,List<String>> newValue=new HashMap<String,List<String>>();
@@ -498,15 +488,10 @@ public class AccountController extends AbstractContextAwareController implements
 				Map<String,List<String>> oldValueNotUpdateableFiel=new HashMap<String,List<String>>();
 				Map<String,List<String>> newValueNotUpdateableFiel=new HashMap<String,List<String>>();
 				
-				Map<String,List<String>> oldValuePhone=new HashMap<String,List<String>>();
-				Map<String,List<String>> newValuePhone=new HashMap<String,List<String>>();
-				
 				
 				// parcourir les champs
 				while(it.hasNext()){
 					BeanField beanPersoInfo=(BeanField)it.next();
-					
-					List<BeanMultiValue> lbm = new ArrayList<BeanMultiValue>();
 					
 					Iterator itBeanPersoInfo=beanPersoInfo.getValues().iterator();
 					
@@ -531,7 +516,6 @@ public class AccountController extends AbstractContextAwareController implements
 					if (beanPersoInfo.isSendMail())
 						this.setMailSendingValues(beanPersoInfo, oldValueNotUpdateableFiel, newValueNotUpdateableFiel);
 					
-					i++;
 				}
 				
 				if(hashBeanPersoInfo.size()>0){
@@ -633,14 +617,13 @@ public class AccountController extends AbstractContextAwareController implements
 	
 		try {
 			BufferedReader lecteurAvecBuffer=null; 
-			String ligne;
    		 	File file = new File(csvFileName);
    		 	if (!file.exists()) {
    		 		file.createNewFile();
    		 	}
    		 	//insérer entête, si fichier vide
    			lecteurAvecBuffer = new BufferedReader(new FileReader(csvFileName));      		 
-	   		if ((ligne=lecteurAvecBuffer.readLine())==null) {
+	   		if ((lecteurAvecBuffer.readLine())==null) {
 	   			header=header+";Champs modifié;Acienne valeur;Nouvelle valeur\n";
 	   			newvalueList= header.toUpperCase()+newvalueList;
 			}
