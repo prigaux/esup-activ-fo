@@ -37,4 +37,15 @@
         >
     </bean>
 
+    <bean id="casParams" class="org.springframework.beans.factory.config.MapFactoryBean">
+      <property name="sourceMap">
+       <map>
+        <entry key="cas.url" value="${cas.url}" />
+        <entry key="tomcat.host" value="${tomcat.host}" />
+        <entry key="tomcat.port" value="${tomcat.port}" />
+        <entry key="cas.proxyCallbackUrl" value="${cas.proxyCallbackUrl}" />
+       </map>
+      </property>
+    </bean>
+
 </beans>
