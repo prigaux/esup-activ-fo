@@ -7,8 +7,6 @@ package org.esupportail.activfo.domain;
 import java.util.Map;
 import java.util.List;
 
-import org.esupportail.activfo.services.ldap.LdapSchema;
-import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.exceptions.AuthentificationException;
 import org.esupportail.activfo.exceptions.ChannelException;
 import org.esupportail.activfo.exceptions.KerberosException;
@@ -19,14 +17,10 @@ import org.esupportail.activfo.exceptions.PrincipalNotExistsException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
 import org.esupportail.activfo.services.client.AccountManagement;
 import org.esupportail.activfo.services.client.CasAccountManagement;
-import org.esupportail.commons.exceptions.ConfigException;
-import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.ldap.LdapEntityService;
-import org.esupportail.commons.services.ldap.LdapUser;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
 import org.esupportail.commons.utils.Assert;
-import org.esupportail.commons.web.beans.Paginator;
 import org.springframework.beans.factory.InitializingBean;
 
 /**

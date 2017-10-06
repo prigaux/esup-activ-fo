@@ -8,7 +8,6 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.List;
 
-import org.esupportail.activfo.domain.beans.User;
 import org.esupportail.activfo.exceptions.AuthentificationException;
 import org.esupportail.activfo.exceptions.ChannelException;
 import org.esupportail.activfo.exceptions.KerberosException;
@@ -17,10 +16,7 @@ import org.esupportail.activfo.exceptions.LoginAlreadyExistsException;
 import org.esupportail.activfo.exceptions.LoginException;
 import org.esupportail.activfo.exceptions.PrincipalNotExistsException;
 import org.esupportail.activfo.exceptions.UserPermissionException;
-import org.esupportail.commons.exceptions.ConfigException;
-import org.esupportail.commons.exceptions.UserNotFoundException;
 import org.esupportail.commons.services.ldap.LdapEntityService;
-import org.esupportail.commons.web.beans.Paginator;
 
 /**
  * The domain service interface.
