@@ -85,16 +85,6 @@
 	</context-param>
 <!--END-PORTLET-ONLY-->
 
-	<context-param>
-		<description>
-			The logout URL of the CAS server.
-		</description>
-		<param-name>edu.yale.its.tp.cas.client.logoutUrl</param-name>
-		<param-value>
-			${cas.url}/logout?service=%s
-		</param-value>
-	</context-param>
-
 	<listener>
 		<listener-class>
 			org.springframework.web.util.Log4jConfigListener
