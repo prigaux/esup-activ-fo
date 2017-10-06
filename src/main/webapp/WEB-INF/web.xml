@@ -71,19 +71,10 @@
 		<param-value>org.apache.myfaces.renderkit.html.util.DefaultAddResource</param-value>
 	</context-param>
 
-<!--BEGIN-SERVLET-ONLY-->
 	<context-param>
 		<param-name>org.apache.myfaces.CHECK_EXTENSIONS_FILTER</param-name>
 		<param-value>true</param-value>
 	</context-param>
- <!--END-SERVLET-ONLY-->
-
-<!--BEGIN-PORTLET-ONLY-->
-	<context-param>
-		<param-name>org.apache.myfaces.CHECK_EXTENSIONS_FILTER</param-name>
-		<param-value>false</param-value>
-	</context-param>
-<!--END-PORTLET-ONLY-->
 
 	<listener>
 		<listener-class>
@@ -99,7 +90,6 @@
 
 
 
-<!--BEGIN-SERVLET-ONLY-->
 	<filter>
 		<description>
 			The CAS filter, used to authenticate users.
@@ -153,7 +143,6 @@
 		<filter-name>CAS Filter</filter-name>
 		<url-pattern>/stylesheets/accountDataChange.faces</url-pattern>		 
 	</filter-mapping>
- <!--END-SERVLET-ONLY-->
  	
 	<servlet>
         <servlet-name>ProxyTicketReceptor</servlet-name>
@@ -168,7 +157,6 @@
         <url-pattern>/CasProxyServlet</url-pattern>
     </servlet-mapping>
   
- <!--BEGIN-SERVLET-ONLY-->
 	<servlet>
 		<description>
 			The main servlet of the application. This class inherits from 
@@ -186,39 +174,6 @@
 		<servlet-name>Faces Servlet</servlet-name>
 		<url-pattern>*.faces</url-pattern>
 	</servlet-mapping>
- <!--END-SERVLET-ONLY-->
-
-<!--BEGIN-PORTLET-ONLY-->
-	<servlet> 
-		<servlet-name>esup-activ-fo</servlet-name>
-		<servlet-class>
-			org.apache.pluto.core.PortletServlet
-		</servlet-class>
-		<init-param>
-			<param-name>portlet-class</param-name>
-			<param-value>
-				org.apache.portals.bridges.portletfilter.FilterPortlet
-			</param-value>
-		</init-param>
-		<init-param>
-			<param-name>portlet-guid</param-name>
-			<param-value>esup-activ-fo.esup-activ-fo</param-value>
-		</init-param>
-        <init-param>
-            <param-name>portlet-name</param-name>
-            <param-value>esup-activ-fo</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>		
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>esup-activ-fo</servlet-name>
-		<url-pattern>/esup-activ-fo/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-        <servlet-name>esup-activ-fo</servlet-name>
-        <url-pattern>/PlutoInvoker/esup-activ-fo</url-pattern>
-    </servlet-mapping>
-<!--END-PORTLET-ONLY-->
 
 	<filter>
 		<description>

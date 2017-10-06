@@ -67,11 +67,6 @@
     			The path to the media files, used for scripts.
     		</description>
     	</property>
-    	<property name="portletMediaPath" value="${mediaPath.portlet}" >
-    		<description>
-    			The path to the media files, used for scripts and styleheets.
-    		</description>
-    	</property>
     	<property name="scripts" >
     		<description>
     			A list of URLs that will be automatically included in the head part
@@ -89,10 +84,8 @@
     			URLs are prefixed by property servletMediaPath.
     			Warning: this tag is ignored for portlet installations.
     		</description>
-    		<!-- portlet.css ne sera plus utilisé (à revoir) -->
     		<list>
     			<value>commons.css</value>
-    			<value>../media/portlet.css</value>
     		</list>
     	</property>
     	<property name="documentBodyStyleClass" value="portlet-section-body" >

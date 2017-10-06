@@ -6,7 +6,6 @@
 
 <script>
 $(function() {
-	<!-- Ne pas utiliser ${accountController.activ}), cela ne fonctionne pas en portlet-->
 	<!-- Utiliser un tag jsf comme outputText-->
 	<!-- Mettre cette partie de code après e:page, sinon outputText ne sera jamais evalué -->
 	if(<t:outputText value="#{accountController.reinit}" />){progressBar(3);}
