@@ -85,7 +85,6 @@
     			Warning: this tag is ignored for portlet installations.
     		</description>
     		<list>
-    			<value>commons.css</value>
     		</list>
     	</property>
     	<property name="documentBodyStyleClass" value="portlet-section-body" >
