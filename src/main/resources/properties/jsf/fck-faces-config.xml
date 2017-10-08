@@ -3,14 +3,14 @@
                               "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
 <faces-config>
 	<component>
-		<component-type>SelectBooleanCheckBox</component-type>
-		<component-class>org.esupportail.activfo.web.component.html.SelectBooleanCheckBox</component-class>
+		<component-type>org.fckfaces.Editor</component-type>
+		<component-class>org.fckfaces.component.html.FCKFaceEditor</component-class>
 	</component>
 	<render-kit>
 		<renderer>
-			<component-family>SelectBooleanCheckBoxFamily</component-family>
-			<renderer-type>SelectBooleanCheckboxRenderer</renderer-type> 
-			<renderer-class>org.esupportail.activfo.web.renderkit.html.SelectBooleanCheckboxRenderer</renderer-class> 
+			<component-family>org.fckfaces.FCKFacesFamily</component-family>
+			<renderer-type>org.fckfaces.EditorRenderer</renderer-type> 
+			<renderer-class>org.fckfaces.renderkit.html.FCKFaceEditorRenderer</renderer-class> 
 		</renderer>
 	</render-kit>
 </faces-config>
