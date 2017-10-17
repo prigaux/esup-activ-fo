@@ -114,6 +114,10 @@
 		<servlet-class>
 			org.esupportail.commons.web.servlet.FacesServlet
 		</servlet-class>
+         <init-param>
+                        <param-name>use-redirector</param-name>
+                        <param-value>false</param-value>
+                </init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
