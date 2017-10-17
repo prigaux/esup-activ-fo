@@ -28,9 +28,9 @@
       </plugin>
 
       <plugin>
-	<groupId>org.mortbay.jetty</groupId>
+	<groupId>org.eclipse.jetty</groupId>
 	<artifactId>jetty-maven-plugin</artifactId>
-	<version>8.1.16.v20140903</version>
+	<version>9.4.7.v20170914</version>
       </plugin>
     </plugins>
   </build>
