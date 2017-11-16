@@ -25,10 +25,9 @@ import org.esupportail.commons.services.logging.LoggerImpl;
 public class LdapTablesConverter implements Converter {
 	
 	private LdapEntityService ldapEntityService;
-	private String attribute="supannRoleGenerique";
+	private String attribute="up1TableKey";
 	private String displayValue="displayName";
-	private String dn="entryDN";
-	private String branch="ou=supannRoleGenerique,ou=tables,dc=univ-paris1,dc=fr";
+	private String subFilter = "(up1TableName=supannRoleGenerique)(objectClass=up1TableEntry)";
 	
 	//permet de renvoyer les codes associés au displayValue.
 	//il y a une bijection entre displayValue et code
@@ -58,7 +57,7 @@ public class LdapTablesConverter implements Converter {
     	
     	if(code.isEmpty()||code==null) return code;
     	
-    	String filter = "("+dn+"="+attribute+"="+code+","+branch+")";    	
+    	String filter = "(&("+attribute+"="+code+")" + subFilter + ")";
     	String convertedValue=code;
     	try {
     	List<LdapEntity> ldapEntities = ldapEntityService.getLdapEntitiesFromFilter(filter);    	
@@ -118,33 +117,5 @@ public class LdapTablesConverter implements Converter {
 	public void setDisplayValue(String displayValue) {
 		this.displayValue = displayValue;
 	}
-
-	/**
-	 * @return the branch
-	 */
-	public String getBranch() {
-		return branch;
-	}
-
-	/**
-	 * @param branch the branch to set
-	 */
-	public void setBranch(String branch) {
-		this.branch = branch;
-	}
-
-	/**
-	 * @return the dn
-	 */
-	public String getDn() {
-		return dn;
-	}
-
-	/**
-	 * @param dn the dn to set
-	 */
-	public void setDn(String dn) {
-		this.dn = dn;
-	}	
 		
 }
