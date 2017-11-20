@@ -136,6 +136,7 @@
 		  <list>
 		  	<ref bean="beanSupannRoleGenerique"/>
 		  	<ref bean="beanDescription"/>
+			<ref bean="beanSupannActivite"/>
 		    <ref bean="beanInfo"/>
 		    <ref bean="beanEduPersonAffiliation"/>
 		    <ref bean="beanEduPersonPrimaryAffiliation"/>
