@@ -60,12 +60,19 @@ $(function() {
 			                  <f:selectItems value="#{beanfield.displayItems}" />
 			             	</h:selectOneMenu> 	            
 			            </t:div>   		
-			        </t:dataList>             
+			        </t:dataList>
+			        <!-- Avec validator -->
 			        <t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}">             
-			             	<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'}" validator="#{beanfield.validator.validate}" layout="pageDirection">
+							<h:selectManyCheckbox value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'&&beanfield.validator!=null}" validator="#{beanfield.validator.validate}" layout="pageDirection">
 			                  <f:selectItems value="#{beanfield.displayItems}" />
 			             	</h:selectManyCheckbox>        
-			        </t:div> 
+			        </t:div>
+			        <!-- Sans validator -->
+					<t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}" >
+						<h:selectManyCheckbox styleClass="showHideButton" value="#{beanfield.selectedItems}" rendered="#{beanfield.fieldType=='selectManyCheckbox'&&beanfield.validator==null}" layout="pageDirection">
+							<f:selectItems value="#{beanfield.displayItems}" />
+						</h:selectManyCheckbox>
+					</t:div>
 			        <t:div rendered="#{beanfield.fieldType=='selectOneRadio'}">        
 			            	<h:selectOneRadio value="#{beanfield.value}">
 			                  <f:selectItems value="#{beanfield.displayItems}" />
