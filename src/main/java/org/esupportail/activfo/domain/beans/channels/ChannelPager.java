@@ -10,8 +10,8 @@ import org.esupportail.activfo.domain.beans.Account;
  * @author aanli
  *
  */
-public class ChannelPager extends ChannelImpl{	
-	
+public class ChannelPager extends ChannelImpl{
+
 	private  Account account;
 
 	/**
@@ -29,11 +29,12 @@ public class ChannelPager extends ChannelImpl{
 	/**
 	 * @return the paramMsg
 	 */
+	@Override
 	public String getParamMsg() {
 		String pager=account.getPager();
-		if(pager!=null) pager=pager.substring(0,6)+"****";
+		if(pager!=null) pager=pager.replaceAll(" ", "").replaceAll("^\\+33", "0").substring(0, 6)+"****";
 		return pager;
-		
-	}		
+
+	}
 
 }
