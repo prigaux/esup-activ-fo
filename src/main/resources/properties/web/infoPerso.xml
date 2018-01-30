@@ -67,6 +67,15 @@
 	</bean>
 	
 	<bean
+		id="beanHiddenField"
+		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
+		scope="session"
+		>
+		<property name="validator" ref="validatorMailPersoOrMobilePhone"/>
+		<property name="name" value="givenName"/>
+		<property name="hiddenField" value="display:none"/>
+	</bean>
+	<bean
 		id="beanSMSAgreement"
 		class="org.esupportail.activfo.web.beans.BeanFieldImpl"
 		scope="session"

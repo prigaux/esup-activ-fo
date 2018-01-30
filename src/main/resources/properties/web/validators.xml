@@ -262,15 +262,22 @@
     	
 	</bean>
 	<bean 
-		id="validatorMailPersoOrMobilePhone"
-		class="org.esupportail.activfo.web.validators.ValidatorBeanFieldOrINotEmpty"
-		parent="abstractI18nAwareBean" scope="session">
-    	<description>
-			The BeanField or validate's component must be not empty
-    	</description>
-    	<property name="beanField" ref="beanEmailPerso"/>
-    	<property name="errorMsg" value="VALIDATOR.MOBILEORMAILPERSO.INVALID"/>
-    	
+    id="validatorMailPersoOrMobilePhone"
+    class="org.esupportail.activfo.web.validators.ValidatorBeanFieldOrINotEmpty"
+    parent="abstractI18nAwareBean"
+    scope="session"
+    >
+      <description>
+      A validator for SMS Terms of use.
+      </description>
+     <property name="beanFields">
+		<list>
+			<ref bean="beanMobilePhoneEtu"/>
+			<ref bean="beanEmailPerso"/>
+		</list>
+	</property>
+	<property name="errorMsg" value="VALIDATOR.MOBILEORMAILPERSO.INVALID"/>
+
 	</bean>
 	
 	<bean 
@@ -282,8 +289,7 @@
     	</description>
     	<property name="validators">
     	<list>
-    	 	<ref bean="validatorMailPersoOrMobilePhone"/>
-    	 	<ref bean="validatorPager"/>
+			<ref bean="validatorPager"/>
     	</list>    	
     	</property>    	  	
       <property name="converter" ref="emptyAndFormatPhoneNumberConverter"/>

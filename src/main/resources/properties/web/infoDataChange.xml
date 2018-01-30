@@ -381,6 +381,18 @@
 		      		</list>		
 				</entry>
 			</map>
+			</entry>
+			<entry>
+			<key>
+				<ref bean="beanHiddenField"/>
+			</key>
+			<map>
+				<entry key="eduPersonAffiliation">
+					<list>
+						<value>student</value>
+					</list>
+				</entry>
+			</map>
 			</entry>						
 		</map>
 		</property>
@@ -422,6 +434,7 @@
 		    <ref bean="beanMobilePhone"/>
 		    <ref bean="beanSMSAgreement"/>
 		    <ref bean="beanSMSAgreementEtu"/>
+		    <ref bean="beanHiddenField"/>
 		  </list>
 		</property> 
 	</bean>
