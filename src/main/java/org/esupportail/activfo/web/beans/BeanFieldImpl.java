@@ -65,7 +65,8 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private  UploadedFile fileUpLoad;
 	private int deleteJpegPhoto=0; 
-	private String photoSize; 
+	private String photoSize;
+	private String hiddenField="";
 	
 		
 	public List<BeanMultiValue> getValues()	
@@ -504,6 +505,13 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 
 	public void setPhotoSize(String photoSize) {
 		this.photoSize = photoSize;
+	}
+	public String getHiddenField() {
+		return hiddenField;
+	}
+
+	public void setHiddenField(String hiddenField) {
+		this.hiddenField = hiddenField;
 	}
 	
 }

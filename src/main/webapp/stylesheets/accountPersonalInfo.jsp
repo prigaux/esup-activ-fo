@@ -45,21 +45,27 @@ $(function() {
              <h:inputText value="#{beanfield.deleteJpegPhoto}" styleClass="deletePhoto" style="display:none;" />
            </t:div>
 					<t:dataList value="#{beanfield.values}" var="sub">
-						<t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue)}" styleClass="#{beanfield.name}show">
-						    <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&(sub.value!=''||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-				            <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-				            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" >
-			                  <f:selectItems value="#{beanfield.displayItems}" />
-			             	</h:selectOneMenu>    
+						<t:div rendered="#{beanfield.hiddenField==''}">
+							<t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue)}" styleClass="#{beanfield.name}show">
+							    <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" validator="#{beanfield.validator.validate}"  required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&(sub.value!=''||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+					            <h:inputText value="#{sub.value}"  disabled="#{beanfield.disable}" converter="#{beanfield.converter}" required="#{beanfield.required}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+					            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&(sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue))}" >
+				                  <f:selectItems value="#{beanfield.displayItems}" />
+								</h:selectOneMenu>
+					        </t:div>
+					        <t:div rendered="#{sub.value==''&&beanfield.multiValue}" style="display:none;" styleClass="#{beanfield.name}hide" >
+					            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+					            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
+					            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&sub.value==''&&beanfield.multiValue}" >
+				                  <f:selectItems value="#{beanfield.displayItems}" />
+								</h:selectOneMenu>
+				            </t:div>
+				       </t:div>
+				       <!-- Ajouter un input NON IMMEDIATE caché pour déclencher le validatorMailPersoOrMobilePhone dès la confirmatin du formaulaire, 
+			            il peut être attaché à un checkox,car pas de immédiate, mais ce dernier ne se déclenche que lorsque le Checkbox est saisie (Bug jsf 1.2)-->
+			            <t:div rendered="#{beanfield.hiddenField!=''&&beanfield.validator!=null}">
+				            <h:inputText value="#{sub.value}" validator="#{beanfield.validator.validate}" style="#{beanfield.hiddenField}"/>
 				        </t:div>
-				        	       	        
-				        <t:div rendered="#{sub.value==''&&beanfield.multiValue}" style="display:none;" styleClass="#{beanfield.name}hide" >    
-				            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator!=null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-				            <h:inputText value="#{sub.value}" size="35" rendered="#{beanfield.fieldType=='inputText'&&beanfield.validator==null&&sub.value==''&&beanfield.multiValue}" immediate="true" valueChangeListener="#{sub.setValue}"/>
-				            <h:selectOneMenu value="#{sub.value}" style="max-width:23em" rendered="#{beanfield.fieldType=='selectOneMenu'&&sub.value==''&&beanfield.multiValue}" >
-			                  <f:selectItems value="#{beanfield.displayItems}" />
-			             	</h:selectOneMenu> 	            
-			            </t:div>   		
 			        </t:dataList>
 			        <!-- Avec validator -->
 			        <t:div rendered="#{beanfield.fieldType=='selectManyCheckbox'}">             
@@ -82,14 +88,14 @@ $(function() {
 			         <t:div><h:outputText styleClass="digestConstraint" value="#{msgs[beanfield.digestConstraint]}" rendered="#{beanfield.digestConstraint!=null}"/> </t:div>
 			        </h:column>
 			        	<h:column>
-			        		<h:graphicImage styleClass="toolTipShow" title="#{msgs[beanfield.notice]}" value="../media/images/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange}"/>
-			       	 		<h:graphicImage styleClass="toolTipShow" title="#{msgs[beanfield.help]}" value="../media/images/help.jpg"  style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange}"/>					  	
-					  	<t:div >
-						  <h:graphicImage alt="#{beanfield.name}" styleClass="show" value="../media/images/add.png"  style="border: 0;" rendered="#{beanfield.multiValue&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>
-						  <h:graphicImage alt="#{beanfield.name}" styleClass="hide" value="../media/images/remove.png"  style="border: 0;" rendered="#{beanfield.multiValue&&beanfield.fieldType=='inputText'&&(!beanfield.disable)}"/>
-					  	</t:div>
-						</h:column>										
-				  	</h:dataTable>
+							<h:graphicImage styleClass="toolTipShow" title="#{msgs[beanfield.notice]}" value="../media/images/redtriangular.jpg"  style="border: 0;" rendered="#{!beanfield.updateable&&!beanfield.disable&&!accountController.viewDataChange&&beanfield.hiddenField==''}"/>
+							<h:graphicImage styleClass="toolTipShow" title="#{msgs[beanfield.help]}" value="../media/images/help.jpg"  style="border: 0;" rendered="#{beanfield.help!=null&&!accountController.viewDataChange&&beanfield.hiddenField==''}"/>
+							<t:div >
+								<h:graphicImage alt="#{beanfield.name}" styleClass="show" value="../media/images/add.png"  style="border: 0;" rendered="#{beanfield.multiValue&&beanfield.fieldType=='inputText'&&(!beanfield.disable&&beanfield.hiddenField=='')}"/>
+								<h:graphicImage alt="#{beanfield.name}" styleClass="hide" value="../media/images/remove.png"  style="border: 0;" rendered="#{beanfield.multiValue&&beanfield.fieldType=='inputText'&&(!beanfield.disable&&beanfield.hiddenField=='')}"/>
+							</t:div>
+						</h:column>
+				</h:dataTable>
 				</t:dataList>										
 				<e:commandButton value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.pushChangeInfoPersonal}"  id="application" style="display:none;"/>
 				</h:form>
