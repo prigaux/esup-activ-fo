@@ -75,8 +75,7 @@
 			<list>			  		
 				<value>${ldap.attribute.displayName}</value>
 				<value>${ldap.attribute.description}</value>
-				<value>${ldap.attribute.supannRoleGenerique}</value>
-				<value>${ldap.attribute.supannActivite}</value>
+				<value>${ldap.attribute.up1TableKey}</value>
 			</list>
 		</property>
 	</bean>
@@ -141,6 +140,7 @@
 		    <property name="ou" value="${ldap.attribute.ou}" />
 		    <property name="supannCodeEntite" value="${ldap.attribute.supannCodeEntite}" />
 		    <property name="displayName" value="${ldap.attribute.displayName}" />
+		    <property name="tableKey" value="${ldap.attribute.up1TableKey}" />
 	</bean>
 		
 

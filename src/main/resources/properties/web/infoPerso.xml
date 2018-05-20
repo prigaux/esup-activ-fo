@@ -372,7 +372,7 @@
 		class="org.esupportail.activfo.web.beans.LdapStructureList"
 		scope="singleton">
 		<property name="ldapEntityService" ref="ldapTableService"/>
-		<property name="ldapSearchFilter" value="(objectClass=up1TableEntry)"/>
+		<property name="ldapSearchFilter" value="(up1TableName=supannActivite)"/>
 		<property name="firstLabel" value="Ne pas préciser"/>
 		<property name="businessCategory" value="up1TableKey"/>
 		<property name="value" value="displayName"/>
@@ -731,10 +731,10 @@
 		scope="singleton">
 		
 		<property name="ldapEntityService" ref="ldapTableService"/>
-		<property name="ldapSearchFilter" value="(objectClass=up1TableEntry)"/>
+		<property name="ldapSearchFilter" value="(up1TableName=supannRoleGenerique)"/>
 		<property name="firstLabel" value="Ne pas préciser"/>
 		<property name="businessCategory" value="supannRefId"/>
-		<property name="value" value="supannRoleGenerique"/>
+		<property name="value" value="up1TableKey"/>
 		<property name="label" value="displayName"/>
 		<property name="businessCategoryMap">
 		 <map>

@@ -28,6 +28,8 @@ public class LdapSchema implements InitializingBean{
 	private String supannCodeEntite;
 	
 	private String displayName;
+
+	private String tableKey;
 	
 	
 	public void afterPropertiesSet() throws Exception {
@@ -145,6 +147,13 @@ public class LdapSchema implements InitializingBean{
 	 */
 	public void setDisplayName(String displayName) {
 		this.displayName = displayName;
+	}
+
+	public void setTableKey(String tableKey) {
+		this.tableKey = tableKey;
+	}
+	public String getTableKey() {
+		return tableKey;
 	}
 	
 	
