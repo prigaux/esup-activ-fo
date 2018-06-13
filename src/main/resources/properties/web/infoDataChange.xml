@@ -426,7 +426,7 @@
 		</property>	
 		<property name="listBeanField">
 		  <list>
-		    <ref bean="beanJpegPhotoEtu"/>
+		    <ref bean="beanJpegPhoto"/>
 		    <ref bean="beanDisplayName"/>
 		    <ref bean="beanEmailPerso"/>
 		    <ref bean="beanRedirectMailEtu"/>	

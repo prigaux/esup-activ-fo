@@ -937,27 +937,13 @@
 		<property name="fieldType" value="inputFileUpload"/>
 		<property name="constraint" value="PERSOINFO.FILE.FORMAT.PHOTO.CONSTRAINT"/>
 		<!-- Focer à appliquer le convertor -->
-		<property name="useConvertedValue" value="true"/>
+		<!-- property name="useConvertedValue" value="true"/>
 		<property name="converter" ref="attributeReplaceConverter"/>
 		<property name="value" value="https://userphoto-test.univ-paris1.fr/?&amp;ldap-test=1&amp;uid={uid}"/>
-		<property name="photoSize" value="283*343"/>
+		<property name="photoSize" value="283*343"/> -->
 		<property name="validator" ref="validatorPhoto"/>
+		<property name="digestConstraint" value="PERSOINFO.JPEGPHOTO.DIGESTCONSTRAINT.LABEL"/>
 	</bean>
-
-  <bean id="beanJpegPhotoEtu"
-    class="org.esupportail.activfo.web.beans.BeanFieldImpl"
-    scope="session">
-    <property name="required" value="false" />
-    <property name="name" value="jpegPhoto"/>
-    <property name="disable" value="false"/>
-    <property name="updateable" value="true"/>
-    <property name="multiValue" value="true"/>
-    <property name="fieldType" value="inputFileUpload"/>
-    <property name="constraint" value="PERSOINFO.FILE.FORMAT.PHOTO.CONSTRAINT"/>
-    <property name="photoSize" value="283*343"/>
-    <property name="validator" ref="validatorPhoto"/>
-    <property name="digestConstraint" value="PERSOINFO.JPEGPHOTO.DIGESTCONSTRAINT.LABEL"/>
-  </bean>
 
  <bean id="beanSupannActivite"
 	class="org.esupportail.activfo.web.beans.BeanFieldImpl"
