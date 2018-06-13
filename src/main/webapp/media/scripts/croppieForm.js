@@ -1,4 +1,5 @@
 var c;
+var formulaire=$("#accountForm").attr('action');
 function croppie() {
 	if (c==undefined){
 	 c=new Croppie(document.getElementsByClassName('photo')[0], {
@@ -18,7 +19,7 @@ if (!document.getElementById('navbar-inverse')){
 }
 
 $(".exportedPhoto").click(function () {
-	if ($("#accountForm").attr('action')=="/stylesheets/accountDataChange.faces" && $('.export').attr("src").substring("data:image/jpeg;base64,".length )!=""){
+	if (formulaire.includes("/stylesheets/accountDataChange.faces") && $('.export').attr("src").substring("data:image/jpeg;base64,".length )!=""){
 		exportImg(1);
 		$('.croppie-container').hide();
 		$('.insertinnerHTMLRotation').hide();
@@ -32,18 +33,10 @@ $(".exportedPhoto").click(function () {
 
 $(".rotatedPhoto").click(function () {
 	c.rotate(90);
-	if ($("#accountForm").attr('action')=="/stylesheets/accountDataChange.faces"){
-		$('.croppie-container').show();
-		$('.export').hide();
-	}
 });
 
 $(".rotatedPhotoLeft").click(function () {
 	c.rotate(-90);
-	if ($("#accountForm").attr('action')=="/stylesheets/accountDataChange.faces"){
-		$('.croppie-container').show();
-		$('.export').hide();
-	}
 });
 
 
@@ -74,8 +67,6 @@ function isJpeg(file, callback) {q
 function readFile(input) {
      if (input.files && input.files[0]) {
         $('.alert').hide();
-		$('.croppie-container').show();
-		$('.insertinnerHTMLRotation').show();
 		isJpeg(input.files[0], function(mime) {
 		if(mime){
 		  croppie(2);
@@ -90,7 +81,6 @@ function readFile(input) {
                }).then(function(){
                    console.log('jQuery bind complete');
                    exportImg(2);
-                   $('.export').hide();
                });
            });
 	      }
@@ -119,7 +109,7 @@ function exportImg(param) {
 		document.getElementsByClassName('setDataURL')[0].value=canvas.substring("data:image/jpeg;base64,".length );
 		// Dans les procedures de mot de passe oublié et changement de mot de passe, la photo est toujours en mode modification. Lorsque l'utilisateur exporte (param=1)la photo, un message de prise en compte est affiché.
 		// Pas d'utilisation d'affichage comme dans modification de données personnelles (modes consultation et modification)
-		if (($("#accountForm").attr('action')!="/stylesheets/accountDataChange.faces") && (param==1)){
+		if ((formulaire.includes("/stylesheets/accountDataChange.faces")!="/stylesheets/accountDataChange.faces") && (param==1)){
 			$('.alert-success').show();
 			setTimeout(function(){ $('.alert-success').hide(); }, 3000);
 		}
