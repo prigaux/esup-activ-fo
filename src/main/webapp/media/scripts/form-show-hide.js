@@ -1,5 +1,6 @@
 
 $(function() {
+
 	var paramDialog="";
 	
 	// Gestion de l'infobulle
@@ -38,9 +39,13 @@ $(function() {
 		var answer = confirm('Etes-vous s\373r de vouloir supprimer la photo?');
 		if(answer){
 			$('.deletePhoto').val(2);
-			$('.photo').attr("src","../media/images/deletedPhoto.png");
+			$('.setDataURL').val("");
+			$('.showDeletePhoto').show();
 			$('.upload').hide();
 			$(this).hide();
+			$('.croppie-container').hide();
+			$('.insertinnerHTMLRotation').hide();
+			$('.export').hide();
 			
 		}
 		else
@@ -71,9 +76,10 @@ $(function() {
 		 $(this).closest('.mainModifyLinkByCategory').find(".validate").show();
 		 $(this).closest('.mainModifyLinkByCategory').find(".modifyByCategory").hide();
 	});
-		
+
+
 	// Au clic sur un champ, afficher en mode modification
-	$("[class*='output']").click(function () {	
+	$("[class*='output']").click(function () {
 		// Prendre la premiere classe de la liste, celle qui contient beanName+output
 		var getFirstClass = $(this).attr('class').split(' ')[0];
 		var field=getFirstClass.replace("output","");
@@ -155,7 +161,7 @@ $(function() {
 	
 	// Afficher le(s) champ(s) en mode modification
 	function modify(field,elt){
-		var field=field.replace("_modifyLink","");
+		 var field=field.replace("_modifyLink","");
 		 $("." + field+"show").show();
 		 $("." + field+"modify").show();
 		 if(field!="jpegPhoto"){$("." + field+"output").hide();}
@@ -163,6 +169,14 @@ $(function() {
 		 $("." + field+"digestConstraint").show();
 		 $(elt).closest('.mainModifyLinkByCategory').find(".validate").show();
 		 $(elt).closest('.mainModifyLinkByCategory').find(".modifyByCategory").hide();
+		 if(field=="jpegPhoto"){
+			 croppie();
+			 $(".cr-slider-wrap").css("display","block");
+			 $(".cr-viewport").addClass('noafter');
+			 $('.croppie-container').show();
+			 $('.insertinnerHTMLRotation').show();
+			 $('.export').hide();
+		 }
 	}
 
 });

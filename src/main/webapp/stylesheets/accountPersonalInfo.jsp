@@ -34,16 +34,25 @@ $(function() {
 				  <h:dataTable  value="#{category.profilingListBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn"> 
 					<h:column >						
 					  <t:outputText styleClass="labeltext" value="#{msgs[beanfield.key]}" />
-					  <t:div styleClass="#{beanfield.name photoBorder" rendered="#{beanfield.fieldType=='inputFileUpload'}" >
-              <h:graphicImage url="data:image/jpg;base64,#{beanfield.value}" styleClass="photo photoSize"></h:graphicImage>
-            </t:div>
+					  <t:div styleClass="#{beanfield.name} photoBorder" rendered="#{beanfield.fieldType=='inputFileUpload'}" >
+                           <h:graphicImage  value="../media/images/deletedPhoto.png" styleClass="showDeletePhoto" style="display:none;"></h:graphicImage>
+                           <h:graphicImage url="data:image/jpg;base64,#{beanfield.value}" styleClass="photo photoSize export"></h:graphicImage>
+                       </t:div>
+                      <!-- Gestion affichage des bourons rotation et validation -->
+                      <t:div rendered="#{beanfield.fieldType=='inputFileUpload'}">
+                          <t:div styleClass="insertinnerHTMLRotation" style="margin-top:3em;"></t:div>
+                      </t:div>
 					</h:column>
 					<h:column>
 					 <t:div rendered="#{beanfield.fieldType=='inputFileUpload'}">
-					   <t:inputFileUpload value="#{beanfield.fileUpLoad}"  styleClass="upload" storage="file" accept="image/jpeg" validator="#{beanfield.validator.validate}"></t:inputFileUpload>
+					   <t:div styleClass="alert alert-success" style="display:none;"><t:outputText  value="Votre photo est prise en compte"/></t:div>
+					   <t:div styleClass="alert alert-danger" style="display:none;"><t:outputText  value="Votre photo pose problème, veuillez vérifier son format et/ou son contenu"/></t:div>
+                       <t:inputFileUpload value="#{beanfield.fileUpLoad}" onchange="readFile(this)" styleClass="upload" storage="file" accept="image/jpeg" validator="#{beanfield.validator.validate}"></t:inputFileUpload>
 					   <h:graphicImage  alt="#{beanfield.name}" styleClass="delete" value="../media/images/delete.png" style="float:right;margin-right: -30px;margin-top: -24.9px;" rendered="#{beanfield.fieldType=='inputFileUpload'&&beanfield.deleteJpegPhoto==1}" />
-             <h:inputText value="#{beanfield.deleteJpegPhoto}" styleClass="deletePhoto" style="display:none;" />
-           </t:div>
+                       <h:inputText value="#{beanfield.deleteJpegPhoto}" styleClass="deletePhoto" style="display:none;" />
+                       <!-- Alimenter dataURL du beanfield par la photo modiée via Croppie-->
+                       <h:inputText value="#{beanfield.dataURL}"   styleClass="setDataURL" style="display:none;"/>
+                    </t:div>
 					<t:dataList value="#{beanfield.values}" var="sub">
 						<t:div rendered="#{beanfield.hiddenField==''}">
 							<t:div rendered="#{sub.value!=''&&!sub.convertedValue||(sub.value==''&&!beanfield.multiValue)}" styleClass="#{beanfield.name}show">
@@ -108,3 +117,12 @@ $(function() {
 		</div>	
 </div>
 </e:page>
+<script src="../media/scripts/croppie.js"></script>
+<script src="https://foliotek.github.io/Croppie/bower_components/exif-js/exif.js"></script>
+<link rel="stylesheet" href="../media/croppie.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+<script src="../media/scripts/croppieForm.js"></script>
+
+<script type="text/javascript">
+croppie();
+</script>

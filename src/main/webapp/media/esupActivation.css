@@ -123,6 +123,27 @@ background-color: #428bca ;
   max-height:100%;
 }
 
+ .export{
+ max-width: 100%;
+ height: auto;
+ }
+
+ .cr-viewport {
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: 0 0 2000px 2000px rgba(0, 0, 0, 0.5);
+ }
+ .cr-viewport::after {
+   content: "";
+   pointer-events: none;
+   display: block;
+   position: absolute;
+   left: 0; right: 0;
+   top: 15px; bottom: 5px;
+   border: 2px solid white;
+   border-radius: 50%;
+ }
+
 /* override boostrap */
 .pc .progress {height: 30px;!important;}
 .pc .progress-bar {font-size: 14px;

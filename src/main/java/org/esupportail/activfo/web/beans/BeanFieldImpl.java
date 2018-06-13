@@ -1,25 +1,16 @@
 package org.esupportail.activfo.web.beans;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.faces.convert.Converter;
 import javax.faces.event.ValueChangeEvent;
 import javax.faces.model.SelectItem;
-import javax.imageio.ImageIO;
 
-import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.io.output.ByteArrayOutputStream;
 import org.apache.myfaces.custom.fileupload.UploadedFile;
 import org.esupportail.activfo.web.validators.Validator;
-import org.esupportail.activfo.web.validators.ValidatorPhoto;
 import org.esupportail.commons.services.logging.Logger;
 import org.esupportail.commons.services.logging.LoggerImpl;
-import org.imgscalr.Scalr;
-import org.imgscalr.Scalr.Mode;
 
 
 public class BeanFieldImpl<T> implements BeanField<T> {
@@ -65,13 +56,11 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 	
 	private  UploadedFile fileUpLoad;
 	private int deleteJpegPhoto=0; 
-	private String photoSize;
 	private String hiddenField="";
-	
+	private String dataURL;
 		
 	public List<BeanMultiValue> getValues()	
 	{  
-		
 		
 	  if(MANYCHECKBOX.equals(fieldType))
 		{
@@ -96,76 +85,37 @@ public class BeanFieldImpl<T> implements BeanField<T> {
     	   values.add(bmv);				
        }
         
-          
-      if(INPUTFILE.equals(fieldType)){
-    	  UploadedFile fileUp;    	  
-		  BeanMultiValue bmv = new BeanMultiValueImpl();
-		  fileUp= getFileUpLoad();
-		  		  
-		  if (deleteJpegPhoto!=2){
-			  if (fileUp!=null){
-				  InputStream streamFile = null;
-				  BufferedImage img= null;
-				
-				  try {	
-						try {
-							streamFile = fileUp.getInputStream();
-							img = ImageIO.read(streamFile);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-							}
-				  } catch (IllegalArgumentException e) {
-					//Lors de la lecture d'une photo en noir et blanc ImageIO.read génère l'exception IllegalArgumentException
-					// BufferedImage.TYPE_BYTE_GRAY permet de remédier à ce probleme.
-					 ValidatorPhoto valphoto=new ValidatorPhoto();
-					 img=valphoto.getbyteGrayImage(fileUp);
-					
-		 			}
-					
-				  	//Redimensionner l'image
-					//La taille de l'image est passé en paramètre exp:283*343
-					int p = photoSize.indexOf('*');
-					int width=0;
-					int height=0;
-					ByteArrayOutputStream baos = new ByteArrayOutputStream();
-					BufferedImage scaledImg = null;
-					byte[] buf = null;
-					
-					if (p >= 0) {
-						width = Integer.parseInt(photoSize.substring(0, p));
-						height = Integer.parseInt(photoSize.substring(p + 1));
-					}
-					if (img.getWidth()>width||img.getHeight()> height) {
-						scaledImg = Scalr.resize(img,Mode.AUTOMATIC,width,height);							
-					}
-					else scaledImg=img;
-									
-					try {
-						ImageIO.write(scaledImg,fileUp.getContentType().substring(fileUp.getContentType().indexOf("/")+1), baos);
-						// Encoder l'image 						
-						buf = baos.toByteArray();							
-						byte[] bytesVal = Base64.encodeBase64(buf);
-						String stringVal = new String(bytesVal);
-						// La chaine "encodeBase64" indique que ce champ encodé est à décoder dans la méthode org.esupportail.activbo.services.ldap.WriteableLdapUserServiceImpl.mapToContext
-						bmv.setValue("encodeBase64"+stringVal);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}  
-					
- 		 		values.clear();	
- 				values.add(bmv);
-				  
-	   	 	  }			  
-		   }
-		  else{
-			  values.clear();	
-			  bmv.setValue(" ");
-			  values.add(bmv);
-		  }
-			  
-      }
+       if(INPUTFILE.equals(fieldType)){
+          BeanMultiValue bmv = new BeanMultiValueImpl();
+          if (deleteJpegPhoto!=2){
+              if (dataURL!=null){
+                if (dataURL.length()>0){
+                    List<String> newValues=new ArrayList<String>();
+                    newValues.add(getDataURL());
+                    List<String> currentValues=new ArrayList<String>();
+                    for (String retval: (" "+(String) value).split("encode64")) {
+                      if (retval.length()>0){
+                        currentValues.add((retval.trim()));
+                      }
+                    }
+
+                    if(newValues.containsAll(currentValues)&&currentValues.containsAll(newValues)){
+                       bmv.setValue(getDataURL());
+                       values.add(bmv);
+                    }
+                    else{
+                       bmv.setValue("encodeBase64"+getDataURL());
+                       values.add(bmv);
+                 }
+               }
+             }
+          }
+          else{
+             values.clear();
+             bmv.setValue(" ");
+             values.add(bmv);
+         }
+       }
       
        if(!values.isEmpty()&& !INPUTFILE.equals(fieldType)){
    		value=(T)values.get(0).getValue();
@@ -499,19 +449,20 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		this.deleteJpegPhoto = deleteJpegPhoto;
 	}
 
-	public String getPhotoSize() {
-		return photoSize;
-	}
-
-	public void setPhotoSize(String photoSize) {
-		this.photoSize = photoSize;
-	}
 	public String getHiddenField() {
 		return hiddenField;
 	}
 
 	public void setHiddenField(String hiddenField) {
 		this.hiddenField = hiddenField;
+	}
+
+	public String getDataURL() {
+		return dataURL;
+	}
+
+	public void setDataURL(String dataURL) {
+		this.dataURL = dataURL;
 	}
 	
 }
