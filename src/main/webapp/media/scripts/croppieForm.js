@@ -67,6 +67,8 @@ function isJpeg(file, callback) {q
 function readFile(input) {
      if (input.files && input.files[0]) {
         $('.alert').hide();
+		$('.croppie-container').show();
+		$('.insertinnerHTMLRotation').show();
 		isJpeg(input.files[0], function(mime) {
 		if(mime){
 		  croppie(2);
@@ -81,6 +83,7 @@ function readFile(input) {
                }).then(function(){
                    console.log('jQuery bind complete');
                    exportImg(2);
+                   $('.export').hide();
                });
            });
 	      }
