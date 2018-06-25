@@ -4,7 +4,7 @@ function croppie() {
 	if (c==undefined){
 	 c=new Croppie(document.getElementsByClassName('photo')[0], {
 	     enableOrientation: true,
-	     viewport: { width: 100, height: 123 },
+	     viewport: { width: 200, height: 242 },
 	 });
 	}
 }
@@ -24,6 +24,7 @@ $(".exportedPhoto").click(function () {
 		$('.croppie-container').hide();
 		$('.insertinnerHTMLRotation').hide();
 		$('.export').show();
+		$('.jpegPhotooutput').removeClass("photoBorderModify").addClass("photoBorder");
 	}
 	else
 		if ($('.photo').attr("src").substring("data:image/jpeg;base64,".length )!=""){

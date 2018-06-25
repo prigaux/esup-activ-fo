@@ -34,7 +34,7 @@ $(function() {
 				  <h:dataTable  value="#{category.profilingListBeanField}" rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn"> 
 					<h:column >						
 					  <t:outputText styleClass="labeltext" value="#{msgs[beanfield.key]}" />
-					  <t:div styleClass="#{beanfield.name} photoBorder" rendered="#{beanfield.fieldType=='inputFileUpload'}" >
+					  <t:div styleClass="#{beanfield.name} photoBorderModify" rendered="#{beanfield.fieldType=='inputFileUpload'}" >
                            <h:graphicImage  value="../media/images/deletedPhoto.png" styleClass="showDeletePhoto" style="display:none;"></h:graphicImage>
                            <h:graphicImage url="data:image/jpg;base64,#{beanfield.value}" styleClass="photo photoSize export"></h:graphicImage>
                        </t:div>

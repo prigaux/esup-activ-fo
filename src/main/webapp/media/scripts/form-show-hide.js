@@ -41,6 +41,7 @@ $(function() {
 			$('.deletePhoto').val(2);
 			$('.setDataURL').val("");
 			$('.showDeletePhoto').show();
+			$('.jpegPhotooutput').removeClass("photoBorderModify").addClass("photoBorder");
 			$('.upload').hide();
 			$(this).hide();
 			$('.croppie-container').hide();
@@ -171,8 +172,7 @@ $(function() {
 		 $(elt).closest('.mainModifyLinkByCategory').find(".modifyByCategory").hide();
 		 if(field=="jpegPhoto"){
 			 croppie();
-			 $(".cr-slider-wrap").css("display","block");
-			 $(".cr-viewport").addClass('noafter');
+			 $('.jpegPhotooutput').removeClass("photoBorder").addClass("photoBorderModify");
 			 $('.croppie-container').show();
 			 $('.insertinnerHTMLRotation').show();
 			 $('.export').hide();
