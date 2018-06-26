@@ -49,12 +49,14 @@ $(function() {
 												<h:column>
 													<t:outputText styleClass="#{beanfield.name} labeltexttop#{beanfield.size>1}"	value="#{msgs[beanfield.key]}"	rendered="#{beanfield.fieldType!='inputFileUpload'}" />
 													<t:div styleClass="#{beanfield.name}output " rendered="#{beanfield.fieldType=='inputFileUpload'}" >
-														<h:graphicImage  value="../media/images/deletedPhoto.png" styleClass="showDeletePhoto" style="display:none;"></h:graphicImage>
 														<!-- Ajout class  photoToCrop et export pour utiliser croppie-->
 														<h:graphicImage url="data:image/jpg;base64,#{beanfield.value}" styleClass="photo" style="display:none;"></h:graphicImage>
 														<!-- Export sert également de champ cliquable car croopie desactive  styleClass="photo"-->
 														<h:graphicImage url="data:image/jpg;base64,#{beanfield.value}" styleClass="export photoSize photoBorder"></h:graphicImage>
 													</t:div>
+													<t:div rendered="#{beanfield.fieldType=='inputFileUpload'}" >
+                                                        <h:graphicImage  value="../media/images/deletedPhoto.png" styleClass="showDeletePhoto" style="display:none;"></h:graphicImage>
+                                                    </t:div>
 													<!-- Gestion affichage des bourons rotation et validation -->
 													<t:div styleClass="#{beanfield.name}show" style="display:none;" rendered="#{beanfield.fieldType=='inputFileUpload'}">
 														<t:div styleClass="insertinnerHTMLRotation" style="margin-top:3em;"></t:div>

@@ -42,6 +42,7 @@ $(function() {
 			$('.setDataURL').val("");
 			$('.showDeletePhoto').show();
 			$('.jpegPhotooutput').removeClass("photoBorderModify").addClass("photoBorder");
+			$('.jpegPhotooutput').hide();
 			$('.upload').hide();
 			$(this).hide();
 			$('.croppie-container').hide();

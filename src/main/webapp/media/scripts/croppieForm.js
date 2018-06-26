@@ -72,7 +72,8 @@ function readFile(input) {
 		$('.insertinnerHTMLRotation').show();
 		isJpeg(input.files[0], function(mime) {
 		if(mime){
-		  croppie(2);
+		  croppie();
+		  $('.jpegPhotooutput').removeClass("photoBorder").addClass("photoBorderModify");
 		  var reader = new FileReader();
 	      reader.onload = function (e) {
            var data = { src: e.target.result };
