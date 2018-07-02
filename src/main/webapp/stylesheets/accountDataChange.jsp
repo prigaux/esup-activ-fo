@@ -48,11 +48,11 @@ $(function() {
 											<h:dataTable value="#{category.profilingListBeanField}"	rendered="#{category.access}" var="beanfield" columnClasses="firstColumn,secondColumn,thirdColumn,fourthColumn">
 												<h:column>
 													<t:outputText styleClass="#{beanfield.name} labeltexttop#{beanfield.size>1}"	value="#{msgs[beanfield.key]}"	rendered="#{beanfield.fieldType!='inputFileUpload'}" />
-													<t:div styleClass="#{beanfield.name}output " rendered="#{beanfield.fieldType=='inputFileUpload'}" >
+													<t:div styleClass="#{beanfield.name}output photoBorder" rendered="#{beanfield.fieldType=='inputFileUpload'}" >
 														<!-- Ajout class  photoToCrop et export pour utiliser croppie-->
 														<h:graphicImage url="data:image/jpg;base64,#{beanfield.value}" styleClass="photo" style="display:none;"></h:graphicImage>
 														<!-- Export sert également de champ cliquable car croopie desactive  styleClass="photo"-->
-														<h:graphicImage url="data:image/jpg;base64,#{beanfield.value}" styleClass="export photoSize photoBorder"></h:graphicImage>
+														<h:graphicImage url="data:image/jpg;base64,#{beanfield.value}" styleClass="export photoSize"></h:graphicImage>
 													</t:div>
 													<t:div rendered="#{beanfield.fieldType=='inputFileUpload'}" >
                                                         <h:graphicImage  value="../media/images/deletedPhoto.png" styleClass="showDeletePhoto" style="display:none;"></h:graphicImage>
