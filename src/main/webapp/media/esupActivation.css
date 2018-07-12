@@ -70,6 +70,16 @@ color: red;
    padding: 8px 14px !important;
 }
 
+.navbar{
+  min-height: 0px;!important;
+  border-radius: 4px;!important;
+}
+
+.navbar-nav >li{
+  display:inline-block!important;
+}
+
+
 .sidenav li.active a {
 background-color: #428bca ;
 }
@@ -77,6 +87,11 @@ background-color: #428bca ;
 .nav-stacked > li + li {
     margin-top: 0 !important;
 }
+.nav > li > a{
+	padding: 10px 29px !important;
+}
+
+
 
 .sidenav .glyphicon-chevron-right {
     float: right;
