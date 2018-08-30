@@ -167,6 +167,15 @@
     	<property name="beanField" ref="beanEmailPerso"/>     
 	</bean>
 	<bean 
+        id="mailForwardingAddressConverter"
+        class="org.esupportail.activfo.web.converters.MailForwardingAddressConverter"
+        scope="session">
+        <description>
+            Pour afficher tous les mailForwardingAddress différents de supannMailPerso
+        </description>
+        <property name="beanField" ref="beanEmailPerso"/>
+    </bean>
+	<bean
 		id="emptyAndFormatPhoneNumberConverter"
 		class="org.esupportail.activfo.web.converters.EmptyAndFormatPhoneNumberConverter">
     	<description/>
