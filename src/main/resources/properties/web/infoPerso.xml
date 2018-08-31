@@ -1021,7 +1021,7 @@
 		</property>
     </bean>
     <bean
-        id="mailForwardingAddress"
+        id="beanMailForwardingAddress"
         class="org.esupportail.activfo.web.beans.BeanFieldImpl"
         scope="session"
         >
