@@ -258,7 +258,7 @@
 			A validator for mobile phone (pager)
     	</description>
     	<property name="regex" value="^0[6|7][0-9]{8}$|^$"/>
-    	<property name="errorMsg" value="VALIDATOR.MOBILE.INVALID"/>
+        <property name="errorMsg" value="VALIDATOR.PAGER.INVALID"/>
     	
 	</bean>
 	<bean 
