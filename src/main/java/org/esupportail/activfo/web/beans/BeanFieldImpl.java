@@ -149,6 +149,7 @@ public class BeanFieldImpl<T> implements BeanField<T> {
 		}
 	
 		if(INPUTFILE.equals(fieldType)){
+			dataURL="";
 			if(!values.get(0).getValue().isEmpty())	{
 				deleteJpegPhoto=1;}
 			else {deleteJpegPhoto=0;}
