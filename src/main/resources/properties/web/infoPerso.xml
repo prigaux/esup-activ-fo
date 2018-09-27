@@ -42,6 +42,7 @@
 		>
 		<property name="key" value="PERSOINFO.MOBILE.TEXT.LABEL"/>
 		<property name="validator" ref="validatorPager"/>		
+		<property name="converter" ref="emptyAndFormatPhoneNumberConverter"/>
 		<property name="help" value="PERSOINFO.MOBILE.TEXT.HELP"/>		
 		<property name="constraint" value="PERSOINFO.PHONE.CONSTRAINT"/>
 		<property name="required" value="false" />
