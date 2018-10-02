@@ -79,8 +79,19 @@
 			A validator for mobile phone (mobile)
     	</description>
         <property name="regex" value="(^(\+33\s?|0)[67](\s\d{2}){4}$)"/>
-    	<property name="errorMsg" value="VALIDATOR.MOBILE.INVALID"/>
+        <property name="errorMsg" value="VALIDATOR.PAGER.INVALID"/>
 	</bean>
+	<bean
+        id="validatorMobileProPhone"
+                class="org.esupportail.activfo.web.validators.ValidatorValueMatches"
+        parent="abstractI18nAwareBean"
+        >
+        <description>
+            A validator for mobile phone (mobile)
+        </description>
+        <property name="regex" value="(^(\+33\s?|0)[67](\s\d{2}){4}$)"/>
+        <property name="errorMsg" value="VALIDATOR.MOBILE.INVALID"/>
+    </bean>
 	
 	<bean 
 		id="validatorRoomNumber"
