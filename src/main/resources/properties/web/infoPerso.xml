@@ -41,8 +41,9 @@
 		scope="session"
 		>
 		<property name="key" value="PERSOINFO.MOBILE.TEXT.LABEL"/>
-		<property name="validator" ref="validatorMobilePhone"/>
+		<property name="validator" ref="validatorMobileStudent"/>
 		<property name="converter" ref="emptyAndFormatPhoneNumberConverter"/>
+		<property name="useConvertedValue" value="true"/>
 		<property name="help" value="PERSOINFO.MOBILE.TEXT.HELP"/>		
 		<property name="constraint" value="PERSOINFO.PHONE.CONSTRAINT"/>
 		<property name="required" value="false" />
