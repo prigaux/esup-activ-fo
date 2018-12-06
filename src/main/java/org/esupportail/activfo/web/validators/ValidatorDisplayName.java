@@ -158,7 +158,7 @@ public class ValidatorDisplayName extends AbstractI18nAwareBean implements Valid
 			// Convertir une chaîne accentué en chaîne sans accent.
 			value = Normalizer.normalize(value, Normalizer.Form.NFD);
 			// Supprimer les espaces,les caractères diacritiques, le tiret et la virgule  
-			value=value.replaceAll("[\u0300-\u036F]|\\s|-|,", "");
+			value=value.replaceAll("[\u0300-\u036F]|\\s|-|,|'", "");
 			
 			return value.toUpperCase();    	
 	}
