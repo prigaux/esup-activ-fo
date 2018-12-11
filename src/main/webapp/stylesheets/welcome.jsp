@@ -74,6 +74,7 @@
 	            </div>
 	            <div style="margin-top:1em;">            
 	              <e:commandButton id="application" value="#{msgs['_.BUTTON.CONFIRM']}" action="#{accountController.enter}" style="display:none"/>               
+	              <e:commandButton id="logout" value="#{msgs['_.BUTTON.LOGOUT']}" action="#{sessionController.logout}" style="display:none"/>
 	            </div>
 	          </div>      
 	       </div>             
