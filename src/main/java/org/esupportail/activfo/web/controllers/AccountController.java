@@ -292,7 +292,7 @@ public class AccountController extends AbstractContextAwareController implements
 	 *        
 	 */
 	public void exceptions(Exception exception, String errMess){
-		logger.debug("exception",exception);
+		logger.info("exception:",exception);
 		if (exception instanceof XFireRuntimeException)addErrorMessage(errMess, "LDAP.MESSAGE.BO.INDISPONIBLE");
 		else if (exception instanceof LdapProblemException)addErrorMessage(errMess, "LDAP.MESSAGE.PROBLEM");
 		else if (exception instanceof LoginException)addErrorMessage(errMess, "APPLICATION.MESSAGE.NULLLOGIN");		
