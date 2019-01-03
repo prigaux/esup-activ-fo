@@ -154,15 +154,6 @@
 	</navigation-rule>
 	
 	<navigation-rule>
-		<display-name>accountAuthentificationToDataChange</display-name>
-		<from-view-id>/stylesheets/accountAuthentification.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>gotoDataChange</from-outcome>
-			<to-view-id>/stylesheets/accountDataChange.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	
-	<navigation-rule>
 		<display-name>welcomeToDataChange</display-name>
 		<from-view-id>/stylesheets/welcome.jsp</from-view-id>
 		<navigation-case>
@@ -233,22 +224,4 @@
 		</navigation-case>
 	</navigation-rule>	
 		
-	<navigation-rule>
-		<display-name>accountWelcomeToAuthentificationCas</display-name>
-		<from-view-id>/stylesheets/welcome.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>gotoAuthentificationCas</from-outcome>
-			<to-view-id>/stylesheets/accountAuthentificationCas.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-	
-	<navigation-rule>
-		<display-name>accountAuthentificationCasToPersonalInfo</display-name>
-		<from-view-id>/stylesheets/accountAuthentificationCas.jsp</from-view-id>
-		<navigation-case>
-			<from-outcome>gotoPersonalInfo</from-outcome>
-			<to-view-id>/stylesheets/accountPersonalInfo.jsp</to-view-id>
-		</navigation-case>
-	</navigation-rule>
-
 </faces-config>
