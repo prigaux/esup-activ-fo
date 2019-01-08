@@ -1,5 +1,5 @@
  ## Modifier mes données
-- gérer proxy CAS (avec (connect-cas)[https://github.com/AceMetrix/connect-cas])
+- gérer proxy CAS (avec [connect-cas](https://github.com/AceMetrix/connect-cas))
 - gérer les beanfields !updateable (toValidateDRH)
 - gérer les beanfields "help" (icone "i")
 - gérer croppie
