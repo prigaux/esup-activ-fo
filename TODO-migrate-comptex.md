@@ -20,7 +20,7 @@
 - ~~implémenter nextBrowserStep~~
 - ~~implémenter computed `attrs`~~
   - ~~pour le choix de channels en fonction de l'utilisateur (channels envoyés par esup-activ-bo en fonction des attributs utilisateurs)~~
-- ~~implémenter templated step "description" label which can use "v" & "v_pre" ~~
+- ~~implémenter templated step "description" label which can use "v" & "v_pre"~~
 - ~~implémenter esup_activ_bo_validateAccount, esup_activ_bo_sendCode, esup_activ_bo_validateCode~~
 
 ## Activation :
