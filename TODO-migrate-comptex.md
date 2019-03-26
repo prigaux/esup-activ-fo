@@ -2,7 +2,7 @@
 - gérer proxy CAS (avec [connect-cas](https://github.com/AceMetrix/connect-cas))
 - gérer les beanfields !updateable (toValidateDRH)
 - gérer les beanfields "help" (icone "i")
-- gérer croppie
+- ~~gérer croppie~~
 - gérer les catégories de beanfields (sous menu à gauche)
 - bouton "Editer mes données"
 - ~~implémenter computed `attrs`~~
