@@ -4,17 +4,17 @@
 - gérer les beanfields "help" (icone "i")
 - ~~gérer croppie~~
 - gérer les catégories de beanfields (sous menu à gauche)
-- bouton "Editer mes données"
+- bouton "Editer mes données" (?)
 - ~~implémenter computed `attrs`~~
   - pour gérer les beanfields en fonction du profile
 - implémenter esup_activ_bo_authentificateUserWithCas
-- implémenter esup_activ_bo_updatePersonalInformations
+- ~~implémenter esup_activ_bo_updatePersonalInformations~~
 
 ## Modifier mes données perso (voir ci-dessus)
 
 ## Changement de mot de passe :
 - ~~implémenter nextBrowserStep~~
-- implémenter esup_activ_bo_authentificateUser
+- ~~implémenter esup_activ_bo_authentificateUser~~
 
 ## Réinit password :
 - ~~implémenter nextBrowserStep~~
