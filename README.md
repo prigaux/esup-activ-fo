@@ -37,7 +37,8 @@ Routes
   * `infoToValidate.xml`
   * `infoPerso.xml`
 * `src/main/java/org/esupportail/activfo/web/beans/BeanField.java`
-* `src/main/java/org/esupportail/activfo/web/beans/BeanFieldImpl.java`
+* `src/main/java/org/esupportail/activfo/web/beans/BeanFieldImpl.java` \
+  `disable` veut dire non-éditable (`<input disabled>`)
 * `src/main/webapp/stylesheets/accountDataView.jsp`\
   gère l'affichage des différents beanfields
 * `src/main/webapp/stylesheets/accountDataChange.jsp`\
