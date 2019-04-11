@@ -12,7 +12,7 @@ Routes
 * `src/main/webapp/stylesheets/accountCode.jsp`\
   "Veuillez entrer le code de validation qui vous a été fourni". Appelle ensuite xfire "validateCode"
 * `src/main/webapp/stylesheets/accountPersonalInfo.jsp`\
-  gère l'affichage/interaction des différents beanfields. "Vous pouvez modifier ici vos informations personnelles :". Appelle ensuite xfire "updatePersonalInformations" et envoie des mails
+  gère l'affichage/interaction des différents beanfields (`categoryBeanDataChangeDigest`). "Vous pouvez modifier ici vos informations personnelles :". Appelle ensuite xfire "updatePersonalInformations" et envoie des mails
 * `src/main/webapp/stylesheets/accountCharter.jsp`\
   page d'acceptation de la charte. Pas d'action
 * `src/main/webapp/stylesheets/accountPassword.jsp`\
@@ -40,14 +40,14 @@ Routes
 * `src/main/java/org/esupportail/activfo/web/beans/BeanFieldImpl.java` \
   `disable` veut dire non-éditable (`<input disabled>`)
 * `src/main/webapp/stylesheets/accountDataView.jsp`\
-  gère l'affichage des différents beanfields
+  gère l'affichage des différents beanfields. Inutilisé à Paris1
 * `src/main/webapp/stylesheets/accountDataChange.jsp`\
-  gère l'affichage/interaction des différents beanfields. Appelle ensuite xfire "updatePersonalInformations" et envoie des mails
+  gère l'affichage/interaction des différents beanfields (`categoryBeanDataChange`). Appelle ensuite xfire "updatePersonalInformations" et envoie des mails
 
 * `src/main/webapp/stylesheets/_includeAccountData.jsp`\
   gère le sous-menu des catégories à gauche
 * `src/main/resources/properties/web/infoDataView.xml`\
-  déclare des CategoryBeanFieldImpl + 3 BeanFieldImpl link/linkPerso
+  déclare des CategoryBeanFieldImpl + 3 BeanFieldImpl link/linkPerso. Inutilisé à Paris1
 * `src/main/resources/properties/web/infoDataChange.xml`\
   déclare des CategoryBeanFieldImpl
 * `src/main/java/org/esupportail/activfo/web/beans/CategoryBeanFieldImpl.java`\
